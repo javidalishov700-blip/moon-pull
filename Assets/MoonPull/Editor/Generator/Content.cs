@@ -217,7 +217,7 @@ namespace MoonPull.EditorTools
             return Finish<PlacementView>(root, "Obstacles", 5);
         }
 
-        private PlacementView Pickup(string name, PrimitiveType type, Vector3 scale, Color color, Vector3 euler, int warmCount)
+        private PlacementView MakePickup(string name, PrimitiveType type, Vector3 scale, Color color, Vector3 euler, int warmCount)
         {
             GameObject root = Placement(name, out Transform v);
             GameObject body = Gen.Prim(type, v, Vector3.zero, scale, color, euler, 0.8f);
@@ -229,9 +229,9 @@ namespace MoonPull.EditorTools
 
         private void CreatePlacementPrefabs()
         {
-            var star = Pickup("Star", PrimitiveType.Cube, new Vector3(0.45f, 0.45f, 0.12f), Gen.Hex("FFD95C"), new Vector3(0f, 0f, 45f), 20);
-            var coin = Pickup("Coin", PrimitiveType.Cylinder, new Vector3(0.45f, 0.05f, 0.45f), Gen.Hex("F5B642"), new Vector3(90f, 0f, 0f), 24);
-            var moonstone = Pickup("Moonstone", PrimitiveType.Sphere, new Vector3(0.5f, 0.6f, 0.5f), Gen.Hex("BDE6FF"), Vector3.zero, 7);
+            var star = MakePickup("Star", PrimitiveType.Cube, new Vector3(0.45f, 0.45f, 0.12f), Gen.Hex("FFD95C"), new Vector3(0f, 0f, 45f), 20);
+            var coin = MakePickup("Coin", PrimitiveType.Cylinder, new Vector3(0.45f, 0.05f, 0.45f), Gen.Hex("F5B642"), new Vector3(90f, 0f, 0f), 24);
+            var moonstone = MakePickup("Moonstone", PrimitiveType.Sphere, new Vector3(0.5f, 0.6f, 0.5f), Gen.Hex("BDE6FF"), Vector3.zero, 7);
 
             // Chest on the seabed, sparkling when the tide is low enough to reach it.
             GameObject chestRoot = Placement("Chest", out Transform cv);
@@ -269,8 +269,8 @@ namespace MoonPull.EditorTools
             Gen.SetArray(dock, "passengerFigures", figures);
             dock = Finish<DockView>(dockRoot, "Layers", 2);
 
-            var dolphin = Creature("Dolphin", Gen.Hex("7FA7D9"), new Vector3(1.4f, 0.35f, 0.35f), new Vector3(0f, -0.9f, 0f), new Vector3(0f, 0.1f, 0f), true);
-            var whale = Creature("Whale", Gen.Hex("4A5E8A"), new Vector3(2.5f, 0.7f, 1.2f), new Vector3(0f, -1.6f, 0f), new Vector3(0f, -0.25f, 0f), false);
+            var dolphin = MakeCreature("Dolphin", Gen.Hex("7FA7D9"), new Vector3(1.4f, 0.35f, 0.35f), new Vector3(0f, -0.9f, 0f), new Vector3(0f, 0.1f, 0f), true);
+            var whale = MakeCreature("Whale", Gen.Hex("4A5E8A"), new Vector3(2.5f, 0.7f, 1.2f), new Vector3(0f, -1.6f, 0f), new Vector3(0f, -0.25f, 0f), false);
             var shark = SharkPrefab();
             var kraken = KrakenPrefab();
 
@@ -314,7 +314,7 @@ namespace MoonPull.EditorTools
             Debris = DebrisPrefab();
         }
 
-        private CreatureView Creature(string name, Color color, Vector3 size, Vector3 hidden, Vector3 engaged, bool always)
+        private CreatureView MakeCreature(string name, Color color, Vector3 size, Vector3 hidden, Vector3 engaged, bool always)
         {
             GameObject root = Placement(name, out Transform v);
             Transform body = Gen.Go("Body", v).transform;
