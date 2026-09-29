@@ -49,8 +49,8 @@ namespace MoonPull.Config
         [SerializeField, Range(0f, 1f)] private float signatureChance = 0.25f;
 
         [Header("Wave launch rock")]
-        [SerializeField, Min(0f)] private float launchRockExtraHeight = 0.6f;
-        [SerializeField, Min(0.1f)] private float launchRockWidth = 1.3f;
+        [SerializeField, Min(0f)] private float launchRockExtraHeight = 0.35f;
+        [SerializeField, Min(0.1f)] private float launchRockWidth = 1.1f;
         [SerializeField, Min(0)] private int launchArcStars = 3;
         [Tooltip("Free travel time before and after a launch rock or Kraken so the player can launch and land.")]
         [SerializeField, Min(0f)] private float launchLeadSeconds = 0.6f;

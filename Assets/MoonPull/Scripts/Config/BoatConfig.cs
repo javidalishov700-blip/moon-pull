@@ -8,7 +8,7 @@ namespace MoonPull.Config
     {
         [Header("Movement")]
         [SerializeField, Min(0.1f)] private float baseSpeed = 4.5f;
-        [SerializeField, Min(0.1f)] private float gravity = 22f;
+        [SerializeField, Min(0.1f)] private float gravity = 16f;
 
         [Header("Buoyancy")]
         [Tooltip("X offsets (boat space) where water height is sampled.")]
