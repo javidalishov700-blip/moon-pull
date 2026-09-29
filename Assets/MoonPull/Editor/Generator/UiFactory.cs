@@ -69,6 +69,12 @@ namespace MoonPull.EditorTools
             MenuScreen menu = BuildMenu(bannerSafe, idle, streak, spin, missions, settings, lighthouse, chest);
             Gen.Wire(hud, "pausePopup", pause);
 
+            // Popups draw above every full screen (the menu is built last because it references them).
+            foreach (Component popup in new Component[] { idle, streak, spin, missions, settings, lighthouse, chest, pause })
+            {
+                popup.transform.SetAsLastSibling();
+            }
+
             w.Hand = BuildHand(canvasGo.transform);
 
             var debug = canvasGo.AddComponent<DebugPanel>();
