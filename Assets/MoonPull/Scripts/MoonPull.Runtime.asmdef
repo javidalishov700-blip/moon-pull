@@ -1,0 +1,29 @@
+{
+    "name": "MoonPull.Runtime",
+    "rootNamespace": "MoonPull",
+    "references": [
+        "Unity.TextMeshPro",
+        "Unity.Localization",
+        "Unity.ResourceManager",
+        "UnityEngine.Purchasing",
+        "UnityEngine.Purchasing.Stores",
+        "UnityEngine.Purchasing.Security",
+        "Unity.Advertisement.IosSupport"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        { "name": "com.google.ads.mobile", "expression": "8.0.0", "define": "MOONPULL_ADMOB" },
+        { "name": "com.google.firebase.analytics", "expression": "11.0.0", "define": "MOONPULL_FIREBASE_ANALYTICS" },
+        { "name": "com.google.firebase.crashlytics", "expression": "11.0.0", "define": "MOONPULL_FIREBASE_CRASHLYTICS" },
+        { "name": "com.google.firebase.remote-config", "expression": "11.0.0", "define": "MOONPULL_FIREBASE_REMOTE_CONFIG" },
+        { "name": "com.unity.purchasing", "expression": "4.9.0", "define": "MOONPULL_IAP" },
+        { "name": "com.unity.ads.ios-support", "expression": "1.0.0", "define": "MOONPULL_ATT" }
+    ],
+    "noEngineReferences": false
+}
