@@ -2,7 +2,8 @@
     "name": "MoonPull.Editor",
     "rootNamespace": "MoonPull.EditorTools",
     "references": [
-        "MoonPull.Runtime"
+        "MoonPull.Runtime",
+        "UnityEngine.UI"
     ],
     "includePlatforms": [
         "Editor"

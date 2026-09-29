@@ -1,0 +1,222 @@
+# Moon Pull CI — same proven pipeline as Slice & Blast.
+#
+# Recommended path (cheapest, most reliable):
+#   1. GitHub Actions "iOS Xcode project" (.github/workflows/ios-xcode.yml) runs Unity on a free
+#      Linux runner and publishes the Xcode project as a release.
+#   2. Codemagic "moon-pull-xcode-to-testflight" compiles, signs and ships it to TestFlight.
+#
+# All-in-one alternative: "moon-pull-ios" installs Unity on the Mac and does everything there.
+workflows:
+  moon-pull-xcode-to-testflight:
+    name: Moon Pull — Xcode project → TestFlight
+    max_build_duration: 45
+    instance_type: mac_mini_m2
+
+    # Codemagic → Team settings → Integrations → App Store Connect. Same key as Slice & Blast.
+    integrations:
+      app_store_connect: SliceBlast ASC Key
+
+    environment:
+      groups:
+        - unity
+      vars:
+        GITHUB_REPO: javidalishov700-blip/moon-pull
+        RELEASE_TAG: ios-xcode-latest
+        XCODE_DIR: ios-xcode
+        XCODE_PROJECT: ios-xcode/Unity-iPhone.xcodeproj
+        XCODE_SCHEME: Unity-iPhone
+        BUNDLE_ID: com.javidalishov.moonpull
+      # Pinned: a silent Xcode bump once broke Slice & Blast archives. Move forward deliberately.
+      xcode: "26.4"
+
+    scripts:
+      - name: Fetch the Xcode project built by GitHub Actions
+        script: bash ci/fetch-xcode-project.sh "$XCODE_DIR"
+
+      - name: Fetch (and create) signing files
+        script: |
+          keychain initialize
+          app-store-connect fetch-signing-files "$BUNDLE_ID" --type IOS_APP_STORE --create
+          keychain add-certificates
+
+      - name: Apply provisioning profiles
+        script: xcode-project use-profiles --project "$XCODE_PROJECT"
+
+      - name: Set the build number
+        script: |
+          BUILD_NUMBER=$(( ( $(date -u +%s) - 1704067200 ) / 60 ))
+          echo "CFBundleVersion = $BUILD_NUMBER"
+          cd "$XCODE_DIR"
+          agvtool new-version -all "$BUILD_NUMBER"
+
+      - name: Install CocoaPods dependencies (Google Mobile Ads)
+        script: |
+          if [ -f "$XCODE_DIR/Podfile" ]; then
+            cd "$XCODE_DIR"
+            pod install --repo-update
+          fi
+
+      - name: Build the .ipa
+        script: |
+          if [ -f "$XCODE_DIR/Unity-iPhone.xcworkspace/contents.xcworkspacedata" ]; then
+            SOURCE="--workspace $XCODE_DIR/Unity-iPhone.xcworkspace"
+          else
+            SOURCE="--project $XCODE_PROJECT"
+          fi
+
+          if ! xcode-project build-ipa $SOURCE --scheme "$XCODE_SCHEME"; then
+            ERRORS="$( (grep -h -E "error:|\*\* ARCHIVE FAILED \*\*|The following build commands failed" \
+              /tmp/xcodebuild_logs/*.log 2>/dev/null || true) | sort -u | head -80 )"
+            echo "=================== xcodebuild errors ==================="
+            echo "${ERRORS:-(no xcodebuild log — failed before archiving began)}"
+            echo "========================================================="
+            exit 1
+          fi
+
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
+        expire_build_submitted_for_review: true
+
+  moon-pull-ios:
+    name: Moon Pull — iOS all-in-one (Unity on Mac → TestFlight)
+    max_build_duration: 120
+    instance_type: mac_mini_m2
+
+    integrations:
+      app_store_connect: SliceBlast ASC Key
+
+    environment:
+      groups:
+        # UNITY_EMAIL, UNITY_PASSWORD (Personal) or UNITY_SERIAL (Plus/Pro)
+        - unity
+      vars:
+        UNITY_PROJECT: .
+        UNITY_VERSION: 6000.3.22f1
+        UNITY_MODULES: ios
+        XCODE_DIR: ios
+        XCODE_PROJECT: ios/Unity-iPhone.xcodeproj
+        XCODE_SCHEME: Unity-iPhone
+        BUNDLE_ID: com.javidalishov.moonpull
+        APP_VERSION: 1.0.0
+        IOS_MIN_VERSION: "13.0"
+      xcode: "26.4"
+
+    scripts:
+      - name: Install the Unity editor
+        script: bash ci/install-unity.sh
+
+      - name: Activate Unity licence
+        script: &activate |
+          UNITY_BIN="$(bash ci/find-unity.sh)" || exit 1
+          echo "UNITY_BIN=$UNITY_BIN" >> "$CM_ENV"
+          if [ -n "${UNITY_SERIAL:-}" ]; then
+            "$UNITY_BIN" -batchmode -quit -nographics -logFile - \
+              -serial "$UNITY_SERIAL" -username "${UNITY_EMAIL:-}" -password "${UNITY_PASSWORD:-}"
+          elif [ -n "${UNITY_EMAIL:-}" ] && [ -n "${UNITY_PASSWORD:-}" ]; then
+            "$UNITY_BIN" -batchmode -quit -nographics -logFile - \
+              -username "$UNITY_EMAIL" -password "$UNITY_PASSWORD"
+          else
+            echo "No Unity licence configured: set UNITY_EMAIL + UNITY_PASSWORD in the 'unity' group."
+            exit 1
+          fi
+
+      - name: Generate content, scene and the Xcode project
+        script: |
+          UNITY_BIN="${UNITY_BIN:-$(bash ci/find-unity.sh)}"
+          # The first run may exit 2 after switching the platform to iOS; the second builds.
+          for attempt in 1 2; do
+            set +e
+            "$UNITY_BIN" -batchmode -quit -nographics -logFile - -projectPath "$UNITY_PROJECT" \
+              -buildTarget iOS -executeMethod MoonPull.EditorTools.MoonPullBuild.BuildIos
+            CODE=$?
+            set -e
+            [ $CODE -eq 0 ] && exit 0
+            [ $CODE -ne 2 ] && exit $CODE
+          done
+          exit 1
+
+      - name: Fetch (and create) signing files
+        script: |
+          keychain initialize
+          app-store-connect fetch-signing-files "$BUNDLE_ID" --type IOS_APP_STORE --create
+          keychain add-certificates
+
+      - name: Apply provisioning profiles
+        script: xcode-project use-profiles --project "$XCODE_PROJECT"
+
+      - name: Install CocoaPods dependencies
+        script: cd "$XCODE_DIR" && pod install --repo-update
+
+      - name: Build the .ipa
+        script: |
+          xcode-project build-ipa --workspace "$XCODE_DIR/Unity-iPhone.xcworkspace" --scheme "$XCODE_SCHEME" || {
+            grep -h -E "error:|ARCHIVE FAILED" /tmp/xcodebuild_logs/*.log 2>/dev/null | sort -u | head -80 || true
+            exit 1
+          }
+
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
+        expire_build_submitted_for_review: true
+      scripts:
+        - name: Return the Unity licence
+          script: |
+            UNITY_BIN="${UNITY_BIN:-$(bash ci/find-unity.sh)}" || exit 0
+            "$UNITY_BIN" -batchmode -quit -nographics -logFile - -returnlicense || true
+
+  moon-pull-android:
+    name: Moon Pull — Android APK
+    max_build_duration: 90
+    instance_type: mac_mini_m2
+
+    environment:
+      groups:
+        - unity
+      vars:
+        UNITY_PROJECT: .
+        UNITY_VERSION: 6000.3.22f1
+        UNITY_MODULES: android android-sdk-ndk-tools android-open-jdk
+        BUNDLE_ID: com.javidalishov.moonpull
+        APP_VERSION: 1.0.0
+
+    scripts:
+      - name: Install the Unity editor
+        script: bash ci/install-unity.sh
+
+      - name: Activate Unity licence
+        script: *activate
+
+      - name: Build the APK
+        script: |
+          UNITY_BIN="${UNITY_BIN:-$(bash ci/find-unity.sh)}"
+          for attempt in 1 2; do
+            set +e
+            "$UNITY_BIN" -batchmode -quit -nographics -logFile - -projectPath "$UNITY_PROJECT" \
+              -buildTarget Android -executeMethod MoonPull.EditorTools.MoonPullBuild.BuildAndroid
+            CODE=$?
+            set -e
+            [ $CODE -eq 0 ] && exit 0
+            [ $CODE -ne 2 ] && exit $CODE
+          done
+          exit 1
+
+    artifacts:
+      - build/android/*.apk
+
+    publishing:
+      scripts:
+        - name: Return the Unity licence
+          script: |
+            UNITY_BIN="${UNITY_BIN:-$(bash ci/find-unity.sh)}" || exit 0
+            "$UNITY_BIN" -batchmode -quit -nographics -logFile - -returnlicense || true

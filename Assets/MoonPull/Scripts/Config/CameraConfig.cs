@@ -6,7 +6,7 @@ namespace MoonPull.Config
     public sealed class CameraConfig : ScriptableObject
     {
         [Tooltip("Camera position relative to the boat. Positive X keeps the boat left of center so obstacles read early.")]
-        [SerializeField] private Vector3 offset = new Vector3(3.2f, 2.5f, -14f);
+        [SerializeField] private Vector3 offset = new Vector3(3.5f, 3f, -22f);
         [SerializeField, Range(1f, 30f)] private float followSharpness = 8f;
         [Tooltip("0 = camera Y fixed, 1 = fully follows boat Y. Low values keep the horizon stable.")]
         [SerializeField, Range(0f, 1f)] private float verticalFollow = 0.25f;

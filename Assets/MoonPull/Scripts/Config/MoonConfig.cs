@@ -15,7 +15,7 @@ namespace MoonPull.Config
 
         [Header("Visual")]
         [Tooltip("Moon local Y (relative to camera) at height 0 and 1.")]
-        [SerializeField] private Vector2 visualLocalYRange = new Vector2(2.5f, 6.5f);
+        [SerializeField] private Vector2 visualLocalYRange = new Vector2(4.5f, 11f);
         [Tooltip("Normalized speed above which the star trail emits.")]
         [SerializeField, Range(0f, 5f)] private float trailSpeedThreshold = 0.4f;
         [SerializeField, Min(0f)] private float fullMoonBrightness = 1.8f;

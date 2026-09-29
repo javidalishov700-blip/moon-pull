@@ -32,7 +32,7 @@ namespace MoonPull.Config
 
         [Header("Surface mesh")]
         [Tooltip("Mesh follows the camera in steps of this size so vertices never swim.")]
-        [SerializeField, Min(0.01f)] private float followSnap = 0.5f;
+        [SerializeField, Min(0.01f)] private float followSnap = 1f;
 
         public Wave WaveA => waveA;
         public Wave WaveB => waveB;
