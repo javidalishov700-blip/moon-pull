@@ -18,6 +18,7 @@ namespace MoonPull.Core.Boot
             QualitySettings.vSyncCount = 0;
             Input.multiTouchEnabled = config.MultiTouchEnabled;
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
+            Services.Register<IClock>(new SystemClock());
 
             if (loadingOverlay != null)
             {
