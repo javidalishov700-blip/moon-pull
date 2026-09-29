@@ -594,7 +594,7 @@ namespace MoonPull.EditorTools
             dropdownRt.sizeDelta = new Vector2(420f, 90f);
             foreach (Text t in dropdownGo.GetComponentsInChildren<Text>(true))
             {
-                t.font = Font;
+                t.font = UiKit.Font;
                 t.fontSize = 36;
             }
 
