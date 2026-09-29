@@ -45,6 +45,17 @@ namespace MoonPull.Layers.Boss
             HitsRequired = plan != null ? plan.KrakenHitsRequired : 0;
         }
 
+        /// <summary>Rewind support. Hits never exceed the snapshot, so a replayed head cannot be counted twice.</summary>
+        public void RestoreHits(int hits)
+        {
+            if (!IsActive || IsDefeated)
+            {
+                return;
+            }
+
+            Hits = Mathf.Clamp(hits, 0, HitsRequired);
+        }
+
         public void SimulationTick(float deltaTime, float levelTime)
         {
             if (!IsActive)
