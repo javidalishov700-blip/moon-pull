@@ -71,10 +71,59 @@ namespace MoonPull.EditorTools
             return Gen.Errors.Count == 0;
         }
 
+        /// <summary>
+        /// Linux player that screenshots the menu and gameplay (Boot/StoreCapture.cs). Mono, no ads or tracking
+        /// defines; built and run by .github/workflows/store-capture.yml, never shipped.
+        /// </summary>
+        public static void BuildCaptureLinux()
+        {
+            capturing = true;
+            if (!Generate())
+            {
+                Finish(false, "content generation reported errors");
+                return;
+            }
+
+            NamedBuildTarget named = NamedBuildTarget.Standalone;
+            PlayerSettings.productName = ProductName;
+            PlayerSettings.SetScriptingBackend(named, ScriptingImplementation.Mono2x);
+            PlayerSettings.SetScriptingDefineSymbols(named, "MOONPULL_CAPTURE");
+            PlayerSettings.fullScreenMode = FullScreenMode.Windowed;
+            PlayerSettings.defaultIsNativeResolution = false;
+            PlayerSettings.defaultScreenWidth = 1080;
+            PlayerSettings.defaultScreenHeight = 1920;
+            PlayerSettings.resizableWindow = false;
+            PlayerSettings.runInBackground = true;
+            PlayerSettings.SetUseDefaultGraphicsAPIs(BuildTarget.StandaloneLinux64, false);
+            PlayerSettings.SetGraphicsAPIs(BuildTarget.StandaloneLinux64, new[] { UnityEngine.Rendering.GraphicsDeviceType.OpenGLCore });
+            ApplySplashSettings();
+            IncludeShaders();
+
+            string custom = CommandLineArgument("-customBuildPath", null);
+            string folder = string.IsNullOrEmpty(custom) ? "build/capture" : Path.GetDirectoryName(custom);
+            Directory.CreateDirectory(folder);
+            BuildReport report = BuildPipeline.BuildPlayer(new BuildPlayerOptions
+            {
+                scenes = new[] { EditorBuildSettings.scenes[0].path },
+                locationPathName = Path.Combine(folder, "MoonPull.x86_64"),
+                target = BuildTarget.StandaloneLinux64,
+                targetGroup = BuildTargetGroup.Standalone,
+                options = BuildOptions.None
+            });
+            Finish(report.summary.result == BuildResult.Succeeded, "the capture build failed");
+        }
+
+        private static bool capturing;
+
         /// <summary>Called by the build preprocessor so any build path gets a correct player.</summary>
         public static void PrepareProject()
         {
             Generate();
+            if (capturing)
+            {
+                return;
+            }
+
             BuildTarget target = EditorUserBuildSettings.activeBuildTarget;
             ApplyPlayerSettings(target, BuildPipeline.GetBuildTargetGroup(target));
         }

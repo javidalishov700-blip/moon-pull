@@ -1,0 +1,80 @@
+# Builds a Linux capture player, runs it under a virtual display and publishes in-game screenshots
+# (menu + gameplay) as a "capture-<run id>" release. Needs the same Unity secrets as ios-xcode.yml.
+name: Store capture
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, claude/intelligent-shannon-qd3fs3]
+    paths: ["Assets/**", "Packages/**", "ProjectSettings/**"]
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Free disk space
+        run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc || true
+
+      - uses: actions/cache@v4
+        with:
+          path: Library
+          key: unity-library-capture-${{ hashFiles('Assets/**', 'Packages/**') }}
+          restore-keys: unity-library-capture-
+
+      # Only this throwaway build needs the screenshot module; it is never committed.
+      - name: Enable the screen capture module for this build only
+        run: |
+          python3 - <<'PY'
+          import json
+          path = "Packages/manifest.json"
+          manifest = json.load(open(path))
+          manifest["dependencies"]["com.unity.modules.screencapture"] = "1.0.0"
+          manifest["dependencies"]["com.unity.modules.imageconversion"] = "1.0.0"
+          json.dump(manifest, open(path, "w"), indent=2)
+          PY
+
+      - uses: game-ci/unity-builder@v4
+        env:
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          projectPath: .
+          unityVersion: 6000.3.22f1
+          targetPlatform: StandaloneLinux64
+          allowDirtyBuild: true
+          buildMethod: MoonPull.EditorTools.MoonPullBuild.BuildCaptureLinux
+
+      - name: Play and capture
+        run: |
+          set -eu
+          sudo apt-get update -qq && sudo apt-get install -y -qq xvfb mesa-utils libgl1-mesa-dri > /dev/null
+          PLAYER="$(find build -name 'MoonPull.x86_64' -print -quit)"
+          sudo chmod -R a+rwx build
+          cd "$(dirname "$PLAYER")"
+          timeout 180 xvfb-run -a -s "-screen 0 1080x1920x24" \
+            ./MoonPull.x86_64 -screen-width 1080 -screen-height 1920 -screen-fullscreen 0 -logFile player.log || true
+          mkdir -p "$GITHUB_WORKSPACE/out"
+          cp capture/*.png player.log "$GITHUB_WORKSPACE/out/" 2>/dev/null || true
+          ls -la "$GITHUB_WORKSPACE/out"
+          ls "$GITHUB_WORKSPACE"/out/*.png > /dev/null
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: store-capture
+          path: out
+
+      - name: Publish screenshots
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "capture-${{ github.run_id }}" out/* --latest=false \
+            --title "In-game capture ${{ github.run_id }}" \
+            --notes "Screenshots from ${{ github.sha }}." --target "${{ github.sha }}"
