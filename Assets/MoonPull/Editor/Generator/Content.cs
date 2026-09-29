@@ -212,8 +212,8 @@ namespace MoonPull.EditorTools
             switch (style)
             {
                 case 0: // stone bridge
-                    Gen.Prim(PrimitiveType.Cube, v, new Vector3(0f, 0.35f, 0f), new Vector3(1.8f, 0.7f, 2.2f), color);
-                    Gen.Prim(PrimitiveType.Cube, v, new Vector3(0f, 4.5f, 1.3f), new Vector3(1.8f, 8f, 0.4f), dark);
+                    Meshes.Part(Meshes.Rock(41, 0.45f), v, new Vector3(0f, 0.35f, 0f), new Vector3(1.1f, 0.8f, 1.3f), color);
+                    RockColumn(v, dark, 5, 1f);
                     break;
                 case 1: // cave ceiling
                     RockColumn(v, dark, 4, 1f);
