@@ -18,7 +18,6 @@ namespace MoonPull.Water
 
         private MaterialPropertyBlock block;
         private float brightness = 1f;
-        private float targetBrightness = 1f;
         private float baseLightIntensity;
 
         private void Awake()
@@ -30,11 +29,11 @@ namespace MoonPull.Water
             }
         }
 
-        /// <summary>1 = normal, 0 = eclipsed, &gt;1 = full moon glow.</summary>
-        public void SetTargetBrightness(float value)
-        {
-            targetBrightness = value;
-        }
+        /// <summary>Set by Full Moon mode. Brightens moon and moonlight.</summary>
+        public bool FullMoon { get; set; }
+
+        /// <summary>Set by the eclipse. Overrides Full Moon because losing control must always read clearly.</summary>
+        public bool Eclipsed { get; set; }
 
         private void LateUpdate()
         {
@@ -48,6 +47,7 @@ namespace MoonPull.Water
                 starTrail.emitting = Mathf.Abs(moon.Velocity01) > config.TrailSpeedThreshold;
             }
 
+            float targetBrightness = Eclipsed ? config.EclipseBrightness : FullMoon ? config.FullMoonBrightness : 1f;
             brightness = Mathf.Lerp(brightness, targetBrightness, 1f - Mathf.Exp(-brightnessSharpness * Time.unscaledDeltaTime));
             if (moonRenderer != null)
             {

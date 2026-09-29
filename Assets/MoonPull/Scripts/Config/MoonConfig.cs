@@ -18,6 +18,8 @@ namespace MoonPull.Config
         [SerializeField] private Vector2 visualLocalYRange = new Vector2(2.5f, 6.5f);
         [Tooltip("Normalized speed above which the star trail emits.")]
         [SerializeField, Range(0f, 5f)] private float trailSpeedThreshold = 0.4f;
+        [SerializeField, Min(0f)] private float fullMoonBrightness = 1.8f;
+        [SerializeField, Min(0f)] private float eclipseBrightness = 0.08f;
 
         public float DragRangeScreenFraction => dragRangeScreenFraction;
         public float FollowSharpness => followSharpness;
@@ -25,5 +27,7 @@ namespace MoonPull.Config
         public float StartHeight01 => startHeight01;
         public Vector2 VisualLocalYRange => visualLocalYRange;
         public float TrailSpeedThreshold => trailSpeedThreshold;
+        public float FullMoonBrightness => fullMoonBrightness;
+        public float EclipseBrightness => eclipseBrightness;
     }
 }

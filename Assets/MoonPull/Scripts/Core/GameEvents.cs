@@ -32,6 +32,7 @@ namespace MoonPull.Core
         public static event Action<int, int> NearMiss;
         public static event Action NearMissChainBroken;
         public static event Action<int> StarCollected;
+        public static event Action<int> CoinCollected;
         public static event Action<int> MoonstoneCollected;
         public static event Action<float> FullMoonStarted;
         public static event Action FullMoonEnded;
@@ -69,6 +70,7 @@ namespace MoonPull.Core
         public static void RaiseNearMiss(int chain, int multiplier) => NearMiss?.Invoke(chain, multiplier);
         public static void RaiseNearMissChainBroken() => NearMissChainBroken?.Invoke();
         public static void RaiseStarCollected(int streak) => StarCollected?.Invoke(streak);
+        public static void RaiseCoinCollected(int amount) => CoinCollected?.Invoke(amount);
         public static void RaiseMoonstoneCollected(int count) => MoonstoneCollected?.Invoke(count);
         public static void RaiseFullMoonStarted(float duration) => FullMoonStarted?.Invoke(duration);
         public static void RaiseFullMoonEnded() => FullMoonEnded?.Invoke();
@@ -107,6 +109,7 @@ namespace MoonPull.Core
             NearMiss = null;
             NearMissChainBroken = null;
             StarCollected = null;
+            CoinCollected = null;
             MoonstoneCollected = null;
             FullMoonStarted = null;
             FullMoonEnded = null;

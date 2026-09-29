@@ -101,6 +101,25 @@ namespace MoonPull.Boat
             Launched?.Invoke(velocity);
         }
 
+        /// <summary>Temporary crash immunity, e.g. the grace period after Full Moon ends.</summary>
+        public void GrantInvulnerability(float seconds)
+        {
+            state.InvulnerableRemaining = Mathf.Max(state.InvulnerableRemaining, seconds);
+        }
+
+        /// <summary>Ends the run regardless of shields or invincibility (Kraken grab at a locked harbor).</summary>
+        public void ForceCrash(FailReason reason)
+        {
+            if (state.Crashed)
+            {
+                return;
+            }
+
+            state.Crashed = true;
+            Crashed?.Invoke(reason);
+            GameEvents.RaiseRunFailed(reason);
+        }
+
         public void ApplySpeedBoost(float multiplier, float duration)
         {
             state.BoostMultiplier = multiplier;
