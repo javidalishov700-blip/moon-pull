@@ -21,6 +21,34 @@ namespace MoonPull.EditorTools
 
         public static IReadOnlyList<string> Errors => Problems;
 
+        private static readonly Dictionary<Object, string> Paths = new Dictionary<Object, string>(new ByReference());
+
+        private sealed class ByReference : IEqualityComparer<Object>
+        {
+            public bool Equals(Object a, Object b) => ReferenceEquals(a, b);
+
+            public int GetHashCode(Object o) => System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(o);
+        }
+
+        /// <summary>Returns the live asset for a generated object whose in-memory instance was replaced by a re-import.</summary>
+        public static T Live<T>(T obj) where T : Object
+        {
+            if (ReferenceEquals(obj, null) || obj != null || !Paths.TryGetValue(obj, out string path))
+            {
+                return obj;
+            }
+
+            Object reloaded = AssetDatabase.LoadAssetAtPath(path, obj.GetType());
+            if (reloaded == null)
+            {
+                Error("Generated asset vanished: " + path);
+                return obj;
+            }
+
+            Paths[reloaded] = path;
+            return (T)reloaded;
+        }
+
         public static void ResetErrors() => Problems.Clear();
 
         public static void Error(string message)
@@ -50,15 +78,22 @@ namespace MoonPull.EditorTools
             T asset = AssetDatabase.LoadAssetAtPath<T>(path);
             if (asset == null)
             {
-                asset = ScriptableObject.CreateInstance<T>();
-                AssetDatabase.CreateAsset(asset, path);
+                // Import the new asset straight away and continue with the imported object. Otherwise the first
+                // later refresh re-imports it, replacing the object every wire already points at (seen on CI:
+                // every config reference saved as null).
+                AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<T>(), path);
+                AssetDatabase.SaveAssets();
+                AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceSynchronousImport);
+                asset = AssetDatabase.LoadAssetAtPath<T>(path);
             }
 
+            Paths[asset] = path;
             return asset;
         }
 
         public static void Set(Object target, string field, object value)
         {
+            target = Live(target);
             if (target == null)
             {
                 Error("Set on null target for field " + field);
@@ -88,6 +123,7 @@ namespace MoonPull.EditorTools
 
         public static void SetArray<T>(Object target, string field, IList<T> values) where T : Object
         {
+            target = Live(target);
             var so = new SerializedObject(target);
             SerializedProperty property = so.FindProperty(field);
             if (property == null || !property.isArray)
@@ -99,7 +135,7 @@ namespace MoonPull.EditorTools
             property.arraySize = values.Count;
             for (int i = 0; i < values.Count; i++)
             {
-                property.GetArrayElementAtIndex(i).objectReferenceValue = values[i];
+                property.GetArrayElementAtIndex(i).objectReferenceValue = Live(values[i]);
             }
 
             so.ApplyModifiedPropertiesWithoutUndo();
@@ -108,6 +144,7 @@ namespace MoonPull.EditorTools
         /// <summary>Fills an array of serializable structs; <paramref name="fill"/> writes each element's children.</summary>
         public static void SetStructArray(Object target, string field, int count, Action<SerializedProperty, int> fill)
         {
+            target = Live(target);
             var so = new SerializedObject(target);
             SerializedProperty property = so.FindProperty(field);
             if (property == null || !property.isArray)
@@ -146,7 +183,12 @@ namespace MoonPull.EditorTools
                     property.objectReferenceValue = null;
                     break;
                 case Object reference:
-                    property.objectReferenceValue = reference;
+                    property.objectReferenceValue = Live(reference);
+                    if (property.objectReferenceValue == null)
+                    {
+                        Error("Wired a destroyed object into " + label);
+                    }
+
                     break;
                 case bool b:
                     property.boolValue = b;
