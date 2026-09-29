@@ -61,6 +61,7 @@ namespace MoonPull.EditorTools
             string scenePath = SceneFactory.Build(content);
             EditorBuildSettings.scenes = new[] { new EditorBuildSettingsScene(scenePath, true) };
             AssetDatabase.SaveAssets();
+            VerifyScene(scenePath);
 
             foreach (string problem in Gen.Errors)
             {
@@ -114,6 +115,52 @@ namespace MoonPull.EditorTools
         }
 
         private static bool capturing;
+
+        /// <summary>
+        /// Reopens the saved scene from disk and reports every object reference that did not survive the save,
+        /// so wiring that looks right in memory but is lost on disk fails the build.
+        /// </summary>
+        private static void VerifyScene(string scenePath)
+        {
+            UnityEditor.SceneManagement.EditorSceneManager.OpenScene(scenePath, UnityEditor.SceneManagement.OpenSceneMode.Single);
+            int checkedRefs = 0;
+            int nullRefs = 0;
+            foreach (MonoBehaviour behaviour in UnityEngine.Object.FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+            {
+                string ns = behaviour != null ? behaviour.GetType().Namespace : null;
+                if (ns == null || !ns.StartsWith("MoonPull"))
+                {
+                    continue;
+                }
+
+                var so = new SerializedObject(behaviour);
+                SerializedProperty property = so.GetIterator();
+                while (property.NextVisible(true))
+                {
+                    if (property.propertyType != SerializedPropertyType.ObjectReference || property.name == "m_Script")
+                    {
+                        continue;
+                    }
+
+                    checkedRefs++;
+                    if (property.objectReferenceValue == null && (property.name == "config" || property.objectReferenceInstanceIDValue != 0))
+                    {
+                        nullRefs++;
+                        if (nullRefs <= 40)
+                        {
+                            Debug.LogError($"[MoonPull] Verify: {behaviour.GetType().Name} on '{behaviour.name}' has null {property.propertyPath} (id {property.objectReferenceInstanceIDValue})");
+                        }
+                    }
+                }
+            }
+
+            string probe = Gen.Root + "/Config/AdConfig.asset";
+            Debug.Log($"[MoonPull] Verify: {checkedRefs} references checked, {nullRefs} null. {probe} exists={System.IO.File.Exists(probe)} loads={AssetDatabase.LoadMainAssetAtPath(probe) != null}");
+            if (nullRefs > 0)
+            {
+                Gen.Error($"{nullRefs} scene reference(s) were lost when the scene was saved");
+            }
+        }
 
         /// <summary>Called by the build preprocessor so any build path gets a correct player.</summary>
         public static void PrepareProject()

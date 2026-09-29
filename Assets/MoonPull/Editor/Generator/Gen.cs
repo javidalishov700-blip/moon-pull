@@ -142,6 +142,7 @@ namespace MoonPull.EditorTools
             switch (value)
             {
                 case null:
+                    Debug.LogWarning("[MoonPull] Wired null into " + label);
                     property.objectReferenceValue = null;
                     break;
                 case Object reference:
