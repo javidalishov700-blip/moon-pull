@@ -3,9 +3,8 @@ using MoonPull.Config;
 using MoonPull.Localization;
 using MoonPull.Meta;
 using MoonPull.Save;
-using TMPro;
-using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine;
 
 namespace MoonPull.UI
 {
@@ -13,8 +12,8 @@ namespace MoonPull.UI
     {
         [SerializeField] private LocalizedText description;
         [SerializeField] private Image progressFill;
-        [SerializeField] private TMP_Text progressLabel;
-        [SerializeField] private TMP_Text rewardLabel;
+        [SerializeField] private Text progressLabel;
+        [SerializeField] private Text rewardLabel;
         [SerializeField] private Button claimButton;
         [SerializeField] private GameObject claimedMark;
 

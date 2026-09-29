@@ -1,9 +1,8 @@
 using System;
 using MoonPull.Core;
 using MoonPull.IAP;
-using TMPro;
-using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine;
 
 namespace MoonPull.UI
 {
@@ -11,7 +10,7 @@ namespace MoonPull.UI
     public sealed class IapProductCard : MonoBehaviour
     {
         [SerializeField] private Button buyButton;
-        [SerializeField] private TMP_Text priceLabel;
+        [SerializeField] private Text priceLabel;
 
         private string productId;
 

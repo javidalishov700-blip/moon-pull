@@ -1,7 +1,7 @@
 using MoonPull.Ads;
 using MoonPull.Core;
 using MoonPull.Localization;
-using TMPro;
+using UnityEngine.UI;
 using UnityEngine;
 
 namespace MoonPull.UI
@@ -11,7 +11,7 @@ namespace MoonPull.UI
     {
         [SerializeField] private AdsCoordinator coordinator;
         [SerializeField] private CanvasGroup group;
-        [SerializeField] private TMP_Text label;
+        [SerializeField] private Text label;
         [SerializeField, Min(0.5f)] private float visibleSeconds = 2.2f;
 
         private float hideAt;

@@ -1,18 +1,18 @@
 using MoonPull.Core;
-using TMPro;
+using UnityEngine.UI;
 using UnityEngine;
 
 namespace MoonPull.Localization
 {
-    /// <summary>Binds a TMP label to a localization key and refreshes on language change. Supports {0}-style arguments.</summary>
-    [RequireComponent(typeof(TMP_Text))]
+    /// <summary>Binds a uGUI Text label to a localization key and refreshes on language change. Supports {0}-style arguments.</summary>
+    [RequireComponent(typeof(Text))]
     public sealed class LocalizedText : MonoBehaviour
     {
         private static readonly System.Collections.Generic.List<LocalizedText> Active = new System.Collections.Generic.List<LocalizedText>(128);
 
         [SerializeField] private string key;
 
-        private TMP_Text label;
+        private Text label;
         private object[] args;
         private ILocalizationService service;
 
@@ -20,7 +20,7 @@ namespace MoonPull.Localization
 
         private void Awake()
         {
-            label = GetComponent<TMP_Text>();
+            label = GetComponent<Text>();
         }
 
         /// <summary>Refreshes every enabled label. Called once the localization service is registered during boot.</summary>

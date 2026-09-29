@@ -2,9 +2,8 @@ using MoonPull.Ads;
 using MoonPull.Core;
 using MoonPull.Localization;
 using MoonPull.Meta;
-using TMPro;
-using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine;
 
 namespace MoonPull.UI
 {
@@ -20,8 +19,8 @@ namespace MoonPull.UI
         [SerializeField] private CoinFlyEffect coinFly;
 
         [SerializeField] private StarRatingView stars;
-        [SerializeField] private TMP_Text scoreLabel;
-        [SerializeField] private TMP_Text rewardLabel;
+        [SerializeField] private Text scoreLabel;
+        [SerializeField] private Text rewardLabel;
         [SerializeField] private RectTransform rewardAnchor;
         [SerializeField] private GameObject newBestBadge;
         [SerializeField] private GameObject bossChestNote;

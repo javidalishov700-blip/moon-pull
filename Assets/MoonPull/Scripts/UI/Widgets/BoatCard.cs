@@ -2,9 +2,8 @@ using System;
 using MoonPull.Config;
 using MoonPull.Localization;
 using MoonPull.Meta;
-using TMPro;
-using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine;
 
 namespace MoonPull.UI
 {
@@ -13,8 +12,8 @@ namespace MoonPull.UI
         [SerializeField] private Image icon;
         [SerializeField] private LocalizedText nameLabel;
         [SerializeField] private LocalizedText rarityLabel;
-        [SerializeField] private TMP_Text perkLabel;
-        [SerializeField] private TMP_Text priceLabel;
+        [SerializeField] private Text perkLabel;
+        [SerializeField] private Text priceLabel;
         [SerializeField] private Button buyButton;
         [SerializeField] private Button selectButton;
         [SerializeField] private GameObject selectedMark;

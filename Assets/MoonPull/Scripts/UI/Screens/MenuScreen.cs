@@ -1,9 +1,8 @@
 using MoonPull.Core;
 using MoonPull.Localization;
 using MoonPull.Meta;
-using TMPro;
-using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine;
 
 namespace MoonPull.UI
 {
@@ -15,7 +14,7 @@ namespace MoonPull.UI
         [Header("Labels")]
         [SerializeField] private LocalizedText levelLabel;
         [SerializeField] private LocalizedText regionLabel;
-        [SerializeField] private TMP_Text starsLabel;
+        [SerializeField] private Text starsLabel;
         [SerializeField] private LocalizedText lockedLabel;
 
         [Header("Buttons")]

@@ -1,9 +1,8 @@
 using MoonPull.Config;
 using MoonPull.Localization;
 using MoonPull.Meta;
-using TMPro;
-using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine;
 
 namespace MoonPull.UI
 {
@@ -16,7 +15,7 @@ namespace MoonPull.UI
         [SerializeField] private MetaGame meta;
         [SerializeField] private CoinFlyEffect coinFly;
         [SerializeField] private RectTransform wheel;
-        [SerializeField] private TMP_Text[] segmentLabels = new TMP_Text[8];
+        [SerializeField] private Text[] segmentLabels = new Text[8];
         [SerializeField] private Image[] segmentImages = new Image[8];
         [SerializeField] private Button freeSpinButton;
         [SerializeField] private RewardedButton extraSpinButton;

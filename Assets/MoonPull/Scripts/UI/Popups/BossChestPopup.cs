@@ -1,8 +1,7 @@
 using MoonPull.Localization;
 using MoonPull.Meta;
-using TMPro;
-using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine;
 
 namespace MoonPull.UI
 {
@@ -11,7 +10,7 @@ namespace MoonPull.UI
         [SerializeField] private MetaGame meta;
         [SerializeField] private CoinFlyEffect coinFly;
         [SerializeField] private RectTransform chest;
-        [SerializeField] private TMP_Text pendingLabel;
+        [SerializeField] private Text pendingLabel;
         [SerializeField] private LocalizedText keysLabel;
         [SerializeField] private LocalizedText resultLabel;
         [SerializeField] private Button openWithKeyButton;

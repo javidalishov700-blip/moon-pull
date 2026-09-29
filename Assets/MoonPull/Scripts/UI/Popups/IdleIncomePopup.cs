@@ -1,7 +1,7 @@
 using MoonPull.Localization;
 using MoonPull.Meta;
-using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine;
 
 namespace MoonPull.UI
 {

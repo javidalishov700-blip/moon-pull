@@ -1,10 +1,9 @@
-using System;
 using System.Collections;
+using System;
 using MoonPull.Ads;
 using MoonPull.Localization;
-using TMPro;
-using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine;
 
 namespace MoonPull.UI
 {

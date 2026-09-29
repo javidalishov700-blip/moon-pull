@@ -64,7 +64,6 @@ namespace MoonPull.Ads
             MobileAds.SetRequestConfiguration(new RequestConfiguration
             {
                 TagForChildDirectedTreatment = TagForChildDirectedTreatment.False,
-                TagForUnderAgeOfConsent = TagForUnderAgeOfConsent.False,
                 MaxAdContentRating = MaxAdContentRating.T,
                 TestDeviceIds = new List<string>(config.TestDeviceIds)
             });

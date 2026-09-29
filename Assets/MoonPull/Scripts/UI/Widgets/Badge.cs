@@ -1,10 +1,9 @@
-using System;
 using System.Collections;
+using System;
 using MoonPull.Ads;
 using MoonPull.Localization;
-using TMPro;
-using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine;
 
 namespace MoonPull.UI
 {
@@ -12,7 +11,7 @@ namespace MoonPull.UI
     public sealed class Badge : MonoBehaviour
     {
         [SerializeField] private GameObject root;
-        [SerializeField] private TMP_Text count;
+        [SerializeField] private Text count;
 
         public void Set(int value)
         {

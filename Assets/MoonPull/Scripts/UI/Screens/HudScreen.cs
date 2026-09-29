@@ -1,17 +1,16 @@
-using MoonPull.Core;
 using MoonPull.Core.TimeControl;
+using MoonPull.Core;
 using MoonPull.Layers.Boss;
 using MoonPull.Layers.Passengers;
 using MoonPull.Level;
 using MoonPull.Localization;
 using MoonPull.Mechanics;
-using TMPro;
-using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine;
 
 namespace MoonPull.UI
 {
-    /// <summary>In-level HUD. Numbers use TMP SetText with numeric args, so per-frame updates do not allocate.</summary>
+    /// <summary>In-level HUD. Labels only change on events; the per-frame work (progress bar, gauge) sets no text.</summary>
     public sealed class HudScreen : UIScreen
     {
         [Header("Systems")]
@@ -26,20 +25,20 @@ namespace MoonPull.UI
 
         [Header("Progress & score")]
         [SerializeField] private Slider progressBar;
-        [SerializeField] private TMP_Text scoreLabel;
-        [SerializeField] private TMP_Text multiplierLabel;
+        [SerializeField] private Text scoreLabel;
+        [SerializeField] private Text multiplierLabel;
         [SerializeField] private Button pauseButton;
 
         [Header("Callout (near miss, shield, passengers)")]
         [SerializeField] private CanvasGroup callout;
         [SerializeField] private LocalizedText calloutText;
-        [SerializeField] private TMP_Text calloutMultiplier;
+        [SerializeField] private Text calloutMultiplier;
         [SerializeField, Min(0.1f)] private float calloutSeconds = 0.9f;
 
         [Header("Moonstones / Full Moon")]
         [SerializeField] private GameObject moonstoneMeter;
         [SerializeField] private Image moonstoneFill;
-        [SerializeField] private TMP_Text moonstoneLabel;
+        [SerializeField] private Text moonstoneLabel;
         [SerializeField] private GameObject fullMoonBanner;
         [SerializeField] private Image fullMoonTimer;
 
@@ -62,7 +61,7 @@ namespace MoonPull.UI
         [Header("Boss")]
         [SerializeField] private GameObject bossPanel;
         [SerializeField] private Image bossFill;
-        [SerializeField] private TMP_Text bossLabel;
+        [SerializeField] private Text bossLabel;
 
         [Header("Rewind")]
         [SerializeField] private GameObject rewindOverlay;

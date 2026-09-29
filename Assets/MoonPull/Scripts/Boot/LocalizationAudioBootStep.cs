@@ -1,7 +1,7 @@
 using System.Collections;
 using MoonPull.Audio;
-using MoonPull.Core;
 using MoonPull.Core.Boot;
+using MoonPull.Core;
 using MoonPull.Haptics;
 using MoonPull.Localization;
 using MoonPull.Save;
@@ -19,8 +19,8 @@ namespace MoonPull.Boot
         {
             ISaveService save = Services.Get<ISaveService>();
 
-            var localization = new UnityLocalizationService();
-            yield return localization.Initialize(save.Data.Settings.Language);
+            var localization = new CsvLocalizationService();
+            localization.Initialize(save.Data.Settings.Language);
             Services.Register<ILocalizationService>(localization);
 
             Services.Register<IAudioService>(audioService);
@@ -32,6 +32,7 @@ namespace MoonPull.Boot
             Services.Register(settings);
 
             LocalizedText.RefreshAllActive();
+            yield break;
         }
     }
 }

@@ -1,8 +1,7 @@
 using MoonPull.Localization;
 using MoonPull.Meta;
-using TMPro;
-using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine;
 
 namespace MoonPull.UI
 {
@@ -18,7 +17,7 @@ namespace MoonPull.UI
         [SerializeField] private Color builtColor = Color.white;
         [SerializeField] private Color pendingColor = new Color(1f, 1f, 1f, 0.25f);
         [SerializeField] private Button buildButton;
-        [SerializeField] private TMP_Text costLabel;
+        [SerializeField] private Text costLabel;
         [SerializeField] private Button previousButton;
         [SerializeField] private Button nextButton;
         [SerializeField] private Button collectButton;

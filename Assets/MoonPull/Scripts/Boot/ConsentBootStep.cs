@@ -1,8 +1,8 @@
 using System.Collections;
 using MoonPull.Config;
 using MoonPull.Consent;
-using MoonPull.Core;
 using MoonPull.Core.Boot;
+using MoonPull.Core;
 using UnityEngine;
 
 namespace MoonPull.Boot

@@ -1,6 +1,6 @@
 using MoonPull.Core;
 using MoonPull.Meta;
-using TMPro;
+using UnityEngine.UI;
 using UnityEngine;
 
 namespace MoonPull.UI
@@ -12,7 +12,7 @@ namespace MoonPull.UI
     public sealed class CoinCounter : MonoBehaviour
     {
         [SerializeField] private MetaGame meta;
-        [SerializeField] private TMP_Text label;
+        [SerializeField] private Text label;
         [SerializeField] private RectTransform icon;
 
         private long displayed;

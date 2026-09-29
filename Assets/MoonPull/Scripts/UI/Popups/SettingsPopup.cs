@@ -3,9 +3,8 @@ using MoonPull.Consent;
 using MoonPull.Core;
 using MoonPull.Localization;
 using MoonPull.Settings;
-using TMPro;
-using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine;
 
 namespace MoonPull.UI
 {
@@ -14,7 +13,7 @@ namespace MoonPull.UI
         [SerializeField] private ToggleButton musicToggle;
         [SerializeField] private ToggleButton soundToggle;
         [SerializeField] private ToggleButton hapticsToggle;
-        [SerializeField] private TMP_Dropdown languageDropdown;
+        [SerializeField] private Dropdown languageDropdown;
         [SerializeField] private Button privacyOptionsButton;
         [SerializeField] private Button privacyPolicyButton;
         [SerializeField] private LocalizedText versionLabel;

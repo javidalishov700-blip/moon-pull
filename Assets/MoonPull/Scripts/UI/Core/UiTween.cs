@@ -1,148 +1,113 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
-#if MOONPULL_DOTWEEN
-using DG.Tweening;
-#endif
 
 namespace MoonPull.UI
 {
+    public enum Ease
+    {
+        Linear,
+        OutQuad,
+        OutCubic,
+        OutQuart,
+        OutExpo,
+        OutBack,
+        InCubic,
+        InOutSine
+    }
+
     /// <summary>
-    /// The only file that touches DOTween. All tweens run on unscaled time so UI keeps animating while the game is
-    /// paused or in slow motion. Without the MOONPULL_DOTWEEN define, end states apply instantly so the project
-    /// still compiles and runs before DOTween is imported.
+    /// Small self-contained tween engine for UI (fades, pops, count-ups, coin arcs, wheel spin). Replaces DOTween so
+    /// the project builds from source on CI with no Asset Store import. Runs on unscaled time, so UI keeps animating
+    /// while gameplay is paused or in slow motion.
     /// </summary>
     public static class UiTween
     {
         public static void Fade(CanvasGroup group, float to, float duration, Action onComplete = null)
         {
-#if MOONPULL_DOTWEEN
-            DOTween.Kill(group);
-            DOTween.To(() => group.alpha, a => group.alpha = a, to, duration)
-                .SetTarget(group).SetUpdate(true).SetEase(Ease.OutQuad)
-                .OnComplete(() => onComplete?.Invoke());
-#else
-            group.alpha = to;
-            onComplete?.Invoke();
-#endif
+            float from = group.alpha;
+            TweenRunner.Add(group, duration, 0f, Ease.OutQuad, 0, false, t => group.alpha = Mathf.LerpUnclamped(from, to, t), onComplete);
         }
 
         public static void PopIn(Transform target, float duration)
         {
-#if MOONPULL_DOTWEEN
-            target.DOKill();
             target.localScale = Vector3.one * 0.85f;
-            target.DOScale(1f, duration).SetUpdate(true).SetEase(Ease.OutBack);
-#else
-            target.localScale = Vector3.one;
-#endif
+            TweenRunner.Add(target, duration, 0f, Ease.OutBack, 0, false,
+                t => target.localScale = Vector3.one * Mathf.LerpUnclamped(0.85f, 1f, t), null);
         }
 
         public static void Punch(Transform target, float strength = 0.15f, float duration = 0.25f)
         {
-#if MOONPULL_DOTWEEN
-            target.DOKill(true);
-            target.localScale = Vector3.one;
-            target.DOPunchScale(Vector3.one * strength, duration, 6, 0.6f).SetUpdate(true);
-#endif
+            TweenRunner.Add(target, duration, 0f, Ease.Linear, 0, false,
+                t => target.localScale = Vector3.one * (1f + strength * Mathf.Sin(t * Mathf.PI * 3f) * (1f - t)),
+                () => target.localScale = Vector3.one);
         }
 
         /// <summary>Endless breathing scale, used to draw the eye to rewarded offers (the pulsing x3).</summary>
         public static void PulseLoop(Transform target, float scale = 1.08f, float halfPeriod = 0.45f)
         {
-#if MOONPULL_DOTWEEN
-            target.DOKill();
             target.localScale = Vector3.one;
-            target.DOScale(scale, halfPeriod).SetUpdate(true).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
-#endif
+            TweenRunner.Add(target, halfPeriod, 0f, Ease.InOutSine, -1, true,
+                t => target.localScale = Vector3.one * Mathf.LerpUnclamped(1f, scale, t), null);
         }
 
         public static void MoveAnchored(RectTransform target, Vector2 to, float duration, Action onComplete = null)
         {
-#if MOONPULL_DOTWEEN
-            DOTween.Kill(target);
-            DOTween.To(() => target.anchoredPosition, p => target.anchoredPosition = p, to, duration)
-                .SetTarget(target).SetUpdate(true).SetEase(Ease.OutCubic)
-                .OnComplete(() => onComplete?.Invoke());
-#else
-            target.anchoredPosition = to;
-            onComplete?.Invoke();
-#endif
+            Vector2 from = target.anchoredPosition;
+            TweenRunner.Add(target, duration, 0f, Ease.OutCubic, 0, false,
+                t => target.anchoredPosition = Vector2.LerpUnclamped(from, to, t), onComplete);
         }
 
-        /// <summary>Loops between two anchored positions (tutorial hand).</summary>
+        /// <summary>Loops between two anchored positions (tutorial hand). fastUp = flick then restart.</summary>
         public static void YoyoAnchored(RectTransform target, Vector2 from, Vector2 to, float halfPeriod, bool fastUp = false)
         {
             target.anchoredPosition = from;
-#if MOONPULL_DOTWEEN
-            DOTween.Kill(target);
-            DOTween.To(() => target.anchoredPosition, p => target.anchoredPosition = p, to, halfPeriod)
-                .SetTarget(target).SetUpdate(true)
-                .SetEase(fastUp ? Ease.OutExpo : Ease.InOutSine)
-                .SetLoops(-1, fastUp ? LoopType.Restart : LoopType.Yoyo);
-#endif
+            TweenRunner.Add(target, halfPeriod, 0f, fastUp ? Ease.OutExpo : Ease.InOutSine, -1, !fastUp,
+                t => target.anchoredPosition = Vector2.LerpUnclamped(from, to, t), null);
         }
 
-        /// <summary>Moves along a curved path (coin fly): arcs through <paramref name="control"/>.</summary>
+        /// <summary>Moves along a quadratic curve (coin fly) through <paramref name="control"/>.</summary>
         public static void Arc(Transform target, Vector3 from, Vector3 control, Vector3 to, float duration, float delay, Action onComplete)
         {
-#if MOONPULL_DOTWEEN
-            target.DOKill();
             target.position = from;
-            float t = 0f;
-            DOTween.To(() => t, v =>
-                {
-                    t = v;
-                    float u = 1f - v;
-                    target.position = u * u * from + 2f * u * v * control + v * v * to;
-                }, 1f, duration)
-                .SetTarget(target).SetDelay(delay).SetUpdate(true).SetEase(Ease.InCubic)
-                .OnComplete(() => onComplete?.Invoke());
-#else
-            target.position = to;
-            onComplete?.Invoke();
-#endif
+            TweenRunner.Add(target, duration, delay, Ease.InCubic, 0, false, v =>
+            {
+                float u = 1f - v;
+                target.position = u * u * from + 2f * u * v * control + v * v * to;
+            }, onComplete);
         }
 
         public static void RotateZ(Transform target, float toDegrees, float duration, Action onComplete)
         {
-#if MOONPULL_DOTWEEN
-            target.DOKill();
-            target.DOLocalRotate(new Vector3(0f, 0f, toDegrees), duration, RotateMode.FastBeyond360)
-                .SetUpdate(true).SetEase(Ease.OutQuart).OnComplete(() => onComplete?.Invoke());
-#else
-            target.localRotation = Quaternion.Euler(0f, 0f, toDegrees);
-            onComplete?.Invoke();
-#endif
+            float from = target.localEulerAngles.z;
+            TweenRunner.Add(target, duration, 0f, Ease.OutQuart, 0, false,
+                t => target.localRotation = Quaternion.Euler(0f, 0f, Mathf.LerpUnclamped(from, toDegrees, t)), onComplete);
         }
 
         /// <summary>Animated number (score and coin count-ups).</summary>
         public static void Count(object target, float from, float to, float duration, Action<float> onUpdate, Action onComplete = null)
         {
-#if MOONPULL_DOTWEEN
-            DOTween.Kill(target);
-            float value = from;
-            DOTween.To(() => value, v =>
-                {
-                    value = v;
-                    onUpdate(v);
-                }, to, duration)
-                .SetTarget(target).SetUpdate(true).SetEase(Ease.OutCubic)
-                .OnComplete(() => onComplete?.Invoke());
-#else
-            onUpdate(to);
-            onComplete?.Invoke();
-#endif
+            TweenRunner.Add(target, duration, 0f, Ease.OutCubic, 0, false, t => onUpdate(Mathf.LerpUnclamped(from, to, t)), onComplete);
         }
 
-        public static void Kill(object target, bool complete = false)
+        public static void Kill(object target, bool complete = false) => TweenRunner.Kill(target, complete);
+
+        public static float Evaluate(Ease ease, float t)
         {
-#if MOONPULL_DOTWEEN
-            DOTween.Kill(target, complete);
-            if (target is Transform transform)
+            switch (ease)
             {
-                transform.DOKill(complete);
+                case Ease.OutQuad: return 1f - (1f - t) * (1f - t);
+                case Ease.OutCubic: return 1f - Mathf.Pow(1f - t, 3f);
+                case Ease.OutQuart: return 1f - Mathf.Pow(1f - t, 4f);
+                case Ease.OutExpo: return t >= 1f ? 1f : 1f - Mathf.Pow(2f, -10f * t);
+                case Ease.OutBack:
+                    const float c1 = 1.70158f;
+                    const float c3 = c1 + 1f;
+                    return 1f + c3 * Mathf.Pow(t - 1f, 3f) + c1 * Mathf.Pow(t - 1f, 2f);
+                case Ease.InCubic: return t * t * t;
+                case Ease.InOutSine: return -(Mathf.Cos(Mathf.PI * t) - 1f) / 2f;
+                default: return t;
             }
-#endif
         }
     }
 }

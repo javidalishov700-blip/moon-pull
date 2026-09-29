@@ -1,9 +1,8 @@
 using MoonPull.Config;
 using MoonPull.Localization;
 using MoonPull.Meta;
-using TMPro;
-using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine;
 
 namespace MoonPull.UI
 {
@@ -13,7 +12,7 @@ namespace MoonPull.UI
         private struct DayCell
         {
             public LocalizedText DayLabel;
-            public TMP_Text RewardLabel;
+            public Text RewardLabel;
             public GameObject ClaimedMark;
             public GameObject TodayHighlight;
         }

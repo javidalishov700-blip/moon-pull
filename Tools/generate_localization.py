@@ -1,4 +1,4 @@
-# Source of truth for UI strings. Run: python3 Tools/generate_localization.py Assets/MoonPull/Localization/MoonPull_UI.csv Assets/MoonPull/Scripts/Localization/LocKeys.cs
+# Source of truth for UI strings. Run: python3 Tools/generate_localization.py Assets/MoonPull/Resources/Localization/MoonPull_UI.csv Assets/MoonPull/Scripts/Localization/LocKeys.cs
 # Columns: en, tr, es, pt-BR, de, fr, ru, ja
 import csv, re
 
