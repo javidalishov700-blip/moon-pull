@@ -30,8 +30,29 @@ namespace MoonPull.UI
             button.onClick.AddListener(OnClick);
         }
 
+        /// <summary>For buttons inside runtime-instantiated prefabs, which cannot reference scene objects.</summary>
+        public void SetCoordinator(AdsCoordinator value)
+        {
+            if (coordinator != null && isActiveAndEnabled)
+            {
+                coordinator.RewardedAvailabilityChanged -= Refresh;
+            }
+
+            coordinator = value;
+            if (isActiveAndEnabled)
+            {
+                OnEnable();
+            }
+        }
+
         private void OnEnable()
         {
+            if (coordinator == null)
+            {
+                return;
+            }
+
+            coordinator.RewardedAvailabilityChanged -= Refresh;
             coordinator.RewardedAvailabilityChanged += Refresh;
             Refresh(coordinator.IsRewardedReady);
             if (pulse)
@@ -42,7 +63,11 @@ namespace MoonPull.UI
 
         private void OnDisable()
         {
-            coordinator.RewardedAvailabilityChanged -= Refresh;
+            if (coordinator != null)
+            {
+                coordinator.RewardedAvailabilityChanged -= Refresh;
+            }
+
             UiTween.Kill(transform);
             transform.localScale = Vector3.one;
         }

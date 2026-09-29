@@ -2,7 +2,10 @@ using UnityEngine;
 
 namespace MoonPull.UI
 {
-    /// <summary>Pooled coin icons that arc from a point to the wallet counter. Requires a Screen Space - Overlay canvas.</summary>
+    /// <summary>
+    /// Pooled coin icons that arc from a point to the wallet counter, for coins already credited to the wallet.
+    /// Requires a Screen Space - Overlay canvas.
+    /// </summary>
     public sealed class CoinFlyEffect : MonoBehaviour
     {
         [SerializeField] private RectTransform[] icons = new RectTransform[0];
@@ -23,15 +26,23 @@ namespace MoonPull.UI
             }
         }
 
-        public void PlayFromWorld(Vector3 worldPosition, long amount)
+        public void PlayCreditedFromWorld(Vector3 worldPosition, long amount)
         {
-            PlayFromScreen(worldCamera.WorldToScreenPoint(worldPosition), amount);
+            PlayCredited(worldCamera.WorldToScreenPoint(worldPosition), amount);
         }
 
-        public void PlayFromScreen(Vector2 screenPosition, long amount)
+        public void PlayCredited(Vector2 screenPosition, long amount)
         {
             if (amount <= 0)
             {
+                return;
+            }
+
+            // A burst already in flight owns the pool; the counter still ends on the right total.
+            if (inFlight > 0)
+            {
+                counter.BeginCredit(0);
+                counter.EndCredit();
                 return;
             }
 
@@ -39,7 +50,7 @@ namespace MoonPull.UI
             long share = amount / count;
             long remainder = amount - share * count;
             Vector3 target = counter.Icon.position;
-            counter.Hold();
+            counter.BeginCredit(amount);
             inFlight += count;
 
             for (int i = 0; i < count; i++)
@@ -56,7 +67,7 @@ namespace MoonPull.UI
                     inFlight--;
                     if (inFlight == 0)
                     {
-                        counter.Release();
+                        counter.EndCredit();
                     }
                 });
             }

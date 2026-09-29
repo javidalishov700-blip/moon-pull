@@ -41,6 +41,9 @@ namespace MoonPull.Meta
         public RegionCatalog Regions => regions;
 
         public LevelReward LastReward { get; private set; }
+
+        /// <summary>True when the last won level beat its previous best score.</summary>
+        public bool LastResultWasNewBest { get; private set; }
         public bool LastRewardMultiplied { get; private set; }
         public bool CanMultiplyLastReward => hasLastReward && !LastRewardMultiplied && LastReward.Total > 0;
 
@@ -142,6 +145,7 @@ namespace MoonPull.Meta
             }
 
             bool isReplay = Progress.IsCompleted(result.LevelIndex);
+            LastResultWasNewBest = isReplay && result.Score > Progress.BestScoreFor(result.LevelIndex);
             Progress.Record(result);
 
             BoatModifiers modifiers = BoatModifiers.From(Boats.BoatForNextLevel);
