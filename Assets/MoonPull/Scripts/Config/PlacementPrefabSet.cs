@@ -3,46 +3,6 @@ using UnityEngine;
 
 namespace MoonPull.Config
 {
-    [CreateAssetMenu(fileName = "RegionCatalog", menuName = "MoonPull/Catalog/Regions")]
-    public sealed class RegionCatalog : ScriptableObject
-    {
-        [SerializeField] private RegionDefinition[] regions = new RegionDefinition[0];
-
-        public int Count => regions.Length;
-
-        public RegionDefinition this[int index] => regions[Mathf.Clamp(index, 0, regions.Length - 1)];
-
-        public RegionDefinition ForLevel(int levelIndex, int levelsPerRegion) => this[levelIndex / Mathf.Max(1, levelsPerRegion)];
-    }
-
-    [CreateAssetMenu(fileName = "BoatCatalog", menuName = "MoonPull/Catalog/Boats")]
-    public sealed class BoatCatalog : ScriptableObject
-    {
-        [SerializeField] private BoatDefinition[] boats = new BoatDefinition[0];
-        [SerializeField] private BoatDefinition defaultBoat;
-
-        public int Count => boats.Length;
-        public BoatDefinition this[int index] => boats[index];
-        public BoatDefinition Default => defaultBoat != null ? defaultBoat : boats.Length > 0 ? boats[0] : null;
-
-        /// <summary>Finds a boat by id, falling back to the default so a renamed id can never break a save.</summary>
-        public BoatDefinition Find(string id)
-        {
-            if (!string.IsNullOrEmpty(id))
-            {
-                for (int i = 0; i < boats.Length; i++)
-                {
-                    if (boats[i] != null && boats[i].Id == id)
-                    {
-                        return boats[i];
-                    }
-                }
-            }
-
-            return Default;
-        }
-    }
-
     /// <summary>Prefabs for every non-obstacle placement plus fallback obstacles when a region has none.</summary>
     [CreateAssetMenu(fileName = "PlacementPrefabSet", menuName = "MoonPull/Catalog/Placement Prefabs")]
     public sealed class PlacementPrefabSet : ScriptableObject
