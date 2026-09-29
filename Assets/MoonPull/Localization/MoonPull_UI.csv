@@ -1,0 +1,159 @@
+Key,English(en),Turkish(tr),Spanish(es),Portuguese (Brazil)(pt-BR),German(de),French(fr),Russian(ru),Japanese(ja)
+common.ok,OK,Tamam,OK,OK,OK,OK,ОК,OK
+common.close,Close,Kapat,Cerrar,Fechar,Schließen,Fermer,Закрыть,閉じる
+common.loading,Loading...,Yükleniyor...,Cargando...,Carregando...,Lädt...,Chargement...,Загрузка...,読み込み中...
+common.locked,Locked,Kilitli,Bloqueado,Bloqueado,Gesperrt,Verrouillé,Закрыто,ロック中
+common.claim,Claim,Al,Reclamar,Resgatar,Abholen,Récupérer,Забрать,受け取る
+common.claimed,Claimed,Alındı,Reclamado,Resgatado,Abgeholt,Récupéré,Получено,受け取り済み
+common.collect,Collect,Topla,Recoger,Coletar,Einsammeln,Récolter,Собрать,回収
+common.continue,Continue,Devam,Continuar,Continuar,Weiter,Continuer,Продолжить,続ける
+common.home,Home,Ana Menü,Inicio,Início,Menü,Accueil,Меню,ホーム
+common.retry,Retry,Tekrar Dene,Reintentar,Tentar de novo,Nochmal,Réessayer,Ещё раз,リトライ
+common.on,On,Açık,Sí,Ligado,An,Oui,Вкл.,オン
+common.off,Off,Kapalı,No,Desligado,Aus,Non,Выкл.,オフ
+menu.play,PLAY,OYNA,JUGAR,JOGAR,SPIELEN,JOUER,ИГРАТЬ,プレイ
+menu.level,Level {0},Bölüm {0},Nivel {0},Fase {0},Level {0},Niveau {0},Уровень {0},レベル {0}
+menu.shop,Shop,Mağaza,Tienda,Loja,Shop,Boutique,Магазин,ショップ
+menu.boats,Boats,Tekneler,Barcos,Barcos,Boote,Bateaux,Лодки,ボート
+menu.lighthouse,Lighthouse,Deniz Feneri,Faro,Farol,Leuchtturm,Phare,Маяк,灯台
+menu.missions,Missions,Görevler,Misiones,Missões,Missionen,Missions,Задания,ミッション
+menu.spin,Daily Spin,Günlük Çark,Ruleta diaria,Roleta diária,Tagesrad,Roue du jour,Колесо дня,デイリースピン
+menu.settings,Settings,Ayarlar,Ajustes,Configurações,Einstellungen,Paramètres,Настройки,設定
+menu.stars,{0} stars,{0} yıldız,{0} estrellas,{0} estrelas,{0} Sterne,{0} étoiles,Звёзд: {0},スター {0}
+hud.near_miss,NEAR MISS!,KIL PAYI!,¡POR POCO!,POR UM TRIZ!,KNAPP!,DE JUSTESSE !,НА ВОЛОСОК!,ニアミス！
+hud.multiplier,x{0},x{0},x{0},x{0},x{0},x{0},x{0},x{0}
+hud.full_moon,FULL MOON!,DOLUNAY!,¡LUNA LLENA!,LUA CHEIA!,VOLLMOND!,PLEINE LUNE !,ПОЛНОЛУНИЕ!,満月！
+hud.moonstones,{0}/{1},{0}/{1},{0}/{1},{0}/{1},{0}/{1},{0}/{1},{0}/{1},{0}/{1}
+hud.shield,Shield saved you!,Kalkan seni kurtardı!,¡El escudo te salvó!,O escudo te salvou!,Schild hat dich gerettet!,Le bouclier t'a sauvé !,Щит спас тебя!,シールドが守った！
+hud.passengers_boarded,+{0} passengers,+{0} yolcu,+{0} pasajeros,+{0} passageiros,+{0} Passagiere,+{0} passagers,+{0} пассажиров,乗客 +{0}
+hud.align,Hold the tide!,Suyu sabit tut!,¡Mantén la marea!,Segure a maré!,Halte die Flut!,Tiens la marée !,Держи уровень!,潮をキープ！
+hud.storm,Storm incoming!,Fırtına geliyor!,¡Se acerca una tormenta!,Tempestade chegando!,Sturm zieht auf!,Tempête en approche !,Надвигается шторм!,嵐が来る！
+hud.fog,Fog ahead!,Önünde sis var!,¡Niebla adelante!,Neblina à frente!,Nebel voraus!,Brouillard devant !,Впереди туман!,前方に霧！
+hud.eclipse,Eclipse in {0}...,Tutulmaya {0}...,Eclipse en {0}...,Eclipse em {0}...,Finsternis in {0}...,Éclipse dans {0}...,Затмение через {0}...,{0}秒後に日食...
+hud.eclipse_now,Eclipse! Hold steady!,Tutulma! Sabit kal!,¡Eclipse! ¡Aguanta!,Eclipse! Aguente firme!,Finsternis! Ruhig bleiben!,Éclipse ! Tiens bon !,Затмение! Держись!,日食！そのまま耐えろ！
+hud.boss,Kraken {0}/{1},Kraken {0}/{1},Kraken {0}/{1},Kraken {0}/{1},Krake {0}/{1},Kraken {0}/{1},Кракен {0}/{1},クラーケン {0}/{1}
+hud.boss_defeated,Kraken defeated!,Kraken yenildi!,¡Kraken derrotado!,Kraken derrotado!,Krake besiegt!,Kraken vaincu !,Кракен повержен!,クラーケン撃破！
+hud.new_best,New best!,Yeni rekor!,¡Nuevo récord!,Novo recorde!,Neuer Rekord!,Nouveau record !,Новый рекорд!,ベスト更新！
+pause.title,Paused,Duraklatıldı,Pausa,Pausado,Pause,Pause,Пауза,一時停止
+pause.resume,Resume,Devam Et,Reanudar,Retomar,Fortsetzen,Reprendre,Продолжить,再開
+pause.restart,Restart,Yeniden Başla,Reiniciar,Reiniciar,Neustart,Recommencer,Заново,やり直す
+fail.title,Shipwrecked!,Gemi battı!,¡Naufragio!,Naufrágio!,Schiffbruch!,Naufrage !,Кораблекрушение!,難破！
+fail.rock,You hit a rock,Kayaya çarptın,Chocaste con una roca,Você bateu numa pedra,Du bist auf einen Felsen gefahren,Tu as percuté un rocher,Ты налетел на скалу,岩にぶつかった
+fail.bridge,You hit a bridge,Köprüye çarptın,Chocaste con un puente,Você bateu numa ponte,Du bist gegen eine Brücke gefahren,Tu as percuté un pont,Ты врезался в мост,橋にぶつかった
+fail.aground,You ran aground,Karaya oturdun,Encallaste,Você encalhou,Du bist auf Grund gelaufen,Tu t'es échoué,Ты сел на мель,座礁した
+fail.shark,A shark got you,Köpekbalığı yakaladı,Te atrapó un tiburón,Um tubarão te pegou,Ein Hai hat dich erwischt,Un requin t'a eu,Тебя схватила акула,サメにやられた
+fail.kraken,The Kraken got you,Kraken seni yakaladı,El Kraken te atrapó,O Kraken te pegou,Der Krake hat dich erwischt,Le Kraken t'a eu,Тебя схватил Кракен,クラーケンにやられた
+fail.rewind,Rewind the Tide,Gelgiti Geri Sar,Rebobinar la marea,Voltar a maré,Flut zurückspulen,Rembobiner la marée,Отмотать прилив,潮を巻き戻す
+fail.rewind_desc,Watch an ad to rewind 3 seconds,3 saniye geri sarmak için reklam izle,Mira un anuncio para retroceder 3 segundos,Assista a um anúncio para voltar 3 segundos,"Sieh dir eine Werbung an, um 3 Sekunden zurückzuspulen",Regarde une pub pour revenir 3 secondes en arrière,"Посмотри рекламу, чтобы отмотать 3 секунды",広告を見て3秒巻き戻す
+win.title,Harbor reached!,Limana ulaştın!,¡Llegaste al puerto!,Porto alcançado!,Hafen erreicht!,Port atteint !,Гавань достигнута!,港に到着！
+win.score,Score {0},Skor {0},Puntos {0},Pontos {0},Punkte {0},Score {0},Очки: {0},スコア {0}
+win.reward,+{0},+{0},+{0},+{0},+{0},+{0},+{0},+{0}
+win.triple,Triple your reward,Ödülünü üçe katla,Triplica tu recompensa,Triplique sua recompensa,Belohnung verdreifachen,Triple ta récompense,Утрой награду,報酬を3倍に
+win.triple_desc,Watch an ad: {0} → {1},Reklam izle: {0} → {1},Mira un anuncio: {0} → {1},Assista a um anúncio: {0} → {1},Werbung ansehen: {0} → {1},Regarde une pub : {0} → {1},Смотри рекламу: {0} → {1},広告を見る：{0} → {1}
+win.boss_chest,The Kraken dropped a chest!,Kraken bir sandık düşürdü!,¡El Kraken soltó un cofre!,O Kraken deixou um baú!,Der Krake hat eine Truhe fallen lassen!,Le Kraken a lâché un coffre !,Кракен оставил сундук!,クラーケンが宝箱を落とした！
+ads.not_ready,Ad not available right now. Try again soon.,Şu an reklam yok. Birazdan tekrar dene.,No hay anuncios ahora. Inténtalo pronto.,Nenhum anúncio disponível agora. Tente logo mais.,Gerade keine Werbung verfügbar. Versuch es gleich nochmal.,Aucune pub disponible. Réessaie bientôt.,Реклама сейчас недоступна. Попробуй чуть позже.,現在広告がありません。後でもう一度お試しください。
+ads.closed_early,Watch the whole ad to get your reward.,Ödül için reklamın tamamını izle.,Mira el anuncio completo para obtener tu recompensa.,Assista ao anúncio inteiro para ganhar a recompensa.,"Sieh dir die ganze Werbung an, um die Belohnung zu erhalten.",Regarde la pub en entier pour obtenir ta récompense.,"Досмотри рекламу до конца, чтобы получить награду.",報酬を得るには広告を最後まで見てください。
+ads.watch,Watch ad,Reklam izle,Ver anuncio,Ver anúncio,Werbung ansehen,Voir la pub,Смотреть,広告を見る
+idle.title,Collect your earnings,Kazancını topla,Recoge tus ganancias,Colete seus ganhos,Einnahmen einsammeln,Récolte tes gains,Забери заработок,収益を回収
+idle.body,Your lighthouses earned {0} coins while you were away.,Sen yokken fenerlerin {0} altın kazandı.,Tus faros ganaron {0} monedas mientras no estabas.,Seus faróis renderam {0} moedas enquanto você estava fora.,"Deine Leuchttürme haben {0} Münzen verdient, während du weg warst.",Tes phares ont gagné {0} pièces pendant ton absence.,"Пока тебя не было, маяки заработали {0} монет.",不在中に灯台が{0}コインを稼ぎました。
+idle.double,Double it,İkiye katla,Duplícalo,Dobrar,Verdoppeln,Double-le,Удвоить,2倍にする
+idle.rate,{0} coins/hour,{0} altın/saat,{0} monedas/hora,{0} moedas/hora,{0} Münzen/Std.,{0} pièces/heure,{0} монет/час,{0}コイン/時
+idle.full,Storage full!,Depo dolu!,¡Almacén lleno!,Estoque cheio!,Speicher voll!,Stock plein !,Хранилище полно!,貯蔵いっぱい！
+lighthouse.title,Lighthouse,Deniz Feneri,Faro,Farol,Leuchtturm,Phare,Маяк,灯台
+lighthouse.build,Build,İnşa Et,Construir,Construir,Bauen,Construire,Строить,建設
+lighthouse.stage,Stage {0}/{1},Aşama {0}/{1},Fase {0}/{1},Etapa {0}/{1},Stufe {0}/{1},Étape {0}/{1},Этап {0}/{1},段階 {0}/{1}
+lighthouse.complete,Complete!,Tamamlandı!,¡Completado!,Concluído!,Fertig!,Terminé !,Готово!,完成！
+lighthouse.region_locked,Needs {0} stars,{0} yıldız gerekli,Necesitas {0} estrellas,Precisa de {0} estrelas,Benötigt {0} Sterne,Nécessite {0} étoiles,Нужно звёзд: {0},スター{0}個が必要
+boats.title,Boats,Tekneler,Barcos,Barcos,Boote,Bateaux,Лодки,ボート
+boats.select,Select,Seç,Elegir,Escolher,Wählen,Choisir,Выбрать,選択
+boats.selected,Selected,Seçildi,Elegido,Escolhido,Gewählt,Choisi,Выбрано,選択中
+boats.buy,Buy,Satın Al,Comprar,Comprar,Kaufen,Acheter,Купить,購入
+boats.try,Try for one level,Bir bölüm dene,Pruébalo un nivel,Teste por uma fase,Ein Level testen,Essaie un niveau,Попробовать на уровень,1レベル試す
+boats.owned,Owned,Sahipsin,Tuyo,Seu,Im Besitz,Possédé,Есть,所持
+boats.iap_only,Starter Pack exclusive,Başlangıç Paketine özel,Exclusivo del Pack de inicio,Exclusivo do Pacote Inicial,Exklusiv im Starterpaket,Exclusif au Pack de départ,Только в стартовом наборе,スターターパック限定
+perk.none,No special ability,Özel yeteneği yok,Sin habilidad especial,Sem habilidade especial,Keine Spezialfähigkeit,Aucune capacité spéciale,Без особых способностей,特殊能力なし
+perk.coin_bonus,+{0}% coins,+%{0} altın,+{0}% monedas,+{0}% moedas,+{0} % Münzen,+{0} % de pièces,+{0}% монет,コイン +{0}%
+perk.shields,Survives {0} crash per level,Bölüm başına {0} kazaya dayanır,Resiste {0} choque por nivel,Resiste a {0} batida por fase,Übersteht {0} Crash pro Level,Survit à {0} choc par niveau,Выдерживает {0} удар за уровень,1レベルにつき{0}回の衝突に耐える
+perk.launch,+{0}% wave launch height,+%{0} dalga fırlatma yüksekliği,+{0}% altura de lanzamiento,+{0}% altura do salto na onda,+{0} % Wellensprung-Höhe,+{0} % de hauteur de saut,+{0}% к высоте прыжка на волне,波ジャンプの高さ +{0}%
+perk.near_miss,+{0}% near-miss window,+%{0} kıl payı aralığı,+{0}% margen de «por poco»,+{0}% margem de «por um triz»,+{0} % Knapp-Fenster,+{0} % de marge de justesse,+{0}% к окну «на волосок»,ニアミス判定 +{0}%
+perk.full_moon,+{0}s Full Moon,Dolunay +{0} sn,+{0} s de Luna llena,+{0}s de Lua Cheia,+{0} s Vollmond,+{0} s de Pleine Lune,+{0} с полнолуния,満月 +{0}秒
+perk.moonstones,Starts with {0} moonstones,{0} ay taşıyla başlar,Empieza con {0} piedras lunares,Começa com {0} pedras da lua,Startet mit {0} Mondsteinen,Commence avec {0} pierres de lune,Начинает с {0} лунными камнями,ムーンストーン{0}個でスタート
+perk.passengers,+{0}% passenger coins,+%{0} yolcu altını,+{0}% monedas por pasajero,+{0}% moedas por passageiro,+{0} % Passagier-Münzen,+{0} % de pièces par passager,+{0}% монет за пассажиров,乗客コイン +{0}%
+perk.magnet,Pickup magnet +{0},Toplama mıknatısı +{0},Imán de objetos +{0},Ímã de itens +{0},Sammelmagnet +{0},Aimant à bonus +{0},Магнит предметов +{0},アイテム磁石 +{0}
+perk.idle,+{0}% idle income,+%{0} pasif gelir,+{0}% ingresos pasivos,+{0}% renda passiva,+{0} % passives Einkommen,+{0} % de revenus passifs,+{0}% пассивного дохода,放置収入 +{0}%
+rarity.common,Common,Sıradan,Común,Comum,Gewöhnlich,Commun,Обычная,コモン
+rarity.rare,Rare,Nadir,Raro,Raro,Selten,Rare,Редкая,レア
+rarity.epic,Epic,Destansı,Épico,Épico,Episch,Épique,Эпическая,エピック
+rarity.legendary,Legendary,Efsanevi,Legendario,Lendário,Legendär,Légendaire,Легендарная,レジェンド
+shop.title,Shop,Mağaza,Tienda,Loja,Shop,Boutique,Магазин,ショップ
+shop.remove_ads,Remove Ads,Reklamları Kaldır,Quitar anuncios,Remover anúncios,Werbung entfernen,Supprimer les pubs,Убрать рекламу,広告を削除
+shop.remove_ads_desc,No more interstitials or banners. Reward ads stay optional.,Artık ara reklam ve banner yok. Ödüllü reklamlar isteğe bağlı kalır.,Sin anuncios intersticiales ni banners. Los anuncios con recompensa siguen siendo opcionales.,Sem anúncios intersticiais ou banners. Anúncios com recompensa continuam opcionais.,Keine Zwischen- oder Bannerwerbung mehr. Belohnungswerbung bleibt freiwillig.,Plus d'interstitiels ni de bannières. Les pubs récompensées restent facultatives.,Никаких межстраничных и баннеров. Реклама за награду — по желанию.,インタースティシャルとバナーを非表示。リワード広告は任意のまま。
+shop.starter,Starter Pack,Başlangıç Paketi,Pack de inicio,Pacote Inicial,Starterpaket,Pack de départ,Стартовый набор,スターターパック
+shop.starter_desc,Remove Ads + rare boat + {0} coins,Reklamsız + nadir tekne + {0} altın,Sin anuncios + barco raro + {0} monedas,Sem anúncios + barco raro + {0} moedas,Werbefrei + seltenes Boot + {0} Münzen,Sans pubs + bateau rare + {0} pièces,Без рекламы + редкая лодка + {0} монет,広告削除＋レアボート＋{0}コイン
+shop.offer_ends,Offer ends in {0},Teklif {0} sonra bitiyor,La oferta termina en {0},A oferta termina em {0},Angebot endet in {0},L'offre se termine dans {0},Предложение истекает через {0},残り {0}
+shop.coin_packs,Coin packs,Altın paketleri,Packs de monedas,Pacotes de moedas,Münzpakete,Packs de pièces,Наборы монет,コインパック
+shop.best_value,Best value,En avantajlı,Mejor valor,Melhor custo-benefício,Bester Wert,Meilleure offre,Выгоднее всего,お得
+shop.restore,Restore Purchases,Satın Alımları Geri Yükle,Restaurar compras,Restaurar compras,Käufe wiederherstellen,Restaurer les achats,Восстановить покупки,購入を復元
+shop.purchase_ok,Purchase complete!,Satın alma tamamlandı!,¡Compra completada!,Compra concluída!,Kauf abgeschlossen!,Achat effectué !,Покупка завершена!,購入完了！
+shop.purchase_failed,Purchase failed. You were not charged.,Satın alma başarısız. Ücret alınmadı.,La compra falló. No se te cobró.,A compra falhou. Você não foi cobrado.,Kauf fehlgeschlagen. Dir wurde nichts berechnet.,Achat échoué. Tu n'as pas été débité.,Покупка не удалась. Деньги не списаны.,購入に失敗しました。請求はされていません。
+shop.restored,Purchases restored,Satın alımlar geri yüklendi,Compras restauradas,Compras restauradas,Käufe wiederhergestellt,Achats restaurés,Покупки восстановлены,購入を復元しました
+shop.owned,Owned,Sahipsin,Comprado,Comprado,Gekauft,Acheté,Куплено,購入済み
+missions.title,Daily Missions,Günlük Görevler,Misiones diarias,Missões diárias,Tägliche Missionen,Missions du jour,Ежедневные задания,デイリーミッション
+missions.refresh,New missions in {0},Yeni görevler {0} sonra,Nuevas misiones en {0},Novas missões em {0},Neue Missionen in {0},Nouvelles missions dans {0},Новые задания через {0},新ミッションまで {0}
+mission.near_misses,Do {0} near misses,{0} kıl payı kurtuluş yap,Logra {0} «por poco»,Faça {0} «por um triz»,Schaffe {0} knappe Manöver,Réussis {0} passages de justesse,Сделай {0} манёвров «на волосок»,ニアミスを{0}回
+mission.deliver_passengers,Deliver {0} passengers,{0} yolcu taşı,Lleva {0} pasajeros,Entregue {0} passageiros,Bring {0} Passagiere ans Ziel,Transporte {0} passagers,Доставь {0} пассажиров,乗客を{0}人運ぶ
+mission.find_chests,Find {0} chests,{0} sandık bul,Encuentra {0} cofres,Encontre {0} baús,Finde {0} Truhen,Trouve {0} coffres,Найди {0} сундуков,宝箱を{0}個見つける
+mission.complete_levels,Complete {0} levels,{0} bölüm bitir,Completa {0} niveles,Complete {0} fases,Schließe {0} Level ab,Termine {0} niveaux,Пройди {0} уровней,レベルを{0}回クリア
+mission.collect_stars,Collect {0} stars,{0} yıldız topla,Recoge {0} estrellas,Colete {0} estrelas,Sammle {0} Sterne,Ramasse {0} étoiles,Собери {0} звёзд,スターを{0}個集める
+mission.wave_launches,Do {0} wave launches,{0} dalga fırlatması yap,Haz {0} saltos de ola,Faça {0} saltos na onda,Mach {0} Wellensprünge,Fais {0} sauts de vague,Сделай {0} прыжков на волне,波ジャンプを{0}回
+mission.full_moons,Trigger {0} Full Moons,{0} Dolunay başlat,Activa {0} Lunas llenas,Ative {0} Luas Cheias,Löse {0}× Vollmond aus,Déclenche {0} Pleines Lunes,Вызови {0} полнолуний,満月を{0}回発動
+mission.three_star,Get 3 stars on {0} levels,{0} bölümde 3 yıldız al,Consigue 3 estrellas en {0} niveles,Ganhe 3 estrelas em {0} fases,Hol 3 Sterne in {0} Leveln,Obtiens 3 étoiles sur {0} niveaux,Получи 3 звезды на {0} уровнях,{0}レベルで星3つ獲得
+spin.title,Daily Spin,Günlük Çark,Ruleta diaria,Roleta diária,Tagesrad,Roue du jour,Колесо дня,デイリースピン
+spin.free,Spin for free!,Ücretsiz çevir!,¡Gira gratis!,Gire grátis!,Gratis drehen!,Tourne gratuitement !,Крути бесплатно!,無料でスピン！
+spin.extra,Extra spin,Ekstra çevirme,Giro extra,Giro extra,Extra-Dreh,Tour bonus,Доп. вращение,追加スピン
+spin.left,{0} left today,Bugün {0} hak kaldı,Quedan {0} hoy,Restam {0} hoje,Heute noch {0},Encore {0} aujourd'hui,Осталось сегодня: {0},本日残り{0}回
+spin.tomorrow,Come back tomorrow,Yarın tekrar gel,Vuelve mañana,Volte amanhã,Komm morgen wieder,Reviens demain,Возвращайся завтра,また明日
+spin.won,You won {0}!,{0} kazandın!,¡Ganaste {0}!,Você ganhou {0}!,Du hast {0} gewonnen!,Tu as gagné {0} !,Ты выиграл: {0}!,{0}を獲得！
+streak.title,Daily Reward,Günlük Ödül,Recompensa diaria,Recompensa diária,Tagesbelohnung,Récompense du jour,Ежедневная награда,デイリー報酬
+streak.day,Day {0},{0}. Gün,Día {0},Dia {0},Tag {0},Jour {0},День {0},{0}日目
+chest.title,Boss Chest,Boss Sandığı,Cofre del jefe,Baú do chefe,Boss-Truhe,Coffre de boss,Сундук босса,ボス宝箱
+chest.open_key,Open with key,Anahtarla aç,Abrir con llave,Abrir com chave,Mit Schlüssel öffnen,Ouvrir avec une clé,Открыть ключом,鍵で開ける
+chest.open_ad,Open (watch ad),Aç (reklam izle),Abrir (ver anuncio),Abrir (ver anúncio),Öffnen (Werbung),Ouvrir (voir une pub),Открыть (реклама),開ける（広告を見る）
+chest.keys,Keys: {0},Anahtar: {0},Llaves: {0},Chaves: {0},Schlüssel: {0},Clés : {0},Ключи: {0},鍵：{0}
+chest.got,You got {0} coins!,{0} altın kazandın!,¡Conseguiste {0} monedas!,Você ganhou {0} moedas!,Du hast {0} Münzen bekommen!,Tu as obtenu {0} pièces !,Ты получил {0} монет!,{0}コイン獲得！
+reward.coins,{0} coins,{0} altın,{0} monedas,{0} moedas,{0} Münzen,{0} pièces,{0} монет,{0}コイン
+reward.keys,{0} keys,{0} anahtar,{0} llaves,{0} chaves,{0} Schlüssel,{0} clés,Ключи: {0},鍵{0}個
+settings.title,Settings,Ayarlar,Ajustes,Configurações,Einstellungen,Paramètres,Настройки,設定
+settings.music,Music,Müzik,Música,Música,Musik,Musique,Музыка,音楽
+settings.sound,Sound,Ses,Sonido,Som,Sound,Son,Звук,効果音
+settings.haptics,Haptics,Titreşim,Vibración,Vibração,Vibration,Vibrations,Вибрация,振動
+settings.language,Language,Dil,Idioma,Idioma,Sprache,Langue,Язык,言語
+settings.privacy,Privacy options,Gizlilik seçenekleri,Opciones de privacidad,Opções de privacidade,Datenschutzoptionen,Options de confidentialité,Настройки конфиденциальности,プライバシー設定
+settings.privacy_policy,Privacy policy,Gizlilik politikası,Política de privacidad,Política de privacidade,Datenschutzerklärung,Politique de confidentialité,Политика конфиденциальности,プライバシーポリシー
+settings.version,Version {0},Sürüm {0},Versión {0},Versão {0},Version {0},Version {0},Версия {0},バージョン {0}
+region.tropical_lagoon,Tropical Lagoon,Tropik Lagün,Laguna Tropical,Lagoa Tropical,Tropische Lagune,Lagon Tropical,Тропическая лагуна,トロピカルラグーン
+region.frozen_north,Frozen North,Donmuş Kuzey,Norte Helado,Norte Congelado,Eisiger Norden,Nord Gelé,Ледяной Север,凍てつく北
+region.volcanic_isles,Volcanic Isles,Volkan Adaları,Islas Volcánicas,Ilhas Vulcânicas,Vulkaninseln,Îles Volcaniques,Вулканические острова,火山諸島
+region.sunken_city,Sunken City,Batık Şehir,Ciudad Sumergida,Cidade Submersa,Versunkene Stadt,Cité Engloutie,Затонувший город,沈んだ都
+region.midnight_sea,Midnight Sea,Gece Yarısı Denizi,Mar de Medianoche,Mar da Meia-Noite,Mitternachtsmeer,Mer de Minuit,Полуночное море,真夜中の海
+region.locked,Region locked,Bölge kilitli,Región bloqueada,Região bloqueada,Region gesperrt,Région verrouillée,Регион закрыт,エリア未開放
+boat.dinghy.name,Dinghy,Sandal,Bote,Bote,Beiboot,Canot,Шлюпка,ディンギー
+boat.skiff.name,Skiff,Kayık,Esquife,Esquife,Skiff,Skiff,Ялик,スキフ
+boat.fisher.name,Fisher,Balıkçı,Pesquero,Pesqueiro,Fischkutter,Chalutier,Рыбак,漁船
+boat.ducky.name,Rubber Ducky,Lastik Ördek,Patito de goma,Patinho de borracha,Quietscheente,Canard en caoutchouc,Резиновая уточка,ラバーダッキー
+boat.lantern.name,Lantern Junk,Fenerli Jonk,Junco farol,Junco-lanterna,Laternen-Dschunke,Jonque-lanterne,Джонка-фонарь,ランタン船
+boat.catamaran.name,Catamaran,Katamaran,Catamarán,Catamarã,Katamaran,Catamaran,Катамаран,カタマラン
+boat.tug.name,Tugboat,Römorkör,Remolcador,Rebocador,Schlepper,Remorqueur,Буксир,タグボート
+boat.moonrunner.name,Moonrunner,Ay Koşucusu,Corredor lunar,Corredor lunar,Mondläufer,Coureur de lune,Лунный бегун,ムーンランナー
+boat.pearl.name,Pearl Sloop,İnci Slup,Balandra Perla,Chalupa Pérola,Perlenschaluppe,Sloop Perle,Жемчужный шлюп,パール号
+boat.viking.name,Longship,Viking Gemisi,Drakar,Drakkar,Langschiff,Drakkar,Драккар,ロングシップ
+boat.gondola.name,Gondola,Gondol,Góndola,Gôndola,Gondel,Gondole,Гондола,ゴンドラ
+boat.icebreaker.name,Ice Breaker,Buzkıran,Rompehielos,Quebra-gelo,Eisbrecher,Brise-glace,Ледокол,砕氷船
+boat.ember.name,Ember Raft,Kor Salı,Balsa de brasas,Jangada de brasas,Glutfloß,Radeau de braise,Огненный плот,エンバーラフト
+boat.sub.name,Tiny Sub,Minik Denizaltı,Minisubmarino,Minissubmarino,Mini-U-Boot,Mini sous-marin,Мини-субмарина,ミニ潜水艦
+boat.pirate.name,Pirate Brig,Korsan Brigi,Bergantín pirata,Brigue pirata,Piratenbrigg,Brick pirate,Пиратский бриг,海賊ブリッグ
+boat.swan.name,Swan Boat,Kuğu Tekne,Barca cisne,Pedalinho cisne,Schwanenboot,Bateau cygne,Лодка-лебедь,スワンボート
+boat.steamer.name,Paddle Steamer,Çarklı Vapur,Vapor de ruedas,Barco a vapor,Raddampfer,Bateau à aubes,Колёсный пароход,外輪船
+boat.ghost.name,Ghost Ship,Hayalet Gemi,Barco fantasma,Navio fantasma,Geisterschiff,Vaisseau fantôme,Корабль-призрак,幽霊船
+boat.starliner.name,Starliner,Yıldız Gemisi,Crucero estelar,Cruzeiro estelar,Sternenkreuzer,Paquebot stellaire,Звёздный лайнер,スターライナー
+boat.leviathan.name,Leviathan,Leviathan,Leviatán,Leviatã,Leviathan,Léviathan,Левиафан,リヴァイアサン
