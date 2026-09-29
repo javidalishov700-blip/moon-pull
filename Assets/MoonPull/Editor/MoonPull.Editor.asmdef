@@ -1,0 +1,18 @@
+{
+    "name": "MoonPull.Editor",
+    "rootNamespace": "MoonPull.EditorTools",
+    "references": [
+        "MoonPull.Runtime"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
