@@ -148,6 +148,24 @@ namespace MoonPull.EditorTools
             Gen.Wire(view, "visualRoot", visual, "authoredWidth", authoredWidth);
         }
 
+        /// <summary>
+        /// A column of stacked faceted boulders filling the space an obstacle's collider covers, growing down into the
+        /// sea (direction -1) or up into the sky (+1) from the pivot. Replaces the old flat boxes.
+        /// </summary>
+        private static void RockColumn(Transform v, Color color, int seed, float direction)
+        {
+            float y = direction < 0f ? -1.5f : 1.4f;
+            for (int i = 0; i < 5; i++)
+            {
+                float size = 1f + i * 0.12f;
+                Color c = Color.Lerp(color, color * 0.8f, i / 4f);
+                c.a = 1f;
+                Meshes.Part(Meshes.Rock(seed * 10 + i, 1.1f), v, new Vector3(((i * 37) % 5 - 2) * 0.05f, y, 0f),
+                    new Vector3(0.95f * size, 1.05f, 0.85f * size), c, new Vector3(0f, i * 47f, i % 2 == 0 ? 6f : -5f));
+                y += 1.55f * direction;
+            }
+        }
+
         /// <summary>Low obstacle: pointed, upward-facing (readable by shape, not color). Pivot at its top edge.</summary>
         private PlacementView LowObstacle(string name, Color color, int style)
         {
@@ -157,12 +175,12 @@ namespace MoonPull.EditorTools
             switch (style)
             {
                 case 0: // jagged rock
-                    Gen.Prim(PrimitiveType.Cube, v, new Vector3(0f, -3.4f, 0f), new Vector3(1.6f, 6f, 1.4f), dark);
-                    Gen.Prim(PrimitiveType.Cube, v, new Vector3(0f, -0.55f, 0f), new Vector3(0.8f, 0.8f, 1.2f), color, new Vector3(0f, 0f, 45f));
-                    Gen.Prim(PrimitiveType.Cube, v, new Vector3(-0.45f, -0.8f, 0.1f), new Vector3(0.55f, 0.55f, 1f), color, new Vector3(0f, 0f, 45f));
+                    RockColumn(v, dark, 1, -1f);
+                    Meshes.Part(Meshes.Rock(11, 1.2f), v, new Vector3(0.05f, -0.55f, 0f), new Vector3(0.62f, 0.55f, 0.7f), color, new Vector3(0f, 25f, 8f));
+                    Meshes.Part(Meshes.Rock(12), v, new Vector3(-0.5f, -0.85f, 0.15f), new Vector3(0.42f, 0.4f, 0.5f), color * 0.92f, new Vector3(0f, 60f, 0f));
                     break;
                 case 1: // reef spires
-                    Gen.Prim(PrimitiveType.Cube, v, new Vector3(0f, -3.6f, 0f), new Vector3(1.8f, 6f, 1.3f), dark);
+                    RockColumn(v, dark, 2, -1f);
                     for (int i = -1; i <= 1; i++)
                     {
                         float h = i == 0 ? 0.9f : 0.6f;
@@ -171,7 +189,7 @@ namespace MoonPull.EditorTools
 
                     break;
                 default: // wreck hull
-                    Gen.Prim(PrimitiveType.Cube, v, new Vector3(0f, -3.4f, 0f), new Vector3(1.8f, 6f, 1.2f), dark);
+                    RockColumn(v, dark, 3, -1f);
                     Gen.Prim(PrimitiveType.Cube, v, new Vector3(0.2f, -0.45f, 0f), new Vector3(0.2f, 0.9f, 0.2f), color, new Vector3(0f, 0f, -18f));
                     Gen.Prim(PrimitiveType.Cube, v, new Vector3(-0.3f, -0.55f, 0f), new Vector3(1.2f, 0.25f, 1.1f), color, new Vector3(0f, 0f, 12f));
                     break;
@@ -198,7 +216,7 @@ namespace MoonPull.EditorTools
                     Gen.Prim(PrimitiveType.Cube, v, new Vector3(0f, 4.5f, 1.3f), new Vector3(1.8f, 8f, 0.4f), dark);
                     break;
                 case 1: // cave ceiling
-                    Gen.Prim(PrimitiveType.Cube, v, new Vector3(0f, 4f, 0f), new Vector3(1.8f, 8f, 2.4f), dark);
+                    RockColumn(v, dark, 4, 1f);
                     Gen.Prim(PrimitiveType.Cube, v, new Vector3(-0.4f, 0.25f, -0.6f), new Vector3(0.35f, 0.35f, 0.35f), color, new Vector3(0f, 0f, 45f));
                     Gen.Prim(PrimitiveType.Cube, v, new Vector3(0.45f, 0.3f, -0.6f), new Vector3(0.3f, 0.3f, 0.3f), color, new Vector3(0f, 0f, 45f));
                     break;
@@ -542,27 +560,45 @@ namespace MoonPull.EditorTools
         private static GameObject BoatModel(string id, Color hull, Color sail, int shape)
         {
             GameObject root = Gen.Go("BoatModel_" + id);
-            Transform t = root.transform;
-            Color trim = Color.Lerp(hull, Color.white, 0.5f);
-            Gen.Prim(PrimitiveType.Cube, t, new Vector3(0f, -0.08f, 0f), new Vector3(1.5f, 0.42f, 0.7f), hull);
-            Gen.Prim(PrimitiveType.Cube, t, new Vector3(0.78f, 0.02f, 0f), new Vector3(0.4f, 0.4f, 0.7f), hull, new Vector3(0f, 0f, 45f));
-            Gen.Prim(PrimitiveType.Cube, t, new Vector3(0f, 0.15f, 0f), new Vector3(1.55f, 0.06f, 0.74f), trim);
+            // Everything sits under one scaled node: the boat reads clearly on a phone without touching the hitbox.
+            Transform t = Gen.Go("Body", root.transform).transform;
+            t.localScale = Vector3.one * 1.35f;
+            Color trim = Color.Lerp(hull, Color.white, 0.55f);
+            Color wood = Gen.Hex("6B4A34");
+            Color dark = hull * 0.6f;
+            dark.a = 1f;
+
+            // Hull with a raised bow, a contrasting gunwale stripe and a waterline band.
+            Meshes.Part(Meshes.Hull(1.7f, 0.78f, 0.42f, 0.22f), t, new Vector3(0f, 0.1f, 0f), Vector3.one, hull);
+            Meshes.Part(Meshes.Hull(1.72f, 0.8f, 0.08f, 0.22f), t, new Vector3(0f, 0.12f, 0f), Vector3.one, trim);
+            Meshes.Part(Meshes.Hull(1.5f, 0.7f, 0.12f, 0.1f), t, new Vector3(0f, -0.14f, 0f), Vector3.one, dark);
+            Gen.Prim(PrimitiveType.Cube, t, new Vector3(-0.05f, 0.1f, 0f), new Vector3(1.3f, 0.03f, 0.6f), wood);
+
             switch (shape)
             {
-                case 1: // cabin boat
-                    Gen.Prim(PrimitiveType.Cube, t, new Vector3(-0.25f, 0.45f, 0f), new Vector3(0.6f, 0.5f, 0.55f), trim);
-                    Gen.Prim(PrimitiveType.Cylinder, t, new Vector3(-0.25f, 1.1f, 0f), new Vector3(0.12f, 0.45f, 0.12f), sail);
-                    Gen.Prim(PrimitiveType.Cube, t, new Vector3(-0.25f, 1.6f, 0f), new Vector3(0.3f, 0.15f, 0.05f), sail, default, 0.3f);
+                case 1: // cabin boat with a warm lit window and a funnel
+                    Gen.Prim(PrimitiveType.Cube, t, new Vector3(-0.25f, 0.38f, 0f), new Vector3(0.62f, 0.52f, 0.56f), trim);
+                    Gen.Prim(PrimitiveType.Cube, t, new Vector3(-0.25f, 0.68f, 0f), new Vector3(0.72f, 0.08f, 0.64f), hull);
+                    Gen.Prim(PrimitiveType.Cube, t, new Vector3(0.07f, 0.42f, 0f), new Vector3(0.02f, 0.18f, 0.36f), Gen.Hex("FFD37A"), default, 1.2f);
+                    Gen.Prim(PrimitiveType.Cylinder, t, new Vector3(-0.38f, 0.92f, 0f), new Vector3(0.14f, 0.2f, 0.14f), sail);
+                    Gen.Prim(PrimitiveType.Cylinder, t, new Vector3(-0.38f, 1.12f, 0f), new Vector3(0.16f, 0.03f, 0.16f), Gen.Hex("333344"));
+                    Gen.Prim(PrimitiveType.Sphere, t, new Vector3(0.62f, 0.32f, 0f), new Vector3(0.08f, 0.08f, 0.08f), Gen.Hex("FFE9A8"), default, 2f);
                     break;
-                case 2: // rounded novelty
-                    Gen.Prim(PrimitiveType.Sphere, t, new Vector3(0.45f, 0.55f, 0f), new Vector3(0.55f, 0.55f, 0.5f), sail);
-                    Gen.Prim(PrimitiveType.Cylinder, t, new Vector3(-0.2f, 0.95f, 0f), new Vector3(0.05f, 0.8f, 0.05f), Gen.Hex("5B4636"));
-                    Gen.Prim(PrimitiveType.Cube, t, new Vector3(-0.05f, 1.55f, 0f), new Vector3(0.3f, 0.2f, 0.03f), sail);
+                case 2: // rounded novelty: big friendly head and a pennant
+                    Gen.Prim(PrimitiveType.Sphere, t, new Vector3(0.5f, 0.55f, 0f), new Vector3(0.55f, 0.52f, 0.5f), sail);
+                    Gen.Prim(PrimitiveType.Sphere, t, new Vector3(0.64f, 0.62f, 0.18f), new Vector3(0.09f, 0.09f, 0.05f), Gen.Hex("1B1B2A"));
+                    Gen.Prim(PrimitiveType.Sphere, t, new Vector3(0.64f, 0.62f, -0.18f), new Vector3(0.09f, 0.09f, 0.05f), Gen.Hex("1B1B2A"));
+                    Gen.Prim(PrimitiveType.Cube, t, new Vector3(0.8f, 0.5f, 0f), new Vector3(0.18f, 0.06f, 0.2f), Gen.Hex("FF9F1C"));
+                    Gen.Prim(PrimitiveType.Cylinder, t, new Vector3(-0.35f, 0.75f, 0f), new Vector3(0.04f, 0.6f, 0.04f), wood);
+                    Meshes.Part(Meshes.Sail(0.35f, 0.4f, 0.04f), t, new Vector3(-0.33f, 1.0f, 0f), Vector3.one, sail * 0.9f + Color.white * 0.1f);
                     break;
-                default: // sailboat
-                    Gen.Prim(PrimitiveType.Cylinder, t, new Vector3(0f, 0.95f, 0f), new Vector3(0.06f, 0.85f, 0.06f), Gen.Hex("5B4636"));
-                    Gen.Prim(PrimitiveType.Cube, t, new Vector3(0.28f, 1.05f, 0f), new Vector3(0.5f, 1.1f, 0.03f), sail, new Vector3(0f, 0f, -8f));
-                    Gen.Prim(PrimitiveType.Cube, t, new Vector3(0f, 1.82f, 0f), new Vector3(0.2f, 0.1f, 0.02f), Gen.Hex("FF5A5A"), default, 0.4f);
+                default: // sloop: tall mast, billowing mainsail and jib, a pennant at the top
+                    Gen.Prim(PrimitiveType.Cylinder, t, new Vector3(0.05f, 1.05f, 0f), new Vector3(0.05f, 0.95f, 0.05f), wood);
+                    Gen.Prim(PrimitiveType.Cylinder, t, new Vector3(-0.3f, 0.32f, 0f), new Vector3(0.035f, 0.36f, 0.035f), wood, new Vector3(0f, 0f, 90f));
+                    Meshes.Part(Meshes.Sail(1.55f, 0.72f, 0.16f), t, new Vector3(0.02f, 0.32f, 0f), new Vector3(-1f, 1f, 1f), sail);
+                    Meshes.Part(Meshes.Sail(1.3f, 0.62f, 0.1f), t, new Vector3(0.1f, 0.3f, 0f), Vector3.one, Color.Lerp(sail, hull, 0.25f));
+                    Gen.Prim(PrimitiveType.Cube, t, new Vector3(-0.07f, 2.02f, 0f), new Vector3(0.24f, 0.1f, 0.02f), Gen.Hex("FF5A5A"), default, 0.5f);
+                    Gen.Prim(PrimitiveType.Sphere, t, new Vector3(0.05f, 1.98f, 0f), new Vector3(0.06f, 0.06f, 0.06f), Gen.Hex("FFE9A8"), default, 2f);
                     break;
             }
 

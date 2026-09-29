@@ -36,6 +36,15 @@ namespace MoonPull.Mechanics
             GameEvents.RaiseScoreChanged(Score, CurrentMultiplier);
         }
 
+        /// <summary>Flat bonus scaled by the live multiplier (used by Perfect Crest launches).</summary>
+        public int AddBonus(int basePoints)
+        {
+            int points = basePoints * CurrentMultiplier;
+            Score += points;
+            GameEvents.RaiseScoreChanged(Score, CurrentMultiplier);
+            return points;
+        }
+
         public int Add(ScoreSource source, int count = 1)
         {
             int points = ScoreRules.Apply(ScoreRules.BasePoints(config, source) * count, chainMultiplier, fullMoon, config.FullMoonMultiplier);

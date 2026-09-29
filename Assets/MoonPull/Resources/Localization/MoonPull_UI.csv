@@ -20,6 +20,7 @@ menu.missions,Missions,Görevler,Misiones,Missões,Missionen,Missions,Задан
 menu.spin,Daily Spin,Günlük Çark,Ruleta diaria,Roleta diária,Tagesrad,Roue du jour,Колесо дня,デイリースピン
 menu.settings,Settings,Ayarlar,Ajustes,Configurações,Einstellungen,Paramètres,Настройки,設定
 menu.stars,{0} stars,{0} yıldız,{0} estrellas,{0} estrelas,{0} Sterne,{0} étoiles,Звёзд: {0},スター {0}
+hud.perfect_crest,PERFECT CREST!,MÜKEMMEL DALGA!,¡CRESTA PERFECTA!,CRISTA PERFEITA!,PERFEKTE WELLE!,CRÊTE PARFAITE !,ИДЕАЛЬНЫЙ ГРЕБЕНЬ!,パーフェクト！
 hud.near_miss,NEAR MISS!,KIL PAYI!,¡POR POCO!,POR UM TRIZ!,KNAPP!,DE JUSTESSE !,НА ВОЛОСОК!,ニアミス！
 hud.multiplier,x{0},x{0},x{0},x{0},x{0},x{0},x{0},x{0}
 hud.full_moon,FULL MOON!,DOLUNAY!,¡LUNA LLENA!,LUA CHEIA!,VOLLMOND!,PLEINE LUNE !,ПОЛНОЛУНИЕ!,満月！

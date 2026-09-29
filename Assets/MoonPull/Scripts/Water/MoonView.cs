@@ -35,12 +35,16 @@ namespace MoonPull.Water
         /// <summary>Set by the eclipse. Overrides Full Moon because losing control must always read clearly.</summary>
         public bool Eclipsed { get; set; }
 
+        private static readonly int MoonPosId = Shader.PropertyToID("_MP_MoonPos");
+
         private void LateUpdate()
         {
             Vector2 range = config.VisualLocalYRange;
             Vector3 local = moonTransform.localPosition;
             local.y = Mathf.Lerp(range.x, range.y, moon.Height01);
             moonTransform.localPosition = local;
+            // The water shader draws the moon's glitter path from this.
+            Shader.SetGlobalVector(MoonPosId, new Vector4(moonTransform.position.x, moonTransform.position.y, moonTransform.position.z, brightness));
 
             if (starTrail != null)
             {

@@ -14,6 +14,7 @@ Shader "MoonPull/Flat"
         Pass
         {
             Tags { "LightMode"="ForwardBase" }
+            Cull Off
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
@@ -38,9 +39,13 @@ Shader "MoonPull/Flat"
             fixed4 frag (v2f i) : SV_Target
             {
                 float3 n = normalize(cross(ddy(i.worldPos), ddx(i.worldPos)));
+                float3 viewDir = normalize(_WorldSpaceCameraPos - i.worldPos);
+                if (dot(n, viewDir) < 0) n = -n; // winding-independent (procedural meshes, double-sided sails)
                 float light = saturate(dot(n, normalize(_WorldSpaceLightPos0.xyz)));
                 fixed3 albedo = _Color.rgb * _BaseColor.rgb;
                 fixed3 col = albedo * (UNITY_LIGHTMODEL_AMBIENT.rgb + light * _LightColor0.rgb) + albedo * _Emission;
+                // Moonlit rim so silhouettes separate from the dark sea and sky.
+                col += albedo * pow(1 - saturate(dot(n, viewDir)), 3) * 0.45 * _LightColor0.rgb;
                 // Surfaces darken just below the tide line so players read water height on obstacles.
                 float wet = smoothstep(_MP_WaterLevel + 0.15, _MP_WaterLevel - 0.05, i.worldPos.y) * _WetLine;
                 col *= 1 - wet;

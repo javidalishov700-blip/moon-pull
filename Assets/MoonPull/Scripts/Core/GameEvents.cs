@@ -29,6 +29,7 @@ namespace MoonPull.Core
 
         // Gameplay feedback
         public static event Action<float> WaveLaunched;
+        public static event Action<int> PerfectCrest;
         public static event Action<int, int> NearMiss;
         public static event Action NearMissChainBroken;
         public static event Action<int> StarCollected;
@@ -70,6 +71,7 @@ namespace MoonPull.Core
         public static void RaiseAppResumed(float secondsAway) => AppResumed?.Invoke(secondsAway);
 
         public static void RaiseWaveLaunched(float strength01) => WaveLaunched?.Invoke(strength01);
+        public static void RaisePerfectCrest(int streak) => PerfectCrest?.Invoke(streak);
         public static void RaiseNearMiss(int chain, int multiplier) => NearMiss?.Invoke(chain, multiplier);
         public static void RaiseNearMissChainBroken() => NearMissChainBroken?.Invoke();
         public static void RaiseStarCollected(int streak) => StarCollected?.Invoke(streak);

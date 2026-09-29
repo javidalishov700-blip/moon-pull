@@ -56,6 +56,7 @@ namespace MoonPull.EditorTools
             generated = true;
             Gen.ResetErrors();
             Art.ResetCache();
+            Meshes.ResetCache();
             Art.EnsureIcon(IconPath);
             Content content = Content.Build();
             string scenePath = SceneFactory.Build(content);

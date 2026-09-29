@@ -136,6 +136,22 @@ namespace MoonPull.EditorTools
             Gen.Wire(w.Boat, "config", content.Boat, "water", water, "seabed", seabed);
             Gen.Wire(boatView, "controller", w.Boat, "modelRoot", modelRoot, "pools", pools, "debrisPrefab", content.Debris);
 
+            // Foam wake streaming from the stern: sells speed and makes the boat read as sitting in the water.
+            GameObject wakeGo = Gen.Go("Wake", boatGo.transform);
+            wakeGo.transform.localPosition = new Vector3(-1.1f, -0.05f, 0f);
+            var wake = wakeGo.AddComponent<TrailRenderer>();
+            wake.time = 0.9f;
+            wake.minVertexDistance = 0.12f;
+            wake.widthCurve = new AnimationCurve(new Keyframe(0f, 0.55f), new Keyframe(1f, 0.05f));
+            wake.colorGradient = new Gradient
+            {
+                colorKeys = new[] { new GradientColorKey(Color.white, 0f), new GradientColorKey(new Color(0.75f, 0.9f, 1f), 1f) },
+                alphaKeys = new[] { new GradientAlphaKey(0.75f, 0f), new GradientAlphaKey(0f, 1f) }
+            };
+            wake.sharedMaterial = Art.Glow(Color.white);
+            wake.alignment = LineAlignment.View;
+            wake.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+
             CameraRig rig = Gen.Add<CameraRig>(cameraGo);
             Gen.Wire(rig, "config", content.Camera, "boat", w.Boat);
 
@@ -183,7 +199,7 @@ namespace MoonPull.EditorTools
             Gen.Wire(w.Runner, "config", content.Runner, "pools", pools, "prefabs", content.Prefabs, "boat", w.Boat, "seabed", seabed);
             Gen.Wire(w.Obstacles, "config", content.NearMiss, "scoreConfig", content.Score, "runner", w.Runner, "boat", w.Boat, "score", score);
             Gen.Wire(pickups, "config", content.Pickup, "runner", w.Runner, "boat", w.Boat, "score", score, "fullMoon", w.FullMoon);
-            Gen.Wire(launcher, "config", content.WaveLaunch, "moon", moon, "boat", w.Boat, "water", water);
+            Gen.Wire(launcher, "config", content.WaveLaunch, "moon", moon, "boat", w.Boat, "water", water, "score", score);
             Gen.Wire(w.FullMoon, "config", content.FullMoon, "boat", w.Boat, "score", score, "water", water, "moonView", moonView);
             Gen.Set(score, "config", content.Score);
             Gen.Wire(w.Passengers, "config", content.Passenger, "runner", w.Runner, "boat", w.Boat, "tide", tide, "score", score);
