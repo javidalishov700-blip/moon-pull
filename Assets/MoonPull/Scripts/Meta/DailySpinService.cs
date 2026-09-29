@@ -21,6 +21,9 @@ namespace MoonPull.Meta
             rng = new SeededRandom((int)(clock.UtcNow.Ticks & 0x7FFFFFFF));
         }
 
+        /// <summary>(segment index, was extra spin) after a spin is granted.</summary>
+        public event System.Action<int, bool> Spun;
+
         public SpinSegment[] Segments => config.SpinSegments;
 
         public bool FreeSpinAvailable => save.Data.FreeSpinDate != DateKeys.Today(clock);
@@ -46,7 +49,9 @@ namespace MoonPull.Meta
             }
 
             save.Data.FreeSpinDate = DateKeys.Today(clock);
-            return SpinAndGrant("spin_free");
+            int index = SpinAndGrant("spin_free");
+            Spun?.Invoke(index, false);
+            return index;
         }
 
         /// <summary>Call only after the rewarded ad paid out.</summary>
@@ -65,7 +70,9 @@ namespace MoonPull.Meta
             }
 
             save.Data.Ads.ExtraSpinsToday++;
-            return SpinAndGrant("spin_extra");
+            int index = SpinAndGrant("spin_extra");
+            Spun?.Invoke(index, true);
+            return index;
         }
 
         /// <summary>Weighted pick. Pure, so the odds can be unit-tested.</summary>

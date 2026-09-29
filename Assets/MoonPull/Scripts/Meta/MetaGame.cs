@@ -50,6 +50,9 @@ namespace MoonPull.Meta
         /// <summary>"Double Idle Earnings" multiplier; overridable by Remote Config.</summary>
         public int IdleRewardedMultiplier { get; set; }
 
+        /// <summary>Hours after first launch the discounted starter pack is offered; overridable by Remote Config.</summary>
+        public float StarterPackIntroHours { get; set; } = 48f;
+
         public void Initialize(ISaveService saveService, IClock clock)
         {
             save = saveService;

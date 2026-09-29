@@ -18,7 +18,7 @@ namespace MoonPull.Boot
         public override IEnumerator Run()
         {
             save = new SaveService(new PlayerPrefsStorage(), generation.TotalLevels, regions.Count);
-            save.CorruptionDetected += message => Debug.LogWarning($"[Save] {message}");
+            save.CorruptionDetected += ReportCorruption;
             save.Load();
 
             AdsStateData ads = save.Data.Ads;
@@ -31,6 +31,15 @@ namespace MoonPull.Boot
             save.SaveNow();
             Services.Register<ISaveService>(save);
             yield break;
+        }
+
+        private static void ReportCorruption(string message)
+        {
+            Debug.LogWarning($"[Save] {message}");
+            if (Services.TryGet(out Analytics.ICrashReporter crash))
+            {
+                crash.RecordException(new System.IO.InvalidDataException(message));
+            }
         }
 
         private void OnApplicationPause(bool paused)

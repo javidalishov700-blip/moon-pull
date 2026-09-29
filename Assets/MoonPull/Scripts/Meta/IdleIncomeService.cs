@@ -23,6 +23,9 @@ namespace MoonPull.Meta
             this.rateProvider = rateProvider;
         }
 
+        /// <summary>(coins, multiplier) after a payout, for analytics.</summary>
+        public event Action<long, int> Collected;
+
         public float CapHours => config.IdleCapHours;
 
         private DateTime LastCollectUtc => new DateTime(save.Data.LastIdleCollectUtcTicks, DateTimeKind.Utc);
@@ -51,6 +54,11 @@ namespace MoonPull.Meta
             save.Data.LastIdleCollectUtcTicks = clock.UtcNow.Ticks;
             save.MarkDirty();
             wallet.AddCoins(coins, multiplier > 1 ? "idle_doubled" : "idle");
+            if (coins > 0)
+            {
+                Collected?.Invoke(coins, multiplier);
+            }
+
             return coins;
         }
     }

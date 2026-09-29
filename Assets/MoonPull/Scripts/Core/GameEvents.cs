@@ -50,6 +50,9 @@ namespace MoonPull.Core
         // Economy
         public static event Action<long, long> CoinsChanged;
 
+        // Onboarding
+        public static event Action<int, string> TutorialStepCompleted;
+
         public static void RaisePlayRequested(LevelStartArgs args) => PlayRequested?.Invoke(args);
         public static void RaiseRestartRequested() => RestartRequested?.Invoke();
         public static void RaiseMenuRequested() => MenuRequested?.Invoke();
@@ -86,6 +89,7 @@ namespace MoonPull.Core
         public static void RaiseWeatherEnded(WeatherKind kind) => WeatherEnded?.Invoke(kind);
 
         public static void RaiseCoinsChanged(long total, long delta) => CoinsChanged?.Invoke(total, delta);
+        public static void RaiseTutorialStepCompleted(int step, string name) => TutorialStepCompleted?.Invoke(step, name);
 
         /// <summary>Clears every subscriber. Runs automatically on play-mode entry so disabled domain reload cannot leak handlers.</summary>
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
@@ -124,6 +128,7 @@ namespace MoonPull.Core
             WeatherStarted = null;
             WeatherEnded = null;
             CoinsChanged = null;
+            TutorialStepCompleted = null;
         }
     }
 }
