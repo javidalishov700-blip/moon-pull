@@ -18,11 +18,14 @@ namespace MoonPull.UI
 
         private void Awake()
         {
-            menu.HideInstant();
-            hud.HideInstant();
-            fail.HideInstant();
-            win.HideInstant();
-            shop.HideInstant();
+            // Every screen and popup starts hidden; they are all built active so the generator can lay them out.
+            foreach (UIScreen screen in FindObjectsByType<UIScreen>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+            {
+                if (screen != loading)
+                {
+                    screen.HideInstant();
+                }
+            }
             current = loading;
             loading.Show();
         }
