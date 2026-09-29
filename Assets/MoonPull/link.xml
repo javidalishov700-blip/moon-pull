@@ -1,0 +1,7 @@
+<linker>
+  <!-- Unity IAP obfuscated receipt keys are generated into Assembly-CSharp and found by reflection. -->
+  <assembly fullname="Assembly-CSharp" ignoreIfMissing="1">
+    <type fullname="UnityEngine.Purchasing.Security.GooglePlayTangle" preserve="all" />
+    <type fullname="UnityEngine.Purchasing.Security.AppleTangle" preserve="all" />
+  </assembly>
+</linker>

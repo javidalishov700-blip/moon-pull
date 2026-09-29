@@ -29,6 +29,7 @@ namespace MoonPull.Save
         public long LastFullscreenAdUtcTicks;
         public long LastRewardedAdUtcTicks;
         public int LevelsSinceInterstitial;
+        public bool SkipNextInterstitial;
         public int SessionCount;
         public string ExtraSpinsDate = string.Empty;
         public int ExtraSpinsToday;
