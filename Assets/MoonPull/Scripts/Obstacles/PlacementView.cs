@@ -52,6 +52,16 @@ namespace MoonPull.Obstacles
             }
         }
 
+        /// <summary>One-shot reaction (dolphin jump, whale spout, kraken recoil). Default: nothing.</summary>
+        public virtual void OnTriggered()
+        {
+        }
+
+        /// <summary>Continuous state such as a surfaced whale, circling shark or risen Kraken. Default: nothing.</summary>
+        public virtual void SetEngaged(bool engaged)
+        {
+        }
+
         public virtual void OnSpawned()
         {
         }
