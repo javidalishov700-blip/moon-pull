@@ -3,21 +3,12 @@
     "rootNamespace": "MoonPull",
     "references": [
         "UnityEngine.UI",
-        "GoogleMobileAds",
-        "GoogleMobileAds.Api",
-        "GoogleMobileAds.Core",
-        "GoogleMobileAds.Common",
-        "GoogleMobileAds.Ump",
-        "GoogleMobileAds.Ump.Api",
-        "GoogleMobileAds.Ump.Core",
+        "Unity.Advertisement.IosSupport",
         "UnityEngine.Purchasing",
         "UnityEngine.Purchasing.Stores",
         "UnityEngine.Purchasing.Security",
-        "UnityEngine.Purchasing.SecurityCore",
-        "UnityEngine.Purchasing.SecurityStub",
         "Unity.Services.Core",
-        "Unity.Services.Core.Environments",
-        "Unity.Advertisement.IosSupport"
+        "Unity.Services.Core.Environments"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -27,11 +18,6 @@
     "autoReferenced": true,
     "defineConstraints": [],
     "versionDefines": [
-        {
-            "name": "com.google.ads.mobile",
-            "expression": "8.0.0",
-            "define": "MOONPULL_ADMOB"
-        },
         {
             "name": "com.google.firebase.analytics",
             "expression": "11.0.0",

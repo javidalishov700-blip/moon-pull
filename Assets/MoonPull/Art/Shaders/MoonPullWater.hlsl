@@ -1,4 +1,4 @@
-// Shader Graph Custom Function (File mode). Mirrors MoonPull.Water.WaveMath exactly.
+// Shared by MoonPullWater.shader (and usable as a Shader Graph Custom Function). Mirrors MoonPull.Water.WaveMath exactly.
 // Globals are pushed every frame by WaterSurface.cs.
 #ifndef MOONPULL_WATER_INCLUDED
 #define MOONPULL_WATER_INCLUDED

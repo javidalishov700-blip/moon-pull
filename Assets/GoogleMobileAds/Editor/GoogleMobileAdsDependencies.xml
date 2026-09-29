@@ -1,0 +1,36 @@
+<dependencies>
+  <androidPackages>
+    <androidPackage spec="com.google.android.gms:play-services-ads:25.4.0">
+      <repositories>
+        <repository>https://maven.google.com/</repository>
+      </repositories>
+    </androidPackage>
+    <androidPackage spec="androidx.constraintlayout:constraintlayout:2.1.4">
+      <repositories>
+        <repository>https://maven.google.com/</repository>
+      </repositories>
+    </androidPackage>
+    <androidPackage spec="androidx.lifecycle:lifecycle-process:2.6.2">
+        <repositories>
+            <repository>https://maven.google.com/</repository>
+        </repositories>
+    </androidPackage>
+    <androidPackage spec="androidx.fragment:fragment:1.7.1">
+        <repositories>
+            <repository>https://maven.google.com/</repository>
+        </repositories>
+    </androidPackage>
+  </androidPackages>
+
+  <iosPods>
+    <!--
+      No explicit <sources> here on purpose. The External Dependency Manager already
+      searches the CDN (https://cdn.cocoapods.org/) by default; naming the old git-based
+      https://github.com/CocoaPods/Specs here made it search both, and CocoaPods refused
+      to pick between the two nearly-identical spec files that produced — "Found multiple
+      specifications for Google-Mobile-Ads-SDK" — on every build. The CDN mirrors the same
+      specs and is what CocoaPods itself has defaulted new projects to since 1.7.
+    -->
+    <iosPod name="Google-Mobile-Ads-SDK" version="~> 13.7" />
+  </iosPods>
+</dependencies>

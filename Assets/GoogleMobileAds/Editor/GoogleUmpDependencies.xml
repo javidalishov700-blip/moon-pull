@@ -1,0 +1,13 @@
+<dependencies>
+  <androidPackages>
+    <androidPackage spec="com.google.android.ump:user-messaging-platform:4.0.0">
+      <repositories>
+        <repository>https://maven.google.com/</repository>
+      </repositories>
+    </androidPackage>
+  </androidPackages>
+  <iosPods>
+    <!-- See GoogleMobileAdsDependencies.xml for why this carries no explicit <sources>. -->
+    <iosPod name="GoogleUserMessagingPlatform" version="3.1.0" />
+  </iosPods>
+</dependencies>
