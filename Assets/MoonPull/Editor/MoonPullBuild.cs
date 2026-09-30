@@ -92,8 +92,8 @@ namespace MoonPull.EditorTools
             PlayerSettings.SetScriptingDefineSymbols(named, "MOONPULL_CAPTURE");
             PlayerSettings.fullScreenMode = FullScreenMode.Windowed;
             PlayerSettings.defaultIsNativeResolution = false;
-            PlayerSettings.defaultScreenWidth = 1080;
-            PlayerSettings.defaultScreenHeight = 1920;
+            PlayerSettings.defaultScreenWidth = 1170; // iPhone 13-15 portrait
+            PlayerSettings.defaultScreenHeight = 2532;
             PlayerSettings.resizableWindow = false;
             PlayerSettings.runInBackground = true;
             PlayerSettings.SetUseDefaultGraphicsAPIs(BuildTarget.StandaloneLinux64, false);

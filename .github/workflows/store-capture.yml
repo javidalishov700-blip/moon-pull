@@ -58,8 +58,8 @@ jobs:
           PLAYER="$(find build -name 'MoonPull.x86_64' -print -quit)"
           sudo chmod -R a+rwx build
           cd "$(dirname "$PLAYER")"
-          timeout 900 xvfb-run -a -s "-screen 0 1080x1920x24" \
-            ./MoonPull.x86_64 -screen-width 1080 -screen-height 1920 -screen-fullscreen 0 -logFile player.log || true
+          timeout 900 xvfb-run -a -s "-screen 0 1170x2532x24" \
+            ./MoonPull.x86_64 -screen-width 1170 -screen-height 2532 -screen-fullscreen 0 -logFile player.log || true
           mkdir -p "$GITHUB_WORKSPACE/out"
           cp capture/*.png capture/*.txt player.log "$GITHUB_WORKSPACE/out/" 2>/dev/null || true
           cat capture/bot-report.txt 2>/dev/null || echo "no bot report"

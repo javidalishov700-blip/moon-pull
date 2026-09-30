@@ -36,7 +36,8 @@ namespace MoonPull.EditorTools
             scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
             scaler.referenceResolution = new Vector2(1080f, 1920f);
             scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
-            scaler.matchWidthOrHeight = 0.5f;
+            // Portrait game: match width, so tall phones (19.5:9) gain vertical room instead of clipping the sides.
+            scaler.matchWidthOrHeight = 0f;
             canvasGo.AddComponent<GraphicRaycaster>();
             popups = canvasGo.AddComponent<PopupManager>();
             var router = canvasGo.AddComponent<UiRouter>();
@@ -705,7 +706,12 @@ namespace MoonPull.EditorTools
         {
             // A bottom sheet: the live village stays visible (and tappable) above it.
             var popup = Popup<VillagePopup>(parent, "Village", LocKeys.VillageTitle, new Vector2(1040f, 1080f), out RectTransform p);
-            p.anchoredPosition = new Vector2(0f, -400f);
+            // A bottom sheet: pinned to the bottom edge on every aspect ratio, the village fills the space above.
+            p.anchorMin = p.anchorMax = new Vector2(0.5f, 0f);
+            p.pivot = new Vector2(0.5f, 0f);
+            p.anchoredPosition = new Vector2(0f, 20f);
+            Gen.Set(popup, "sheetOpenY", 20f);
+            Gen.Set(popup, "sheetHiddenY", -790f);
             Image backdrop = popup.transform.Find("Backdrop").GetComponent<Image>();
             backdrop.color = new Color(0f, 0f, 0f, 0f);
             backdrop.raycastTarget = false;

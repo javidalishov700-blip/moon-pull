@@ -31,8 +31,8 @@ namespace MoonPull.UI
 
         [SerializeField] private RectTransform sheet;
         [SerializeField] private Button exploreButton;
-        [SerializeField] private float sheetOpenY = -400f;
-        [SerializeField] private float sheetHiddenY = -1210f;
+        [SerializeField] private float sheetOpenY = 20f;
+        [SerializeField] private float sheetHiddenY = -790f;
 
         [Header("Tycoon")]
         [SerializeField] private CoinFlyEffect coinFly;
