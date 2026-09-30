@@ -290,7 +290,7 @@ namespace MoonPull.EditorTools
             w.Village = Gen.Add<MoonPull.Rescue.VillageDirector>(island);
             Gen.Wire(w.Village, "cameraTransform", cameraGo.transform, "villagerPrefab", content.RescuePassenger, "meta", w.Meta);
             // A wide, flat-topped island so the village has room to grow.
-            Gen.Prim(PrimitiveType.Sphere, island.transform, new Vector3(0f, -1.05f, 0f), new Vector3(13f, 3f, 8f), Gen.Hex("5E7A5A"));
+            Gen.Prim(PrimitiveType.Sphere, island.transform, new Vector3(0f, -1.05f, 0f), new Vector3(13f, 3f, 8f), Gen.Hex("7CCB6A"));
             Gen.Prim(PrimitiveType.Sphere, island.transform, new Vector3(0f, -1.45f, 0f), new Vector3(14.5f, 2.6f, 9.5f), Gen.Hex("E8D3A0"));
             for (int i = 0; i < 7; i++)
             {
@@ -309,7 +309,7 @@ namespace MoonPull.EditorTools
                 Transform root = Gen.Go("Expansion_" + i, island.transform).transform;
                 root.localPosition = spots[i];
                 spotRoots.Add(root);
-                Gen.Prim(PrimitiveType.Sphere, root, new Vector3(0f, -0.9f, 0f), new Vector3(5.2f, 1.9f, 3.8f), Gen.Hex("E8D3A0"));
+                Gen.Prim(PrimitiveType.Sphere, root, new Vector3(0f, -0.9f, 0f), new Vector3(5.2f, 1.9f, 3.8f), Gen.Hex("F2D59A"));
                 GameObject built = Gen.Go("Owned", root);
                 Gen.Prim(PrimitiveType.Sphere, built.transform, new Vector3(0f, -0.62f, 0f), new Vector3(4.4f, 1.6f, 3.1f), grass[i]);
                 for (int h = 0; h < 3; h++)

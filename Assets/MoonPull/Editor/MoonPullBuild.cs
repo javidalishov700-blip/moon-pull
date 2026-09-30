@@ -377,7 +377,7 @@ namespace MoonPull.EditorTools
                 return;
             }
 
-            foreach (string name in new[] { "MoonPull/Water", "MoonPull/Flat", "MoonPull/Sky", "MoonPull/Moon", "UI/Default", "Sprites/Default" })
+            foreach (string name in new[] { "MoonPull/Water", "MoonPull/Flat", "MoonPull/Sky", "MoonPull/Moon", "MoonPull/Glow", "UI/Default", "Sprites/Default" })
             {
                 Shader shader = Shader.Find(name);
                 if (shader == null)

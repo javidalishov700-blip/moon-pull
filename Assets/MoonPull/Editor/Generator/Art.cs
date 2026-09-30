@@ -55,7 +55,7 @@ namespace MoonPull.EditorTools
         /// <summary>Unlit additive-looking material for trails, beams and sparkles (Sprites/Default is always present).</summary>
         public static Material Glow(Color color)
         {
-            Material material = LoadOrCreateMaterial("Glow_" + ColorUtility.ToHtmlStringRGBA(color), "Sprites/Default");
+            Material material = LoadOrCreateMaterial("GlowAdd_" + ColorUtility.ToHtmlStringRGBA(color), "MoonPull/Glow");
             material.color = color;
             return material;
         }

@@ -80,7 +80,7 @@ namespace MoonPull.Rescue
                 label.characterSize = 0.045f;
                 label.anchor = TextAnchor.MiddleCenter;
                 label.alignment = TextAlignment.Center;
-                label.color = new Color(1f, 0.9f, 0.35f);
+                label.color = new Color(0.1f, 0.07f, 0.28f);
             }
 
             root.gameObject.SetActive(false);

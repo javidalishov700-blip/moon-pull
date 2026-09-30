@@ -219,11 +219,14 @@ namespace MoonPull.EditorTools
             Person(rider.transform, Vector3.zero, 0.8f, Gen.Hex("81B29A"));
             RescuePassenger = Gen.SavePrefabObject(rider, "Rescue", "Rescue_Passenger");
 
+            // Sky lantern: a round paper lantern with red caps, a warm glowing body and a soft bloom.
             GameObject lantern = Gen.Go("Rescue_Lantern");
-            Gen.Prim(PrimitiveType.Cube, lantern.transform, Vector3.zero, new Vector3(0.36f, 0.48f, 0.36f), Gen.Hex("FFB347"), default, 2.2f);
-            Gen.Prim(PrimitiveType.Cube, lantern.transform, new Vector3(0f, 0.27f, 0f), new Vector3(0.4f, 0.06f, 0.4f), Gen.Hex("C0392B"), default, 0.8f);
-            Gen.Prim(PrimitiveType.Sphere, lantern.transform, Vector3.zero, new Vector3(1.3f, 1.3f, 1.3f), Color.white)
-                .GetComponent<MeshRenderer>().sharedMaterial = Art.Glow(new Color(1f, 0.7f, 0.3f, 0.22f));
+            Gen.Prim(PrimitiveType.Sphere, lantern.transform, Vector3.zero, new Vector3(0.5f, 0.6f, 0.5f), Gen.Hex("FFB347"), default, 1.8f);
+            Gen.Prim(PrimitiveType.Sphere, lantern.transform, Vector3.zero, new Vector3(0.52f, 0.1f, 0.52f), Gen.Hex("FF8A3D"), default, 1.2f); // rib
+            Gen.Prim(PrimitiveType.Cylinder, lantern.transform, new Vector3(0f, 0.31f, 0f), new Vector3(0.26f, 0.04f, 0.26f), Gen.Hex("C0392B"), default, 0.6f);
+            Gen.Prim(PrimitiveType.Cylinder, lantern.transform, new Vector3(0f, -0.31f, 0f), new Vector3(0.22f, 0.04f, 0.22f), Gen.Hex("C0392B"), default, 0.6f);
+            Gen.Prim(PrimitiveType.Sphere, lantern.transform, Vector3.zero, new Vector3(1.4f, 1.4f, 1.4f), Color.white)
+                .GetComponent<MeshRenderer>().sharedMaterial = Art.Glow(new Color(1f, 0.7f, 0.3f, 0.35f));
             RescueLantern = Gen.SavePrefabObject(lantern, "Rescue", "Rescue_Lantern");
 
             // Island: rocky mound, a beach, a dock and a dark lighthouse whose "Lit" child switches on at rescue.
