@@ -139,7 +139,12 @@ namespace MoonPull.EditorTools
         public static Sprite BuiltinUi(string name) => AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/" + name);
 
         public static Sprite Rounded => BuiltinUi("UISprite.psd");
-        public static Sprite Circle => BuiltinUi("Knob.psd");
+        /// <summary>Crisp anti-aliased disc (256 px): stays sharp when scaled up for wheels, moons and badges.</summary>
+        public static Sprite Circle => Draw("ui_disc", 256, (x, y) =>
+        {
+            float d = Vector2.Distance(new Vector2(x, y), new Vector2(0.5f, 0.5f));
+            return d < 0.49f ? Color.white : Color.clear;
+        });
         public static Sprite Square => BuiltinUi("Background.psd");
 
         public static Sprite Star(bool filled) => Draw(filled ? "star_full" : "star_empty", 128, (x, y) =>

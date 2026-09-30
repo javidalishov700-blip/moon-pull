@@ -116,7 +116,7 @@ fail.shark,A shark got you,Köpekbalığı yakaladı,Te atrapó un tiburón,Um t
 fail.kraken,The Kraken got you,Kraken seni yakaladı,El Kraken te atrapó,O Kraken te pegou,Der Krake hat dich erwischt,Le Kraken t'a eu,Тебя схватил Кракен,クラーケンにやられた
 fail.rewind,Rewind the Tide,Gelgiti Geri Sar,Rebobinar la marea,Voltar a maré,Flut zurückspulen,Rembobiner la marée,Отмотать прилив,潮を巻き戻す
 fail.rewind_desc,Watch an ad to rewind 3 seconds,3 saniye geri sarmak için reklam izle,Mira un anuncio para retroceder 3 segundos,Assista a um anúncio para voltar 3 segundos,"Sieh dir eine Werbung an, um 3 Sekunden zurückzuspulen",Regarde une pub pour revenir 3 secondes en arrière,"Посмотри рекламу, чтобы отмотать 3 секунды",広告を見て3秒巻き戻す
-win.title,Harbor reached!,Limana ulaştın!,¡Llegaste al puerto!,Porto alcançado!,Hafen erreicht!,Port atteint !,Гавань достигнута!,港に到着！
+win.title,Dawn breaks!,Şafak söktü!,¡Amanece!,Amanheceu!,Morgengrauen!,L'aube se lève !,Рассвет!,夜明けだ！
 win.score,Score {0},Skor {0},Puntos {0},Pontos {0},Punkte {0},Score {0},Очки: {0},スコア {0}
 win.reward,+{0},+{0},+{0},+{0},+{0},+{0},+{0},+{0}
 win.triple,Triple your reward,Ödülünü üçe katla,Triplica tu recompensa,Triplique sua recompensa,Belohnung verdreifachen,Triple ta récompense,Утрой награду,報酬を3倍に
