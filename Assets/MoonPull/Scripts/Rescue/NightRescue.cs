@@ -778,7 +778,7 @@ namespace MoonPull.Rescue
             {
                 float pitch = Mathf.Atan2(vy, Mathf.Max(vx, 0.1f)) * Mathf.Rad2Deg;
                 boatRoot.position = new Vector3(x, y + 0.05f, 0f);
-                boatRoot.rotation = Quaternion.Slerp(boatRoot.rotation, Quaternion.Euler(0f, 0f, Mathf.Clamp(pitch, -55f, 55f)),
+                boatRoot.rotation = Quaternion.Slerp(boatRoot.rotation, Quaternion.Euler(0f, 0f, Mathf.Clamp(pitch * 0.7f, -30f, 30f)),
                     1f - Mathf.Exp(-12f * Time.deltaTime));
             }
 

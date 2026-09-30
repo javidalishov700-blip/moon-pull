@@ -121,9 +121,9 @@ Shader "MoonPull/Water"
 
                 // Foam cap: a clean white rim along the highest part of each swell, with a slow wavy edge.
                 float wobble = sin(scrolled.x * 0.9 + t * 1.2) * 0.03 + sin(scrolled.y * 1.3 - t) * 0.03;
-                float foam = smoothstep(0.86 + wobble, 0.9 + wobble, h);
+                float foam = smoothstep(0.93 + wobble, 0.95 + wobble, h) * 0.8;
                 // A thin second line just below, like cartoon water drawings.
-                float line2 = smoothstep(0.02, 0.0, abs(h - 0.8 - wobble)) * 0.5;
+                float line2 = smoothstep(0.02, 0.0, abs(h - 0.86 - wobble)) * 0.4;
                 col = lerp(col, _FoamColor.rgb, saturate(foam * 0.9 + line2 * 0.5));
 
                 // Moon path: a soft pale streak towards the moon, with a few smooth glints.
