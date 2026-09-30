@@ -215,12 +215,18 @@ namespace MoonPull.EditorTools
             Gen.Wire(w.Rewind, "config", content.Rewind, "loop", loop, "moon", moon, "tide", tide, "water", water, "boat", w.Boat,
                 "fullMoon", w.FullMoon, "kraken", w.Kraken, "runner", w.Runner, "obstacles", w.Obstacles, "cameraRig", rig);
 
-            // Order matters: weather locks the moon before it reads input; rewind records last.
-            Gen.SetArray<MonoBehaviour>(loop, "tickables", new MonoBehaviour[]
-            {
-                weather, moon, tide, water, w.Boat, w.Runner, w.Obstacles, pickups, creatures, w.Kraken, launcher,
-                w.FullMoon, w.Passengers, w.Session, w.Rewind
-            });
+            // Moonlight Sail is the game: it owns the boat, the props, the camera and the run. The legacy tide systems
+            // stay in the scene only for the sea surface, the score and the meta flows that reference them.
+            var sail = Gen.Add<MoonPull.Sail.MoonlightSail>(Gen.Go("MoonlightSail", gameplay));
+            Transform sailBoat = Gen.Go("SailBoat", gameplay).transform;
+            Gen.Wire(sail, "session", w.Session, "score", score, "fullMoon", w.FullMoon, "water", water, "tide", tide,
+                "cameraRig", rig, "cameraTransform", cameraGo.transform, "moonAnchor", moonAnchor, "legacyBoat", boatGo,
+                "boatRoot", sailBoat, "rockPrefab", content.SailRock, "starPrefab", content.SailStar, "coinPrefab", content.SailCoin,
+                "moonstonePrefab", content.SailMoonstone, "lighthousePrefab", content.SailLighthouse,
+                "defaultBoatModel", AssetDatabase.LoadAssetAtPath<GameObject>(Gen.Root + "/Boats/BoatModel_dinghy.prefab"));
+            Gen.Set(w.Session, "sail", sail);
+
+            Gen.SetArray<MonoBehaviour>(loop, "tickables", new MonoBehaviour[] { water, sail });
 
             // ------------------------------------------------ visuals, audio, feedback
             GameObject visuals = Gen.Go("Visuals", gameplay);

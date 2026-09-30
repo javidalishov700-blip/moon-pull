@@ -31,6 +31,7 @@ namespace MoonPull.Core
         public static event Action<float> WaveLaunched;
         public static event Action<int> PerfectCrest;
         public static event Action<int> TideTurned;
+        public static event Action<int> BoatBumped;
 
         /// <summary>
         /// Asked on a crash before the run fails: returns true when a free "Tide Turn" rewind was granted instead.
@@ -80,6 +81,7 @@ namespace MoonPull.Core
         public static void RaiseWaveLaunched(float strength01) => WaveLaunched?.Invoke(strength01);
         public static void RaisePerfectCrest(int streak) => PerfectCrest?.Invoke(streak);
         public static void RaiseTideTurned(int freeLeft) => TideTurned?.Invoke(freeLeft);
+        public static void RaiseBoatBumped(int heartsLeft) => BoatBumped?.Invoke(heartsLeft);
         public static void RaiseNearMiss(int chain, int multiplier) => NearMiss?.Invoke(chain, multiplier);
         public static void RaiseNearMissChainBroken() => NearMissChainBroken?.Invoke();
         public static void RaiseStarCollected(int streak) => StarCollected?.Invoke(streak);

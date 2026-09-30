@@ -37,6 +37,7 @@ namespace MoonPull.Level
         [SerializeField] private WaveLauncher launcher;
         [SerializeField] private ScoreSystem score;
         [SerializeField] private CameraRig cameraRig;
+        [SerializeField] private MoonPull.Sail.MoonlightSail sail;
 
         private readonly LevelPlan plan = new LevelPlan();
         private bool completed;
@@ -57,7 +58,7 @@ namespace MoonPull.Level
         public bool HarborLocked { get; set; }
 
         /// <summary>0..1 progress toward the harbor for the HUD bar.</summary>
-        public float Progress => plan.HarborX > plan.StartX
+        public float Progress => sail != null ? sail.Progress : plan.HarborX > plan.StartX
             ? Mathf.Clamp01((boat.X - plan.StartX) / (plan.HarborX - plan.StartX))
             : 0f;
 
@@ -107,6 +108,28 @@ namespace MoonPull.Level
             BoatModifiers modifiers = BoatModifiers.From(Boat);
 
             LevelGenerator.Generate(generation, scoreConfig, BuildContext(Region), args.LevelIndex, plan);
+
+            if (sail != null)
+            {
+                // Moonlight Sail drives the whole run; the legacy tide systems only provide the sea and the score.
+                tide.ResetForLevel();
+                water.ResetForLevel();
+                if (Region != null)
+                {
+                    water.ApplyPalette(Region.WaterShallow, Region.WaterDeep, Region.Foam);
+                }
+
+                score.ResetForLevel();
+                fullMoon.ResetForLevel(0);
+                loop.SetLevelTime(0f);
+                sail.Begin(args, Boat);
+                completed = false;
+                usedRewind = false;
+                HarborLocked = false;
+                IsActive = true;
+                GameEvents.RaiseLevelStarted(args);
+                return;
+            }
 
             moon.ResetForLevel();
             tide.ResetForLevel();

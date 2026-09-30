@@ -83,6 +83,7 @@ namespace MoonPull.UI
             GameEvents.NearMiss += OnNearMiss;
             GameEvents.PerfectCrest += OnPerfectCrest;
             GameEvents.TideTurned += OnTideTurned;
+            GameEvents.BoatBumped += OnBoatBumped;
             GameEvents.ShieldConsumed += OnShield;
             GameEvents.PassengerBoarded += OnPassengerBoarded;
             GameEvents.MoonstoneCollected += OnMoonstone;
@@ -105,6 +106,7 @@ namespace MoonPull.UI
             GameEvents.NearMiss -= OnNearMiss;
             GameEvents.PerfectCrest -= OnPerfectCrest;
             GameEvents.TideTurned -= OnTideTurned;
+            GameEvents.BoatBumped -= OnBoatBumped;
             GameEvents.ShieldConsumed -= OnShield;
             GameEvents.PassengerBoarded -= OnPassengerBoarded;
             GameEvents.MoonstoneCollected -= OnMoonstone;
@@ -150,7 +152,7 @@ namespace MoonPull.UI
             weatherBanner.alpha = 0f;
             rewindOverlay.SetActive(false);
             scoreLabel.SetText("{0}", 0);
-            bossPanel.SetActive(plan.IsBoss);
+            bossPanel.SetActive(false); // Moonlight Sail has no Kraken fight
             bossFill.fillAmount = 0f;
             bossLabel.SetText("0/{0}", plan.KrakenHitsRequired);
             moonstoneMeter.SetActive(plan.Count(PlacementKind.Moonstone) > 0);
@@ -163,6 +165,13 @@ namespace MoonPull.UI
             if (IsVisible)
             {
                 ResetWidgets();
+            }
+
+            if (args.LevelIndex < 3)
+            {
+                calloutMultiplier.gameObject.SetActive(false);
+                ShowCallout(LocKeys.HudSteerHint);
+                calloutHideAt = Time.unscaledTime + 3f;
             }
         }
 
@@ -203,6 +212,12 @@ namespace MoonPull.UI
         {
             calloutMultiplier.gameObject.SetActive(false);
             ShowCallout(LocKeys.HudTideTurned, freeLeft);
+        }
+
+        private void OnBoatBumped(int heartsLeft)
+        {
+            calloutMultiplier.gameObject.SetActive(false);
+            ShowCallout(LocKeys.HudBumped, heartsLeft);
         }
 
         private void OnShield()

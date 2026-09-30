@@ -13,6 +13,7 @@ float4 _MP_WaveDirZ;
 float4 _MP_WavePhase;
 float4 _MP_Pulse;      // x = centre X, y = current amplitude, z = 1 / width
 float  _MP_FullMoon;
+float  _MP_ScrollZ;    // distance sailed: the sea scrolls under a boat that stays near z = 0
 
 void MoonPullWaterLevel_float(out float Level, out float FullMoon)
 {
@@ -24,7 +25,7 @@ void MoonPullWaterLevel_float(out float Level, out float FullMoon)
 // Height: world Y of the displaced surface. Normal: world-space surface normal.
 void MoonPullWave_float(float3 WorldPos, out float Height, out float3 Normal)
 {
-    float4 arg = _MP_WaveK * (_MP_WaveDirX * WorldPos.x + _MP_WaveDirZ * WorldPos.z) - _MP_WaveOmega * _MP_WaveTime + _MP_WavePhase;
+    float4 arg = _MP_WaveK * (_MP_WaveDirX * WorldPos.x + _MP_WaveDirZ * (WorldPos.z + _MP_ScrollZ)) - _MP_WaveOmega * _MP_WaveTime + _MP_WavePhase;
     float4 s = sin(arg);
     float4 c = cos(arg);
 

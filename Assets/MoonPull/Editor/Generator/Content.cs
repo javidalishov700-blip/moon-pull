@@ -46,6 +46,7 @@ namespace MoonPull.EditorTools
         public BoatCatalog Boats;
         public MissionCatalog Missions;
         public BoatDebris Debris;
+        public GameObject SailRock, SailStar, SailCoin, SailMoonstone, SailLighthouse;
 
         private readonly List<(PooledObject prefab, int count)> warm = new List<(PooledObject, int)>();
 
@@ -62,6 +63,7 @@ namespace MoonPull.EditorTools
             c.CreateBoats();
             c.CreateMissions();
             c.CreateWarmup();
+            c.CreateSailProps();
             return c;
         }
 
@@ -146,6 +148,52 @@ namespace MoonPull.EditorTools
         private static void WireView(PlacementView view, Transform visual, float authoredWidth)
         {
             Gen.Wire(view, "visualRoot", visual, "authoredWidth", authoredWidth);
+        }
+
+        /// <summary>Props for Moonlight Sail: sea rocks, floating stars, coins, moonstones and the harbor lighthouse.</summary>
+        private void CreateSailProps()
+        {
+            // Rock: a cluster of faceted boulders, mostly below the waterline so only the crown shows.
+            GameObject rock = Gen.Go("Sail_Rock");
+            Color rockColor = Gen.Hex("6A6F8C");
+            Meshes.Part(Meshes.Rock(71, 1.15f), rock.transform, new Vector3(0f, 0.1f, 0f), new Vector3(1.05f, 1.2f, 1.0f), rockColor);
+            Meshes.Part(Meshes.Rock(72), rock.transform, new Vector3(0.6f, -0.1f, 0.3f), new Vector3(0.6f, 0.7f, 0.6f), rockColor * 0.9f, new Vector3(0f, 40f, 0f));
+            Meshes.Part(Meshes.Rock(73), rock.transform, new Vector3(-0.55f, -0.2f, -0.2f), new Vector3(0.5f, 0.55f, 0.55f), rockColor * 0.85f, new Vector3(0f, 110f, 0f));
+            Gen.Prim(PrimitiveType.Cylinder, rock.transform, new Vector3(0f, -0.28f, 0f), new Vector3(2.2f, 0.02f, 2.2f), Gen.Hex("E8F4FF"), default, 0.35f); // foam ring
+            SailRock = Gen.SavePrefabObject(rock, "Sail", "Sail_Rock");
+
+            GameObject star = Gen.Go("Sail_Star");
+            GameObject starBody = Gen.Prim(PrimitiveType.Cube, star.transform, Vector3.zero, new Vector3(0.5f, 0.5f, 0.14f), Gen.Hex("FFD95C"), new Vector3(0f, 0f, 45f), 1.1f);
+            Gen.Prim(PrimitiveType.Cube, starBody.transform, Vector3.zero, new Vector3(1f, 1f, 1f), Gen.Hex("FFE9A0"), new Vector3(0f, 0f, 45f), 1.1f);
+            Gen.Add<MoonPull.Gameplay.Visuals.Spinner>(starBody); // on a child: the sail owns the root position
+            SailStar = Gen.SavePrefabObject(star, "Sail", "Sail_Star");
+
+            GameObject coin = Gen.Go("Sail_Coin");
+            GameObject coinSpin = Gen.Go("Spin", coin.transform);
+            Gen.Prim(PrimitiveType.Cylinder, coinSpin.transform, Vector3.zero, new Vector3(0.5f, 0.05f, 0.5f), Gen.Hex("F5B642"), new Vector3(90f, 0f, 0f), 0.8f);
+            Gen.Add<MoonPull.Gameplay.Visuals.Spinner>(coinSpin);
+            SailCoin = Gen.SavePrefabObject(coin, "Sail", "Sail_Coin");
+
+            GameObject stone = Gen.Go("Sail_Moonstone");
+            GameObject stoneBody = Gen.Prim(PrimitiveType.Sphere, stone.transform, Vector3.zero, new Vector3(0.5f, 0.65f, 0.5f), Gen.Hex("BDE6FF"), default, 1.6f);
+            Gen.Add<MoonPull.Gameplay.Visuals.Spinner>(stoneBody);
+            SailMoonstone = Gen.SavePrefabObject(stone, "Sail", "Sail_Moonstone");
+
+            // Lighthouse on a rocky islet: the finish line of every voyage.
+            GameObject house = Gen.Go("Sail_Lighthouse");
+            Transform h = house.transform;
+            Meshes.Part(Meshes.Rock(81, 0.6f), h, new Vector3(0f, -0.3f, 0f), new Vector3(3.2f, 1.6f, 3f), Gen.Hex("5B5E78"));
+            for (int i = 0; i < 4; i++)
+            {
+                Gen.Prim(PrimitiveType.Cylinder, h, new Vector3(0f, 1.1f + i * 1.1f, 0f), new Vector3(1.1f - i * 0.12f, 0.55f, 1.1f - i * 0.12f),
+                    i % 2 == 0 ? Gen.Hex("F4F1EA") : Gen.Hex("D9534F"));
+            }
+
+            Gen.Prim(PrimitiveType.Cylinder, h, new Vector3(0f, 5.5f, 0f), new Vector3(0.75f, 0.35f, 0.75f), Gen.Hex("FFE9A8"), default, 3f);
+            Gen.Prim(PrimitiveType.Cylinder, h, new Vector3(0f, 6.0f, 0f), new Vector3(0.95f, 0.12f, 0.95f), Gen.Hex("333344"));
+            Gen.Prim(PrimitiveType.Sphere, h, new Vector3(0f, 5.5f, 0f), new Vector3(2.2f, 2.2f, 2.2f), new Color(1f, 0.95f, 0.7f), default, 0.6f)
+                .GetComponent<MeshRenderer>().sharedMaterial = Art.Glow(new Color(1f, 0.93f, 0.6f, 0.25f));
+            SailLighthouse = Gen.SavePrefabObject(house, "Sail", "Sail_Lighthouse");
         }
 
         /// <summary>

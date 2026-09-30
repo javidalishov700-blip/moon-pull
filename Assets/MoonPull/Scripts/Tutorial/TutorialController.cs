@@ -30,6 +30,7 @@ namespace MoonPull.Tutorial
             FirstWin = 1 << 9
         }
 
+        [SerializeField] private bool legacyLessons;
         [SerializeField] private LevelSession session;
         [SerializeField] private LevelRunner runner;
         [SerializeField] private ObstacleInteractionSystem obstacles;
@@ -72,6 +73,12 @@ namespace MoonPull.Tutorial
             active = Lesson.None;
             targetIndex = -1;
             shown = false;
+
+            // The tide lessons belong to the old side-scrolling mode; Moonlight Sail teaches itself with a HUD tip.
+            if (!legacyLessons)
+            {
+                return;
+            }
 
             LevelPlan plan = session.Plan;
             if (plan.IsTutorial && !Learned(Lesson.Tide))

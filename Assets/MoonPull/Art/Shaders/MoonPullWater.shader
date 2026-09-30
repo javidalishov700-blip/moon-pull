@@ -95,7 +95,8 @@ Shader "MoonPull/Water"
 
                 // Ripples fade with distance so the horizon stays calm instead of aliasing.
                 float rippleFade = saturate(1 - dist / (_DepthRange * 1.2));
-                float2 slope = rippleSlope(i.worldPos.xz, t) * _RippleStrength * rippleFade;
+                float2 scrolled = i.worldPos.xz + float2(0, _MP_ScrollZ);
+                float2 slope = rippleSlope(scrolled, t) * _RippleStrength * rippleFade;
                 float3 n = normalize(i.normal + float3(-slope.x, 0, -slope.y));
 
                 // Body colour: deep water, lifted where light passes through the thin tops of the waves.
@@ -117,13 +118,13 @@ Shader "MoonPull/Water"
                 float3 toMoon = normalize(_MP_MoonPos.xyz - i.worldPos);
                 float spec = pow(saturate(dot(r, toMoon)), 180);
                 float wide = pow(saturate(dot(r, toMoon)), 18);
-                float sparkle = step(0.93, valueNoise(i.worldPos.xz * 6 + t * 1.3)) * wide;
+                float sparkle = step(0.93, valueNoise(scrolled * 6 + t * 1.3)) * wide;
                 float moonBright = saturate(_MP_MoonPos.w);
                 col += (spec * _GlitterStrength + wide * 0.18 + sparkle * 1.4) * moonBright * _LightColor0.rgb;
 
                 // Foam: only on the highest, steepest tips, broken up by noise so it reads as spray not paint.
                 float steep = 1 - saturate(i.normal.y);
-                float foamNoise = valueNoise(i.worldPos.xz * 1.7 + float2(t * 0.6, 0)) * 0.6 + valueNoise(i.worldPos.xz * 4.1 - t) * 0.4;
+                float foamNoise = valueNoise(scrolled * 1.7 + float2(t * 0.6, 0)) * 0.6 + valueNoise(scrolled * 4.1 - t) * 0.4;
                 float foam = smoothstep(_FoamHeight * 0.75, _FoamHeight * 1.2, i.crest + steep * 0.6) * smoothstep(0.35, 0.7, foamNoise);
                 col = lerp(col, _FoamColor.rgb, foam * 0.85);
 

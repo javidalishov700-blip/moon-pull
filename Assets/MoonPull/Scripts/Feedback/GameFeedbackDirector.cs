@@ -38,6 +38,7 @@ namespace MoonPull.Feedback
             GameEvents.FullMoonEnded += OnFullMoonEnded;
             GameEvents.WaveLaunched += OnWaveLaunched;
             GameEvents.PerfectCrest += OnPerfectCrest;
+            GameEvents.BoatBumped += OnBoatBumped;
             GameEvents.RunFailed += OnRunFailed;
             GameEvents.LevelCompleted += OnLevelCompleted;
             GameEvents.TreasureFound += OnTreasure;
@@ -63,6 +64,7 @@ namespace MoonPull.Feedback
             GameEvents.FullMoonEnded -= OnFullMoonEnded;
             GameEvents.WaveLaunched -= OnWaveLaunched;
             GameEvents.PerfectCrest -= OnPerfectCrest;
+            GameEvents.BoatBumped -= OnBoatBumped;
             GameEvents.RunFailed -= OnRunFailed;
             GameEvents.LevelCompleted -= OnLevelCompleted;
             GameEvents.TreasureFound -= OnTreasure;
@@ -103,6 +105,11 @@ namespace MoonPull.Feedback
             }
 
             audioService.SetMusicIntensity(0f);
+        }
+
+        private void OnBoatBumped(int heartsLeft)
+        {
+            audioService.PlaySfx(SfxId.ShieldHit);
         }
 
         private void OnPerfectCrest(int streak)
