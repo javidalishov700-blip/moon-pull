@@ -218,6 +218,11 @@ namespace MoonPull.UI
 
         private void Refresh()
         {
+            if (meta == null || !meta.IsInitialized)
+            {
+                return; // the wallet is not loaded yet (Awake runs before boot)
+            }
+
             populationLabel.SetKey(LocKeys.VillagePopulation, VillageState.Population);
             levelLabel.SetKey(LocKeys.VillageLevel, VillageState.Level);
             xpFill.fillAmount = VillageState.Level >= VillageState.MaxVillageLevel ? 1f : VillageState.Xp / (float)VillageState.XpForNextLevel;
