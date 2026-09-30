@@ -26,6 +26,7 @@ namespace MoonPull.Localization
         public const string MenuStars = "menu.stars";
         public const string HudNearMiss = "hud.near_miss";
         public const string HudPerfectCrest = "hud.perfect_crest";
+        public const string HudTideTurned = "hud.tide_turned";
         public const string HudMultiplier = "hud.multiplier";
         public const string HudFullMoon = "hud.full_moon";
         public const string HudMoonstones = "hud.moonstones";

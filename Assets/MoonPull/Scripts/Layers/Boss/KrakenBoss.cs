@@ -11,7 +11,7 @@ namespace MoonPull.Layers.Boss
 {
     /// <summary>
     /// Every 5th level. The Kraken drags sea level toward its own oscillating target, fighting the player's tide.
-    /// Three wave launches over its surfacing head defeat it and unlock the harbor.
+    /// Clearing its surfacing head three times (ride over on a high tide, or fly over with a wave launch) defeats it.
     /// </summary>
     public sealed class KrakenBoss : MonoBehaviour, ISimulationTickable
     {
@@ -101,7 +101,7 @@ namespace MoonPull.Layers.Boss
                 }
 
                 bool over = boat.X >= head.MinX && boat.X <= head.MaxX;
-                if (over && boat.IsAirborne && hull.MinY - head.Y >= config.HitMinClearance)
+                if (over && hull.MinY - head.Y >= config.HitMinClearance)
                 {
                     RegisterHit(i);
                 }

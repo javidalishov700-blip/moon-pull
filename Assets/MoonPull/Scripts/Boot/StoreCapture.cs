@@ -34,18 +34,10 @@ namespace MoonPull.Boot
                 meta.PlayNext();
             }
 
-            // Tap now and then so the footage shows wave launches, and grab a frame mid-air.
-            var moon = FindFirstObjectByType<MoonPull.Water.MoonController>();
-            float[] times = { 2f, 2.5f, 2.5f, 3f, 3f };
+            float[] times = { 2f, 3f, 3f, 4f, 4f };
             for (int i = 0; i < times.Length; i++)
             {
-                yield return new WaitForSecondsRealtime(times[i] - 0.45f);
-                if (moon != null)
-                {
-                    moon.QueueTap();
-                }
-
-                yield return new WaitForSecondsRealtime(0.45f);
+                yield return new WaitForSecondsRealtime(times[i]);
                 yield return Shot(folder, "0" + (i + 2) + "-play");
             }
 

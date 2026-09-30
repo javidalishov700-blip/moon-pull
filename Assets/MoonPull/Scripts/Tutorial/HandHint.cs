@@ -43,10 +43,8 @@ namespace MoonPull.Tutorial
                 case HintGesture.SwipeUpDown:
                     UiTween.YoyoAnchored(hand, low, high, swipeHalfPeriod);
                     break;
-                case HintGesture.FlickUp: // taught as a quick tap: the tap launches the boat
-                    UiTween.Kill(hand);
-                    hand.anchoredPosition = mid;
-                    UiTween.PulseLoop(hand, 0.8f, 0.22f);
+                case HintGesture.FlickUp:
+                    UiTween.YoyoAnchored(hand, low, high, flickSeconds, true);
                     break;
                 case HintGesture.SwipeDown:
                     UiTween.YoyoAnchored(hand, mid, low, swipeHalfPeriod);

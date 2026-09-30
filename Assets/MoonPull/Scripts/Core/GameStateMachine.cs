@@ -14,7 +14,7 @@ namespace MoonPull.Core
             { GameState.Consent,   new[] { GameState.Menu } },
             { GameState.Menu,      new[] { GameState.Playing, GameState.Shop } },
             { GameState.Shop,      new[] { GameState.Menu, GameState.Playing } },
-            { GameState.Playing,   new[] { GameState.Fail, GameState.Win, GameState.Menu, GameState.Playing } },
+            { GameState.Playing,   new[] { GameState.Fail, GameState.Win, GameState.Menu, GameState.Playing, GameState.Rewinding } },
             { GameState.Fail,      new[] { GameState.Rewinding, GameState.Playing, GameState.Menu } },
             { GameState.Rewinding, new[] { GameState.Playing, GameState.Fail } },
             { GameState.Win,       new[] { GameState.Playing, GameState.Menu, GameState.Shop } }

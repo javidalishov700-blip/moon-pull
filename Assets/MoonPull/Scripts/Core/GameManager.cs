@@ -88,6 +88,12 @@ namespace MoonPull.Core
         private void OnRunFailed(FailReason reason)
         {
             LastFailReason = reason;
+            // Forgiving by design: the moon turns the tide back a few seconds instead of ending the run.
+            if (GameEvents.TryFreeRewind != null && GameEvents.TryFreeRewind() && Transition(GameState.Rewinding))
+            {
+                return;
+            }
+
             Transition(GameState.Fail);
         }
 

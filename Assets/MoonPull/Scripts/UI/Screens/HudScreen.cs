@@ -82,6 +82,7 @@ namespace MoonPull.UI
             GameEvents.ScoreChanged += OnScoreChanged;
             GameEvents.NearMiss += OnNearMiss;
             GameEvents.PerfectCrest += OnPerfectCrest;
+            GameEvents.TideTurned += OnTideTurned;
             GameEvents.ShieldConsumed += OnShield;
             GameEvents.PassengerBoarded += OnPassengerBoarded;
             GameEvents.MoonstoneCollected += OnMoonstone;
@@ -103,6 +104,7 @@ namespace MoonPull.UI
             GameEvents.ScoreChanged -= OnScoreChanged;
             GameEvents.NearMiss -= OnNearMiss;
             GameEvents.PerfectCrest -= OnPerfectCrest;
+            GameEvents.TideTurned -= OnTideTurned;
             GameEvents.ShieldConsumed -= OnShield;
             GameEvents.PassengerBoarded -= OnPassengerBoarded;
             GameEvents.MoonstoneCollected -= OnMoonstone;
@@ -195,6 +197,12 @@ namespace MoonPull.UI
             ShowCallout(LocKeys.HudPerfectCrest);
             calloutMultiplier.gameObject.SetActive(streak > 1);
             calloutMultiplier.SetText("x{0}", Mathf.Min(streak, 5));
+        }
+
+        private void OnTideTurned(int freeLeft)
+        {
+            calloutMultiplier.gameObject.SetActive(false);
+            ShowCallout(LocKeys.HudTideTurned, freeLeft);
         }
 
         private void OnShield()

@@ -7,7 +7,7 @@ namespace MoonPull.Config
     public sealed class BoatConfig : ScriptableObject
     {
         [Header("Movement")]
-        [SerializeField, Min(0.1f)] private float baseSpeed = 4.5f;
+        [SerializeField, Min(0.1f)] private float baseSpeed = 4.0f;
         [SerializeField, Min(0.1f)] private float gravity = 16f;
 
         [Header("Buoyancy")]

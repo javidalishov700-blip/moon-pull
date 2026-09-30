@@ -24,7 +24,6 @@ namespace MoonPull.Mechanics
         private const float PerfectBoostSeconds = 1.2f;
         private const int PerfectPoints = 60;
         private int perfectStreak;
-        private const float TapStrength = 0.75f;
 
         private float cooldown;
 
@@ -39,8 +38,6 @@ namespace MoonPull.Mechanics
 
         public void SimulationTick(float deltaTime, float levelTime)
         {
-            // Always drain the tap so one made mid-air or during cooldown never fires later by surprise.
-            bool tapped = moon.ConsumeTap();
             if (cooldown > 0f)
             {
                 cooldown -= deltaTime;
@@ -52,22 +49,13 @@ namespace MoonPull.Mechanics
                 return;
             }
 
-            // Two ways to launch: a quick tap anywhere (the main, one-thumb control) or a fast upward flick.
             float velocity = moon.Velocity01;
-            float strength;
-            if (tapped)
-            {
-                strength = TapStrength;
-            }
-            else if (velocity >= config.VelocityThreshold)
-            {
-                strength = Mathf.InverseLerp(config.VelocityThreshold, config.VelocityForMaxLaunch, velocity);
-            }
-            else
+            if (velocity < config.VelocityThreshold)
             {
                 return;
             }
 
+            float strength = Mathf.InverseLerp(config.VelocityThreshold, config.VelocityForMaxLaunch, velocity);
             float launch = Mathf.Lerp(config.MinLaunchVelocity, config.MaxLaunchVelocity, strength);
             float x = boat.X;
             float here = water.GetHeight(x);

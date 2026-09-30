@@ -33,6 +33,12 @@ namespace MoonPull.Rewind
         private float sampleAccumulator;
         private int rewindsUsed;
         private bool playing;
+
+        // Free "Tide Turn" rewinds per level: a crash rewinds a few seconds instead of failing. Only when they run
+        // out does the Fail screen appear (where the rewarded "Rewind the Tide" is still offered).
+        private const int FreeRewindsPerLevel = 3;
+        private int freeRewindsLeft;
+        private bool pendingFree;
         private float playbackElapsed;
 
         /// <summary>True when the Fail screen may offer "Rewind the Tide".</summary>
@@ -49,12 +55,30 @@ namespace MoonPull.Rewind
         {
             GameEvents.LevelStarted += OnLevelStarted;
             GameEvents.StateChanged += OnStateChanged;
+            GameEvents.TryFreeRewind = TryFreeRewind;
         }
 
         private void OnDisable()
         {
             GameEvents.LevelStarted -= OnLevelStarted;
             GameEvents.StateChanged -= OnStateChanged;
+            if (GameEvents.TryFreeRewind == TryFreeRewind)
+            {
+                GameEvents.TryFreeRewind = null;
+            }
+        }
+
+        private bool TryFreeRewind()
+        {
+            int needed = Mathf.CeilToInt(config.MinimumHistorySeconds * config.SamplesPerSecond);
+            if (freeRewindsLeft <= 0 || buffer.Count < needed)
+            {
+                return false;
+            }
+
+            freeRewindsLeft--;
+            pendingFree = true;
+            return true;
         }
 
         public void SimulationTick(float deltaTime, float levelTime)
@@ -76,6 +100,8 @@ namespace MoonPull.Rewind
             sampleAccumulator = 0f;
             rewindsUsed = 0;
             playing = false;
+            freeRewindsLeft = FreeRewindsPerLevel;
+            pendingFree = false;
         }
 
         private void OnStateChanged(GameState from, GameState to)
@@ -98,7 +124,16 @@ namespace MoonPull.Rewind
                 return;
             }
 
-            rewindsUsed++;
+            if (pendingFree)
+            {
+                pendingFree = false;
+                GameEvents.RaiseTideTurned(freeRewindsLeft);
+            }
+            else
+            {
+                rewindsUsed++;
+            }
+
             playing = true;
             playbackElapsed = 0f;
             GameEvents.RaiseRewindStarted();

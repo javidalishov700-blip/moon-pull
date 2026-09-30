@@ -112,7 +112,7 @@ namespace MoonPull.Config
             new SegmentRule { Segment = LevelSegment.CoinLine, Weight = 1.2f, UnlockLevelIndex = 0 },
             new SegmentRule { Segment = LevelSegment.ChainLowHigh, Weight = 2f, UnlockLevelIndex = 1 },
             new SegmentRule { Segment = LevelSegment.ChainHighLow, Weight = 2f, UnlockLevelIndex = 1 },
-            new SegmentRule { Segment = LevelSegment.LaunchRock, Weight = 1.5f, UnlockLevelIndex = 2 },
+            new SegmentRule { Segment = LevelSegment.LaunchRock, Weight = 0f, UnlockLevelIndex = int.MaxValue }, // tide-only design
             new SegmentRule { Segment = LevelSegment.Treasure, Weight = 1f, UnlockLevelIndex = 3 },
             new SegmentRule { Segment = LevelSegment.ChainHighLowHigh, Weight = 1.5f, UnlockLevelIndex = 3 },
             new SegmentRule { Segment = LevelSegment.ChainLowHighLow, Weight = 1.5f, UnlockLevelIndex = 3 },
