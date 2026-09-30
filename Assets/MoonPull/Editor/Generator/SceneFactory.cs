@@ -47,6 +47,7 @@ namespace MoonPull.EditorTools
             public AdsCoordinator Ads;
             public LevelSession Session;
             public MoonPull.Rescue.NightRescue Rescue;
+            public MoonPull.Rescue.VillagePins Pins;
             public LevelRunner Runner;
             public BoatController Boat;
             public FullMoonMode FullMoon;
@@ -258,9 +259,11 @@ namespace MoonPull.EditorTools
             // Village buildings: round cartoon halls that grow per level (hall, annex with a lit window, flag and glow).
             Color[] tints = { Gen.Hex("81B29A"), Gen.Hex("E07A5F"), Gen.Hex("F2CC8F"), Gen.Hex("7FA7D9"), Gen.Hex("C39BD3") };
             var tiers = new List<GameObject>();
+            var sites = new List<Transform>();
             for (int b = 0; b < 5; b++)
             {
                 Transform site = Gen.Go("Building_" + b, island.transform).transform;
+                sites.Add(site);
                 site.localPosition = new Vector3(-3.2f + b * 1.6f, 0.5f, -1.4f);
                 GameObject t1 = Gen.Go("Tier1", site);
                 Gen.Prim(PrimitiveType.Cylinder, t1.transform, new Vector3(0f, 0.4f, 0f), new Vector3(1.05f, 0.4f, 0.95f), Gen.Hex("F6E7C8"));
@@ -298,12 +301,14 @@ namespace MoonPull.EditorTools
             // Expansion islands for sale around the harbor: bought with coins in the Village screen.
             var owned = new List<GameObject>();
             var forSale = new List<GameObject>();
+            var spotRoots = new List<Transform>();
             Vector3[] spots = { new Vector3(-6.2f, 0.2f, 6.5f), new Vector3(6.4f, 0.2f, 6.8f), new Vector3(-2.6f, 0.2f, 11.5f), new Vector3(3.8f, 0.2f, 12.5f) };
             Color[] grass = { Gen.Hex("6FBF73"), Gen.Hex("F2B880"), Gen.Hex("7FC8A9"), Gen.Hex("9FA8DA") };
             for (int i = 0; i < spots.Length; i++)
             {
                 Transform root = Gen.Go("Expansion_" + i, island.transform).transform;
                 root.localPosition = spots[i];
+                spotRoots.Add(root);
                 Gen.Prim(PrimitiveType.Sphere, root, new Vector3(0f, -0.9f, 0f), new Vector3(5.2f, 1.9f, 3.8f), Gen.Hex("E8D3A0"));
                 GameObject built = Gen.Go("Owned", root);
                 Gen.Prim(PrimitiveType.Sphere, built.transform, new Vector3(0f, -0.62f, 0f), new Vector3(4.4f, 1.6f, 3.1f), grass[i]);
@@ -328,6 +333,13 @@ namespace MoonPull.EditorTools
 
             Gen.SetArray<GameObject>(village, "islandsOwned", owned);
             Gen.SetArray<GameObject>(village, "islandsForSale", forSale);
+
+            // Tycoon map pins over buildings (coins ready) and islands for sale (price).
+            w.Pins = Gen.Add<MoonPull.Rescue.VillagePins>(island);
+            Gen.Wire(w.Pins, "cameraTransform", cameraGo.transform, "pinSprite", Art.MapPin, "coinSprite", Art.Coin(),
+                "islandSprite", Art.BuildingIcon("island", Gen.Hex("6FBF73")), "font", UiKit.Font);
+            Gen.SetArray<Transform>(w.Pins, "buildingSites", sites);
+            Gen.SetArray<Transform>(w.Pins, "islandSpots", spotRoots);
 
             Transform stageRoot = Gen.Go("StageRoot", island.transform).transform;
             stageRoot.localPosition = new Vector3(0.5f, 0.1f, 0f);

@@ -153,22 +153,24 @@ namespace MoonPull.EditorTools
             return d < 0f && d > -0.05f ? new Color(1f, 1f, 1f, 0.55f) : Color.clear;
         });
 
-        public static Sprite Coin() => Draw("coin", 128, (x, y) =>
+        /// <summary>Moon Pull coin: thick gold with a dark rim, an embossed crescent moon and a shine.</summary>
+        public static Sprite Coin() => Draw("coin_v2", 128, (x, y) =>
         {
-            float r = Vector2.Distance(new Vector2(x, y), new Vector2(0.5f, 0.5f));
-            if (r > 0.46f)
-            {
-                return Color.clear;
-            }
-
-            Color gold = new Color(1f, 0.78f, 0.25f);
-            if (r > 0.38f)
-            {
-                return gold * 0.85f + new Color(0, 0, 0, 0.15f);
-            }
-
-            float shine = Mathf.Clamp01(1f - Vector2.Distance(new Vector2(x, y), new Vector2(0.4f, 0.62f)) * 3f);
-            return Color.Lerp(gold, Color.white, shine * 0.5f);
+            Vector2 p = new Vector2(x, y);
+            float r = Vector2.Distance(p, new Vector2(0.5f, 0.5f));
+            if (r > 0.47f) return Color.clear;
+            Color outline = new Color(0.55f, 0.3f, 0.05f);
+            Color rim = new Color(0.98f, 0.66f, 0.12f);
+            Color face = new Color(1f, 0.8f, 0.2f);
+            if (r > 0.435f) return outline;
+            if (r > 0.36f) return y > 0.5f ? Color.Lerp(rim, Color.white, 0.25f) : rim;
+            // Crescent moon emboss.
+            bool moon = Vector2.Distance(p, new Vector2(0.47f, 0.5f)) < 0.2f && Vector2.Distance(p, new Vector2(0.56f, 0.56f)) > 0.17f;
+            bool moonShadow = Vector2.Distance(p, new Vector2(0.48f, 0.48f)) < 0.2f && Vector2.Distance(p, new Vector2(0.57f, 0.54f)) > 0.17f;
+            if (moon) return new Color(1f, 0.95f, 0.65f);
+            if (moonShadow) return new Color(0.85f, 0.55f, 0.08f);
+            float shine = Mathf.Clamp01(1f - Vector2.Distance(p, new Vector2(0.36f, 0.66f)) * 5f);
+            return Color.Lerp(face, Color.white, shine * 0.6f);
         });
 
         public static Sprite Moonstone() => Draw("moonstone", 128, (x, y) =>
@@ -245,6 +247,122 @@ namespace MoonPull.EditorTools
             if (sailShape) return sail;
             if (mast) return new Color(0.35f, 0.25f, 0.2f);
             return water ? new Color(0.5f, 0.8f, 0.9f, 0.8f) : Color.clear;
+        });
+
+        // ---------------------------------------------------------------- casual UI kit (9-sliced, tinted by Image.color)
+
+        /// <summary>Signed distance to a rounded rectangle (negative inside), in the same units as the inputs.</summary>
+        private static float RoundedBox(float x, float y, float x0, float y0, float x1, float y1, float r)
+        {
+            float cx = (x0 + x1) * 0.5f, cy = (y0 + y1) * 0.5f;
+            float hx = (x1 - x0) * 0.5f - r, hy = (y1 - y0) * 0.5f - r;
+            float qx = Mathf.Abs(x - cx) - hx, qy = Mathf.Abs(y - cy) - hy;
+            float outside = new Vector2(Mathf.Max(qx, 0f), Mathf.Max(qy, 0f)).magnitude;
+            return outside + Mathf.Min(Mathf.Max(qx, qy), 0f) - r;
+        }
+
+        private static Color Shade(float v, float a = 1f) => new Color(v, v, v, a);
+
+        /// <summary>Chunky 3D button: dark outline, a darker bottom lip, a body and a glossy top highlight.</summary>
+        public static Sprite ChunkyButton => Draw("ui_button", 128, (x, y) =>
+        {
+            float d = RoundedBox(x, y, 0.02f, 0.02f, 0.98f, 0.98f, 0.3f);
+            if (d > 0f) return Color.clear;
+            if (d > -0.035f) return Shade(0.22f);                                   // outline
+            float face = RoundedBox(x, y, 0.055f, 0.17f, 0.945f, 0.945f, 0.26f);
+            if (face > 0f) return Shade(0.6f);                                      // bottom lip
+            float gloss = RoundedBox(x, y, 0.14f, 0.66f, 0.86f, 0.89f, 0.1f);
+            if (gloss < 0f) return Color.Lerp(Shade(0.93f), Shade(1f), 0.9f);       // top shine
+            return Shade(Mathf.Lerp(0.8f, 0.92f, y));                               // body, lighter towards the top
+        }, new Vector4(44f, 48f, 44f, 44f));
+
+        /// <summary>Soft rounded panel with a dark rim and a lighter inner edge.</summary>
+        public static Sprite PanelSprite => Draw("ui_panel", 128, (x, y) =>
+        {
+            float d = RoundedBox(x, y, 0.02f, 0.02f, 0.98f, 0.98f, 0.28f);
+            if (d > 0f) return Color.clear;
+            if (d > -0.04f) return Shade(0.45f);
+            if (d > -0.07f) return Shade(1f);
+            return Shade(0.9f);
+        }, new Vector4(44f, 44f, 44f, 44f));
+
+        /// <summary>Capsule chip for the top bar (coins, stars, level).</summary>
+        public static Sprite Pill => Draw("ui_pill", 128, (x, y) =>
+        {
+            float d = RoundedBox(x, y, 0.02f, 0.02f, 0.98f, 0.98f, 0.48f);
+            if (d > 0f) return Color.clear;
+            if (d > -0.05f) return Shade(0.25f);
+            return y > 0.62f && d < -0.12f ? Shade(1f) : Shade(0.88f);
+        }, new Vector4(60f, 60f, 60f, 60f));
+
+        /// <summary>Map pin: a teardrop with a dark outline and a light disc for the icon (tinted by the renderer).</summary>
+        public static Sprite MapPin => Draw("ui_pin", 128, (x, y) =>
+        {
+            Vector2 p = new Vector2(x, y);
+            Func<float, float, bool> inPin = (u, v) => Vector2.Distance(new Vector2(u, v), new Vector2(0.5f, 0.62f)) < 0.34f
+                || InTriangle(new Vector2(u, v), new Vector2(0.24f, 0.5f), new Vector2(0.76f, 0.5f), new Vector2(0.5f, 0.05f));
+            bool inside = inPin(x, y);
+            bool rim = !inside && (inPin(x + 0.03f, y) || inPin(x - 0.03f, y) || inPin(x, y + 0.03f) || inPin(x, y - 0.03f));
+            if (rim) return new Color(0.1f, 0.07f, 0.28f, 1f);
+            if (!inside) return Color.clear;
+            if (Vector2.Distance(p, new Vector2(0.5f, 0.64f)) < 0.24f) return new Color(1f, 1f, 1f, 1f) * 0.98f + new Color(0, 0, 0, 0.02f);
+            return new Color(0.85f, 0.85f, 0.85f) + (y > 0.7f ? new Color(0.15f, 0.15f, 0.15f, 0f) : Color.clear);
+        });
+
+        /// <summary>White sticker glyphs for the menu tiles, with a dark outline.</summary>
+        public static Sprite MenuIcon(string kind) => Draw("menu_" + kind, 128, (x, y) =>
+        {
+            Vector2 p = new Vector2(x, y);
+            Func<float, float, bool> shape;
+            switch (kind)
+            {
+                case "bag":
+                    shape = (u, v) => RoundedRect(u, v, 0.2f, 0.12f, 0.8f, 0.66f, 0.1f)
+                                      || (Mathf.Abs(Vector2.Distance(new Vector2(u, v), new Vector2(0.5f, 0.66f)) - 0.17f) < 0.045f && v > 0.66f);
+                    break;
+                case "house":
+                    shape = (u, v) => RoundedRect(u, v, 0.24f, 0.12f, 0.76f, 0.56f, 0.06f)
+                                      || InTriangle(new Vector2(u, v), new Vector2(0.1f, 0.52f), new Vector2(0.9f, 0.52f), new Vector2(0.5f, 0.88f));
+                    break;
+                case "list":
+                    shape = (u, v) => RoundedRect(u, v, 0.2f, 0.1f, 0.8f, 0.9f, 0.08f);
+                    break;
+                default: // wheel
+                    shape = (u, v) => Vector2.Distance(new Vector2(u, v), new Vector2(0.5f, 0.5f)) < 0.4f;
+                    break;
+            }
+
+            bool inside = shape(x, y);
+            bool rim = !inside && (shape(x + 0.035f, y) || shape(x - 0.035f, y) || shape(x, y + 0.035f) || shape(x, y - 0.035f));
+            if (rim) return new Color(0.1f, 0.07f, 0.28f, 1f);
+            if (!inside) return Color.clear;
+
+            Color white = new Color(1f, 0.98f, 0.94f);
+            Color ink = new Color(0.1f, 0.07f, 0.28f);
+            switch (kind)
+            {
+                case "bag":
+                    return Vector2.Distance(p, new Vector2(0.5f, 0.38f)) < 0.09f ? new Color(1f, 0.78f, 0.2f) : white;
+                case "house":
+                    if (RoundedRect(x, y, 0.42f, 0.12f, 0.58f, 0.36f, 0.04f)) return ink;
+                    return y > 0.55f ? new Color(1f, 0.45f, 0.4f) : white;
+                case "list":
+                {
+                    bool line = x > 0.42f && x < 0.7f && (Mathf.Abs(y - 0.7f) < 0.03f || Mathf.Abs(y - 0.5f) < 0.03f || Mathf.Abs(y - 0.3f) < 0.03f);
+                    bool tick = Vector2.Distance(p, new Vector2(0.31f, 0.7f)) < 0.05f || Vector2.Distance(p, new Vector2(0.31f, 0.5f)) < 0.05f
+                                || Vector2.Distance(p, new Vector2(0.31f, 0.3f)) < 0.05f;
+                    if (tick) return new Color(0.36f, 0.83f, 0.36f);
+                    return line ? ink : white;
+                }
+                default:
+                {
+                    float a = Mathf.Atan2(y - 0.5f, x - 0.5f);
+                    int seg = (int)Mathf.Floor((a + Mathf.PI) / (Mathf.PI / 3f));
+                    if (Vector2.Distance(p, new Vector2(0.5f, 0.5f)) < 0.08f) return ink;
+                    Color[] cols = { new Color(1f, 0.45f, 0.4f), white, new Color(1f, 0.8f, 0.25f), white, new Color(0.4f, 0.8f, 1f), white };
+                    return cols[Mathf.Clamp(seg, 0, 5)];
+                }
+            }
         });
 
         /// <summary>Village building badge: a rounded coloured tile with a bold cartoon symbol and a soft outline.</summary>
@@ -438,7 +556,7 @@ namespace MoonPull.EditorTools
 
         // ---------------------------------------------------------------- raster helpers
 
-        private static Sprite Draw(string name, int size, Func<float, float, Color> shader)
+        private static Sprite Draw(string name, int size, Func<float, float, Color> shader, Vector4 border = default)
         {
             if (SpriteCache.TryGetValue(name, out Sprite cached) && cached != null)
             {
@@ -477,12 +595,14 @@ namespace MoonPull.EditorTools
                 AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate);
             }
 
-            if (AssetImporter.GetAtPath(path) is TextureImporter importer && importer.textureType != TextureImporterType.Sprite)
+            if (AssetImporter.GetAtPath(path) is TextureImporter importer
+                && (importer.textureType != TextureImporterType.Sprite || importer.spriteBorder != border))
             {
                 importer.textureType = TextureImporterType.Sprite;
                 importer.spriteImportMode = SpriteImportMode.Single;
                 importer.alphaIsTransparency = true;
                 importer.mipmapEnabled = false;
+                importer.spriteBorder = border; // 9-slice insets (left, bottom, right, top) in pixels
                 importer.SaveAndReimport();
             }
 

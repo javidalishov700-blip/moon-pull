@@ -12,20 +12,26 @@ namespace MoonPull.EditorTools
     /// </summary>
     internal static class UiKit
     {
-        public static readonly Color Ink = Gen.Hex("0B1026");
-        public static readonly Color Panel = Gen.Hex("1E2552");
-        public static readonly Color PanelLight = Gen.Hex("2C3570");
-        public static readonly Color Primary = Gen.Hex("FFB547");
-        public static readonly Color Accent = Gen.Hex("7FE3C4");
-        public static readonly Color RewardedColor = Gen.Hex("8E7CFF");
-        public static readonly Color Muted = Gen.Hex("A3ABDB");
-        public static readonly Color TextLight = Gen.Hex("F4F1FF");
-        public static readonly Color Gold = Gen.Hex("FFD95C");
-        public static readonly Color Danger = Gen.Hex("FF6B6B");
+        // Casual "moonlit candy" palette: royal-blue panels, warm chunky buttons, white outlined type.
+        public static readonly Color Ink = Gen.Hex("1B1646");
+        public static readonly Color Panel = Gen.Hex("4254B8");
+        public static readonly Color PanelLight = Gen.Hex("6A7BE0");
+        public static readonly Color Primary = Gen.Hex("FFB21E");
+        public static readonly Color Accent = Gen.Hex("5BE3B0");
+        public static readonly Color RewardedColor = Gen.Hex("A474FF");
+        public static readonly Color Muted = Gen.Hex("DCE2FF");
+        public static readonly Color TextLight = Gen.Hex("FFFFFF");
+        public static readonly Color Gold = Gen.Hex("FFD84A");
+        public static readonly Color Danger = Gen.Hex("FF5A5F");
+        public static readonly Color Go = Gen.Hex("5DD35B");
+        public static readonly Color OutlineInk = new Color(0.1f, 0.07f, 0.28f, 0.95f);
 
         private static Font font;
 
-        public static Font Font => font != null ? font : font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        /// <summary>Paytone One (SIL OFL, Art/Fonts): chunky and friendly, full Turkish coverage; OS fonts fill other scripts.</summary>
+        public static Font Font => font != null ? font : font =
+            UnityEditor.AssetDatabase.LoadAssetAtPath<Font>("Assets/MoonPull/Art/Fonts/PaytoneOne-Regular.ttf")
+            ?? Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
 
         public static readonly Vector2 Center = new Vector2(0.5f, 0.5f);
         public static readonly Vector2 Top = new Vector2(0.5f, 1f);
@@ -62,15 +68,15 @@ namespace MoonPull.EditorTools
         {
             RectTransform rt = Rect(name, parent, anchor, position, size);
             var image = rt.gameObject.AddComponent<Image>();
-            image.sprite = sprite != null ? sprite : Art.Rounded;
-            image.type = image.sprite == Art.Rounded ? UnityEngine.UI.Image.Type.Sliced : UnityEngine.UI.Image.Type.Simple;
+            image.sprite = sprite != null ? sprite : Art.PanelSprite;
+            image.type = image.sprite.border != Vector4.zero ? UnityEngine.UI.Image.Type.Sliced : UnityEngine.UI.Image.Type.Simple;
             image.color = color;
             return image;
         }
 
         public static Image Fill(Image image, UnityEngine.UI.Image.FillMethod method, float amount)
         {
-            if (image.sprite == null || image.sprite == Art.Rounded)
+            if (image.sprite == null || image.sprite.border != Vector4.zero)
             {
                 image.sprite = Art.Square;
             }
@@ -103,13 +109,28 @@ namespace MoonPull.EditorTools
             text.fontSize = size;
             text.color = color;
             text.alignment = align;
-            text.fontStyle = bold ? FontStyle.Bold : FontStyle.Normal;
+            text.fontStyle = FontStyle.Normal; // the display font is already heavy
+            text.lineSpacing = 0.9f;
             text.horizontalOverflow = HorizontalWrapMode.Wrap;
             text.verticalOverflow = VerticalWrapMode.Overflow;
             text.raycastTarget = false;
-            var shadow = rt.gameObject.AddComponent<Shadow>();
-            shadow.effectColor = new Color(0f, 0f, 0f, 0.35f);
-            shadow.effectDistance = new Vector2(0f, -3f);
+            if (bold || size >= 40)
+            {
+                // Sticker-style type: a dark outline plus a drop shadow, like casual game UI.
+                var outline = rt.gameObject.AddComponent<Outline>();
+                outline.effectColor = OutlineInk;
+                outline.effectDistance = new Vector2(Mathf.Max(2f, size * 0.06f), -Mathf.Max(2f, size * 0.06f));
+                var drop = rt.gameObject.AddComponent<Shadow>();
+                drop.effectColor = new Color(0.1f, 0.07f, 0.28f, 0.6f);
+                drop.effectDistance = new Vector2(0f, -Mathf.Max(3f, size * 0.1f));
+            }
+            else
+            {
+                var shadow = rt.gameObject.AddComponent<Shadow>();
+                shadow.effectColor = new Color(0.1f, 0.07f, 0.28f, 0.5f);
+                shadow.effectDistance = new Vector2(0f, -2f);
+            }
+
             return text;
         }
 
@@ -126,20 +147,21 @@ namespace MoonPull.EditorTools
         public static Button Button(Transform parent, string name, string key, Vector2 anchor, Vector2 position, Vector2 size,
             Color color, int fontSize = 52, bool localized = true)
         {
-            Image image = Image(parent, name, anchor, position, size, color);
+            Image image = Image(parent, name, anchor, position, size, color, Art.ChunkyButton);
             var button = image.gameObject.AddComponent<Button>();
             ColorBlock colors = button.colors;
             colors.pressedColor = new Color(0.85f, 0.85f, 0.85f);
             colors.disabledColor = new Color(0.55f, 0.55f, 0.6f, 0.6f);
             button.colors = colors;
-            Color label = color.grayscale > 0.6f ? Ink : TextLight;
+            // White sticker text sitting on the button face (above the bottom lip).
+            Vector2 labelPos = new Vector2(0f, Mathf.Min(8f, size.y * 0.06f));
             if (localized)
             {
-                Loc(image.transform, "Label", key, fontSize, Center, Vector2.zero, size - new Vector2(24f, 8f), label, TextAnchor.MiddleCenter, true);
+                Loc(image.transform, "Label", key, fontSize, Center, labelPos, size - new Vector2(30f, 16f), TextLight, TextAnchor.MiddleCenter, true);
             }
             else
             {
-                Text(image.transform, "Label", key, fontSize, Center, Vector2.zero, size - new Vector2(24f, 8f), label, TextAnchor.MiddleCenter, true);
+                Text(image.transform, "Label", key, fontSize, Center, labelPos, size - new Vector2(30f, 16f), TextLight, TextAnchor.MiddleCenter, true);
             }
 
             return button;

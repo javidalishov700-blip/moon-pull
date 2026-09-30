@@ -110,9 +110,11 @@ namespace MoonPull.EditorTools
             Group(root.gameObject);
             Backdrop(root, new Color(0.02f, 0.03f, 0.1f, 0.72f));
             panel = Image(root, "Content", Center, Vector2.zero, size, Panel).rectTransform;
-            Image(panel, "Header", Top, new Vector2(0f, -70f), new Vector2(size.x - 40f, 110f), PanelLight);
-            Loc(panel, "Title", titleKey, 60, Top, new Vector2(0f, -70f), new Vector2(size.x - 200f, 100f), TextLight, TextAnchor.MiddleCenter, true);
-            Button close = Button(panel, "Close", "X", TopRight, new Vector2(-70f, -70f), new Vector2(96f, 96f), Danger, 48, false);
+            // Title ribbon riding on the top edge of the panel.
+            Image ribbon = Image(panel, "Header", Top, new Vector2(0f, -40f), new Vector2(Mathf.Min(size.x - 160f, 720f), 120f), Primary, Art.ChunkyButton);
+            ribbon.raycastTarget = false;
+            Loc(panel, "Title", titleKey, 58, Top, new Vector2(0f, -34f), new Vector2(Mathf.Min(size.x - 200f, 680f), 100f), TextLight, TextAnchor.MiddleCenter, true);
+            Button close = Button(panel, "Close", "X", TopRight, new Vector2(-40f, -40f), new Vector2(100f, 100f), Danger, 50, false);
             var popup = root.gameObject.AddComponent<T>();
             Gen.Wire(popup, "content", panel, "popups", popups, "closeButton", close);
             return popup;
@@ -125,9 +127,9 @@ namespace MoonPull.EditorTools
             RectTransform bar = Rect("TopBar", safe, TopLeft, new Vector2(210f, -90f), new Vector2(340f, 100f));
             Group(bar.gameObject);
             var visibility = bar.gameObject.AddComponent<StateVisibility>();
-            Image pill = Image(bar, "Pill", Center, Vector2.zero, new Vector2(340f, 96f), new Color(0f, 0f, 0f, 0.45f));
-            RectTransform icon = CoinIcon(pill.transform, new Vector2(0f, 0.5f), new Vector2(52f, 0f), 76f);
-            Text label = Text(pill.transform, "Coins", "0", 50, new Vector2(0f, 0.5f), new Vector2(205f, 0f), new Vector2(220f, 80f), Gold, TextAnchor.MiddleLeft, true);
+            Image pill = Image(bar, "Pill", Center, new Vector2(20f, 0f), new Vector2(320f, 84f), Gen.Hex("2A2F7A"), Art.Pill);
+            RectTransform icon = CoinIcon(pill.transform, new Vector2(0f, 0.5f), new Vector2(10f, 2f), 104f);
+            Text label = Text(pill.transform, "Coins", "0", 48, new Vector2(0f, 0.5f), new Vector2(190f, 2f), new Vector2(210f, 80f), TextLight, TextAnchor.MiddleLeft, true);
             var counter = pill.gameObject.AddComponent<CoinCounter>();
             Gen.Wire(counter, "meta", w.Meta, "label", label, "icon", icon);
             _ = visibility;
@@ -188,30 +190,43 @@ namespace MoonPull.EditorTools
             return screen;
         }
 
+        /// <summary>Square menu tile: a drawn icon over a small label, on a chunky coloured button.</summary>
+        private static Button IconTile(Transform parent, string name, string key, Vector2 position, Color color, string icon)
+        {
+            Button button = Button(parent, name, key, Bottom, position, new Vector2(236f, 200f), color, 32);
+            var label = (RectTransform)button.transform.Find("Label");
+            label.anchoredPosition = new Vector2(0f, -52f);
+            label.sizeDelta = new Vector2(226f, 50f);
+            Image glyph = Image(button.transform, "Icon", Center, new Vector2(0f, 28f), new Vector2(110f, 110f), Color.white, Art.MenuIcon(icon));
+            glyph.raycastTarget = false;
+            return button;
+        }
+
         private static MenuScreen BuildMenu(Transform parent, UIScreen idle, UIScreen streak, UIScreen spin, UIScreen missions,
             UIScreen settings, UIScreen lighthouse, UIScreen chest)
         {
             var screen = Screen<MenuScreen>(parent, "Menu");
             RectTransform c = ContentOf(screen);
 
-            Text(c, "Title", "MOON PULL", 110, Top, new Vector2(0f, -290f), new Vector2(1000f, 150f), TextLight, TextAnchor.MiddleCenter, true);
-            LocalizedText region = Loc(c, "Region", "region.tropical_lagoon", 46, Top, new Vector2(0f, -400f), new Vector2(900f, 70f), Accent);
+            Text(c, "Title", "MOON PULL", 132, Top, new Vector2(0f, -280f), new Vector2(1000f, 170f), Gold, TextAnchor.MiddleCenter, true);
+            Text(c, "Subtitle", "Night Rescue", 50, Top, new Vector2(0f, -370f), new Vector2(800f, 70f), TextLight, TextAnchor.MiddleCenter, true);
+            LocalizedText region = Loc(c, "Region", "region.tropical_lagoon", 42, Top, new Vector2(0f, -430f), new Vector2(900f, 70f), Accent);
             LocalizedText level = Loc(c, "Level", LocKeys.MenuLevel, 66, Top, new Vector2(0f, -490f), new Vector2(900f, 90f), TextLight, TextAnchor.MiddleCenter, true);
             Image starIcon = Image(c, "StarIcon", Top, new Vector2(-50f, -580f), new Vector2(64f, 64f), Color.white, Art.Star(true));
             starIcon.raycastTarget = false;
             Text stars = Text(c, "Stars", "0", 48, Top, new Vector2(40f, -580f), new Vector2(160f, 70f), Gold, TextAnchor.MiddleLeft, true);
             LocalizedText locked = Loc(c, "Locked", LocKeys.LighthouseRegionLocked, 38, Top, new Vector2(0f, -660f), new Vector2(900f, 60f), Primary);
 
-            Button play = Button(c, "Play", LocKeys.MenuPlay, Bottom, new Vector2(0f, 560f), new Vector2(640f, 200f), Primary, 88);
-            Button settingsButton = Button(c, "Settings", LocKeys.MenuSettings, TopRight, new Vector2(-170f, -90f), new Vector2(280f, 96f), PanelLight, 36);
-            Button chestButton = Button(c, "BossChest", LocKeys.ChestTitle, TopLeft, new Vector2(210f, -210f), new Vector2(340f, 96f), Gen.Hex("8A5A2B"), 34);
+            Button play = Button(c, "Play", LocKeys.MenuPlay, Bottom, new Vector2(0f, 560f), new Vector2(680f, 220f), Go, 96);
+            Button settingsButton = Button(c, "Settings", LocKeys.MenuSettings, TopRight, new Vector2(-165f, -90f), new Vector2(270f, 96f), PanelLight, 34);
+            Button chestButton = Button(c, "BossChest", LocKeys.ChestTitle, TopLeft, new Vector2(210f, -210f), new Vector2(340f, 96f), Gen.Hex("E0842C"), 34);
             Badge chestBadge = Badge(chestButton.transform, new Vector2(-10f, -10f));
 
             float y = 320f;
-            Button shop = Button(c, "Shop", LocKeys.MenuShop, Bottom, new Vector2(-390f, y), new Vector2(240f, 160f), PanelLight, 38);
-            Button lighthouseButton = Button(c, "Lighthouse", LocKeys.MenuLighthouse, Bottom, new Vector2(-130f, y), new Vector2(240f, 160f), PanelLight, 34);
-            Button missionsButton = Button(c, "Missions", LocKeys.MenuMissions, Bottom, new Vector2(130f, y), new Vector2(240f, 160f), PanelLight, 38);
-            Button spinButton = Button(c, "Spin", LocKeys.MenuSpin, Bottom, new Vector2(390f, y), new Vector2(240f, 160f), PanelLight, 34);
+            Button shop = IconTile(c, "Shop", LocKeys.MenuShop, new Vector2(-390f, y), Primary, "bag");
+            Button lighthouseButton = IconTile(c, "Lighthouse", LocKeys.MenuLighthouse, new Vector2(-130f, y), Gen.Hex("2EC4C9"), "house");
+            Button missionsButton = IconTile(c, "Missions", LocKeys.MenuMissions, new Vector2(130f, y), RewardedColor, "list");
+            Button spinButton = IconTile(c, "Spin", LocKeys.MenuSpin, new Vector2(390f, y), Gen.Hex("FF6FAE"), "wheel");
             Badge missionsBadge = Badge(missionsButton.transform, new Vector2(-12f, -12f));
             Badge spinBadge = Badge(spinButton.transform, new Vector2(-12f, -12f));
 
@@ -767,6 +782,11 @@ namespace MoonPull.EditorTools
             if (w.Village != null)
             {
                 Gen.Set(w.Village, "toast", toast);
+            }
+
+            if (w.Pins != null)
+            {
+                Gen.Set(w.Pins, "popup", popup);
             }
 
             return popup;

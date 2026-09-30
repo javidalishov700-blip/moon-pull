@@ -153,6 +153,12 @@ namespace MoonPull.UI
             }
         }
 
+        /// <summary>Opened by tapping an island's price pin in the village.</summary>
+        public void ShowIslands() => ShowPage(true);
+
+        /// <summary>Tapping a coin pin over a building collects the Treasury.</summary>
+        public void CollectFromWorld() => Collect();
+
         private void ShowPage(bool islands)
         {
             showIslands = islands;
