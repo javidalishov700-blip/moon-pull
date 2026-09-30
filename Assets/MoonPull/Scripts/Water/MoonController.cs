@@ -19,6 +19,26 @@ namespace MoonPull.Water
         private bool ignoringPointer;
         private float lastPointerY;
 
+        // Tap detection: a short touch that barely moves is a "launch" tap instead of a tide drag.
+        private const float TapMaxSeconds = 0.22f;
+        private const float TapMaxTravelFraction = 0.035f;
+        private float pressStartTime;
+        private float pressStartY;
+        private float pressTravel;
+        private bool pressActive;
+        private bool tapPending;
+
+        /// <summary>Queues a launch tap as if the player tapped (capture player / automation).</summary>
+        public void QueueTap() => tapPending = true;
+
+        /// <summary>True once per quick tap; WaveLauncher consumes it to launch the boat.</summary>
+        public bool ConsumeTap()
+        {
+            bool tap = tapPending;
+            tapPending = false;
+            return tap;
+        }
+
         public float Height01 => state.Height01;
         public float TargetHeight01 => state.TargetHeight01;
 
@@ -33,6 +53,8 @@ namespace MoonPull.Water
 
         public void ResetForLevel()
         {
+            tapPending = false;
+            pressActive = false;
             state = new MoonState
             {
                 Height01 = config.StartHeight01,
@@ -68,6 +90,14 @@ namespace MoonPull.Water
         {
             if (!TryGetPointer(out float pointerY, out bool began, out int pointerId))
             {
+                if (pressActive && !ignoringPointer && !ControlLocked
+                    && Time.unscaledTime - pressStartTime <= TapMaxSeconds
+                    && pressTravel <= Screen.height * TapMaxTravelFraction)
+                {
+                    tapPending = true;
+                }
+
+                pressActive = false;
                 dragging = false;
                 ignoringPointer = false;
                 return;
@@ -83,6 +113,16 @@ namespace MoonPull.Water
             {
                 return;
             }
+
+            if (began || !pressActive)
+            {
+                pressActive = true;
+                pressStartTime = Time.unscaledTime;
+                pressStartY = pointerY;
+                pressTravel = 0f;
+            }
+
+            pressTravel = Mathf.Max(pressTravel, Mathf.Abs(pointerY - pressStartY));
 
             if (!dragging || began)
             {
