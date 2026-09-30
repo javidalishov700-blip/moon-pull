@@ -131,6 +131,11 @@ namespace MoonPull.EditorTools
             Image pill = Image(bar, "Pill", Center, new Vector2(20f, 0f), new Vector2(320f, 84f), Gen.Hex("10163A"), Art.Pill);
             RectTransform icon = CoinIcon(pill.transform, new Vector2(0f, 0.5f), new Vector2(10f, 2f), 104f);
             Text label = Text(pill.transform, "Coins", "0", 48, new Vector2(0f, 0.5f), new Vector2(190f, 2f), new Vector2(210f, 80f), TextLight, TextAnchor.MiddleLeft, true);
+            // Green "+" at the end of the coin pill: straight to the shop.
+            Button add = Button(pill.transform, "Add", "", new Vector2(1f, 0.5f), new Vector2(-8f, 0f), new Vector2(76f, 76f), Go, 30, false);
+            Image plus = Image(add.transform, "Icon", Center, new Vector2(0f, 3f), new Vector2(44f, 44f), Color.white, Art.MenuIcon("plus"));
+            plus.raycastTarget = false;
+            add.gameObject.AddComponent<ShopShortcut>();
             var counter = pill.gameObject.AddComponent<CoinCounter>();
             Gen.Wire(counter, "meta", w.Meta, "label", label, "icon", icon);
             _ = visibility;
@@ -219,7 +224,9 @@ namespace MoonPull.EditorTools
             LocalizedText locked = Loc(c, "Locked", LocKeys.LighthouseRegionLocked, 38, Top, new Vector2(0f, -660f), new Vector2(900f, 60f), Primary);
 
             Button play = Button(c, "Play", LocKeys.MenuPlay, Bottom, new Vector2(0f, 560f), new Vector2(680f, 220f), Go, 96);
-            Button settingsButton = Button(c, "Settings", LocKeys.MenuSettings, TopRight, new Vector2(-165f, -90f), new Vector2(270f, 96f), PanelLight, 34);
+            Button settingsButton = Button(c, "Settings", "", TopRight, new Vector2(-90f, -90f), new Vector2(116f, 116f), Gen.Hex("2F7BE0"), 34, false);
+            Image gear = Image(settingsButton.transform, "Icon", Center, new Vector2(0f, 4f), new Vector2(76f, 76f), Color.white, Art.MenuIcon("gear"));
+            gear.raycastTarget = false;
             Button chestButton = Button(c, "BossChest", LocKeys.ChestTitle, TopLeft, new Vector2(210f, -210f), new Vector2(340f, 96f), Gen.Hex("B8742E"), 34);
             Badge chestBadge = Badge(chestButton.transform, new Vector2(-10f, -10f));
             Text goal = Text(c, "Goal", "", 34, Top, new Vector2(0f, -725f), new Vector2(960f, 60f), Gold, TextAnchor.MiddleCenter, true);

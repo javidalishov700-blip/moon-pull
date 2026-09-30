@@ -16,14 +16,14 @@ namespace MoonPull.EditorTools
         public static readonly Color Ink = Gen.Hex("0A0F24");
         public static readonly Color Panel = Gen.Hex("141C3F");
         public static readonly Color PanelLight = Gen.Hex("1F2A57");
-        public static readonly Color Primary = Gen.Hex("E3A63B");
+        public static readonly Color Primary = Gen.Hex("FFA91F");
         public static readonly Color Accent = Gen.Hex("5CC8B4");
         public static readonly Color RewardedColor = Gen.Hex("7B62D9");
         public static readonly Color Muted = Gen.Hex("9AA6CF");
         public static readonly Color TextLight = Gen.Hex("F5F3EE");
         public static readonly Color Gold = Gen.Hex("F2C35B");
         public static readonly Color Danger = Gen.Hex("D9534F");
-        public static readonly Color Go = Gen.Hex("3FA96B");
+        public static readonly Color Go = Gen.Hex("4CC631");
         public static readonly Color OutlineInk = new Color(0.02f, 0.03f, 0.1f, 0.7f);
 
         private static Font font;
@@ -147,8 +147,13 @@ namespace MoonPull.EditorTools
         public static Button Button(Transform parent, string name, string key, Vector2 anchor, Vector2 position, Vector2 size,
             Color color, int fontSize = 52, bool localized = true)
         {
-            Image image = Image(parent, name, anchor, position, size, color, Art.ChunkyButton);
+            // Casual-game button: a light rim framing a vivid glossy face (see Art.ButtonRim / ButtonFace).
+            Color rim = Color.Lerp(color, new Color(1f, 0.97f, 0.9f), 0.62f);
+            Image image = Image(parent, name, anchor, position, size, rim, Art.ButtonRim);
+            Image face = Image(image.transform, "Face", Center, Vector2.zero, size - new Vector2(16f, 16f), color, Art.ButtonFace);
+            face.raycastTarget = false;
             var button = image.gameObject.AddComponent<Button>();
+            button.targetGraphic = face;
             image.gameObject.AddComponent<ButtonFeel>();
             ColorBlock colors = button.colors;
             colors.pressedColor = new Color(0.85f, 0.85f, 0.85f);

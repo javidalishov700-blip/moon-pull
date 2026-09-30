@@ -195,9 +195,9 @@ namespace MoonPull.UI
             fadingPage.alpha = 0f;
             Color on = new Color(1f, 0.71f, 0.28f);
             Color off = new Color(0.25f, 0.3f, 0.55f);
-            buildingsTab.GetComponent<Image>().color = index == 0 ? on : off;
-            islandsTab.GetComponent<Image>().color = index == 1 ? on : off;
-            boatTab.GetComponent<Image>().color = index == 2 ? on : off;
+            buildingsTab.targetGraphic.color = index == 0 ? on : off;
+            islandsTab.targetGraphic.color = index == 1 ? on : off;
+            boatTab.targetGraphic.color = index == 2 ? on : off;
             VillageDirector.ShowIslandPins = exploring;
             Refresh();
         }

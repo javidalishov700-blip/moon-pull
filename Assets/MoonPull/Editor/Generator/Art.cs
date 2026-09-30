@@ -280,6 +280,26 @@ namespace MoonPull.EditorTools
             return Shade(Mathf.Lerp(0.72f, 0.95f, Mathf.SmoothStep(0.1f, 0.95f, y))); // body gradient
         }, new Vector4(40f, 40f, 40f, 40f));
 
+        /// <summary>Button rim: a soft rounded frame with a faint dark outline, tinted cream / light by the Image.</summary>
+        public static Sprite ButtonRim => Draw("ui_button_rim", 128, (x, y) =>
+        {
+            float d = RoundedBox(x, y, 0.02f, 0.02f, 0.98f, 0.98f, 0.3f);
+            if (d > 0f) return Color.clear;
+            if (d > -0.018f) return Shade(0.35f, 0.85f);
+            return Shade(Mathf.Lerp(0.82f, 1f, Mathf.SmoothStep(0.05f, 0.4f, y)));
+        }, new Vector4(44f, 44f, 44f, 44f));
+
+        /// <summary>Button face: vivid body, glossy upper half, a deeper lip along the bottom.</summary>
+        public static Sprite ButtonFace => Draw("ui_button_face", 128, (x, y) =>
+        {
+            float d = RoundedBox(x, y, 0.01f, 0.01f, 0.99f, 0.99f, 0.26f);
+            if (d > 0f) return Color.clear;
+            if (y < 0.14f) return Shade(0.7f);                                   // bottom lip
+            float gloss = RoundedBox(x, y, 0.07f, 0.56f, 0.93f, 0.93f, 0.2f);
+            if (gloss < 0f) return Shade(1f);                                    // gloss
+            return Shade(Mathf.Lerp(0.86f, 0.94f, y));
+        }, new Vector4(40f, 40f, 40f, 40f));
+
         /// <summary>Glass panel: a light hairline rim over a slightly darker body with a gentle top glow.</summary>
         public static Sprite PanelSprite => Draw("ui_panel_v2", 128, (x, y) =>
         {
@@ -331,6 +351,18 @@ namespace MoonPull.EditorTools
                 case "list":
                     shape = (u, v) => RoundedRect(u, v, 0.2f, 0.1f, 0.8f, 0.9f, 0.08f);
                     break;
+                case "gear":
+                    shape = (u, v) =>
+                    {
+                        float r = Vector2.Distance(new Vector2(u, v), new Vector2(0.5f, 0.5f));
+                        float a = Mathf.Atan2(v - 0.5f, u - 0.5f);
+                        float teeth = Mathf.Cos(a * 8f) > 0.3f ? 0.4f : 0.32f;
+                        return r < teeth && r > 0.13f;
+                    };
+                    break;
+                case "plus":
+                    shape = (u, v) => (Mathf.Abs(u - 0.5f) < 0.1f && Mathf.Abs(v - 0.5f) < 0.34f) || (Mathf.Abs(v - 0.5f) < 0.1f && Mathf.Abs(u - 0.5f) < 0.34f);
+                    break;
                 case "person":
                     shape = (u, v) => Vector2.Distance(new Vector2(u, v), new Vector2(0.5f, 0.7f)) < 0.16f
                                       || RoundedRect(u, v, 0.26f, 0.1f, 0.74f, 0.5f, 0.16f);
@@ -353,6 +385,9 @@ namespace MoonPull.EditorTools
                     return Vector2.Distance(p, new Vector2(0.5f, 0.38f)) < 0.09f ? new Color(1f, 0.78f, 0.2f) : white;
                 case "person":
                     return white;
+                case "gear":
+                case "plus":
+                    return new Color(1f, 1f, 1f);
                 case "house":
                     if (RoundedRect(x, y, 0.42f, 0.12f, 0.58f, 0.36f, 0.04f)) return ink;
                     return y > 0.55f ? new Color(1f, 0.45f, 0.4f) : white;
