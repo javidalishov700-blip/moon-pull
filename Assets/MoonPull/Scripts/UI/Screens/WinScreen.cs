@@ -25,6 +25,7 @@ namespace MoonPull.UI
         [SerializeField] private GameObject newBestBadge;
         [SerializeField] private GameObject bossChestNote;
         [SerializeField] private LocalizedText suppliesNote;
+        [SerializeField] private Text goalNote;
 
         [SerializeField] private GameObject tripleGroup;
         [SerializeField] private RewardedButton tripleButton;
@@ -78,6 +79,11 @@ namespace MoonPull.UI
         private void ShowReward(LevelReward reward)
         {
             rewardLabel.SetText("+{0}", reward.Total);
+            if (goalNote != null)
+            {
+                goalNote.text = GoalText.Next(meta.Wallet);
+            }
+
             newBestBadge.SetActive(meta.LastResultWasNewBest);
 
             bool canMultiply = meta.CanMultiplyLastReward;

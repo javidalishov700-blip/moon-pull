@@ -38,17 +38,24 @@ namespace MoonPull.Rescue
             int signature = 0;
             for (int b = 0; b < VillageService.BuildingCount; b++)
             {
-                signature = signature * 4 + VillageService.Level((VillageBuilding)b);
+                signature = signature * 8 + VillageService.Level((VillageBuilding)b);
             }
 
             if (signature != builtSignature)
             {
                 builtSignature = signature;
+                int tiers = VillageService.VisualTiers;
                 for (int i = 0; i < buildingTiers.Length; i++)
                 {
                     if (buildingTiers[i] != null)
                     {
-                        buildingTiers[i].SetActive(VillageService.Level((VillageBuilding)(i / VillageService.MaxLevel)) > i % VillageService.MaxLevel);
+                        int level = VillageService.Level((VillageBuilding)(i / tiers));
+                        buildingTiers[i].SetActive(level > i % tiers);
+                        if (i % tiers == 0 && buildingTiers[i].transform.parent != null)
+                        {
+                            // Levels past the last visual tier make the whole building grander.
+                            buildingTiers[i].transform.parent.localScale = Vector3.one * (1f + 0.12f * Mathf.Max(0, level - tiers));
+                        }
                     }
                 }
             }

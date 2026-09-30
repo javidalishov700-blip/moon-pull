@@ -221,6 +221,7 @@ namespace MoonPull.EditorTools
             Button settingsButton = Button(c, "Settings", LocKeys.MenuSettings, TopRight, new Vector2(-165f, -90f), new Vector2(270f, 96f), PanelLight, 34);
             Button chestButton = Button(c, "BossChest", LocKeys.ChestTitle, TopLeft, new Vector2(210f, -210f), new Vector2(340f, 96f), Gen.Hex("B8742E"), 34);
             Badge chestBadge = Badge(chestButton.transform, new Vector2(-10f, -10f));
+            Text goal = Text(c, "Goal", "", 34, Top, new Vector2(0f, -725f), new Vector2(960f, 60f), Gold, TextAnchor.MiddleCenter, true);
 
             float y = 320f;
             Button shop = IconTile(c, "Shop", LocKeys.MenuShop, new Vector2(-390f, y), PanelLight, "bag");
@@ -228,12 +229,13 @@ namespace MoonPull.EditorTools
             Button missionsButton = IconTile(c, "Missions", LocKeys.MenuMissions, new Vector2(130f, y), PanelLight, "list");
             Button spinButton = IconTile(c, "Spin", LocKeys.MenuSpin, new Vector2(390f, y), PanelLight, "wheel");
             Badge missionsBadge = Badge(missionsButton.transform, new Vector2(-12f, -12f));
+            Badge villageBadge = Badge(lighthouseButton.transform, new Vector2(-12f, -12f));
             Badge spinBadge = Badge(spinButton.transform, new Vector2(-12f, -12f));
 
             Gen.Wire(screen, "meta", w.Meta, "popups", popups, "levelLabel", level, "regionLabel", region, "starsLabel", stars,
                 "lockedLabel", locked, "playButton", play, "shopButton", shop, "lighthouseButton", lighthouseButton,
                 "missionsButton", missionsButton, "spinButton", spinButton, "settingsButton", settingsButton, "bossChestButton", chestButton,
-                "missionsBadge", missionsBadge, "spinBadge", spinBadge, "chestBadge", chestBadge,
+                "missionsBadge", missionsBadge, "spinBadge", spinBadge, "chestBadge", chestBadge, "villageBadge", villageBadge, "goalLabel", goal,
                 "idlePopup", idle, "streakPopup", streak, "spinPopup", spin, "missionsPopup", missions, "settingsPopup", settings,
                 "lighthousePopup", lighthouse, "bossChestPopup", chest);
             return screen;
@@ -377,6 +379,7 @@ namespace MoonPull.EditorTools
             Text reward = Text(rewardAnchor, "Amount", "+0", 72, Center, new Vector2(50f, 0f), new Vector2(360f, 100f), Gold, TextAnchor.MiddleLeft, true);
             LocalizedText chestNote = Loc(c, "BossChest", LocKeys.WinBossChest, 38, Center, new Vector2(0f, 70f), new Vector2(900f, 60f), Primary);
             LocalizedText suppliesNote = Loc(c, "Supplies", LocKeys.WinSupplies, 38, Center, new Vector2(0f, 70f), new Vector2(900f, 60f), Accent, TextAnchor.MiddleCenter, true);
+            Text goalNote = Text(c, "Goal", "", 34, Center, new Vector2(0f, -770f), new Vector2(1000f, 60f), Gold, TextAnchor.MiddleCenter, true);
 
             RectTransform triple = Rect("Triple", c, Center, new Vector2(0f, -110f), new Vector2(900f, 300f));
             RewardedButton tripleButton = Rewarded(triple, "Triple", LocKeys.WinTriple, AdPlacement.TripleReward, Center, new Vector2(0f, 40f), new Vector2(660f, 180f), w.Ads, true);
@@ -387,7 +390,7 @@ namespace MoonPull.EditorTools
 
             Gen.Wire(screen, "gameManager", w.GameManager, "meta", w.Meta, "ads", w.Ads, "coinFly", coinFly, "stars", starView,
                 "scoreLabel", score, "rewardLabel", reward, "rewardAnchor", rewardAnchor, "newBestBadge", newBest.gameObject,
-                "bossChestNote", chestNote.gameObject, "suppliesNote", suppliesNote, "tripleGroup", triple.gameObject, "tripleButton", tripleButton,
+                "bossChestNote", chestNote.gameObject, "suppliesNote", suppliesNote, "goalNote", goalNote, "tripleGroup", triple.gameObject, "tripleButton", tripleButton,
                 "tripleDescription", tripleDesc, "continueButton", next, "homeButton", home);
             return screen;
         }

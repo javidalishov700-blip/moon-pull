@@ -439,7 +439,7 @@ namespace MoonPull.Rescue
 
             // Lighthouses refill the moonlight, but no night lasts forever: dawn always comes.
             // First nights stay short and snappy (about a minute); later nights may run up to about two minutes.
-            if (moonlight <= 0f || runTime > Mathf.Lerp(65f, 120f, Mathf.Clamp01(levelIndex / 12f)) * VillageService.NightMultiplier)
+            if (moonlight <= 0f || runTime > Mathf.Lerp(65f, 120f, Mathf.Clamp01(levelIndex / 12f)) * Mathf.Min(1.3f, VillageService.NightMultiplier))
             {
                 EndNight();
             }

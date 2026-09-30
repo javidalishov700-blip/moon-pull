@@ -15,16 +15,19 @@ namespace MoonPull.Rescue
 
     public static class VillageService
     {
-        public const int MaxLevel = 3;
+        public const int MaxLevel = 5;
+
+        /// <summary>Visible building parts per building in the village (levels 4-5 grow the whole building).</summary>
+        public const int VisualTiers = 3;
         public const int BuildingCount = 5;
 
         private static readonly int[,] Costs =
         {
-            { 150, 450, 1000 },  // Shelter
-            { 120, 380, 850 },   // Restaurant
-            { 200, 520, 1150 },  // Workshop
-            { 250, 620, 1350 },  // Shipyard
-            { 300, 700, 1500 }   // Market
+            { 150, 450, 1000, 2200, 4500 },  // Shelter
+            { 120, 380, 850, 1900, 4000 },   // Restaurant
+            { 200, 520, 1150, 2500, 5000 },  // Workshop
+            { 250, 620, 1350, 2900, 5800 },  // Shipyard
+            { 300, 700, 1500, 3200, 6500 }   // Market
         };
 
         private static string Key(VillageBuilding b) => "mp_village_" + b.ToString().ToLowerInvariant();
@@ -65,7 +68,7 @@ namespace MoonPull.Rescue
         public static int ExtraSeats => Level(VillageBuilding.Shelter);
         public static float CoinMultiplier => 1f + 0.3f * Level(VillageBuilding.Restaurant);
         public static float NightMultiplier => 1f + 0.12f * Level(VillageBuilding.Workshop);
-        public static float SpeedBonus => 1.5f * Level(VillageBuilding.Shipyard);
+        public static float SpeedBonus => 1.2f * Level(VillageBuilding.Shipyard);
         public static int DawnCoins(int population) =>
             Mathf.RoundToInt(Level(VillageBuilding.Market) * (10 + population / 2) * VillageState.Happiness / 100f);
     }

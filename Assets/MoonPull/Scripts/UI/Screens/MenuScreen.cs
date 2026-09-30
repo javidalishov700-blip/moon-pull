@@ -30,6 +30,8 @@ namespace MoonPull.UI
         [SerializeField] private Badge missionsBadge;
         [SerializeField] private Badge spinBadge;
         [SerializeField] private Badge chestBadge;
+        [SerializeField] private Badge villageBadge;
+        [SerializeField] private Text goalLabel;
 
         [Header("Popups")]
         [SerializeField] private UIScreen idlePopup;
@@ -152,6 +154,16 @@ namespace MoonPull.UI
             int chests = meta.BossChests.Pending;
             chestBadge.Set(chests);
             bossChestButton.gameObject.SetActive(chests > 0);
+            if (villageBadge != null)
+            {
+                // Coins waiting in the treasury, or the village has run dry and needs a night at sea.
+                villageBadge.Set(MoonPull.Rescue.TycoonState.Treasury >= 50 || MoonPull.Rescue.TycoonState.OutOfSupplies);
+            }
+
+            if (goalLabel != null)
+            {
+                goalLabel.text = GoalText.Next(meta.Wallet);
+            }
         }
     }
 }
