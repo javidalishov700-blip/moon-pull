@@ -44,6 +44,7 @@ namespace MoonPull.Sail
         [SerializeField] private Transform cameraTransform;
         [SerializeField] private Transform moonAnchor;
         [SerializeField] private GameObject legacyBoat;
+        [SerializeField] private GameObject[] hideWhileSailing = new GameObject[0];
         [SerializeField] private Transform boatRoot;
         [SerializeField] private GameObject defaultBoatModel;
 
@@ -60,8 +61,8 @@ namespace MoonPull.Sail
         [SerializeField] private float steerSharpness = 7f;
         [SerializeField] private float spawnAhead = 70f;
         [SerializeField] private float despawnBehind = -9f;
-        [SerializeField] private Vector3 cameraOffset = new Vector3(0f, 3.4f, -8.2f);
-        [SerializeField] private float cameraPitch = 12f;
+        [SerializeField] private Vector3 cameraOffset = new Vector3(0f, 4.6f, -9.5f);
+        [SerializeField] private float cameraPitch = 17f;
         [SerializeField] private int maxHearts = 3;
         [SerializeField] private float invulnerableSeconds = 1.6f;
         [SerializeField] private float fullMoonSeconds = 6f;
@@ -153,6 +154,18 @@ namespace MoonPull.Sail
             score.SetFullMoon(false);
             water.SetFullMoonGlow(0f);
             running = true;
+            SetSailingProps(true);
+        }
+
+        private void SetSailingProps(bool sailing)
+        {
+            foreach (GameObject go in hideWhileSailing)
+            {
+                if (go != null)
+                {
+                    go.SetActive(!sailing);
+                }
+            }
         }
 
         public void SimulationTick(float deltaTime, float time)
@@ -544,6 +557,7 @@ namespace MoonPull.Sail
             {
                 running = false;
                 ClearProps();
+                SetSailingProps(false);
                 Shader.SetGlobalFloat(ScrollId, 0f);
             }
         }
@@ -612,6 +626,7 @@ namespace MoonPull.Sail
             {
                 Vector3 local = moonAnchor.localPosition;
                 local.x = Mathf.Lerp(local.x, boatX * 1.6f, 1f - Mathf.Exp(-6f * Time.deltaTime));
+                local.y = 7.5f;   // high in the sky, above the horizon
                 local.z = 30f;
                 moonAnchor.localPosition = local;
             }

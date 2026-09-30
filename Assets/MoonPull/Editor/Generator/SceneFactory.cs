@@ -235,6 +235,7 @@ namespace MoonPull.EditorTools
 
             GameObject island = Gen.Go("LighthouseIsland", visuals.transform);
             island.transform.position = new Vector3(-7f, -0.6f, 9f);
+            Gen.SetArray<GameObject>(sail, "hideWhileSailing", new[] { island });
             Gen.Prim(PrimitiveType.Sphere, island.transform, new Vector3(0f, -1.2f, 0f), new Vector3(7f, 3f, 5f), Gen.Hex("5E7A5A"));
             Gen.Prim(PrimitiveType.Sphere, island.transform, new Vector3(0f, -1.45f, 0f), new Vector3(8f, 2.6f, 6f), Gen.Hex("E8D3A0"));
             Transform stageRoot = Gen.Go("StageRoot", island.transform).transform;
