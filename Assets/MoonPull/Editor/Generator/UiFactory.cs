@@ -215,7 +215,7 @@ namespace MoonPull.EditorTools
             LocalizedText level = Loc(c, "Level", LocKeys.MenuLevel, 66, Top, new Vector2(0f, -490f), new Vector2(900f, 90f), TextLight, TextAnchor.MiddleCenter, true);
             Image starIcon = Image(c, "StarIcon", Top, new Vector2(-50f, -580f), new Vector2(64f, 64f), Color.white, Art.Star(true));
             starIcon.raycastTarget = false;
-            Text stars = Text(c, "Stars", "0", 48, Top, new Vector2(40f, -580f), new Vector2(160f, 70f), Gold, TextAnchor.MiddleLeft, true);
+            Text stars = Text(c, "Stars", "0", 48, Top, new Vector2(72f, -580f), new Vector2(160f, 70f), Gold, TextAnchor.MiddleLeft, true);
             LocalizedText locked = Loc(c, "Locked", LocKeys.LighthouseRegionLocked, 38, Top, new Vector2(0f, -660f), new Vector2(900f, 60f), Primary);
 
             Button play = Button(c, "Play", LocKeys.MenuPlay, Bottom, new Vector2(0f, 560f), new Vector2(680f, 220f), Go, 96);
@@ -492,7 +492,7 @@ namespace MoonPull.EditorTools
             Button select = Button(card.transform, "Select", LocKeys.BoatsSelect, new Vector2(1f, 0.5f), new Vector2(-150f, 45f), new Vector2(240f, 90f), Accent, 36);
             LocalizedText selected = Loc(card.transform, "Selected", LocKeys.BoatsSelected, 36, new Vector2(1f, 0.5f), new Vector2(-150f, 45f), new Vector2(240f, 90f), Accent, TextAnchor.MiddleCenter, true);
             LocalizedText iapOnly = Loc(card.transform, "IapOnly", LocKeys.BoatsIapOnly, 26, new Vector2(1f, 0.5f), new Vector2(-150f, 45f), new Vector2(260f, 90f), Primary);
-            RewardedButton tryButton = Rewarded(card.transform, "Try", LocKeys.BoatsTry, AdPlacement.TryBoat, new Vector2(1f, 0.5f), new Vector2(-150f, -55f), new Vector2(240f, 80f), null, false);
+            RewardedButton tryButton = Rewarded(card.transform, "Try", LocKeys.BoatsTry, AdPlacement.TryBoat, new Vector2(1f, 0.5f), new Vector2(-150f, -55f), new Vector2(240f, 80f), null, false, 28);
 
             var boatCard = card.gameObject.AddComponent<BoatCard>();
             Gen.Wire(boatCard, "icon", icon, "nameLabel", nameLabel, "rarityLabel", rarity, "perkLabel", perk, "priceLabel", price,
@@ -647,6 +647,41 @@ namespace MoonPull.EditorTools
                 dropdown.template.sizeDelta = new Vector2(0f, 520f);
             }
 
+            // Match the dark glass UI instead of the default white Unity dropdown.
+            var dropdownBg = dropdownGo.GetComponent<Image>();
+            dropdownBg.sprite = Art.PanelSprite;
+            dropdownBg.type = UnityEngine.UI.Image.Type.Sliced;
+            dropdownBg.color = PanelLight;
+            foreach (Text t in dropdownGo.GetComponentsInChildren<Text>(true))
+            {
+                t.color = TextLight;
+            }
+
+            Transform arrow = dropdownGo.transform.Find("Arrow");
+            if (arrow != null)
+            {
+                arrow.GetComponent<Image>().color = Gold;
+            }
+
+            if (dropdown.template != null)
+            {
+                var templateBg = dropdown.template.GetComponent<Image>();
+                templateBg.sprite = Art.PanelSprite;
+                templateBg.type = UnityEngine.UI.Image.Type.Sliced;
+                templateBg.color = Panel;
+                Transform itemBg = dropdown.template.Find("Viewport/Content/Item/Item Background");
+                if (itemBg != null)
+                {
+                    itemBg.GetComponent<Image>().color = PanelLight;
+                }
+
+                Transform check = dropdown.template.Find("Viewport/Content/Item/Item Checkmark");
+                if (check != null)
+                {
+                    check.GetComponent<Image>().color = Gold;
+                }
+            }
+
             Button privacy = Button(p, "PrivacyOptions", LocKeys.SettingsPrivacy, Center, new Vector2(0f, -230f), new Vector2(700f, 110f), PanelLight, 40);
             Button policy = Button(p, "PrivacyPolicy", LocKeys.SettingsPrivacyPolicy, Center, new Vector2(0f, -370f), new Vector2(700f, 110f), PanelLight, 40);
             LocalizedText version = Loc(p, "Version", LocKeys.SettingsVersion, 30, Center, new Vector2(0f, -500f), new Vector2(700f, 50f), Muted);
@@ -711,7 +746,7 @@ namespace MoonPull.EditorTools
             p.pivot = new Vector2(0.5f, 0f);
             p.anchoredPosition = new Vector2(0f, 20f);
             Gen.Set(popup, "sheetOpenY", 20f);
-            Gen.Set(popup, "sheetHiddenY", -790f);
+            Gen.Set(popup, "sheetHiddenY", -820f);
             Image backdrop = popup.transform.Find("Backdrop").GetComponent<Image>();
             backdrop.color = new Color(0f, 0f, 0f, 0f);
             backdrop.raycastTarget = false;

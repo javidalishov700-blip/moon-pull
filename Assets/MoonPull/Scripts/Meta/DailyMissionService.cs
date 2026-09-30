@@ -30,6 +30,10 @@ namespace MoonPull.Meta
             GameEvents.LevelCompleted += OnLevelCompleted;
             GameEvents.WaveLaunched += OnWaveLaunched;
             GameEvents.FullMoonStarted += OnFullMoonStarted;
+            GameEvents.PassengerBoarded += OnPassengerBoarded;
+            GameEvents.PerfectCrest += OnPerfectCrest;
+            GameEvents.RockDodged += OnRockDodged;
+            GameEvents.LighthouseLit += OnLighthouseLit;
         }
 
         /// <summary>Raised whenever progress or claims change.</summary>
@@ -68,7 +72,8 @@ namespace MoonPull.Meta
         public void Refresh()
         {
             string today = DateKeys.Today(clock);
-            if (save.Data.MissionsDate == today && save.Data.Missions.Count > 0)
+            bool stale = save.Data.Missions.Exists(m => catalog.Find(m.MissionId) == null); // retired mission ids
+            if (save.Data.MissionsDate == today && save.Data.Missions.Count > 0 && !stale)
             {
                 return;
             }
@@ -131,6 +136,10 @@ namespace MoonPull.Meta
             GameEvents.LevelCompleted -= OnLevelCompleted;
             GameEvents.WaveLaunched -= OnWaveLaunched;
             GameEvents.FullMoonStarted -= OnFullMoonStarted;
+            GameEvents.PassengerBoarded -= OnPassengerBoarded;
+            GameEvents.PerfectCrest -= OnPerfectCrest;
+            GameEvents.RockDodged -= OnRockDodged;
+            GameEvents.LighthouseLit -= OnLighthouseLit;
         }
 
         private bool HasOtherType(int usedMask)
@@ -174,6 +183,10 @@ namespace MoonPull.Meta
         private void OnTreasureFound(int coins) => Add(MissionType.FindChests, 1);
         private void OnWaveLaunched(float strength) => Add(MissionType.WaveLaunches, 1);
         private void OnFullMoonStarted(float duration) => Add(MissionType.FullMoons, 1);
+        private void OnPassengerBoarded(int onboard) => Add(MissionType.RescuePeople, 1);
+        private void OnPerfectCrest(int streak) => Add(MissionType.PerfectLandings, 1);
+        private void OnRockDodged() => Add(MissionType.DodgeRocks, 1);
+        private void OnLighthouseLit(int rescued) => Add(MissionType.LightLighthouses, 1);
 
         private void OnLevelCompleted(LevelResult result)
         {

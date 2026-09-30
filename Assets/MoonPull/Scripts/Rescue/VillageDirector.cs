@@ -457,7 +457,9 @@ namespace MoonPull.Rescue
 
             // Fly the camera over to the island and look down on the village.
             Vector3 panWorld = new Vector3(pan.x, 0f, pan.y);
-            Vector3 target = transform.position + panWorld + viewOffset * zoom * (exploring ? 1.1f : 1f);
+            Camera cam = cameraTransform.GetComponent<Camera>();
+            float aspectFit = cam != null ? Mathf.Pow(Mathf.Max(1f, 0.5625f / cam.aspect), 0.85f) : 1f; // tall phones: keep the village in frame
+            Vector3 target = transform.position + panWorld + viewOffset * zoom * (exploring ? 1.1f : 1f) * aspectFit;
             float t = 1f - Mathf.Exp(-4f * Time.unscaledDeltaTime);
             cameraTransform.position = Vector3.Lerp(cameraTransform.position, target, t);
             // Aim below the island so it sits in the top half of the screen, above the Village sheet.

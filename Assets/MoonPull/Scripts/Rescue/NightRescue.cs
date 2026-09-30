@@ -858,6 +858,7 @@ namespace MoonPull.Rescue
                         {
                             t.Done = true;
                             Stats.RocksDodged++;
+                            GameEvents.RaiseRockDodged();
                         }
 
                         break;
@@ -1096,7 +1097,9 @@ namespace MoonPull.Rescue
                 // Side view that pulls back as the boat climbs and leads a little with speed, keeping the wave
                 // ahead in frame. High enough that the nearest swells never rise above the lens.
                 float altitude = Mathf.Max(0f, y - Height(x));
-                float back = 15f + altitude * 0.8f + (fever > 0f ? 1.5f : 0f);
+                // Taller-than-16:9 phones see less sea sideways: pull back so the view ahead stays the same.
+                float aspectFit = sceneCamera != null ? Mathf.Pow(Mathf.Max(1f, 0.5625f / sceneCamera.aspect), 0.85f) : 1f;
+                float back = (15f + altitude * 0.8f + (fever > 0f ? 1.5f : 0f)) * aspectFit;
                 float lead = running ? Mathf.Clamp(speed - minSpeed, 0f, 12f) * 0.12f : 0f;
                 Vector3 target = new Vector3(x + 1.8f + lead, 7f + Mathf.Max(0f, y) * 0.6f, -back);
                 cameraBase = Vector3.Lerp(cameraBase, target, 1f - Mathf.Exp(-7f * Time.deltaTime));

@@ -11,7 +11,11 @@ namespace MoonPull.Config
         CollectStars,
         WaveLaunches,
         FullMoons,
-        ThreeStarLevels
+        ThreeStarLevels,
+        RescuePeople,
+        PerfectLandings,
+        DodgeRocks,
+        LightLighthouses
     }
 
     [CreateAssetMenu(fileName = "Mission_", menuName = "MoonPull/Mission Definition")]

@@ -156,22 +156,22 @@ namespace MoonPull.EditorTools
             button.colors = colors;
             // White sticker text sitting on the button face (above the bottom lip).
             Vector2 labelPos = new Vector2(0f, Mathf.Min(8f, size.y * 0.06f));
-            if (localized)
-            {
-                Loc(image.transform, "Label", key, fontSize, Center, labelPos, size - new Vector2(30f, 16f), TextLight, TextAnchor.MiddleCenter, true);
-            }
-            else
-            {
-                Text(image.transform, "Label", key, fontSize, Center, labelPos, size - new Vector2(30f, 16f), TextLight, TextAnchor.MiddleCenter, true);
-            }
+            Text label = localized
+                ? Loc(image.transform, "Label", key, fontSize, Center, labelPos, size - new Vector2(30f, 16f), TextLight, TextAnchor.MiddleCenter, true).GetComponent<Text>()
+                : Text(image.transform, "Label", key, fontSize, Center, labelPos, size - new Vector2(30f, 16f), TextLight, TextAnchor.MiddleCenter, true);
+            // Long translations shrink to fit instead of spilling out of the button.
+            label.resizeTextForBestFit = true;
+            label.resizeTextMaxSize = fontSize;
+            label.resizeTextMinSize = Mathf.Max(14, fontSize / 2);
+            label.verticalOverflow = VerticalWrapMode.Truncate;
 
             return button;
         }
 
         public static RewardedButton Rewarded(Transform parent, string name, string key, AdPlacement placement, Vector2 anchor,
-            Vector2 position, Vector2 size, AdsCoordinator ads, bool pulse)
+            Vector2 position, Vector2 size, AdsCoordinator ads, bool pulse, int fontSize = 48)
         {
-            Button button = Button(parent, name, key, anchor, position, size, RewardedColor, 48);
+            Button button = Button(parent, name, key, anchor, position, size, RewardedColor, fontSize);
             // Small "ad" play badge so the reward is clearly an opt-in video.
             Image badge = Image(button.transform, "AdBadge", new Vector2(0f, 1f), new Vector2(34f, -30f), new Vector2(64f, 44f), Gold);
             Text(badge.transform, "Play", "AD", 24, Center, Vector2.zero, new Vector2(64f, 44f), Ink, TextAnchor.MiddleCenter, true);

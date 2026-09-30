@@ -786,14 +786,16 @@ namespace MoonPull.EditorTools
         {
             (string id, MissionType type, int target, int reward, int min, string key)[] specs =
             {
-                ("m_near_5", MissionType.NearMisses, 5, 80, 0, "mission.near_misses"),
-                ("m_near_12", MissionType.NearMisses, 12, 150, 5, "mission.near_misses"),
-                ("m_levels_3", MissionType.CompleteLevels, 3, 120, 0, "mission.complete_levels"),
-                ("m_stars_15", MissionType.CollectStars, 15, 100, 0, "mission.collect_stars"),
-                ("m_fullmoon_2", MissionType.FullMoons, 2, 120, 1, "mission.full_moons"),
-                ("m_launch_5", MissionType.WaveLaunches, 5, 100, 2, "mission.wave_launches"),
-                ("m_chests_1", MissionType.FindChests, 1, 100, 3, "mission.find_chests"),
-                ("m_passengers_2", MissionType.DeliverPassengers, 2, 100, 6, "mission.deliver_passengers"),
+                // Night Rescue missions: everything here can be done in a normal night or two.
+                ("m_rescue_10", MissionType.RescuePeople, 10, 100, 0, "mission.rescue_people"),
+                ("m_rescue_30", MissionType.RescuePeople, 30, 220, 4, "mission.rescue_people"),
+                ("m_nights_3", MissionType.CompleteLevels, 3, 120, 0, "mission.complete_nights"),
+                ("m_lanterns_12", MissionType.CollectStars, 12, 100, 0, "mission.collect_lanterns"),
+                ("m_perfect_5", MissionType.PerfectLandings, 5, 130, 1, "mission.perfect_landings"),
+                ("m_rocks_6", MissionType.DodgeRocks, 6, 120, 1, "mission.dodge_rocks"),
+                ("m_lighthouse_4", MissionType.LightLighthouses, 4, 120, 0, "mission.light_lighthouses"),
+                ("m_deliver_8", MissionType.DeliverPassengers, 8, 120, 2, "mission.deliver_passengers"),
+                ("m_fullmoon_1", MissionType.FullMoons, 1, 150, 3, "mission.full_moons"),
                 ("m_threestar_2", MissionType.ThreeStarLevels, 2, 150, 2, "mission.three_star")
             };
 

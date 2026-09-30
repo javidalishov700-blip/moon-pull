@@ -32,7 +32,7 @@ namespace MoonPull.UI
         [SerializeField] private RectTransform sheet;
         [SerializeField] private Button exploreButton;
         [SerializeField] private float sheetOpenY = 20f;
-        [SerializeField] private float sheetHiddenY = -790f;
+        [SerializeField] private float sheetHiddenY = -820f;
 
         [Header("Tycoon")]
         [SerializeField] private CoinFlyEffect coinFly;
@@ -202,11 +202,20 @@ namespace MoonPull.UI
             Refresh();
         }
 
+        private static void Sfx(MoonPull.Audio.SfxId id)
+        {
+            if (MoonPull.Audio.AudioService.Current != null)
+            {
+                MoonPull.Audio.AudioService.Current.PlaySfx(id);
+            }
+        }
+
         private void UpgradeBoat(BoatPart part)
         {
             if (BoatUpgrades.TryUpgrade(part, meta.Wallet))
             {
                 UiTween.Punch(boatButtons[(int)part].transform, 0.3f, 0.3f);
+                Sfx(MoonPull.Audio.SfxId.Purchase);
             }
 
             Refresh();
@@ -218,6 +227,7 @@ namespace MoonPull.UI
             if (amount > 0)
             {
                 UiTween.Punch(collectButton.transform, 0.3f, 0.3f);
+                Sfx(MoonPull.Audio.SfxId.CoinPickup);
                 if (coinFly != null)
                 {
                     coinFly.PlayCredited(RectTransformUtility.WorldToScreenPoint(null, collectButton.transform.position), amount);
@@ -233,6 +243,7 @@ namespace MoonPull.UI
             if (TycoonState.TryBuyIsland(island, meta.Wallet))
             {
                 UiTween.Punch(islandButtons[island].transform, 0.3f, 0.3f);
+                Sfx(MoonPull.Audio.SfxId.Reward);
                 if (VillageState.Level > before)
                 {
                     meta.Wallet.AddCoins(VillageState.LevelReward(VillageState.Level), "village_level");
@@ -248,6 +259,7 @@ namespace MoonPull.UI
             if (VillageService.TryUpgrade(building, meta.Wallet))
             {
                 UiTween.Punch(upgradeButtons[(int)building].transform, 0.3f, 0.3f);
+                Sfx(MoonPull.Audio.SfxId.Purchase);
                 if (VillageState.Level > before)
                 {
                     meta.Wallet.AddCoins(VillageState.LevelReward(VillageState.Level), "village_level");

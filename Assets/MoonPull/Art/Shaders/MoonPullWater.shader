@@ -124,7 +124,9 @@ Shader "MoonPull/Water"
                 float foam = smoothstep(0.93 + wobble, 0.95 + wobble, h) * 0.8;
                 // A thin second line just below, like cartoon water drawings.
                 float line2 = smoothstep(0.02, 0.0, abs(h - 0.86 - wobble)) * 0.4;
-                col = lerp(col, _FoamColor.rgb, saturate(foam * 0.9 + line2 * 0.5));
+                // Foam fades out right in front of the lens, where a cap would fill the screen with white.
+                float foamNear = lerp(0.25, 1, smoothstep(6, 18, dist));
+                col = lerp(col, _FoamColor.rgb, saturate(foam * 0.9 + line2 * 0.5) * foamNear);
 
                 // Moon path: a soft pale streak towards the moon, with a few smooth glints.
                 float3 r = reflect(-viewDir, normalize(i.normal));

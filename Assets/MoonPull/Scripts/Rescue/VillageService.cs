@@ -64,6 +64,44 @@ namespace MoonPull.Rescue
             return true;
         }
 
+        /// <summary>True when the player can buy something right now (building, boat part or island): drives the menu badge.</summary>
+        public static bool AnyAffordable(Wallet wallet)
+        {
+            if (wallet == null)
+            {
+                return false;
+            }
+
+            for (int b = 0; b < BuildingCount; b++)
+            {
+                var building = (VillageBuilding)b;
+                int cost = NextCost(building);
+                if (cost >= 0 && !IsCapped(building) && !NeedsWorkers && wallet.CanAfford(cost))
+                {
+                    return true;
+                }
+            }
+
+            for (int p = 0; p < BoatUpgrades.PartCount; p++)
+            {
+                int cost = BoatUpgrades.NextCost((BoatPart)p);
+                if (cost >= 0 && wallet.CanAfford(cost))
+                {
+                    return true;
+                }
+            }
+
+            for (int i = 0; i < TycoonState.IslandCount; i++)
+            {
+                if (TycoonState.CanBuyNext(i) && wallet.CanAfford(TycoonState.IslandCost(i)))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         // Effects used by NightRescue.
         public static int ExtraSeats => Level(VillageBuilding.Shelter);
         public static float CoinMultiplier => 1f + 0.3f * Level(VillageBuilding.Restaurant);

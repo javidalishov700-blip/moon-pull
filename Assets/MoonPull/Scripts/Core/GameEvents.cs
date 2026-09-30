@@ -37,6 +37,9 @@ namespace MoonPull.Core
         /// <summary>Night Rescue landing: kind 0 = clean, 1 = perfect, 2 = belly flop, 3 = rock hop; impact 0..1.</summary>
         public static event Action<int, float> RescueLanded;
 
+        /// <summary>Night Rescue: a rock slipped past under the hull (hopped or flown over).</summary>
+        public static event Action RockDodged;
+
         /// <summary>
         /// Asked on a crash before the run fails: returns true when a free "Tide Turn" rewind was granted instead.
         /// Set by RewindController; null means no free rewinds.
@@ -85,6 +88,7 @@ namespace MoonPull.Core
         public static void RaiseWaveLaunched(float strength01) => WaveLaunched?.Invoke(strength01);
         public static void RaisePerfectCrest(int streak) => PerfectCrest?.Invoke(streak);
         public static void RaiseRescueLanded(int kind, float impact01) => RescueLanded?.Invoke(kind, impact01);
+        public static void RaiseRockDodged() => RockDodged?.Invoke();
         public static void RaiseTideTurned(int freeLeft) => TideTurned?.Invoke(freeLeft);
         public static void RaiseBoatBumped(int heartsLeft) => BoatBumped?.Invoke(heartsLeft);
         public static void RaiseLighthouseLit(int rescued) => LighthouseLit?.Invoke(rescued);
@@ -129,6 +133,7 @@ namespace MoonPull.Core
             AppResumed = null;
             WaveLaunched = null;
             RescueLanded = null;
+            RockDodged = null;
             NearMiss = null;
             NearMissChainBroken = null;
             StarCollected = null;

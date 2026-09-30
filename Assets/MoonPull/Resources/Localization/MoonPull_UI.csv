@@ -19,7 +19,7 @@ village.supplies,"Supplies {0}/{1} · Workers {2}/{3}","Erzak {0}/{1} · İşçi
 village.needs_people,"Rescue more: {0} people","Daha çok kurtar: {0} kişi","Rescata más: {0} personas","Resgate mais: {0} pessoas","Rette mehr: {0} Leute","Sauve-en plus : {0} pers.","Спаси больше: {0} чел.","もっと救助: {0}人"
 win.supplies,"+{0} supplies for the village","Köye +{0} erzak","+{0} provisiones para la aldea","+{0} suprimentos para a vila","+{0} Vorräte fürs Dorf","+{0} vivres pour le village","+{0} припасов для деревни","村に物資+{0}"
 village.explore,Explore,Köyü Gez,Explorar,Explorar,Erkunden,Explorer,Осмотреть,探索
-village.manage,Build,Yönet,Gestionar,Gerenciar,Verwalten,Gérer,Управлять,管理
+village.manage,Manage,Yönet,Gestionar,Gerenciar,Verwalten,Gérer,Управлять,管理
 village.tab_boat,Boat,Tekne,Barco,Barco,Boot,Bateau,Лодка,ボート
 boat_up.sail.name,Sail,Yelken,Vela,Vela,Segel,Voile,Парус,帆
 boat_up.sail.desc,Faster cruising speed,Daha yüksek seyir hızı,Más velocidad de crucero,Mais velocidade,Schnelleres Segeln,Vitesse de croisière,Выше скорость,巡航速度アップ
@@ -171,8 +171,14 @@ shop.restored,Purchases restored,Satın alımlar geri yüklendi,Compras restaura
 shop.owned,Owned,Sahipsin,Comprado,Comprado,Gekauft,Acheté,Куплено,購入済み
 missions.title,Daily Missions,Günlük Görevler,Misiones diarias,Missões diárias,Tägliche Missionen,Missions du jour,Ежедневные задания,デイリーミッション
 missions.refresh,New missions in {0},Yeni görevler {0} sonra,Nuevas misiones en {0},Novas missões em {0},Neue Missionen in {0},Nouvelles missions dans {0},Новые задания через {0},新ミッションまで {0}
+mission.rescue_people,Rescue {0} castaways,{0} kazazede kurtar,Rescata a {0} náufragos,Resgate {0} náufragos,Rette {0} Schiffbrüchige,Sauve {0} naufragés,Спаси {0} потерпевших,{0}人の遭難者を救助
+mission.complete_nights,Sail {0} nights,{0} gece denize açıl,Navega {0} noches,Navegue {0} noites,Segle {0} Nächte,Navigue {0} nuits,Проведи в море {0} ночи,{0}夜航海する
+mission.collect_lanterns,Catch {0} sky lanterns,{0} gökyüzü feneri yakala,Atrapa {0} farolillos,Pegue {0} lanternas,Fange {0} Himmelslaternen,Attrape {0} lanternes,Поймай {0} фонариков,{0}個のランタンを取る
+mission.perfect_landings,Land {0} Perfect crests,{0} kusursuz iniş yap,Aterriza {0} crestas perfectas,Faça {0} pousos perfeitos,Lande {0} perfekte Kämme,Réussis {0} atterrissages parfaits,Сделай {0} идеальных приземлений,パーフェクト着水を{0}回
+mission.dodge_rocks,Get past {0} rocks,{0} kayadan kurtul,Esquiva {0} rocas,Desvie de {0} rochas,Weiche {0} Felsen aus,Évite {0} rochers,Обойди {0} камней,{0}個の岩をかわす
+mission.light_lighthouses,Light {0} lighthouses,{0} deniz feneri yak,Enciende {0} faros,Acenda {0} faróis,Entzünde {0} Leuchttürme,Allume {0} phares,Зажги {0} маяков,{0}基の灯台を灯す
 mission.near_misses,Do {0} near misses,{0} kıl payı kurtuluş yap,Logra {0} «por poco»,Faça {0} «por um triz»,Schaffe {0} knappe Manöver,Réussis {0} passages de justesse,Сделай {0} манёвров «на волосок»,ニアミスを{0}回
-mission.deliver_passengers,Deliver {0} passengers,{0} yolcu taşı,Lleva {0} pasajeros,Entregue {0} passageiros,Bring {0} Passagiere ans Ziel,Transporte {0} passagers,Доставь {0} пассажиров,乗客を{0}人運ぶ
+mission.deliver_passengers,Bring {0} people to lighthouses,Deniz fenerlerine {0} kişi götür,Lleva {0} personas a los faros,Leve {0} pessoas aos faróis,Bring {0} Leute zu Leuchttürmen,Amène {0} personnes aux phares,Доставь {0} человек к маякам,{0}人を灯台へ運ぶ
 mission.find_chests,Find {0} chests,{0} sandık bul,Encuentra {0} cofres,Encontre {0} baús,Finde {0} Truhen,Trouve {0} coffres,Найди {0} сундуков,宝箱を{0}個見つける
 mission.complete_levels,Complete {0} levels,{0} bölüm bitir,Completa {0} niveles,Complete {0} fases,Schließe {0} Level ab,Termine {0} niveaux,Пройди {0} уровней,レベルを{0}回クリア
 mission.collect_stars,Collect {0} stars,{0} yıldız topla,Recoge {0} estrellas,Colete {0} estrelas,Sammle {0} Sterne,Ramasse {0} étoiles,Собери {0} звёзд,スターを{0}個集める

@@ -157,7 +157,8 @@ namespace MoonPull.UI
             if (villageBadge != null)
             {
                 // Coins waiting in the treasury, or the village has run dry and needs a night at sea.
-                villageBadge.Set(MoonPull.Rescue.TycoonState.Treasury >= 50 || MoonPull.Rescue.TycoonState.OutOfSupplies);
+                villageBadge.Set(MoonPull.Rescue.TycoonState.Treasury >= 50 || MoonPull.Rescue.TycoonState.OutOfSupplies
+                                 || MoonPull.Rescue.VillageService.AnyAffordable(meta.Wallet));
             }
 
             if (goalLabel != null)
