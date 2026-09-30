@@ -349,6 +349,9 @@ namespace MoonPull.EditorTools
             PlayerSettings.iOS.appleEnableAutomaticSigning = false;
             PlayerSettings.iOS.buildNumber = MinutesSince2024().ToString();
             PlayerSettings.iOS.requiresFullScreen = true;
+            PlayerSettings.statusBarHidden = true;
+            PlayerSettings.iOS.hideHomeButton = true;
+            PlayerSettings.iOS.SetiPhoneLaunchScreenType(iOSLaunchScreenType.Default);
 
             string teamId = Environment.GetEnvironmentVariable("APPLE_TEAM_ID");
             if (!string.IsNullOrEmpty(teamId))

@@ -115,6 +115,7 @@ namespace MoonPull.Rescue
         private float runTime;
         private int seats;
         private float nightLength;
+        private float progressCheckAt, progressCheckX;
         private float speedBonus;
 
         private ParticleSystem splash;
@@ -252,6 +253,8 @@ namespace MoonPull.Rescue
             moonlight = 1f;
             aboard = rescued = lanternsCaught = lighthousesLit = 0;
             runTime = 0f;
+            progressCheckAt = 2f;
+            progressCheckX = x;
             nextCastawayAt = 30f;
             nextLanternAt = 45f;
             nextIslandAt = 115f;
@@ -306,14 +309,56 @@ namespace MoonPull.Rescue
                 moonlight -= deltaTime / Mathf.Max(5f, nightLength);
             }
 
+            Unstick();
             SpawnAhead();
             Interact();
             DespawnBehind();
 
-            if (moonlight <= 0f)
+            // Lighthouses refill the moonlight, but no night lasts forever: dawn always comes.
+            if (moonlight <= 0f || runTime > Mathf.Max(90f, nightLength * 4f))
             {
                 EndNight();
             }
+        }
+
+        /// <summary>Ends the night now (pause menu): everyone aboard gets home and the run is scored.</summary>
+        public void EndNightNow()
+        {
+            if (running)
+            {
+                EndNight();
+            }
+        }
+
+        /// <summary>
+        /// Safety net: if the boat has barely moved for a while (wedged against a steep face, or a bad float), lift it
+        /// onto the surface and give it a push so a run can never get stuck.
+        /// </summary>
+        private void Unstick()
+        {
+            bool broken = float.IsNaN(x) || float.IsNaN(y) || float.IsNaN(speed) || float.IsInfinity(vy);
+            if (!broken && y > Height(x) - 1.5f && runTime < progressCheckAt)
+            {
+                return;
+            }
+
+            if (broken || x - progressCheckX < 4f || y < Height(x) - 1.5f)
+            {
+                if (broken)
+                {
+                    x = progressCheckX + 1f;
+                }
+
+                airborne = false;
+                y = Height(x);
+                speed = Mathf.Max(startSpeed, speed) + 4f;
+                vx = speed;
+                vy = 0f;
+                Splash(20, new Color(0.9f, 0.96f, 1f, 0.85f));
+            }
+
+            progressCheckAt = runTime + 2f;
+            progressCheckX = x;
         }
 
         private bool ReadHold()
@@ -488,6 +533,11 @@ namespace MoonPull.Rescue
 
             var thing = new Thing { Kind = kind, Transform = Instantiate(prefab, transform).transform, X = px, Height = height };
             things.Add(thing);
+            if (kind == Kind.Castaway)
+            {
+                VillageDirector.Dress(thing.Transform, random);
+            }
+
             Place(thing);
             return thing;
         }
@@ -635,6 +685,7 @@ namespace MoonPull.Rescue
             {
                 GameObject figure = Instantiate(passengerPrefab, boatRoot);
                 figure.transform.localPosition = new Vector3(-0.7f + aboardFigures.Count * 0.34f, 0.28f, 0f);
+                VillageDirector.Dress(figure.transform, new System.Random(31 + aboardFigures.Count * 7));
                 aboardFigures.Add(figure);
             }
 

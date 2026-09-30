@@ -55,6 +55,7 @@ namespace MoonPull.Localization
         public const string PauseTitle = "pause.title";
         public const string PauseResume = "pause.resume";
         public const string PauseRestart = "pause.restart";
+        public const string PauseFinish = "pause.finish";
         public const string FailTitle = "fail.title";
         public const string FailRock = "fail.rock";
         public const string FailBridge = "fail.bridge";

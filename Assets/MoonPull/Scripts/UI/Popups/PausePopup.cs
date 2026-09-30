@@ -1,5 +1,6 @@
 using MoonPull.Core.TimeControl;
 using MoonPull.Core;
+using MoonPull.Rescue;
 using UnityEngine.UI;
 using UnityEngine;
 
@@ -11,6 +12,8 @@ namespace MoonPull.UI
         [SerializeField] private Button resumeButton;
         [SerializeField] private Button restartButton;
         [SerializeField] private Button homeButton;
+        [SerializeField] private Button finishButton;
+        [SerializeField] private NightRescue rescue;
 
         private bool paused;
 
@@ -23,6 +26,19 @@ namespace MoonPull.UI
                 Resume();
                 GameEvents.RaiseRestartRequested();
             });
+            if (finishButton != null)
+            {
+                // Ends the night right here: everyone aboard gets home and the run is scored as usual.
+                finishButton.onClick.AddListener(() =>
+                {
+                    Resume();
+                    if (rescue != null)
+                    {
+                        rescue.EndNightNow();
+                    }
+                });
+            }
+
             homeButton.onClick.AddListener(() =>
             {
                 Resume();

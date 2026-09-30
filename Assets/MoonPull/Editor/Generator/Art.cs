@@ -247,6 +247,89 @@ namespace MoonPull.EditorTools
             return water ? new Color(0.5f, 0.8f, 0.9f, 0.8f) : Color.clear;
         });
 
+        /// <summary>Village building badge: a rounded coloured tile with a bold cartoon symbol and a soft outline.</summary>
+        public static Sprite BuildingIcon(string id, Color tile) => Draw("building_" + id, 192, (x, y) =>
+        {
+            Vector2 p = new Vector2(x, y);
+            if (!RoundedRect(x, y, 0.04f, 0.04f, 0.96f, 0.96f, 0.22f))
+            {
+                return Color.clear;
+            }
+
+            Color ink = new Color(0.16f, 0.13f, 0.24f);
+            Color white = new Color(1f, 0.98f, 0.93f);
+            Color accent = new Color(1f, 0.83f, 0.35f);
+            Color bg = Color.Lerp(tile, Color.white, Mathf.Clamp01((y - 0.5f) * 0.5f)); // gentle top light
+            if (!RoundedRect(x, y, 0.09f, 0.09f, 0.91f, 0.91f, 0.18f))
+            {
+                return tile * 0.7f + new Color(0f, 0f, 0f, 0.3f);
+            }
+
+            switch (id)
+            {
+                case "shelter":
+                {
+                    bool roof = InTriangle(p, new Vector2(0.18f, 0.55f), new Vector2(0.82f, 0.55f), new Vector2(0.5f, 0.82f));
+                    bool walls = RoundedRect(x, y, 0.27f, 0.2f, 0.73f, 0.57f, 0.03f);
+                    bool door = RoundedRect(x, y, 0.43f, 0.2f, 0.57f, 0.42f, 0.05f);
+                    bool window = RoundedRect(x, y, 0.3f, 0.4f, 0.4f, 0.5f, 0.02f) || RoundedRect(x, y, 0.6f, 0.4f, 0.7f, 0.5f, 0.02f);
+                    bool chimney = x > 0.63f && x < 0.71f && y > 0.62f && y < 0.8f;
+                    if (door) return ink;
+                    if (window) return accent;
+                    if (roof || chimney) return new Color(0.78f, 0.3f, 0.24f);
+                    return walls ? white : bg;
+                }
+                case "restaurant":
+                {
+                    float bowl = Vector2.Distance(p, new Vector2(0.5f, 0.46f));
+                    bool bowlShape = bowl < 0.3f && y < 0.46f && y > 0.2f;
+                    bool rim = y > 0.43f && y < 0.49f && x > 0.18f && x < 0.82f;
+                    bool food = Vector2.Distance(p, new Vector2(0.4f, 0.5f)) < 0.09f || Vector2.Distance(p, new Vector2(0.57f, 0.51f)) < 0.1f;
+                    float wave = Mathf.Sin(y * 30f) * 0.03f;
+                    bool steam = y > 0.6f && y < 0.84f && (Mathf.Abs(x - 0.4f - wave) < 0.03f || Mathf.Abs(x - 0.6f - wave) < 0.03f);
+                    if (rim) return ink;
+                    if (bowlShape) return white;
+                    if (food) return accent;
+                    return steam ? new Color(1f, 1f, 1f, 1f) * 0.9f + bg * 0.1f : bg;
+                }
+                case "workshop":
+                {
+                    // Hammer, tilted.
+                    float c = Mathf.Cos(0.7f), sn = Mathf.Sin(0.7f);
+                    Vector2 q = new Vector2((p.x - 0.5f) * c - (p.y - 0.5f) * sn, (p.x - 0.5f) * sn + (p.y - 0.5f) * c);
+                    bool handle = Mathf.Abs(q.x) < 0.05f && q.y > -0.33f && q.y < 0.18f;
+                    bool head = RoundedRect(q.x + 0.5f, q.y + 0.5f, 0.3f, 0.66f, 0.72f, 0.82f, 0.03f);
+                    if (head) return new Color(0.75f, 0.8f, 0.9f);
+                    return handle ? new Color(0.65f, 0.42f, 0.25f) : bg;
+                }
+                case "shipyard":
+                {
+                    bool hull = InTriangle(p, new Vector2(0.14f, 0.38f), new Vector2(0.86f, 0.38f), new Vector2(0.74f, 0.2f))
+                                || InTriangle(p, new Vector2(0.14f, 0.38f), new Vector2(0.74f, 0.2f), new Vector2(0.26f, 0.2f));
+                    bool mast = x > 0.47f && x < 0.52f && y > 0.38f && y < 0.84f;
+                    bool sail = InTriangle(p, new Vector2(0.53f, 0.82f), new Vector2(0.53f, 0.43f), new Vector2(0.82f, 0.43f))
+                                || InTriangle(p, new Vector2(0.45f, 0.75f), new Vector2(0.45f, 0.43f), new Vector2(0.24f, 0.43f));
+                    if (hull) return new Color(0.62f, 0.38f, 0.22f);
+                    if (sail) return white;
+                    return mast ? ink : bg;
+                }
+                default: // market
+                {
+                    bool awning = y > 0.56f && y < 0.74f && x > 0.16f && x < 0.84f;
+                    bool scallop = y > 0.5f && y <= 0.56f && Vector2.Distance(new Vector2((x - 0.16f) % 0.136f, y), new Vector2(0.068f, 0.56f)) < 0.068f && x > 0.16f && x < 0.84f;
+                    bool stripe = ((int)((x - 0.16f) / 0.136f)) % 2 == 0;
+                    bool posts = (Mathf.Abs(x - 0.22f) < 0.03f || Mathf.Abs(x - 0.78f) < 0.03f) && y > 0.2f && y < 0.56f;
+                    bool counter = RoundedRect(x, y, 0.18f, 0.2f, 0.82f, 0.34f, 0.03f);
+                    bool fruit = Vector2.Distance(p, new Vector2(0.38f, 0.39f)) < 0.06f || Vector2.Distance(p, new Vector2(0.52f, 0.4f)) < 0.06f
+                                 || Vector2.Distance(p, new Vector2(0.65f, 0.39f)) < 0.06f;
+                    if (awning || scallop) return stripe ? new Color(0.85f, 0.3f, 0.3f) : white;
+                    if (fruit) return accent;
+                    if (counter) return new Color(0.62f, 0.4f, 0.24f);
+                    return posts ? ink : bg;
+                }
+            }
+        });
+
         /// <summary>1024 app icon: moon over a night sea, a small boat riding a wave.</summary>
         public static Texture2D DrawIcon()
         {

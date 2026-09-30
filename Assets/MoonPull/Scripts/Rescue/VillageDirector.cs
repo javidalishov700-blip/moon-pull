@@ -70,11 +70,55 @@ namespace MoonPull.Rescue
                 Transform body = Instantiate(villagerPrefab, transform).transform;
                 body.localPosition = RandomSpot();
                 body.localScale = Vector3.one * 1.25f;
+                Dress(body, random);
                 var collider = body.gameObject.AddComponent<CapsuleCollider>();
                 collider.center = new Vector3(0f, 0.5f, 0f);
                 collider.height = 1.6f;
                 collider.radius = 0.45f;
                 villagers.Add(new Villager { Body = body, Target = RandomSpot(), Wait = (float)random.NextDouble() * 2f, Bubble = MakeBubble(body) });
+            }
+        }
+
+        private static readonly Color[] Coats =
+        {
+            new Color(0.88f, 0.48f, 0.37f), new Color(0.51f, 0.7f, 0.6f), new Color(0.95f, 0.8f, 0.56f), new Color(0.45f, 0.6f, 0.9f),
+            new Color(0.85f, 0.45f, 0.7f), new Color(0.6f, 0.5f, 0.85f), new Color(0.95f, 0.65f, 0.3f), new Color(0.35f, 0.75f, 0.8f)
+        };
+
+        private static readonly Color[] Hairs =
+        {
+            new Color(0.35f, 0.23f, 0.16f), new Color(0.12f, 0.1f, 0.12f), new Color(0.85f, 0.62f, 0.3f), new Color(0.7f, 0.3f, 0.18f),
+            new Color(0.9f, 0.9f, 0.88f), new Color(0.3f, 0.3f, 0.55f)
+        };
+
+        private static readonly Color[] Skins =
+        {
+            new Color(0.96f, 0.81f, 0.65f), new Color(0.87f, 0.66f, 0.5f), new Color(0.66f, 0.46f, 0.32f), new Color(0.5f, 0.34f, 0.24f)
+        };
+
+        /// <summary>Gives a cartoon person (built by the generator) its own coat, hair and skin colours.</summary>
+        public static void Dress(Transform person, System.Random random)
+        {
+            Color coat = Coats[random.Next(Coats.Length)];
+            Color hair = Hairs[random.Next(Hairs.Length)];
+            Color skin = Skins[random.Next(Skins.Length)];
+            var block = new MaterialPropertyBlock();
+            foreach (Renderer r in person.GetComponentsInChildren<Renderer>(true))
+            {
+                string n = r.gameObject.name;
+                Color? c = n == "Coat" ? coat : n == "Hair" ? hair : n == "Skin" ? skin : (Color?)null;
+                if (c.HasValue)
+                {
+                    block.SetColor("_Color", c.Value);
+                    r.SetPropertyBlock(block);
+                }
+            }
+
+            // Some wear their hair tall, some short: a small random stretch keeps the crowd varied.
+            Transform head = person.Find("Person/Head");
+            if (head != null)
+            {
+                head.localScale = new Vector3(1f, 0.92f + (float)random.NextDouble() * 0.16f, 1f);
             }
         }
 

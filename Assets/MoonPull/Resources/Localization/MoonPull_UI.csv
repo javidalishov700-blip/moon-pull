@@ -68,6 +68,7 @@ hud.boss_defeated,Kraken defeated!,Kraken yenildi!,¡Kraken derrotado!,Kraken de
 hud.new_best,New best!,Yeni rekor!,¡Nuevo récord!,Novo recorde!,Neuer Rekord!,Nouveau record !,Новый рекорд!,ベスト更新！
 pause.title,Paused,Duraklatıldı,Pausa,Pausado,Pause,Pause,Пауза,一時停止
 pause.resume,Resume,Devam Et,Reanudar,Retomar,Fortsetzen,Reprendre,Продолжить,再開
+pause.finish,Finish Night,Geceyi Bitir,Terminar noche,Terminar noite,Nacht beenden,Finir la nuit,Закончить ночь,夜を終える
 pause.restart,Restart,Yeniden Başla,Reiniciar,Reiniciar,Neustart,Recommencer,Заново,やり直す
 fail.title,Shipwrecked!,Gemi battı!,¡Naufragio!,Naufrágio!,Schiffbruch!,Naufrage !,Кораблекрушение!,難破！
 fail.rock,You hit a rock,Kayaya çarptın,Chocaste con una roca,Você bateu numa pedra,Du bist auf einen Felsen gefahren,Tu as percuté un rocher,Ты налетел на скалу,岩にぶつかった

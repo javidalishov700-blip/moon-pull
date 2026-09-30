@@ -181,6 +181,54 @@ namespace MoonPull.EditorTools
             tris.Add(a); tris.Add(c); tris.Add(d);
         }
 
+        /// <summary>
+        /// Soft cartoon normals for triangle soups: each corner averages the faces sharing its position whose angle to
+        /// its own face is under the crease angle, so curves read round while hard edges (hull rim, keel) stay crisp.
+        /// </summary>
+        private static List<Vector3> SmoothNormals(List<Vector3> tris, float creaseDegrees)
+        {
+            var faces = new Vector3[tris.Count / 3];
+            var byPosition = new Dictionary<Vector3Int, List<int>>();
+            for (int f = 0; f < faces.Length; f++)
+            {
+                Vector3 a = tris[f * 3], b = tris[f * 3 + 1], c = tris[f * 3 + 2];
+                faces[f] = Vector3.Cross(b - a, c - a); // area-weighted
+                for (int k = 0; k < 3; k++)
+                {
+                    Vector3Int key = Quantize(tris[f * 3 + k]);
+                    if (!byPosition.TryGetValue(key, out List<int> list))
+                    {
+                        byPosition[key] = list = new List<int>();
+                    }
+
+                    list.Add(f);
+                }
+            }
+
+            float cos = Mathf.Cos(creaseDegrees * Mathf.Deg2Rad);
+            var normals = new List<Vector3>(tris.Count);
+            for (int i = 0; i < tris.Count; i++)
+            {
+                Vector3 own = faces[i / 3].normalized;
+                Vector3 sum = Vector3.zero;
+                foreach (int f in byPosition[Quantize(tris[i])])
+                {
+                    Vector3 other = faces[f];
+                    if (Vector3.Dot(own, other.normalized) >= cos)
+                    {
+                        sum += other;
+                    }
+                }
+
+                normals.Add(sum.sqrMagnitude > 1e-12f ? sum.normalized : own);
+            }
+
+            return normals;
+        }
+
+        private static Vector3Int Quantize(Vector3 v) =>
+            new Vector3Int(Mathf.RoundToInt(v.x * 1000f), Mathf.RoundToInt(v.y * 1000f), Mathf.RoundToInt(v.z * 1000f));
+
         private static Mesh Build(string key, System.Func<List<Vector3>> triangles)
         {
             if (Cache.TryGetValue(key, out Mesh cached) && cached != null)
@@ -204,7 +252,7 @@ namespace MoonPull.EditorTools
                 var created = new Mesh { name = key };
                 created.SetVertices(tris);
                 created.SetTriangles(indices, 0);
-                created.RecalculateNormals();
+                created.SetNormals(SmoothNormals(tris, 55f));
                 created.RecalculateBounds();
                 AssetDatabase.CreateAsset(created, path);
                 AssetDatabase.SaveAssets();

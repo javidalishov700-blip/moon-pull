@@ -85,6 +85,9 @@ namespace MoonPull.EditorTools
         public static Image Backdrop(Transform parent, Color color)
         {
             RectTransform rt = Stretch("Backdrop", parent);
+            // Bleed past the safe area and banner inset so backdrops always reach the physical screen edges.
+            rt.offsetMin = new Vector2(-400f, -700f);
+            rt.offsetMax = new Vector2(400f, 700f);
             var image = rt.gameObject.AddComponent<Image>();
             image.color = color;
             return image;

@@ -46,6 +46,7 @@ namespace MoonPull.EditorTools
             public MetaGame Meta;
             public AdsCoordinator Ads;
             public LevelSession Session;
+            public MoonPull.Rescue.NightRescue Rescue;
             public LevelRunner Runner;
             public BoatController Boat;
             public FullMoonMode FullMoon;
@@ -227,6 +228,7 @@ namespace MoonPull.EditorTools
                 "lanternPrefab", content.RescueLantern, "islandPrefab", content.RescueIsland,
                 "defaultBoatModel", AssetDatabase.LoadAssetAtPath<GameObject>(Gen.Root + "/Boats/BoatModel_dinghy.prefab"));
             Gen.Set(w.Session, "rescue", sail);
+            w.Rescue = sail;
 
             Gen.SetArray<MonoBehaviour>(loop, "tickables", new MonoBehaviour[] { sail });
 
