@@ -84,6 +84,7 @@ namespace MoonPull.UI
             GameEvents.PerfectCrest += OnPerfectCrest;
             GameEvents.TideTurned += OnTideTurned;
             GameEvents.BoatBumped += OnBoatBumped;
+            GameEvents.LighthouseLit += OnLighthouseLit;
             GameEvents.ShieldConsumed += OnShield;
             GameEvents.PassengerBoarded += OnPassengerBoarded;
             GameEvents.MoonstoneCollected += OnMoonstone;
@@ -107,6 +108,7 @@ namespace MoonPull.UI
             GameEvents.PerfectCrest -= OnPerfectCrest;
             GameEvents.TideTurned -= OnTideTurned;
             GameEvents.BoatBumped -= OnBoatBumped;
+            GameEvents.LighthouseLit -= OnLighthouseLit;
             GameEvents.ShieldConsumed -= OnShield;
             GameEvents.PassengerBoarded -= OnPassengerBoarded;
             GameEvents.MoonstoneCollected -= OnMoonstone;
@@ -212,6 +214,12 @@ namespace MoonPull.UI
         {
             calloutMultiplier.gameObject.SetActive(false);
             ShowCallout(LocKeys.HudTideTurned, freeLeft);
+        }
+
+        private void OnLighthouseLit(int rescued)
+        {
+            calloutMultiplier.gameObject.SetActive(false);
+            ShowCallout(LocKeys.HudLighthouseLit, rescued);
         }
 
         private void OnBoatBumped(int heartsLeft)

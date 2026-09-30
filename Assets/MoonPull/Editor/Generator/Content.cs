@@ -47,6 +47,7 @@ namespace MoonPull.EditorTools
         public MissionCatalog Missions;
         public BoatDebris Debris;
         public GameObject SailRock, SailStar, SailCoin, SailMoonstone, SailLighthouse;
+        public GameObject RescueCastaway, RescuePassenger, RescueLantern, RescueIsland, VillageHouse;
 
         private readonly List<(PooledObject prefab, int count)> warm = new List<(PooledObject, int)>();
 
@@ -64,6 +65,7 @@ namespace MoonPull.EditorTools
             c.CreateMissions();
             c.CreateWarmup();
             c.CreateSailProps();
+            c.CreateRescueProps();
             return c;
         }
 
@@ -148,6 +150,85 @@ namespace MoonPull.EditorTools
         private static void WireView(PlacementView view, Transform visual, float authoredWidth)
         {
             Gen.Wire(view, "visualRoot", visual, "authoredWidth", authoredWidth);
+        }
+
+        /// <summary>A little villager: body, head and a warm lantern. Used on rafts, on the boat and in the village.</summary>
+        private static void Person(Transform parent, Vector3 at, float scale, Color coat)
+        {
+            Transform p = Gen.Go("Person", parent).transform;
+            p.localPosition = at;
+            p.localScale = Vector3.one * scale;
+            Gen.Prim(PrimitiveType.Capsule, p, new Vector3(0f, 0.32f, 0f), new Vector3(0.28f, 0.3f, 0.28f), coat);
+            Gen.Prim(PrimitiveType.Sphere, p, new Vector3(0f, 0.72f, 0f), new Vector3(0.24f, 0.24f, 0.24f), Gen.Hex("F2C9A0"));
+            Gen.Prim(PrimitiveType.Sphere, p, new Vector3(0.2f, 0.45f, 0f), new Vector3(0.12f, 0.14f, 0.12f), Gen.Hex("FFC857"), default, 2.5f);
+        }
+
+        /// <summary>Night Rescue props: castaway rafts, sky lanterns, lighthouse islands and village houses.</summary>
+        private void CreateRescueProps()
+        {
+            Color wood = Gen.Hex("8A5A36");
+
+            GameObject raft = Gen.Go("Rescue_Castaway");
+            for (int i = -1; i <= 1; i++)
+            {
+                Gen.Prim(PrimitiveType.Cylinder, raft.transform, new Vector3(i * 0.22f, 0.05f, 0f), new Vector3(0.2f, 0.45f, 0.2f), wood * (1f - 0.08f * (i + 1)), new Vector3(90f, 0f, 0f));
+            }
+
+            Person(raft.transform, new Vector3(0f, 0.12f, 0f), 1f, Gen.Hex("E07A5F"));
+            Gen.Prim(PrimitiveType.Cylinder, raft.transform, new Vector3(-0.3f, 0.6f, 0f), new Vector3(0.03f, 0.5f, 0.03f), wood);
+            Gen.Prim(PrimitiveType.Cube, raft.transform, new Vector3(-0.15f, 1.0f, 0f), new Vector3(0.28f, 0.16f, 0.02f), Gen.Hex("F4F1DE"), default, 0.6f); // little flag
+            Gen.Prim(PrimitiveType.Sphere, raft.transform, new Vector3(0f, 0.6f, 0f), new Vector3(1.4f, 1.4f, 1.4f), Color.white)
+                .GetComponent<MeshRenderer>().sharedMaterial = Art.Glow(new Color(1f, 0.8f, 0.4f, 0.18f)); // lantern halo
+            RescueCastaway = Gen.SavePrefabObject(raft, "Rescue", "Rescue_Castaway");
+
+            GameObject rider = Gen.Go("Rescue_Passenger");
+            Person(rider.transform, Vector3.zero, 0.8f, Gen.Hex("81B29A"));
+            RescuePassenger = Gen.SavePrefabObject(rider, "Rescue", "Rescue_Passenger");
+
+            GameObject lantern = Gen.Go("Rescue_Lantern");
+            Gen.Prim(PrimitiveType.Cube, lantern.transform, Vector3.zero, new Vector3(0.36f, 0.48f, 0.36f), Gen.Hex("FFB347"), default, 2.2f);
+            Gen.Prim(PrimitiveType.Cube, lantern.transform, new Vector3(0f, 0.27f, 0f), new Vector3(0.4f, 0.06f, 0.4f), Gen.Hex("C0392B"), default, 0.8f);
+            Gen.Prim(PrimitiveType.Sphere, lantern.transform, Vector3.zero, new Vector3(1.3f, 1.3f, 1.3f), Color.white)
+                .GetComponent<MeshRenderer>().sharedMaterial = Art.Glow(new Color(1f, 0.7f, 0.3f, 0.22f));
+            RescueLantern = Gen.SavePrefabObject(lantern, "Rescue", "Rescue_Lantern");
+
+            // Island: rocky mound, a beach, a dock and a dark lighthouse whose "Lit" child switches on at rescue.
+            GameObject island = Gen.Go("Rescue_Island");
+            Transform t = island.transform;
+            Meshes.Part(Meshes.Rock(91, 0.55f), t, new Vector3(0f, 0f, 0f), new Vector3(6.5f, 2.6f, 4.5f), Gen.Hex("4E5670"));
+            Gen.Prim(PrimitiveType.Sphere, t, new Vector3(0f, 0.2f, -0.5f), new Vector3(8f, 1.4f, 5f), Gen.Hex("D9C391"));
+            Meshes.Part(Meshes.Rock(92), t, new Vector3(2.3f, 1.2f, 0.6f), new Vector3(1.4f, 1.3f, 1.2f), Gen.Hex("5B6480"));
+            for (int i = 0; i < 4; i++)
+            {
+                Gen.Prim(PrimitiveType.Cylinder, t, new Vector3(-0.8f, 2.0f + i * 1.0f, 0.4f), new Vector3(0.95f - i * 0.1f, 0.5f, 0.95f - i * 0.1f),
+                    i % 2 == 0 ? Gen.Hex("E8E4DA") : Gen.Hex("B8423A"));
+            }
+
+            Gen.Prim(PrimitiveType.Cylinder, t, new Vector3(-0.8f, 6.1f, 0.4f), new Vector3(0.62f, 0.32f, 0.62f), Gen.Hex("2A2F45")); // dark lamp room
+            Gen.Prim(PrimitiveType.Cylinder, t, new Vector3(-0.8f, 6.55f, 0.4f), new Vector3(0.8f, 0.1f, 0.8f), Gen.Hex("222233"));
+            for (int i = 0; i < 4; i++)
+            {
+                Gen.Prim(PrimitiveType.Cube, t, new Vector3(2.8f + i * 0.5f, 0.35f, -1.8f), new Vector3(0.45f, 0.08f, 1.1f), Gen.Hex("7A5230")); // dock planks
+            }
+
+            Transform lit = Gen.Go("Lit", t).transform;
+            Gen.Prim(PrimitiveType.Cylinder, lit, new Vector3(-0.8f, 6.1f, 0.4f), new Vector3(0.66f, 0.34f, 0.66f), Gen.Hex("FFE9A8"), default, 3.5f);
+            Gen.Prim(PrimitiveType.Sphere, lit, new Vector3(-0.8f, 6.1f, 0.4f), new Vector3(4f, 4f, 4f), Color.white)
+                .GetComponent<MeshRenderer>().sharedMaterial = Art.Glow(new Color(1f, 0.92f, 0.6f, 0.25f));
+            Gen.Prim(PrimitiveType.Cube, lit, new Vector3(-7f, 6.1f, 0.4f), new Vector3(12f, 1.2f, 0.05f), Color.white, new Vector3(0f, 0f, 4f))
+                .GetComponent<MeshRenderer>().sharedMaterial = Art.Glow(new Color(1f, 0.95f, 0.7f, 0.16f)); // beam
+            for (int i = 0; i < 3; i++)
+            {
+                Person(lit, new Vector3(3.2f + i * 0.45f, 0.4f, -1.8f), 0.9f, i == 1 ? Gen.Hex("F2CC8F") : Gen.Hex("81B29A")); // waving villagers
+            }
+
+            RescueIsland = Gen.SavePrefabObject(island, "Rescue", "Rescue_Island");
+
+            GameObject house = Gen.Go("Village_House");
+            Gen.Prim(PrimitiveType.Cube, house.transform, new Vector3(0f, 0.35f, 0f), new Vector3(0.8f, 0.7f, 0.7f), Gen.Hex("E9D8B8"));
+            Gen.Prim(PrimitiveType.Cube, house.transform, new Vector3(0f, 0.82f, 0f), new Vector3(0.62f, 0.62f, 0.76f), Gen.Hex("B5533C"), new Vector3(0f, 0f, 45f));
+            Gen.Prim(PrimitiveType.Cube, house.transform, new Vector3(0.2f, 0.38f, -0.36f), new Vector3(0.18f, 0.18f, 0.02f), Gen.Hex("FFD37A"), default, 3f);
+            VillageHouse = Gen.SavePrefabObject(house, "Rescue", "Village_House");
         }
 
         /// <summary>Props for Moonlight Sail: sea rocks, floating stars, coins, moonstones and the harbor lighthouse.</summary>

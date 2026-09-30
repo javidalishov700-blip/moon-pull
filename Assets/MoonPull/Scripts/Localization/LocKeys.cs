@@ -29,6 +29,7 @@ namespace MoonPull.Localization
         public const string HudTideTurned = "hud.tide_turned";
         public const string HudBumped = "hud.bumped";
         public const string HudSteerHint = "hud.steer_hint";
+        public const string HudLighthouseLit = "hud.lighthouse_lit";
         public const string HudMultiplier = "hud.multiplier";
         public const string HudFullMoon = "hud.full_moon";
         public const string HudMoonstones = "hud.moonstones";

@@ -22,7 +22,7 @@ Shader "MoonPull/Flat"
             #include "UnityCG.cginc"
 
             fixed4 _Color, _BaseColor, _LightColor0;
-            float _Emission, _WetLine, _MP_WaterLevel;
+            float _Emission, _WetLine, _MP_WaterLevel, _MP_Dark;
 
             struct appdata { float4 vertex : POSITION; };
             struct v2f { float4 pos : SV_POSITION; float3 worldPos : TEXCOORD0; UNITY_FOG_COORDS(1) };
@@ -49,6 +49,7 @@ Shader "MoonPull/Flat"
                 // Surfaces darken just below the tide line so players read water height on obstacles.
                 float wet = smoothstep(_MP_WaterLevel + 0.15, _MP_WaterLevel - 0.05, i.worldPos.y) * _WetLine;
                 col *= 1 - wet;
+                col *= 1 - _MP_Dark * 0.6 * saturate(1 - _Emission); // lit lamps keep glowing in the dark
                 fixed4 result = fixed4(col, 1);
                 UNITY_APPLY_FOG(i.fogCoord, result);
                 return result;

@@ -34,18 +34,27 @@ namespace MoonPull.Boot
                 meta.PlayNext();
             }
 
-            // Steer a little between shots so the footage shows the boat weaving through the moonlight.
-            var sail = FindFirstObjectByType<MoonPull.Sail.MoonlightSail>();
-            float[] times = { 2f, 3f, 3f, 4f, 4f };
-            float[] steer = { -1.8f, 1.6f, 0f, 2.4f, -1f };
+            // Surf like a player: dive on the way down, release to fly off the next crest, and grab frames in between.
+            var rescue = FindFirstObjectByType<MoonPull.Rescue.NightRescue>();
+            float[] times = { 2.5f, 3f, 3f, 3.5f, 4f };
             for (int i = 0; i < times.Length; i++)
             {
-                if (sail != null)
+                float until = Time.realtimeSinceStartup + times[i];
+                while (Time.realtimeSinceStartup < until)
                 {
-                    sail.SetSteerTarget(steer[i]);
+                    if (rescue != null)
+                    {
+                        rescue.ForcedHold = Mathf.Repeat(Time.realtimeSinceStartup, 1.3f) < 0.65f;
+                    }
+
+                    yield return null;
                 }
 
-                yield return new WaitForSecondsRealtime(times[i]);
+                if (rescue != null)
+                {
+                    rescue.ForcedHold = false;
+                }
+
                 yield return Shot(folder, "0" + (i + 2) + "-play");
             }
 

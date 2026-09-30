@@ -1,4 +1,5 @@
 Key,English(en),Turkish(tr),Spanish(es),Portuguese (Brazil)(pt-BR),German(de),French(fr),Russian(ru),Japanese(ja)
+hud.lighthouse_lit,"Lighthouse lit! +{0} saved","Fener yandı! +{0} kurtarıldı","¡Faro encendido! +{0} a salvo","Farol aceso! +{0} salvos","Leuchtturm an! +{0} gerettet","Phare allumé ! +{0} sauvés","Маяк зажжён! +{0} спасено","灯台点灯！+{0}人救助"
 common.ok,OK,Tamam,OK,OK,OK,OK,ОК,OK
 common.close,Close,Kapat,Cerrar,Fechar,Schließen,Fermer,Закрыть,閉じる
 common.loading,Loading...,Yükleniyor...,Cargando...,Carregando...,Lädt...,Chargement...,Загрузка...,読み込み中...
@@ -21,7 +22,7 @@ menu.spin,Daily Spin,Günlük Çark,Ruleta diaria,Roleta diária,Tagesrad,Roue d
 menu.settings,Settings,Ayarlar,Ajustes,Configurações,Einstellungen,Paramètres,Настройки,設定
 menu.stars,{0} stars,{0} yıldız,{0} estrellas,{0} estrelas,{0} Sterne,{0} étoiles,Звёзд: {0},スター {0}
 hud.bumped,"Ouch! {0} ♥ left","Ah! {0} ♥ kaldı","¡Ay! Quedan {0} ♥","Ai! Restam {0} ♥","Autsch! Noch {0} ♥","Aïe ! Encore {0} ♥","Ой! Осталось {0} ♥","いたっ！残り{0} ♥"
-hud.steer_hint,"Slide to move the moon — sail in its light","Ayı kaydır — ışığında yelken aç","Desliza para mover la luna y navega en su luz","Deslize para mover a lua e navegue na luz","Wische, um den Mond zu bewegen – segle im Licht","Glisse pour bouger la lune, navigue dans sa lumière","Сдвигай луну — плыви по её свету","月をスライドして光の道を進もう"
+hud.steer_hint,"Hold to dive into the wave, release to fly","Basılı tut: dalgaya dal, bırak: uç","Mantén para bajar, suelta para volar","Segure para mergulhar, solte para voar","Halten zum Eintauchen, loslassen zum Fliegen","Maintiens pour plonger, relâche pour voler","Держи — ныряй в волну, отпусти — лети","長押しで波に潜り、離して飛ぼう"
 hud.tide_turned,"The tide turns back! ({0} left)","Gelgit geri döndü! ({0} kaldı)","¡La marea retrocede! (quedan {0})","A maré volta! (restam {0})","Die Flut dreht zurück! (noch {0})","La marée recule ! (encore {0})","Прилив повернул назад! (осталось {0})","潮が戻る！（残り{0}）"
 hud.perfect_crest,PERFECT CREST!,MÜKEMMEL DALGA!,¡CRESTA PERFECTA!,CRISTA PERFEITA!,PERFEKTE WELLE!,CRÊTE PARFAITE !,ИДЕАЛЬНЫЙ ГРЕБЕНЬ!,パーフェクト！
 hud.near_miss,NEAR MISS!,KIL PAYI!,¡POR POCO!,POR UM TRIZ!,KNAPP!,DE JUSTESSE !,НА ВОЛОСОК!,ニアミス！

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using MoonPull.Ads;
 using MoonPull.Analytics;
 using MoonPull.Audio;
@@ -215,18 +216,18 @@ namespace MoonPull.EditorTools
             Gen.Wire(w.Rewind, "config", content.Rewind, "loop", loop, "moon", moon, "tide", tide, "water", water, "boat", w.Boat,
                 "fullMoon", w.FullMoon, "kraken", w.Kraken, "runner", w.Runner, "obstacles", w.Obstacles, "cameraRig", rig);
 
-            // Moonlight Sail is the game: it owns the boat, the props, the camera and the run. The legacy tide systems
-            // stay in the scene only for the sea surface, the score and the meta flows that reference them.
-            var sail = Gen.Add<MoonPull.Sail.MoonlightSail>(Gen.Go("MoonlightSail", gameplay));
-            Transform sailBoat = Gen.Go("SailBoat", gameplay).transform;
-            Gen.Wire(sail, "session", w.Session, "score", score, "fullMoon", w.FullMoon, "water", water, "tide", tide,
-                "cameraRig", rig, "cameraTransform", cameraGo.transform, "moonAnchor", moonAnchor, "legacyBoat", boatGo,
-                "boatRoot", sailBoat, "rockPrefab", content.SailRock, "starPrefab", content.SailStar, "coinPrefab", content.SailCoin,
-                "moonstonePrefab", content.SailMoonstone, "lighthousePrefab", content.SailLighthouse,
+            // Night Rescue is the game: it owns the boat, the sea swells, the camera and the run. The legacy tide systems
+            // stay in the scene only for the sea surface mesh, the score and the meta flows that reference them.
+            var sail = Gen.Add<MoonPull.Rescue.NightRescue>(Gen.Go("NightRescue", gameplay));
+            Transform sailBoat = Gen.Go("RescueBoat", gameplay).transform;
+            Gen.Wire(sail, "session", w.Session, "score", score, "water", water, "cameraRig", rig,
+                "cameraTransform", cameraGo.transform, "moonAnchor", moonAnchor, "legacyBoat", boatGo, "boatRoot", sailBoat,
+                "castawayPrefab", content.RescueCastaway, "passengerPrefab", content.RescuePassenger,
+                "lanternPrefab", content.RescueLantern, "islandPrefab", content.RescueIsland,
                 "defaultBoatModel", AssetDatabase.LoadAssetAtPath<GameObject>(Gen.Root + "/Boats/BoatModel_dinghy.prefab"));
-            Gen.Set(w.Session, "sail", sail);
+            Gen.Set(w.Session, "rescue", sail);
 
-            Gen.SetArray<MonoBehaviour>(loop, "tickables", new MonoBehaviour[] { water, sail });
+            Gen.SetArray<MonoBehaviour>(loop, "tickables", new MonoBehaviour[] { sail });
 
             // ------------------------------------------------ visuals, audio, feedback
             GameObject visuals = Gen.Go("Visuals", gameplay);
@@ -234,8 +235,21 @@ namespace MoonPull.EditorTools
             Gen.Wire(ambience, "session", w.Session, "meta", w.Meta, "water", water, "weather", weather, "gameplayCamera", w.Camera);
 
             GameObject island = Gen.Go("LighthouseIsland", visuals.transform);
-            island.transform.position = new Vector3(-7f, -0.6f, 9f);
+            island.transform.position = new Vector3(8f, -0.6f, 10f);
             Gen.SetArray<GameObject>(sail, "hideWhileSailing", new[] { island });
+            var village = Gen.Add<MoonPull.Rescue.VillageView>(island);
+            var houses = new List<GameObject>();
+            for (int i = 0; i < 24; i++)
+            {
+                float angle = i * 2.39996f; // golden-angle spiral keeps the village tidy as it grows
+                float radius = 1.2f + 0.28f * Mathf.Sqrt(i) * 2.2f;
+                var house = (GameObject)PrefabUtility.InstantiatePrefab(content.VillageHouse, island.transform);
+                house.transform.localPosition = new Vector3(Mathf.Cos(angle) * radius * 1.2f, 0.45f, Mathf.Sin(angle) * radius * 0.6f);
+                house.transform.localRotation = Quaternion.Euler(0f, angle * Mathf.Rad2Deg, 0f);
+                houses.Add(house);
+            }
+
+            Gen.SetArray<GameObject>(village, "houses", houses);
             Gen.Prim(PrimitiveType.Sphere, island.transform, new Vector3(0f, -1.2f, 0f), new Vector3(7f, 3f, 5f), Gen.Hex("5E7A5A"));
             Gen.Prim(PrimitiveType.Sphere, island.transform, new Vector3(0f, -1.45f, 0f), new Vector3(8f, 2.6f, 6f), Gen.Hex("E8D3A0"));
             Transform stageRoot = Gen.Go("StageRoot", island.transform).transform;

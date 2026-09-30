@@ -32,6 +32,7 @@ Shader "MoonPull/Water"
             float _FoamHeight, _DepthRange, _RippleStrength, _GlitterStrength;
             fixed4 _LightColor0;
             fixed4 _MP_SkyTop, _MP_SkyBottom;
+            float _MP_Dark;
             float4 _MP_MoonPos;
 
             struct appdata { float4 vertex : POSITION; };
@@ -133,6 +134,7 @@ Shader "MoonPull/Water"
                 col = lerp(col, _MP_SkyBottom.rgb * 0.9, haze * haze);
 
                 col = lerp(col, col * _FullMoonTint.rgb * 1.5 + 0.08, _MP_FullMoon);
+                col *= 1 - _MP_Dark * 0.7; // the night deepens as the moonlight runs out
                 fixed4 result = fixed4(col, 1);
                 UNITY_APPLY_FOG(i.fogCoord, result);
                 return result;

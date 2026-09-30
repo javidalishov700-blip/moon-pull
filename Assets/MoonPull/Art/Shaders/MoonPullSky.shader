@@ -16,6 +16,7 @@ Shader "MoonPull/Sky"
             #include "UnityCG.cginc"
 
             fixed4 _MP_SkyTop, _MP_SkyBottom;
+            float _MP_Dark;
             float4 _MP_MoonPos;
             float _MP_FullMoon;
 
@@ -103,6 +104,7 @@ Shader "MoonPull/Sky"
                 float island = smoothstep(ridge, ridge - 0.004, d.y) * smoothstep(-0.02, 0.0, d.y);
                 col = lerp(col, _MP_SkyTop.rgb * 0.55, island * 0.85);
 
+                col *= 1 - _MP_Dark * 0.7; // the night deepens as the moonlight runs out
                 return fixed4(col, 1);
             }
             ENDCG
