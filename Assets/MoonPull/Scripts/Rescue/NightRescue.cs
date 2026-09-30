@@ -403,6 +403,14 @@ namespace MoonPull.Rescue
                 speed = Mathf.MoveTowards(speed, minSpeed, 6f * dt); // the wind never lets the boat stall
             }
 
+            // Holding is a dive, not an accelerator: above cruising speed the sea drags the boat back down, so
+            // speed comes from well-timed releases and perfect landings, not from keeping a finger on the screen.
+            float cruise = 11f + speedBonus;
+            if (speed > cruise && fever <= 0f)
+            {
+                speed -= (speed - cruise) * (holding ? 0.9f : 0.35f) * dt;
+            }
+
             float cap = maxSpeed + speedBonus;
             speed = Mathf.Min(speed, fever > 0f ? cap * 1.2f : cap);
 

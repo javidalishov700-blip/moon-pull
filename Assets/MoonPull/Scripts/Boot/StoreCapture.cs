@@ -52,6 +52,14 @@ namespace MoonPull.Boot
                     yield return Shot(folder, "01d-islands");
                 }
 
+                Transform explore = village.transform.Find("Explore");
+                if (explore != null)
+                {
+                    explore.GetComponent<UnityEngine.UI.Button>().onClick.Invoke();
+                    yield return new WaitForSecondsRealtime(2.5f);
+                    yield return Shot(folder, "01e-explore");
+                }
+
                 popups.Close(village);
                 yield return new WaitForSecondsRealtime(1.5f);
             }

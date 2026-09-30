@@ -713,6 +713,8 @@ namespace MoonPull.EditorTools
             Image storeFill = Fill(Image(storeBg.transform, "Fill", Center, Vector2.zero, new Vector2(900f, 14f), Gold), UnityEngine.UI.Image.FillMethod.Horizontal, 0.4f);
             Button collect = Button(card.transform, "Collect", LocKeys.VillageCollect, new Vector2(1f, 0.5f), new Vector2(-170f, 10f), new Vector2(290f, 110f), Gen.Hex("5CCB7A"), 46);
 
+            Button explore = Button(popup.transform, "Explore", LocKeys.VillageExplore, TopRight, new Vector2(-150f, -440f), new Vector2(250f, 96f), Gen.Hex("2EC4C9"), 34);
+
             Button tabBuildings = Button(p, "TabBuildings", LocKeys.VillageTabBuildings, Top, new Vector2(-245f, -335f), new Vector2(470f, 76f), Primary, 36);
             Button tabIslands = Button(p, "TabIslands", LocKeys.VillageTabIslands, Top, new Vector2(245f, -335f), new Vector2(470f, 76f), Accent, 36);
 
@@ -765,6 +767,7 @@ namespace MoonPull.EditorTools
                 islandLocked.Add(Loc(row.transform, "Locked", LocKeys.VillageNeedsLevel, 24, new Vector2(1f, 0.5f), new Vector2(-150f, 22f), new Vector2(260f, 60f), Muted, TextAnchor.MiddleCenter, true));
             }
 
+            Gen.Wire(popup, "sheet", p, "exploreButton", explore);
             Gen.Wire(popup, "coinFly", coinFly, "buildingsTab", tabBuildings, "islandsTab", tabIslands,
                 "buildingsPage", buildingsPage.gameObject, "islandsPage", islandsPage.gameObject, "treasuryLabel", treasury,
                 "incomeLabel", income, "suppliesLabel", supplies, "collectButton", collect, "treasuryFill", storeFill);

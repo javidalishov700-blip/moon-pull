@@ -44,6 +44,23 @@ namespace MoonPull.Rescue
         private float nextNeedAt;
         private float nextSimulateAt;
         private Material bubbleMaterial;
+        private bool exploring;
+        private Vector2 pan;
+        private float zoom = 1f;
+        private Vector2 lastDrag;
+        private bool dragging;
+        private float lastPinch;
+
+        /// <summary>Exploring: the sheet is down, the camera frames the whole village and can be dragged and pinched.</summary>
+        public void SetExploring(bool value)
+        {
+            exploring = value;
+            if (!value)
+            {
+                pan = Vector2.zero;
+                zoom = 1f;
+            }
+        }
 
         public void Enter()
         {
@@ -177,6 +194,51 @@ namespace MoonPull.Rescue
             Walk();
             AssignNeeds();
             HandleTap();
+            HandlePanZoom();
+        }
+
+        private void HandlePanZoom()
+        {
+            if (Input.touchCount >= 2)
+            {
+                float d = Vector2.Distance(Input.GetTouch(0).position, Input.GetTouch(1).position);
+                if (lastPinch > 0f)
+                {
+                    zoom = Mathf.Clamp(zoom * lastPinch / Mathf.Max(1f, d), 0.55f, 1.6f);
+                }
+
+                lastPinch = d;
+                dragging = false;
+                return;
+            }
+
+            lastPinch = 0f;
+            bool down = Input.touchCount == 1 || Input.GetMouseButton(0);
+            Vector2 pos = Input.touchCount == 1 ? Input.GetTouch(0).position : (Vector2)Input.mousePosition;
+            if (!down)
+            {
+                dragging = false;
+                return;
+            }
+
+            if (!dragging)
+            {
+                int pointer = Input.touchCount > 0 ? Input.GetTouch(0).fingerId : -1;
+                if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject(pointer))
+                {
+                    return; // drags that start on the UI stay with the UI
+                }
+
+                dragging = true;
+                lastDrag = pos;
+                return;
+            }
+
+            Vector2 delta = pos - lastDrag;
+            lastDrag = pos;
+            float unitsPerPixel = 0.025f * zoom * 1080f / Mathf.Max(1f, Screen.width);
+            pan -= delta * unitsPerPixel;
+            pan = new Vector2(Mathf.Clamp(pan.x, -10f, 10f), Mathf.Clamp(pan.y, -8f, 12f));
         }
 
         private void Walk()
@@ -391,11 +453,14 @@ namespace MoonPull.Rescue
             }
 
             // Fly the camera over to the island and look down on the village.
-            Vector3 target = transform.position + viewOffset;
+            Vector3 panWorld = new Vector3(pan.x, 0f, pan.y);
+            Vector3 target = transform.position + panWorld + viewOffset * zoom * (exploring ? 1.1f : 1f);
             float t = 1f - Mathf.Exp(-4f * Time.unscaledDeltaTime);
             cameraTransform.position = Vector3.Lerp(cameraTransform.position, target, t);
             // Aim below the island so it sits in the top half of the screen, above the Village sheet.
-            Quaternion look = Quaternion.LookRotation(transform.position + new Vector3(0f, -10f, 3f) - target);
+            // With the sheet up, aim below the island so it sits in the top half; exploring, frame it in the middle.
+            Vector3 aim = exploring ? new Vector3(0f, -2.5f, 3f) : new Vector3(0f, -10f, 3f);
+            Quaternion look = Quaternion.LookRotation(transform.position + panWorld + aim - target);
             cameraTransform.rotation = Quaternion.Slerp(cameraTransform.rotation, look, t);
         }
     }

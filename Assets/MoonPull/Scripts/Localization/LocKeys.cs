@@ -41,6 +41,8 @@ namespace MoonPull.Localization
         public const string VillageNeedsLevel = "village.needs_level";
         public const string VillageIncome = "village.income";
         public const string VillageCollect = "village.collect";
+        public const string VillageExplore = "village.explore";
+        public const string VillageManage = "village.manage";
         public const string VillageNoSupplies = "village.no_supplies";
         public const string VillageSupplies = "village.supplies";
         public const string VillageNeedsPeople = "village.needs_people";

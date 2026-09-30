@@ -29,6 +29,11 @@ namespace MoonPull.UI
         [SerializeField] private GameObject[] maxLabels = new GameObject[VillageService.BuildingCount];
         [SerializeField] private LocalizedText[] cappedLabels = new LocalizedText[VillageService.BuildingCount];
 
+        [SerializeField] private RectTransform sheet;
+        [SerializeField] private Button exploreButton;
+        [SerializeField] private float sheetOpenY = -400f;
+        [SerializeField] private float sheetHiddenY = -1210f;
+
         [Header("Tycoon")]
         [SerializeField] private CoinFlyEffect coinFly;
         [SerializeField] private Button buildingsTab;
@@ -46,6 +51,7 @@ namespace MoonPull.UI
         [SerializeField] private LocalizedText[] islandLockedLabels = new LocalizedText[TycoonState.IslandCount];
 
         private bool showIslands;
+        private bool exploring;
 
         private float nextRefresh;
 
@@ -113,6 +119,10 @@ namespace MoonPull.UI
             buildingsTab.onClick.AddListener(() => ShowPage(false));
             islandsTab.onClick.AddListener(() => ShowPage(true));
             collectButton.onClick.AddListener(Collect);
+            if (exploreButton != null)
+            {
+                exploreButton.onClick.AddListener(() => SetExploring(!exploring));
+            }
             ShowPage(false);
         }
 
@@ -125,8 +135,13 @@ namespace MoonPull.UI
 
             if (hideWhileOpen != null)
             {
+                // Hidden and untouchable: taps on the village must never reach the menu's buttons underneath.
                 hideWhileOpen.alpha = 0f;
+                hideWhileOpen.interactable = false;
+                hideWhileOpen.blocksRaycasts = false;
             }
+
+            SetExploring(false);
 
             Refresh();
         }
@@ -141,6 +156,8 @@ namespace MoonPull.UI
             if (hideWhileOpen != null)
             {
                 hideWhileOpen.alpha = 1f;
+                hideWhileOpen.interactable = true;
+                hideWhileOpen.blocksRaycasts = true;
             }
         }
 
@@ -153,8 +170,32 @@ namespace MoonPull.UI
             }
         }
 
+        /// <summary>Slides the sheet down so the whole village can be explored (drag to pan, pinch to zoom).</summary>
+        private void SetExploring(bool value)
+        {
+            exploring = value;
+            if (exploreButton != null)
+            {
+                exploreButton.GetComponentInChildren<LocalizedText>().SetKey(value ? LocKeys.VillageManage : LocKeys.VillageExplore);
+            }
+
+            if (sheet != null)
+            {
+                sheet.anchoredPosition = new Vector2(sheet.anchoredPosition.x, value ? sheetHiddenY : sheetOpenY);
+            }
+
+            if (director != null)
+            {
+                director.SetExploring(value);
+            }
+        }
+
         /// <summary>Opened by tapping an island's price pin in the village.</summary>
-        public void ShowIslands() => ShowPage(true);
+        public void ShowIslands()
+        {
+            SetExploring(false);
+            ShowPage(true);
+        }
 
         /// <summary>Tapping a coin pin over a building collects the Treasury.</summary>
         public void CollectFromWorld() => Collect();
