@@ -26,7 +26,7 @@ Alternatives in `codemagic.yaml`: `moon-pull-ios` (Unity on the Mac, all in one)
 ## One-time setup
 
 - App Store Connect: create the app with bundle id `com.javidalishov.moonpull`.
-- Codemagic: add this repository; it uses the existing `unity` env group and the `SliceBlast ASC Key` integration.
+- Codemagic: add this repository; it uses the existing `unity` env group and the `MoonPull ASC Key` integration.
 - GitHub: add the three Unity secrets above.
 
 ## Before release
