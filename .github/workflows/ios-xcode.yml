@@ -76,11 +76,14 @@ jobs:
         run: |
           set -eu
           TAG="ios-xcode-${{ github.run_id }}"
+          # The release API sometimes answers 403 when tagging this exact commit; retry, then fall back to a
+          # tag on the default branch (Codemagic downloads the asset, the tag itself does not matter).
           for attempt in 1 2 3; do
+            TARGET_ARGS="--target ${{ github.sha }}"
+            [ "$attempt" -eq 3 ] && TARGET_ARGS=""
             if gh release create "$TAG" ios-xcode.zip --latest \
                 --title "iOS Xcode project ${{ github.run_id }}" \
-                --notes "Generated from ${{ github.sha }}." \
-                --target "${{ github.sha }}"; then
+                --notes "Generated from ${{ github.sha }}." $TARGET_ARGS; then
               exit 0
             fi
             sleep $((attempt * 20))

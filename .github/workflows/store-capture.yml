@@ -76,11 +76,14 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # The release API occasionally answers 403 for a moment; retry before failing the job.
+          # The release API sometimes answers 403 when tagging this exact commit; retry, then fall back to a
+          # tag on the default branch (the tag itself does not matter, the assets do).
           for attempt in 1 2 3; do
+            TARGET_ARGS="--target ${{ github.sha }}"
+            [ "$attempt" -eq 3 ] && TARGET_ARGS=""
             if gh release create "capture-${{ github.run_id }}" out/* --latest=false \
               --title "In-game capture ${{ github.run_id }}" \
-              --notes "Screenshots from ${{ github.sha }}." --target "${{ github.sha }}"; then
+              --notes "Screenshots from ${{ github.sha }}." $TARGET_ARGS; then
               exit 0
             fi
             sleep $((attempt * 15))
