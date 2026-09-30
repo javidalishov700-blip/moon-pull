@@ -12,25 +12,25 @@ namespace MoonPull.EditorTools
     /// </summary>
     internal static class UiKit
     {
-        // Casual "moonlit candy" palette: royal-blue panels, warm chunky buttons, white outlined type.
-        public static readonly Color Ink = Gen.Hex("1B1646");
-        public static readonly Color Panel = Gen.Hex("4254B8");
-        public static readonly Color PanelLight = Gen.Hex("6A7BE0");
-        public static readonly Color Primary = Gen.Hex("FFB21E");
-        public static readonly Color Accent = Gen.Hex("5BE3B0");
-        public static readonly Color RewardedColor = Gen.Hex("A474FF");
-        public static readonly Color Muted = Gen.Hex("DCE2FF");
-        public static readonly Color TextLight = Gen.Hex("FFFFFF");
-        public static readonly Color Gold = Gen.Hex("FFD84A");
-        public static readonly Color Danger = Gen.Hex("FF5A5F");
-        public static readonly Color Go = Gen.Hex("5DD35B");
-        public static readonly Color OutlineInk = new Color(0.1f, 0.07f, 0.28f, 0.95f);
+        // Premium night palette: deep navy glass panels, warm gold accents, restrained buttons.
+        public static readonly Color Ink = Gen.Hex("0A0F24");
+        public static readonly Color Panel = Gen.Hex("141C3F");
+        public static readonly Color PanelLight = Gen.Hex("1F2A57");
+        public static readonly Color Primary = Gen.Hex("E3A63B");
+        public static readonly Color Accent = Gen.Hex("5CC8B4");
+        public static readonly Color RewardedColor = Gen.Hex("7B62D9");
+        public static readonly Color Muted = Gen.Hex("9AA6CF");
+        public static readonly Color TextLight = Gen.Hex("F5F3EE");
+        public static readonly Color Gold = Gen.Hex("F2C35B");
+        public static readonly Color Danger = Gen.Hex("D9534F");
+        public static readonly Color Go = Gen.Hex("3FA96B");
+        public static readonly Color OutlineInk = new Color(0.02f, 0.03f, 0.1f, 0.7f);
 
         private static Font font;
 
-        /// <summary>Paytone One (SIL OFL, Art/Fonts): chunky and friendly, full Turkish coverage; OS fonts fill other scripts.</summary>
+        /// <summary>Kanit SemiBold (SIL OFL, Art/Fonts): clean and modern, full Turkish coverage; OS fonts fill other scripts.</summary>
         public static Font Font => font != null ? font : font =
-            UnityEditor.AssetDatabase.LoadAssetAtPath<Font>("Assets/MoonPull/Art/Fonts/PaytoneOne-Regular.ttf")
+            UnityEditor.AssetDatabase.LoadAssetAtPath<Font>("Assets/MoonPull/Art/Fonts/Kanit-SemiBold.ttf")
             ?? Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
 
         public static readonly Vector2 Center = new Vector2(0.5f, 0.5f);
@@ -110,7 +110,7 @@ namespace MoonPull.EditorTools
             text.color = color;
             text.alignment = align;
             text.fontStyle = FontStyle.Normal; // the display font is already heavy
-            text.lineSpacing = 0.9f;
+            text.lineSpacing = 0.85f;
             text.horizontalOverflow = HorizontalWrapMode.Wrap;
             text.verticalOverflow = VerticalWrapMode.Overflow;
             text.raycastTarget = false;
@@ -119,10 +119,10 @@ namespace MoonPull.EditorTools
                 // Sticker-style type: a dark outline plus a drop shadow, like casual game UI.
                 var outline = rt.gameObject.AddComponent<Outline>();
                 outline.effectColor = OutlineInk;
-                outline.effectDistance = new Vector2(Mathf.Max(2f, size * 0.06f), -Mathf.Max(2f, size * 0.06f));
+                outline.effectDistance = new Vector2(Mathf.Max(1.5f, size * 0.03f), -Mathf.Max(1.5f, size * 0.03f));
                 var drop = rt.gameObject.AddComponent<Shadow>();
-                drop.effectColor = new Color(0.1f, 0.07f, 0.28f, 0.6f);
-                drop.effectDistance = new Vector2(0f, -Mathf.Max(3f, size * 0.1f));
+                drop.effectColor = new Color(0f, 0f, 0.05f, 0.45f);
+                drop.effectDistance = new Vector2(0f, -Mathf.Max(2f, size * 0.05f));
             }
             else
             {

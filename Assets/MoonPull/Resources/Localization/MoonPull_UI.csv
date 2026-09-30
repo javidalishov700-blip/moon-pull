@@ -77,7 +77,7 @@ menu.spin,Daily Spin,Günlük Çark,Ruleta diaria,Roleta diária,Tagesrad,Roue d
 menu.settings,Settings,Ayarlar,Ajustes,Configurações,Einstellungen,Paramètres,Настройки,設定
 menu.stars,{0} stars,{0} yıldız,{0} estrellas,{0} estrelas,{0} Sterne,{0} étoiles,Звёзд: {0},スター {0}
 hud.bumped,"Ouch! {0} aboard","Eyvah! Teknede {0} kişi","¡Ay! {0} a bordo","Ai! {0} a bordo","Autsch! {0} an Bord","Aïe ! {0} à bord","Ой! На борту {0}","いたっ！乗船{0}人"
-hud.steer_hint,"Hold to dive into the wave, release to fly","Basılı tut: dalgaya dal, bırak: uç","Mantén para bajar, suelta para volar","Segure para mergulhar, solte para voar","Halten zum Eintauchen, loslassen zum Fliegen","Maintiens pour plonger, relâche pour voler","Держи — ныряй в волну, отпусти — лети","長押しで波に潜り、離して飛ぼう"
+hud.steer_hint,"Hold: dive · Release: fly · Tap: hop over rocks","Basılı tut: dal · Bırak: uç · Dokun: kayadan zıpla","Mantén: sumérgete · Suelta: vuela · Toca: salta rocas","Segure: mergulhe · Solte: voe · Toque: pule rochas","Halten: tauchen · Loslassen: fliegen · Tippen: über Felsen hüpfen","Maintiens : plonge · Relâche : vole · Touche : saute les rochers","Держи: ныряй · Отпусти: лети · Тап: прыжок через камни","長押し:潜る・離す:飛ぶ・タップ:岩をジャンプ"
 hud.tide_turned,"The tide turns back! ({0} left)","Gelgit geri döndü! ({0} kaldı)","¡La marea retrocede! (quedan {0})","A maré volta! (restam {0})","Die Flut dreht zurück! (noch {0})","La marée recule ! (encore {0})","Прилив повернул назад! (осталось {0})","潮が戻る！（残り{0}）"
 hud.perfect_crest,PERFECT CREST!,MÜKEMMEL DALGA!,¡CRESTA PERFECTA!,CRISTA PERFEITA!,PERFEKTE WELLE!,CRÊTE PARFAITE !,ИДЕАЛЬНЫЙ ГРЕБЕНЬ!,パーフェクト！
 hud.near_miss,NEAR MISS!,KIL PAYI!,¡POR POCO!,POR UM TRIZ!,KNAPP!,DE JUSTESSE !,НА ВОЛОСОК!,ニアミス！

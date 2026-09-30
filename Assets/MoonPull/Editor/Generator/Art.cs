@@ -263,28 +263,27 @@ namespace MoonPull.EditorTools
 
         private static Color Shade(float v, float a = 1f) => new Color(v, v, v, a);
 
-        /// <summary>Chunky 3D button: dark outline, a darker bottom lip, a body and a glossy top highlight.</summary>
-        public static Sprite ChunkyButton => Draw("ui_button", 128, (x, y) =>
+        /// <summary>Premium button: thin dark outline, a slim darker base edge, a soft vertical gradient and a fine top sheen.</summary>
+        public static Sprite ChunkyButton => Draw("ui_button_v2", 128, (x, y) =>
         {
-            float d = RoundedBox(x, y, 0.02f, 0.02f, 0.98f, 0.98f, 0.3f);
+            float d = RoundedBox(x, y, 0.02f, 0.02f, 0.98f, 0.98f, 0.24f);
             if (d > 0f) return Color.clear;
-            if (d > -0.035f) return Shade(0.22f);                                   // outline
-            float face = RoundedBox(x, y, 0.055f, 0.17f, 0.945f, 0.945f, 0.26f);
-            if (face > 0f) return Shade(0.6f);                                      // bottom lip
-            float gloss = RoundedBox(x, y, 0.14f, 0.66f, 0.86f, 0.89f, 0.1f);
-            if (gloss < 0f) return Color.Lerp(Shade(0.93f), Shade(1f), 0.9f);       // top shine
-            return Shade(Mathf.Lerp(0.8f, 0.92f, y));                               // body, lighter towards the top
-        }, new Vector4(44f, 48f, 44f, 44f));
+            if (d > -0.02f) return Shade(0.25f, 0.9f);                              // outline
+            float face = RoundedBox(x, y, 0.04f, 0.1f, 0.96f, 0.96f, 0.21f);
+            if (face > 0f) return Shade(0.55f);                                     // base edge
+            if (face > -0.02f && y > 0.6f) return Shade(1f);                        // top sheen line
+            return Shade(Mathf.Lerp(0.72f, 0.95f, Mathf.SmoothStep(0.1f, 0.95f, y))); // body gradient
+        }, new Vector4(40f, 40f, 40f, 40f));
 
-        /// <summary>Soft rounded panel with a dark rim and a lighter inner edge.</summary>
-        public static Sprite PanelSprite => Draw("ui_panel", 128, (x, y) =>
+        /// <summary>Glass panel: a light hairline rim over a slightly darker body with a gentle top glow.</summary>
+        public static Sprite PanelSprite => Draw("ui_panel_v2", 128, (x, y) =>
         {
-            float d = RoundedBox(x, y, 0.02f, 0.02f, 0.98f, 0.98f, 0.28f);
+            float d = RoundedBox(x, y, 0.02f, 0.02f, 0.98f, 0.98f, 0.22f);
             if (d > 0f) return Color.clear;
-            if (d > -0.04f) return Shade(0.45f);
-            if (d > -0.07f) return Shade(1f);
-            return Shade(0.9f);
-        }, new Vector4(44f, 44f, 44f, 44f));
+            if (d > -0.015f) return new Color(1f, 1f, 1f, 0.9f);
+            if (d > -0.03f) return Shade(0.55f, 0.97f);
+            return Shade(Mathf.Lerp(0.85f, 1f, Mathf.SmoothStep(0.5f, 1f, y)), 0.96f);
+        }, new Vector4(36f, 36f, 36f, 36f));
 
         /// <summary>Capsule chip for the top bar (coins, stars, level).</summary>
         public static Sprite Pill => Draw("ui_pill", 128, (x, y) =>
@@ -337,8 +336,8 @@ namespace MoonPull.EditorTools
             if (rim) return new Color(0.1f, 0.07f, 0.28f, 1f);
             if (!inside) return Color.clear;
 
-            Color white = new Color(1f, 0.98f, 0.94f);
-            Color ink = new Color(0.1f, 0.07f, 0.28f);
+            Color white = new Color(0.95f, 0.77f, 0.36f);
+            Color ink = new Color(0.08f, 0.1f, 0.24f);
             switch (kind)
             {
                 case "bag":

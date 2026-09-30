@@ -181,7 +181,8 @@ namespace MoonPull.EditorTools
 
             // Head: big and round, the cartoon proportion.
             Transform head = Gen.Go("Head", p).transform;
-            head.localPosition = new Vector3(0f, 0.68f, 0f);
+            head.localPosition = new Vector3(0f, 0.64f, 0f);
+            head.localScale = Vector3.one * 0.8f;
             Gen.Prim(PrimitiveType.Sphere, head, Vector3.zero, new Vector3(0.44f, 0.42f, 0.42f), skin).name = "Skin";
             // Eyes: dark ovals with a bright glint.
             for (int side = -1; side <= 1; side += 2)
@@ -261,14 +262,18 @@ namespace MoonPull.EditorTools
 
             RescueIsland = Gen.SavePrefabObject(island, "Rescue", "Rescue_Island");
 
-            // A round cartoon hut: plump walls, a puffy thatched dome with a knob, a round door and a glowing window.
+            // A fisher's cottage: fieldstone footing, lime-washed timber walls, a steep thatched cone roof,
+            // a chimney, a plank door and a warm lit window.
             GameObject house = Gen.Go("Village_House");
             Transform ht = house.transform;
-            Gen.Prim(PrimitiveType.Cylinder, ht, new Vector3(0f, 0.3f, 0f), new Vector3(0.8f, 0.3f, 0.8f), Gen.Hex("F3E3C3"));
-            Gen.Prim(PrimitiveType.Sphere, ht, new Vector3(0f, 0.66f, 0f), new Vector3(1.05f, 0.62f, 1.05f), Gen.Hex("E0875F"));
-            Gen.Prim(PrimitiveType.Sphere, ht, new Vector3(0f, 0.98f, 0f), new Vector3(0.16f, 0.16f, 0.16f), Gen.Hex("F2CC8F"));
-            Gen.Prim(PrimitiveType.Sphere, ht, new Vector3(0f, 0.22f, -0.37f), new Vector3(0.24f, 0.36f, 0.08f), Gen.Hex("6B4A3A")); // door
-            Gen.Prim(PrimitiveType.Sphere, ht, new Vector3(0.24f, 0.36f, -0.3f), new Vector3(0.15f, 0.15f, 0.06f), Gen.Hex("FFD37A"), default, 3f); // window
+            Gen.Prim(PrimitiveType.Cylinder, ht, new Vector3(0f, 0.06f, 0f), new Vector3(0.86f, 0.06f, 0.86f), Gen.Hex("7D7A76"));
+            Gen.Prim(PrimitiveType.Cylinder, ht, new Vector3(0f, 0.34f, 0f), new Vector3(0.76f, 0.24f, 0.76f), Gen.Hex("E6DCC8"));
+            Gen.Prim(PrimitiveType.Cylinder, ht, new Vector3(0f, 0.6f, 0f), new Vector3(0.8f, 0.03f, 0.8f), Gen.Hex("5B4130")); // eave beam
+            Meshes.Part(Meshes.Cone(), ht, new Vector3(0f, 0.6f, 0f), new Vector3(0.56f, 0.62f, 0.56f), Gen.Hex("9C7A4E")); // thatch
+            Meshes.Part(Meshes.Cone(), ht, new Vector3(0f, 1.16f, 0f), new Vector3(0.1f, 0.12f, 0.1f), Gen.Hex("5B4130"));
+            Gen.Prim(PrimitiveType.Cube, ht, new Vector3(0.2f, 0.95f, 0.1f), new Vector3(0.1f, 0.3f, 0.1f), Gen.Hex("6E6A66")); // chimney
+            Gen.Prim(PrimitiveType.Cube, ht, new Vector3(0f, 0.25f, -0.37f), new Vector3(0.18f, 0.3f, 0.04f), Gen.Hex("5B4130")); // door
+            Gen.Prim(PrimitiveType.Cube, ht, new Vector3(0.22f, 0.4f, -0.31f), new Vector3(0.13f, 0.12f, 0.04f), Gen.Hex("FFC870"), new Vector3(0f, -35f, 0f), 2.5f); // window
             VillageHouse = Gen.SavePrefabObject(house, "Rescue", "Village_House");
         }
 
@@ -592,7 +597,7 @@ namespace MoonPull.EditorTools
         {
             RegionSpec[] specs =
             {
-                new RegionSpec { Id = "tropical_lagoon", Stars = 0, SkyTop = "1F2F6E", SkyBottom = "5F7FC8", Shallow = "5CC4EA", Deep = "1F5AA8", Foam = "FFFFFF", Fog = "5F7FC8", Rock = "5E6C8C", Bridge = "A67C52", Signature = "FF8FA3", SignatureKind = PlacementKind.LowObstacle, Idle = 60, Root = 261.63f, CostScale = 1f },
+                new RegionSpec { Id = "tropical_lagoon", Stars = 0, SkyTop = "0B1433", SkyBottom = "3A5089", Shallow = "3B93B5", Deep = "0B2A4C", Foam = "DCEAF2", Fog = "3A5089", Rock = "5E6C8C", Bridge = "A67C52", Signature = "FF8FA3", SignatureKind = PlacementKind.LowObstacle, Idle = 60, Root = 261.63f, CostScale = 1f },
                 new RegionSpec { Id = "frozen_north", Stars = 35, SkyTop = "0E2140", SkyBottom = "5C7FB0", Shallow = "A8E6FF", Deep = "1E3F66", Foam = "FFFFFF", Fog = "B8C8DC", Rock = "8FA3BF", Bridge = "D8EEFF", Signature = "BFEFFF", SignatureKind = PlacementKind.HighObstacle, Idle = 90, Root = 293.66f, CostScale = 1.75f },
                 new RegionSpec { Id = "volcanic_isles", Stars = 80, SkyTop = "2A0F2E", SkyBottom = "C97A6A", Shallow = "F2A279", Deep = "4A1E2E", Foam = "FFE6C7", Fog = "8A5A5A", Rock = "3E3440", Bridge = "6B4A3A", Signature = "FF6A3D", SignatureKind = PlacementKind.LowObstacle, Idle = 130, Root = 220f, CostScale = 2.5f },
                 new RegionSpec { Id = "sunken_city", Stars = 130, SkyTop = "0F2A33", SkyBottom = "3E8C8A", Shallow = "7FE3C4", Deep = "114A52", Foam = "E8FFF6", Fog = "6E9C9A", Rock = "8C8A70", Bridge = "C2B48A", Signature = "E8D9A8", SignatureKind = PlacementKind.HighObstacle, Idle = 180, Root = 246.94f, CostScale = 3.25f },

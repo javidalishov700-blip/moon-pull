@@ -118,6 +118,7 @@ namespace MoonPull.Rescue
         private int seats;
         private float nightLength;
         private float progressCheckAt, progressCheckX;
+        private float pressStartedAt, hopCooldown;
         private float speedBonus;
 
         private ParticleSystem splash;
@@ -306,7 +307,17 @@ namespace MoonPull.Rescue
 
             runTime += deltaTime;
             waveTime += deltaTime;
+            bool wasHolding = holding;
             holding = ForcedHold ?? ReadHold();
+            hopCooldown -= deltaTime;
+            if (holding && !wasHolding)
+            {
+                pressStartedAt = runTime;
+            }
+            else if (!holding && wasHolding && runTime - pressStartedAt < 0.2f && !airborne && hopCooldown <= 0f)
+            {
+                Hop(); // a quick tap hops the boat clear of a rock
+            }
 
             // Swells grow the further out you sail: more air, more speed, more to master.
             ampScale = Mathf.Lerp(1f, 1.4f, Mathf.Clamp01((x - startX) / 1400f));
@@ -507,6 +518,19 @@ namespace MoonPull.Rescue
                 speed = Mathf.Max(minSpeed, along * 0.5f);
                 GameEvents.RaiseNearMissChainBroken();
             }
+        }
+
+        /// <summary>Quick tap: a short hop off the water, enough to clear a rock if timed right.</summary>
+        private void Hop()
+        {
+            airborne = true;
+            airTime = 0f;
+            vx = Mathf.Max(speed, minSpeed);
+            vy = 7.5f;
+            y += 0.05f;
+            hopCooldown = 0.8f;
+            Splash(14, new Color(0.9f, 0.96f, 1f, 0.8f));
+            GameEvents.RaiseWaveLaunched(0.5f);
         }
 
         /// <summary>A rock or a belly flop: most of the speed gone and one passenger falls overboard.</summary>

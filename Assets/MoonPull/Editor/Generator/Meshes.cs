@@ -66,6 +66,26 @@ namespace MoonPull.EditorTools
             });
         }
 
+        /// <summary>Cone of unit height and unit base radius, apex at +Y, base at 0 (roofs, lighthouse caps).</summary>
+        public static Mesh Cone(int segments = 24)
+        {
+            return Build("Cone_" + segments, () =>
+            {
+                var tris = new List<Vector3>();
+                Vector3 apex = new Vector3(0f, 1f, 0f);
+                for (int i = 0; i < segments; i++)
+                {
+                    float a0 = i * Mathf.PI * 2f / segments, a1 = (i + 1) * Mathf.PI * 2f / segments;
+                    Vector3 p0 = new Vector3(Mathf.Cos(a0), 0f, Mathf.Sin(a0));
+                    Vector3 p1 = new Vector3(Mathf.Cos(a1), 0f, Mathf.Sin(a1));
+                    tris.Add(p0); tris.Add(apex); tris.Add(p1);
+                    tris.Add(p0); tris.Add(p1); tris.Add(Vector3.zero);
+                }
+
+                return tris;
+            });
+        }
+
         /// <summary>Triangular sail billowing towards +Z: foot along +X from the mast, luff up the mast.</summary>
         public static Mesh Sail(float height, float foot, float belly)
         {

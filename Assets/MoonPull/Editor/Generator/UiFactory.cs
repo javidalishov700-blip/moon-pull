@@ -127,7 +127,7 @@ namespace MoonPull.EditorTools
             RectTransform bar = Rect("TopBar", safe, TopLeft, new Vector2(210f, -90f), new Vector2(340f, 100f));
             Group(bar.gameObject);
             var visibility = bar.gameObject.AddComponent<StateVisibility>();
-            Image pill = Image(bar, "Pill", Center, new Vector2(20f, 0f), new Vector2(320f, 84f), Gen.Hex("2A2F7A"), Art.Pill);
+            Image pill = Image(bar, "Pill", Center, new Vector2(20f, 0f), new Vector2(320f, 84f), Gen.Hex("10163A"), Art.Pill);
             RectTransform icon = CoinIcon(pill.transform, new Vector2(0f, 0.5f), new Vector2(10f, 2f), 104f);
             Text label = Text(pill.transform, "Coins", "0", 48, new Vector2(0f, 0.5f), new Vector2(190f, 2f), new Vector2(210f, 80f), TextLight, TextAnchor.MiddleLeft, true);
             var counter = pill.gameObject.AddComponent<CoinCounter>();
@@ -219,14 +219,14 @@ namespace MoonPull.EditorTools
 
             Button play = Button(c, "Play", LocKeys.MenuPlay, Bottom, new Vector2(0f, 560f), new Vector2(680f, 220f), Go, 96);
             Button settingsButton = Button(c, "Settings", LocKeys.MenuSettings, TopRight, new Vector2(-165f, -90f), new Vector2(270f, 96f), PanelLight, 34);
-            Button chestButton = Button(c, "BossChest", LocKeys.ChestTitle, TopLeft, new Vector2(210f, -210f), new Vector2(340f, 96f), Gen.Hex("E0842C"), 34);
+            Button chestButton = Button(c, "BossChest", LocKeys.ChestTitle, TopLeft, new Vector2(210f, -210f), new Vector2(340f, 96f), Gen.Hex("B8742E"), 34);
             Badge chestBadge = Badge(chestButton.transform, new Vector2(-10f, -10f));
 
             float y = 320f;
-            Button shop = IconTile(c, "Shop", LocKeys.MenuShop, new Vector2(-390f, y), Primary, "bag");
-            Button lighthouseButton = IconTile(c, "Lighthouse", LocKeys.MenuLighthouse, new Vector2(-130f, y), Gen.Hex("2EC4C9"), "house");
-            Button missionsButton = IconTile(c, "Missions", LocKeys.MenuMissions, new Vector2(130f, y), RewardedColor, "list");
-            Button spinButton = IconTile(c, "Spin", LocKeys.MenuSpin, new Vector2(390f, y), Gen.Hex("FF6FAE"), "wheel");
+            Button shop = IconTile(c, "Shop", LocKeys.MenuShop, new Vector2(-390f, y), PanelLight, "bag");
+            Button lighthouseButton = IconTile(c, "Lighthouse", LocKeys.MenuLighthouse, new Vector2(-130f, y), PanelLight, "house");
+            Button missionsButton = IconTile(c, "Missions", LocKeys.MenuMissions, new Vector2(130f, y), PanelLight, "list");
+            Button spinButton = IconTile(c, "Spin", LocKeys.MenuSpin, new Vector2(390f, y), PanelLight, "wheel");
             Badge missionsBadge = Badge(missionsButton.transform, new Vector2(-12f, -12f));
             Badge spinBadge = Badge(spinButton.transform, new Vector2(-12f, -12f));
 
@@ -711,9 +711,9 @@ namespace MoonPull.EditorTools
             supplies.GetComponent<Text>().gameObject.AddComponent<Outline>().effectColor = new Color(0f, 0f, 0.1f, 0.8f);
             Image storeBg = Image(card.transform, "Storage", new Vector2(0.5f, 0f), new Vector2(0f, 18f), new Vector2(900f, 14f), new Color(0f, 0f, 0f, 0.4f));
             Image storeFill = Fill(Image(storeBg.transform, "Fill", Center, Vector2.zero, new Vector2(900f, 14f), Gold), UnityEngine.UI.Image.FillMethod.Horizontal, 0.4f);
-            Button collect = Button(card.transform, "Collect", LocKeys.VillageCollect, new Vector2(1f, 0.5f), new Vector2(-170f, 10f), new Vector2(290f, 110f), Gen.Hex("5CCB7A"), 46);
+            Button collect = Button(card.transform, "Collect", LocKeys.VillageCollect, new Vector2(1f, 0.5f), new Vector2(-170f, 10f), new Vector2(290f, 110f), Go, 46);
 
-            Button explore = Button(popup.transform, "Explore", LocKeys.VillageExplore, TopRight, new Vector2(-150f, -440f), new Vector2(250f, 96f), Gen.Hex("2EC4C9"), 34);
+            Button explore = Button(popup.transform, "Explore", LocKeys.VillageExplore, TopRight, new Vector2(-150f, -440f), new Vector2(250f, 96f), Gen.Hex("2F8C99"), 34);
 
             Button tabBuildings = Button(p, "TabBuildings", LocKeys.VillageTabBuildings, Top, new Vector2(-325f, -335f), new Vector2(315f, 80f), Primary, 34);
             Button tabIslands = Button(p, "TabIslands", LocKeys.VillageTabIslands, Top, new Vector2(0f, -335f), new Vector2(315f, 80f), Accent, 34);
@@ -781,7 +781,7 @@ namespace MoonPull.EditorTools
                 Image(row.transform, "Icon", new Vector2(0f, 0.5f), new Vector2(70f, 0f), new Vector2(110f, 110f), Color.white, Art.BuildingIcon("island", islandTints[i]));
                 Loc(row.transform, "Name", "island." + id + ".name", 36, new Vector2(0f, 0.5f), new Vector2(330f, 24f), new Vector2(420f, 50f), TextLight, TextAnchor.MiddleLeft, true);
                 Loc(row.transform, "Desc", "island." + id + ".desc", 26, new Vector2(0f, 0.5f), new Vector2(330f, -24f), new Vector2(420f, 50f), Muted, TextAnchor.MiddleLeft);
-                Button buy = Button(row.transform, "Buy", LocKeys.IslandBuy, new Vector2(1f, 0.5f), new Vector2(-150f, 20f), new Vector2(250f, 70f), Gen.Hex("5CCB7A"), 34);
+                Button buy = Button(row.transform, "Buy", LocKeys.IslandBuy, new Vector2(1f, 0.5f), new Vector2(-150f, 20f), new Vector2(250f, 70f), Go, 34);
                 Image costBg = Image(row.transform, "Cost", new Vector2(1f, 0.5f), new Vector2(-150f, -38f), new Vector2(250f, 44f), new Color(0f, 0f, 0f, 0.3f));
                 CoinIcon(costBg.transform, new Vector2(0f, 0.5f), new Vector2(28f, 0f), 36f);
                 islandCosts.Add(Text(costBg.transform, "Amount", "0", 28, Center, new Vector2(20f, 0f), new Vector2(180f, 44f), Gold, TextAnchor.MiddleCenter, true));

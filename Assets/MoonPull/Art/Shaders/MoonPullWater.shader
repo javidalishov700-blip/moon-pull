@@ -133,8 +133,9 @@ Shader "MoonPull/Water"
                 float moonBright = saturate(_MP_MoonPos.w);
                 float glint = smoothstep(0.985, 0.995, m) * (0.5 + 0.5 * sin(scrolled.x * 3 + t * 2));
                 // Only out towards the horizon, so the water around the boat stays clean.
-                float far = smoothstep(12, 30, dist);
-                col += (pow(m, 60) * 0.2 + glint * 0.35) * far * moonBright * _LightColor0.rgb;
+                float far = smoothstep(6, 26, dist);
+                float sharp = pow(m, 400) * 1.4;
+                col += (pow(m, 60) * 0.22 + glint * 0.4 + sharp) * far * moonBright * _LightColor0.rgb;
 
                 // Fade into the sky's horizon colour with distance.
                 float haze = saturate((dist - _DepthRange * 0.4) / _DepthRange);

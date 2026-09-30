@@ -265,20 +265,23 @@ namespace MoonPull.EditorTools
                 Transform site = Gen.Go("Building_" + b, island.transform).transform;
                 sites.Add(site);
                 site.localPosition = new Vector3(-3.2f + b * 1.6f, 0.5f, -1.4f);
+                // Village halls: stone footing, timber walls, a steep coloured roof; an annex and then a lit
+                // lantern tower as the building levels up.
                 GameObject t1 = Gen.Go("Tier1", site);
-                Gen.Prim(PrimitiveType.Cylinder, t1.transform, new Vector3(0f, 0.4f, 0f), new Vector3(1.05f, 0.4f, 0.95f), Gen.Hex("F6E7C8"));
-                Gen.Prim(PrimitiveType.Sphere, t1.transform, new Vector3(0f, 0.86f, 0f), new Vector3(1.3f, 0.8f, 1.2f), tints[b]);
-                Gen.Prim(PrimitiveType.Sphere, t1.transform, new Vector3(0f, 1.26f, 0f), new Vector3(0.2f, 0.2f, 0.2f), Gen.Hex("FFE9A8"), default, 0.6f);
-                Gen.Prim(PrimitiveType.Sphere, t1.transform, new Vector3(0f, 0.3f, -0.47f), new Vector3(0.3f, 0.46f, 0.08f), Gen.Hex("6B4A34")); // door
+                Gen.Prim(PrimitiveType.Cylinder, t1.transform, new Vector3(0f, 0.08f, 0f), new Vector3(1.15f, 0.08f, 1.05f), Gen.Hex("7D7A76"));
+                Gen.Prim(PrimitiveType.Cylinder, t1.transform, new Vector3(0f, 0.45f, 0f), new Vector3(1.0f, 0.34f, 0.92f), Gen.Hex("E6DCC8"));
+                Gen.Prim(PrimitiveType.Cylinder, t1.transform, new Vector3(0f, 0.8f, 0f), new Vector3(1.05f, 0.03f, 0.97f), Gen.Hex("5B4130"));
+                Meshes.Part(Meshes.Cone(), t1.transform, new Vector3(0f, 0.8f, 0f), new Vector3(0.72f, 0.8f, 0.68f), Color.Lerp(tints[b], Gen.Hex("3A2A20"), 0.35f));
+                Gen.Prim(PrimitiveType.Cube, t1.transform, new Vector3(0f, 0.32f, -0.47f), new Vector3(0.26f, 0.42f, 0.05f), Gen.Hex("5B4130"));
                 GameObject t2 = Gen.Go("Tier2", site);
-                Gen.Prim(PrimitiveType.Cylinder, t2.transform, new Vector3(0.62f, 0.3f, 0.2f), new Vector3(0.55f, 0.3f, 0.55f), Gen.Hex("EFDDB8"));
-                Gen.Prim(PrimitiveType.Sphere, t2.transform, new Vector3(0.62f, 0.64f, 0.2f), new Vector3(0.7f, 0.46f, 0.7f), Color.Lerp(tints[b], Color.white, 0.25f));
-                Gen.Prim(PrimitiveType.Sphere, t2.transform, new Vector3(-0.3f, 0.5f, -0.44f), new Vector3(0.22f, 0.22f, 0.06f), Gen.Hex("FFD37A"), default, 3f);
+                Gen.Prim(PrimitiveType.Cylinder, t2.transform, new Vector3(0.66f, 0.3f, 0.22f), new Vector3(0.5f, 0.28f, 0.5f), Gen.Hex("DCCFB6"));
+                Meshes.Part(Meshes.Cone(), t2.transform, new Vector3(0.66f, 0.58f, 0.22f), new Vector3(0.36f, 0.42f, 0.36f), Gen.Hex("8A6A45"));
+                Gen.Prim(PrimitiveType.Cube, t2.transform, new Vector3(-0.28f, 0.5f, -0.44f), new Vector3(0.2f, 0.18f, 0.05f), Gen.Hex("FFC870"), default, 2.5f);
                 GameObject t3 = Gen.Go("Tier3", site);
-                Gen.Prim(PrimitiveType.Cylinder, t3.transform, new Vector3(0f, 1.6f, 0f), new Vector3(0.04f, 0.35f, 0.04f), Gen.Hex("6B4A34"));
-                Gen.Prim(PrimitiveType.Sphere, t3.transform, new Vector3(0.18f, 1.82f, 0f), new Vector3(0.36f, 0.2f, 0.05f), tints[b], default, 1.2f); // flag
+                Gen.Prim(PrimitiveType.Cylinder, t3.transform, new Vector3(0f, 1.75f, 0f), new Vector3(0.03f, 0.2f, 0.03f), Gen.Hex("5B4130"));
+                Gen.Prim(PrimitiveType.Cube, t3.transform, new Vector3(0.16f, 1.85f, 0f), new Vector3(0.3f, 0.16f, 0.02f), tints[b], default, 0.8f); // banner
                 Gen.Prim(PrimitiveType.Sphere, t3.transform, new Vector3(0f, 1.0f, -0.6f), new Vector3(2.2f, 2.2f, 2.2f), Color.white)
-                    .GetComponent<MeshRenderer>().sharedMaterial = Art.Glow(new Color(1f, 0.85f, 0.5f, 0.15f));
+                    .GetComponent<MeshRenderer>().sharedMaterial = Art.Glow(new Color(1f, 0.8f, 0.45f, 0.18f));
                 tiers.Add(t1);
                 tiers.Add(t2);
                 tiers.Add(t3);
@@ -290,7 +293,7 @@ namespace MoonPull.EditorTools
             w.Village = Gen.Add<MoonPull.Rescue.VillageDirector>(island);
             Gen.Wire(w.Village, "cameraTransform", cameraGo.transform, "villagerPrefab", content.RescuePassenger, "meta", w.Meta);
             // A wide, flat-topped island so the village has room to grow.
-            Gen.Prim(PrimitiveType.Sphere, island.transform, new Vector3(0f, -1.05f, 0f), new Vector3(13f, 3f, 8f), Gen.Hex("7CCB6A"));
+            Gen.Prim(PrimitiveType.Sphere, island.transform, new Vector3(0f, -1.05f, 0f), new Vector3(13f, 3f, 8f), Gen.Hex("5E9A52"));
             Gen.Prim(PrimitiveType.Sphere, island.transform, new Vector3(0f, -1.45f, 0f), new Vector3(14.5f, 2.6f, 9.5f), Gen.Hex("E8D3A0"));
             for (int i = 0; i < 7; i++)
             {
