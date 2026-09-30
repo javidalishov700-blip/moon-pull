@@ -50,6 +50,12 @@ namespace MoonPull.Rescue
         /// <summary>Stats of the night in progress (or the last one once it has ended).</summary>
         public NightStats Stats { get; private set; } = new NightStats();
 
+        /// <summary>
+        /// Context hint for the first nights (a localization key, or null): hold on the way down, let go to fly,
+        /// tap before a rock, sail to the lighthouse when the boat is full.
+        /// </summary>
+        public string CoachKey { get; private set; }
+
         /// <summary>Playtest autopilot: negative = off, 0..1 = how reliably it reacts to rocks.</summary>
         public float AutoPilotSkill { get; set; } = -1f;
 
@@ -378,6 +384,7 @@ namespace MoonPull.Rescue
             }
 
             Stats.MaxSpeed = Mathf.Max(Stats.MaxSpeed, speed);
+            CoachKey = levelIndex < 3 ? Coach() : null;
             Unstick();
             SpawnAhead();
             Interact();
@@ -561,6 +568,39 @@ namespace MoonPull.Rescue
                 speed = Mathf.Max(minSpeed, along * 0.5f);
                 GameEvents.RaiseNearMissChainBroken();
             }
+        }
+
+        private string Coach()
+        {
+            float reach = Mathf.Max(speed, minSpeed) * 0.45f + 1f;
+            foreach (Thing t in things)
+            {
+                if (t.Kind == Kind.Rock && !t.Done && t.X > x)
+                {
+                    float dx = t.X - x;
+                    if (dx < reach)
+                    {
+                        return "hud.coach_hop";
+                    }
+
+                    if (dx < 16f)
+                    {
+                        return "hud.coach_rock";
+                    }
+                }
+            }
+
+            if (aboard >= seats)
+            {
+                return "hud.coach_full";
+            }
+
+            if (runTime < 10f && !airborne)
+            {
+                return Slope(x) < 0f ? "hud.coach_hold" : "hud.coach_release";
+            }
+
+            return null;
         }
 
         // ------------------------------------------------------------------ playtest autopilot
@@ -812,6 +852,7 @@ namespace MoonPull.Rescue
         private void EndNight()
         {
             running = false;
+            CoachKey = null;
             // Everyone still aboard makes it home at dawn too.
             rescued += aboard;
             SetAboard(0);

@@ -35,6 +35,11 @@ namespace MoonPull.UI
         [SerializeField] private Text calloutMultiplier;
         [SerializeField, Min(0.1f)] private float calloutSeconds = 0.9f;
 
+        [Header("Coach (first nights)")]
+        [SerializeField] private MoonPull.Rescue.NightRescue rescue;
+        [SerializeField] private CanvasGroup coach;
+        [SerializeField] private LocalizedText coachText;
+
         [Header("Moonstones / Full Moon")]
         [SerializeField] private GameObject moonstoneMeter;
         [SerializeField] private Image moonstoneFill;
@@ -67,6 +72,7 @@ namespace MoonPull.UI
         [SerializeField] private GameObject rewindOverlay;
 
         private float calloutHideAt;
+        private string coachShown;
         private float fullMoonDuration = 1f;
         private float eclipseAt;
         private int lastEclipseSeconds = -1;
@@ -142,6 +148,34 @@ namespace MoonPull.UI
 
             UpdatePassengerGauge();
             UpdateEclipseCountdown();
+            UpdateCoach();
+        }
+
+        private void UpdateCoach()
+        {
+            if (coach == null || rescue == null)
+            {
+                return;
+            }
+
+            string key = rescue.CoachKey;
+            if (key != null && key != coachShown)
+            {
+                coachShown = key;
+                coachText.SetKey(key);
+                UiTween.PopIn(coach.transform, 0.2f);
+            }
+
+            coach.alpha = Mathf.MoveTowards(coach.alpha, key != null ? 1f : 0f, Time.unscaledDeltaTime * 5f);
+            if (key == null)
+            {
+                coachShown = null;
+            }
+            else if (key == "hud.coach_hop")
+            {
+                float pulse = 1f + 0.08f * Mathf.Sin(Time.unscaledTime * 14f);
+                coach.transform.localScale = new Vector3(pulse, pulse, 1f);
+            }
         }
 
         private void ResetWidgets()
@@ -169,12 +203,7 @@ namespace MoonPull.UI
                 ResetWidgets();
             }
 
-            if (args.LevelIndex < 3)
-            {
-                calloutMultiplier.gameObject.SetActive(false);
-                ShowCallout(LocKeys.HudSteerHint);
-                calloutHideAt = Time.unscaledTime + 3f;
-            }
+            // First nights are coached contextually by the Coach pill (see UpdateCoach).
         }
 
         private void OnScoreChanged(int score, int multiplier)

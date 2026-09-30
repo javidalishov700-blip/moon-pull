@@ -303,6 +303,15 @@ namespace MoonPull.EditorTools
             rewindTint.raycastTarget = false;
             Text(rewind, "Icon", "<<", 200, Center, Vector2.zero, new Vector2(500f, 260f), new Color(1f, 1f, 1f, 0.8f), TextAnchor.MiddleCenter, true);
 
+            // Coach pill for the first nights: sits low, above the thumb, never over the boat.
+            Image coachPill = Image(c, "Coach", Bottom, new Vector2(0f, 330f), new Vector2(860f, 110f), new Color(0.04f, 0.06f, 0.16f, 0.82f));
+            coachPill.raycastTarget = false;
+            var coachGroup = coachPill.gameObject.AddComponent<CanvasGroup>();
+            coachGroup.alpha = 0f;
+            coachGroup.blocksRaycasts = false;
+            LocalizedText coachText = Loc(coachPill.transform, "Text", "hud.coach_hold", 40, Center, Vector2.zero, new Vector2(820f, 100f), Gold, TextAnchor.MiddleCenter, true);
+            Gen.Wire(screen, "rescue", w.Rescue, "coach", coachGroup, "coachText", coachText);
+
             Gen.Wire(screen, "session", w.Session, "fullMoon", w.FullMoon, "passengers", w.Passengers, "boss", w.Kraken,
                 "gameManager", w.GameManager, "timeScale", w.TimeScale, "popups", popups,
                 "progressBar", slider, "scoreLabel", score, "multiplierLabel", multiplier, "pauseButton", pause,

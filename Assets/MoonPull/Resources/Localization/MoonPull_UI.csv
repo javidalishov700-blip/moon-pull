@@ -27,6 +27,11 @@ boat_up.hull.name,Hull,Gövde,Casco,Casco,Rumpf,Coque,Корпус,船体
 boat_up.hull.desc,Rocks hurt less; people hold on,Kayalar daha az zarar verir,Las rocas dañan menos,Rochas ferem menos,Felsen schaden weniger,Les rochers font moins mal,Камни вредят меньше,岩のダメージ軽減
 boat_up.lamp.name,Search Lamp,Arama Feneri,Lámpara,Lanterna,Suchlampe,Lampe,Прожектор,サーチライト
 boat_up.lamp.desc,Reach castaways and lanterns further,Kazazedeleri daha uzaktan al,Alcanza náufragos más lejos,Alcance maior,Größere Reichweite,Portée accrue,Дальше подбираешь,拾える範囲アップ
+hud.coach_hold,Hold to dive down the wave,Basılı tut: dalgadan aşağı dal,Mantén para bajar la ola,Segure para descer a onda,Halten: die Welle hinabtauchen,Maintiens pour plonger,Держи: ныряй с волны,長押しで波を下る
+hud.coach_release,Let go on the way up to fly,Yukarı çıkarken bırak: uç,Suelta al subir para volar,Solte na subida para voar,Beim Anstieg loslassen: fliegen,Relâche en montant pour voler,Отпусти на подъёме: лети,上りで離して飛ぶ
+hud.coach_rock,Rock ahead!,İleride kaya var!,¡Roca delante!,Rocha à frente!,Felsen voraus!,Rocher devant !,Впереди камень!,前方に岩！
+hud.coach_hop,TAP NOW to hop!,ŞİMDİ DOKUN: zıpla!,¡TOCA YA para saltar!,TOQUE AGORA para pular!,JETZT tippen: hüpfen!,TOUCHE pour sauter !,ТАП: прыгай!,今タップでジャンプ！
+hud.coach_full,Boat full: sail on to the lighthouse,Tekne dolu: deniz fenerine götür,Barco lleno: ve al faro,Barco cheio: vá ao farol,Boot voll: zum Leuchtturm,Bateau plein : va au phare,Лодка полна: к маяку,満員：灯台へ
 village.levelup,"Village level {0}! +{1} coins","Köy seviye {0}! +{1} para","¡Aldea nivel {0}! +{1} monedas","Vila nível {0}! +{1} moedas","Dorf Stufe {0}! +{1} Münzen","Village niveau {0} ! +{1} pièces","Деревня ур. {0}! +{1} монет","村レベル{0}！+{1}コイン"
 village.tip.homeless,Not enough homes: build a Shelter!,Yeterli ev yok: Barınak kur!,Faltan casas: ¡construye un Refugio!,Faltam casas: construa um Abrigo!,Zu wenig Häuser: Baue eine Unterkunft!,Pas assez de logis : construis un Abri !,Не хватает домов: построй приют!,家が足りない：避難所を建てよう！
 village.tip.hungry,The pantry is empty: build a Restaurant!,Kiler boş: Restoran kur!,Despensa vacía: ¡construye un Restaurante!,Despensa vazia: construa um Restaurante!,Vorrat leer: Baue ein Restaurant!,Garde-manger vide : construis un Restaurant !,Кладовая пуста: построй ресторан!,食料庫が空：レストランを建てよう！
