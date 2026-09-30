@@ -310,7 +310,13 @@ namespace MoonPull.EditorTools
             coachGroup.alpha = 0f;
             coachGroup.blocksRaycasts = false;
             LocalizedText coachText = Loc(coachPill.transform, "Text", "hud.coach_hold", 40, Center, Vector2.zero, new Vector2(820f, 100f), Gold, TextAnchor.MiddleCenter, true);
-            Gen.Wire(screen, "rescue", w.Rescue, "coach", coachGroup, "coachText", coachText);
+            // Seats: who is aboard right now (full = gold).
+            Image seatsPill = Image(c, "Aboard", TopRight, new Vector2(-140f, -200f), new Vector2(220f, 92f), new Color(0.04f, 0.06f, 0.16f, 0.82f));
+            seatsPill.raycastTarget = false;
+            Image seatsIcon = Image(seatsPill.transform, "Icon", new Vector2(0f, 0.5f), new Vector2(52f, 0f), new Vector2(64f, 64f), Color.white, Art.MenuIcon("person"));
+            seatsIcon.raycastTarget = false;
+            Text seats = Text(seatsPill.transform, "Count", "0/3", 46, new Vector2(0f, 0.5f), new Vector2(150f, 0f), new Vector2(140f, 80f), TextLight, TextAnchor.MiddleCenter, true);
+            Gen.Wire(screen, "rescue", w.Rescue, "coach", coachGroup, "coachText", coachText, "aboardLabel", seats);
 
             Gen.Wire(screen, "session", w.Session, "fullMoon", w.FullMoon, "passengers", w.Passengers, "boss", w.Kraken,
                 "gameManager", w.GameManager, "timeScale", w.TimeScale, "popups", popups,

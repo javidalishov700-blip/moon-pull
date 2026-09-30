@@ -326,6 +326,10 @@ namespace MoonPull.EditorTools
                 case "list":
                     shape = (u, v) => RoundedRect(u, v, 0.2f, 0.1f, 0.8f, 0.9f, 0.08f);
                     break;
+                case "person":
+                    shape = (u, v) => Vector2.Distance(new Vector2(u, v), new Vector2(0.5f, 0.7f)) < 0.16f
+                                      || RoundedRect(u, v, 0.26f, 0.1f, 0.74f, 0.5f, 0.16f);
+                    break;
                 default: // wheel
                     shape = (u, v) => Vector2.Distance(new Vector2(u, v), new Vector2(0.5f, 0.5f)) < 0.4f;
                     break;
@@ -342,6 +346,8 @@ namespace MoonPull.EditorTools
             {
                 case "bag":
                     return Vector2.Distance(p, new Vector2(0.5f, 0.38f)) < 0.09f ? new Color(1f, 0.78f, 0.2f) : white;
+                case "person":
+                    return white;
                 case "house":
                     if (RoundedRect(x, y, 0.42f, 0.12f, 0.58f, 0.36f, 0.04f)) return ink;
                     return y > 0.55f ? new Color(1f, 0.45f, 0.4f) : white;

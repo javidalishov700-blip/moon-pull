@@ -7,13 +7,13 @@ island.buy,Buy,Satın al,Comprar,Comprar,Kaufen,Acheter,Купить,購入
 island.owned,Yours!,Senin!,¡Tuya!,Sua!,Deine!,À toi !,Твой!,所有中
 island.buy_previous,Buy the island before,Önce önceki adayı al,Compra la isla anterior,Compre a ilha anterior,Kaufe erst die vorige Insel,Achète l'île précédente,Сначала купи предыдущий,前の島を先に購入
 island.palm_cove.name,Palm Cove,Palmiye Koyu,Cala Palmera,Enseada das Palmas,Palmenbucht,Crique aux Palmiers,Пальмовая бухта,ヤシの入り江
-island.palm_cove.desc,+8 homes · +25% income,+8 ev · +%25 gelir,+8 casas · +25% ingresos,+8 casas · +25% renda,+8 Häuser · +25% Einkommen,+8 logis · +25% revenus,+8 домов · +25% дохода,家+8・収入+25%
+island.palm_cove.desc,+20 homes · +25% income,+20 ev · +%25 gelir,+20 casas · +25% ingresos,+20 casas · +25% renda,+20 Häuser · +25% Einkommen,+20 logis · +25% revenus,+20 домов · +25% дохода,家+20・収入+25%
 island.coral_reef.name,Coral Reef,Mercan Resifi,Arrecife de Coral,Recife de Coral,Korallenriff,Récif de Corail,Коралловый риф,サンゴ礁
-island.coral_reef.desc,+8 homes · +25% income,+8 ev · +%25 gelir,+8 casas · +25% ingresos,+8 casas · +25% renda,+8 Häuser · +25% Einkommen,+8 logis · +25% revenus,+8 домов · +25% дохода,家+8・収入+25%
+island.coral_reef.desc,+20 homes · +25% income,+20 ev · +%25 gelir,+20 casas · +25% ingresos,+20 casas · +25% renda,+20 Häuser · +25% Einkommen,+20 logis · +25% revenus,+20 домов · +25% дохода,家+20・収入+25%
 island.fisher_bay.name,Fisher's Bay,Balıkçı Körfezi,Bahía Pesquera,Baía dos Pescadores,Fischerbucht,Baie des Pêcheurs,Рыбацкий залив,漁師の湾
-island.fisher_bay.desc,+8 homes · +25% income,+8 ev · +%25 gelir,+8 casas · +25% ingresos,+8 casas · +25% renda,+8 Häuser · +25% Einkommen,+8 logis · +25% revenus,+8 домов · +25% дохода,家+8・収入+25%
+island.fisher_bay.desc,+20 homes · +25% income,+20 ev · +%25 gelir,+20 casas · +25% ingresos,+20 casas · +25% renda,+20 Häuser · +25% Einkommen,+20 logis · +25% revenus,+20 домов · +25% дохода,家+20・収入+25%
 island.sky_peak.name,Sky Peak,Gök Tepe,Pico del Cielo,Pico do Céu,Himmelsgipfel,Pic du Ciel,Небесный пик,空の峰
-island.sky_peak.desc,+8 homes · +25% income,+8 ev · +%25 gelir,+8 casas · +25% ingresos,+8 casas · +25% renda,+8 Häuser · +25% Einkommen,+8 logis · +25% revenus,+8 домов · +25% дохода,家+8・収入+25%
+island.sky_peak.desc,+20 homes · +25% income,+20 ev · +%25 gelir,+20 casas · +25% ingresos,+20 casas · +25% renda,+20 Häuser · +25% Einkommen,+20 logis · +25% revenus,+20 домов · +25% дохода,家+20・収入+25%
 village.no_supplies,Out of supplies! Sail tonight,Erzak bitti! Denize açıl,¡Sin provisiones! Zarpa,Sem suprimentos! Navegue,Keine Vorräte! Stich in See,Plus de vivres ! Prends la mer,Нет припасов! В море,物資切れ！出航しよう
 village.supplies,"Supplies {0}/{1} · Workers {2}/{3}","Erzak {0}/{1} · İşçi {2}/{3}","Provisiones {0}/{1} · Obreros {2}/{3}","Suprimentos {0}/{1} · Trabalhadores {2}/{3}","Vorräte {0}/{1} · Arbeiter {2}/{3}","Vivres {0}/{1} · Ouvriers {2}/{3}","Припасы {0}/{1} · Рабочие {2}/{3}","物資 {0}/{1}・働き手 {2}/{3}"
 village.needs_people,"Rescue more: {0} people","Daha çok kurtar: {0} kişi","Rescata más: {0} personas","Resgate mais: {0} pessoas","Rette mehr: {0} Leute","Sauve-en plus : {0} pers.","Спаси больше: {0} чел.","もっと救助: {0}人"
@@ -54,7 +54,7 @@ village.workshop.desc,+12% longer night,Gece %12 daha uzun,Noche +12% más larga
 village.workshop.name,Lamp Workshop,Fener Atölyesi,Taller de faroles,Oficina de lanternas,Laternenwerkstatt,Atelier des lanternes,Мастерская фонарей,ランプ工房
 village.restaurant.desc,+30% coins per rescue,Kurtarma başına +%30 para,+30% monedas por rescate,+30% moedas por resgate,+30% Münzen pro Rettung,+30% de pièces par sauvetage,+30% монет за спасение,救助ごとのコイン+30%
 village.restaurant.name,Restaurant,Restoran,Restaurante,Restaurante,Restaurant,Restaurant,Ресторан,レストラン
-village.shelter.desc,+1 seat on your boat,Teknede +1 yer,+1 asiento en el barco,+1 lugar no barco,+1 Platz im Boot,+1 place dans le bateau,+1 место в лодке,ボートの座席+1
+village.shelter.desc,+1 boat seat · +15 homes,Teknede +1 yer · +15 ev,+1 asiento · +15 casas,+1 lugar · +15 casas,+1 Platz · +15 Häuser,+1 place · +15 logis,+1 место · +15 домов,座席+1・家+15
 village.shelter.name,Shelter,Barınak,Refugio,Abrigo,Unterkunft,Abri,Приют,避難所
 village.max,Complete,Tamamlandı,Completo,Completo,Fertig,Terminé,Готово,完成
 village.upgrade,Build,İnşa et,Construir,Construir,Bauen,Construire,Строить,建てる

@@ -146,6 +146,10 @@ namespace MoonPull.Rescue
         private float speedBonus;
 
         private ParticleSystem splash;
+        private TrailRenderer wake;
+        private Camera sceneCamera;
+        private Vector3 cameraBase;
+        private bool cameraBaseValid;
 
         /// <summary>Spray thrown up where the boat lands: bigger for belly flops, golden for Perfect landings.</summary>
         private static Texture2D DropletTexture()
@@ -201,6 +205,15 @@ namespace MoonPull.Rescue
             splash.Emit(emit, count);
         }
 
+        /// <summary>A burst of spray or sparks at a world position (pickups, deliveries).</summary>
+        private void SplashAt(Vector3 position, int count, Color color)
+        {
+            Splash(0, color); // makes sure the particle system exists
+            splash.transform.position = position;
+            var emit = new ParticleSystem.EmitParams { startColor = color, applyShapeToPosition = true };
+            splash.Emit(emit, count);
+        }
+
         /// <summary>Capture player / automation: overrides the touch input while set.</summary>
         public bool? ForcedHold { get; set; }
 
@@ -209,6 +222,10 @@ namespace MoonPull.Rescue
         /// <summary>Supplies the last night brought home (shown on the win screen).</summary>
         public static int LastSupplies { get; private set; }
         public int Aboard => aboard;
+
+        public int Seats => seats;
+
+        public bool Running => running;
 
         private void Awake()
         {
@@ -234,6 +251,31 @@ namespace MoonPull.Rescue
 
             x = 0f;
             y = Height(0f);
+            if (cameraTransform != null)
+            {
+                sceneCamera = cameraTransform.GetComponent<Camera>();
+            }
+
+            if (boatRoot != null)
+            {
+                // Foam wake behind the stern; only drawn while the hull is in the water.
+                var wakeGo = new GameObject("Wake");
+                wakeGo.transform.SetParent(boatRoot, false);
+                wakeGo.transform.localPosition = new Vector3(-0.9f, 0.02f, 0f);
+                wake = wakeGo.AddComponent<TrailRenderer>();
+                wake.time = 0.8f;
+                wake.minVertexDistance = 0.25f;
+                wake.widthMultiplier = 0.55f;
+                wake.widthCurve = new AnimationCurve(new Keyframe(0f, 1f), new Keyframe(1f, 0.15f));
+                var gradient = new Gradient();
+                gradient.SetKeys(
+                    new[] { new GradientColorKey(new Color(0.9f, 0.96f, 1f), 0f), new GradientColorKey(new Color(0.7f, 0.85f, 1f), 1f) },
+                    new[] { new GradientAlphaKey(0.7f, 0f), new GradientAlphaKey(0f, 1f) });
+                wake.colorGradient = gradient;
+                wake.sharedMaterial = new Material(Shader.Find("Sprites/Default"));
+                wake.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+                wake.emitting = false;
+            }
         }
 
         // ------------------------------------------------------------------ the sea
@@ -305,6 +347,11 @@ namespace MoonPull.Rescue
             runTime = 0f;
             hopFlight = false;
             Stats = new NightStats { Level = levelIndex };
+            if (wake != null)
+            {
+                wake.Clear();
+            }
+
             progressCheckAt = 2f;
             progressCheckX = x;
             nextCastawayAt = 30f;
@@ -391,7 +438,8 @@ namespace MoonPull.Rescue
             DespawnBehind();
 
             // Lighthouses refill the moonlight, but no night lasts forever: dawn always comes.
-            if (moonlight <= 0f || runTime > Mathf.Max(70f, nightLength * 2.3f))
+            // First nights stay short and snappy (about a minute); later nights may run up to about two minutes.
+            if (moonlight <= 0f || runTime > Mathf.Lerp(65f, 120f, Mathf.Clamp01(levelIndex / 12f)) * VillageService.NightMultiplier)
             {
                 EndNight();
             }
@@ -544,12 +592,15 @@ namespace MoonPull.Rescue
                 hopFlight = false;
                 speed = Mathf.Max(minSpeed, Mathf.Max(along, speed * 0.95f));
                 Splash(12, new Color(0.9f, 0.96f, 1f, 0.8f));
+                GameEvents.RaiseRescueLanded(3, 0.3f);
             }
             else if (diff < 0.32f && airTime > 0.35f && slopeAngle < 0.05f)
             {
                 perfectStreak++;
                 Stats.Perfects++;
                 speed = Mathf.Max(along, speed) * 1.1f;
+                shake = Mathf.Max(shake, 0.12f);
+                GameEvents.RaiseRescueLanded(1, Mathf.Clamp01(airTime / 1.5f));
                 Splash(28, new Color(1f, 0.9f, 0.55f, 0.95f));
                 score.AddBonus(25 * Mathf.Min(perfectStreak, 8));
                 GameEvents.RaisePerfectCrest(perfectStreak);
@@ -563,11 +614,13 @@ namespace MoonPull.Rescue
                 speed = Mathf.Max(minSpeed, along * 0.92f);
                 perfectStreak = 0;
                 Splash(16, new Color(0.9f, 0.96f, 1f, 0.85f));
+                GameEvents.RaiseRescueLanded(0, Mathf.Clamp01(airTime / 1.5f));
             }
             else
             {
                 // Belly flop: a big splash, most of the speed gone and someone falls overboard. Never a game over.
                 Stats.BellyFlops++;
+                GameEvents.RaiseRescueLanded(2, 1f);
                 if (diff > 1.15f)
                 {
                     HitHazard(); // a really hard slap: someone goes overboard
@@ -696,7 +749,7 @@ namespace MoonPull.Rescue
             while (nextCastawayAt < horizon)
             {
                 Add(Kind.Castaway, castawayPrefab, nextCastawayAt, 0f);
-                nextCastawayAt += 22f + (float)random.NextDouble() * 26f;
+                nextCastawayAt += 30f + (float)random.NextDouble() * 30f;
             }
 
             while (nextLanternAt < horizon)
@@ -776,6 +829,7 @@ namespace MoonPull.Rescue
                             t.Transform.gameObject.SetActive(false);
                             SetAboard(aboard + 1);
                             score.AddBonus(50);
+                            SplashAt(t.Transform.position + Vector3.up * 0.6f, 18, new Color(1f, 0.86f, 0.5f, 0.95f));
                             GameEvents.RaisePassengerBoarded(aboard);
                         }
 
@@ -788,6 +842,7 @@ namespace MoonPull.Rescue
                             lanternsCaught++;
                             moonlight = Mathf.Min(1f, moonlight + 0.035f);
                             score.AddBonus(20);
+                            SplashAt(t.Transform.position, 20, new Color(1f, 0.72f, 0.32f, 0.95f));
                             GameEvents.RaiseStarCollected(lanternsCaught);
                         }
 
@@ -831,6 +886,8 @@ namespace MoonPull.Rescue
 
             rescued += count;
             lighthousesLit++;
+            SplashAt(island.Transform.position + new Vector3(-0.8f, 6.1f, 0.4f), 45, new Color(1f, 0.93f, 0.62f, 1f));
+            shake = Mathf.Max(shake, 0.15f);
             moonlight = Mathf.Min(1f, moonlight + 0.14f + 0.04f * count);
             score.AddBonus(150 * count);
             SetAboard(0);
@@ -873,7 +930,9 @@ namespace MoonPull.Rescue
 
             VillageState.Simulate();
             int levelBefore = VillageState.Level;
-            VillageState.AddPeople(rescued);
+            int settled = VillageState.AddPeople(rescued);
+            // A full village cannot take everyone in: those who sail on to other harbors leave a thank-you fee.
+            int sailedOn = rescued - settled;
             LastSupplies = TycoonState.SuppliesFromNight(rescued, lanternsCaught);
             TycoonState.AddSupplies(LastSupplies);
             int levelReward = 0;
@@ -885,7 +944,8 @@ namespace MoonPull.Rescue
 
             int target = 3 + Mathf.Min(levelIndex, 30) / 2;
             int stars = rescued >= target * 2 ? 3 : rescued >= target ? 2 : 1;
-            int coins = Mathf.RoundToInt((rescued * 10 + lanternsCaught * 2) * VillageService.CoinMultiplier) + VillageService.DawnCoins(total) + levelReward;
+            int coins = Mathf.RoundToInt((rescued * 10 + lanternsCaught * 2) * VillageService.CoinMultiplier) + VillageService.DawnCoins(total) + levelReward
+                        + sailedOn * 6;
             Stats.Rescued = rescued;
             Stats.Lanterns = lanternsCaught;
             Stats.Lighthouses = lighthousesLit;
@@ -1020,17 +1080,47 @@ namespace MoonPull.Rescue
                     1f - Mathf.Exp(-12f * Time.deltaTime));
             }
 
+            if (wake != null)
+            {
+                wake.emitting = running && !airborne;
+            }
+
             if (cameraTransform != null && !VillageDirector.Active)
             {
-                // Side view that pulls back as the boat climbs, keeping the wave ahead in frame.
+                if (!cameraBaseValid)
+                {
+                    cameraBase = cameraTransform.position;
+                    cameraBaseValid = true;
+                }
+
+                // Side view that pulls back as the boat climbs and leads a little with speed, keeping the wave
+                // ahead in frame. High enough that the nearest swells never rise above the lens.
                 float altitude = Mathf.Max(0f, y - Height(x));
                 float back = 15f + altitude * 0.8f + (fever > 0f ? 1.5f : 0f);
+                float lead = running ? Mathf.Clamp(speed - minSpeed, 0f, 12f) * 0.12f : 0f;
+                Vector3 target = new Vector3(x + 1.8f + lead, 7f + Mathf.Max(0f, y) * 0.6f, -back);
+                cameraBase = Vector3.Lerp(cameraBase, target, 1f - Mathf.Exp(-7f * Time.deltaTime));
+
+                // Shake is applied on top of the smoothed position so impacts stay crisp.
                 shake = Mathf.MoveTowards(shake, 0f, Time.deltaTime);
                 Vector3 jitter = shake > 0f ? Random.insideUnitSphere * shake * 0.35f : Vector3.zero;
-                // High enough that the nearest swells never rise above the lens, tilted down onto the sea.
-                Vector3 target = new Vector3(x + 1.8f, 7f + Mathf.Max(0f, y) * 0.6f, -back) + jitter;
-                cameraTransform.position = Vector3.Lerp(cameraTransform.position, target, 1f - Mathf.Exp(-6f * Time.deltaTime));
+                cameraTransform.position = cameraBase + jitter;
                 cameraTransform.rotation = Quaternion.Euler(17f, 0f, 0f);
+
+                if (sceneCamera != null)
+                {
+                    // Speed reads as a wider lens: up to +9 degrees at full tilt, +3 more during Full Moon.
+                    float fov = 60f + (running ? Mathf.Clamp((speed - 11f) * 0.7f, 0f, 9f) + (fever > 0f ? 3f : 0f) : 0f);
+                    sceneCamera.fieldOfView = Mathf.Lerp(sceneCamera.fieldOfView, fov, 1f - Mathf.Exp(-3f * Time.deltaTime));
+                }
+            }
+            else
+            {
+                cameraBaseValid = false;
+                if (sceneCamera != null)
+                {
+                    sceneCamera.fieldOfView = 60f;
+                }
             }
 
             if (moonAnchor != null)

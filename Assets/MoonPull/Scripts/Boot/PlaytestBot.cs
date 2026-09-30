@@ -62,9 +62,9 @@ namespace MoonPull.Boot
             GameEvents.LevelCompleted += onDone;
 
             report.AppendLine("MOON PULL PLAYTEST BOT  skill=" + Skill + "  nights=" + Nights);
-            report.AppendLine("night lvl  secs  dist  rescued lost lant lh rocksHit/dodged flops perf hops stuck maxSpd coins supp | pop vLv income/h supplies coins");
+            report.AppendLine("night lvl  secs  dist  rescued lost lant lh rocksHit/dodged flops perf hops stuck maxSpd coins supp | pop/homes hap vLv income/h supplies coins");
             int firstPurchaseNight = -1;
-            float totalSecs = 0f, totalRescued = 0f, totalHit = 0f, totalDodged = 0f;
+            float totalSecs = 0f, totalRescued = 0f, totalHit = 0f, totalDodged = 0f, firstNightSecs = 0f;
             int totalStuck = 0;
             var purchases = new List<string>();
 
@@ -102,6 +102,11 @@ namespace MoonPull.Boot
                 }
 
                 NightRescue.NightStats s = rescue.Stats;
+                if (night == 1)
+                {
+                    firstNightSecs = s.Duration;
+                }
+
                 totalSecs += s.Duration;
                 totalRescued += s.Rescued;
                 totalHit += s.RocksHit;
@@ -121,11 +126,11 @@ namespace MoonPull.Boot
                 }
 
                 report.AppendLine(string.Format(
-                    "{0,5} {1,3} {2,5:0} {3,5:0} {4,7} {5,4} {6,4} {7,2} {8,8}/{9,-6} {10,5} {11,4} {12,4} {13,5} {14,6:0.0} {15,5} {16,4} | {17,3} {18,3} {19,8:0} {20,5:0}/{21,-3} {22}",
+                    "{0,5} {1,3} {2,5:0} {3,5:0} {4,7} {5,4} {6,4} {7,2} {8,8}/{9,-6} {10,5} {11,4} {12,4} {13,5} {14,6:0.0} {15,5} {16,4} | {17,3}/{23,-3} {24,3}% {18,3} {19,8:0} {20,5:0}/{21,-3} {22}",
                     night, s.Level + 1, s.Duration, s.Distance, s.Rescued, s.PassengersLost, s.Lanterns, s.Lighthouses, s.RocksHit, s.RocksDodged,
                     s.BellyFlops, s.Perfects, s.Hops, s.Unsticks, s.MaxSpeed, s.Coins, s.Supplies,
                     VillageState.Population, VillageState.Level, TycoonState.IncomePerMinute * 60f, TycoonState.Supplies, TycoonState.SupplyCapacity,
-                    meta.Wallet.Coins));
+                    meta.Wallet.Coins, VillageState.Housing, VillageState.Happiness));
             }
 
             GameEvents.LevelCompleted -= onDone;
@@ -157,6 +162,8 @@ namespace MoonPull.Boot
             if (totalRescued / n < 2f) warnings.Add($"WARN: few rescues per night ({totalRescued / n:0.0})");
             if (firstPurchaseNight < 0 || firstPurchaseNight > 3) warnings.Add($"WARN: first purchase only after night {firstPurchaseNight}");
             if (TycoonState.IslandsOwned == 0) warnings.Add("WARN: no island bought in 20 nights");
+            if (VillageState.Happiness < 50) warnings.Add($"WARN: village unhappy at the end ({VillageState.Happiness}%)");
+            if (firstNightSecs > 80f) warnings.Add($"WARN: first night too long ({firstNightSecs:0}s)");
             int newErrors = Errors.Count - errorsBefore;
             if (Errors.Count > 0) warnings.Add($"FAIL: {Errors.Count} errors/exceptions in the log ({newErrors} during the bot run)");
             foreach (string e in Errors)

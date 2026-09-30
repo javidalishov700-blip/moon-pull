@@ -149,6 +149,7 @@ namespace MoonPull.EditorTools
         {
             Image image = Image(parent, name, anchor, position, size, color, Art.ChunkyButton);
             var button = image.gameObject.AddComponent<Button>();
+            image.gameObject.AddComponent<ButtonFeel>();
             ColorBlock colors = button.colors;
             colors.pressedColor = new Color(0.85f, 0.85f, 0.85f);
             colors.disabledColor = new Color(0.55f, 0.55f, 0.6f, 0.6f);

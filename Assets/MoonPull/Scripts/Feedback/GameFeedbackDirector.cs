@@ -37,6 +37,7 @@ namespace MoonPull.Feedback
             GameEvents.FullMoonStarted += OnFullMoonStarted;
             GameEvents.FullMoonEnded += OnFullMoonEnded;
             GameEvents.WaveLaunched += OnWaveLaunched;
+            GameEvents.RescueLanded += OnRescueLanded;
             GameEvents.PerfectCrest += OnPerfectCrest;
             GameEvents.BoatBumped += OnBoatBumped;
             GameEvents.RunFailed += OnRunFailed;
@@ -63,6 +64,7 @@ namespace MoonPull.Feedback
             GameEvents.FullMoonStarted -= OnFullMoonStarted;
             GameEvents.FullMoonEnded -= OnFullMoonEnded;
             GameEvents.WaveLaunched -= OnWaveLaunched;
+            GameEvents.RescueLanded -= OnRescueLanded;
             GameEvents.PerfectCrest -= OnPerfectCrest;
             GameEvents.BoatBumped -= OnBoatBumped;
             GameEvents.RunFailed -= OnRunFailed;
@@ -109,7 +111,39 @@ namespace MoonPull.Feedback
 
         private void OnBoatBumped(int heartsLeft)
         {
-            audioService.PlaySfx(SfxId.ShieldHit);
+            // Hit-stop: a 70 ms freeze sells the impact, then the sea eases back to speed.
+            timeScale.RequestSlowMotion(0.08f, 0.07f, 0.18f);
+            audioService.PlaySfx(SfxId.Crash, 1.15f, 0.8f);
+            audioService.Duck(0.55f, 0.25f, 0.6f);
+            Haptic(HapticType.Heavy);
+        }
+
+        private void OnRescueLanded(int kind, float impact01)
+        {
+            switch (kind)
+            {
+                case 1: // perfect: sparkle over the splash
+                    audioService.PlaySfx(SfxId.Splash, 1.15f, 0.55f);
+                    Haptic(HapticType.Medium);
+                    break;
+                case 2: // belly flop: heavy slap, music dips
+                    audioService.PlaySfx(SfxId.Splash, 0.8f, 1f);
+                    audioService.Duck(0.35f, 0.15f, 0.4f);
+                    Haptic(HapticType.Medium);
+                    break;
+                case 3: // rock hop
+                    audioService.PlaySfx(SfxId.Splash, 1.3f, 0.35f);
+                    Haptic(HapticType.Light);
+                    break;
+                default:
+                    audioService.PlaySfx(SfxId.Splash, 1f, 0.3f + 0.5f * impact01);
+                    if (impact01 > 0.4f)
+                    {
+                        Haptic(HapticType.Light);
+                    }
+
+                    break;
+            }
         }
 
         private void OnPerfectCrest(int streak)
@@ -195,11 +229,16 @@ namespace MoonPull.Feedback
 
         private void OnPassengerBoarded(int onboard)
         {
-            audioService.PlaySfx(SfxId.PassengerBoard);
+            // Each castaway aboard rings a step higher, so a full boat sounds like a little fanfare.
+            audioService.PlaySfx(SfxId.PassengerBoard, Semitones(Mathf.Clamp(onboard - 1, 0, 7) * 2));
             Haptic(HapticType.Selection);
         }
 
-        private void OnPassengersDelivered(int count) => audioService.PlaySfx(SfxId.PassengerDeliver);
+        private void OnPassengersDelivered(int count)
+        {
+            audioService.PlaySfx(SfxId.PassengerDeliver);
+            Haptic(HapticType.Success);
+        }
 
         private void OnShield()
         {

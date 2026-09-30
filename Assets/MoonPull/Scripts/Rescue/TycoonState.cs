@@ -98,7 +98,7 @@ namespace MoonPull.Rescue
             !Owns(island) && (island == 0 || Owns(island - 1)) && VillageState.Level >= IslandVillageLevel[island]
             && VillageState.Population >= IslandPeople[island];
 
-        public static int ExtraHousing => 8 * IslandsOwned;
+        public static int ExtraHousing => 20 * IslandsOwned;
 
         public static float IncomeMultiplier => 1f + 0.25f * IslandsOwned;
 

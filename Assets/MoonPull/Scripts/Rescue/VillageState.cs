@@ -37,11 +37,14 @@ namespace MoonPull.Rescue
         /// <summary>Every building's level is capped by the village level (and by its own maximum).</summary>
         public static int BuildingLevelCap => Mathf.Min(VillageService.MaxLevel, 1 + (Level - 1) / 2);
 
-        public static int Housing => 6 + 6 * VillageService.Level(VillageBuilding.Shelter) + TycoonState.ExtraHousing;
+        public static int Housing => 10 + 15 * VillageService.Level(VillageBuilding.Shelter) + TycoonState.ExtraHousing;
 
-        public static float FoodPerHour => 2f + 5f * VillageService.Level(VillageBuilding.Restaurant);
+        /// <summary>The village takes in people up to a quarter over its homes; the rest sail on to other harbors.</summary>
+        public static int Capacity => Mathf.CeilToInt(Housing * 1.25f);
 
-        public static float EatingPerHour => Population * 0.3f;
+        public static float FoodPerHour => 4f + 12f * VillageService.Level(VillageBuilding.Restaurant) + 6f * TycoonState.IslandsOwned;
+
+        public static float EatingPerHour => Population * 0.12f;
 
         /// <summary>0..100. Fed, housed and entertained villagers are happy.</summary>
         public static int Happiness
@@ -112,15 +115,18 @@ namespace MoonPull.Rescue
             Changed?.Invoke();
         }
 
-        public static void AddPeople(int count)
+        /// <summary>Moves rescued people in (up to <see cref="Capacity"/>) and returns how many settled.</summary>
+        public static int AddPeople(int count)
         {
             if (count <= 0)
             {
-                return;
+                return 0;
             }
 
-            PlayerPrefs.SetInt(PopulationKey, Population + count);
-            AddXp(count * 10);
+            int settled = Mathf.Clamp(Capacity - Population, 0, count);
+            PlayerPrefs.SetInt(PopulationKey, Population + settled);
+            AddXp(count * 10); // every rescue counts for the village's reputation
+            return settled;
         }
 
         public static bool TryEat(float amount)

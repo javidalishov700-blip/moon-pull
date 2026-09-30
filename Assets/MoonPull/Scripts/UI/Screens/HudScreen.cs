@@ -39,6 +39,7 @@ namespace MoonPull.UI
         [SerializeField] private MoonPull.Rescue.NightRescue rescue;
         [SerializeField] private CanvasGroup coach;
         [SerializeField] private LocalizedText coachText;
+        [SerializeField] private Text aboardLabel;
 
         [Header("Moonstones / Full Moon")]
         [SerializeField] private GameObject moonstoneMeter;
@@ -73,6 +74,7 @@ namespace MoonPull.UI
 
         private float calloutHideAt;
         private string coachShown;
+        private int aboardShown = -1;
         private float fullMoonDuration = 1f;
         private float eclipseAt;
         private int lastEclipseSeconds = -1;
@@ -156,6 +158,15 @@ namespace MoonPull.UI
             if (coach == null || rescue == null)
             {
                 return;
+            }
+
+            int aboardNow = rescue.Aboard * 100 + rescue.Seats;
+            if (aboardLabel != null && aboardNow != aboardShown)
+            {
+                aboardShown = aboardNow;
+                aboardLabel.SetText("{0}/{1}", rescue.Aboard, rescue.Seats);
+                aboardLabel.color = rescue.Aboard >= rescue.Seats && rescue.Seats > 0 ? new Color(1f, 0.78f, 0.35f) : Color.white;
+                UiTween.Punch(aboardLabel.transform.parent, 0.25f, 0.25f);
             }
 
             string key = rescue.CoachKey;

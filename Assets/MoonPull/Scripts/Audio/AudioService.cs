@@ -47,9 +47,13 @@ namespace MoonPull.Audio
         public bool SfxEnabled { get; private set; } = true;
         public SfxLibrary Library => library;
 
+        /// <summary>The live service, for widgets that only need a click sound (UI buttons).</summary>
+        public static AudioService Current { get; private set; }
+
         private void Awake()
         {
             activeMusic = musicA;
+            Current = this;
         }
 
         public void SetMusicEnabled(bool enabled)

@@ -95,6 +95,9 @@ namespace MoonPull.EditorTools
             w.Camera.farClipPlane = 120f;
             w.Camera.clearFlags = CameraClearFlags.Skybox;
             Gen.Add<AudioListener>(cameraGo);
+            // Bloom + grade + vignette on the 3D view (the overlay UI stays crisp on top).
+            var post = Gen.Add<MoonPull.Gameplay.Visuals.MoonPullPost>(cameraGo);
+            Gen.Set(post, "shader", AssetDatabase.LoadAssetAtPath<Shader>("Assets/MoonPull/Art/Shaders/MoonPullPost.shader"));
             cameraGo.transform.position = content.Camera.Offset;
 
             GameObject lightGo = Gen.Go("Moonlight");

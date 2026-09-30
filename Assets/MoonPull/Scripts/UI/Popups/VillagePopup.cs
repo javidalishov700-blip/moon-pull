@@ -57,6 +57,8 @@ namespace MoonPull.UI
         [SerializeField] private LocalizedText[] islandLockedLabels = new LocalizedText[TycoonState.IslandCount];
 
         private int page;
+        private CanvasGroup fadingPage;
+        private float pageFade = 1f;
         private bool exploring;
 
         private float nextRefresh;
@@ -129,6 +131,15 @@ namespace MoonPull.UI
 
         protected override void OnUpdate()
         {
+            if (fadingPage != null && pageFade < 1f)
+            {
+                // Tab switch: the new page fades in and settles up from 24 units below.
+                pageFade = Mathf.Min(1f, pageFade + Time.unscaledDeltaTime / 0.18f);
+                float eased = 1f - (1f - pageFade) * (1f - pageFade);
+                fadingPage.alpha = eased;
+                ((RectTransform)fadingPage.transform).anchoredPosition = new Vector2(0f, -24f * (1f - eased));
+            }
+
             if (Time.unscaledTime >= nextRefresh)
             {
                 nextRefresh = Time.unscaledTime + 0.5f;
@@ -140,7 +151,7 @@ namespace MoonPull.UI
         private void SetExploring(bool value)
         {
             exploring = value;
-            VillageDirector.ShowIslandPins = value || page == 1;
+            VillageDirector.ShowIslandPins = value;
             if (exploreButton != null)
             {
                 exploreButton.GetComponentInChildren<LocalizedText>().SetKey(value ? LocKeys.VillageManage : LocKeys.VillageExplore);
@@ -173,12 +184,21 @@ namespace MoonPull.UI
             buildingsPage.SetActive(index == 0);
             islandsPage.SetActive(index == 1);
             boatPage.SetActive(index == 2);
+            GameObject shown = index == 0 ? buildingsPage : index == 1 ? islandsPage : boatPage;
+            fadingPage = shown.GetComponent<CanvasGroup>();
+            if (fadingPage == null)
+            {
+                fadingPage = shown.AddComponent<CanvasGroup>();
+            }
+
+            pageFade = 0f;
+            fadingPage.alpha = 0f;
             Color on = new Color(1f, 0.71f, 0.28f);
             Color off = new Color(0.25f, 0.3f, 0.55f);
             buildingsTab.GetComponent<Image>().color = index == 0 ? on : off;
             islandsTab.GetComponent<Image>().color = index == 1 ? on : off;
             boatTab.GetComponent<Image>().color = index == 2 ? on : off;
-            VillageDirector.ShowIslandPins = exploring || index == 1;
+            VillageDirector.ShowIslandPins = exploring;
             Refresh();
         }
 
