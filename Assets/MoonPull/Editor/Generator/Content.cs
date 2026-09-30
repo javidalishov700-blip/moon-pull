@@ -258,10 +258,14 @@ namespace MoonPull.EditorTools
 
             RescueIsland = Gen.SavePrefabObject(island, "Rescue", "Rescue_Island");
 
+            // A round cartoon hut: plump walls, a puffy thatched dome with a knob, a round door and a glowing window.
             GameObject house = Gen.Go("Village_House");
-            Gen.Prim(PrimitiveType.Cube, house.transform, new Vector3(0f, 0.35f, 0f), new Vector3(0.8f, 0.7f, 0.7f), Gen.Hex("E9D8B8"));
-            Gen.Prim(PrimitiveType.Cube, house.transform, new Vector3(0f, 0.82f, 0f), new Vector3(0.62f, 0.62f, 0.76f), Gen.Hex("B5533C"), new Vector3(0f, 0f, 45f));
-            Gen.Prim(PrimitiveType.Cube, house.transform, new Vector3(0.2f, 0.38f, -0.36f), new Vector3(0.18f, 0.18f, 0.02f), Gen.Hex("FFD37A"), default, 3f);
+            Transform ht = house.transform;
+            Gen.Prim(PrimitiveType.Cylinder, ht, new Vector3(0f, 0.3f, 0f), new Vector3(0.8f, 0.3f, 0.8f), Gen.Hex("F3E3C3"));
+            Gen.Prim(PrimitiveType.Sphere, ht, new Vector3(0f, 0.66f, 0f), new Vector3(1.05f, 0.62f, 1.05f), Gen.Hex("E0875F"));
+            Gen.Prim(PrimitiveType.Sphere, ht, new Vector3(0f, 0.98f, 0f), new Vector3(0.16f, 0.16f, 0.16f), Gen.Hex("F2CC8F"));
+            Gen.Prim(PrimitiveType.Sphere, ht, new Vector3(0f, 0.22f, -0.37f), new Vector3(0.24f, 0.36f, 0.08f), Gen.Hex("6B4A3A")); // door
+            Gen.Prim(PrimitiveType.Sphere, ht, new Vector3(0.24f, 0.36f, -0.3f), new Vector3(0.15f, 0.15f, 0.06f), Gen.Hex("FFD37A"), default, 3f); // window
             VillageHouse = Gen.SavePrefabObject(house, "Rescue", "Village_House");
         }
 
@@ -585,9 +589,9 @@ namespace MoonPull.EditorTools
         {
             RegionSpec[] specs =
             {
-                new RegionSpec { Id = "tropical_lagoon", Stars = 0, SkyTop = "1B1F4B", SkyBottom = "7A5C9E", Shallow = "6FE0D8", Deep = "1D4E7A", Foam = "F4FBFF", Fog = "8C8FB8", Rock = "5E6C8C", Bridge = "A67C52", Signature = "FF8FA3", SignatureKind = PlacementKind.LowObstacle, Idle = 60, Root = 261.63f, CostScale = 1f },
+                new RegionSpec { Id = "tropical_lagoon", Stars = 0, SkyTop = "1F2F6E", SkyBottom = "5F7FC8", Shallow = "4FD6D6", Deep = "1B4A8C", Foam = "FFFFFF", Fog = "5F7FC8", Rock = "5E6C8C", Bridge = "A67C52", Signature = "FF8FA3", SignatureKind = PlacementKind.LowObstacle, Idle = 60, Root = 261.63f, CostScale = 1f },
                 new RegionSpec { Id = "frozen_north", Stars = 35, SkyTop = "0E2140", SkyBottom = "5C7FB0", Shallow = "A8E6FF", Deep = "1E3F66", Foam = "FFFFFF", Fog = "B8C8DC", Rock = "8FA3BF", Bridge = "D8EEFF", Signature = "BFEFFF", SignatureKind = PlacementKind.HighObstacle, Idle = 90, Root = 293.66f, CostScale = 1.75f },
-                new RegionSpec { Id = "volcanic_isles", Stars = 80, SkyTop = "2A0F2E", SkyBottom = "B0554A", Shallow = "F2A279", Deep = "4A1E2E", Foam = "FFE6C7", Fog = "8A5A5A", Rock = "3E3440", Bridge = "6B4A3A", Signature = "FF6A3D", SignatureKind = PlacementKind.LowObstacle, Idle = 130, Root = 220f, CostScale = 2.5f },
+                new RegionSpec { Id = "volcanic_isles", Stars = 80, SkyTop = "2A0F2E", SkyBottom = "C97A6A", Shallow = "F2A279", Deep = "4A1E2E", Foam = "FFE6C7", Fog = "8A5A5A", Rock = "3E3440", Bridge = "6B4A3A", Signature = "FF6A3D", SignatureKind = PlacementKind.LowObstacle, Idle = 130, Root = 220f, CostScale = 2.5f },
                 new RegionSpec { Id = "sunken_city", Stars = 130, SkyTop = "0F2A33", SkyBottom = "3E8C8A", Shallow = "7FE3C4", Deep = "114A52", Foam = "E8FFF6", Fog = "6E9C9A", Rock = "8C8A70", Bridge = "C2B48A", Signature = "E8D9A8", SignatureKind = PlacementKind.HighObstacle, Idle = 180, Root = 246.94f, CostScale = 3.25f },
                 new RegionSpec { Id = "midnight_sea", Stars = 185, SkyTop = "05060F", SkyBottom = "2A2359", Shallow = "7F8CFF", Deep = "0C0F2E", Foam = "D6DBFF", Fog = "3C3A66", Rock = "3A3F5C", Bridge = "5A4E7A", Signature = "9DFFE5", SignatureKind = PlacementKind.LowObstacle, Idle = 240, Root = 196f, CostScale = 4f }
             };

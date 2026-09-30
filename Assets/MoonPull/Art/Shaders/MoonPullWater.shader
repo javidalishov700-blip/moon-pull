@@ -87,54 +87,59 @@ Shader "MoonPull/Water"
                 return s;
             }
 
+            // Cartoon sea, like casual mobile games: clean colour bands by wave height (deep troughs, bright teal
+            // faces, pale crests), a soft white foam cap along the tops, a smooth moon path and gentle haze. No noisy
+            // texture: every shape comes from the swells themselves.
             fixed4 frag (v2f i) : SV_Target
             {
                 float t = _MP_WaveTime;
                 float3 viewVec = _WorldSpaceCameraPos - i.worldPos;
                 float dist = length(viewVec);
                 float3 viewDir = viewVec / dist;
-
-                // Ripples fade with distance so the horizon stays calm instead of aliasing.
-                float rippleFade = saturate(1 - dist / (_DepthRange * 1.2));
                 float2 scrolled = i.worldPos.xz + float2(0, _MP_ScrollZ);
-                float2 slope = rippleSlope(scrolled, t) * _RippleStrength * rippleFade;
-                float3 n = normalize(i.normal + float3(-slope.x, 0, -slope.y));
 
-                // Body colour: deep water, lifted where light passes through the thin tops of the waves.
-                float crest01 = saturate(i.crest / max(_FoamHeight, 0.01) * 0.5 + 0.5);
-                float facing = saturate(dot(n, viewDir));
-                fixed3 body = lerp(_DeepColor.rgb, _ShallowColor.rgb * 0.8, crest01 * crest01 * (1 - facing * 0.5));
+                // Height 0..1 across the current swell size.
+                float amp = max(_MP_WaveAmp.x + _MP_WaveAmp.y + _MP_WaveAmp.z, 0.05);
+                float h = saturate(i.crest / amp * 0.5 + 0.5);
 
-                // Sky reflection by Fresnel, using the same gradient the sky dome draws.
-                float3 r = reflect(-viewDir, n);
-                fixed3 sky = lerp(_MP_SkyBottom.rgb, _MP_SkyTop.rgb, saturate(r.y * 1.4 + 0.3));
-                float fresnel = 0.04 + 0.96 * pow(1 - facing, 5);
-                fixed3 col = lerp(body, sky, saturate(fresnel * 1.15));
+                // Soft-banded body colour.
+                float band1 = smoothstep(0.30, 0.42, h);
+                float band2 = smoothstep(0.62, 0.72, h);
+                fixed3 deep = _DeepColor.rgb;
+                fixed3 mid = lerp(_DeepColor.rgb, _ShallowColor.rgb, 0.6);
+                fixed3 top = lerp(_ShallowColor.rgb, fixed3(1, 1, 1), 0.18);
+                fixed3 col = lerp(lerp(deep, mid, band1), top, band2);
 
-                // Soft moonlight diffuse so wave shapes stay readable.
+                // Gentle two-tone light so wave faces read round.
                 float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);
-                col *= 0.75 + 0.35 * saturate(dot(n, lightDir));
+                float ndl = dot(normalize(i.normal), lightDir);
+                col *= 0.82 + 0.22 * smoothstep(-0.1, 0.4, ndl);
 
-                // Moon glitter path: sharp specular towards the moon plus sparkles that twinkle on the ripples.
+                // Soft sky tint at grazing angles (keeps the horizon calm).
+                float facing = saturate(dot(normalize(i.normal), viewDir));
+                col = lerp(col, _MP_SkyBottom.rgb, pow(1 - facing, 4) * 0.35);
+
+                // Foam cap: a clean white rim along the highest part of each swell, with a slow wavy edge.
+                float wobble = sin(scrolled.x * 0.9 + t * 1.2) * 0.03 + sin(scrolled.y * 1.3 - t) * 0.03;
+                float foam = smoothstep(0.86 + wobble, 0.9 + wobble, h);
+                // A thin second line just below, like cartoon water drawings.
+                float line2 = smoothstep(0.02, 0.0, abs(h - 0.8 - wobble)) * 0.5;
+                col = lerp(col, _FoamColor.rgb, saturate(foam * 0.9 + line2 * 0.5));
+
+                // Moon path: a soft pale streak towards the moon, with a few smooth glints.
+                float3 r = reflect(-viewDir, normalize(i.normal));
                 float3 toMoon = normalize(_MP_MoonPos.xyz - i.worldPos);
-                float spec = pow(saturate(dot(r, toMoon)), 180);
-                float wide = pow(saturate(dot(r, toMoon)), 18);
-                float sparkle = step(0.93, valueNoise(scrolled * 6 + t * 1.3)) * wide;
+                float m = saturate(dot(r, toMoon));
                 float moonBright = saturate(_MP_MoonPos.w);
-                col += (spec * _GlitterStrength + wide * 0.18 + sparkle * 1.4) * moonBright * _LightColor0.rgb;
+                float glint = smoothstep(0.985, 0.995, m) * (0.5 + 0.5 * sin(scrolled.x * 3 + t * 2));
+                col += (pow(m, 30) * 0.25 + glint * 0.5) * moonBright * _LightColor0.rgb;
 
-                // Foam: only on the highest, steepest tips, broken up by noise so it reads as spray not paint.
-                float steep = 1 - saturate(i.normal.y);
-                float foamNoise = valueNoise(scrolled * 1.7 + float2(t * 0.6, 0)) * 0.6 + valueNoise(scrolled * 4.1 - t) * 0.4;
-                float foam = smoothstep(_FoamHeight * 0.75, _FoamHeight * 1.2, i.crest + steep * 0.6) * smoothstep(0.35, 0.7, foamNoise);
-                col = lerp(col, _FoamColor.rgb, foam * 0.85);
+                // Fade into the sky's horizon colour with distance.
+                float haze = saturate((dist - _DepthRange * 0.4) / _DepthRange);
+                col = lerp(col, _MP_SkyBottom.rgb, haze * haze * 0.85);
 
-                // Fade to the sky's horizon colour with distance for depth.
-                float haze = saturate((dist - _DepthRange * 0.35) / _DepthRange);
-                col = lerp(col, _MP_SkyBottom.rgb * 0.9, haze * haze);
-
-                col = lerp(col, col * _FullMoonTint.rgb * 1.5 + 0.08, _MP_FullMoon);
-                col *= 1 - _MP_Dark * 0.7; // the night deepens as the moonlight runs out
+                col = lerp(col, col * _FullMoonTint.rgb * 1.25 + 0.04, _MP_FullMoon);
+                col *= 1 - _MP_Dark * 0.6; // the night deepens as the moonlight runs out
                 fixed4 result = fixed4(col, 1);
                 UNITY_APPLY_FOG(i.fogCoord, result);
                 return result;

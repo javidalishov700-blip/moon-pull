@@ -65,46 +65,49 @@ Shader "MoonPull/Sky"
                 return smoothstep(radius, radius * 0.2, d) * twinkle;
             }
 
+            // Cartoon night sky: a smooth two-colour gradient with a warm glow on the horizon, a few big soft stars,
+            // a clean moon halo and puffy rounded clouds. No noise textures, so it reads calm and friendly.
+            float puff(float2 p, float2 c, float2 size)
+            {
+                // A cloud is a few overlapping circles on a flat base.
+                float2 q = (p - c) / size;
+                float d = min(min(length(q - float2(-0.55, 0)) - 0.45, length(q - float2(0.1, 0.18)) - 0.6),
+                              min(length(q - float2(0.7, 0.02)) - 0.42, length(q - float2(0.35, -0.05)) - 0.45));
+                d = max(d, -q.y - 0.3); // flat bottom
+                return smoothstep(0.04, -0.04, d);
+            }
+
             fixed4 frag (v2f i) : SV_Target
             {
                 float3 d = normalize(i.dir);
                 float t = _Time.y;
                 float up = saturate(d.y);
 
-                // Gradient with a warmer glow hugging the horizon.
-                fixed3 col = lerp(_MP_SkyBottom.rgb, _MP_SkyTop.rgb, saturate(pow(up, 0.6) * 1.2));
-                col += _MP_SkyBottom.rgb * 0.35 * exp(-up * 9);
+                fixed3 col = lerp(_MP_SkyBottom.rgb, _MP_SkyTop.rgb, smoothstep(0.0, 0.7, up));
+                col = lerp(col, _MP_SkyBottom.rgb * 1.15 + fixed3(0.06, 0.03, 0.0), exp(-up * 14) * 0.6); // horizon glow
 
-                // Spherical-ish mapping for the star layers (avoids pinching at the zenith for our view range).
                 float2 uv = float2(atan2(d.x, d.z) * 3.2, d.y * 5.5);
+                float starMask = smoothstep(0.12, 0.4, d.y);
+                col += stars(uv * 10, 0.28, 0.1, t) * starMask * 0.9;
 
-                // Milky band: faint, diagonal, broken up by noise.
-                float band = exp(-pow((d.y - d.x * 0.35 - 0.45) * 4, 2)) * fbm(uv * 1.3 + 4);
-                col += band * 0.12 * float3(0.8, 0.8, 1.0);
-
-                float starMask = smoothstep(0.02, 0.25, d.y);
-                float s = stars(uv * 18, 0.35, 0.09, t) + stars(uv * 42 + 11, 0.5, 0.12, t * 1.3) * 0.55;
-                col += s * starMask * float3(0.95, 0.95, 1.0);
-
-                // Moon halo: wide soft glow plus a tighter bright ring. Direction from camera to the moon.
                 float3 moonDir = normalize(_MP_MoonPos.xyz - _WorldSpaceCameraPos);
                 float m = saturate(dot(d, moonDir));
-                float moonBright = saturate(_MP_MoonPos.w) * (1 + _MP_FullMoon * 0.8);
-                col += (pow(m, 60) * 0.35 + pow(m, 600) * 0.6 + pow(m, 8) * 0.08) * moonBright * float3(0.9, 0.92, 1.0);
+                float moonBright = saturate(_MP_MoonPos.w) * (1 + _MP_FullMoon * 0.5);
+                col += (pow(m, 40) * 0.25 + pow(m, 400) * 0.35) * moonBright * fixed3(0.95, 0.95, 1.0);
 
-                // Clouds: two drifting fbm layers in a band above the horizon, rim-lit on the moon side.
-                float2 cuv = float2(atan2(d.x, d.z) * 2.2 + t * 0.012, d.y * 7);
-                float cloud = smoothstep(0.52, 0.8, fbm(cuv * float2(1, 2.2))) * smoothstep(0.03, 0.15, d.y) * smoothstep(0.55, 0.25, d.y);
-                float lit = pow(m, 6) * moonBright;
-                fixed3 cloudCol = lerp(_MP_SkyBottom.rgb * 0.55, _MP_SkyBottom.rgb * 1.2 + 0.1, lit);
-                col = lerp(col, cloudCol, cloud * 0.75);
+                // Puffy clouds drifting slowly along the lower sky.
+                float2 cp = float2(atan2(d.x, d.z) + t * 0.004, d.y);
+                float c = 0;
+                c = max(c, puff(cp, float2(-0.9, 0.16), float2(0.22, 0.07)));
+                c = max(c, puff(cp, float2(-0.2, 0.26), float2(0.16, 0.05)));
+                c = max(c, puff(cp, float2(0.45, 0.13), float2(0.26, 0.08)));
+                c = max(c, puff(cp, float2(1.2, 0.22), float2(0.2, 0.06)));
+                c = max(c, puff(cp, float2(2.3, 0.18), float2(0.24, 0.07)));
+                c = max(c, puff(cp, float2(-1.8, 0.2), float2(0.2, 0.06)));
+                fixed3 cloudCol = lerp(_MP_SkyTop.rgb, fixed3(0.85, 0.88, 1.0), 0.35 + 0.25 * pow(m, 4));
+                col = lerp(col, cloudCol, c * 0.85);
 
-                // Far islands: soft dark silhouettes sitting on the horizon line.
-                float ridge = 0.03 * fbm(float2(atan2(d.x, d.z) * 6, 1.7)) * smoothstep(0.55, 0.8, noise(float2(atan2(d.x, d.z) * 1.5, 9)));
-                float island = smoothstep(ridge, ridge - 0.004, d.y) * smoothstep(-0.02, 0.0, d.y);
-                col = lerp(col, _MP_SkyTop.rgb * 0.55, island * 0.0); // silhouettes disabled: read as a flat line
-
-                col *= 1 - _MP_Dark * 0.7; // the night deepens as the moonlight runs out
+                col *= 1 - _MP_Dark * 0.6; // the night deepens as the moonlight runs out
                 return fixed4(col, 1);
             }
             ENDCG

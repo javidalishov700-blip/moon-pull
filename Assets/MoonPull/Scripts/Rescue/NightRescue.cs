@@ -283,7 +283,7 @@ namespace MoonPull.Rescue
             holding = ForcedHold ?? ReadHold();
 
             // Swells grow the further out you sail: more air, more speed, more to master.
-            ampScale = Mathf.Lerp(1f, 1.7f, Mathf.Clamp01((x - startX) / 1400f));
+            ampScale = Mathf.Lerp(1f, 1.4f, Mathf.Clamp01((x - startX) / 1400f));
 
             if (airborne)
             {
