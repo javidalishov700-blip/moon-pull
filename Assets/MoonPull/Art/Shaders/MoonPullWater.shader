@@ -103,21 +103,21 @@ Shader "MoonPull/Water"
                 float h = saturate(i.crest / amp * 0.5 + 0.5);
 
                 // Soft-banded body colour.
-                float band1 = smoothstep(0.30, 0.42, h);
-                float band2 = smoothstep(0.62, 0.72, h);
+                float band1 = smoothstep(0.32, 0.4, h);
+                float band2 = smoothstep(0.64, 0.7, h);
                 fixed3 deep = _DeepColor.rgb;
-                fixed3 mid = lerp(_DeepColor.rgb, _ShallowColor.rgb, 0.6);
-                fixed3 top = lerp(_ShallowColor.rgb, fixed3(1, 1, 1), 0.18);
+                fixed3 mid = lerp(_DeepColor.rgb, _ShallowColor.rgb, 0.5);
+                fixed3 top = _ShallowColor.rgb;
                 fixed3 col = lerp(lerp(deep, mid, band1), top, band2);
 
                 // Gentle two-tone light so wave faces read round.
                 float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);
                 float ndl = dot(normalize(i.normal), lightDir);
-                col *= 0.82 + 0.22 * smoothstep(-0.1, 0.4, ndl);
+                col *= 0.9 + 0.1 * smoothstep(-0.1, 0.4, ndl);
 
                 // Soft sky tint at grazing angles (keeps the horizon calm).
                 float facing = saturate(dot(normalize(i.normal), viewDir));
-                col = lerp(col, _MP_SkyBottom.rgb, pow(1 - facing, 4) * 0.35);
+                col = lerp(col, _MP_SkyBottom.rgb, pow(1 - facing, 4) * 0.15);
 
                 // Foam cap: a clean white rim along the highest part of each swell, with a slow wavy edge.
                 float wobble = sin(scrolled.x * 0.9 + t * 1.2) * 0.03 + sin(scrolled.y * 1.3 - t) * 0.03;
@@ -132,13 +132,15 @@ Shader "MoonPull/Water"
                 float m = saturate(dot(r, toMoon));
                 float moonBright = saturate(_MP_MoonPos.w);
                 float glint = smoothstep(0.985, 0.995, m) * (0.5 + 0.5 * sin(scrolled.x * 3 + t * 2));
-                col += (pow(m, 30) * 0.25 + glint * 0.5) * moonBright * _LightColor0.rgb;
+                // Only out towards the horizon, so the water around the boat stays clean.
+                float far = smoothstep(12, 30, dist);
+                col += (pow(m, 60) * 0.2 + glint * 0.35) * far * moonBright * _LightColor0.rgb;
 
                 // Fade into the sky's horizon colour with distance.
                 float haze = saturate((dist - _DepthRange * 0.4) / _DepthRange);
                 col = lerp(col, _MP_SkyBottom.rgb, haze * haze * 0.85);
 
-                col = lerp(col, col * _FullMoonTint.rgb * 1.25 + 0.04, _MP_FullMoon);
+                col = lerp(col, col * _FullMoonTint.rgb * 1.1 + 0.03, _MP_FullMoon);
                 col *= 1 - _MP_Dark * 0.6; // the night deepens as the moonlight runs out
                 fixed4 result = fixed4(col, 1);
                 UNITY_APPLY_FOG(i.fogCoord, result);

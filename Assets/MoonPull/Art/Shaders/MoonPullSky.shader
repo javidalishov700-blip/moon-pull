@@ -104,7 +104,7 @@ Shader "MoonPull/Sky"
                 c = max(c, puff(cp, float2(1.2, 0.22), float2(0.2, 0.06)));
                 c = max(c, puff(cp, float2(2.3, 0.18), float2(0.24, 0.07)));
                 c = max(c, puff(cp, float2(-1.8, 0.2), float2(0.2, 0.06)));
-                fixed3 cloudCol = lerp(_MP_SkyTop.rgb, fixed3(0.85, 0.88, 1.0), 0.35 + 0.25 * pow(m, 4));
+                fixed3 cloudCol = lerp(_MP_SkyBottom.rgb, fixed3(0.92, 0.94, 1.0), 0.5 + 0.3 * pow(m, 4));
                 col = lerp(col, cloudCol, c * 0.85);
 
                 col *= 1 - _MP_Dark * 0.6; // the night deepens as the moonlight runs out

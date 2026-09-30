@@ -589,7 +589,7 @@ namespace MoonPull.EditorTools
         {
             RegionSpec[] specs =
             {
-                new RegionSpec { Id = "tropical_lagoon", Stars = 0, SkyTop = "1F2F6E", SkyBottom = "5F7FC8", Shallow = "4FD6D6", Deep = "1B4A8C", Foam = "FFFFFF", Fog = "5F7FC8", Rock = "5E6C8C", Bridge = "A67C52", Signature = "FF8FA3", SignatureKind = PlacementKind.LowObstacle, Idle = 60, Root = 261.63f, CostScale = 1f },
+                new RegionSpec { Id = "tropical_lagoon", Stars = 0, SkyTop = "1F2F6E", SkyBottom = "5F7FC8", Shallow = "5CC4EA", Deep = "1F5AA8", Foam = "FFFFFF", Fog = "5F7FC8", Rock = "5E6C8C", Bridge = "A67C52", Signature = "FF8FA3", SignatureKind = PlacementKind.LowObstacle, Idle = 60, Root = 261.63f, CostScale = 1f },
                 new RegionSpec { Id = "frozen_north", Stars = 35, SkyTop = "0E2140", SkyBottom = "5C7FB0", Shallow = "A8E6FF", Deep = "1E3F66", Foam = "FFFFFF", Fog = "B8C8DC", Rock = "8FA3BF", Bridge = "D8EEFF", Signature = "BFEFFF", SignatureKind = PlacementKind.HighObstacle, Idle = 90, Root = 293.66f, CostScale = 1.75f },
                 new RegionSpec { Id = "volcanic_isles", Stars = 80, SkyTop = "2A0F2E", SkyBottom = "C97A6A", Shallow = "F2A279", Deep = "4A1E2E", Foam = "FFE6C7", Fog = "8A5A5A", Rock = "3E3440", Bridge = "6B4A3A", Signature = "FF6A3D", SignatureKind = PlacementKind.LowObstacle, Idle = 130, Root = 220f, CostScale = 2.5f },
                 new RegionSpec { Id = "sunken_city", Stars = 130, SkyTop = "0F2A33", SkyBottom = "3E8C8A", Shallow = "7FE3C4", Deep = "114A52", Foam = "E8FFF6", Fog = "6E9C9A", Rock = "8C8A70", Bridge = "C2B48A", Signature = "E8D9A8", SignatureKind = PlacementKind.HighObstacle, Idle = 180, Root = 246.94f, CostScale = 3.25f },

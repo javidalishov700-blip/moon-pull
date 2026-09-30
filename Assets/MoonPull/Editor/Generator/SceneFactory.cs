@@ -222,6 +222,7 @@ namespace MoonPull.EditorTools
             // stay in the scene only for the sea surface mesh, the score and the meta flows that reference them.
             var sail = Gen.Add<MoonPull.Rescue.NightRescue>(Gen.Go("NightRescue", gameplay));
             Transform sailBoat = Gen.Go("RescueBoat", gameplay).transform;
+            sailBoat.localScale = Vector3.one * 1.4f; // a chunkier, friendlier boat that reads well on a phone
             Gen.Wire(sail, "session", w.Session, "score", score, "water", water, "cameraRig", rig,
                 "cameraTransform", cameraGo.transform, "moonAnchor", moonAnchor, "legacyBoat", boatGo, "boatRoot", sailBoat,
                 "castawayPrefab", content.RescueCastaway, "passengerPrefab", content.RescuePassenger,
