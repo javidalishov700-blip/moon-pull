@@ -64,64 +64,6 @@ namespace MoonPull.UI
         protected override void Awake()
         {
             base.Awake();
-            int treasury = TycoonState.Treasury;
-            treasuryLabel.SetText("{0}", treasury);
-            if (TycoonState.OutOfSupplies)
-            {
-                incomeLabel.SetKey(LocKeys.VillageNoSupplies);
-                incomeLabel.GetComponent<Text>().color = new Color(1f, 0.5f, 0.45f);
-            }
-            else
-            {
-                incomeLabel.SetKey(LocKeys.VillageIncome, Mathf.RoundToInt(TycoonState.IncomePerMinute * 60f));
-                incomeLabel.GetComponent<Text>().color = new Color(0.5f, 0.89f, 0.77f);
-            }
-
-            suppliesLabel.SetKey(LocKeys.VillageSupplies, Mathf.FloorToInt(TycoonState.Supplies), TycoonState.SupplyCapacity,
-                Mathf.Min(VillageState.Population, TycoonState.JobsTotal), TycoonState.JobsTotal);
-            treasuryFill.fillAmount = Mathf.Clamp01(treasury / TycoonState.Capacity);
-            collectButton.interactable = treasury > 0;
-
-            for (int i = 0; i < islandButtons.Length; i++)
-            {
-                bool owned = TycoonState.Owns(i);
-                bool canBuy = TycoonState.CanBuyNext(i);
-                bool previousOwned = i == 0 || TycoonState.Owns(i - 1);
-                islandButtons[i].gameObject.SetActive(canBuy);
-                islandButtons[i].interactable = canBuy && meta.Wallet.CanAfford(TycoonState.IslandCost(i));
-                islandCostLabels[i].transform.parent.gameObject.SetActive(!owned);
-                islandCostLabels[i].SetText("{0}", TycoonState.IslandCost(i));
-                islandOwnedLabels[i].SetActive(owned);
-                islandLockedLabels[i].gameObject.SetActive(!owned && !canBuy);
-                if (!owned && !canBuy)
-                {
-                    if (previousOwned && VillageState.Population < TycoonState.IslandRequiredPeople(i))
-                    {
-                        islandLockedLabels[i].SetKey(LocKeys.VillageNeedsPeople, TycoonState.IslandRequiredPeople(i));
-                    }
-                    else if (previousOwned)
-                    {
-                        islandLockedLabels[i].SetKey(LocKeys.VillageNeedsLevel, TycoonState.IslandRequiredLevel(i));
-                    }
-                    else
-                    {
-                        islandLockedLabels[i].SetKey(LocKeys.IslandBuyPrevious);
-                    }
-                }
-            }
-
-            for (int i = 0; i < boatButtons.Length; i++)
-            {
-                var part = (BoatPart)i;
-                int cost = BoatUpgrades.NextCost(part);
-                boatLevelLabels[i].SetText("{0}/{1}", BoatUpgrades.Level(part), BoatUpgrades.MaxLevel);
-                boatButtons[i].gameObject.SetActive(cost >= 0);
-                boatButtons[i].interactable = cost >= 0 && meta.Wallet.CanAfford(cost);
-                boatCostLabels[i].transform.parent.gameObject.SetActive(cost >= 0);
-                boatCostLabels[i].SetText("{0}", Mathf.Max(0, cost));
-                boatMaxLabels[i].SetActive(cost < 0);
-            }
-
             for (int i = 0; i < upgradeButtons.Length; i++)
             {
                 var building = (VillageBuilding)i;
