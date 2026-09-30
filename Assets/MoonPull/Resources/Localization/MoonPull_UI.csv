@@ -1,4 +1,19 @@
 Key,English(en),Turkish(tr),Spanish(es),Portuguese (Brazil)(pt-BR),German(de),French(fr),Russian(ru),Japanese(ja)
+village.market.desc,The village pays you coins at dawn,Köy her sabah para verir,La aldea te paga al amanecer,A vila paga moedas ao amanhecer,Das Dorf zahlt dir Münzen im Morgengrauen,Le village te paie à l'aube,Деревня платит монеты на рассвете,夜明けに村がコインをくれる
+village.market.name,Market,Pazar,Mercado,Mercado,Markt,Marché,Рынок,市場
+village.shipyard.desc,A faster boat,Daha hızlı tekne,Un barco más rápido,Um barco mais rápido,Ein schnelleres Boot,Un bateau plus rapide,Быстрее лодка,より速いボート
+village.shipyard.name,Shipyard,Tersane,Astillero,Estaleiro,Werft,Chantier naval,Верфь,造船所
+village.workshop.desc,+12% longer night,Gece %12 daha uzun,Noche +12% más larga,Noite +12% mais longa,Nacht +12% länger,Nuit +12% plus longue,Ночь на 12% длиннее,夜が12%長くなる
+village.workshop.name,Lamp Workshop,Fener Atölyesi,Taller de faroles,Oficina de lanternas,Laternenwerkstatt,Atelier des lanternes,Мастерская фонарей,ランプ工房
+village.restaurant.desc,+30% coins per rescue,Kurtarma başına +%30 para,+30% monedas por rescate,+30% moedas por resgate,+30% Münzen pro Rettung,+30% de pièces par sauvetage,+30% монет за спасение,救助ごとのコイン+30%
+village.restaurant.name,Restaurant,Restoran,Restaurante,Restaurante,Restaurant,Restaurant,Ресторан,レストラン
+village.shelter.desc,+1 seat on your boat,Teknede +1 yer,+1 asiento en el barco,+1 lugar no barco,+1 Platz im Boot,+1 place dans le bateau,+1 место в лодке,ボートの座席+1
+village.shelter.name,Shelter,Barınak,Refugio,Abrigo,Unterkunft,Abri,Приют,避難所
+village.max,Complete,Tamamlandı,Completo,Completo,Fertig,Terminé,Готово,完成
+village.upgrade,Build,İnşa et,Construir,Construir,Bauen,Construire,Строить,建てる
+village.population,"{0} people live here","Burada {0} kişi yaşıyor","Aquí viven {0} personas","{0} pessoas moram aqui","{0} Leute wohnen hier","{0} habitants","Здесь живут {0} чел.","{0}人が暮らしています"
+village.title,Your Village,Köyün,Tu aldea,Sua vila,Dein Dorf,Ton village,Твоя деревня,あなたの村
+menu.lighthouse,Village,Köy,Aldea,Vila,Dorf,Village,Деревня,村
 hud.lighthouse_lit,"Lighthouse lit! +{0} saved","Fener yandı! +{0} kurtarıldı","¡Faro encendido! +{0} a salvo","Farol aceso! +{0} salvos","Leuchtturm an! +{0} gerettet","Phare allumé ! +{0} sauvés","Маяк зажжён! +{0} спасено","灯台点灯！+{0}人救助"
 common.ok,OK,Tamam,OK,OK,OK,OK,ОК,OK
 common.close,Close,Kapat,Cerrar,Fechar,Schließen,Fermer,Закрыть,閉じる
@@ -16,7 +31,6 @@ menu.play,PLAY,OYNA,JUGAR,JOGAR,SPIELEN,JOUER,ИГРАТЬ,プレイ
 menu.level,Level {0},Bölüm {0},Nivel {0},Fase {0},Level {0},Niveau {0},Уровень {0},レベル {0}
 menu.shop,Shop,Mağaza,Tienda,Loja,Shop,Boutique,Магазин,ショップ
 menu.boats,Boats,Tekneler,Barcos,Barcos,Boote,Bateaux,Лодки,ボート
-menu.lighthouse,Lighthouse,Deniz Feneri,Faro,Farol,Leuchtturm,Phare,Маяк,灯台
 menu.missions,Missions,Görevler,Misiones,Missões,Missionen,Missions,Задания,ミッション
 menu.spin,Daily Spin,Günlük Çark,Ruleta diaria,Roleta diária,Tagesrad,Roue du jour,Колесо дня,デイリースピン
 menu.settings,Settings,Ayarlar,Ajustes,Configurações,Einstellungen,Paramètres,Настройки,設定

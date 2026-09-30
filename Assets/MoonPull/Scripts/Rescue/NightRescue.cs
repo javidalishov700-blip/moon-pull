@@ -113,6 +113,9 @@ namespace MoonPull.Rescue
         private float shake;
         private int levelIndex;
         private float runTime;
+        private int seats;
+        private float nightLength;
+        private float speedBonus;
 
         /// <summary>Capture player / automation: overrides the touch input while set.</summary>
         public bool? ForcedHold { get; set; }
@@ -190,13 +193,18 @@ namespace MoonPull.Rescue
             random = new System.Random(4211 + levelIndex * 977);
             ClearThings();
             SetBoat(boat);
+
+            // What the village has built so far shapes tonight's run.
+            seats = capacity + VillageService.ExtraSeats;
+            nightLength = nightSeconds * VillageService.NightMultiplier * Mathf.Lerp(1f, 0.8f, Mathf.Clamp01(args.LevelIndex / 30f));
+            speedBonus = VillageService.SpeedBonus;
             SetAboard(0);
 
             startX = x = 0f;
             waveTime = 0f;
             ampScale = 1f;
             y = Height(x);
-            speed = startSpeed;
+            speed = startSpeed + speedBonus;
             vx = speed;
             vy = 0f;
             airborne = false;
@@ -257,8 +265,7 @@ namespace MoonPull.Rescue
             else
             {
                 // The night gets a little shorter each level, but lighthouses always buy it back.
-                float night = nightSeconds * Mathf.Lerp(1f, 0.8f, Mathf.Clamp01(levelIndex / 30f));
-                moonlight -= deltaTime / night;
+                moonlight -= deltaTime / Mathf.Max(5f, nightLength);
             }
 
             SpawnAhead();
@@ -310,7 +317,8 @@ namespace MoonPull.Rescue
                 speed = Mathf.MoveTowards(speed, minSpeed, 6f * dt); // the wind never lets the boat stall
             }
 
-            speed = Mathf.Min(speed, fever > 0f ? maxSpeed * 1.2f : maxSpeed);
+            float cap = maxSpeed + speedBonus;
+            speed = Mathf.Min(speed, fever > 0f ? cap * 1.2f : cap);
 
             float nx = x + speed * inv * dt;
             float ny = Height(nx);
@@ -456,7 +464,7 @@ namespace MoonPull.Rescue
                 switch (t.Kind)
                 {
                     case Kind.Castaway:
-                        if (dx < 1.1f && y - Height(t.X) < 1.4f && aboard < capacity)
+                        if (dx < 1.1f && y - Height(t.X) < 1.4f && aboard < seats)
                         {
                             t.Done = true;
                             t.Transform.gameObject.SetActive(false);
@@ -548,7 +556,8 @@ namespace MoonPull.Rescue
 
             int target = 3 + Mathf.Min(levelIndex, 30) / 2;
             int stars = rescued >= target * 2 ? 3 : rescued >= target ? 2 : 1;
-            var result = new LevelResult(levelIndex, stars, score.Score, runTime, lanternsCaught, rescued * 10 + lanternsCaught * 2,
+            int coins = Mathf.RoundToInt((rescued * 10 + lanternsCaught * 2) * VillageService.CoinMultiplier) + VillageService.DawnCoins(total);
+            var result = new LevelResult(levelIndex, stars, score.Score, runTime, lanternsCaught, coins,
                 0, rescued, lighthousesLit, false, false);
             GameEvents.RaiseLevelCompleted(result);
         }
@@ -575,10 +584,10 @@ namespace MoonPull.Rescue
         private void SetAboard(int count)
         {
             aboard = count;
-            while (aboardFigures.Count < capacity && passengerPrefab != null && boatRoot != null)
+            while (aboardFigures.Count < Mathf.Max(seats, capacity) && passengerPrefab != null && boatRoot != null)
             {
                 GameObject figure = Instantiate(passengerPrefab, boatRoot);
-                figure.transform.localPosition = new Vector3(-0.55f + aboardFigures.Count * 0.42f, 0.28f, 0f);
+                figure.transform.localPosition = new Vector3(-0.7f + aboardFigures.Count * 0.34f, 0.28f, 0f);
                 aboardFigures.Add(figure);
             }
 

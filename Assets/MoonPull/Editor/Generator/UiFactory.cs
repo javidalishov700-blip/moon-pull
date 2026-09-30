@@ -66,11 +66,12 @@ namespace MoonPull.EditorTools
             LighthousePopup lighthouse = BuildLighthouse(bannerSafe, idle);
             BossChestPopup chest = BuildBossChest(bannerSafe);
             PausePopup pause = BuildPause(bannerSafe);
-            MenuScreen menu = BuildMenu(bannerSafe, idle, streak, spin, missions, settings, lighthouse, chest);
+            VillagePopup village = BuildVillage(bannerSafe);
+            MenuScreen menu = BuildMenu(bannerSafe, idle, streak, spin, missions, settings, village, chest);
             Gen.Wire(hud, "pausePopup", pause);
 
             // Popups draw above every full screen (the menu is built last because it references them).
-            foreach (Component popup in new Component[] { idle, streak, spin, missions, settings, lighthouse, chest, pause })
+            foreach (Component popup in new Component[] { idle, streak, spin, missions, settings, lighthouse, village, chest, pause })
             {
                 popup.transform.SetAsLastSibling();
             }
@@ -662,6 +663,40 @@ namespace MoonPull.EditorTools
                 "completeLabel", complete.gameObject, "buildButton", build, "costLabel", cost, "previousButton", prev, "nextButton", next,
                 "collectButton", collect, "idlePopup", idle);
             Gen.SetArray(popup, "stagePips", pips);
+            return popup;
+        }
+
+        private static VillagePopup BuildVillage(Transform parent)
+        {
+            var popup = Popup<VillagePopup>(parent, "Village", LocKeys.VillageTitle, new Vector2(980f, 1400f), out RectTransform p);
+            LocalizedText population = Loc(p, "Population", LocKeys.VillagePopulation, 40, Center, new Vector2(0f, 520f), new Vector2(800f, 60f), Accent);
+            string[] ids = { "shelter", "restaurant", "workshop", "shipyard", "market" };
+            Color[] tints = { Gen.Hex("81B29A"), Gen.Hex("E07A5F"), Gen.Hex("F2CC8F"), Gen.Hex("7FA7D9"), Gen.Hex("C39BD3") };
+            var levels = new List<Text>();
+            var buttons = new List<Button>();
+            var costs = new List<Text>();
+            var maxes = new List<GameObject>();
+            for (int i = 0; i < ids.Length; i++)
+            {
+                float y = 370f - i * 205f;
+                Image row = Image(p, "Row_" + ids[i], Center, new Vector2(0f, y), new Vector2(900f, 185f), PanelLight);
+                Image(row.transform, "Icon", new Vector2(0f, 0.5f), new Vector2(80f, 0f), new Vector2(110f, 110f), tints[i], Art.Circle);
+                Loc(row.transform, "Name", "village." + ids[i] + ".name", 40, new Vector2(0f, 0.5f), new Vector2(330f, 34f), new Vector2(380f, 56f), TextLight, TextAnchor.MiddleLeft, true);
+                Loc(row.transform, "Desc", "village." + ids[i] + ".desc", 28, new Vector2(0f, 0.5f), new Vector2(330f, -26f), new Vector2(380f, 70f), Muted, TextAnchor.MiddleLeft);
+                levels.Add(Text(row.transform, "Level", "0/3", 34, new Vector2(1f, 0.5f), new Vector2(-330f, 0f), new Vector2(100f, 60f), Gold, TextAnchor.MiddleCenter, true));
+                Button build = Button(row.transform, "Build", LocKeys.VillageUpgrade, new Vector2(1f, 0.5f), new Vector2(-140f, 22f), new Vector2(230f, 80f), Primary, 34);
+                Image costBg = Image(row.transform, "Cost", new Vector2(1f, 0.5f), new Vector2(-140f, -44f), new Vector2(230f, 52f), new Color(0f, 0f, 0f, 0.3f));
+                CoinIcon(costBg.transform, new Vector2(0f, 0.5f), new Vector2(30f, 0f), 40f);
+                costs.Add(Text(costBg.transform, "Amount", "0", 30, Center, new Vector2(20f, 0f), new Vector2(160f, 48f), Gold, TextAnchor.MiddleCenter, true));
+                buttons.Add(build);
+                maxes.Add(Loc(row.transform, "Max", LocKeys.VillageMax, 34, new Vector2(1f, 0.5f), new Vector2(-140f, 0f), new Vector2(230f, 60f), Accent, TextAnchor.MiddleCenter, true).gameObject);
+            }
+
+            Gen.Wire(popup, "meta", w.Meta, "populationLabel", population);
+            Gen.SetArray(popup, "levelLabels", levels);
+            Gen.SetArray(popup, "upgradeButtons", buttons);
+            Gen.SetArray(popup, "costLabels", costs);
+            Gen.SetArray(popup, "maxLabels", maxes);
             return popup;
         }
 

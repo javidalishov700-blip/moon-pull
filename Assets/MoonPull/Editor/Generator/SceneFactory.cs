@@ -250,6 +250,31 @@ namespace MoonPull.EditorTools
             }
 
             Gen.SetArray<GameObject>(village, "houses", houses);
+
+            // Village buildings: each gains a visible part per level (base, extension, lit roof sign).
+            Color[] tints = { Gen.Hex("81B29A"), Gen.Hex("E07A5F"), Gen.Hex("F2CC8F"), Gen.Hex("7FA7D9"), Gen.Hex("C39BD3") };
+            var tiers = new List<GameObject>();
+            for (int b = 0; b < 5; b++)
+            {
+                Transform site = Gen.Go("Building_" + b, island.transform).transform;
+                site.localPosition = new Vector3(-3.2f + b * 1.6f, 0.5f, -1.4f);
+                GameObject t1 = Gen.Go("Tier1", site);
+                Gen.Prim(PrimitiveType.Cube, t1.transform, new Vector3(0f, 0.45f, 0f), new Vector3(1.1f, 0.9f, 0.9f), Gen.Hex("EFE3C8"));
+                Gen.Prim(PrimitiveType.Cube, t1.transform, new Vector3(0f, 1.05f, 0f), new Vector3(0.85f, 0.85f, 1.0f), tints[b], new Vector3(0f, 0f, 45f));
+                Gen.Prim(PrimitiveType.Cube, t1.transform, new Vector3(0f, 0.35f, -0.46f), new Vector3(0.25f, 0.4f, 0.02f), Gen.Hex("6B4A34"));
+                GameObject t2 = Gen.Go("Tier2", site);
+                Gen.Prim(PrimitiveType.Cube, t2.transform, new Vector3(0.55f, 0.35f, 0.1f), new Vector3(0.6f, 0.7f, 0.7f), Gen.Hex("E6D3AE"));
+                Gen.Prim(PrimitiveType.Cube, t2.transform, new Vector3(-0.25f, 0.55f, -0.46f), new Vector3(0.22f, 0.22f, 0.02f), Gen.Hex("FFD37A"), default, 3f);
+                GameObject t3 = Gen.Go("Tier3", site);
+                Gen.Prim(PrimitiveType.Cube, t3.transform, new Vector3(0f, 1.75f, 0f), new Vector3(0.7f, 0.28f, 0.06f), tints[b], default, 1.5f);
+                Gen.Prim(PrimitiveType.Sphere, t3.transform, new Vector3(0f, 1.0f, -0.6f), new Vector3(2.2f, 2.2f, 2.2f), Color.white)
+                    .GetComponent<MeshRenderer>().sharedMaterial = Art.Glow(new Color(1f, 0.85f, 0.5f, 0.15f));
+                tiers.Add(t1);
+                tiers.Add(t2);
+                tiers.Add(t3);
+            }
+
+            Gen.SetArray<GameObject>(village, "buildingTiers", tiers);
             Gen.Prim(PrimitiveType.Sphere, island.transform, new Vector3(0f, -1.2f, 0f), new Vector3(7f, 3f, 5f), Gen.Hex("5E7A5A"));
             Gen.Prim(PrimitiveType.Sphere, island.transform, new Vector3(0f, -1.45f, 0f), new Vector3(8f, 2.6f, 6f), Gen.Hex("E8D3A0"));
             Transform stageRoot = Gen.Go("StageRoot", island.transform).transform;

@@ -30,6 +30,10 @@ namespace MoonPull.Localization
         public const string HudBumped = "hud.bumped";
         public const string HudSteerHint = "hud.steer_hint";
         public const string HudLighthouseLit = "hud.lighthouse_lit";
+        public const string VillageTitle = "village.title";
+        public const string VillagePopulation = "village.population";
+        public const string VillageUpgrade = "village.upgrade";
+        public const string VillageMax = "village.max";
         public const string HudMultiplier = "hud.multiplier";
         public const string HudFullMoon = "hud.full_moon";
         public const string HudMoonstones = "hud.moonstones";
