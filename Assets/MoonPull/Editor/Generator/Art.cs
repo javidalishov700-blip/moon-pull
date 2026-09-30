@@ -420,6 +420,7 @@ namespace MoonPull.EditorTools
                     if (head) return new Color(0.75f, 0.8f, 0.9f);
                     return handle ? new Color(0.65f, 0.42f, 0.25f) : bg;
                 }
+                case "sail":
                 case "shipyard":
                 {
                     bool hull = InTriangle(p, new Vector2(0.14f, 0.38f), new Vector2(0.86f, 0.38f), new Vector2(0.74f, 0.2f))
@@ -430,6 +431,25 @@ namespace MoonPull.EditorTools
                     if (hull) return new Color(0.62f, 0.38f, 0.22f);
                     if (sail) return white;
                     return mast ? ink : bg;
+                }
+                case "hull":
+                {
+                    // Shield over a plank hull: sturdier boat.
+                    bool shield = RoundedRect(x, y, 0.28f, 0.42f, 0.72f, 0.82f, 0.06f)
+                                  || InTriangle(p, new Vector2(0.28f, 0.44f), new Vector2(0.72f, 0.44f), new Vector2(0.5f, 0.16f));
+                    bool stripe = shield && Mathf.Abs(x - 0.5f) < 0.05f;
+                    if (stripe) return accent;
+                    return shield ? white : bg;
+                }
+                case "lamp":
+                {
+                    bool glass = RoundedRect(x, y, 0.36f, 0.3f, 0.64f, 0.66f, 0.06f);
+                    bool cap = RoundedRect(x, y, 0.32f, 0.66f, 0.68f, 0.74f, 0.03f) || RoundedRect(x, y, 0.32f, 0.22f, 0.68f, 0.3f, 0.03f);
+                    bool handle = Mathf.Abs(Vector2.Distance(p, new Vector2(0.5f, 0.76f)) - 0.1f) < 0.025f && y > 0.76f;
+                    float glow = Mathf.Clamp01(1f - Vector2.Distance(p, new Vector2(0.5f, 0.48f)) * 3f);
+                    if (cap || handle) return ink;
+                    if (glass) return Color.Lerp(accent, Color.white, glow);
+                    return Color.Lerp(bg, new Color(1f, 0.9f, 0.5f), glow * 0.5f);
                 }
                 case "island":
                 {

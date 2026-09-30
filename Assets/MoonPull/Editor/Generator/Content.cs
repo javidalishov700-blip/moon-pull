@@ -114,7 +114,7 @@ namespace MoonPull.EditorTools
                 Gen.Child(element, "PitchVariance", ids[i] == SfxId.StarPickup || ids[i] == SfxId.UiTap ? 0f : 0.05f);
             });
             Gen.Wire(Sfx,
-                "menuMusic", Synth.Music("music_menu", 196f, false),
+                "menuMusic", Synth.Music("music_menu_v2", 261.63f, false),
                 "fullMoonLayer", Synth.FullMoonLayer(),
                 "waveLoop", Synth.WaveLoop());
         }
@@ -623,7 +623,7 @@ namespace MoonPull.EditorTools
                     "id", spec.Id, "nameKey", "region." + spec.Id, "starsToUnlock", spec.Stars,
                     "skyTop", Gen.Hex(spec.SkyTop), "skyBottom", Gen.Hex(spec.SkyBottom), "waterShallow", Gen.Hex(spec.Shallow),
                     "waterDeep", Gen.Hex(spec.Deep), "foam", Gen.Hex(spec.Foam), "fog", Gen.Hex(spec.Fog),
-                    "music", Synth.Music("music_" + spec.Id, spec.Root, spec.Stars > 0),
+                    "music", Synth.Music("music_v2_" + spec.Id, spec.Root, true),
                     "signatureObstacle", signature, "signatureKind", spec.SignatureKind,
                     "lighthouseStageCosts", costs, "idleCoinsPerHour", spec.Idle);
                 Gen.SetArray(region, "lowObstacles", lows);

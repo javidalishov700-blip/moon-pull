@@ -49,6 +49,7 @@ namespace MoonPull.Localization
         public const string WinSupplies = "win.supplies";
         public const string VillageTabBuildings = "village.tab_buildings";
         public const string VillageTabIslands = "village.tab_islands";
+        public const string VillageTabBoat = "village.tab_boat";
         public const string IslandBuy = "island.buy";
         public const string IslandOwned = "island.owned";
         public const string IslandBuyPrevious = "island.buy_previous";

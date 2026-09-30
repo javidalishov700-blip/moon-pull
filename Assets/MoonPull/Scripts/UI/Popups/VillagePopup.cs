@@ -40,6 +40,12 @@ namespace MoonPull.UI
         [SerializeField] private Button islandsTab;
         [SerializeField] private GameObject buildingsPage;
         [SerializeField] private GameObject islandsPage;
+        [SerializeField] private Button boatTab;
+        [SerializeField] private GameObject boatPage;
+        [SerializeField] private Text[] boatLevelLabels = new Text[BoatUpgrades.PartCount];
+        [SerializeField] private Button[] boatButtons = new Button[BoatUpgrades.PartCount];
+        [SerializeField] private Text[] boatCostLabels = new Text[BoatUpgrades.PartCount];
+        [SerializeField] private GameObject[] boatMaxLabels = new GameObject[BoatUpgrades.PartCount];
         [SerializeField] private Text treasuryLabel;
         [SerializeField] private LocalizedText incomeLabel;
         [SerializeField] private LocalizedText suppliesLabel;
@@ -50,7 +56,7 @@ namespace MoonPull.UI
         [SerializeField] private GameObject[] islandOwnedLabels = new GameObject[TycoonState.IslandCount];
         [SerializeField] private LocalizedText[] islandLockedLabels = new LocalizedText[TycoonState.IslandCount];
 
-        private bool showIslands;
+        private int page;
         private bool exploring;
 
         private float nextRefresh;
@@ -104,6 +110,18 @@ namespace MoonPull.UI
                 }
             }
 
+            for (int i = 0; i < boatButtons.Length; i++)
+            {
+                var part = (BoatPart)i;
+                int cost = BoatUpgrades.NextCost(part);
+                boatLevelLabels[i].SetText("{0}/{1}", BoatUpgrades.Level(part), BoatUpgrades.MaxLevel);
+                boatButtons[i].gameObject.SetActive(cost >= 0);
+                boatButtons[i].interactable = cost >= 0 && meta.Wallet.CanAfford(cost);
+                boatCostLabels[i].transform.parent.gameObject.SetActive(cost >= 0);
+                boatCostLabels[i].SetText("{0}", Mathf.Max(0, cost));
+                boatMaxLabels[i].SetActive(cost < 0);
+            }
+
             for (int i = 0; i < upgradeButtons.Length; i++)
             {
                 var building = (VillageBuilding)i;
@@ -116,14 +134,20 @@ namespace MoonPull.UI
                 islandButtons[i].onClick.AddListener(() => BuyIsland(island));
             }
 
-            buildingsTab.onClick.AddListener(() => ShowPage(false));
-            islandsTab.onClick.AddListener(() => ShowPage(true));
+            buildingsTab.onClick.AddListener(() => ShowPage(0));
+            islandsTab.onClick.AddListener(() => ShowPage(1));
+            boatTab.onClick.AddListener(() => ShowPage(2));
+            for (int i = 0; i < boatButtons.Length; i++)
+            {
+                var part = (BoatPart)i;
+                boatButtons[i].onClick.AddListener(() => UpgradeBoat(part));
+            }
             collectButton.onClick.AddListener(Collect);
             if (exploreButton != null)
             {
                 exploreButton.onClick.AddListener(() => SetExploring(!exploring));
             }
-            ShowPage(false);
+            ShowPage(0);
         }
 
         protected override void OnShown()
@@ -194,21 +218,33 @@ namespace MoonPull.UI
         public void ShowIslands()
         {
             SetExploring(false);
-            ShowPage(true);
+            ShowPage(1);
         }
 
         /// <summary>Tapping a coin pin over a building collects the Treasury.</summary>
         public void CollectFromWorld() => Collect();
 
-        private void ShowPage(bool islands)
+        private void ShowPage(int index)
         {
-            showIslands = islands;
-            buildingsPage.SetActive(!islands);
-            islandsPage.SetActive(islands);
+            page = index;
+            buildingsPage.SetActive(index == 0);
+            islandsPage.SetActive(index == 1);
+            boatPage.SetActive(index == 2);
             Color on = new Color(1f, 0.71f, 0.28f);
             Color off = new Color(0.25f, 0.3f, 0.55f);
-            buildingsTab.GetComponent<Image>().color = islands ? off : on;
-            islandsTab.GetComponent<Image>().color = islands ? on : off;
+            buildingsTab.GetComponent<Image>().color = index == 0 ? on : off;
+            islandsTab.GetComponent<Image>().color = index == 1 ? on : off;
+            boatTab.GetComponent<Image>().color = index == 2 ? on : off;
+            Refresh();
+        }
+
+        private void UpgradeBoat(BoatPart part)
+        {
+            if (BoatUpgrades.TryUpgrade(part, meta.Wallet))
+            {
+                UiTween.Punch(boatButtons[(int)part].transform, 0.3f, 0.3f);
+            }
+
             Refresh();
         }
 
@@ -318,6 +354,18 @@ namespace MoonPull.UI
                         islandLockedLabels[i].SetKey(LocKeys.IslandBuyPrevious);
                     }
                 }
+            }
+
+            for (int i = 0; i < boatButtons.Length; i++)
+            {
+                var part = (BoatPart)i;
+                int cost = BoatUpgrades.NextCost(part);
+                boatLevelLabels[i].SetText("{0}/{1}", BoatUpgrades.Level(part), BoatUpgrades.MaxLevel);
+                boatButtons[i].gameObject.SetActive(cost >= 0);
+                boatButtons[i].interactable = cost >= 0 && meta.Wallet.CanAfford(cost);
+                boatCostLabels[i].transform.parent.gameObject.SetActive(cost >= 0);
+                boatCostLabels[i].SetText("{0}", Mathf.Max(0, cost));
+                boatMaxLabels[i].SetActive(cost < 0);
             }
 
             for (int i = 0; i < upgradeButtons.Length; i++)

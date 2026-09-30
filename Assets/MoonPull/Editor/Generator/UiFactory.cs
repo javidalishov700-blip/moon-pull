@@ -715,11 +715,34 @@ namespace MoonPull.EditorTools
 
             Button explore = Button(popup.transform, "Explore", LocKeys.VillageExplore, TopRight, new Vector2(-150f, -440f), new Vector2(250f, 96f), Gen.Hex("2EC4C9"), 34);
 
-            Button tabBuildings = Button(p, "TabBuildings", LocKeys.VillageTabBuildings, Top, new Vector2(-245f, -335f), new Vector2(470f, 76f), Primary, 36);
-            Button tabIslands = Button(p, "TabIslands", LocKeys.VillageTabIslands, Top, new Vector2(245f, -335f), new Vector2(470f, 76f), Accent, 36);
+            Button tabBuildings = Button(p, "TabBuildings", LocKeys.VillageTabBuildings, Top, new Vector2(-325f, -335f), new Vector2(315f, 80f), Primary, 34);
+            Button tabIslands = Button(p, "TabIslands", LocKeys.VillageTabIslands, Top, new Vector2(0f, -335f), new Vector2(315f, 80f), Accent, 34);
+            Button tabBoat = Button(p, "TabBoat", LocKeys.VillageTabBoat, Top, new Vector2(325f, -335f), new Vector2(315f, 80f), Accent, 34);
 
             RectTransform buildingsPage = Stretch("BuildingsPage", p);
             RectTransform islandsPage = Stretch("IslandsPage", p);
+            RectTransform boatPage = Stretch("BoatPage", p);
+            string[] parts = { "sail", "hull", "lamp" };
+            Color[] partTints = { Gen.Hex("7FA7D9"), Gen.Hex("C98A5B"), Gen.Hex("F2CC8F") };
+            var boatLevels = new List<Text>();
+            var boatButtons = new List<Button>();
+            var boatCosts = new List<Text>();
+            var boatMaxes = new List<GameObject>();
+            for (int i = 0; i < parts.Length; i++)
+            {
+                float y = 80f - i * 150f;
+                Image row = Image(boatPage, "Part_" + parts[i], Center, new Vector2(0f, y), new Vector2(980f, 136f), PanelLight);
+                Image(row.transform, "Icon", new Vector2(0f, 0.5f), new Vector2(70f, 0f), new Vector2(110f, 110f), Color.white, Art.BuildingIcon(parts[i], partTints[i]));
+                Loc(row.transform, "Name", "boat_up." + parts[i] + ".name", 36, new Vector2(0f, 0.5f), new Vector2(330f, 24f), new Vector2(420f, 50f), TextLight, TextAnchor.MiddleLeft, true);
+                Loc(row.transform, "Desc", "boat_up." + parts[i] + ".desc", 26, new Vector2(0f, 0.5f), new Vector2(330f, -24f), new Vector2(420f, 50f), Muted, TextAnchor.MiddleLeft);
+                boatLevels.Add(Text(row.transform, "Level", "0/5", 32, new Vector2(1f, 0.5f), new Vector2(-330f, 0f), new Vector2(100f, 60f), Gold, TextAnchor.MiddleCenter, true));
+                Button up = Button(row.transform, "Upgrade", LocKeys.VillageUpgrade, new Vector2(1f, 0.5f), new Vector2(-140f, 18f), new Vector2(230f, 66f), Go, 32);
+                Image costBg = Image(row.transform, "Cost", new Vector2(1f, 0.5f), new Vector2(-140f, -36f), new Vector2(230f, 44f), new Color(0f, 0f, 0f, 0.3f));
+                CoinIcon(costBg.transform, new Vector2(0f, 0.5f), new Vector2(28f, 0f), 36f);
+                boatCosts.Add(Text(costBg.transform, "Amount", "0", 28, Center, new Vector2(20f, 0f), new Vector2(160f, 44f), Gold, TextAnchor.MiddleCenter, true));
+                boatButtons.Add(up);
+                boatMaxes.Add(Loc(row.transform, "Max", LocKeys.VillageMax, 32, new Vector2(1f, 0.5f), new Vector2(-140f, 0f), new Vector2(230f, 60f), Accent, TextAnchor.MiddleCenter, true).gameObject);
+            }
 
             string[] ids = { "shelter", "restaurant", "workshop", "shipyard", "market" };
             Color[] tints = { Gen.Hex("81B29A"), Gen.Hex("E07A5F"), Gen.Hex("F2CC8F"), Gen.Hex("7FA7D9"), Gen.Hex("C39BD3") };
@@ -767,7 +790,11 @@ namespace MoonPull.EditorTools
                 islandLocked.Add(Loc(row.transform, "Locked", LocKeys.VillageNeedsLevel, 24, new Vector2(1f, 0.5f), new Vector2(-150f, 22f), new Vector2(260f, 60f), Muted, TextAnchor.MiddleCenter, true));
             }
 
-            Gen.Wire(popup, "sheet", p, "exploreButton", explore);
+            Gen.Wire(popup, "sheet", p, "exploreButton", explore, "boatTab", tabBoat, "boatPage", boatPage.gameObject);
+            Gen.SetArray(popup, "boatLevelLabels", boatLevels);
+            Gen.SetArray(popup, "boatButtons", boatButtons);
+            Gen.SetArray(popup, "boatCostLabels", boatCosts);
+            Gen.SetArray(popup, "boatMaxLabels", boatMaxes);
             Gen.Wire(popup, "coinFly", coinFly, "buildingsTab", tabBuildings, "islandsTab", tabIslands,
                 "buildingsPage", buildingsPage.gameObject, "islandsPage", islandsPage.gameObject, "treasuryLabel", treasury,
                 "incomeLabel", income, "suppliesLabel", supplies, "collectButton", collect, "treasuryFill", storeFill);

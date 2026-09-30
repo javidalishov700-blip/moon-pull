@@ -45,27 +45,64 @@ namespace MoonPull.EditorTools
             }
         }
 
-        /// <summary>16 s ambient loop: slow pad chord plus a soft pentatonic arpeggio. Root differs per region.</summary>
+        /// <summary>
+        /// 16 s upbeat island loop at 120 BPM (8 bars): kick and snare, shaker hats, a bouncy bass, off-beat chord
+        /// plucks and a pentatonic marimba melody over I-V-vi-IV. The menu gets a softer, drum-light version.
+        /// </summary>
         public static AudioClip Music(string name, float root, bool bright)
         {
-            float[] chord = { root, root * 1.25f, root * 1.5f, root * 1.875f };
-            float[] scale = { 1f, 1.125f, 1.25f, 1.5f, 1.6875f, 2f };
-            const float length = 16f;
-            return Clip(name, length, t =>
+            const float beat = 0.5f;
+            float[] progression = { 1f, 1.5f, 1.6818f, 1.3348f }; // I, V, vi, IV (as frequency ratios of the root)
+            bool[] minor = { false, false, true, false };
+            float[] penta = { 1f, 1.1225f, 1.2599f, 1.4983f, 1.6818f, 2f, 2.2449f, 2.5198f };
+            int[] melody = { 0, 2, 4, 5, 4, 2, 3, -1, 2, 4, 5, 7, 6, 5, 4, -1, 5, 4, 2, 0, 2, 3, 4, -1, 4, 5, 6, 5, 4, 2, 0, -1 };
+            float drums = bright ? 1f : 0.35f;
+            return Clip(name, 16f, t =>
             {
-                float pad = 0f;
-                for (int i = 0; i < chord.Length; i++)
+                int beatIndex = (int)(t / beat);
+                float inBeat = t - beatIndex * beat;
+                int bar = beatIndex / 4;
+                int chord = (bar / 2) % 4;
+                float chordRoot = root * progression[chord];
+                if (chordRoot > root * 1.45f)
                 {
-                    pad += Mathf.Sin(2f * Mathf.PI * chord[i] * 0.5f * t + i) * (0.5f + 0.5f * Mathf.Sin(2f * Mathf.PI * t / length + i * 1.3f));
+                    chordRoot *= 0.5f; // keep chords in one register
                 }
 
-                pad *= 0.06f;
-                float step = 0.5f;
-                int note = (int)(t / step);
-                float local = t - note * step;
-                float arpFreq = root * 2f * scale[(note * 3 + note / 4) % scale.Length];
-                float arp = (bright ? 0.12f : 0.08f) * Pluck(local, arpFreq, step);
-                return pad + arp;
+                float third = minor[chord] ? 1.1892f : 1.2599f;
+
+                // Drums.
+                float kick = beatIndex % 2 == 0 ? Mathf.Sin(2f * Mathf.PI * (55f + 90f * Mathf.Exp(-inBeat * 30f)) * inBeat) * Mathf.Exp(-inBeat * 14f) : 0f;
+                float snare = beatIndex % 2 == 1 ? ((float)Noise.NextDouble() * 2f - 1f) * Mathf.Exp(-inBeat * 22f) * 0.35f : 0f;
+                float eighth = t % (beat * 0.5f);
+                float hat = ((float)Noise.NextDouble() * 2f - 1f) * Mathf.Exp(-eighth * 70f) * 0.08f;
+                float drumMix = (kick * 0.55f + snare + hat) * drums;
+
+                // Bouncy bass on eighths: root, root, octave, fifth.
+                int e8 = (int)(t / (beat * 0.5f));
+                float[] bassPattern = { 1f, 1f, 2f, 1.5f };
+                float bassF = chordRoot * 0.5f * bassPattern[e8 % 4];
+                float bass = (Mathf.Sin(2f * Mathf.PI * bassF * eighth) + 0.3f * Mathf.Sin(4f * Mathf.PI * bassF * eighth)) * Mathf.Exp(-eighth * 9f) * 0.28f;
+
+                // Off-beat chord plucks.
+                float offLocal = inBeat - beat * 0.5f;
+                float chordPluck = 0f;
+                if (offLocal >= 0f)
+                {
+                    chordPluck = (Pluck(offLocal, chordRoot * 2f, 0.4f) + Pluck(offLocal, chordRoot * 2f * third, 0.4f) + Pluck(offLocal, chordRoot * 3f, 0.4f)) * 0.07f;
+                }
+
+                // Marimba melody on eighths.
+                int m = melody[e8 % melody.Length];
+                float lead = 0f;
+                if (m >= 0)
+                {
+                    float f = root * 2f * penta[m];
+                    lead = (Mathf.Sin(2f * Mathf.PI * f * eighth) + 0.25f * Mathf.Sin(2f * Mathf.PI * f * 4f * eighth) * Mathf.Exp(-eighth * 40f))
+                           * Mathf.Exp(-eighth * 10f) * Mathf.Clamp01(eighth * 300f) * (bright ? 0.2f : 0.16f);
+                }
+
+                return Mathf.Clamp((drumMix + bass + chordPluck + lead) * 0.85f, -0.95f, 0.95f);
             }, true);
         }
 

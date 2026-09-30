@@ -227,7 +227,7 @@ namespace MoonPull.EditorTools
             Gen.Wire(sail, "session", w.Session, "score", score, "water", water, "cameraRig", rig,
                 "cameraTransform", cameraGo.transform, "moonAnchor", moonAnchor, "legacyBoat", boatGo, "boatRoot", sailBoat,
                 "castawayPrefab", content.RescueCastaway, "passengerPrefab", content.RescuePassenger,
-                "lanternPrefab", content.RescueLantern, "islandPrefab", content.RescueIsland,
+                "lanternPrefab", content.RescueLantern, "islandPrefab", content.RescueIsland, "rockPrefab", content.SailRock,
                 "defaultBoatModel", AssetDatabase.LoadAssetAtPath<GameObject>(Gen.Root + "/Boats/BoatModel_dinghy.prefab"));
             Gen.Set(w.Session, "rescue", sail);
             w.Rescue = sail;

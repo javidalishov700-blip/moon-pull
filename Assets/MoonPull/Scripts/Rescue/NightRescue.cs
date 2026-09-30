@@ -26,7 +26,7 @@ namespace MoonPull.Rescue
     [DefaultExecutionOrder(1000)] // after WaterSurface.LateUpdate, so our wave globals win
     public sealed class NightRescue : MonoBehaviour, ISimulationTickable
     {
-        private enum Kind { Castaway, Lantern, Island }
+        private enum Kind { Castaway, Lantern, Island, Rock }
 
         private sealed class Thing
         {
@@ -53,6 +53,8 @@ namespace MoonPull.Rescue
         [Header("Prefabs")]
         [SerializeField] private GameObject castawayPrefab;
         [SerializeField] private GameObject passengerPrefab;
+        [Tooltip("Sea rocks: jump over them or lose speed and a passenger.")]
+        [SerializeField] private GameObject rockPrefab;
         [SerializeField] private GameObject lanternPrefab;
         [SerializeField] private GameObject islandPrefab;
 
@@ -108,7 +110,7 @@ namespace MoonPull.Rescue
         private int rescued;
         private int lanternsCaught;
         private int lighthousesLit;
-        private float nextCastawayAt, nextLanternAt, nextIslandAt;
+        private float nextCastawayAt, nextLanternAt, nextIslandAt, nextRockAt;
         private float startX;
         private float shake;
         private int levelIndex;
@@ -261,6 +263,7 @@ namespace MoonPull.Rescue
             nextCastawayAt = 30f;
             nextLanternAt = 45f;
             nextIslandAt = 115f;
+            nextRockAt = 70f;
             score.SetFullMoon(false);
 
             foreach (GameObject go in hideWhileSailing)
@@ -405,7 +408,7 @@ namespace MoonPull.Rescue
 
             // Holding is a dive, not an accelerator: above cruising speed the sea drags the boat back down, so
             // speed comes from well-timed releases and perfect landings, not from keeping a finger on the screen.
-            float cruise = 11f + speedBonus;
+            float cruise = 11f + speedBonus + BoatUpgrades.CruiseBonus;
             if (speed > cruise && fever <= 0f)
             {
                 speed -= (speed - cruise) * (holding ? 0.9f : 0.35f) * dt;
@@ -424,6 +427,7 @@ namespace MoonPull.Rescue
             {
                 airborne = true;
                 airTime = 0f;
+                GameEvents.RaiseWaveLaunched(Mathf.Clamp01(vyAlong / 10f));
                 vx = speed * inv;
                 vy = vyAlong;
                 x = nx;
@@ -478,13 +482,26 @@ namespace MoonPull.Rescue
             }
             else
             {
-                // Belly flop: a big splash and most of the speed gone. Never a game over.
+                // Belly flop: a big splash, most of the speed gone and someone falls overboard. Never a game over.
+                HitHazard();
                 speed = Mathf.Max(minSpeed, along * 0.5f);
-                perfectStreak = 0;
-                shake = 0.3f;
-                Splash(55, new Color(0.9f, 0.96f, 1f, 0.9f));
                 GameEvents.RaiseNearMissChainBroken();
             }
+        }
+
+        /// <summary>A rock or a belly flop: most of the speed gone and one passenger falls overboard.</summary>
+        private void HitHazard()
+        {
+            speed = Mathf.Max(minSpeed, speed * BoatUpgrades.HitSpeedKept);
+            perfectStreak = 0;
+            shake = 0.45f;
+            Splash(45, new Color(0.9f, 0.96f, 1f, 0.9f));
+            if (aboard > 0 && random.NextDouble() >= BoatUpgrades.HoldOnChance)
+            {
+                SetAboard(aboard - 1);
+            }
+
+            GameEvents.RaiseBoatBumped(aboard);
         }
 
         private void StartFever()
@@ -516,6 +533,17 @@ namespace MoonPull.Rescue
                 }
 
                 nextLanternAt += 40f + (float)random.NextDouble() * 35f;
+            }
+
+            while (nextRockAt < horizon)
+            {
+                // Rocks: never right on top of a castaway, closer together on later nights.
+                if (Mathf.Abs(nextRockAt - nextCastawayAt) > 5f)
+                {
+                    Add(Kind.Rock, rockPrefab, nextRockAt, 0f);
+                }
+
+                nextRockAt += Mathf.Max(22f, 70f - levelIndex * 2f) + (float)random.NextDouble() * 30f;
             }
 
             while (nextIslandAt < horizon)
@@ -566,7 +594,7 @@ namespace MoonPull.Rescue
                 switch (t.Kind)
                 {
                     case Kind.Castaway:
-                        if (dx < 1.1f && y - Height(t.X) < 1.4f && aboard < seats)
+                        if (dx < 1.1f + BoatUpgrades.ReachBonus && y - Height(t.X) < 1.4f + BoatUpgrades.ReachBonus && aboard < seats)
                         {
                             t.Done = true;
                             t.Transform.gameObject.SetActive(false);
@@ -577,7 +605,7 @@ namespace MoonPull.Rescue
 
                         break;
                     case Kind.Lantern:
-                        if (dx < 1f && Mathf.Abs(y - (Height(t.X) + t.Height)) < 1.2f)
+                        if (dx < 1f + BoatUpgrades.ReachBonus && Mathf.Abs(y - (Height(t.X) + t.Height)) < 1.2f + BoatUpgrades.ReachBonus)
                         {
                             t.Done = true;
                             t.Transform.gameObject.SetActive(false);
@@ -585,6 +613,14 @@ namespace MoonPull.Rescue
                             moonlight = Mathf.Min(1f, moonlight + 0.035f);
                             score.AddBonus(20);
                             GameEvents.RaiseStarCollected(lanternsCaught);
+                        }
+
+                        break;
+                    case Kind.Rock:
+                        if (dx < 0.9f && y - Height(t.X) < 1.0f)
+                        {
+                            t.Done = true;
+                            HitHazard();
                         }
 
                         break;
@@ -716,6 +752,10 @@ namespace MoonPull.Rescue
                 case Kind.Castaway:
                     t.Transform.position = new Vector3(t.X, surface, 0.4f);
                     t.Transform.rotation = Quaternion.Euler(0f, 0f, Mathf.Atan(Slope(t.X)) * Mathf.Rad2Deg);
+                    break;
+                case Kind.Rock:
+                    t.Transform.position = new Vector3(t.X, surface - 0.15f, 0f);
+                    t.Transform.localScale = Vector3.one * 1.25f;
                     break;
                 case Kind.Lantern:
                     t.Transform.position = new Vector3(t.X, surface + t.Height + 0.2f * Mathf.Sin(Time.time * 2f + t.X), 0f);

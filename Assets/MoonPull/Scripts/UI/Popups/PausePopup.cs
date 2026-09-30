@@ -42,6 +42,12 @@ namespace MoonPull.UI
             homeButton.onClick.AddListener(() =>
             {
                 Resume();
+                // Going home still banks the night: rescued people, lanterns, supplies and coins all count.
+                if (rescue != null)
+                {
+                    rescue.EndNightNow();
+                }
+
                 GameEvents.RaiseMenuRequested();
             });
         }
