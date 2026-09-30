@@ -123,6 +123,23 @@ namespace MoonPull.Rescue
         private ParticleSystem splash;
 
         /// <summary>Spray thrown up where the boat lands: bigger for belly flops, golden for Perfect landings.</summary>
+        private static Texture2D DropletTexture()
+        {
+            const int size = 32;
+            var texture = new Texture2D(size, size, TextureFormat.RGBA32, false);
+            for (int py = 0; py < size; py++)
+            {
+                for (int px = 0; px < size; px++)
+                {
+                    float d = Vector2.Distance(new Vector2(px + 0.5f, py + 0.5f), new Vector2(size * 0.5f, size * 0.5f)) / (size * 0.5f);
+                    texture.SetPixel(px, py, new Color(1f, 1f, 1f, Mathf.Clamp01((1f - d) * 3f)));
+                }
+            }
+
+            texture.Apply();
+            return texture;
+        }
+
         private void Splash(int count, Color color)
         {
             if (splash == null)
@@ -148,7 +165,10 @@ namespace MoonPull.Rescue
                 shape.radius = 0.4f;
                 go.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
                 var renderer = go.GetComponent<ParticleSystemRenderer>();
-                renderer.sharedMaterial = new Material(Shader.Find("Sprites/Default"));
+                // Round droplets: a soft disc texture instead of the default square particles.
+                var material = new Material(Shader.Find("Sprites/Default"));
+                material.mainTexture = DropletTexture();
+                renderer.sharedMaterial = material;
             }
 
             splash.transform.position = new Vector3(x, y, -0.3f);
