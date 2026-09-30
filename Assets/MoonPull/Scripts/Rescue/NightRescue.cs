@@ -1086,7 +1086,7 @@ namespace MoonPull.Rescue
                 wake.emitting = running && !airborne;
             }
 
-            if (cameraTransform != null && !VillageDirector.Active)
+            if (cameraTransform != null && !VillageDirector.Active && !VillageDirector.MenuView)
             {
                 if (!cameraBaseValid)
                 {

@@ -42,6 +42,12 @@ namespace MoonPull.Rescue
         /// <summary>Price pins over islands for sale only show while exploring or on the Islands tab.</summary>
         public static bool ShowIslandPins { get; set; }
 
+        /// <summary>Main menu backdrop: an aerial view over the archipelago; tapping it opens the village.</summary>
+        public static bool MenuView { get; set; }
+
+        /// <summary>Raised when the island is tapped from the main menu.</summary>
+        public static event System.Action OpenRequested;
+
         private readonly List<Villager> villagers = new List<Villager>();
         private System.Random random = new System.Random(77);
         private float nextNeedAt;
@@ -182,6 +188,14 @@ namespace MoonPull.Rescue
 
         private void Update()
         {
+            if (!Active && MenuView)
+            {
+                Populate();
+                Walk();
+                HandleMenuTap();
+                return;
+            }
+
             if (!Active)
             {
                 return;
@@ -198,6 +212,28 @@ namespace MoonPull.Rescue
             AssignNeeds();
             HandleTap();
             HandlePanZoom();
+        }
+
+        private void HandleMenuTap()
+        {
+            bool tapped = Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began);
+            if (!tapped || cameraTransform == null)
+            {
+                return;
+            }
+
+            int pointer = Input.touchCount > 0 ? Input.GetTouch(0).fingerId : -1;
+            if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject(pointer))
+            {
+                return;
+            }
+
+            Camera cam = cameraTransform.GetComponent<Camera>();
+            Vector2 screen = Input.touchCount > 0 ? Input.GetTouch(0).position : (Vector2)Input.mousePosition;
+            if (cam != null && Physics.Raycast(cam.ScreenPointToRay(screen), out RaycastHit hit, 200f) && hit.collider.transform.IsChildOf(transform))
+            {
+                OpenRequested?.Invoke();
+            }
         }
 
         private void HandlePanZoom()
@@ -450,8 +486,21 @@ namespace MoonPull.Rescue
                 }
             }
 
-            if (!Active || cameraTransform == null)
+            if ((!Active && !MenuView) || cameraTransform == null)
             {
+                return;
+            }
+
+            if (!Active)
+            {
+                // Menu: a high aerial view over the whole archipelago, framed between the title and the Play button.
+                Camera menuCam = cameraTransform.GetComponent<Camera>();
+                float fit = menuCam != null ? Mathf.Pow(Mathf.Max(1f, 0.5625f / menuCam.aspect), 0.85f) : 1f;
+                Vector3 menuTarget = transform.position + new Vector3(0f, 17f, -17f) * fit;
+                float mt = 1f - Mathf.Exp(-3f * Time.unscaledDeltaTime);
+                cameraTransform.position = Vector3.Lerp(cameraTransform.position, menuTarget, mt);
+                Quaternion menuLook = Quaternion.LookRotation(transform.position + new Vector3(0f, -5f, 5f) - menuTarget);
+                cameraTransform.rotation = Quaternion.Slerp(cameraTransform.rotation, menuLook, mt);
                 return;
             }
 

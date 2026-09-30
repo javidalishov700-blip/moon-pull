@@ -245,6 +245,9 @@ namespace MoonPull.EditorTools
             GameObject island = Gen.Go("LighthouseIsland", visuals.transform);
             island.transform.position = new Vector3(8f, 0.2f, 10f); // ground above the calm sea
             Gen.SetArray<GameObject>(sail, "hideWhileSailing", new[] { island });
+            var islandTap = island.AddComponent<BoxCollider>(); // menu: tap the island to visit the village
+            islandTap.center = new Vector3(0f, 0f, 3f);
+            islandTap.size = new Vector3(16f, 2f, 14f);
             var village = Gen.Add<MoonPull.Rescue.VillageView>(island);
             var houses = new List<GameObject>();
             for (int i = 0; i < 24; i++)

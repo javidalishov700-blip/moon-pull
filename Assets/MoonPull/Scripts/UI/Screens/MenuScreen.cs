@@ -65,8 +65,20 @@ namespace MoonPull.UI
 
         private void OnDisable() => GameEvents.AppResumed -= OnAppResumed;
 
+        private void OpenVillage() => popups.Open(lighthousePopup);
+
+        protected override void OnHidden()
+        {
+            MoonPull.Rescue.VillageDirector.MenuView = false;
+            MoonPull.Rescue.VillageDirector.OpenRequested -= OpenVillage;
+        }
+
         protected override void OnShown()
         {
+            // The menu backdrop is the living archipelago seen from above; tap it to visit.
+            MoonPull.Rescue.VillageDirector.MenuView = true;
+            MoonPull.Rescue.VillageDirector.OpenRequested -= OpenVillage;
+            MoonPull.Rescue.VillageDirector.OpenRequested += OpenVillage;
             if (!meta.IsInitialized)
             {
                 return;
