@@ -493,59 +493,23 @@ namespace MoonPull.EditorTools
         public static Texture2D DrawIcon()
         {
             const int size = 1024;
+            const int ss = 2; // 2x2 supersampling for clean edges
             var texture = new Texture2D(size, size, TextureFormat.RGBA32, false);
             var pixels = new Color[size * size];
-            Color skyTop = new Color(0.12f, 0.1f, 0.32f);
-            Color skyBottom = new Color(0.55f, 0.4f, 0.7f);
             for (int py = 0; py < size; py++)
             {
                 for (int px = 0; px < size; px++)
                 {
-                    float x = (px + 0.5f) / size;
-                    float y = (py + 0.5f) / size;
-                    Color c = Color.Lerp(skyBottom, skyTop, y);
-
-                    float moon = Vector2.Distance(new Vector2(x, y), new Vector2(0.64f, 0.7f));
-                    if (moon < 0.3f)
+                    Color sum = Color.clear;
+                    for (int sy = 0; sy < ss; sy++)
                     {
-                        c = Color.Lerp(c, new Color(1f, 0.97f, 0.88f), Mathf.Clamp01((0.3f - moon) * 60f) * 0.25f);
-                    }
-
-                    if (moon < 0.19f)
-                    {
-                        float crater = Vector2.Distance(new Vector2(x, y), new Vector2(0.6f, 0.74f));
-                        c = crater < 0.04f ? new Color(0.9f, 0.88f, 0.8f) : new Color(1f, 0.98f, 0.9f);
-                    }
-
-                    float wave = 0.36f + 0.06f * Mathf.Sin(x * 9f + 0.8f) + 0.02f * Mathf.Sin(x * 23f);
-                    if (y < wave)
-                    {
-                        float depth = Mathf.Clamp01((wave - y) / 0.36f);
-                        c = Color.Lerp(new Color(0.45f, 0.85f, 0.9f), new Color(0.08f, 0.2f, 0.42f), depth);
-                        if (wave - y < 0.012f)
+                        for (int sx = 0; sx < ss; sx++)
                         {
-                            c = new Color(0.95f, 0.98f, 1f);
+                            sum += IconPixel((px + (sx + 0.5f) / ss) / size, (py + (sy + 0.5f) / ss) / size);
                         }
                     }
 
-                    Vector2 p = new Vector2(x, y);
-                    float boatY = 0.36f + 0.06f * Mathf.Sin(0.3f * 9f + 0.8f) + 0.03f;
-                    if (InTriangle(p, new Vector2(0.18f, boatY + 0.02f), new Vector2(0.44f, boatY + 0.02f), new Vector2(0.4f, boatY - 0.05f))
-                        || InTriangle(p, new Vector2(0.18f, boatY + 0.02f), new Vector2(0.4f, boatY - 0.05f), new Vector2(0.22f, boatY - 0.05f)))
-                    {
-                        c = new Color(0.95f, 0.45f, 0.35f);
-                    }
-
-                    if (InTriangle(p, new Vector2(0.31f, boatY + 0.22f), new Vector2(0.31f, boatY + 0.04f), new Vector2(0.42f, boatY + 0.04f)))
-                    {
-                        c = new Color(1f, 0.98f, 0.92f);
-                    }
-
-                    if (x > 0.3f && x < 0.312f && y > boatY + 0.02f && y < boatY + 0.24f)
-                    {
-                        c = new Color(0.3f, 0.2f, 0.18f);
-                    }
-
+                    Color c = sum / (ss * ss);
                     c.a = 1f;
                     pixels[py * size + px] = c;
                 }
@@ -554,6 +518,122 @@ namespace MoonPull.EditorTools
             texture.SetPixels(pixels);
             texture.Apply();
             return texture;
+        }
+
+        /// <summary>
+        /// App icon: a night sea under a big moon, its silver path on the water, a lit lighthouse on the horizon and
+        /// a small sailboat with a warm lantern riding the crest of a swell.
+        /// </summary>
+        private static Color IconPixel(float x, float y)
+        {
+            Vector2 p = new Vector2(x, y);
+            Color skyTop = new Color(0.03f, 0.05f, 0.14f);
+            Color skyLow = new Color(0.2f, 0.28f, 0.5f);
+            float horizon = 0.44f;
+
+            // Sky with a moon halo.
+            Color c = Color.Lerp(skyLow, skyTop, Mathf.SmoothStep(horizon, 1f, y));
+            Vector2 moonC = new Vector2(0.66f, 0.72f);
+            float md = Vector2.Distance(p, moonC);
+            c += new Color(0.55f, 0.6f, 0.8f) * (Mathf.Exp(-md * 7f) * 0.45f);
+            // A few stars.
+            float sx = Mathf.Floor(x * 40f), sy = Mathf.Floor(y * 40f);
+            float h = Mathf.Repeat(Mathf.Sin(sx * 12.9898f + sy * 78.233f) * 43758.5453f, 1f);
+            if (y > horizon + 0.08f && h > 0.965f && md > 0.2f)
+            {
+                Vector2 cell = new Vector2((sx + 0.5f) / 40f, (sy + 0.5f) / 40f);
+                c = Color.Lerp(c, Color.white, Mathf.Clamp01(1f - Vector2.Distance(p, cell) * 220f) * 0.9f);
+            }
+
+            // Moon disc with soft maria.
+            if (md < 0.17f)
+            {
+                float edge = Mathf.Clamp01((0.17f - md) * 300f);
+                float maria = Mathf.Clamp01(1f - Vector2.Distance(p, new Vector2(0.62f, 0.76f)) * 14f) * 0.12f
+                              + Mathf.Clamp01(1f - Vector2.Distance(p, new Vector2(0.7f, 0.68f)) * 18f) * 0.1f;
+                Color moon = new Color(1f, 0.97f, 0.88f) * (1f - maria);
+                c = Color.Lerp(c, moon, edge);
+            }
+
+            // Far island with a lighthouse and its beam.
+            float island = horizon + 0.025f * Mathf.Exp(-Mathf.Pow((x - 0.86f) * 9f, 2f));
+            if (y < island && y > horizon - 0.01f && x > 0.72f)
+            {
+                c = new Color(0.07f, 0.09f, 0.18f);
+            }
+
+            if (x > 0.845f && x < 0.875f && y > island - 0.005f && y < island + 0.1f)
+            {
+                c = Mathf.Repeat((y - island) * 40f, 1f) < 0.5f ? new Color(0.9f, 0.88f, 0.84f) : new Color(0.7f, 0.25f, 0.22f);
+            }
+
+            float lampY = island + 0.11f;
+            float lamp = Vector2.Distance(p, new Vector2(0.86f, lampY));
+            c += new Color(1f, 0.85f, 0.5f) * (Mathf.Exp(-lamp * 45f) * 0.9f);
+            if (y > lampY - 0.02f && y < lampY + 0.02f + (0.86f - x) * 0.12f && x < 0.86f && x > 0.45f)
+            {
+                c += new Color(1f, 0.9f, 0.6f) * 0.08f * Mathf.Clamp01((x - 0.45f) * 3f);
+            }
+
+            // Sea: layered swells, moon path glitter, a big crest in front.
+            if (y < horizon)
+            {
+                float depth = Mathf.Clamp01((horizon - y) / horizon);
+                c = Color.Lerp(new Color(0.18f, 0.32f, 0.52f), new Color(0.03f, 0.1f, 0.22f), Mathf.Pow(depth, 0.7f));
+                float band = Mathf.Sin(y * 120f + Mathf.Sin(x * 14f) * 2f);
+                c += new Color(0.1f, 0.14f, 0.2f) * Mathf.Clamp01(band) * (1f - depth) * 0.5f;
+                // Moon path: a column of glints under the moon that widens towards the viewer.
+                float path = Mathf.Abs(x - 0.66f) / (0.05f + depth * 0.25f);
+                float glint = Mathf.Clamp01(1f - path) * Mathf.Clamp01(Mathf.Sin(y * 260f + x * 30f) * 2f - 0.6f);
+                c += new Color(0.9f, 0.92f, 1f) * glint * 0.55f;
+            }
+
+            float crest = 0.3f + 0.1f * Mathf.Sin(x * 5.2f + 0.6f) + 0.015f * Mathf.Sin(x * 31f);
+            if (y < crest)
+            {
+                float d = crest - y;
+                Color face = Color.Lerp(new Color(0.12f, 0.42f, 0.6f), new Color(0.02f, 0.08f, 0.18f), Mathf.Clamp01(d / 0.3f));
+                c = face;
+                if (d < 0.018f)
+                {
+                    c = Color.Lerp(new Color(0.85f, 0.93f, 1f), face, d / 0.018f); // foam lip
+                }
+            }
+
+            // Boat on the crest: dark hull, cream sails, a warm lantern.
+            float bx = 0.3f;
+            float by = 0.3f + 0.1f * Mathf.Sin(bx * 5.2f + 0.6f) + 0.005f;
+            bool hull = InTriangle(p, new Vector2(bx - 0.13f, by + 0.035f), new Vector2(bx + 0.14f, by + 0.035f), new Vector2(bx + 0.1f, by - 0.02f))
+                        || InTriangle(p, new Vector2(bx - 0.13f, by + 0.035f), new Vector2(bx + 0.1f, by - 0.02f), new Vector2(bx - 0.09f, by - 0.02f));
+            bool mainSail = InTriangle(p, new Vector2(bx - 0.005f, by + 0.27f), new Vector2(bx - 0.005f, by + 0.05f), new Vector2(bx + 0.12f, by + 0.05f));
+            bool jib = InTriangle(p, new Vector2(bx - 0.02f, by + 0.24f), new Vector2(bx - 0.02f, by + 0.06f), new Vector2(bx - 0.11f, by + 0.06f));
+            bool mast = x > bx - 0.02f && x < bx - 0.005f && y > by + 0.03f && y < by + 0.29f;
+            if (mainSail || jib)
+            {
+                c = Color.Lerp(new Color(0.93f, 0.88f, 0.78f), new Color(0.75f, 0.72f, 0.7f), Mathf.Clamp01((x - bx) * 4f + 0.3f));
+            }
+
+            if (mast)
+            {
+                c = new Color(0.22f, 0.15f, 0.12f);
+            }
+
+            if (hull)
+            {
+                c = Color.Lerp(new Color(0.42f, 0.25f, 0.16f), new Color(0.26f, 0.15f, 0.1f), Mathf.Clamp01((by + 0.035f - y) / 0.055f));
+            }
+
+            float lantern = Vector2.Distance(p, new Vector2(bx + 0.1f, by + 0.06f));
+            c += new Color(1f, 0.7f, 0.3f) * (Mathf.Exp(-lantern * 60f) * 1.2f);
+            if (lantern < 0.012f)
+            {
+                c = new Color(1f, 0.85f, 0.5f);
+            }
+
+            // Gentle vignette.
+            float v = Vector2.Distance(p, new Vector2(0.5f, 0.5f));
+            c *= 1f - Mathf.Clamp01(v - 0.45f) * 0.6f;
+            return c;
         }
 
         public static Texture2D EnsureIcon(string path)

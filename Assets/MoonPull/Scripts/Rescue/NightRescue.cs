@@ -263,14 +263,14 @@ namespace MoonPull.Rescue
                 wakeGo.transform.SetParent(boatRoot, false);
                 wakeGo.transform.localPosition = new Vector3(-0.9f, 0.02f, 0f);
                 wake = wakeGo.AddComponent<TrailRenderer>();
-                wake.time = 0.8f;
+                wake.time = 0.5f;
                 wake.minVertexDistance = 0.25f;
-                wake.widthMultiplier = 0.55f;
+                wake.widthMultiplier = 0.3f;
                 wake.widthCurve = new AnimationCurve(new Keyframe(0f, 1f), new Keyframe(1f, 0.15f));
                 var gradient = new Gradient();
                 gradient.SetKeys(
                     new[] { new GradientColorKey(new Color(0.9f, 0.96f, 1f), 0f), new GradientColorKey(new Color(0.7f, 0.85f, 1f), 1f) },
-                    new[] { new GradientAlphaKey(0.7f, 0f), new GradientAlphaKey(0f, 1f) });
+                    new[] { new GradientAlphaKey(0.35f, 0f), new GradientAlphaKey(0f, 1f) });
                 wake.colorGradient = gradient;
                 wake.sharedMaterial = new Material(Shader.Find("Sprites/Default"));
                 wake.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
@@ -439,7 +439,7 @@ namespace MoonPull.Rescue
 
             // Lighthouses refill the moonlight, but no night lasts forever: dawn always comes.
             // First nights stay short and snappy (about a minute); later nights may run up to about two minutes.
-            if (moonlight <= 0f || runTime > Mathf.Lerp(65f, 120f, Mathf.Clamp01(levelIndex / 12f)) * Mathf.Min(1.3f, VillageService.NightMultiplier))
+            if (moonlight <= 0f || runTime > Mathf.Lerp(60f, 105f, Mathf.Clamp01(levelIndex / 12f)) * Mathf.Min(1.2f, VillageService.NightMultiplier))
             {
                 EndNight();
             }
@@ -708,7 +708,7 @@ namespace MoonPull.Rescue
             airborne = true;
             airTime = 0f;
             vx = Mathf.Max(speed, minSpeed);
-            vy = 7.5f;
+            vy = 8.2f;
             y += 0.05f;
             hopCooldown = 0.8f;
             hopFlight = true;

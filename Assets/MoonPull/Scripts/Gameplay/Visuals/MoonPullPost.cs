@@ -26,8 +26,8 @@ namespace MoonPull.Gameplay.Visuals
         [SerializeField] private Shader shader;
 
         [Header("Bloom")]
-        [SerializeField, Range(0f, 3f)] private float bloomIntensity = 0.9f;
-        [SerializeField, Range(0f, 1.5f)] private float threshold = 0.72f;
+        [SerializeField, Range(0f, 3f)] private float bloomIntensity = 0.5f;
+        [SerializeField, Range(0f, 1.5f)] private float threshold = 0.86f;
         [SerializeField, Range(0.01f, 1f)] private float softKnee = 0.5f;
         [SerializeField, Range(2, MaxIterations)] private int iterations = 4;
 

@@ -43,6 +43,23 @@ namespace MoonPull.Boot
 
             yield return Shot("01-menu");
 
+            // The other menu destinations: shop, missions, daily spin and settings.
+            var menu = FindFirstObjectByType<MenuScreen>(FindObjectsInactive.Include);
+            if (menu != null && popups != null)
+            {
+                yield return Press(menu.transform, "Content/Shop", 1.5f);
+                yield return Shot("01a-shop");
+                MoonPull.Core.GameEvents.RaiseMenuRequested();
+                yield return new WaitForSecondsRealtime(1f);
+                foreach (string tile in new[] { "Missions", "Spin", "Settings" })
+                {
+                    yield return Press(menu.transform, "Content/" + tile, 1.2f);
+                    yield return Shot("01" + (tile == "Missions" ? "b" : tile == "Spin" ? "c" : "d") + "-" + tile.ToLowerInvariant());
+                    popups.CloseAll();
+                    yield return new WaitForSecondsRealtime(0.8f);
+                }
+            }
+
             // A lived-in village for the store shots (the bot resets it later).
             PlayerPrefs.SetInt(NightRescue.VillageKey, 16);
             PlayerPrefs.SetInt("mp_village_level", 3);
