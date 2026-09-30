@@ -395,7 +395,7 @@ namespace MoonPull.Rescue
             float t = 1f - Mathf.Exp(-4f * Time.unscaledDeltaTime);
             cameraTransform.position = Vector3.Lerp(cameraTransform.position, target, t);
             // Aim below the island so it sits in the top half of the screen, above the Village sheet.
-            Quaternion look = Quaternion.LookRotation(transform.position + new Vector3(0f, -6f, 4.5f) - target);
+            Quaternion look = Quaternion.LookRotation(transform.position + new Vector3(0f, -10f, 3f) - target);
             cameraTransform.rotation = Quaternion.Slerp(cameraTransform.rotation, look, t);
         }
     }

@@ -37,6 +37,7 @@ namespace MoonPull.UI
         [SerializeField] private GameObject islandsPage;
         [SerializeField] private Text treasuryLabel;
         [SerializeField] private LocalizedText incomeLabel;
+        [SerializeField] private LocalizedText suppliesLabel;
         [SerializeField] private Button collectButton;
         [SerializeField] private Image treasuryFill;
         [SerializeField] private Button[] islandButtons = new Button[TycoonState.IslandCount];
@@ -53,7 +54,19 @@ namespace MoonPull.UI
             base.Awake();
             int treasury = TycoonState.Treasury;
             treasuryLabel.SetText("{0}", treasury);
-            incomeLabel.SetKey(LocKeys.VillageIncome, Mathf.RoundToInt(TycoonState.IncomePerMinute * 60f));
+            if (TycoonState.OutOfSupplies)
+            {
+                incomeLabel.SetKey(LocKeys.VillageNoSupplies);
+                incomeLabel.GetComponent<Text>().color = new Color(1f, 0.5f, 0.45f);
+            }
+            else
+            {
+                incomeLabel.SetKey(LocKeys.VillageIncome, Mathf.RoundToInt(TycoonState.IncomePerMinute * 60f));
+                incomeLabel.GetComponent<Text>().color = new Color(0.5f, 0.89f, 0.77f);
+            }
+
+            suppliesLabel.SetKey(LocKeys.VillageSupplies, Mathf.FloorToInt(TycoonState.Supplies), TycoonState.SupplyCapacity,
+                Mathf.Min(VillageState.Population, TycoonState.JobsTotal), TycoonState.JobsTotal);
             treasuryFill.fillAmount = Mathf.Clamp01(treasury / TycoonState.Capacity);
             collectButton.interactable = treasury > 0;
 
@@ -70,7 +83,11 @@ namespace MoonPull.UI
                 islandLockedLabels[i].gameObject.SetActive(!owned && !canBuy);
                 if (!owned && !canBuy)
                 {
-                    if (previousOwned)
+                    if (previousOwned && VillageState.Population < TycoonState.IslandRequiredPeople(i))
+                    {
+                        islandLockedLabels[i].SetKey(LocKeys.VillageNeedsPeople, TycoonState.IslandRequiredPeople(i));
+                    }
+                    else if (previousOwned)
                     {
                         islandLockedLabels[i].SetKey(LocKeys.VillageNeedsLevel, TycoonState.IslandRequiredLevel(i));
                     }
@@ -141,8 +158,10 @@ namespace MoonPull.UI
             showIslands = islands;
             buildingsPage.SetActive(!islands);
             islandsPage.SetActive(islands);
-            buildingsTab.GetComponent<Image>().color = islands ? new Color(1f, 1f, 1f, 0.35f) : Color.white;
-            islandsTab.GetComponent<Image>().color = islands ? Color.white : new Color(1f, 1f, 1f, 0.35f);
+            Color on = new Color(1f, 0.71f, 0.28f);
+            Color off = new Color(0.25f, 0.3f, 0.55f);
+            buildingsTab.GetComponent<Image>().color = islands ? off : on;
+            islandsTab.GetComponent<Image>().color = islands ? on : off;
             Refresh();
         }
 
@@ -205,7 +224,19 @@ namespace MoonPull.UI
 
             int treasury = TycoonState.Treasury;
             treasuryLabel.SetText("{0}", treasury);
-            incomeLabel.SetKey(LocKeys.VillageIncome, Mathf.RoundToInt(TycoonState.IncomePerMinute * 60f));
+            if (TycoonState.OutOfSupplies)
+            {
+                incomeLabel.SetKey(LocKeys.VillageNoSupplies);
+                incomeLabel.GetComponent<Text>().color = new Color(1f, 0.5f, 0.45f);
+            }
+            else
+            {
+                incomeLabel.SetKey(LocKeys.VillageIncome, Mathf.RoundToInt(TycoonState.IncomePerMinute * 60f));
+                incomeLabel.GetComponent<Text>().color = new Color(0.5f, 0.89f, 0.77f);
+            }
+
+            suppliesLabel.SetKey(LocKeys.VillageSupplies, Mathf.FloorToInt(TycoonState.Supplies), TycoonState.SupplyCapacity,
+                Mathf.Min(VillageState.Population, TycoonState.JobsTotal), TycoonState.JobsTotal);
             treasuryFill.fillAmount = Mathf.Clamp01(treasury / TycoonState.Capacity);
             collectButton.interactable = treasury > 0;
 
@@ -222,7 +253,11 @@ namespace MoonPull.UI
                 islandLockedLabels[i].gameObject.SetActive(!owned && !canBuy);
                 if (!owned && !canBuy)
                 {
-                    if (previousOwned)
+                    if (previousOwned && VillageState.Population < TycoonState.IslandRequiredPeople(i))
+                    {
+                        islandLockedLabels[i].SetKey(LocKeys.VillageNeedsPeople, TycoonState.IslandRequiredPeople(i));
+                    }
+                    else if (previousOwned)
                     {
                         islandLockedLabels[i].SetKey(LocKeys.VillageNeedsLevel, TycoonState.IslandRequiredLevel(i));
                     }
@@ -238,7 +273,8 @@ namespace MoonPull.UI
                 var building = (VillageBuilding)i;
                 int level = VillageService.Level(building);
                 int cost = VillageService.NextCost(building);
-                bool capped = VillageService.IsCapped(building);
+                bool needsLevel = VillageService.IsCapped(building);
+                bool capped = needsLevel || (cost >= 0 && VillageService.NeedsWorkers);
                 levelLabels[i].SetText("{0}/{1}", level, VillageService.MaxLevel);
                 upgradeButtons[i].gameObject.SetActive(cost >= 0 && !capped);
                 upgradeButtons[i].interactable = cost >= 0 && meta.Wallet.CanAfford(cost);
@@ -246,7 +282,11 @@ namespace MoonPull.UI
                 costLabels[i].SetText("{0}", Mathf.Max(0, cost));
                 maxLabels[i].SetActive(cost < 0);
                 cappedLabels[i].gameObject.SetActive(capped);
-                if (capped)
+                if (capped && !needsLevel)
+                {
+                    cappedLabels[i].SetKey(LocKeys.VillageNeedsPeople, VillageService.WorkersNeeded);
+                }
+                else if (capped)
                 {
                     // Tier n+1 needs village level 2n+1.
                     cappedLabels[i].SetKey(LocKeys.VillageNeedsLevel, 2 * level + 1);

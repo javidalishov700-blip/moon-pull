@@ -346,6 +346,7 @@ namespace MoonPull.EditorTools
             CoinIcon(rewardAnchor, new Vector2(0f, 0.5f), new Vector2(80f, 0f), 96f);
             Text reward = Text(rewardAnchor, "Amount", "+0", 72, Center, new Vector2(50f, 0f), new Vector2(360f, 100f), Gold, TextAnchor.MiddleLeft, true);
             LocalizedText chestNote = Loc(c, "BossChest", LocKeys.WinBossChest, 38, Center, new Vector2(0f, 70f), new Vector2(900f, 60f), Primary);
+            LocalizedText suppliesNote = Loc(c, "Supplies", LocKeys.WinSupplies, 38, Center, new Vector2(0f, 70f), new Vector2(900f, 60f), Accent, TextAnchor.MiddleCenter, true);
 
             RectTransform triple = Rect("Triple", c, Center, new Vector2(0f, -110f), new Vector2(900f, 300f));
             RewardedButton tripleButton = Rewarded(triple, "Triple", LocKeys.WinTriple, AdPlacement.TripleReward, Center, new Vector2(0f, 40f), new Vector2(660f, 180f), w.Ads, true);
@@ -356,7 +357,7 @@ namespace MoonPull.EditorTools
 
             Gen.Wire(screen, "gameManager", w.GameManager, "meta", w.Meta, "ads", w.Ads, "coinFly", coinFly, "stars", starView,
                 "scoreLabel", score, "rewardLabel", reward, "rewardAnchor", rewardAnchor, "newBestBadge", newBest.gameObject,
-                "bossChestNote", chestNote.gameObject, "tripleGroup", triple.gameObject, "tripleButton", tripleButton,
+                "bossChestNote", chestNote.gameObject, "suppliesNote", suppliesNote, "tripleGroup", triple.gameObject, "tripleButton", tripleButton,
                 "tripleDescription", tripleDesc, "continueButton", next, "homeButton", home);
             return screen;
         }
@@ -691,6 +692,8 @@ namespace MoonPull.EditorTools
             CoinIcon(card.transform, new Vector2(0f, 0.5f), new Vector2(80f, 12f), 96f);
             Text treasury = Text(card.transform, "Amount", "0", 64, new Vector2(0f, 0.5f), new Vector2(330f, 24f), new Vector2(300f, 80f), Gold, TextAnchor.MiddleLeft, true);
             LocalizedText income = Loc(card.transform, "Income", LocKeys.VillageIncome, 30, new Vector2(0f, 0.5f), new Vector2(330f, -32f), new Vector2(300f, 44f), Accent, TextAnchor.MiddleLeft, true);
+            LocalizedText supplies = Loc(popup.transform, "Supplies", LocKeys.VillageSupplies, 30, Top, new Vector2(0f, -360f), new Vector2(960f, 46f), TextLight, TextAnchor.MiddleCenter, true);
+            supplies.GetComponent<Text>().gameObject.AddComponent<Outline>().effectColor = new Color(0f, 0f, 0.1f, 0.8f);
             Image storeBg = Image(card.transform, "Storage", new Vector2(0.5f, 0f), new Vector2(0f, 18f), new Vector2(900f, 14f), new Color(0f, 0f, 0f, 0.4f));
             Image storeFill = Fill(Image(storeBg.transform, "Fill", Center, Vector2.zero, new Vector2(900f, 14f), Gold), UnityEngine.UI.Image.FillMethod.Horizontal, 0.4f);
             Button collect = Button(card.transform, "Collect", LocKeys.VillageCollect, new Vector2(1f, 0.5f), new Vector2(-170f, 10f), new Vector2(290f, 110f), Gen.Hex("5CCB7A"), 46);
@@ -749,7 +752,7 @@ namespace MoonPull.EditorTools
 
             Gen.Wire(popup, "coinFly", coinFly, "buildingsTab", tabBuildings, "islandsTab", tabIslands,
                 "buildingsPage", buildingsPage.gameObject, "islandsPage", islandsPage.gameObject, "treasuryLabel", treasury,
-                "incomeLabel", income, "collectButton", collect, "treasuryFill", storeFill);
+                "incomeLabel", income, "suppliesLabel", supplies, "collectButton", collect, "treasuryFill", storeFill);
             Gen.SetArray(popup, "islandButtons", islandButtons);
             Gen.SetArray(popup, "islandCostLabels", islandCosts);
             Gen.SetArray(popup, "islandOwnedLabels", islandOwned);

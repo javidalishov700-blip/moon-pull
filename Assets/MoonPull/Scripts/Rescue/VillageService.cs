@@ -41,10 +41,15 @@ namespace MoonPull.Rescue
         /// <summary>True when the next level exists but needs a higher village level first.</summary>
         public static bool IsCapped(VillageBuilding b) => Level(b) < MaxLevel && Level(b) >= VillageState.BuildingLevelCap;
 
+        /// <summary>Building one more level needs enough people to staff every level (rescue more at sea).</summary>
+        public static bool NeedsWorkers => VillageState.Population < TycoonState.JobsTotal + TycoonState.WorkersPerLevel;
+
+        public static int WorkersNeeded => TycoonState.JobsTotal + TycoonState.WorkersPerLevel;
+
         public static bool TryUpgrade(VillageBuilding b, Wallet wallet)
         {
             int cost = NextCost(b);
-            if (cost < 0 || IsCapped(b) || wallet == null || !wallet.TrySpendCoins(cost, "village_" + b.ToString().ToLowerInvariant()))
+            if (cost < 0 || IsCapped(b) || NeedsWorkers || wallet == null || !wallet.TrySpendCoins(cost, "village_" + b.ToString().ToLowerInvariant()))
             {
                 return false;
             }

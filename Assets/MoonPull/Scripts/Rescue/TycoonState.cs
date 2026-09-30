@@ -7,7 +7,10 @@ namespace MoonPull.Rescue
     /// <summary>
     /// The island-tycoon layer. Every building level earns coins every minute into the village Treasury (also while
     /// the game is closed, up to a few hours' worth), and villagers add a little each. Coins buy new islands around
-    /// the harbor: each one adds homes and multiplies all income. Rescue nights bring the people who make it all run.
+    /// the harbor: each one adds homes and multiplies all income.
+    /// The village always needs the boat: buildings burn Supplies that only rescue nights bring home (every rescued
+    /// person and lantern), every building level needs 3 workers (rescued people), and islands need a population.
+    /// A rich village that stops sailing runs out of supplies and goes quiet.
     /// </summary>
     public static class TycoonState
     {
@@ -16,6 +19,10 @@ namespace MoonPull.Rescue
 
         private const string TreasuryKey = "mp_tycoon_treasury";
         private const string TickKey = "mp_tycoon_tick";
+        private const string SuppliesKey = "mp_tycoon_supplies";
+        public const int WorkersPerLevel = 3;
+        public const float CoinsPerSupply = 8f;
+        private static readonly int[] IslandPeople = { 10, 20, 35, 50 };
 
         // Per-level coins per minute for Shelter, Restaurant, Workshop, Shipyard, Market.
         private static readonly float[] BuildingIncome = { 1f, 3f, 2f, 2f, 5f };
@@ -46,9 +53,50 @@ namespace MoonPull.Rescue
 
         public static int IslandRequiredLevel(int island) => IslandVillageLevel[island];
 
+        public static int IslandRequiredPeople(int island) => IslandPeople[island];
+
+        // ---- supplies: only the boat brings them
+
+        public static float Supplies => PlayerPrefs.GetFloat(SuppliesKey, 30f);
+
+        public static int SupplyCapacity => 60 + 30 * IslandsOwned;
+
+        public static bool OutOfSupplies => Supplies < 0.5f;
+
+        public static void AddSupplies(int amount)
+        {
+            Accrue();
+            PlayerPrefs.SetFloat(SuppliesKey, Mathf.Min(SupplyCapacity, Supplies + amount));
+            PlayerPrefs.Save();
+            Changed?.Invoke();
+        }
+
+        /// <summary>Supplies a night brings home.</summary>
+        public static int SuppliesFromNight(int rescued, int lanterns) => rescued * 3 + lanterns * 2;
+
+        // ---- workers: rescued people run the buildings
+
+        public static int JobsTotal
+        {
+            get
+            {
+                int levels = 0;
+                for (int b = 0; b < VillageService.BuildingCount; b++)
+                {
+                    levels += VillageService.Level((VillageBuilding)b);
+                }
+
+                return levels * WorkersPerLevel;
+            }
+        }
+
+        /// <summary>0..1: how many jobs have a worker.</summary>
+        public static float Staffed => JobsTotal == 0 ? 1f : Mathf.Clamp01(VillageState.Population / (float)JobsTotal);
+
         /// <summary>Islands must be bought in order; the next one also needs a village level.</summary>
         public static bool CanBuyNext(int island) =>
-            !Owns(island) && (island == 0 || Owns(island - 1)) && VillageState.Level >= IslandVillageLevel[island];
+            !Owns(island) && (island == 0 || Owns(island - 1)) && VillageState.Level >= IslandVillageLevel[island]
+            && VillageState.Population >= IslandPeople[island];
 
         public static int ExtraHousing => 8 * IslandsOwned;
 
@@ -59,12 +107,13 @@ namespace MoonPull.Rescue
         {
             get
             {
-                float rate = 0.2f * VillageState.Population;
+                float buildings = 0f;
                 for (int b = 0; b < VillageService.BuildingCount; b++)
                 {
-                    rate += BuildingIncome[b] * VillageService.Level((VillageBuilding)b);
+                    buildings += BuildingIncome[b] * VillageService.Level((VillageBuilding)b);
                 }
 
+                float rate = 0.2f * VillageState.Population + buildings * Staffed;
                 return rate * IncomeMultiplier * (0.5f + VillageState.Happiness / 200f);
             }
         }
@@ -95,7 +144,11 @@ namespace MoonPull.Rescue
 
             float minutes = Mathf.Min(StorageHours * 60f, (float)TimeSpan.FromTicks(now - last).TotalMinutes);
             float stored = PlayerPrefs.GetFloat(TreasuryKey, 0f);
-            PlayerPrefs.SetFloat(TreasuryKey, Mathf.Min(Capacity, stored + IncomePerMinute * minutes));
+            float room = Mathf.Max(0f, Capacity - stored);
+            // Production burns supplies; with none left the village earns nothing until the boat brings more.
+            float earned = Mathf.Min(room, Mathf.Min(IncomePerMinute * minutes, Supplies * CoinsPerSupply));
+            PlayerPrefs.SetFloat(TreasuryKey, stored + earned);
+            PlayerPrefs.SetFloat(SuppliesKey, Mathf.Max(0f, Supplies - earned / CoinsPerSupply));
         }
 
         public static int Collect(Wallet wallet)
@@ -137,6 +190,7 @@ namespace MoonPull.Rescue
             }
 
             PlayerPrefs.SetFloat(TreasuryKey, treasury);
+            PlayerPrefs.SetFloat(SuppliesKey, 42f);
             PlayerPrefs.SetString(TickKey, DateTime.UtcNow.Ticks.ToString());
         }
     }

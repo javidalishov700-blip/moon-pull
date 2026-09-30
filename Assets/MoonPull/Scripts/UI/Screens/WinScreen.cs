@@ -24,6 +24,7 @@ namespace MoonPull.UI
         [SerializeField] private RectTransform rewardAnchor;
         [SerializeField] private GameObject newBestBadge;
         [SerializeField] private GameObject bossChestNote;
+        [SerializeField] private LocalizedText suppliesNote;
 
         [SerializeField] private GameObject tripleGroup;
         [SerializeField] private RewardedButton tripleButton;
@@ -51,6 +52,12 @@ namespace MoonPull.UI
             rewardLabel.SetText("+{0}", reward.Total);
             newBestBadge.SetActive(meta.LastResultWasNewBest);
             bossChestNote.SetActive(result.BossDefeated);
+            if (suppliesNote != null)
+            {
+                int supplies = MoonPull.Rescue.NightRescue.LastSupplies;
+                suppliesNote.gameObject.SetActive(!result.BossDefeated && supplies > 0);
+                suppliesNote.SetKey(LocKeys.WinSupplies, supplies);
+            }
 
             bool canMultiply = meta.CanMultiplyLastReward;
             tripleGroup.SetActive(canMultiply);

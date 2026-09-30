@@ -158,6 +158,9 @@ namespace MoonPull.Rescue
         public bool? ForcedHold { get; set; }
 
         public float Moonlight => moonlight;
+
+        /// <summary>Supplies the last night brought home (shown on the win screen).</summary>
+        public static int LastSupplies { get; private set; }
         public int Aboard => aboard;
 
         private void Awake()
@@ -644,6 +647,8 @@ namespace MoonPull.Rescue
             VillageState.Simulate();
             int levelBefore = VillageState.Level;
             VillageState.AddPeople(rescued);
+            LastSupplies = TycoonState.SuppliesFromNight(rescued, lanternsCaught);
+            TycoonState.AddSupplies(LastSupplies);
             int levelReward = 0;
             for (int l = levelBefore + 1; l <= VillageState.Level; l++)
             {
