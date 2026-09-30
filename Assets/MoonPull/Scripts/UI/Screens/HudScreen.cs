@@ -254,7 +254,14 @@ namespace MoonPull.UI
         private void OnBoatBumped(int heartsLeft)
         {
             calloutMultiplier.gameObject.SetActive(false);
-            ShowCallout(LocKeys.HudBumped, heartsLeft);
+            if (heartsLeft > 0)
+            {
+                ShowCallout(LocKeys.HudBumped, heartsLeft);
+            }
+            else
+            {
+                ShowCallout("hud.bumped_empty");
+            }
         }
 
         private void OnShield()

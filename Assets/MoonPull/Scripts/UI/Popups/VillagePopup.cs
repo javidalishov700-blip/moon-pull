@@ -140,6 +140,7 @@ namespace MoonPull.UI
         private void SetExploring(bool value)
         {
             exploring = value;
+            VillageDirector.ShowIslandPins = value || page == 1;
             if (exploreButton != null)
             {
                 exploreButton.GetComponentInChildren<LocalizedText>().SetKey(value ? LocKeys.VillageManage : LocKeys.VillageExplore);
@@ -177,6 +178,7 @@ namespace MoonPull.UI
             buildingsTab.GetComponent<Image>().color = index == 0 ? on : off;
             islandsTab.GetComponent<Image>().color = index == 1 ? on : off;
             boatTab.GetComponent<Image>().color = index == 2 ? on : off;
+            VillageDirector.ShowIslandPins = exploring || index == 1;
             Refresh();
         }
 

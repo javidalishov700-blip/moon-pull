@@ -39,6 +39,9 @@ namespace MoonPull.Rescue
         /// <summary>True while the player is visiting the village; the sea camera stands aside.</summary>
         public static bool Active { get; private set; }
 
+        /// <summary>Price pins over islands for sale only show while exploring or on the Islands tab.</summary>
+        public static bool ShowIslandPins { get; set; }
+
         private readonly List<Villager> villagers = new List<Villager>();
         private System.Random random = new System.Random(77);
         private float nextNeedAt;

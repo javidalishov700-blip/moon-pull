@@ -99,7 +99,7 @@ namespace MoonPull.Rescue
                     bool show;
                     if (pin.IsIsland)
                     {
-                        show = active && !TycoonState.Owns(pin.Index);
+                        show = active && VillageDirector.ShowIslandPins && !TycoonState.Owns(pin.Index);
                         bool ready = TycoonState.CanBuyNext(pin.Index);
                         pin.Body.color = ready ? new Color(0.36f, 0.83f, 0.36f) : new Color(0.55f, 0.58f, 0.75f);
                         pin.Label.text = TycoonState.IslandCost(pin.Index).ToString();

@@ -391,7 +391,7 @@ namespace MoonPull.Rescue
             DespawnBehind();
 
             // Lighthouses refill the moonlight, but no night lasts forever: dawn always comes.
-            if (moonlight <= 0f || runTime > Mathf.Max(90f, nightLength * 4f))
+            if (moonlight <= 0f || runTime > Mathf.Max(70f, nightLength * 2.3f))
             {
                 EndNight();
             }
@@ -418,7 +418,7 @@ namespace MoonPull.Rescue
                 return;
             }
 
-            if (broken || x - progressCheckX < 4f || y < Height(x) - 1.5f)
+            if (broken || x - progressCheckX < 2.5f || y < Height(x) - 1.5f)
             {
                 if (broken)
                 {
@@ -475,8 +475,12 @@ namespace MoonPull.Rescue
             speed += accel * dt;
             if (speed < minSpeed)
             {
-                speed = Mathf.MoveTowards(speed, minSpeed, 6f * dt); // the wind never lets the boat stall
+                speed = Mathf.MoveTowards(speed, minSpeed, 8f * dt); // the wind never lets the boat stall
             }
+
+            // A steep face slows the boat but never rolls it backwards into the trough (that used to trap it
+            // there until the unstick safety net fired, which players saw as "stuck on a wave").
+            speed = Mathf.Max(speed, minSpeed * 0.6f);
 
             // Holding is a dive, not an accelerator: above cruising speed the sea drags the boat back down, so
             // speed comes from well-timed releases and perfect landings, not from keeping a finger on the screen.
@@ -554,7 +558,7 @@ namespace MoonPull.Rescue
                     StartFever();
                 }
             }
-            else if (diff < 0.75f)
+            else if (diff < 0.9f)
             {
                 speed = Mathf.Max(minSpeed, along * 0.92f);
                 perfectStreak = 0;
@@ -564,8 +568,18 @@ namespace MoonPull.Rescue
             {
                 // Belly flop: a big splash, most of the speed gone and someone falls overboard. Never a game over.
                 Stats.BellyFlops++;
-                HitHazard();
-                speed = Mathf.Max(minSpeed, along * 0.5f);
+                if (diff > 1.15f)
+                {
+                    HitHazard(); // a really hard slap: someone goes overboard
+                }
+                else
+                {
+                    perfectStreak = 0;
+                    shake = 0.25f;
+                    Splash(40, new Color(0.9f, 0.96f, 1f, 0.9f));
+                }
+
+                speed = Mathf.Max(minSpeed, along * 0.6f);
                 GameEvents.RaiseNearMissChainBroken();
             }
         }
@@ -779,7 +793,7 @@ namespace MoonPull.Rescue
 
                         break;
                     case Kind.Rock:
-                        if (dx < 0.9f && y - Height(t.X) < 1.0f)
+                        if (dx < 0.8f && y - Height(t.X) < 0.85f)
                         {
                             t.Done = true;
                             Stats.RocksHit++;
@@ -817,7 +831,7 @@ namespace MoonPull.Rescue
 
             rescued += count;
             lighthousesLit++;
-            moonlight = Mathf.Min(1f, moonlight + 0.22f + 0.06f * count);
+            moonlight = Mathf.Min(1f, moonlight + 0.14f + 0.04f * count);
             score.AddBonus(150 * count);
             SetAboard(0);
             GameEvents.RaisePassengersDelivered(count);

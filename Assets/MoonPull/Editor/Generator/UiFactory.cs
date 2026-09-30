@@ -849,11 +849,11 @@ namespace MoonPull.EditorTools
 
         private static PausePopup BuildPause(Transform parent)
         {
-            var popup = Popup<PausePopup>(parent, "Pause", LocKeys.PauseTitle, new Vector2(800f, 1060f), out RectTransform p);
-            Button resume = Button(p, "Resume", LocKeys.PauseResume, Center, new Vector2(0f, 230f), new Vector2(560f, 150f), Primary, 54);
-            Button finish = Button(p, "Finish", LocKeys.PauseFinish, Center, new Vector2(0f, 60f), new Vector2(560f, 130f), Gold, 46);
-            Button restart = Button(p, "Restart", LocKeys.PauseRestart, Center, new Vector2(0f, -100f), new Vector2(560f, 130f), PanelLight, 46);
-            Button home = Button(p, "Home", LocKeys.CommonHome, Center, new Vector2(0f, -260f), new Vector2(560f, 130f), PanelLight, 46);
+            var popup = Popup<PausePopup>(parent, "Pause", LocKeys.PauseTitle, new Vector2(800f, 880f), out RectTransform p);
+            Button resume = Button(p, "Resume", LocKeys.PauseResume, Center, new Vector2(0f, 170f), new Vector2(560f, 150f), Primary, 54);
+            Button finish = Button(p, "Finish", LocKeys.PauseFinish, Center, new Vector2(0f, 20f), new Vector2(560f, 124f), Gen.Hex("2F8C99"), 44);
+            Button restart = Button(p, "Restart", LocKeys.PauseRestart, Center, new Vector2(0f, -125f), new Vector2(560f, 124f), PanelLight, 44);
+            Button home = Button(p, "Home", LocKeys.CommonHome, Center, new Vector2(0f, -270f), new Vector2(560f, 124f), PanelLight, 44);
             Gen.Wire(popup, "timeScale", w.TimeScale, "resumeButton", resume, "restartButton", restart, "homeButton", home,
                 "finishButton", finish, "rescue", w.Rescue);
             return popup;

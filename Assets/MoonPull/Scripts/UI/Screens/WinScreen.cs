@@ -45,12 +45,8 @@ namespace MoonPull.UI
         {
             leaving = false;
             LevelResult result = gameManager.LastResult;
-            LevelReward reward = meta.LastReward;
-
             stars.Animate(result.Stars);
             UiTween.Count(scoreLabel, 0f, result.Score, 0.8f, v => scoreLabel.SetText("{0:0}", v));
-            rewardLabel.SetText("+{0}", reward.Total);
-            newBestBadge.SetActive(meta.LastResultWasNewBest);
             bossChestNote.SetActive(result.BossDefeated);
             if (suppliesNote != null)
             {
@@ -59,6 +55,31 @@ namespace MoonPull.UI
                 suppliesNote.SetKey(LocKeys.WinSupplies, supplies);
             }
 
+            // The screen opens inside the LevelCompleted dispatch, possibly before the meta layer has paid the
+            // level: read the reward one frame later so it is never stale (it used to show "+0").
+            rewardLabel.SetText("+{0}", 0);
+            tripleGroup.SetActive(false);
+            if (isActiveAndEnabled)
+            {
+                StartCoroutine(ShowRewardNextFrame());
+            }
+            else
+            {
+                ShowReward(meta.LastReward);
+            }
+        }
+
+        private System.Collections.IEnumerator ShowRewardNextFrame()
+        {
+            yield return null;
+            ShowReward(meta.LastReward);
+        }
+
+        private void ShowReward(LevelReward reward)
+        {
+            rewardLabel.SetText("+{0}", reward.Total);
+            newBestBadge.SetActive(meta.LastResultWasNewBest);
+
             bool canMultiply = meta.CanMultiplyLastReward;
             tripleGroup.SetActive(canMultiply);
             if (canMultiply)
@@ -66,7 +87,10 @@ namespace MoonPull.UI
                 tripleDescription.SetKey(LocKeys.WinTripleDesc, reward.Total, reward.Total * meta.RewardedLevelMultiplier);
             }
 
-            coinFly.PlayCredited(RectTransformUtility.WorldToScreenPoint(null, rewardAnchor.position), reward.Total);
+            if (reward.Total > 0)
+            {
+                coinFly.PlayCredited(RectTransformUtility.WorldToScreenPoint(null, rewardAnchor.position), reward.Total);
+            }
         }
 
         private void OnTripleRewarded()

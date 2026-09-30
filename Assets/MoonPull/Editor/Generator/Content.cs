@@ -282,7 +282,7 @@ namespace MoonPull.EditorTools
         {
             // Rock: a cluster of faceted boulders, mostly below the waterline so only the crown shows.
             GameObject rock = Gen.Go("Sail_Rock");
-            Color rockColor = Gen.Hex("6A6F8C");
+            Color rockColor = Gen.Hex("50545E"); // wet basalt
             Meshes.Part(Meshes.Rock(71, 1.15f), rock.transform, new Vector3(0f, 0.1f, 0f), new Vector3(1.05f, 1.2f, 1.0f), rockColor);
             Meshes.Part(Meshes.Rock(72), rock.transform, new Vector3(0.6f, -0.1f, 0.3f), new Vector3(0.6f, 0.7f, 0.6f), rockColor * 0.9f, new Vector3(0f, 40f, 0f));
             Meshes.Part(Meshes.Rock(73), rock.transform, new Vector3(-0.55f, -0.2f, -0.2f), new Vector3(0.5f, 0.55f, 0.55f), rockColor * 0.85f, new Vector3(0f, 110f, 0f));

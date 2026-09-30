@@ -21,7 +21,7 @@ namespace MoonPull.Rescue
         private const string TickKey = "mp_tycoon_tick";
         private const string SuppliesKey = "mp_tycoon_supplies";
         public const int WorkersPerLevel = 3;
-        public const float CoinsPerSupply = 8f;
+        public const float CoinsPerSupply = 12f;
         private static readonly int[] IslandPeople = { 10, 20, 35, 50 };
 
         // Per-level coins per minute for Shelter, Restaurant, Workshop, Shipyard, Market.
@@ -59,7 +59,7 @@ namespace MoonPull.Rescue
 
         public static float Supplies => PlayerPrefs.GetFloat(SuppliesKey, 30f);
 
-        public static int SupplyCapacity => 60 + 30 * IslandsOwned;
+        public static int SupplyCapacity => 100 + 50 * IslandsOwned;
 
         public static bool OutOfSupplies => Supplies < 0.5f;
 
