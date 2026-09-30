@@ -34,6 +34,11 @@ namespace MoonPull.Localization
         public const string VillagePopulation = "village.population";
         public const string VillageUpgrade = "village.upgrade";
         public const string VillageMax = "village.max";
+        public const string VillageLevel = "village.level";
+        public const string VillageHappiness = "village.happiness";
+        public const string VillageFood = "village.food";
+        public const string VillageHousing = "village.housing";
+        public const string VillageNeedsLevel = "village.needs_level";
         public const string HudMultiplier = "hud.multiplier";
         public const string HudFullMoon = "hud.full_moon";
         public const string HudMoonstones = "hud.moonstones";

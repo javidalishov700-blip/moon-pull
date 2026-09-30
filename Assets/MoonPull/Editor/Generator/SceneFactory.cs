@@ -56,6 +56,7 @@ namespace MoonPull.EditorTools
             public Camera Camera;
             public HandHint Hand;
             public Transform LoadingOverlay;
+            public MoonPull.Rescue.VillageDirector Village;
         }
 
         public static string Build(Content content)
@@ -242,7 +243,7 @@ namespace MoonPull.EditorTools
             for (int i = 0; i < 24; i++)
             {
                 float angle = i * 2.39996f; // golden-angle spiral keeps the village tidy as it grows
-                float radius = 1.2f + 0.28f * Mathf.Sqrt(i) * 2.2f;
+                float radius = 1.6f + 0.36f * Mathf.Sqrt(i) * 2.2f;
                 var house = (GameObject)PrefabUtility.InstantiatePrefab(content.VillageHouse, island.transform);
                 house.transform.localPosition = new Vector3(Mathf.Cos(angle) * radius * 1.2f, 0.45f, Mathf.Sin(angle) * radius * 0.6f);
                 house.transform.localRotation = Quaternion.Euler(0f, angle * Mathf.Rad2Deg, 0f);
@@ -275,8 +276,24 @@ namespace MoonPull.EditorTools
             }
 
             Gen.SetArray<GameObject>(village, "buildingTiers", tiers);
-            Gen.Prim(PrimitiveType.Sphere, island.transform, new Vector3(0f, -1.2f, 0f), new Vector3(7f, 3f, 5f), Gen.Hex("5E7A5A"));
-            Gen.Prim(PrimitiveType.Sphere, island.transform, new Vector3(0f, -1.45f, 0f), new Vector3(8f, 2.6f, 6f), Gen.Hex("E8D3A0"));
+
+            // Villagers and their requests live on the same island; the Village screen drives it.
+            w.Village = Gen.Add<MoonPull.Rescue.VillageDirector>(island);
+            Gen.Wire(w.Village, "cameraTransform", cameraGo.transform, "villagerPrefab", content.RescuePassenger, "meta", w.Meta);
+            // A wide, flat-topped island so the village has room to grow.
+            Gen.Prim(PrimitiveType.Sphere, island.transform, new Vector3(0f, -1.05f, 0f), new Vector3(13f, 3f, 8f), Gen.Hex("5E7A5A"));
+            Gen.Prim(PrimitiveType.Sphere, island.transform, new Vector3(0f, -1.45f, 0f), new Vector3(14.5f, 2.6f, 9.5f), Gen.Hex("E8D3A0"));
+            for (int i = 0; i < 7; i++)
+            {
+                float a = i * 0.9f + 0.4f;
+                Transform palm = Gen.Go("Palm" + i, island.transform).transform;
+                palm.localPosition = new Vector3(Mathf.Cos(a) * 5.6f, 0.3f, Mathf.Sin(a) * 3.2f + 0.6f);
+                Gen.Prim(PrimitiveType.Cylinder, palm, new Vector3(0f, 0.9f, 0f), new Vector3(0.14f, 0.9f, 0.14f), Gen.Hex("7A5230"), new Vector3(0f, 0f, 8f));
+                for (int f = 0; f < 4; f++)
+                {
+                    Gen.Prim(PrimitiveType.Cube, palm, new Vector3(0.1f, 1.85f, 0f), new Vector3(1.1f, 0.06f, 0.3f), Gen.Hex("4F9D69"), new Vector3(0f, f * 90f, -18f));
+                }
+            }
             Transform stageRoot = Gen.Go("StageRoot", island.transform).transform;
             stageRoot.localPosition = new Vector3(0.5f, 0.1f, 0f);
             LighthouseIslandView islandView = Gen.Add<LighthouseIslandView>(island);

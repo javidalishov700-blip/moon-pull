@@ -38,16 +38,20 @@ namespace MoonPull.Rescue
             return level >= MaxLevel ? -1 : Costs[(int)b, level];
         }
 
+        /// <summary>True when the next level exists but needs a higher village level first.</summary>
+        public static bool IsCapped(VillageBuilding b) => Level(b) < MaxLevel && Level(b) >= VillageState.BuildingLevelCap;
+
         public static bool TryUpgrade(VillageBuilding b, Wallet wallet)
         {
             int cost = NextCost(b);
-            if (cost < 0 || wallet == null || !wallet.TrySpendCoins(cost, "village_" + b.ToString().ToLowerInvariant()))
+            if (cost < 0 || IsCapped(b) || wallet == null || !wallet.TrySpendCoins(cost, "village_" + b.ToString().ToLowerInvariant()))
             {
                 return false;
             }
 
             PlayerPrefs.SetInt(Key(b), Level(b) + 1);
             PlayerPrefs.Save();
+            VillageState.AddXp(40 + 30 * Level(b));
             return true;
         }
 
@@ -56,6 +60,7 @@ namespace MoonPull.Rescue
         public static float CoinMultiplier => 1f + 0.3f * Level(VillageBuilding.Restaurant);
         public static float NightMultiplier => 1f + 0.12f * Level(VillageBuilding.Workshop);
         public static float SpeedBonus => 1.5f * Level(VillageBuilding.Shipyard);
-        public static int DawnCoins(int population) => Level(VillageBuilding.Market) * (10 + population / 2);
+        public static int DawnCoins(int population) =>
+            Mathf.RoundToInt(Level(VillageBuilding.Market) * (10 + population / 2) * VillageState.Happiness / 100f);
     }
 }

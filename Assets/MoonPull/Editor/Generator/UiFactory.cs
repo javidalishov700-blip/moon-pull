@@ -668,35 +668,59 @@ namespace MoonPull.EditorTools
 
         private static VillagePopup BuildVillage(Transform parent)
         {
-            var popup = Popup<VillagePopup>(parent, "Village", LocKeys.VillageTitle, new Vector2(980f, 1400f), out RectTransform p);
-            LocalizedText population = Loc(p, "Population", LocKeys.VillagePopulation, 40, Center, new Vector2(0f, 520f), new Vector2(800f, 60f), Accent);
+            // A bottom sheet: the live village stays visible (and tappable) above it.
+            var popup = Popup<VillagePopup>(parent, "Village", LocKeys.VillageTitle, new Vector2(1040f, 1080f), out RectTransform p);
+            p.anchoredPosition = new Vector2(0f, -400f);
+            Image backdrop = popup.transform.Find("Backdrop").GetComponent<Image>();
+            backdrop.color = new Color(0f, 0f, 0f, 0f);
+            backdrop.raycastTarget = false;
+
+            LocalizedText level = Loc(p, "Level", LocKeys.VillageLevel, 40, Top, new Vector2(-250f, -170f), new Vector2(460f, 56f), Gold, TextAnchor.MiddleLeft, true);
+            Image xpBg = Image(p, "XpBar", Top, new Vector2(-250f, -220f), new Vector2(460f, 26f), new Color(0f, 0f, 0f, 0.35f));
+            Image xp = Fill(Image(xpBg.transform, "Fill", Center, Vector2.zero, new Vector2(460f, 26f), Gold), UnityEngine.UI.Image.FillMethod.Horizontal, 0.3f);
+            LocalizedText population = Loc(p, "Population", LocKeys.VillagePopulation, 30, Top, new Vector2(-250f, -262f), new Vector2(460f, 44f), TextLight, TextAnchor.MiddleLeft);
+            LocalizedText happiness = Loc(p, "Happiness", LocKeys.VillageHappiness, 32, Top, new Vector2(250f, -170f), new Vector2(460f, 50f), TextLight, TextAnchor.MiddleLeft, true);
+            Image hapBg = Image(p, "HappyBar", Top, new Vector2(250f, -215f), new Vector2(460f, 22f), new Color(0f, 0f, 0f, 0.35f));
+            Image hap = Fill(Image(hapBg.transform, "Fill", Center, Vector2.zero, new Vector2(460f, 22f), Accent), UnityEngine.UI.Image.FillMethod.Horizontal, 0.7f);
+            LocalizedText food = Loc(p, "Food", LocKeys.VillageFood, 30, Top, new Vector2(140f, -262f), new Vector2(240f, 44f), TextLight, TextAnchor.MiddleLeft);
+            LocalizedText housing = Loc(p, "Housing", LocKeys.VillageHousing, 30, Top, new Vector2(370f, -262f), new Vector2(240f, 44f), TextLight, TextAnchor.MiddleLeft);
+
             string[] ids = { "shelter", "restaurant", "workshop", "shipyard", "market" };
             Color[] tints = { Gen.Hex("81B29A"), Gen.Hex("E07A5F"), Gen.Hex("F2CC8F"), Gen.Hex("7FA7D9"), Gen.Hex("C39BD3") };
             var levels = new List<Text>();
             var buttons = new List<Button>();
             var costs = new List<Text>();
             var maxes = new List<GameObject>();
+            var capped = new List<LocalizedText>();
             for (int i = 0; i < ids.Length; i++)
             {
-                float y = 370f - i * 205f;
-                Image row = Image(p, "Row_" + ids[i], Center, new Vector2(0f, y), new Vector2(900f, 185f), PanelLight);
-                Image(row.transform, "Icon", new Vector2(0f, 0.5f), new Vector2(80f, 0f), new Vector2(110f, 110f), tints[i], Art.Circle);
-                Loc(row.transform, "Name", "village." + ids[i] + ".name", 40, new Vector2(0f, 0.5f), new Vector2(330f, 34f), new Vector2(380f, 56f), TextLight, TextAnchor.MiddleLeft, true);
-                Loc(row.transform, "Desc", "village." + ids[i] + ".desc", 28, new Vector2(0f, 0.5f), new Vector2(330f, -26f), new Vector2(380f, 70f), Muted, TextAnchor.MiddleLeft);
-                levels.Add(Text(row.transform, "Level", "0/3", 34, new Vector2(1f, 0.5f), new Vector2(-330f, 0f), new Vector2(100f, 60f), Gold, TextAnchor.MiddleCenter, true));
-                Button build = Button(row.transform, "Build", LocKeys.VillageUpgrade, new Vector2(1f, 0.5f), new Vector2(-140f, 22f), new Vector2(230f, 80f), Primary, 34);
-                Image costBg = Image(row.transform, "Cost", new Vector2(1f, 0.5f), new Vector2(-140f, -44f), new Vector2(230f, 52f), new Color(0f, 0f, 0f, 0.3f));
-                CoinIcon(costBg.transform, new Vector2(0f, 0.5f), new Vector2(30f, 0f), 40f);
-                costs.Add(Text(costBg.transform, "Amount", "0", 30, Center, new Vector2(20f, 0f), new Vector2(160f, 48f), Gold, TextAnchor.MiddleCenter, true));
+                float y = 170f - i * 150f;
+                Image row = Image(p, "Row_" + ids[i], Center, new Vector2(0f, y), new Vector2(980f, 136f), PanelLight);
+                Image(row.transform, "Icon", new Vector2(0f, 0.5f), new Vector2(70f, 0f), new Vector2(90f, 90f), tints[i], Art.Circle);
+                Loc(row.transform, "Name", "village." + ids[i] + ".name", 36, new Vector2(0f, 0.5f), new Vector2(320f, 26f), new Vector2(400f, 50f), TextLight, TextAnchor.MiddleLeft, true);
+                Loc(row.transform, "Desc", "village." + ids[i] + ".desc", 26, new Vector2(0f, 0.5f), new Vector2(320f, -24f), new Vector2(400f, 50f), Muted, TextAnchor.MiddleLeft);
+                levels.Add(Text(row.transform, "Level", "0/3", 32, new Vector2(1f, 0.5f), new Vector2(-330f, 0f), new Vector2(100f, 60f), Gold, TextAnchor.MiddleCenter, true));
+                Button build = Button(row.transform, "Build", LocKeys.VillageUpgrade, new Vector2(1f, 0.5f), new Vector2(-140f, 18f), new Vector2(230f, 70f), Primary, 32);
+                Image costBg = Image(row.transform, "Cost", new Vector2(1f, 0.5f), new Vector2(-140f, -38f), new Vector2(230f, 46f), new Color(0f, 0f, 0f, 0.3f));
+                CoinIcon(costBg.transform, new Vector2(0f, 0.5f), new Vector2(28f, 0f), 36f);
+                costs.Add(Text(costBg.transform, "Amount", "0", 28, Center, new Vector2(20f, 0f), new Vector2(160f, 44f), Gold, TextAnchor.MiddleCenter, true));
                 buttons.Add(build);
-                maxes.Add(Loc(row.transform, "Max", LocKeys.VillageMax, 34, new Vector2(1f, 0.5f), new Vector2(-140f, 0f), new Vector2(230f, 60f), Accent, TextAnchor.MiddleCenter, true).gameObject);
+                maxes.Add(Loc(row.transform, "Max", LocKeys.VillageMax, 32, new Vector2(1f, 0.5f), new Vector2(-140f, 0f), new Vector2(230f, 60f), Accent, TextAnchor.MiddleCenter, true).gameObject);
+                capped.Add(Loc(row.transform, "Capped", LocKeys.VillageNeedsLevel, 26, new Vector2(1f, 0.5f), new Vector2(-140f, 0f), new Vector2(240f, 80f), Muted, TextAnchor.MiddleCenter, true));
             }
 
-            Gen.Wire(popup, "meta", w.Meta, "populationLabel", population);
+            Gen.Wire(popup, "meta", w.Meta, "director", w.Village, "populationLabel", population, "levelLabel", level, "xpFill", xp,
+                "happinessLabel", happiness, "happinessFill", hap, "foodLabel", food, "housingLabel", housing);
             Gen.SetArray(popup, "levelLabels", levels);
             Gen.SetArray(popup, "upgradeButtons", buttons);
             Gen.SetArray(popup, "costLabels", costs);
             Gen.SetArray(popup, "maxLabels", maxes);
+            Gen.SetArray(popup, "cappedLabels", capped);
+            if (w.Village != null)
+            {
+                Gen.Set(w.Village, "toast", toast);
+            }
+
             return popup;
         }
 

@@ -550,13 +550,19 @@ namespace MoonPull.Rescue
             rescued += aboard;
             SetAboard(0);
 
-            int total = PlayerPrefs.GetInt(VillageKey, 0) + rescued;
-            PlayerPrefs.SetInt(VillageKey, total);
-            PlayerPrefs.Save();
+            VillageState.Simulate();
+            int levelBefore = VillageState.Level;
+            VillageState.AddPeople(rescued);
+            int levelReward = 0;
+            for (int l = levelBefore + 1; l <= VillageState.Level; l++)
+            {
+                levelReward += VillageState.LevelReward(l);
+            }
+            int total = VillageState.Population;
 
             int target = 3 + Mathf.Min(levelIndex, 30) / 2;
             int stars = rescued >= target * 2 ? 3 : rescued >= target ? 2 : 1;
-            int coins = Mathf.RoundToInt((rescued * 10 + lanternsCaught * 2) * VillageService.CoinMultiplier) + VillageService.DawnCoins(total);
+            int coins = Mathf.RoundToInt((rescued * 10 + lanternsCaught * 2) * VillageService.CoinMultiplier) + VillageService.DawnCoins(total) + levelReward;
             var result = new LevelResult(levelIndex, stars, score.Score, runTime, lanternsCaught, coins,
                 0, rescued, lighthousesLit, false, false);
             GameEvents.RaiseLevelCompleted(result);
@@ -678,7 +684,7 @@ namespace MoonPull.Rescue
                     1f - Mathf.Exp(-12f * Time.deltaTime));
             }
 
-            if (cameraTransform != null)
+            if (cameraTransform != null && !VillageDirector.Active)
             {
                 // Side view that pulls back as the boat climbs, keeping the wave ahead in frame.
                 float altitude = Mathf.Max(0f, y - Height(x));

@@ -28,6 +28,25 @@ namespace MoonPull.Boot
             yield return new WaitForSecondsRealtime(5f);
             yield return Shot(folder, "01-menu");
 
+            // Visit a lived-in village: seed a few nights of progress (capture player only) and open the Village screen.
+            PlayerPrefs.SetInt(MoonPull.Rescue.NightRescue.VillageKey, 16);
+            PlayerPrefs.SetInt("mp_village_level", 3);
+            PlayerPrefs.SetInt("mp_village_shelter", 1);
+            PlayerPrefs.SetInt("mp_village_restaurant", 2);
+            PlayerPrefs.SetInt("mp_village_market", 1);
+            var popups = FindFirstObjectByType<MoonPull.UI.PopupManager>(FindObjectsInactive.Include);
+            var village = FindFirstObjectByType<MoonPull.UI.VillagePopup>(FindObjectsInactive.Include);
+            if (popups != null && village != null)
+            {
+                popups.Open(village);
+                yield return new WaitForSecondsRealtime(4f);
+                yield return Shot(folder, "01b-village");
+                yield return new WaitForSecondsRealtime(5f);
+                yield return Shot(folder, "01c-village");
+                popups.Close(village);
+                yield return new WaitForSecondsRealtime(1.5f);
+            }
+
             MetaGame meta = FindFirstObjectByType<MetaGame>();
             if (meta != null)
             {

@@ -1,4 +1,17 @@
 Key,English(en),Turkish(tr),Spanish(es),Portuguese (Brazil)(pt-BR),German(de),French(fr),Russian(ru),Japanese(ja)
+village.levelup,"Village level {0}! +{1} coins","Köy seviye {0}! +{1} para","¡Aldea nivel {0}! +{1} monedas","Vila nível {0}! +{1} moedas","Dorf Stufe {0}! +{1} Münzen","Village niveau {0} ! +{1} pièces","Деревня ур. {0}! +{1} монет","村レベル{0}！+{1}コイン"
+village.tip.homeless,Not enough homes: build a Shelter!,Yeterli ev yok: Barınak kur!,Faltan casas: ¡construye un Refugio!,Faltam casas: construa um Abrigo!,Zu wenig Häuser: Baue eine Unterkunft!,Pas assez de logis : construis un Abri !,Не хватает домов: построй приют!,家が足りない：避難所を建てよう！
+village.tip.hungry,The pantry is empty: build a Restaurant!,Kiler boş: Restoran kur!,Despensa vacía: ¡construye un Restaurante!,Despensa vazia: construa um Restaurante!,Vorrat leer: Baue ein Restaurant!,Garde-manger vide : construis un Restaurant !,Кладовая пуста: построй ресторан!,食料庫が空：レストランを建てよう！
+village.chat,A nice chat made their day! +XP,Güzel bir sohbet! +XP,¡Una buena charla! +XP,Um bom papo! +XP,Ein nettes Gespräch! +XP,Une bonne discussion ! +XP,Приятная беседа! +XP,楽しいおしゃべり！+XP
+village.gift,"A thank-you gift! +{0} coins","Teşekkür hediyesi! +{0} para","¡Un regalo! +{0} monedas","Um presente! +{0} moedas","Ein Geschenk! +{0} Münzen","Un cadeau ! +{0} pièces","Подарок! +{0} монет","お礼のプレゼント！+{0}コイン"
+village.fed_coins,Bought them a meal (5 coins) +XP,Yemek aldın (5 para) +XP,Le compraste comida (5) +XP,Comprou uma refeição (5) +XP,Essen gekauft (5 Münzen) +XP,Repas acheté (5 pièces) +XP,Купил еду (5 монет) +XP,食事を買った(5コイン)+XP
+village.fed,Fed from the pantry! +XP,Kilerden doyurdun! +XP,¡Alimentado! +XP,Alimentado! +XP,Satt gemacht! +XP,Nourri ! +XP,Накормлен! +XP,ごはんをあげた！+XP
+village.tap_hint,Tap villagers with bubbles to help them,Balonlu köylülere dokunup yardım et,Toca a los aldeanos con burbuja para ayudarlos,Toque nos moradores com balão para ajudar,"Tippe Dorfbewohner mit Blase an, um zu helfen",Touche les villageois à bulle pour les aider,"Нажимай на жителей с облачком, чтобы помочь",吹き出しの村人をタップして助けよう
+village.needs_level,"Needs village Lv {0}","Köy Sv. {0} gerekli","Requiere aldea Nv. {0}","Requer vila Nv. {0}","Braucht Dorf Lv. {0}","Village niv. {0} requis","Нужна деревня ур. {0}","村Lv.{0}が必要"
+village.housing,"Homes {0}/{1}","Ev {0}/{1}","Casas {0}/{1}","Casas {0}/{1}","Häuser {0}/{1}","Logis {0}/{1}","Дома {0}/{1}","家 {0}/{1}"
+village.food,"Food {0}","Yiyecek {0}","Comida {0}","Comida {0}","Essen {0}","Nourriture {0}","Еда {0}","食料 {0}"
+village.happiness,"Happiness {0}%","Mutluluk %{0}","Felicidad {0}%","Felicidade {0}%","Glück {0}%","Bonheur {0}%","Счастье {0}%","幸福度 {0}%"
+village.level,"Village Lv {0}","Köy Sv. {0}","Aldea Nv. {0}","Vila Nv. {0}","Dorf Lv. {0}","Village niv. {0}","Деревня ур. {0}","村 Lv.{0}"
 village.market.desc,The village pays you coins at dawn,Köy her sabah para verir,La aldea te paga al amanecer,A vila paga moedas ao amanhecer,Das Dorf zahlt dir Münzen im Morgengrauen,Le village te paie à l'aube,Деревня платит монеты на рассвете,夜明けに村がコインをくれる
 village.market.name,Market,Pazar,Mercado,Mercado,Markt,Marché,Рынок,市場
 village.shipyard.desc,A faster boat,Daha hızlı tekne,Un barco más rápido,Um barco mais rápido,Ein schnelleres Boot,Un bateau plus rapide,Быстрее лодка,より速いボート
