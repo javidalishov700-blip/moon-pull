@@ -76,6 +76,13 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create "capture-${{ github.run_id }}" out/* --latest=false \
-            --title "In-game capture ${{ github.run_id }}" \
-            --notes "Screenshots from ${{ github.sha }}." --target "${{ github.sha }}"
+          # The release API occasionally answers 403 for a moment; retry before failing the job.
+          for attempt in 1 2 3; do
+            if gh release create "capture-${{ github.run_id }}" out/* --latest=false \
+              --title "In-game capture ${{ github.run_id }}" \
+              --notes "Screenshots from ${{ github.sha }}." --target "${{ github.sha }}"; then
+              exit 0
+            fi
+            sleep $((attempt * 15))
+          done
+          exit 1
