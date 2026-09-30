@@ -268,6 +268,7 @@ namespace MoonPull.EditorTools
 
             Button pause = Button(c, "Pause", "II", TopLeft, new Vector2(90f, -90f), new Vector2(120f, 120f), new Color(0f, 0f, 0f, 0.4f), 52, false);
             Text score = Text(c, "Score", "0", 80, Top, new Vector2(0f, -170f), new Vector2(600f, 100f), TextLight, TextAnchor.MiddleCenter, true);
+            score.gameObject.SetActive(false); // abstract points only cluttered the screen; people, lanterns and coins tell the story
             Text multiplier = Text(c, "Multiplier", "x2", 50, Top, new Vector2(0f, -245f), new Vector2(300f, 70f), Gold, TextAnchor.MiddleCenter, true);
 
             Image meter = Image(c, "Moonstones", TopRight, new Vector2(-150f, -90f), new Vector2(240f, 70f), new Color(0f, 0f, 0f, 0.4f));
@@ -375,6 +376,7 @@ namespace MoonPull.EditorTools
 
             LocalizedText newBest = Loc(c, "NewBest", LocKeys.HudNewBest, 40, Center, new Vector2(0f, 370f), new Vector2(600f, 60f), Accent, TextAnchor.MiddleCenter, true);
             Text score = Text(c, "Score", "0", 72, Center, new Vector2(0f, 290f), new Vector2(700f, 100f), TextLight, TextAnchor.MiddleCenter, true);
+            score.gameObject.SetActive(false); // abstract points only cluttered the screen; people, lanterns and coins tell the story
             RectTransform rewardAnchor = Rect("Reward", c, Center, new Vector2(0f, 170f), new Vector2(500f, 110f));
             CoinIcon(rewardAnchor, new Vector2(0f, 0.5f), new Vector2(80f, 0f), 96f);
             Text reward = Text(rewardAnchor, "Amount", "+0", 72, Center, new Vector2(50f, 0f), new Vector2(360f, 100f), Gold, TextAnchor.MiddleLeft, true);

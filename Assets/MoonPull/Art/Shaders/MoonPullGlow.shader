@@ -36,7 +36,7 @@ Shader "MoonPull/Glow"
             {
                 float facing = saturate(dot(normalize(i.normal), normalize(i.view)));
                 float glow = pow(facing, 3.0);
-                return fixed4(_Color.rgb * _Color.a * glow * 2.0, 1);
+                return fixed4(_Color.rgb * _Color.a * glow * 1.1, 1);
             }
             ENDCG
         }
