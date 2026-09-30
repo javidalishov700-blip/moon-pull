@@ -692,7 +692,7 @@ namespace MoonPull.EditorTools
         {
             BoatSpec[] specs =
             {
-                new BoatSpec { Id = "dinghy", Hull = "E07A5F", Sail = "F4F1DE", Rarity = BoatRarity.Common, Price = 0, Perk = BoatPerkType.None, Shape = 0 },
+                new BoatSpec { Id = "dinghy", Hull = "7A4A2E", Sail = "EDE3CC", Rarity = BoatRarity.Common, Price = 0, Perk = BoatPerkType.None, Shape = 0 },
                 new BoatSpec { Id = "skiff", Hull = "3D85C6", Sail = "FFFFFF", Rarity = BoatRarity.Common, Price = 500, Perk = BoatPerkType.CoinBonusPercent, Value = 10, Shape = 0 },
                 new BoatSpec { Id = "fisher", Hull = "6AA84F", Sail = "FFE599", Rarity = BoatRarity.Common, Price = 800, Perk = BoatPerkType.PassengerBonusPercent, Value = 15, Shape = 1 },
                 new BoatSpec { Id = "ducky", Hull = "FFD966", Sail = "FF9900", Rarity = BoatRarity.Common, Price = 1200, Perk = BoatPerkType.PickupRadiusBonus, Value = 0.3f, Shape = 2 },
