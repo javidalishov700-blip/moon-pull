@@ -1,5 +1,5 @@
 # Builds a Linux capture player, runs it under a virtual display and publishes in-game screenshots
-# (menu + gameplay) as a "capture-<run id>" release. Needs the same Unity secrets as ios-xcode.yml.
+# (every screen) plus the playtest bot report as a "capture-<run id>" release. Needs the same Unity secrets as ios-xcode.yml.
 name: Store capture
 
 on:
@@ -58,10 +58,11 @@ jobs:
           PLAYER="$(find build -name 'MoonPull.x86_64' -print -quit)"
           sudo chmod -R a+rwx build
           cd "$(dirname "$PLAYER")"
-          timeout 180 xvfb-run -a -s "-screen 0 1080x1920x24" \
+          timeout 900 xvfb-run -a -s "-screen 0 1080x1920x24" \
             ./MoonPull.x86_64 -screen-width 1080 -screen-height 1920 -screen-fullscreen 0 -logFile player.log || true
           mkdir -p "$GITHUB_WORKSPACE/out"
-          cp capture/*.png player.log "$GITHUB_WORKSPACE/out/" 2>/dev/null || true
+          cp capture/*.png capture/*.txt player.log "$GITHUB_WORKSPACE/out/" 2>/dev/null || true
+          cat capture/bot-report.txt 2>/dev/null || echo "no bot report"
           ls -la "$GITHUB_WORKSPACE/out"
           ls "$GITHUB_WORKSPACE"/out/*.png > /dev/null
 

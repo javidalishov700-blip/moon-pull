@@ -83,6 +83,35 @@ namespace MoonPull.Rescue
             Changed?.Invoke();
         }
 
+        /// <summary>Playtest bot only: pretend <paramref name="minutes"/> passed since the last simulation.</summary>
+        public static void DebugAdvanceClock(float minutes)
+        {
+            long now = DateTime.UtcNow.Ticks;
+            PlayerPrefs.SetString(TickKey, (now - TimeSpan.FromMinutes(minutes).Ticks).ToString());
+        }
+
+        /// <summary>Playtest bot only: an empty village.</summary>
+        public static void DebugReset()
+        {
+            foreach (string key in new[] { PopulationKey, FoodKey, XpKey, LevelKey, TickKey, CheerKey })
+            {
+                PlayerPrefs.DeleteKey(key);
+            }
+
+            for (int b = 0; b < VillageService.BuildingCount; b++)
+            {
+                PlayerPrefs.DeleteKey("mp_village_" + ((VillageBuilding)b).ToString().ToLowerInvariant());
+            }
+
+            for (int p = 0; p < BoatUpgrades.PartCount; p++)
+            {
+                PlayerPrefs.DeleteKey("mp_boat_" + ((BoatPart)p).ToString().ToLowerInvariant());
+            }
+
+            TycoonState.DebugReset();
+            Changed?.Invoke();
+        }
+
         public static void AddPeople(int count)
         {
             if (count <= 0)

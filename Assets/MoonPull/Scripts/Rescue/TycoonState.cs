@@ -181,6 +181,26 @@ namespace MoonPull.Rescue
             return true;
         }
 
+        /// <summary>Playtest bot only: pretend <paramref name="minutes"/> passed since the last accrual.</summary>
+        public static void DebugAdvanceClock(float minutes)
+        {
+            long now = DateTime.UtcNow.Ticks;
+            PlayerPrefs.SetString(TickKey, (now - TimeSpan.FromMinutes(minutes).Ticks).ToString());
+        }
+
+        /// <summary>Playtest bot only: a fresh archipelago.</summary>
+        public static void DebugReset()
+        {
+            for (int i = 0; i < IslandCount; i++)
+            {
+                PlayerPrefs.DeleteKey("mp_island_" + IslandIds[i]);
+            }
+
+            PlayerPrefs.DeleteKey(TreasuryKey);
+            PlayerPrefs.DeleteKey(SuppliesKey);
+            PlayerPrefs.DeleteKey(TickKey);
+        }
+
         /// <summary>For the store-capture player only.</summary>
         public static void SeedForCapture(int islands, float treasury)
         {

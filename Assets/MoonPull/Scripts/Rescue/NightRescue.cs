@@ -35,8 +35,26 @@ namespace MoonPull.Rescue
             public float X;
             public float Height;
             public bool Done;
+            public bool Judged;
             public GameObject Lit;
         }
+
+        /// <summary>What happened during one night: read by the playtest bot and useful for balancing.</summary>
+        public sealed class NightStats
+        {
+            public int Level, Rescued, Lanterns, Lighthouses, RocksHit, RocksDodged, BellyFlops, Perfects, Hops, Unsticks, PassengersLost;
+            public int Coins, Supplies;
+            public float Duration, Distance, MaxSpeed;
+        }
+
+        /// <summary>Stats of the night in progress (or the last one once it has ended).</summary>
+        public NightStats Stats { get; private set; } = new NightStats();
+
+        /// <summary>Playtest autopilot: negative = off, 0..1 = how reliably it reacts to rocks.</summary>
+        public float AutoPilotSkill { get; set; } = -1f;
+
+        private System.Random botRandom = new System.Random(99);
+        private bool hopFlight;
 
         [Header("World")]
         [SerializeField] private LevelSession session;
@@ -279,6 +297,8 @@ namespace MoonPull.Rescue
             moonlight = 1f;
             aboard = rescued = lanternsCaught = lighthousesLit = 0;
             runTime = 0f;
+            hopFlight = false;
+            Stats = new NightStats { Level = levelIndex };
             progressCheckAt = 2f;
             progressCheckX = x;
             nextCastawayAt = 30f;
@@ -308,15 +328,26 @@ namespace MoonPull.Rescue
             runTime += deltaTime;
             waveTime += deltaTime;
             bool wasHolding = holding;
-            holding = ForcedHold ?? ReadHold();
             hopCooldown -= deltaTime;
-            if (holding && !wasHolding)
+            if (AutoPilotSkill >= 0f)
             {
-                pressStartedAt = runTime;
+                holding = AutoHold();
+                if (AutoHop())
+                {
+                    Hop();
+                }
             }
-            else if (!holding && wasHolding && runTime - pressStartedAt < 0.2f && !airborne && hopCooldown <= 0f)
+            else
             {
-                Hop(); // a quick tap hops the boat clear of a rock
+                holding = ForcedHold ?? ReadHold();
+                if (holding && !wasHolding)
+                {
+                    pressStartedAt = runTime;
+                }
+                else if (!holding && wasHolding && runTime - pressStartedAt < 0.2f && !airborne && hopCooldown <= 0f)
+                {
+                    Hop(); // a quick tap hops the boat clear of a rock
+                }
             }
 
             // Swells grow the further out you sail: more air, more speed, more to master.
@@ -346,6 +377,7 @@ namespace MoonPull.Rescue
                 moonlight -= deltaTime / Mathf.Max(5f, nightLength);
             }
 
+            Stats.MaxSpeed = Mathf.Max(Stats.MaxSpeed, speed);
             Unstick();
             SpawnAhead();
             Interact();
@@ -386,6 +418,8 @@ namespace MoonPull.Rescue
                     x = progressCheckX + 1f;
                 }
 
+                Stats.Unsticks++;
+                Debug.LogWarning($"[MoonPull] Unstick at x={x:0.0} y={y:0.00} speed={speed:0.0} airborne={airborne}");
                 airborne = false;
                 y = Height(x);
                 speed = Mathf.Max(startSpeed, speed) + 4f;
@@ -493,9 +527,17 @@ namespace MoonPull.Rescue
             airborne = false;
             y = surface;
 
-            if (diff < 0.32f && airTime > 0.35f && slopeAngle < 0.05f)
+            if (hopFlight)
+            {
+                // A rock hop is a small, controlled bounce: it always lands cleanly.
+                hopFlight = false;
+                speed = Mathf.Max(minSpeed, Mathf.Max(along, speed * 0.95f));
+                Splash(12, new Color(0.9f, 0.96f, 1f, 0.8f));
+            }
+            else if (diff < 0.32f && airTime > 0.35f && slopeAngle < 0.05f)
             {
                 perfectStreak++;
+                Stats.Perfects++;
                 speed = Mathf.Max(along, speed) * 1.1f;
                 Splash(28, new Color(1f, 0.9f, 0.55f, 0.95f));
                 score.AddBonus(25 * Mathf.Min(perfectStreak, 8));
@@ -514,10 +556,43 @@ namespace MoonPull.Rescue
             else
             {
                 // Belly flop: a big splash, most of the speed gone and someone falls overboard. Never a game over.
+                Stats.BellyFlops++;
                 HitHazard();
                 speed = Mathf.Max(minSpeed, along * 0.5f);
                 GameEvents.RaiseNearMissChainBroken();
             }
+        }
+
+        // ------------------------------------------------------------------ playtest autopilot
+
+        /// <summary>Dive on the way down, let go on the way up so the boat flies off crests.</summary>
+        private bool AutoHold() => !airborne && Slope(x) < -0.08f;
+
+        /// <summary>Hop a rock that is about to be reached; misses some, like a real player.</summary>
+        private bool AutoHop()
+        {
+            if (airborne || hopCooldown > 0f)
+            {
+                return false;
+            }
+
+            float reach = Mathf.Max(speed, minSpeed) * 0.35f + 0.6f;
+            foreach (Thing t in things)
+            {
+                if (t.Kind != Kind.Rock || t.Done || t.Judged)
+                {
+                    continue;
+                }
+
+                float dx = t.X - x;
+                if (dx > 0f && dx < reach)
+                {
+                    t.Judged = true;
+                    return botRandom.NextDouble() < AutoPilotSkill;
+                }
+            }
+
+            return false;
         }
 
         /// <summary>Quick tap: a short hop off the water, enough to clear a rock if timed right.</summary>
@@ -529,6 +604,8 @@ namespace MoonPull.Rescue
             vy = 7.5f;
             y += 0.05f;
             hopCooldown = 0.8f;
+            hopFlight = true;
+            Stats.Hops++;
             Splash(14, new Color(0.9f, 0.96f, 1f, 0.8f));
             GameEvents.RaiseWaveLaunched(0.5f);
         }
@@ -542,6 +619,7 @@ namespace MoonPull.Rescue
             Splash(45, new Color(0.9f, 0.96f, 1f, 0.9f));
             if (aboard > 0 && random.NextDouble() >= BoatUpgrades.HoldOnChance)
             {
+                Stats.PassengersLost++;
                 SetAboard(aboard - 1);
             }
 
@@ -664,7 +742,13 @@ namespace MoonPull.Rescue
                         if (dx < 0.9f && y - Height(t.X) < 1.0f)
                         {
                             t.Done = true;
+                            Stats.RocksHit++;
                             HitHazard();
+                        }
+                        else if (t.X < x - 1f)
+                        {
+                            t.Done = true;
+                            Stats.RocksDodged++;
                         }
 
                         break;
@@ -747,6 +831,13 @@ namespace MoonPull.Rescue
             int target = 3 + Mathf.Min(levelIndex, 30) / 2;
             int stars = rescued >= target * 2 ? 3 : rescued >= target ? 2 : 1;
             int coins = Mathf.RoundToInt((rescued * 10 + lanternsCaught * 2) * VillageService.CoinMultiplier) + VillageService.DawnCoins(total) + levelReward;
+            Stats.Rescued = rescued;
+            Stats.Lanterns = lanternsCaught;
+            Stats.Lighthouses = lighthousesLit;
+            Stats.Coins = coins;
+            Stats.Supplies = LastSupplies;
+            Stats.Duration = runTime;
+            Stats.Distance = x - startX;
             var result = new LevelResult(levelIndex, stars, score.Score, runTime, lanternsCaught, coins,
                 0, rescued, lighthousesLit, false, false);
             GameEvents.RaiseLevelCompleted(result);
