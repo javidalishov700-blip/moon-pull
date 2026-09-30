@@ -102,7 +102,7 @@ Shader "MoonPull/Sky"
                 // Far islands: soft dark silhouettes sitting on the horizon line.
                 float ridge = 0.03 * fbm(float2(atan2(d.x, d.z) * 6, 1.7)) * smoothstep(0.55, 0.8, noise(float2(atan2(d.x, d.z) * 1.5, 9)));
                 float island = smoothstep(ridge, ridge - 0.004, d.y) * smoothstep(-0.02, 0.0, d.y);
-                col = lerp(col, _MP_SkyTop.rgb * 0.55, island * 0.85);
+                col = lerp(col, _MP_SkyTop.rgb * 0.55, island * 0.0); // silhouettes disabled: read as a flat line
 
                 col *= 1 - _MP_Dark * 0.7; // the night deepens as the moonlight runs out
                 return fixed4(col, 1);

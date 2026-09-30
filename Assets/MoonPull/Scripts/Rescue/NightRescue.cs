@@ -175,7 +175,9 @@ namespace MoonPull.Rescue
             Shader.SetGlobalVector(KId, new Vector4(k.x, k.y, k.z, 0f));
             Shader.SetGlobalVector(OmegaId, new Vector4(drift.x, drift.y, drift.z, 0f));
             Shader.SetGlobalVector(DirXId, new Vector4(1f, 1f, 1f, 0f));
-            Shader.SetGlobalVector(DirZId, Vector4.zero);
+            // Crests lean at different angles away from the boat's line (z = 0 is unchanged), so the sea reads as
+            // crossing swells instead of straight ridges.
+            Shader.SetGlobalVector(DirZId, new Vector4(0.22f, -0.35f, 0.5f, 0f));
             Shader.SetGlobalVector(PhaseId, new Vector4(phase.x, phase.y, phase.z, 0f));
             Shader.SetGlobalVector(PulseId, Vector4.zero);
             Shader.SetGlobalFloat(ScrollId, 0f);
@@ -643,8 +645,9 @@ namespace MoonPull.Rescue
         {
             if (!running)
             {
-                // Menu backdrop: the boat rocks gently on the swell.
+                // Menu backdrop: a calm sea so the village island stays dry; the boat rocks gently.
                 waveTime += Time.deltaTime;
+                ampScale = Mathf.MoveTowards(ampScale, 0.3f, Time.deltaTime * 0.5f);
                 y = Height(x);
                 vx = 3f;
                 vy = Slope(x) * 3f;

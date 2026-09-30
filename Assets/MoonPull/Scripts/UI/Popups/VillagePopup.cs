@@ -15,6 +15,7 @@ namespace MoonPull.UI
     {
         [SerializeField] private MetaGame meta;
         [SerializeField] private VillageDirector director;
+        [SerializeField] private CanvasGroup hideWhileOpen;
         [SerializeField] private LocalizedText populationLabel;
         [SerializeField] private LocalizedText levelLabel;
         [SerializeField] private Image xpFill;
@@ -47,6 +48,11 @@ namespace MoonPull.UI
                 director.Enter();
             }
 
+            if (hideWhileOpen != null)
+            {
+                hideWhileOpen.alpha = 0f;
+            }
+
             Refresh();
         }
 
@@ -55,6 +61,11 @@ namespace MoonPull.UI
             if (director != null)
             {
                 director.Exit();
+            }
+
+            if (hideWhileOpen != null)
+            {
+                hideWhileOpen.alpha = 1f;
             }
         }
 

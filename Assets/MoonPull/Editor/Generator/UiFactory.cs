@@ -68,6 +68,7 @@ namespace MoonPull.EditorTools
             PausePopup pause = BuildPause(bannerSafe);
             VillagePopup village = BuildVillage(bannerSafe);
             MenuScreen menu = BuildMenu(bannerSafe, idle, streak, spin, missions, settings, village, chest);
+            Gen.Set(village, "hideWhileOpen", menu.GetComponent<CanvasGroup>());
             Gen.Wire(hud, "pausePopup", pause);
 
             // Popups draw above every full screen (the menu is built last because it references them).
