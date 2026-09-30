@@ -117,6 +117,42 @@ namespace MoonPull.Rescue
         private float nightLength;
         private float speedBonus;
 
+        private ParticleSystem splash;
+
+        /// <summary>Spray thrown up where the boat lands: bigger for belly flops, golden for Perfect landings.</summary>
+        private void Splash(int count, Color color)
+        {
+            if (splash == null)
+            {
+                var go = new GameObject("Splash");
+                go.transform.SetParent(transform, false);
+                splash = go.AddComponent<ParticleSystem>();
+                splash.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+                ParticleSystem.MainModule main = splash.main;
+                main.loop = false;
+                main.playOnAwake = false;
+                main.startLifetime = new ParticleSystem.MinMaxCurve(0.4f, 0.9f);
+                main.startSpeed = new ParticleSystem.MinMaxCurve(2.5f, 7f);
+                main.startSize = new ParticleSystem.MinMaxCurve(0.08f, 0.26f);
+                main.gravityModifier = 1.6f;
+                main.maxParticles = 400;
+                main.simulationSpace = ParticleSystemSimulationSpace.World;
+                ParticleSystem.EmissionModule emission = splash.emission;
+                emission.rateOverTime = 0f;
+                ParticleSystem.ShapeModule shape = splash.shape;
+                shape.shapeType = ParticleSystemShapeType.Cone;
+                shape.angle = 35f;
+                shape.radius = 0.4f;
+                go.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
+                var renderer = go.GetComponent<ParticleSystemRenderer>();
+                renderer.sharedMaterial = new Material(Shader.Find("Sprites/Default"));
+            }
+
+            splash.transform.position = new Vector3(x, y, -0.3f);
+            var emit = new ParticleSystem.EmitParams { startColor = color, applyShapeToPosition = true };
+            splash.Emit(emit, count);
+        }
+
         /// <summary>Capture player / automation: overrides the touch input while set.</summary>
         public bool? ForcedHold { get; set; }
 
@@ -370,6 +406,7 @@ namespace MoonPull.Rescue
             {
                 perfectStreak++;
                 speed = Mathf.Max(along, speed) * 1.1f;
+                Splash(28, new Color(1f, 0.9f, 0.55f, 0.95f));
                 score.AddBonus(25 * Mathf.Min(perfectStreak, 8));
                 GameEvents.RaisePerfectCrest(perfectStreak);
                 if (perfectStreak % 3 == 0)
@@ -381,6 +418,7 @@ namespace MoonPull.Rescue
             {
                 speed = Mathf.Max(minSpeed, along * 0.92f);
                 perfectStreak = 0;
+                Splash(16, new Color(0.9f, 0.96f, 1f, 0.85f));
             }
             else
             {
@@ -388,6 +426,7 @@ namespace MoonPull.Rescue
                 speed = Mathf.Max(minSpeed, along * 0.5f);
                 perfectStreak = 0;
                 shake = 0.3f;
+                Splash(55, new Color(0.9f, 0.96f, 1f, 0.9f));
                 GameEvents.RaiseNearMissChainBroken();
             }
         }
