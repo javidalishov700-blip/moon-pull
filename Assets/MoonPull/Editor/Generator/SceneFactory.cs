@@ -236,7 +236,7 @@ namespace MoonPull.EditorTools
             Gen.Wire(ambience, "session", w.Session, "meta", w.Meta, "water", water, "weather", weather, "gameplayCamera", w.Camera);
 
             GameObject island = Gen.Go("LighthouseIsland", visuals.transform);
-            island.transform.position = new Vector3(8f, -0.6f, 10f);
+            island.transform.position = new Vector3(8f, 0.2f, 10f); // ground above the calm sea
             Gen.SetArray<GameObject>(sail, "hideWhileSailing", new[] { island });
             var village = Gen.Add<MoonPull.Rescue.VillageView>(island);
             var houses = new List<GameObject>();
