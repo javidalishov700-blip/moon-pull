@@ -1,4 +1,19 @@
 Key,English(en),Turkish(tr),Spanish(es),Portuguese (Brazil)(pt-BR),German(de),French(fr),Russian(ru),Japanese(ja)
+village.income,"+{0} / hour","+{0} / saat","+{0} / hora","+{0} / hora","+{0} / Std.","+{0} / heure","+{0} / час","+{0} / 時間"
+village.collect,Collect,Topla,Recoger,Coletar,Einsammeln,Récolter,Собрать,回収
+village.tab_buildings,Buildings,Binalar,Edificios,Prédios,Gebäude,Bâtiments,Здания,建物
+village.tab_islands,Islands,Adalar,Islas,Ilhas,Inseln,Îles,Острова,島
+island.buy,Buy,Satın al,Comprar,Comprar,Kaufen,Acheter,Купить,購入
+island.owned,Yours!,Senin!,¡Tuya!,Sua!,Deine!,À toi !,Твой!,所有中
+island.buy_previous,Buy the island before,Önce önceki adayı al,Compra la isla anterior,Compre a ilha anterior,Kaufe erst die vorige Insel,Achète l'île précédente,Сначала купи предыдущий,前の島を先に購入
+island.palm_cove.name,Palm Cove,Palmiye Koyu,Cala Palmera,Enseada das Palmas,Palmenbucht,Crique aux Palmiers,Пальмовая бухта,ヤシの入り江
+island.palm_cove.desc,+8 homes · +25% income,+8 ev · +%25 gelir,+8 casas · +25% ingresos,+8 casas · +25% renda,+8 Häuser · +25% Einkommen,+8 logis · +25% revenus,+8 домов · +25% дохода,家+8・収入+25%
+island.coral_reef.name,Coral Reef,Mercan Resifi,Arrecife de Coral,Recife de Coral,Korallenriff,Récif de Corail,Коралловый риф,サンゴ礁
+island.coral_reef.desc,+8 homes · +25% income,+8 ev · +%25 gelir,+8 casas · +25% ingresos,+8 casas · +25% renda,+8 Häuser · +25% Einkommen,+8 logis · +25% revenus,+8 домов · +25% дохода,家+8・収入+25%
+island.fisher_bay.name,Fisher's Bay,Balıkçı Körfezi,Bahía Pesquera,Baía dos Pescadores,Fischerbucht,Baie des Pêcheurs,Рыбацкий залив,漁師の湾
+island.fisher_bay.desc,+8 homes · +25% income,+8 ev · +%25 gelir,+8 casas · +25% ingresos,+8 casas · +25% renda,+8 Häuser · +25% Einkommen,+8 logis · +25% revenus,+8 домов · +25% дохода,家+8・収入+25%
+island.sky_peak.name,Sky Peak,Gök Tepe,Pico del Cielo,Pico do Céu,Himmelsgipfel,Pic du Ciel,Небесный пик,空の峰
+island.sky_peak.desc,+8 homes · +25% income,+8 ev · +%25 gelir,+8 casas · +25% ingresos,+8 casas · +25% renda,+8 Häuser · +25% Einkommen,+8 logis · +25% revenus,+8 домов · +25% дохода,家+8・収入+25%
 village.levelup,"Village level {0}! +{1} coins","Köy seviye {0}! +{1} para","¡Aldea nivel {0}! +{1} monedas","Vila nível {0}! +{1} moedas","Dorf Stufe {0}! +{1} Münzen","Village niveau {0} ! +{1} pièces","Деревня ур. {0}! +{1} монет","村レベル{0}！+{1}コイン"
 village.tip.homeless,Not enough homes: build a Shelter!,Yeterli ev yok: Barınak kur!,Faltan casas: ¡construye un Refugio!,Faltam casas: construa um Abrigo!,Zu wenig Häuser: Baue eine Unterkunft!,Pas assez de logis : construis un Abri !,Не хватает домов: построй приют!,家が足りない：避難所を建てよう！
 village.tip.hungry,The pantry is empty: build a Restaurant!,Kiler boş: Restoran kur!,Despensa vacía: ¡construye un Restaurante!,Despensa vazia: construa um Restaurante!,Vorrat leer: Baue ein Restaurant!,Garde-manger vide : construis un Restaurant !,Кладовая пуста: построй ресторан!,食料庫が空：レストランを建てよう！

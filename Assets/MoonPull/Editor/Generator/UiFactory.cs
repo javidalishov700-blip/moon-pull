@@ -686,6 +686,21 @@ namespace MoonPull.EditorTools
             LocalizedText food = Loc(p, "Food", LocKeys.VillageFood, 30, Top, new Vector2(140f, -262f), new Vector2(240f, 44f), TextLight, TextAnchor.MiddleLeft);
             LocalizedText housing = Loc(p, "Housing", LocKeys.VillageHousing, 30, Top, new Vector2(370f, -262f), new Vector2(240f, 44f), TextLight, TextAnchor.MiddleLeft);
 
+            // Treasury card floating over the village: income piles up here, tap Collect to bank it.
+            Image card = Image(popup.transform, "Treasury", Top, new Vector2(0f, -250f), new Vector2(960f, 170f), new Color(0.08f, 0.1f, 0.25f, 0.88f));
+            CoinIcon(card.transform, new Vector2(0f, 0.5f), new Vector2(80f, 12f), 96f);
+            Text treasury = Text(card.transform, "Amount", "0", 64, new Vector2(0f, 0.5f), new Vector2(330f, 24f), new Vector2(300f, 80f), Gold, TextAnchor.MiddleLeft, true);
+            LocalizedText income = Loc(card.transform, "Income", LocKeys.VillageIncome, 30, new Vector2(0f, 0.5f), new Vector2(330f, -32f), new Vector2(300f, 44f), Accent, TextAnchor.MiddleLeft, true);
+            Image storeBg = Image(card.transform, "Storage", new Vector2(0.5f, 0f), new Vector2(0f, 18f), new Vector2(900f, 14f), new Color(0f, 0f, 0f, 0.4f));
+            Image storeFill = Fill(Image(storeBg.transform, "Fill", Center, Vector2.zero, new Vector2(900f, 14f), Gold), UnityEngine.UI.Image.FillMethod.Horizontal, 0.4f);
+            Button collect = Button(card.transform, "Collect", LocKeys.VillageCollect, new Vector2(1f, 0.5f), new Vector2(-170f, 10f), new Vector2(290f, 110f), Gen.Hex("5CCB7A"), 46);
+
+            Button tabBuildings = Button(p, "TabBuildings", LocKeys.VillageTabBuildings, Top, new Vector2(-245f, -335f), new Vector2(470f, 76f), Primary, 36);
+            Button tabIslands = Button(p, "TabIslands", LocKeys.VillageTabIslands, Top, new Vector2(245f, -335f), new Vector2(470f, 76f), Accent, 36);
+
+            RectTransform buildingsPage = Stretch("BuildingsPage", p);
+            RectTransform islandsPage = Stretch("IslandsPage", p);
+
             string[] ids = { "shelter", "restaurant", "workshop", "shipyard", "market" };
             Color[] tints = { Gen.Hex("81B29A"), Gen.Hex("E07A5F"), Gen.Hex("F2CC8F"), Gen.Hex("7FA7D9"), Gen.Hex("C39BD3") };
             var levels = new List<Text>();
@@ -695,14 +710,14 @@ namespace MoonPull.EditorTools
             var capped = new List<LocalizedText>();
             for (int i = 0; i < ids.Length; i++)
             {
-                float y = 170f - i * 150f;
-                Image row = Image(p, "Row_" + ids[i], Center, new Vector2(0f, y), new Vector2(980f, 136f), PanelLight);
+                float y = 80f - i * 138f;
+                Image row = Image(buildingsPage, "Row_" + ids[i], Center, new Vector2(0f, y), new Vector2(980f, 128f), PanelLight);
                 Image(row.transform, "Icon", new Vector2(0f, 0.5f), new Vector2(70f, 0f), new Vector2(104f, 104f), Color.white, Art.BuildingIcon(ids[i], tints[i]));
-                Loc(row.transform, "Name", "village." + ids[i] + ".name", 36, new Vector2(0f, 0.5f), new Vector2(320f, 26f), new Vector2(400f, 50f), TextLight, TextAnchor.MiddleLeft, true);
+                Loc(row.transform, "Name", "village." + ids[i] + ".name", 36, new Vector2(0f, 0.5f), new Vector2(320f, 24f), new Vector2(400f, 50f), TextLight, TextAnchor.MiddleLeft, true);
                 Loc(row.transform, "Desc", "village." + ids[i] + ".desc", 26, new Vector2(0f, 0.5f), new Vector2(320f, -24f), new Vector2(400f, 50f), Muted, TextAnchor.MiddleLeft);
                 levels.Add(Text(row.transform, "Level", "0/3", 32, new Vector2(1f, 0.5f), new Vector2(-330f, 0f), new Vector2(100f, 60f), Gold, TextAnchor.MiddleCenter, true));
-                Button build = Button(row.transform, "Build", LocKeys.VillageUpgrade, new Vector2(1f, 0.5f), new Vector2(-140f, 18f), new Vector2(230f, 70f), Primary, 32);
-                Image costBg = Image(row.transform, "Cost", new Vector2(1f, 0.5f), new Vector2(-140f, -38f), new Vector2(230f, 46f), new Color(0f, 0f, 0f, 0.3f));
+                Button build = Button(row.transform, "Build", LocKeys.VillageUpgrade, new Vector2(1f, 0.5f), new Vector2(-140f, 18f), new Vector2(230f, 66f), Primary, 32);
+                Image costBg = Image(row.transform, "Cost", new Vector2(1f, 0.5f), new Vector2(-140f, -36f), new Vector2(230f, 44f), new Color(0f, 0f, 0f, 0.3f));
                 CoinIcon(costBg.transform, new Vector2(0f, 0.5f), new Vector2(28f, 0f), 36f);
                 costs.Add(Text(costBg.transform, "Amount", "0", 28, Center, new Vector2(20f, 0f), new Vector2(160f, 44f), Gold, TextAnchor.MiddleCenter, true));
                 buttons.Add(build);
@@ -710,6 +725,35 @@ namespace MoonPull.EditorTools
                 capped.Add(Loc(row.transform, "Capped", LocKeys.VillageNeedsLevel, 26, new Vector2(1f, 0.5f), new Vector2(-140f, 0f), new Vector2(240f, 80f), Muted, TextAnchor.MiddleCenter, true));
             }
 
+            Color[] islandTints = { Gen.Hex("6FBF73"), Gen.Hex("F2B880"), Gen.Hex("7FC8A9"), Gen.Hex("9FA8DA") };
+            var islandButtons = new List<Button>();
+            var islandCosts = new List<Text>();
+            var islandOwned = new List<GameObject>();
+            var islandLocked = new List<LocalizedText>();
+            for (int i = 0; i < MoonPull.Rescue.TycoonState.IslandCount; i++)
+            {
+                string id = MoonPull.Rescue.TycoonState.IslandIds[i];
+                float y = 80f - i * 150f;
+                Image row = Image(islandsPage, "Island_" + id, Center, new Vector2(0f, y), new Vector2(980f, 136f), PanelLight);
+                Image(row.transform, "Icon", new Vector2(0f, 0.5f), new Vector2(70f, 0f), new Vector2(110f, 110f), Color.white, Art.BuildingIcon("island", islandTints[i]));
+                Loc(row.transform, "Name", "island." + id + ".name", 36, new Vector2(0f, 0.5f), new Vector2(330f, 24f), new Vector2(420f, 50f), TextLight, TextAnchor.MiddleLeft, true);
+                Loc(row.transform, "Desc", "island." + id + ".desc", 26, new Vector2(0f, 0.5f), new Vector2(330f, -24f), new Vector2(420f, 50f), Muted, TextAnchor.MiddleLeft);
+                Button buy = Button(row.transform, "Buy", LocKeys.IslandBuy, new Vector2(1f, 0.5f), new Vector2(-150f, 20f), new Vector2(250f, 70f), Gen.Hex("5CCB7A"), 34);
+                Image costBg = Image(row.transform, "Cost", new Vector2(1f, 0.5f), new Vector2(-150f, -38f), new Vector2(250f, 44f), new Color(0f, 0f, 0f, 0.3f));
+                CoinIcon(costBg.transform, new Vector2(0f, 0.5f), new Vector2(28f, 0f), 36f);
+                islandCosts.Add(Text(costBg.transform, "Amount", "0", 28, Center, new Vector2(20f, 0f), new Vector2(180f, 44f), Gold, TextAnchor.MiddleCenter, true));
+                islandButtons.Add(buy);
+                islandOwned.Add(Loc(row.transform, "Owned", LocKeys.IslandOwned, 36, new Vector2(1f, 0.5f), new Vector2(-150f, 0f), new Vector2(250f, 60f), Accent, TextAnchor.MiddleCenter, true).gameObject);
+                islandLocked.Add(Loc(row.transform, "Locked", LocKeys.VillageNeedsLevel, 24, new Vector2(1f, 0.5f), new Vector2(-150f, 22f), new Vector2(260f, 60f), Muted, TextAnchor.MiddleCenter, true));
+            }
+
+            Gen.Wire(popup, "coinFly", coinFly, "buildingsTab", tabBuildings, "islandsTab", tabIslands,
+                "buildingsPage", buildingsPage.gameObject, "islandsPage", islandsPage.gameObject, "treasuryLabel", treasury,
+                "incomeLabel", income, "collectButton", collect, "treasuryFill", storeFill);
+            Gen.SetArray(popup, "islandButtons", islandButtons);
+            Gen.SetArray(popup, "islandCostLabels", islandCosts);
+            Gen.SetArray(popup, "islandOwnedLabels", islandOwned);
+            Gen.SetArray(popup, "islandLockedLabels", islandLocked);
             Gen.Wire(popup, "meta", w.Meta, "director", w.Village, "populationLabel", population, "levelLabel", level, "xpFill", xp,
                 "happinessLabel", happiness, "happinessFill", hap, "foodLabel", food, "housingLabel", housing);
             Gen.SetArray(popup, "levelLabels", levels);

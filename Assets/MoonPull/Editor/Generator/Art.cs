@@ -313,6 +313,22 @@ namespace MoonPull.EditorTools
                     if (sail) return white;
                     return mast ? ink : bg;
                 }
+                case "island":
+                {
+                    float sea = y < 0.34f ? 1f : 0f;
+                    bool land = Vector2.Distance(new Vector2(p.x, p.y * 1.8f), new Vector2(0.5f, 0.52f)) < 0.3f && y > 0.26f;
+                    bool trunk = Mathf.Abs(x - 0.56f - (y - 0.4f) * 0.25f) < 0.025f && y > 0.36f && y < 0.7f;
+                    bool leaves = Vector2.Distance(p, new Vector2(0.52f, 0.72f)) < 0.07f || Vector2.Distance(p, new Vector2(0.66f, 0.7f)) < 0.07f
+                                  || Vector2.Distance(p, new Vector2(0.6f, 0.78f)) < 0.07f;
+                    bool hut = RoundedRect(x, y, 0.3f, 0.34f, 0.44f, 0.46f, 0.03f);
+                    bool roof = InTriangle(p, new Vector2(0.27f, 0.45f), new Vector2(0.47f, 0.45f), new Vector2(0.37f, 0.56f));
+                    if (leaves) return new Color(0.35f, 0.72f, 0.4f);
+                    if (trunk) return new Color(0.55f, 0.36f, 0.2f);
+                    if (roof) return new Color(0.88f, 0.48f, 0.37f);
+                    if (hut) return white;
+                    if (land) return new Color(0.95f, 0.85f, 0.6f);
+                    return sea > 0f ? new Color(0.3f, 0.65f, 0.9f) : bg;
+                }
                 default: // market
                 {
                     bool awning = y > 0.56f && y < 0.74f && x > 0.16f && x < 0.84f;

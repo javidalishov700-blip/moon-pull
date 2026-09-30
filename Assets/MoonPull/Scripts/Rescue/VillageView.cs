@@ -14,7 +14,12 @@ namespace MoonPull.Rescue
         [Tooltip("Building tiers, building-major: index = building * 3 + tier. Tier n shows once the building reaches level n+1.")]
         [SerializeField] private GameObject[] buildingTiers = new GameObject[0];
 
+        [Tooltip("Expansion islands, in purchase order: the built island and its 'for sale' look.")]
+        [SerializeField] private GameObject[] islandsOwned = new GameObject[0];
+        [SerializeField] private GameObject[] islandsForSale = new GameObject[0];
+
         private int builtSignature = -1;
+        private int islandSignature = -1;
 
         private int shown = -1;
 
@@ -44,6 +49,30 @@ namespace MoonPull.Rescue
                     if (buildingTiers[i] != null)
                     {
                         buildingTiers[i].SetActive(VillageService.Level((VillageBuilding)(i / VillageService.MaxLevel)) > i % VillageService.MaxLevel);
+                    }
+                }
+            }
+
+            int islands = 0;
+            for (int i = 0; i < TycoonState.IslandCount; i++)
+            {
+                islands |= TycoonState.Owns(i) ? 1 << i : 0;
+            }
+
+            if (islands != islandSignature)
+            {
+                islandSignature = islands;
+                for (int i = 0; i < islandsOwned.Length; i++)
+                {
+                    bool owned = (islands & (1 << i)) != 0;
+                    if (islandsOwned[i] != null)
+                    {
+                        islandsOwned[i].SetActive(owned);
+                    }
+
+                    if (i < islandsForSale.Length && islandsForSale[i] != null)
+                    {
+                        islandsForSale[i].SetActive(!owned);
                     }
                 }
             }

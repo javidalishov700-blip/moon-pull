@@ -34,6 +34,7 @@ namespace MoonPull.Boot
             PlayerPrefs.SetInt("mp_village_shelter", 1);
             PlayerPrefs.SetInt("mp_village_restaurant", 2);
             PlayerPrefs.SetInt("mp_village_market", 1);
+            MoonPull.Rescue.TycoonState.SeedForCapture(1, 640f);
             var popups = FindFirstObjectByType<MoonPull.UI.PopupManager>(FindObjectsInactive.Include);
             var village = FindFirstObjectByType<MoonPull.UI.VillagePopup>(FindObjectsInactive.Include);
             if (popups != null && village != null)
@@ -43,6 +44,14 @@ namespace MoonPull.Boot
                 yield return Shot(folder, "01b-village");
                 yield return new WaitForSecondsRealtime(5f);
                 yield return Shot(folder, "01c-village");
+                Transform tab = village.transform.Find("Content/TabIslands");
+                if (tab != null)
+                {
+                    tab.GetComponent<UnityEngine.UI.Button>().onClick.Invoke();
+                    yield return new WaitForSecondsRealtime(0.6f);
+                    yield return Shot(folder, "01d-islands");
+                }
+
                 popups.Close(village);
                 yield return new WaitForSecondsRealtime(1.5f);
             }

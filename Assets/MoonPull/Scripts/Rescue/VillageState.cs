@@ -37,7 +37,7 @@ namespace MoonPull.Rescue
         /// <summary>Every building's level is capped by the village level (and by its own maximum).</summary>
         public static int BuildingLevelCap => Mathf.Min(VillageService.MaxLevel, 1 + (Level - 1) / 2);
 
-        public static int Housing => 6 + 6 * VillageService.Level(VillageBuilding.Shelter);
+        public static int Housing => 6 + 6 * VillageService.Level(VillageBuilding.Shelter) + TycoonState.ExtraHousing;
 
         public static float FoodPerHour => 2f + 5f * VillageService.Level(VillageBuilding.Restaurant);
 

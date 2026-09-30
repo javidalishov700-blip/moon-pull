@@ -49,6 +49,7 @@ namespace MoonPull.Rescue
                 return false;
             }
 
+            TycoonState.Accrue(); // bank income at the old rate first
             PlayerPrefs.SetInt(Key(b), Level(b) + 1);
             PlayerPrefs.Save();
             VillageState.AddXp(40 + 30 * Level(b));

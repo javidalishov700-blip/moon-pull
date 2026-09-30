@@ -18,7 +18,7 @@ namespace MoonPull.EditorTools
         public static readonly Color Primary = Gen.Hex("FFB547");
         public static readonly Color Accent = Gen.Hex("7FE3C4");
         public static readonly Color RewardedColor = Gen.Hex("8E7CFF");
-        public static readonly Color Muted = Gen.Hex("5A628F");
+        public static readonly Color Muted = Gen.Hex("A3ABDB");
         public static readonly Color TextLight = Gen.Hex("F4F1FF");
         public static readonly Color Gold = Gen.Hex("FFD95C");
         public static readonly Color Danger = Gen.Hex("FF6B6B");

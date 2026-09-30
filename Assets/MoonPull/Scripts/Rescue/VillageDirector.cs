@@ -33,7 +33,7 @@ namespace MoonPull.Rescue
         [SerializeField] private Toast toast;
         [SerializeField] private Vector2 walkArea = new Vector2(4.6f, 2.2f);
         [SerializeField] private float groundHeight = 0.45f;
-        [SerializeField] private Vector3 viewOffset = new Vector3(0f, 9f, -10.5f);
+        [SerializeField] private Vector3 viewOffset = new Vector3(0f, 12.5f, -14f);
         [SerializeField] private int maxVisible = 30;
 
         /// <summary>True while the player is visiting the village; the sea camera stands aside.</summary>
@@ -395,7 +395,7 @@ namespace MoonPull.Rescue
             float t = 1f - Mathf.Exp(-4f * Time.unscaledDeltaTime);
             cameraTransform.position = Vector3.Lerp(cameraTransform.position, target, t);
             // Aim below the island so it sits in the top half of the screen, above the Village sheet.
-            Quaternion look = Quaternion.LookRotation(transform.position + new Vector3(0f, -4.5f, 2f) - target);
+            Quaternion look = Quaternion.LookRotation(transform.position + new Vector3(0f, -6f, 4.5f) - target);
             cameraTransform.rotation = Quaternion.Slerp(cameraTransform.rotation, look, t);
         }
     }

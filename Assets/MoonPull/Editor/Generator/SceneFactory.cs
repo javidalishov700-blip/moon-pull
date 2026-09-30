@@ -254,7 +254,7 @@ namespace MoonPull.EditorTools
 
             Gen.SetArray<GameObject>(village, "houses", houses);
 
-            // Village buildings: each gains a visible part per level (base, extension, lit roof sign).
+            // Village buildings: round cartoon halls that grow per level (hall, annex with a lit window, flag and glow).
             Color[] tints = { Gen.Hex("81B29A"), Gen.Hex("E07A5F"), Gen.Hex("F2CC8F"), Gen.Hex("7FA7D9"), Gen.Hex("C39BD3") };
             var tiers = new List<GameObject>();
             for (int b = 0; b < 5; b++)
@@ -262,14 +262,17 @@ namespace MoonPull.EditorTools
                 Transform site = Gen.Go("Building_" + b, island.transform).transform;
                 site.localPosition = new Vector3(-3.2f + b * 1.6f, 0.5f, -1.4f);
                 GameObject t1 = Gen.Go("Tier1", site);
-                Gen.Prim(PrimitiveType.Cube, t1.transform, new Vector3(0f, 0.45f, 0f), new Vector3(1.1f, 0.9f, 0.9f), Gen.Hex("EFE3C8"));
-                Gen.Prim(PrimitiveType.Cube, t1.transform, new Vector3(0f, 1.05f, 0f), new Vector3(0.85f, 0.85f, 1.0f), tints[b], new Vector3(0f, 0f, 45f));
-                Gen.Prim(PrimitiveType.Cube, t1.transform, new Vector3(0f, 0.35f, -0.46f), new Vector3(0.25f, 0.4f, 0.02f), Gen.Hex("6B4A34"));
+                Gen.Prim(PrimitiveType.Cylinder, t1.transform, new Vector3(0f, 0.4f, 0f), new Vector3(1.05f, 0.4f, 0.95f), Gen.Hex("F6E7C8"));
+                Gen.Prim(PrimitiveType.Sphere, t1.transform, new Vector3(0f, 0.86f, 0f), new Vector3(1.3f, 0.8f, 1.2f), tints[b]);
+                Gen.Prim(PrimitiveType.Sphere, t1.transform, new Vector3(0f, 1.26f, 0f), new Vector3(0.2f, 0.2f, 0.2f), Gen.Hex("FFE9A8"), default, 0.6f);
+                Gen.Prim(PrimitiveType.Sphere, t1.transform, new Vector3(0f, 0.3f, -0.47f), new Vector3(0.3f, 0.46f, 0.08f), Gen.Hex("6B4A34")); // door
                 GameObject t2 = Gen.Go("Tier2", site);
-                Gen.Prim(PrimitiveType.Cube, t2.transform, new Vector3(0.55f, 0.35f, 0.1f), new Vector3(0.6f, 0.7f, 0.7f), Gen.Hex("E6D3AE"));
-                Gen.Prim(PrimitiveType.Cube, t2.transform, new Vector3(-0.25f, 0.55f, -0.46f), new Vector3(0.22f, 0.22f, 0.02f), Gen.Hex("FFD37A"), default, 3f);
+                Gen.Prim(PrimitiveType.Cylinder, t2.transform, new Vector3(0.62f, 0.3f, 0.2f), new Vector3(0.55f, 0.3f, 0.55f), Gen.Hex("EFDDB8"));
+                Gen.Prim(PrimitiveType.Sphere, t2.transform, new Vector3(0.62f, 0.64f, 0.2f), new Vector3(0.7f, 0.46f, 0.7f), Color.Lerp(tints[b], Color.white, 0.25f));
+                Gen.Prim(PrimitiveType.Sphere, t2.transform, new Vector3(-0.3f, 0.5f, -0.44f), new Vector3(0.22f, 0.22f, 0.06f), Gen.Hex("FFD37A"), default, 3f);
                 GameObject t3 = Gen.Go("Tier3", site);
-                Gen.Prim(PrimitiveType.Cube, t3.transform, new Vector3(0f, 1.75f, 0f), new Vector3(0.7f, 0.28f, 0.06f), tints[b], default, 1.5f);
+                Gen.Prim(PrimitiveType.Cylinder, t3.transform, new Vector3(0f, 1.6f, 0f), new Vector3(0.04f, 0.35f, 0.04f), Gen.Hex("6B4A34"));
+                Gen.Prim(PrimitiveType.Sphere, t3.transform, new Vector3(0.18f, 1.82f, 0f), new Vector3(0.36f, 0.2f, 0.05f), tints[b], default, 1.2f); // flag
                 Gen.Prim(PrimitiveType.Sphere, t3.transform, new Vector3(0f, 1.0f, -0.6f), new Vector3(2.2f, 2.2f, 2.2f), Color.white)
                     .GetComponent<MeshRenderer>().sharedMaterial = Art.Glow(new Color(1f, 0.85f, 0.5f, 0.15f));
                 tiers.Add(t1);
@@ -288,14 +291,43 @@ namespace MoonPull.EditorTools
             for (int i = 0; i < 7; i++)
             {
                 float a = i * 0.9f + 0.4f;
-                Transform palm = Gen.Go("Palm" + i, island.transform).transform;
-                palm.localPosition = new Vector3(Mathf.Cos(a) * 5.6f, 0.3f, Mathf.Sin(a) * 3.2f + 0.6f);
-                Gen.Prim(PrimitiveType.Cylinder, palm, new Vector3(0f, 0.9f, 0f), new Vector3(0.14f, 0.9f, 0.14f), Gen.Hex("7A5230"), new Vector3(0f, 0f, 8f));
-                for (int f = 0; f < 4; f++)
-                {
-                    Gen.Prim(PrimitiveType.Cube, palm, new Vector3(0.1f, 1.85f, 0f), new Vector3(1.1f, 0.06f, 0.3f), Gen.Hex("4F9D69"), new Vector3(0f, f * 90f, -18f));
-                }
+                Palm(island.transform, new Vector3(Mathf.Cos(a) * 5.6f, 0.3f, Mathf.Sin(a) * 3.2f + 0.6f), 1f);
             }
+
+            // Expansion islands for sale around the harbor: bought with coins in the Village screen.
+            var owned = new List<GameObject>();
+            var forSale = new List<GameObject>();
+            Vector3[] spots = { new Vector3(-6.2f, 0.2f, 6.5f), new Vector3(6.4f, 0.2f, 6.8f), new Vector3(-2.6f, 0.2f, 11.5f), new Vector3(3.8f, 0.2f, 12.5f) };
+            Color[] grass = { Gen.Hex("6FBF73"), Gen.Hex("F2B880"), Gen.Hex("7FC8A9"), Gen.Hex("9FA8DA") };
+            for (int i = 0; i < spots.Length; i++)
+            {
+                Transform root = Gen.Go("Expansion_" + i, island.transform).transform;
+                root.localPosition = spots[i];
+                Gen.Prim(PrimitiveType.Sphere, root, new Vector3(0f, -0.9f, 0f), new Vector3(5.2f, 1.9f, 3.8f), Gen.Hex("E8D3A0"));
+                GameObject built = Gen.Go("Owned", root);
+                Gen.Prim(PrimitiveType.Sphere, built.transform, new Vector3(0f, -0.62f, 0f), new Vector3(4.4f, 1.6f, 3.1f), grass[i]);
+                for (int h = 0; h < 3; h++)
+                {
+                    var hut = (GameObject)PrefabUtility.InstantiatePrefab(content.VillageHouse, built.transform);
+                    hut.transform.localPosition = new Vector3(-1f + h * 1f, 0.2f, h == 1 ? 0.5f : -0.2f);
+                    hut.transform.localScale = Vector3.one * 0.9f;
+                }
+
+                Palm(built.transform, new Vector3(1.7f, 0.1f, 0.6f), 0.8f);
+                Palm(built.transform, new Vector3(-1.8f, 0.1f, 0.4f), 0.7f);
+                GameObject sale = Gen.Go("ForSale", root);
+                Transform sign = Gen.Go("Sign", sale.transform).transform;
+                sign.localPosition = new Vector3(0f, 0.1f, 0f);
+                Gen.Prim(PrimitiveType.Cylinder, sign, new Vector3(0f, 0.4f, 0f), new Vector3(0.08f, 0.4f, 0.08f), Gen.Hex("7A5230"));
+                Gen.Prim(PrimitiveType.Sphere, sign, new Vector3(0f, 0.95f, 0f), new Vector3(0.9f, 0.9f, 0.12f), Gen.Hex("FFD95C"), default, 0.5f); // coin sign
+                Gen.Prim(PrimitiveType.Sphere, sign, new Vector3(0f, 0.95f, -0.06f), new Vector3(0.55f, 0.55f, 0.04f), Gen.Hex("F5B642"), default, 0.4f);
+                owned.Add(built);
+                forSale.Add(sale);
+            }
+
+            Gen.SetArray<GameObject>(village, "islandsOwned", owned);
+            Gen.SetArray<GameObject>(village, "islandsForSale", forSale);
+
             Transform stageRoot = Gen.Go("StageRoot", island.transform).transform;
             stageRoot.localPosition = new Vector3(0.5f, 0.1f, 0f);
             LighthouseIslandView islandView = Gen.Add<LighthouseIslandView>(island);
@@ -392,6 +424,24 @@ namespace MoonPull.EditorTools
             Gen.Wire(service, "library", content.Sfx, "musicA", musicA, "musicB", musicB, "intensityLayer", layer, "musicLowPass", lowPass);
             Gen.SetArray(service, "sfxVoices", voices);
             return service;
+        }
+
+        /// <summary>A cartoon palm: a curved trunk and droopy leaf blobs.</summary>
+        private static void Palm(Transform parent, Vector3 position, float scale)
+        {
+            Transform palm = Gen.Go("Palm", parent).transform;
+            palm.localPosition = position;
+            palm.localScale = Vector3.one * scale;
+            Gen.Prim(PrimitiveType.Capsule, palm, new Vector3(0f, 0.8f, 0f), new Vector3(0.16f, 0.85f, 0.16f), Gen.Hex("9C6B43"), new Vector3(0f, 0f, 8f));
+            for (int f = 0; f < 5; f++)
+            {
+                Transform leaf = Gen.Go("Leaf", palm).transform;
+                leaf.localPosition = new Vector3(-0.1f, 1.62f, 0f);
+                leaf.localEulerAngles = new Vector3(0f, f * 72f, 0f);
+                Gen.Prim(PrimitiveType.Sphere, leaf, new Vector3(0.5f, -0.1f, 0f), new Vector3(1.0f, 0.1f, 0.34f), Gen.Hex("58B368"), new Vector3(0f, 0f, -20f));
+            }
+
+            Gen.Prim(PrimitiveType.Sphere, palm, new Vector3(-0.05f, 1.55f, -0.08f), new Vector3(0.16f, 0.16f, 0.16f), Gen.Hex("7A4E2D")); // coconut
         }
     }
 }
