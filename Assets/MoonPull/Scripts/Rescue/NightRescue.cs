@@ -688,19 +688,20 @@ namespace MoonPull.Rescue
             {
                 // Side view that pulls back as the boat climbs, keeping the wave ahead in frame.
                 float altitude = Mathf.Max(0f, y - Height(x));
-                float back = 13.5f + altitude * 0.9f + (fever > 0f ? 1.5f : 0f);
+                float back = 15f + altitude * 0.8f + (fever > 0f ? 1.5f : 0f);
                 shake = Mathf.MoveTowards(shake, 0f, Time.deltaTime);
                 Vector3 jitter = shake > 0f ? Random.insideUnitSphere * shake * 0.35f : Vector3.zero;
-                Vector3 target = new Vector3(x + 4.5f, 1.6f + y * 0.55f, -back) + jitter;
+                // High enough that the nearest swells never rise above the lens, tilted down onto the sea.
+                Vector3 target = new Vector3(x + 1.8f, 7f + Mathf.Max(0f, y) * 0.6f, -back) + jitter;
                 cameraTransform.position = Vector3.Lerp(cameraTransform.position, target, 1f - Mathf.Exp(-6f * Time.deltaTime));
-                cameraTransform.rotation = Quaternion.Euler(4f, 0f, 0f);
+                cameraTransform.rotation = Quaternion.Euler(17f, 0f, 0f);
             }
 
             if (moonAnchor != null)
             {
                 // The moon sinks towards the horizon as the night runs out.
                 float night = running ? moonlight : 1f;
-                moonAnchor.localPosition = new Vector3(5f, Mathf.Lerp(1.5f, 8.5f, night), 30f);
+                moonAnchor.localPosition = new Vector3(4f, Mathf.Lerp(4f, 13f, night), 30f);
             }
         }
     }
