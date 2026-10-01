@@ -33,6 +33,7 @@ Shader "MoonPull/Water"
             fixed4 _LightColor0;
             fixed4 _MP_SkyTop, _MP_SkyBottom;
             float _MP_Dark;
+            float _MP_TopDown; // 1 when the camera looks down on the village/menu map
             float4 _MP_MoonPos;
 
             struct appdata { float4 vertex : POSITION; };
@@ -142,6 +143,17 @@ Shader "MoonPull/Water"
                 // Fade into the sky's horizon colour with distance.
                 float haze = saturate((dist - _DepthRange * 0.4) / _DepthRange);
                 col = lerp(col, _MP_SkyBottom.rgb, haze * haze * 0.85);
+
+                // Seen from above, the swell bands and foam caps read as clouds. Swap them for a clean sea:
+                // one even blue with small ripple glints.
+                if (_MP_TopDown > 0.001)
+                {
+                    float2 rs = rippleSlope(i.worldPos.xz * 1.6, t);
+                    float sparkle = smoothstep(1.15, 1.45, length(rs));
+                    fixed3 sea = lerp(_DeepColor.rgb, _ShallowColor.rgb, 0.55) * (0.95 + 0.05 * rs.x);
+                    sea = lerp(sea, _FoamColor.rgb, sparkle * 0.35);
+                    col = lerp(col, sea, saturate(_MP_TopDown));
+                }
 
                 col = lerp(col, col * _FullMoonTint.rgb * 1.1 + 0.03, _MP_FullMoon);
                 col *= 1 - _MP_Dark * 0.6; // the night deepens as the moonlight runs out

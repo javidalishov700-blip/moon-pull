@@ -476,6 +476,9 @@ namespace MoonPull.Rescue
             }
         }
 
+        private static readonly int TopDownId = Shader.PropertyToID("_MP_TopDown");
+        private float topDown;
+
         private void LateUpdate()
         {
             foreach (Villager v in villagers)
@@ -485,6 +488,9 @@ namespace MoonPull.Rescue
                     v.Body.localScale = Vector3.MoveTowards(v.Body.localScale, Vector3.one * 1.25f, Time.unscaledDeltaTime);
                 }
             }
+
+            topDown = Mathf.MoveTowards(topDown, Active || MenuView ? 1f : 0f, Time.unscaledDeltaTime * 2f);
+            Shader.SetGlobalFloat(TopDownId, topDown);
 
             if ((!Active && !MenuView) || cameraTransform == null)
             {
