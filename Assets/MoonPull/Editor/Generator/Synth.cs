@@ -123,6 +123,73 @@ namespace MoonPull.EditorTools
             return ((float)Noise.NextDouble() * 2f - 1f) * 0.25f * (0.4f + 0.6f * swell);
         }, true);
 
+
+        /// <summary>12 s shoreline loop: low rolling surf with a wash that breaks and drains every 6 s.</summary>
+        public static AudioClip ShoreLoop()
+        {
+            float low = 0f, low2 = 0f;
+            return Clip("amb_shore", 12f, t =>
+            {
+                float n = (float)Noise.NextDouble() * 2f - 1f;
+                low += (n - low) * 0.06f;   // deep rumble
+                low2 += (n - low2) * 0.35f; // hiss of the wash
+                float phase = (t % 6f) / 6f;
+                float crash = Mathf.Exp(-Mathf.Pow((phase - 0.35f) * 6f, 2f));
+                float drain = phase > 0.35f ? Mathf.Exp(-(phase - 0.35f) * 5f) : 0f;
+                return low * 0.9f * (0.5f + 0.5f * crash) + low2 * (0.12f * crash + 0.08f * drain);
+            }, true);
+        }
+
+        /// <summary>One seagull call: two falling, warbling "kee-ow" cries.</summary>
+        public static AudioClip Gull() => Clip("amb_gull", 0.9f, t =>
+        {
+            float local = t < 0.42f ? t : t - 0.45f;
+            if (local < 0f) return 0f;
+            float len = 0.4f;
+            float f = Mathf.Lerp(1900f, 1150f, local / len) + 60f * Mathf.Sin(2f * Mathf.PI * 28f * local);
+            float ph = 2f * Mathf.PI * f * local;
+            float tone = Mathf.Sin(ph) + 0.45f * Mathf.Sin(2f * ph) + 0.2f * Mathf.Sin(3f * ph);
+            float env = Mathf.Clamp01(local * 40f) * Mathf.Clamp01((len - local) * 8f);
+            return tone * env * 0.35f;
+        });
+
+        /// <summary>8 s murmur of a small crowd: several voices babbling syllables at speech pitch, no words.</summary>
+        public static AudioClip CrowdLoop()
+        {
+            var rng = new System.Random(77);
+            const int voices = 7;
+            var pitch = new float[voices];
+            var rate = new float[voices];
+            var offset = new float[voices];
+            for (int v = 0; v < voices; v++)
+            {
+                pitch[v] = 120f + (float)rng.NextDouble() * 150f;
+                rate[v] = 3f + (float)rng.NextDouble() * 2.5f;
+                offset[v] = (float)rng.NextDouble() * 8f;
+            }
+
+            float hiss = 0f;
+            return Clip("amb_crowd", 8f, t =>
+            {
+                float sum = 0f;
+                for (int v = 0; v < voices; v++)
+                {
+                    float vt = t + offset[v];
+                    // Talk in phrases with pauses; syllables pulse inside them.
+                    float phrase = Mathf.Sin(2f * Mathf.PI * vt / (2.2f + v * 0.37f)) > -0.2f ? 1f : 0f;
+                    float syl = Mathf.Pow(Mathf.Abs(Mathf.Sin(Mathf.PI * rate[v] * vt)), 2f);
+                    float f = pitch[v] * (1f + 0.08f * Mathf.Sin(2f * Mathf.PI * 0.7f * vt + v));
+                    float ph = 2f * Mathf.PI * f * t;
+                    // Voiced buzz shaped toward vowel formants (strong 2nd-4th harmonics).
+                    float voice = 0.4f * Mathf.Sin(ph) + 0.6f * Mathf.Sin(2f * ph) + 0.5f * Mathf.Sin(3f * ph) + 0.3f * Mathf.Sin(4f * ph) + 0.12f * Mathf.Sin(6f * ph);
+                    sum += voice * syl * phrase;
+                }
+
+                hiss += (((float)Noise.NextDouble() * 2f - 1f) - hiss) * 0.2f;
+                return sum * 0.045f + hiss * 0.03f;
+            }, true);
+        }
+
         // ---------------------------------------------------------------- building blocks
 
         private static float Tone(float t, float f, float _) => Mathf.Sin(2f * Mathf.PI * f * t);

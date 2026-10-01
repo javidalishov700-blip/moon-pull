@@ -193,6 +193,7 @@ namespace MoonPull.Rescue
                 Populate();
                 Walk();
                 HandleMenuTap();
+                HandlePanZoom(); // drag to look around the archipelago, pinch to zoom
                 return;
             }
 
@@ -214,9 +215,22 @@ namespace MoonPull.Rescue
             HandlePanZoom();
         }
 
+        private Vector2 menuPressAt;
+        private float menuPressTime;
+
         private void HandleMenuTap()
         {
-            bool tapped = Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began);
+            // A tap is a short press that barely moved; drags pan the map instead.
+            bool down = Input.GetMouseButtonDown(0) || (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began);
+            Vector2 now = Input.touchCount > 0 ? Input.GetTouch(0).position : (Vector2)Input.mousePosition;
+            if (down)
+            {
+                menuPressAt = now;
+                menuPressTime = Time.unscaledTime;
+            }
+
+            bool up = Input.GetMouseButtonUp(0) || (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Ended);
+            bool tapped = up && (now - menuPressAt).magnitude < Screen.height * 0.015f && Time.unscaledTime - menuPressTime < 0.4f;
             if (!tapped || cameraTransform == null)
             {
                 return;
@@ -377,7 +391,17 @@ namespace MoonPull.Rescue
 
         private void HandleTap()
         {
-            bool tapped = Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began);
+            // A tap is a short press that barely moved; drags pan the map instead.
+            bool down = Input.GetMouseButtonDown(0) || (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began);
+            Vector2 now = Input.touchCount > 0 ? Input.GetTouch(0).position : (Vector2)Input.mousePosition;
+            if (down)
+            {
+                menuPressAt = now;
+                menuPressTime = Time.unscaledTime;
+            }
+
+            bool up = Input.GetMouseButtonUp(0) || (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Ended);
+            bool tapped = up && (now - menuPressAt).magnitude < Screen.height * 0.015f && Time.unscaledTime - menuPressTime < 0.4f;
             if (!tapped || cameraTransform == null)
             {
                 return;
@@ -502,10 +526,11 @@ namespace MoonPull.Rescue
                 // Menu: a high aerial view over the whole archipelago, framed between the title and the Play button.
                 Camera menuCam = cameraTransform.GetComponent<Camera>();
                 float fit = menuCam != null ? Mathf.Pow(Mathf.Max(1f, 0.5625f / menuCam.aspect), 0.85f) : 1f;
-                Vector3 menuTarget = transform.position + new Vector3(0f, 17f, -17f) * fit;
+                Vector3 menuPan = new Vector3(pan.x, 0f, pan.y);
+                Vector3 menuTarget = transform.position + menuPan + new Vector3(0f, 17f, -17f) * fit * zoom;
                 float mt = 1f - Mathf.Exp(-3f * Time.unscaledDeltaTime);
                 cameraTransform.position = Vector3.Lerp(cameraTransform.position, menuTarget, mt);
-                Quaternion menuLook = Quaternion.LookRotation(transform.position + new Vector3(0f, -5f, 5f) - menuTarget);
+                Quaternion menuLook = Quaternion.LookRotation(transform.position + menuPan + new Vector3(0f, -5f, 5f) - menuTarget);
                 cameraTransform.rotation = Quaternion.Slerp(cameraTransform.rotation, menuLook, mt);
                 return;
             }
