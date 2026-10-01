@@ -305,7 +305,7 @@ namespace MoonPull.EditorTools
             {
                 float a = i * 0.9f + 0.4f;
                 // Keep palms well inside the grass ellipse and sit them on its curved surface.
-                float px = Mathf.Cos(a) * 4.4f, pz = Mathf.Sin(a) * 2.5f;
+                float px = Mathf.Cos(a) * 3.3f, pz = Mathf.Sin(a) * 1.7f;
                 float k = 1f - (px * px) / (6.5f * 6.5f) - (pz * pz) / 16f;
                 Palm(island.transform, new Vector3(px, -1.05f + 1.5f * Mathf.Sqrt(Mathf.Max(0f, k)) - 0.05f, pz), 1f);
             }
@@ -331,8 +331,8 @@ namespace MoonPull.EditorTools
                     hut.transform.localScale = Vector3.one * 0.9f;
                 }
 
-                Palm(built.transform, new Vector3(1.3f, 0.05f, 0.3f), 0.8f);
-                Palm(built.transform, new Vector3(-1.4f, 0.05f, 0.2f), 0.7f);
+                Palm(built.transform, new Vector3(0.9f, 0.05f, 0.1f), 0.7f);
+                Palm(built.transform, new Vector3(-0.9f, 0.05f, 0f), 0.6f);
                 GameObject sale = Gen.Go("ForSale", root);
                 Transform sign = Gen.Go("Sign", sale.transform).transform;
                 sign.localPosition = new Vector3(0f, 0.1f, 0f);
