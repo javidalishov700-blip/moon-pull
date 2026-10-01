@@ -203,7 +203,7 @@ namespace MoonPull.EditorTools
             var label = (RectTransform)button.transform.Find("Label");
             label.anchoredPosition = new Vector2(0f, -52f);
             label.sizeDelta = new Vector2(226f, 50f);
-            Image glyph = Image(button.transform, "Icon", Center, new Vector2(0f, 28f), new Vector2(110f, 110f), Color.white, Art.MenuIcon(icon));
+            Image glyph = Image(button.transform, "Icon", Center, new Vector2(0f, 26f), new Vector2(128f, 128f), Color.white, Art.MenuIcon(icon));
             glyph.raycastTarget = false;
             return button;
         }

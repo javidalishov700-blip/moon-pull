@@ -334,7 +334,7 @@ namespace MoonPull.EditorTools
         });
 
         /// <summary>White sticker glyphs for the menu tiles, with a dark outline.</summary>
-        public static Sprite MenuIcon(string kind) => Draw("menu_" + kind, 128, (x, y) =>
+        public static Sprite MenuIcon(string kind) => Draw("menu3d_" + kind, 192, (x, y) =>
         {
             Vector2 p = new Vector2(x, y);
             Func<float, float, bool> shape;
@@ -372,10 +372,37 @@ namespace MoonPull.EditorTools
                     break;
             }
 
+            // Chunky 3D sticker: a dark outline, an extruded side below it, a soft drop shadow, and on the face a
+            // top-lit gradient with a glossy upper edge and shaded lower edge.
+            const float o = 0.04f, ex = 0.05f;
             bool inside = shape(x, y);
-            bool rim = !inside && (shape(x + 0.035f, y) || shape(x - 0.035f, y) || shape(x, y + 0.035f) || shape(x, y - 0.035f));
+            bool rim = !inside && (shape(x + o, y) || shape(x - o, y) || shape(x, y + o) || shape(x, y - o)
+                                   || shape(x + o * 0.7f, y + o * 0.7f) || shape(x - o * 0.7f, y - o * 0.7f) || shape(x + o * 0.7f, y - o * 0.7f) || shape(x - o * 0.7f, y + o * 0.7f));
+            if (!inside && !rim)
+            {
+                // Extrusion (the icon's thickness) then a blurred shadow.
+                if (shape(x, y + ex) || shape(x + o, y + ex) || shape(x - o, y + ex)) return new Color(0.06f, 0.04f, 0.18f, 1f);
+                float sh = 0f;
+                for (int k = 1; k <= 3; k++) if (shape(x - 0.02f * k, y + ex + 0.025f * k)) sh += 0.14f;
+                return new Color(0f, 0f, 0.05f, sh);
+            }
+
             if (rim) return new Color(0.1f, 0.07f, 0.28f, 1f);
-            if (!inside) return Color.clear;
+            Color face = FaceColor(kind, x, y, p);
+            float light = Mathf.Lerp(0.78f, 1.12f, y);                      // lit from above
+            bool topEdge = !shape(x, y + 0.045f);
+            bool lowEdge = !shape(x, y - 0.05f);
+            Color c = face * light;
+            if (lowEdge) c *= 0.72f;
+            if (topEdge) c = Color.Lerp(c, Color.white, 0.45f);
+            // Glossy highlight streak across the upper face.
+            if (shape(x, y + 0.09f) && !shape(x, y + 0.14f) && x < 0.62f) c = Color.Lerp(c, Color.white, 0.3f);
+            c.a = 1f;
+            return c;
+        });
+
+        private static Color FaceColor(string kind, float x, float y, Vector2 p)
+        {
 
             Color white = new Color(0.95f, 0.77f, 0.36f);
             Color ink = new Color(0.08f, 0.1f, 0.24f);
@@ -408,7 +435,7 @@ namespace MoonPull.EditorTools
                     return cols[Mathf.Clamp(seg, 0, 5)];
                 }
             }
-        });
+        }
 
         /// <summary>Village building badge: a rounded coloured tile with a bold cartoon symbol and a soft outline.</summary>
         public static Sprite BuildingIcon(string id, Color tile) => Draw("building_" + id, 192, (x, y) =>
