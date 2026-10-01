@@ -53,7 +53,7 @@ Shader "MoonPull/Water"
                 float height; float3 normal;
                 MoonPullWave_float(world, height, normal);
                 // Map view: calm, slightly lowered sea so islands show their beaches instead of sinking into swells.
-                height = lerp(height, _MP_WaterLevel - 0.35 + (height - _MP_WaterLevel) * 0.08, saturate(_MP_TopDown));
+                height = lerp(height, -0.25 + (height - _MP_WaterLevel) * 0.05, saturate(_MP_TopDown)); // fixed map sea level, below the beaches
                 normal = normalize(lerp(normal, float3(0, 1, 0), saturate(_MP_TopDown) * 0.9));
                 world.y = height;
                 o.worldPos = world;
