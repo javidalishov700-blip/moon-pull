@@ -27,14 +27,14 @@ Shader "MoonPull/Water"
             #pragma multi_compile_fog
             #include "UnityCG.cginc"
             #include "MoonPullWater.hlsl"
+            float _MP_TopDown; // 1 when the camera looks down on the village/menu map
 
             fixed4 _ShallowColor, _DeepColor, _FoamColor, _FullMoonTint;
             float _FoamHeight, _DepthRange, _RippleStrength, _GlitterStrength;
             fixed4 _LightColor0;
             fixed4 _MP_SkyTop, _MP_SkyBottom;
             float _MP_Dark;
-            float _MP_TopDown; // 1 when the camera looks down on the village/menu map
-            float4 _MP_MoonPos;
+                        float4 _MP_MoonPos;
 
             struct appdata { float4 vertex : POSITION; };
             struct v2f
@@ -52,6 +52,9 @@ Shader "MoonPull/Water"
                 float3 world = mul(unity_ObjectToWorld, v.vertex).xyz;
                 float height; float3 normal;
                 MoonPullWave_float(world, height, normal);
+                // Map view: calm, slightly lowered sea so islands show their beaches instead of sinking into swells.
+                height = lerp(height, _MP_WaterLevel - 0.35 + (height - _MP_WaterLevel) * 0.08, saturate(_MP_TopDown));
+                normal = normalize(lerp(normal, float3(0, 1, 0), saturate(_MP_TopDown) * 0.9));
                 world.y = height;
                 o.worldPos = world;
                 o.normal = normal;
@@ -148,9 +151,13 @@ Shader "MoonPull/Water"
                 // one even blue with small ripple glints.
                 if (_MP_TopDown > 0.001)
                 {
-                    float2 rs = rippleSlope(i.worldPos.xz * 1.6, t);
-                    float sparkle = smoothstep(1.15, 1.45, length(rs));
-                    fixed3 sea = lerp(_DeepColor.rgb, _ShallowColor.rgb, 0.55) * (0.95 + 0.05 * rs.x);
+                    // Two drifting ripple layers so the sea visibly flows.
+                    float2 p = i.worldPos.xz;
+                    float2 rs = rippleSlope(p * 1.3 + float2(t * 0.35, t * 0.2), t);
+                    float2 rs2 = rippleSlope(p * 0.45 - float2(t * 0.12, t * 0.3), t * 0.6);
+                    float sparkle = smoothstep(1.2, 1.5, length(rs)) * (0.6 + 0.4 * sin(t * 2 + p.x));
+                    float swell = rs2.x * 0.5 + rs2.y * 0.5;
+                    fixed3 sea = lerp(_DeepColor.rgb, _ShallowColor.rgb, 0.5 + swell * 0.12);
                     sea = lerp(sea, _FoamColor.rgb, sparkle * 0.35);
                     col = lerp(col, sea, saturate(_MP_TopDown));
                 }
