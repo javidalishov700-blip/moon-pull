@@ -304,7 +304,10 @@ namespace MoonPull.EditorTools
             for (int i = 0; i < 7; i++)
             {
                 float a = i * 0.9f + 0.4f;
-                Palm(island.transform, new Vector3(Mathf.Cos(a) * 5.6f, 0.3f, Mathf.Sin(a) * 3.2f + 0.6f), 1f);
+                // Keep palms well inside the grass ellipse and sit them on its curved surface.
+                float px = Mathf.Cos(a) * 4.4f, pz = Mathf.Sin(a) * 2.5f;
+                float k = 1f - (px * px) / (6.5f * 6.5f) - (pz * pz) / 16f;
+                Palm(island.transform, new Vector3(px, -1.05f + 1.5f * Mathf.Sqrt(Mathf.Max(0f, k)) - 0.05f, pz), 1f);
             }
 
             // Expansion islands for sale around the harbor: bought with coins in the Village screen.
@@ -328,8 +331,8 @@ namespace MoonPull.EditorTools
                     hut.transform.localScale = Vector3.one * 0.9f;
                 }
 
-                Palm(built.transform, new Vector3(1.7f, 0.1f, 0.6f), 0.8f);
-                Palm(built.transform, new Vector3(-1.8f, 0.1f, 0.4f), 0.7f);
+                Palm(built.transform, new Vector3(1.3f, 0.05f, 0.3f), 0.8f);
+                Palm(built.transform, new Vector3(-1.4f, 0.05f, 0.2f), 0.7f);
                 GameObject sale = Gen.Go("ForSale", root);
                 Transform sign = Gen.Go("Sign", sale.transform).transform;
                 sign.localPosition = new Vector3(0f, 0.1f, 0f);
