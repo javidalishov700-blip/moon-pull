@@ -365,12 +365,12 @@ namespace MoonPull.EditorTools
             Gen.Wire(waveAudio, "audioService", audioService, "moon", moon, "loop", waveSource);
 
             // Village/menu soundscape: shoreline, gulls and a crowd that grows with the population.
-            var ambience = Gen.Add<MoonPull.Audio.ShoreAmbience>(Gen.Go("ShoreAmbience", audioService.transform));
-            AudioSource shoreSrc = Gen.Add<AudioSource>(ambience.gameObject);
-            AudioSource crowdSrc = Gen.Add<AudioSource>(Gen.Go("Crowd", ambience.transform));
-            AudioSource gullSrc = Gen.Add<AudioSource>(Gen.Go("Gulls", ambience.transform));
+            var shoreAmb = Gen.Add<MoonPull.Audio.ShoreAmbience>(Gen.Go("ShoreAmbience", audioService.transform));
+            AudioSource shoreSrc = Gen.Add<AudioSource>(shoreAmb.gameObject);
+            AudioSource crowdSrc = Gen.Add<AudioSource>(Gen.Go("Crowd", shoreAmb.transform));
+            AudioSource gullSrc = Gen.Add<AudioSource>(Gen.Go("Gulls", shoreAmb.transform));
             foreach (AudioSource src in new[] { shoreSrc, crowdSrc, gullSrc }) src.playOnAwake = false;
-            Gen.Wire(ambience, "audioService", audioService, "shore", shoreSrc, "crowd", crowdSrc, "gulls", gullSrc,
+            Gen.Wire(shoreAmb, "audioService", audioService, "shore", shoreSrc, "crowd", crowdSrc, "gulls", gullSrc,
                 "shoreClip", Synth.ShoreLoop(), "crowdClip", Synth.CrowdLoop(), "gullClip", Synth.Gull());
 
             GameFeedbackDirector feedback = Gen.Add<GameFeedbackDirector>(Gen.Go("Feedback", systems));
