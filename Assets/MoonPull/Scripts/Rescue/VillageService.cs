@@ -103,8 +103,8 @@ namespace MoonPull.Rescue
         }
 
         // Effects used by NightRescue.
-        public static int ExtraSeats => Level(VillageBuilding.Shelter);
-        public static float CoinMultiplier => 1f + 0.3f * Level(VillageBuilding.Restaurant);
+        public static int ExtraSeats => Level(VillageBuilding.Shelter) + VillageState.PerkSeats;
+        public static float CoinMultiplier => (1f + 0.3f * Level(VillageBuilding.Restaurant)) * VillageState.PerkCoinMultiplier;
         public static float NightMultiplier => 1f + 0.12f * Level(VillageBuilding.Workshop);
         public static float SpeedBonus => 1.2f * Level(VillageBuilding.Shipyard);
         public static int DawnCoins(int population) =>

@@ -29,8 +29,9 @@ boat_up.lamp.name,Search Lamp,Arama Feneri,Lámpara,Lanterna,Suchlampe,Lampe,П�
 boat_up.lamp.desc,Reach castaways and lanterns further,Kazazedeleri daha uzaktan al,Alcanza náufragos más lejos,Alcance maior,Größere Reichweite,Portée accrue,Дальше подбираешь,拾える範囲アップ
 hud.coach_hold,Hold to dive down the wave,Basılı tut: dalgadan aşağı dal,Mantén para bajar la ola,Segure para descer a onda,Halten: die Welle hinabtauchen,Maintiens pour plonger,Держи: ныряй с волны,長押しで波を下る
 hud.coach_release,Let go on the way up to fly,Yukarı çıkarken bırak: uç,Suelta al subir para volar,Solte na subida para voar,Beim Anstieg loslassen: fliegen,Relâche en montant pour voler,Отпусти на подъёме: лети,上りで離して飛ぶ
-hud.coach_rock,Rock ahead - get ready to tap!,İleride kaya - dokunmaya hazır ol!,¡Roca delante!,Rocha à frente!,Felsen voraus!,Rocher devant !,Впереди камень!,前方に岩！
-hud.coach_hop,TAP NOW to hop!,ŞİMDİ DOKUN: zıpla!,¡TOCA YA para saltar!,TOQUE AGORA para pular!,JETZT tippen: hüpfen!,TOUCHE pour sauter !,ТАП: прыгай!,今タップでジャンプ！
+hud.coach_rock,Rock ahead - get ready to JUMP!,İleride kaya - ZIPLA'ya hazır ol!,¡Roca delante!,Rocha à frente!,Felsen voraus!,Rocher devant !,Впереди камень!,前方に岩！
+hud.coach_hop,Press JUMP now!,ŞİMDİ ZIPLA'ya bas!,¡Pulsa SALTAR ya!,Aperte PULAR agora!,Jetzt SPRINGEN drücken!,Appuie sur SAUTER !,Жми ПРЫЖОК!,今ジャンプを押して！
+hud.jump,JUMP,ZIPLA,SALTAR,PULAR,SPRINGEN,SAUTER,ПРЫЖОК,ジャンプ
 hud.coach_full,Boat full: sail on to the lighthouse,Tekne dolu: deniz fenerine götür,Barco lleno: ve al faro,Barco cheio: vá ao farol,Boot voll: zum Leuchtturm,Bateau plein : va au phare,Лодка полна: к маяку,満員：灯台へ
 hud.bumped_empty,Ouch! Mind the rocks,Eyvah! Kayalara dikkat,¡Ay! Cuidado con las rocas,Ai! Cuidado com as rochas,Autsch! Vorsicht Felsen,Aïe ! Attention aux rochers,Ой! Осторожно камни,いたっ！岩に注意
 goal.people,"Next: {0} needs {1}/{2} people","Sıradaki: {0} için {1}/{2} kişi","Siguiente: {0} necesita {1}/{2} personas","Próximo: {0} precisa de {1}/{2} pessoas","Nächstes: {0} braucht {1}/{2} Leute","Prochain : {0} demande {1}/{2} habitants","Далее: {0} — нужно {1}/{2} чел.","次: {0} には{1}/{2}人"
@@ -63,6 +64,8 @@ village.shelter.name,Shelter,Barınak,Refugio,Abrigo,Unterkunft,Abri,Приют,
 village.max,Complete,Tamamlandı,Completo,Completo,Fertig,Terminé,Готово,完成
 village.upgrade,Build,İnşa et,Construir,Construir,Bauen,Construire,Строить,建てる
 village.population,"{0} people live here","Burada {0} kişi yaşıyor","Aquí viven {0} personas","{0} pessoas moram aqui","{0} Leute wohnen hier","{0} habitants","Здесь живут {0} чел.","{0}人が暮らしています"
+village.pop_next_seat,"{0} people · {1} more: +1 boat seat","{0} kişi · {1} kişi daha: +1 gemi koltuğu","{0} personas · {1} más: +1 asiento","{0} pessoas · mais {1}: +1 assento","{0} Leute · noch {1}: +1 Sitz","{0} habitants · encore {1} : +1 place","{0} чел. · ещё {1}: +1 место","{0}人 · あと{1}人: 座席+1"
+village.pop_next_coins,"{0} people · {1} more: +{2}% coins","{0} kişi · {1} kişi daha: +%{2} altın","{0} personas · {1} más: +{2}% monedas","{0} pessoas · mais {1}: +{2}% moedas","{0} Leute · noch {1}: +{2}% Münzen","{0} habitants · encore {1} : +{2}% pièces","{0} чел. · ещё {1}: +{2}% монет","{0}人 · あと{1}人: コイン+{2}%"
 village.title,Your Village,Köyün,Tu aldea,Sua vila,Dein Dorf,Ton village,Твоя деревня,あなたの村
 menu.lighthouse,Village,Köy,Aldea,Vila,Dorf,Village,Деревня,村
 hud.lighthouse_lit,"Lighthouse lit! +{0} saved","Fener yandı! +{0} kurtarıldı","¡Faro encendido! +{0} a salvo","Farol aceso! +{0} salvos","Leuchtturm an! +{0} gerettet","Phare allumé ! +{0} sauvés","Маяк зажжён! +{0} спасено","灯台点灯！+{0}人救助"

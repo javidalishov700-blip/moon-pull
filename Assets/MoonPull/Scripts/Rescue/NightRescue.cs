@@ -143,7 +143,16 @@ namespace MoonPull.Rescue
         private float nightLength;
         private float progressCheckAt, progressCheckX;
         private float pressStartedAt, hopCooldown;
-        private bool hopPress;
+        private float hopQueued;
+
+        /// <summary>JUMP button. If pressed a moment early (mid-air), the hop fires on touchdown.</summary>
+        public void RequestHop()
+        {
+            if (running)
+            {
+                hopQueued = 0.35f;
+            }
+        }
         private float speedBonus;
 
         private ParticleSystem splash;
@@ -393,25 +402,17 @@ namespace MoonPull.Rescue
             }
             else
             {
-                bool pressed = ForcedHold ?? ReadHold();
-                if (pressed && !wasHolding)
+                // Screen = dive into the waves; the JUMP button hops (see RequestHop).
+                holding = ForcedHold ?? ReadHold();
+                if (hopQueued > 0f)
                 {
-                    pressStartedAt = runTime;
-                    // Touching while a rock is close ahead hops it right away: no tap-vs-hold timing to learn.
-                    hopPress = !airborne && hopCooldown <= 0f && RockAhead(Mathf.Max(speed, minSpeed) * 0.9f + 2.5f);
-                    if (hopPress)
+                    hopQueued -= deltaTime;
+                    if (!airborne && hopCooldown <= 0f)
                     {
+                        hopQueued = 0f;
                         Hop();
                     }
                 }
-
-                if (!pressed)
-                {
-                    hopPress = false;
-                }
-
-                // A press that hopped doesn't also dive; the next press rides the waves as usual.
-                holding = pressed && !hopPress;
             }
 
             // Swells grow the further out you sail: more air, more speed, more to master.
@@ -502,13 +503,22 @@ namespace MoonPull.Rescue
         {
             if (Input.touchCount > 0)
             {
-                Touch touch = Input.GetTouch(0);
-                if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject(touch.fingerId))
+                // Any finger on the sea (not on a button) dives, so the thumb on JUMP doesn't block the other hand.
+                for (int i = 0; i < Input.touchCount; i++)
                 {
-                    return false;
+                    Touch touch = Input.GetTouch(i);
+                    if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
+                    {
+                        continue;
+                    }
+
+                    if (EventSystem.current == null || !EventSystem.current.IsPointerOverGameObject(touch.fingerId))
+                    {
+                        return true;
+                    }
                 }
 
-                return touch.phase != TouchPhase.Ended && touch.phase != TouchPhase.Canceled;
+                return false;
             }
 
             return Input.GetMouseButton(0) && !(EventSystem.current != null && EventSystem.current.IsPointerOverGameObject());

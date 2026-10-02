@@ -64,6 +64,33 @@ namespace MoonPull.Rescue
             }
         }
 
+        // Population milestones: a growing village pays back. Seats at 10/50/200 people, more coins at 25/100.
+        public static readonly int[] PerkPeople = { 10, 25, 50, 100, 200 };
+        public static readonly bool[] PerkIsSeat = { true, false, true, false, true };
+
+        public static int PerkSeats
+        {
+            get
+            {
+                int n = 0;
+                for (int i = 0; i < PerkPeople.Length; i++) if (PerkIsSeat[i] && Population >= PerkPeople[i]) n++;
+                return n;
+            }
+        }
+
+        /// <summary>+10% coins at 25 people and another +15% at 100.</summary>
+        public static float PerkCoinMultiplier => 1f + (Population >= 25 ? 0.1f : 0f) + (Population >= 100 ? 0.15f : 0f);
+
+        /// <summary>Index of the next milestone, or -1 when all are reached.</summary>
+        public static int NextPerk
+        {
+            get
+            {
+                for (int i = 0; i < PerkPeople.Length; i++) if (Population < PerkPeople[i]) return i;
+                return -1;
+            }
+        }
+
         public static bool IsHungry => Population > 0 && Food < 1f;
 
         public static int Homeless => Mathf.Max(0, Population - Housing);

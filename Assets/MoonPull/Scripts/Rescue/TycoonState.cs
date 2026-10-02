@@ -113,7 +113,8 @@ namespace MoonPull.Rescue
                     buildings += BuildingIncome[b] * VillageService.Level((VillageBuilding)b);
                 }
 
-                float rate = 0.2f * VillageState.Population + buildings * Staffed;
+                // Idle income tuned so a top upgrade takes a couple of hours away, not minutes: nights stay the main source.
+                float rate = 0.08f * VillageState.Population + 0.5f * buildings * Staffed;
                 return rate * IncomeMultiplier * (0.5f + VillageState.Happiness / 200f);
             }
         }

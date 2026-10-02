@@ -329,6 +329,12 @@ namespace MoonPull.EditorTools
             Text seats = Text(seatsPill.transform, "Count", "0/3", 46, new Vector2(0f, 0.5f), new Vector2(150f, 0f), new Vector2(140f, 80f), TextLight, TextAnchor.MiddleCenter, true);
             Gen.Wire(screen, "rescue", w.Rescue, "coach", coachGroup, "coachText", coachText, "aboardLabel", seats);
 
+            // JUMP: a big thumb button bottom-right; the rest of the screen dives into the waves.
+            Button jump = Button(c, "Jump", "hud.jump", new Vector2(1f, 0f), new Vector2(-170f, 190f), new Vector2(260f, 200f), Gen.Hex("4CC631"), 54);
+            var jumpFeel = jump.GetComponent<ButtonFeel>();
+            if (jumpFeel != null) Object.DestroyImmediate(jumpFeel); // JumpButton does its own instant punch
+            Gen.Wire(jump.gameObject.AddComponent<JumpButton>(), "rescue", w.Rescue, "face", (RectTransform)jump.transform);
+
             Gen.Wire(screen, "session", w.Session, "fullMoon", w.FullMoon, "passengers", w.Passengers, "boss", w.Kraken,
                 "gameManager", w.GameManager, "timeScale", w.TimeScale, "popups", popups,
                 "progressBar", slider, "scoreLabel", score, "multiplierLabel", multiplier, "pauseButton", pause,

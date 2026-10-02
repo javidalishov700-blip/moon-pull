@@ -276,7 +276,17 @@ namespace MoonPull.UI
                 return; // the wallet is not loaded yet (Awake runs before boot)
             }
 
-            populationLabel.SetKey(LocKeys.VillagePopulation, VillageState.Population);
+            int perk = VillageState.NextPerk;
+            if (perk < 0)
+            {
+                populationLabel.SetKey(LocKeys.VillagePopulation, VillageState.Population);
+            }
+            else
+            {
+                int more = VillageState.PerkPeople[perk] - VillageState.Population;
+                populationLabel.SetKey(VillageState.PerkIsSeat[perk] ? "village.pop_next_seat" : "village.pop_next_coins",
+                    VillageState.Population, more, perk == 1 ? 10 : 15);
+            }
             levelLabel.SetKey(LocKeys.VillageLevel, VillageState.Level);
             xpFill.fillAmount = VillageState.Level >= VillageState.MaxVillageLevel ? 1f : VillageState.Xp / (float)VillageState.XpForNextLevel;
             int happiness = VillageState.Happiness;
