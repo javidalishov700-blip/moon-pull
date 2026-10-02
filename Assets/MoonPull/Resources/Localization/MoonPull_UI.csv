@@ -29,7 +29,7 @@ boat_up.lamp.name,Search Lamp,Arama Feneri,Lámpara,Lanterna,Suchlampe,Lampe,П�
 boat_up.lamp.desc,Reach castaways and lanterns further,Kazazedeleri daha uzaktan al,Alcanza náufragos más lejos,Alcance maior,Größere Reichweite,Portée accrue,Дальше подбираешь,拾える範囲アップ
 hud.coach_hold,Hold to dive down the wave,Basılı tut: dalgadan aşağı dal,Mantén para bajar la ola,Segure para descer a onda,Halten: die Welle hinabtauchen,Maintiens pour plonger,Держи: ныряй с волны,長押しで波を下る
 hud.coach_release,Let go on the way up to fly,Yukarı çıkarken bırak: uç,Suelta al subir para volar,Solte na subida para voar,Beim Anstieg loslassen: fliegen,Relâche en montant pour voler,Отпусти на подъёме: лети,上りで離して飛ぶ
-hud.coach_rock,Rock ahead!,İleride kaya var!,¡Roca delante!,Rocha à frente!,Felsen voraus!,Rocher devant !,Впереди камень!,前方に岩！
+hud.coach_rock,Rock ahead - get ready to tap!,İleride kaya - dokunmaya hazır ol!,¡Roca delante!,Rocha à frente!,Felsen voraus!,Rocher devant !,Впереди камень!,前方に岩！
 hud.coach_hop,TAP NOW to hop!,ŞİMDİ DOKUN: zıpla!,¡TOCA YA para saltar!,TOQUE AGORA para pular!,JETZT tippen: hüpfen!,TOUCHE pour sauter !,ТАП: прыгай!,今タップでジャンプ！
 hud.coach_full,Boat full: sail on to the lighthouse,Tekne dolu: deniz fenerine götür,Barco lleno: ve al faro,Barco cheio: vá ao farol,Boot voll: zum Leuchtturm,Bateau plein : va au phare,Лодка полна: к маяку,満員：灯台へ
 hud.bumped_empty,Ouch! Mind the rocks,Eyvah! Kayalara dikkat,¡Ay! Cuidado con las rocas,Ai! Cuidado com as rochas,Autsch! Vorsicht Felsen,Aïe ! Attention aux rochers,Ой! Осторожно камни,いたっ！岩に注意

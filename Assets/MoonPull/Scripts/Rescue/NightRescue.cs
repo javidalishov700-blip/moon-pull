@@ -143,6 +143,7 @@ namespace MoonPull.Rescue
         private float nightLength;
         private float progressCheckAt, progressCheckX;
         private float pressStartedAt, hopCooldown;
+        private bool hopPress;
         private float speedBonus;
 
         private ParticleSystem splash;
@@ -392,15 +393,25 @@ namespace MoonPull.Rescue
             }
             else
             {
-                holding = ForcedHold ?? ReadHold();
-                if (holding && !wasHolding)
+                bool pressed = ForcedHold ?? ReadHold();
+                if (pressed && !wasHolding)
                 {
                     pressStartedAt = runTime;
+                    // Touching while a rock is close ahead hops it right away: no tap-vs-hold timing to learn.
+                    hopPress = !airborne && hopCooldown <= 0f && RockAhead(Mathf.Max(speed, minSpeed) * 0.9f + 2.5f);
+                    if (hopPress)
+                    {
+                        Hop();
+                    }
                 }
-                else if (!holding && wasHolding && runTime - pressStartedAt < 0.2f && !airborne && hopCooldown <= 0f)
+
+                if (!pressed)
                 {
-                    Hop(); // a quick tap hops the boat clear of a rock
+                    hopPress = false;
                 }
+
+                // A press that hopped doesn't also dive; the next press rides the waves as usual.
+                holding = pressed && !hopPress;
             }
 
             // Swells grow the further out you sail: more air, more speed, more to master.
@@ -568,7 +579,7 @@ namespace MoonPull.Rescue
         private void Fly(float dt)
         {
             airTime += dt;
-            vy -= gravity * (holding ? 2.4f : 1f) * dt;
+            vy -= gravity * (holding && !hopFlight ? 2.4f : 1f) * dt; // hops keep a steady, readable arc
             x += vx * dt;
             y += vy * dt;
 
@@ -639,7 +650,7 @@ namespace MoonPull.Rescue
 
         private string Coach()
         {
-            float reach = Mathf.Max(speed, minSpeed) * 0.45f + 1f;
+            float reach = Mathf.Max(speed, minSpeed) * 0.9f + 2.5f; // same window as the hop
             foreach (Thing t in things)
             {
                 if (t.Kind == Kind.Rock && !t.Done && t.X > x)
@@ -702,13 +713,26 @@ namespace MoonPull.Rescue
             return false;
         }
 
+        private bool RockAhead(float reach)
+        {
+            foreach (Thing t in things)
+            {
+                if (t.Kind == Kind.Rock && !t.Done && t.X > x && t.X - x < reach)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         /// <summary>Quick tap: a short hop off the water, enough to clear a rock if timed right.</summary>
         private void Hop()
         {
             airborne = true;
             airTime = 0f;
             vx = Mathf.Max(speed, minSpeed);
-            vy = 8.2f;
+            vy = 7.4f;
             y += 0.05f;
             hopCooldown = 0.8f;
             hopFlight = true;
@@ -772,7 +796,7 @@ namespace MoonPull.Rescue
                     Add(Kind.Rock, rockPrefab, nextRockAt, 0f);
                 }
 
-                nextRockAt += Mathf.Max(22f, 70f - levelIndex * 2f) + (float)random.NextDouble() * 30f;
+                nextRockAt += Mathf.Max(32f, 70f - levelIndex * 2f) + (float)random.NextDouble() * 30f;
             }
 
             while (nextIslandAt < horizon)
@@ -848,7 +872,7 @@ namespace MoonPull.Rescue
 
                         break;
                     case Kind.Rock:
-                        if (dx < 0.8f && y - Height(t.X) < 0.85f)
+                        if (dx < 0.6f && y - Height(t.X) < 0.6f) // forgiving: only a clear hit counts
                         {
                             t.Done = true;
                             Stats.RocksHit++;
