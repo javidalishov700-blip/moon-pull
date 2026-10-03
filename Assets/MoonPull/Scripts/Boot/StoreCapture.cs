@@ -72,13 +72,13 @@ namespace MoonPull.Boot
             {
                 popups.Open(village);
                 yield return new WaitForSecondsRealtime(4f);
+                yield return Shot("05-village-explore"); // opens as the full village; UPGRADE brings up the sheet
+                yield return Press(village.transform, "Explore", 1.5f);
                 yield return Shot("02-village-buildings");
                 yield return Press(village.transform, "Content/TabIslands", 0.8f);
                 yield return Shot("03-village-islands");
                 yield return Press(village.transform, "Content/TabBoat", 0.8f);
                 yield return Shot("04-village-boat");
-                yield return Press(village.transform, "Explore", 2.5f);
-                yield return Shot("05-village-explore");
                 popups.Close(village);
                 yield return new WaitForSecondsRealtime(1.5f);
             }

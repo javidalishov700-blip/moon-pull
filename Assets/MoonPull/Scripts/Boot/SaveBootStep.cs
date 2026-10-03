@@ -20,6 +20,7 @@ namespace MoonPull.Boot
             save = new SaveService(new PlayerPrefsStorage(), generation.TotalLevels, regions.Count);
             save.CorruptionDetected += ReportCorruption;
             save.Load();
+            MoonPull.Online.Leaderboards.Init(); // Game Center sign-in, quietly in the background
 
             AdsStateData ads = save.Data.Ads;
             if (ads.FirstLaunchUtcTicks <= 0)

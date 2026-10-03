@@ -224,6 +224,14 @@ namespace MoonPull.EditorTools
             LocalizedText locked = Loc(c, "Locked", LocKeys.LighthouseRegionLocked, 38, Top, new Vector2(0f, -660f), new Vector2(900f, 60f), Primary);
 
             Button play = Button(c, "Play", LocKeys.MenuPlay, Bottom, new Vector2(0f, 560f), new Vector2(680f, 220f), Go, 96);
+            // Record pill: your best night and the next player to beat; tap for the Game Center leaderboard.
+            Image recordPill = Image(c, "Record", Bottom, new Vector2(0f, 710f), new Vector2(780f, 86f), new Color(0.05f, 0.07f, 0.18f, 0.82f), Art.Rounded);
+            Image trophy = Image(recordPill.transform, "Trophy", new Vector2(0f, 0.5f), new Vector2(52f, 2f), new Vector2(72f, 72f), Color.white, Art.MenuIcon("trophy"));
+            trophy.raycastTarget = false;
+            LocalizedText recordText = Loc(recordPill.transform, "Text", "menu.record_none", 34, Center, new Vector2(36f, 0f), new Vector2(680f, 76f), Gold, TextAnchor.MiddleCenter, true);
+            recordText.GetComponent<Text>().raycastTarget = false;
+            Gen.Wire(recordPill.gameObject.AddComponent<RecordLabel>(), "label", recordText);
+            recordPill.gameObject.AddComponent<LeaderboardButton>();
             Button settingsButton = Button(c, "Settings", "", TopRight, new Vector2(-90f, -90f), new Vector2(116f, 116f), Gen.Hex("2F7BE0"), 34, false);
             Image gear = Image(settingsButton.transform, "Icon", Center, new Vector2(0f, 4f), new Vector2(76f, 76f), Color.white, Art.MenuIcon("gear"));
             gear.raycastTarget = false;
@@ -803,7 +811,7 @@ namespace MoonPull.EditorTools
             Image storeFill = Fill(Image(storeBg.transform, "Fill", Center, Vector2.zero, new Vector2(900f, 14f), Gold), UnityEngine.UI.Image.FillMethod.Horizontal, 0.4f);
             Button collect = Button(card.transform, "Collect", LocKeys.VillageCollect, new Vector2(1f, 0.5f), new Vector2(-170f, 10f), new Vector2(290f, 110f), Go, 46);
 
-            Button explore = Button(popup.transform, "Explore", LocKeys.VillageExplore, TopRight, new Vector2(-150f, -440f), new Vector2(250f, 96f), Gen.Hex("2F8C99"), 34);
+            Button explore = Button(popup.transform, "Explore", LocKeys.VillageExplore, TopRight, new Vector2(-180f, -440f), new Vector2(320f, 120f), Gen.Hex("4CC631"), 40);
 
             Button tabBuildings = Button(p, "TabBuildings", LocKeys.VillageTabBuildings, Top, new Vector2(-325f, -335f), new Vector2(315f, 80f), Primary, 34);
             Button tabIslands = Button(p, "TabIslands", LocKeys.VillageTabIslands, Top, new Vector2(0f, -335f), new Vector2(315f, 80f), Accent, 34);

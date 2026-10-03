@@ -230,6 +230,12 @@ namespace MoonPull.Rescue
         /// <summary>DIVE button held (same as a finger on the sea).</summary>
         public bool ButtonHold { get; set; }
 
+        /// <summary>True after a night that beat the personal best.</summary>
+        public bool NewRecord { get; private set; }
+
+        private bool recordAnnounced;
+        private float recordFlash;
+
         /// <summary>0..1, filled by perfect landings and lanterns; BOOST spends it.</summary>
         public float BoostCharge { get; private set; }
 
@@ -378,6 +384,9 @@ namespace MoonPull.Rescue
             runTime = 0f;
             BoostCharge = 0f;
             ButtonHold = false;
+            recordAnnounced = false;
+            recordFlash = 0f;
+            NewRecord = false;
             hopFlight = false;
             Stats = new NightStats { Level = levelIndex };
             if (wake != null)
@@ -471,6 +480,20 @@ namespace MoonPull.Rescue
 
             Stats.MaxSpeed = Mathf.Max(Stats.MaxSpeed, speed);
             CoachKey = levelIndex < 3 || BoostCharge >= 1f ? Coach() : null;
+            // Passing your best night mid-run gets its own moment.
+            int best = MoonPull.Online.Leaderboards.PersonalBest;
+            if (!recordAnnounced && best > 0 && rescued + aboard > best)
+            {
+                recordAnnounced = true;
+                recordFlash = 2.5f;
+                GameEvents.RaiseRescueLanded(1, 1f);
+            }
+
+            if (recordFlash > 0f)
+            {
+                recordFlash -= deltaTime;
+                CoachKey = "hud.new_record";
+            }
             Unstick();
             SpawnAhead();
             Interact();
@@ -997,6 +1020,7 @@ namespace MoonPull.Rescue
             rescued += aboard;
             SetAboard(0);
 
+            NewRecord = MoonPull.Online.Leaderboards.ReportNight(rescued);
             VillageState.Simulate();
             int levelBefore = VillageState.Level;
             int settled = VillageState.AddPeople(rescued);

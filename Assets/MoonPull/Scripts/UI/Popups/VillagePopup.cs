@@ -109,7 +109,7 @@ namespace MoonPull.UI
                 hideWhileOpen.blocksRaycasts = false;
             }
 
-            SetExploring(false);
+            SetExploring(true); // open on the whole village; the UPGRADE button brings up the build sheet
 
             Refresh();
         }

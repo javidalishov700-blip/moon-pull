@@ -360,6 +360,16 @@ namespace MoonPull.EditorTools
                         return r < teeth && r > 0.13f;
                     };
                     break;
+                case "trophy":
+                    shape = (u, v) =>
+                    {
+                        bool cup = v > 0.42f && v < 0.88f && Mathf.Abs(u - 0.5f) < 0.26f - (0.88f - v) * 0.25f + 0.08f;
+                        bool handles = Mathf.Abs(Vector2.Distance(new Vector2(Mathf.Abs(u - 0.5f), v), new Vector2(0.3f, 0.7f)) - 0.1f) < 0.04f;
+                        bool stem = Mathf.Abs(u - 0.5f) < 0.06f && v > 0.24f && v <= 0.42f;
+                        bool foot = RoundedRect(u, v, 0.28f, 0.1f, 0.72f, 0.24f, 0.04f);
+                        return cup || handles || stem || foot;
+                    };
+                    break;
                 case "plus":
                     shape = (u, v) => (Mathf.Abs(u - 0.5f) < 0.1f && Mathf.Abs(v - 0.5f) < 0.34f) || (Mathf.Abs(v - 0.5f) < 0.1f && Mathf.Abs(u - 0.5f) < 0.34f);
                     break;
@@ -412,6 +422,8 @@ namespace MoonPull.EditorTools
                     return Vector2.Distance(p, new Vector2(0.5f, 0.38f)) < 0.09f ? new Color(1f, 0.78f, 0.2f) : white;
                 case "person":
                     return white;
+                case "trophy":
+                    return new Color(1f, 0.8f, 0.22f);
                 case "gear":
                 case "plus":
                     return new Color(1f, 1f, 1f);

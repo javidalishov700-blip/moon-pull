@@ -18,8 +18,8 @@ village.no_supplies,Out of supplies! Sail tonight,Erzak bitti! Denize açıl,¡S
 village.supplies,"Supplies {0}/{1} · Workers {2}/{3}","Erzak {0}/{1} · İşçi {2}/{3}","Provisiones {0}/{1} · Obreros {2}/{3}","Suprimentos {0}/{1} · Trabalhadores {2}/{3}","Vorräte {0}/{1} · Arbeiter {2}/{3}","Vivres {0}/{1} · Ouvriers {2}/{3}","Припасы {0}/{1} · Рабочие {2}/{3}","物資 {0}/{1}・働き手 {2}/{3}"
 village.needs_people,"Rescue more: {0} people","Daha çok kurtar: {0} kişi","Rescata más: {0} personas","Resgate mais: {0} pessoas","Rette mehr: {0} Leute","Sauve-en plus : {0} pers.","Спаси больше: {0} чел.","もっと救助: {0}人"
 win.supplies,"+{0} supplies for the village","Köye +{0} erzak","+{0} provisiones para la aldea","+{0} suprimentos para a vila","+{0} Vorräte fürs Dorf","+{0} vivres pour le village","+{0} припасов для деревни","村に物資+{0}"
-village.explore,Explore,Köyü Gez,Explorar,Explorar,Erkunden,Explorer,Осмотреть,探索
-village.manage,Manage,Yönet,Gestionar,Gerenciar,Verwalten,Gérer,Управлять,管理
+village.explore,View village,Köyü Gör,Ver aldea,Ver vila,Dorf ansehen,Voir le village,К деревне,村を見る
+village.manage,UPGRADE,GELİŞTİR,MEJORAR,MELHORAR,AUSBAUEN,AMÉLIORER,УЛУЧШИТЬ,強化
 village.tab_boat,Boat,Tekne,Barco,Barco,Boot,Bateau,Лодка,ボート
 boat_up.sail.name,Sail,Yelken,Vela,Vela,Segel,Voile,Парус,帆
 boat_up.sail.desc,Faster cruising speed,Daha yüksek seyir hızı,Más velocidad de crucero,Mais velocidade,Schnelleres Segeln,Vitesse de croisière,Выше скорость,巡航速度アップ
@@ -240,3 +240,7 @@ boat.steamer.name,Paddle Steamer,Çarklı Vapur,Vapor de ruedas,Barco a vapor,Ra
 boat.ghost.name,Ghost Ship,Hayalet Gemi,Barco fantasma,Navio fantasma,Geisterschiff,Vaisseau fantôme,Корабль-призрак,幽霊船
 boat.starliner.name,Starliner,Yıldız Gemisi,Crucero estelar,Cruzeiro estelar,Sternenkreuzer,Paquebot stellaire,Звёздный лайнер,スターライナー
 boat.leviathan.name,Leviathan,Leviathan,Leviatán,Leviatã,Leviathan,Léviathan,Левиафан,リヴァイアサン
+hud.new_record,NEW RECORD!,YENİ REKOR!,¡NUEVO RÉCORD!,NOVO RECORDE!,NEUER REKORD!,NOUVEAU RECORD !,НОВЫЙ РЕКОРД!,新記録！
+menu.record_none,Rescue people to set your record,Rekor kırmak için insan kurtar,Rescata gente para tu récord,Resgate pessoas para seu recorde,Rette Leute für deinen Rekord,Sauve des gens pour ton record,Спасай людей ради рекорда,救助して記録を作ろう
+menu.record_best,"Your record: {0} people in one night","Rekorun: bir gecede {0} kişi","Tu récord: {0} personas","Seu recorde: {0} pessoas","Dein Rekord: {0} Leute","Ton record : {0} personnes","Твой рекорд: {0} чел.","記録: {0}人"
+menu.record_rival,"Record {0} · Beat {1}: {2}","Rekorun {0} · Geç: {1} ({2})","Récord {0} · Supera a {1}: {2}","Recorde {0} · Supere {1}: {2}","Rekord {0} · Schlage {1}: {2}","Record {0} · Bats {1} : {2}","Рекорд {0} · Обгони {1}: {2}","記録{0} · {1}({2})を超えろ"
