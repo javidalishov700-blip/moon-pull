@@ -785,7 +785,7 @@ namespace MoonPull.EditorTools
             p.pivot = new Vector2(0.5f, 0f);
             p.anchoredPosition = new Vector2(0f, 20f);
             Gen.Set(popup, "sheetOpenY", 20f);
-            Gen.Set(popup, "sheetHiddenY", -820f);
+            Gen.Set(popup, "sheetHiddenY", -1500f); // fully off screen: the village gets the whole view
             Image backdrop = popup.transform.Find("Backdrop").GetComponent<Image>();
             backdrop.color = new Color(0f, 0f, 0f, 0f);
             backdrop.raycastTarget = false;
