@@ -1,3 +1,4 @@
+#pragma warning disable 618 // Unity marks Social deprecated but it is still the Game Center bridge on iOS
 using System;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
@@ -81,7 +82,7 @@ namespace MoonPull.Online
             ILeaderboard board = UnityEngine.Social.CreateLeaderboard();
             board.id = BestNightId;
             board.userScope = UserScope.Global;
-            board.range = new Range(1, 100);
+            board.range = new UnityEngine.SocialPlatforms.Range(1, 100);
             board.LoadScores(ok =>
             {
                 if (!ok || board.scores == null)

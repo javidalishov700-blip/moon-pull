@@ -334,27 +334,27 @@ namespace MoonPull.EditorTools
                 {
                     Transform bi = Gen.Go("Backdrop_" + i, backdropRoot).transform;
                     bi.position = new Vector3(i * 26f - 20f, -0.6f, 30f + (float)bRng.NextDouble() * 16f);
-                    float w = 3.5f + (float)bRng.NextDouble() * 2.5f;
-                    Gen.Prim(PrimitiveType.Sphere, bi, new Vector3(0f, -0.2f, 0f), new Vector3(w * 1.25f, 1.4f, w * 0.8f), Gen.Hex("E2C487"));
-                    Gen.Prim(PrimitiveType.Sphere, bi, new Vector3(0f, 0.1f, 0f), new Vector3(w, 1.8f, w * 0.62f), Gen.Hex("4F8F4A"));
+                    float bw = 3.5f + (float)bRng.NextDouble() * 2.5f;
+                    Gen.Prim(PrimitiveType.Sphere, bi, new Vector3(0f, -0.2f, 0f), new Vector3(bw * 1.25f, 1.4f, bw * 0.8f), Gen.Hex("E2C487"));
+                    Gen.Prim(PrimitiveType.Sphere, bi, new Vector3(0f, 0.1f, 0f), new Vector3(bw, 1.8f, bw * 0.62f), Gen.Hex("4F8F4A"));
                     int palms = 1 + bRng.Next(3);
                     for (int k = 0; k < palms; k++)
                     {
-                        Palm(bi, new Vector3(-w * 0.25f + k * w * 0.25f, 0.85f, (float)bRng.NextDouble() * 0.6f - 0.3f), 1.1f + (float)bRng.NextDouble() * 0.4f);
+                        Palm(bi, new Vector3(-bw * 0.25f + k * bw * 0.25f, 0.85f, (float)bRng.NextDouble() * 0.6f - 0.3f), 1.1f + (float)bRng.NextDouble() * 0.4f);
                     }
 
                     if (i % 2 == 0 && content.VillageHouse != null)
                     {
                         var hut = (GameObject)PrefabUtility.InstantiatePrefab(content.VillageHouse, bi);
-                        hut.transform.localPosition = new Vector3(w * 0.18f, 0.8f, -0.2f);
+                        hut.transform.localPosition = new Vector3(bw * 0.18f, 0.8f, -0.2f);
                         hut.transform.localScale = Vector3.one * 1.1f;
                     }
                     else
                     {
                         // A tiny lighthouse with a warm light: something to sail toward.
-                        Gen.Prim(PrimitiveType.Cylinder, bi, new Vector3(w * 0.2f, 1.6f, 0f), new Vector3(0.45f, 1f, 0.45f), Gen.Hex("F2EEE6"));
-                        Gen.Prim(PrimitiveType.Cylinder, bi, new Vector3(w * 0.2f, 1.9f, 0f), new Vector3(0.48f, 0.12f, 0.48f), Gen.Hex("C8382E"));
-                        Gen.Prim(PrimitiveType.Sphere, bi, new Vector3(w * 0.2f, 2.75f, 0f), new Vector3(0.4f, 0.4f, 0.4f), Gen.Hex("FFD37A"), default, 2.5f);
+                        Gen.Prim(PrimitiveType.Cylinder, bi, new Vector3(bw * 0.2f, 1.6f, 0f), new Vector3(0.45f, 1f, 0.45f), Gen.Hex("F2EEE6"));
+                        Gen.Prim(PrimitiveType.Cylinder, bi, new Vector3(bw * 0.2f, 1.9f, 0f), new Vector3(0.48f, 0.12f, 0.48f), Gen.Hex("C8382E"));
+                        Gen.Prim(PrimitiveType.Sphere, bi, new Vector3(bw * 0.2f, 2.75f, 0f), new Vector3(0.4f, 0.4f, 0.4f), Gen.Hex("FFD37A"), default, 2.5f);
                     }
 
                     backdrop.Add(bi);
