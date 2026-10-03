@@ -27,11 +27,14 @@ boat_up.hull.name,Hull,Gövde,Casco,Casco,Rumpf,Coque,Корпус,船体
 boat_up.hull.desc,Rocks hurt less; people hold on,Kayalar daha az zarar verir,Las rocas dañan menos,Rochas ferem menos,Felsen schaden weniger,Les rochers font moins mal,Камни вредят меньше,岩のダメージ軽減
 boat_up.lamp.name,Search Lamp,Arama Feneri,Lámpara,Lanterna,Suchlampe,Lampe,Прожектор,サーチライト
 boat_up.lamp.desc,Reach castaways and lanterns further,Kazazedeleri daha uzaktan al,Alcanza náufragos más lejos,Alcance maior,Größere Reichweite,Portée accrue,Дальше подбираешь,拾える範囲アップ
-hud.coach_hold,Hold to dive down the wave,Basılı tut: dalgadan aşağı dal,Mantén para bajar la ola,Segure para descer a onda,Halten: die Welle hinabtauchen,Maintiens pour plonger,Держи: ныряй с волны,長押しで波を下る
-hud.coach_release,Let go on the way up to fly,Yukarı çıkarken bırak: uç,Suelta al subir para volar,Solte na subida para voar,Beim Anstieg loslassen: fliegen,Relâche en montant pour voler,Отпусти на подъёме: лети,上りで離して飛ぶ
+hud.coach_hold,Hold DIVE going down the wave,Dalga inerken DAL'a basılı tut,Mantén para bajar la ola,Segure para descer a onda,Halten: die Welle hinabtauchen,Maintiens pour plonger,Держи: ныряй с волны,長押しで波を下る
+hud.coach_release,Let go of DIVE on the way up to fly,Yukarı çıkarken DAL'ı bırak: uç,Suelta al subir para volar,Solte na subida para voar,Beim Anstieg loslassen: fliegen,Relâche en montant pour voler,Отпусти на подъёме: лети,上りで離して飛ぶ
 hud.coach_rock,Rock ahead - get ready to JUMP!,İleride kaya - ZIPLA'ya hazır ol!,¡Roca delante!,Rocha à frente!,Felsen voraus!,Rocher devant !,Впереди камень!,前方に岩！
 hud.coach_hop,Press JUMP now!,ŞİMDİ ZIPLA'ya bas!,¡Pulsa SALTAR ya!,Aperte PULAR agora!,Jetzt SPRINGEN drücken!,Appuie sur SAUTER !,Жми ПРЫЖОК!,今ジャンプを押して！
 hud.jump,JUMP,ZIPLA,SALTAR,PULAR,SPRINGEN,SAUTER,ПРЫЖОК,ジャンプ
+hud.coach_boost,BOOST is ready - tap it!,HIZ hazır - bas!,¡TURBO listo!,TURBO pronto!,TURBO bereit!,TURBO prêt !,ТУРБО готов!,ブースト準備完了！
+hud.dive,DIVE,DAL,BUCEAR,MERGULHAR,TAUCHEN,PLONGER,НЫРОК,ダイブ
+hud.boost,BOOST,HIZ,TURBO,TURBO,TURBO,TURBO,ТУРБО,ブースト
 hud.coach_full,Boat full: sail on to the lighthouse,Tekne dolu: deniz fenerine götür,Barco lleno: ve al faro,Barco cheio: vá ao farol,Boot voll: zum Leuchtturm,Bateau plein : va au phare,Лодка полна: к маяку,満員：灯台へ
 hud.bumped_empty,Ouch! Mind the rocks,Eyvah! Kayalara dikkat,¡Ay! Cuidado con las rocas,Ai! Cuidado com as rochas,Autsch! Vorsicht Felsen,Aïe ! Attention aux rochers,Ой! Осторожно камни,いたっ！岩に注意
 goal.people,"Next: {0} needs {1}/{2} people","Sıradaki: {0} için {1}/{2} kişi","Siguiente: {0} necesita {1}/{2} personas","Próximo: {0} precisa de {1}/{2} pessoas","Nächstes: {0} braucht {1}/{2} Leute","Prochain : {0} demande {1}/{2} habitants","Далее: {0} — нужно {1}/{2} чел.","次: {0} には{1}/{2}人"

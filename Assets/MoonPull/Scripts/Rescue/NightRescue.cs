@@ -227,6 +227,27 @@ namespace MoonPull.Rescue
         /// <summary>Capture player / automation: overrides the touch input while set.</summary>
         public bool? ForcedHold { get; set; }
 
+        /// <summary>DIVE button held (same as a finger on the sea).</summary>
+        public bool ButtonHold { get; set; }
+
+        /// <summary>0..1, filled by perfect landings and lanterns; BOOST spends it.</summary>
+        public float BoostCharge { get; private set; }
+
+        /// <summary>BOOST button: a burst of speed under a full moon. Needs a full charge.</summary>
+        public void UseBoost()
+        {
+            if (!running || BoostCharge < 1f)
+            {
+                return;
+            }
+
+            BoostCharge = 0f;
+            speed += 7f;
+            shake = Mathf.Max(shake, 0.2f);
+            Splash(30, new Color(1f, 0.9f, 0.55f, 0.95f));
+            StartFever();
+        }
+
         public float Moonlight => moonlight;
 
         /// <summary>Supplies the last night brought home (shown on the win screen).</summary>
@@ -355,6 +376,8 @@ namespace MoonPull.Rescue
             moonlight = 1f;
             aboard = rescued = lanternsCaught = lighthousesLit = 0;
             runTime = 0f;
+            BoostCharge = 0f;
+            ButtonHold = false;
             hopFlight = false;
             Stats = new NightStats { Level = levelIndex };
             if (wake != null)
@@ -395,6 +418,10 @@ namespace MoonPull.Rescue
             if (AutoPilotSkill >= 0f)
             {
                 holding = AutoHold();
+                if (BoostCharge >= 1f)
+                {
+                    UseBoost();
+                }
                 if (AutoHop())
                 {
                     Hop();
@@ -403,7 +430,7 @@ namespace MoonPull.Rescue
             else
             {
                 // Screen = dive into the waves; the JUMP button hops (see RequestHop).
-                holding = ForcedHold ?? ReadHold();
+                holding = ForcedHold ?? (ReadHold() || ButtonHold);
                 if (hopQueued > 0f)
                 {
                     hopQueued -= deltaTime;
@@ -443,7 +470,7 @@ namespace MoonPull.Rescue
             }
 
             Stats.MaxSpeed = Mathf.Max(Stats.MaxSpeed, speed);
-            CoachKey = levelIndex < 3 ? Coach() : null;
+            CoachKey = levelIndex < 3 || BoostCharge >= 1f ? Coach() : null;
             Unstick();
             SpawnAhead();
             Interact();
@@ -618,6 +645,7 @@ namespace MoonPull.Rescue
             else if (diff < 0.32f && airTime > 0.35f && slopeAngle < 0.05f)
             {
                 perfectStreak++;
+                BoostCharge = Mathf.Min(1f, BoostCharge + 0.34f);
                 Stats.Perfects++;
                 speed = Mathf.Max(along, speed) * 1.1f;
                 shake = Mathf.Max(shake, 0.12f);
@@ -676,6 +704,11 @@ namespace MoonPull.Rescue
                         return "hud.coach_rock";
                     }
                 }
+            }
+
+            if (BoostCharge >= 1f)
+            {
+                return "hud.coach_boost";
             }
 
             if (aboard >= seats)
@@ -874,6 +907,7 @@ namespace MoonPull.Rescue
                             t.Done = true;
                             t.Transform.gameObject.SetActive(false);
                             lanternsCaught++;
+                            BoostCharge = Mathf.Min(1f, BoostCharge + 0.06f);
                             moonlight = Mathf.Min(1f, moonlight + 0.035f);
                             score.AddBonus(20);
                             SplashAt(t.Transform.position, 20, new Color(1f, 0.72f, 0.32f, 0.95f));

@@ -315,7 +315,7 @@ namespace MoonPull.EditorTools
             Text(rewind, "Icon", "<<", 200, Center, Vector2.zero, new Vector2(500f, 260f), new Color(1f, 1f, 1f, 0.8f), TextAnchor.MiddleCenter, true);
 
             // Coach pill for the first nights: sits low, above the thumb, never over the boat.
-            Image coachPill = Image(c, "Coach", Bottom, new Vector2(0f, 330f), new Vector2(860f, 110f), new Color(0.04f, 0.06f, 0.16f, 0.82f));
+            Image coachPill = Image(c, "Coach", Bottom, new Vector2(0f, 360f), new Vector2(860f, 110f), new Color(0.04f, 0.06f, 0.16f, 0.82f));
             coachPill.raycastTarget = false;
             var coachGroup = coachPill.gameObject.AddComponent<CanvasGroup>();
             coachGroup.alpha = 0f;
@@ -334,6 +334,22 @@ namespace MoonPull.EditorTools
             var jumpFeel = jump.GetComponent<ButtonFeel>();
             if (jumpFeel != null) Object.DestroyImmediate(jumpFeel); // JumpButton does its own instant punch
             Gen.Wire(jump.gameObject.AddComponent<JumpButton>(), "rescue", w.Rescue, "face", (RectTransform)jump.transform);
+
+            // DIVE (hold) bottom-left: the boat's controls are buttons, so thumbs know exactly what to press.
+            Button dive = Button(c, "Dive", "hud.dive", new Vector2(0f, 0f), new Vector2(170f, 190f), new Vector2(260f, 200f), Gen.Hex("2F7FD6"), 54);
+            if (dive.GetComponent<ButtonFeel>() is ButtonFeel diveFeel) Object.DestroyImmediate(diveFeel);
+            Gen.Wire(dive.gameObject.AddComponent<HoldButton>(), "rescue", w.Rescue, "face", (RectTransform)dive.transform);
+
+            // BOOST in the middle: fills from perfect landings and lanterns, then launches a full-moon speed burst.
+            Button boost = Button(c, "Boost", "hud.boost", Bottom, new Vector2(0f, 170f), new Vector2(230f, 170f), Gen.Hex("6B4FA8"), 46);
+            if (boost.GetComponent<ButtonFeel>() is ButtonFeel boostFeel) Object.DestroyImmediate(boostFeel);
+            Image boostFill = Fill(Image(boost.transform, "Charge", Center, Vector2.zero, new Vector2(210f, 150f), new Color(1f, 0.8f, 0.25f, 0.55f)),
+                UnityEngine.UI.Image.FillMethod.Vertical, 0f);
+            boostFill.raycastTarget = false;
+            boostFill.transform.SetSiblingIndex(1); // under the label
+            var boostGroup = boost.gameObject.AddComponent<CanvasGroup>();
+            Gen.Wire(boost.gameObject.AddComponent<HoldButton>(), "rescue", w.Rescue, "face", (RectTransform)boost.transform, "boost", true,
+                "fill", boostFill, "group", boostGroup);
 
             Gen.Wire(screen, "session", w.Session, "fullMoon", w.FullMoon, "passengers", w.Passengers, "boss", w.Kraken,
                 "gameManager", w.GameManager, "timeScale", w.TimeScale, "popups", popups,
