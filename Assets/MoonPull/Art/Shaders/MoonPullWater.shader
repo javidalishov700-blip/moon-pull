@@ -174,8 +174,8 @@ Shader "MoonPull/Water"
                     }
                     float wob = sin(p.x * 2.1 + t) * 0.02 + sin(p.y * 1.7 - t * 0.8) * 0.02;
                     sea = lerp(sea, float3(0.22, 0.72, 0.74), smoothstep(1.55, 1.02, d + wob));
-                    float foamRing = smoothstep(0.05, 0.0, abs(d + wob - 1.06)) * (0.75 + 0.25 * sin(t * 2 + p.x * 3));
-                    float foamRing2 = smoothstep(0.03, 0.0, abs(d - wob - 1.2 - 0.04 * sin(t * 1.3))) * 0.45;
+                    float foamRing = smoothstep(0.035, 0.0, abs(d + wob - 1.04)) * (0.45 + 0.15 * sin(t * 2 + p.x * 3));
+                    float foamRing2 = smoothstep(0.02, 0.0, abs(d - wob - 1.18 - 0.04 * sin(t * 1.3))) * 0.2;
                     sea = lerp(sea, _FoamColor.rgb, saturate(foamRing + foamRing2));
                     sea = lerp(sea, _FoamColor.rgb, sparkle * 0.25);
                     col = lerp(col, sea, saturate(_MP_TopDown));

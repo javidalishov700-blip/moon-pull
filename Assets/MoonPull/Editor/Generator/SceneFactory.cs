@@ -308,12 +308,12 @@ namespace MoonPull.EditorTools
                 float a = i / 16f * Mathf.PI * 2f + (float)rockRng.NextDouble() * 0.25f;
                 float r = 1f + (float)rockRng.NextDouble() * 0.06f;
                 float sz = 0.45f + (float)rockRng.NextDouble() * 0.55f;
-                var pos = new Vector3(Mathf.Cos(a) * 7.0f * r, -0.25f + sz * 0.2f, Mathf.Sin(a) * 4.55f * r);
+                var pos = new Vector3(Mathf.Cos(a) * 6.3f * r, -0.15f + sz * 0.15f, Mathf.Sin(a) * 3.95f * r); // on the beach, not in the water
                 Gen.Prim(PrimitiveType.Sphere, island.transform, pos, new Vector3(sz * 1.3f, sz * 0.8f, sz),
-                    Color.Lerp(Gen.Hex("8A8F98"), Gen.Hex("B5B9C0"), (float)rockRng.NextDouble()), new Vector3(0f, a * 57f, 0f));
+                    Color.Lerp(Gen.Hex("4F555F"), Gen.Hex("6E747E"), (float)rockRng.NextDouble()), new Vector3(0f, a * 57f, 0f));
                 if (i % 3 == 0)
                 {
-                    Gen.Prim(PrimitiveType.Sphere, island.transform, pos + new Vector3(0.45f, -0.08f, 0.25f), new Vector3(sz * 0.7f, sz * 0.5f, sz * 0.6f), Gen.Hex("767B85"));
+                    Gen.Prim(PrimitiveType.Sphere, island.transform, pos + new Vector3(0.45f, -0.08f, 0.25f), new Vector3(sz * 0.7f, sz * 0.5f, sz * 0.6f), Gen.Hex("444A53"));
                 }
             }
             for (int i = 0; i < 7; i++)

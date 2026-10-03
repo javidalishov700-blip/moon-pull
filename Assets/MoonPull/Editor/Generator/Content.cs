@@ -780,24 +780,25 @@ namespace MoonPull.EditorTools
                 {
                     // Square-rigged longship sail with bold vertical stripes, billowing forward, on a wooden yard.
                     Color stripe = id == "dinghy" ? Gen.Hex("C8382E") : Color.Lerp(sail, hull, 0.55f);
-                    Gen.Prim(PrimitiveType.Cylinder, t, new Vector3(0.1f, 1.72f, 0f), new Vector3(0.045f, 0.5f, 0.045f), wood, new Vector3(90f, 0f, 0f));
+                    // The camera watches from the side, so the striped sail faces it (spans the boat's length), billowing outward.
+                    Gen.Prim(PrimitiveType.Cylinder, t, new Vector3(0.05f, 1.74f, 0.04f), new Vector3(0.045f, 0.62f, 0.045f), wood, new Vector3(0f, 0f, 90f));
                     const int strips = 7;
                     for (int i = 0; i < strips; i++)
                     {
-                        float z = -0.42f + i * (0.84f / (strips - 1));
-                        float bulge = 0.12f * (1f - (z / 0.48f) * (z / 0.48f));
-                        Gen.Prim(PrimitiveType.Cube, t, new Vector3(0.12f + bulge, 1.12f, z), new Vector3(0.03f, 1.15f, 0.84f / (strips - 1) + 0.01f),
-                            i % 2 == 0 ? stripe : sail, new Vector3(0f, -z * 40f, 0f));
+                        float sx = -0.55f + i * (1.2f / (strips - 1));
+                        float bulge = 0.12f * (1f - Mathf.Pow((sx - 0.05f) / 0.66f, 2f));
+                        Gen.Prim(PrimitiveType.Cube, t, new Vector3(sx, 1.14f, 0.06f + bulge), new Vector3(1.2f / (strips - 1) + 0.01f, 1.15f, 0.03f),
+                            i % 2 == 0 ? stripe : sail, new Vector3(0f, (sx - 0.05f) * 35f, 0f));
                     }
 
-                    Gen.Prim(PrimitiveType.Cylinder, t, new Vector3(0.1f, 0.54f, 0f), new Vector3(0.035f, 0.44f, 0.035f), wood, new Vector3(90f, 0f, 0f)); // lower boom
+                    Gen.Prim(PrimitiveType.Cylinder, t, new Vector3(0.05f, 0.54f, 0.04f), new Vector3(0.035f, 0.56f, 0.035f), wood, new Vector3(0f, 0f, 90f)); // lower boom
                     // Plank lines and round shields along the gunwale.
                     for (int side = -1; side <= 1; side += 2)
                     {
                         Gen.Prim(PrimitiveType.Cube, t, new Vector3(-0.05f, 0.02f, side * 0.37f), new Vector3(1.35f, 0.025f, 0.02f), wood);
-                        for (int k = 0; k < 4; k++)
+                        for (int k = 0; k < 3; k++)
                         {
-                            Gen.Prim(PrimitiveType.Cylinder, t, new Vector3(-0.55f + k * 0.32f, 0.2f, side * 0.4f), new Vector3(0.16f, 0.015f, 0.16f),
+                            Gen.Prim(PrimitiveType.Cylinder, t, new Vector3(-0.5f + k * 0.4f, 0.17f, side * 0.4f), new Vector3(0.13f, 0.012f, 0.13f),
                                 k % 2 == 0 ? Gen.Hex("E8C170") : stripe, new Vector3(90f, 0f, 0f));
                         }
                     }
