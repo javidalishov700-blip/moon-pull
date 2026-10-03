@@ -509,7 +509,7 @@ namespace MoonPull.Rescue
         {
             int n = 0;
             Vector3 c = transform.position;
-            islandShapes[n++] = new Vector4(c.x, c.z, 7.3f, 4.8f);
+            islandShapes[n++] = new Vector4(c.x, c.z, 7.9f, 5.25f);
             foreach (Transform child in transform)
             {
                 if (n >= islandShapes.Length) break;

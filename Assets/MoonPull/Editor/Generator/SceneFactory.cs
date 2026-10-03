@@ -300,7 +300,7 @@ namespace MoonPull.EditorTools
             Gen.Wire(w.Village, "cameraTransform", cameraGo.transform, "villagerPrefab", content.RescuePassenger, "meta", w.Meta);
             // A wide, flat-topped island so the village has room to grow.
             Gen.Prim(PrimitiveType.Sphere, island.transform, new Vector3(0f, -1.05f, 0f), new Vector3(13f, 3f, 8f), Gen.Hex("5E9A52"));
-            Gen.Prim(PrimitiveType.Sphere, island.transform, new Vector3(0f, -1.3f, 0f), new Vector3(14.5f, 2.6f, 9.5f), Gen.Hex("E8C98A")); // beach ring
+            Gen.Prim(PrimitiveType.Sphere, island.transform, new Vector3(0f, -0.6f, 0f), new Vector3(16f, 1.6f, 10.6f), Gen.Hex("EBCB8B")); // wide flat beach ring, ~2 units of sand above the map sea
             // Grey boulders scattered along the shore, like a painted base-builder coastline.
             var rockRng = new System.Random(5);
             for (int i = 0; i < 16; i++)
@@ -308,7 +308,7 @@ namespace MoonPull.EditorTools
                 float a = i / 16f * Mathf.PI * 2f + (float)rockRng.NextDouble() * 0.25f;
                 float r = 1f + (float)rockRng.NextDouble() * 0.06f;
                 float sz = 0.45f + (float)rockRng.NextDouble() * 0.55f;
-                var pos = new Vector3(Mathf.Cos(a) * 6.3f * r, -0.15f + sz * 0.15f, Mathf.Sin(a) * 3.95f * r); // on the beach, not in the water
+                var pos = new Vector3(Mathf.Cos(a) * 7.1f * r, -0.35f + sz * 0.15f, Mathf.Sin(a) * 4.7f * r); // at the beach's waterline
                 Gen.Prim(PrimitiveType.Sphere, island.transform, pos, new Vector3(sz * 1.3f, sz * 0.8f, sz),
                     Color.Lerp(Gen.Hex("4F555F"), Gen.Hex("6E747E"), (float)rockRng.NextDouble()), new Vector3(0f, a * 57f, 0f));
                 if (i % 3 == 0)
