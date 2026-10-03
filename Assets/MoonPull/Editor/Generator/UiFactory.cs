@@ -812,6 +812,9 @@ namespace MoonPull.EditorTools
             Button collect = Button(card.transform, "Collect", LocKeys.VillageCollect, new Vector2(1f, 0.5f), new Vector2(-170f, 10f), new Vector2(290f, 110f), Go, 46);
 
             Button explore = Button(popup.transform, "Explore", LocKeys.VillageExplore, TopRight, new Vector2(-180f, -440f), new Vector2(320f, 120f), Gen.Hex("4CC631"), 40);
+            // Back to the menu from the full village view (the sheet's X is off screen while exploring).
+            Button back = Button(popup.transform, "Back", "<", TopLeft, new Vector2(100f, -440f), new Vector2(130f, 120f), Danger, 60, false);
+            back.gameObject.AddComponent<PopupBackButton>();
 
             Button tabBuildings = Button(p, "TabBuildings", LocKeys.VillageTabBuildings, Top, new Vector2(-325f, -335f), new Vector2(315f, 80f), Primary, 34);
             Button tabIslands = Button(p, "TabIslands", LocKeys.VillageTabIslands, Top, new Vector2(0f, -335f), new Vector2(315f, 80f), Accent, 34);

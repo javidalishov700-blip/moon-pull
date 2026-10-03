@@ -567,7 +567,7 @@ namespace MoonPull.Rescue
             cameraTransform.position = Vector3.Lerp(cameraTransform.position, target, t);
             // Aim below the island so it sits in the top half of the screen, above the Village sheet.
             // With the sheet up, aim below the island so it sits in the top half; exploring, frame it in the middle.
-            Vector3 aim = exploring ? new Vector3(0f, -2.5f, 3f) : new Vector3(0f, -10f, 3f);
+            Vector3 aim = exploring ? new Vector3(0f, 1.5f, 1f) : new Vector3(0f, -10f, 3f); // exploring: island centred on screen
             Quaternion look = Quaternion.LookRotation(transform.position + panWorld + aim - target);
             cameraTransform.rotation = Quaternion.Slerp(cameraTransform.rotation, look, t);
         }
