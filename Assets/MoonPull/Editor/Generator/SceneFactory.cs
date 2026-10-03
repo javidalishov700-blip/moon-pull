@@ -310,10 +310,10 @@ namespace MoonPull.EditorTools
                 float sz = 0.45f + (float)rockRng.NextDouble() * 0.55f;
                 var pos = new Vector3(Mathf.Cos(a) * 7.1f * r, -0.35f + sz * 0.15f, Mathf.Sin(a) * 4.7f * r); // at the beach's waterline
                 Gen.Prim(PrimitiveType.Sphere, island.transform, pos, new Vector3(sz * 1.3f, sz * 0.8f, sz),
-                    Color.Lerp(Gen.Hex("4F555F"), Gen.Hex("6E747E"), (float)rockRng.NextDouble()), new Vector3(0f, a * 57f, 0f));
+                    Color.Lerp(Gen.Hex("6B625A"), Gen.Hex("8A8076"), (float)rockRng.NextDouble()), new Vector3(0f, a * 57f, 0f));
                 if (i % 3 == 0)
                 {
-                    Gen.Prim(PrimitiveType.Sphere, island.transform, pos + new Vector3(0.45f, -0.08f, 0.25f), new Vector3(sz * 0.7f, sz * 0.5f, sz * 0.6f), Gen.Hex("444A53"));
+                    Gen.Prim(PrimitiveType.Sphere, island.transform, pos + new Vector3(0.45f, -0.08f, 0.25f), new Vector3(sz * 0.7f, sz * 0.5f, sz * 0.6f), Gen.Hex("5A524B"));
                 }
             }
             for (int i = 0; i < 7; i++)

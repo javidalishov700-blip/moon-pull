@@ -535,7 +535,7 @@ namespace MoonPull.Rescue
                 }
             }
 
-            topDown = Mathf.MoveTowards(topDown, Active || MenuView ? 1f : 0f, Time.unscaledDeltaTime * 2f);
+            topDown = MenuView || Active ? Mathf.MoveTowards(topDown, 1f, Time.unscaledDeltaTime * 2f) : 0f; // snap off when a night starts: no map shallows at sea
             Shader.SetGlobalFloat(TopDownId, topDown);
             UploadIslandShapes();
 
