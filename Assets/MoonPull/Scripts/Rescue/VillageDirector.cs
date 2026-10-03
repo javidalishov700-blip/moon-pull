@@ -501,6 +501,28 @@ namespace MoonPull.Rescue
         }
 
         private static readonly int TopDownId = Shader.PropertyToID("_MP_TopDown");
+        private static readonly int IslandsId = Shader.PropertyToID("_MP_Islands");
+        private readonly Vector4[] islandShapes = new Vector4[6];
+
+        /// <summary>Tells the water where the beaches are (map view shallows and foam). Hidden islands are skipped.</summary>
+        private void UploadIslandShapes()
+        {
+            int n = 0;
+            Vector3 c = transform.position;
+            islandShapes[n++] = new Vector4(c.x, c.z, 7.3f, 4.8f);
+            foreach (Transform child in transform)
+            {
+                if (n >= islandShapes.Length) break;
+                if (child.name.StartsWith("Expansion_") && child.gameObject.activeInHierarchy)
+                {
+                    Vector3 e = child.position;
+                    islandShapes[n++] = new Vector4(e.x, e.z, 2.6f, 1.9f);
+                }
+            }
+
+            for (int i = n; i < islandShapes.Length; i++) islandShapes[i] = Vector4.zero;
+            Shader.SetGlobalVectorArray(IslandsId, islandShapes);
+        }
         private float topDown;
 
         private void LateUpdate()
@@ -515,6 +537,7 @@ namespace MoonPull.Rescue
 
             topDown = Mathf.MoveTowards(topDown, Active || MenuView ? 1f : 0f, Time.unscaledDeltaTime * 2f);
             Shader.SetGlobalFloat(TopDownId, topDown);
+            UploadIslandShapes();
 
             if ((!Active && !MenuView) || cameraTransform == null)
             {

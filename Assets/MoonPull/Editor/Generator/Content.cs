@@ -777,8 +777,31 @@ namespace MoonPull.EditorTools
                 default: // sloop: tall mast, billowing mainsail and jib, a pennant at the top
                     Gen.Prim(PrimitiveType.Cylinder, t, new Vector3(0.05f, 1.05f, 0f), new Vector3(0.05f, 0.95f, 0.05f), wood);
                     Gen.Prim(PrimitiveType.Cylinder, t, new Vector3(-0.3f, 0.32f, 0f), new Vector3(0.035f, 0.36f, 0.035f), wood, new Vector3(0f, 0f, 90f));
-                    Meshes.Part(Meshes.Sail(1.55f, 0.72f, 0.16f), t, new Vector3(0.02f, 0.32f, 0f), new Vector3(-1f, 1f, 1f), sail);
-                    Meshes.Part(Meshes.Sail(1.3f, 0.62f, 0.1f), t, new Vector3(0.1f, 0.3f, 0f), Vector3.one, Color.Lerp(sail, hull, 0.25f));
+                {
+                    // Square-rigged longship sail with bold vertical stripes, billowing forward, on a wooden yard.
+                    Color stripe = id == "dinghy" ? Gen.Hex("C8382E") : Color.Lerp(sail, hull, 0.55f);
+                    Gen.Prim(PrimitiveType.Cylinder, t, new Vector3(0.1f, 1.72f, 0f), new Vector3(0.045f, 0.5f, 0.045f), wood, new Vector3(90f, 0f, 0f));
+                    const int strips = 7;
+                    for (int i = 0; i < strips; i++)
+                    {
+                        float z = -0.42f + i * (0.84f / (strips - 1));
+                        float bulge = 0.12f * (1f - (z / 0.48f) * (z / 0.48f));
+                        Gen.Prim(PrimitiveType.Cube, t, new Vector3(0.12f + bulge, 1.12f, z), new Vector3(0.03f, 1.15f, 0.84f / (strips - 1) + 0.01f),
+                            i % 2 == 0 ? stripe : sail, new Vector3(0f, -z * 40f, 0f));
+                    }
+
+                    Gen.Prim(PrimitiveType.Cylinder, t, new Vector3(0.1f, 0.54f, 0f), new Vector3(0.035f, 0.44f, 0.035f), wood, new Vector3(90f, 0f, 0f)); // lower boom
+                    // Plank lines and round shields along the gunwale.
+                    for (int side = -1; side <= 1; side += 2)
+                    {
+                        Gen.Prim(PrimitiveType.Cube, t, new Vector3(-0.05f, 0.02f, side * 0.37f), new Vector3(1.35f, 0.025f, 0.02f), wood);
+                        for (int k = 0; k < 4; k++)
+                        {
+                            Gen.Prim(PrimitiveType.Cylinder, t, new Vector3(-0.55f + k * 0.32f, 0.2f, side * 0.4f), new Vector3(0.16f, 0.015f, 0.16f),
+                                k % 2 == 0 ? Gen.Hex("E8C170") : stripe, new Vector3(90f, 0f, 0f));
+                        }
+                    }
+                }
                     Gen.Prim(PrimitiveType.Cube, t, new Vector3(-0.07f, 2.02f, 0f), new Vector3(0.24f, 0.1f, 0.02f), Gen.Hex("FF5A5A"), default, 0.5f);
                     Gen.Prim(PrimitiveType.Sphere, t, new Vector3(0.05f, 1.98f, 0f), new Vector3(0.06f, 0.06f, 0.06f), Gen.Hex("FFE9A8"), default, 2f);
                     break;
