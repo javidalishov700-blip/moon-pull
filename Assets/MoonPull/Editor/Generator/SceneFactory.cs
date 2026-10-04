@@ -369,7 +369,8 @@ namespace MoonPull.EditorTools
             var owned = new List<GameObject>();
             var forSale = new List<GameObject>();
             var spotRoots = new List<Transform>();
-            Vector3[] spots = { new Vector3(-6.2f, 0.2f, 6.5f), new Vector3(6.4f, 0.2f, 6.8f), new Vector3(-2.6f, 0.2f, 11.5f), new Vector3(3.8f, 0.2f, 12.5f) };
+            // A chain to the east of the harbor, in unlock order: the village view steps along it with < and > buttons.
+            Vector3[] spots = { new Vector3(12.5f, 0.2f, 1.5f), new Vector3(22f, 0.2f, 0.5f), new Vector3(31.5f, 0.2f, 1.8f), new Vector3(41f, 0.2f, 0.6f) };
             Color[] grass = { Gen.Hex("6FBF73"), Gen.Hex("F2B880"), Gen.Hex("7FC8A9"), Gen.Hex("9FA8DA") };
             for (int i = 0; i < spots.Length; i++)
             {

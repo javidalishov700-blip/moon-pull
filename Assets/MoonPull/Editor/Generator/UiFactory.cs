@@ -816,6 +816,15 @@ namespace MoonPull.EditorTools
             Button back = Button(popup.transform, "Back", "<", TopLeft, new Vector2(100f, -440f), new Vector2(130f, 120f), Danger, 60, false);
             back.gameObject.AddComponent<PopupBackButton>();
 
+            // < > island stepping: the camera glides along the chain of islands, neighbours peeking in at the edges.
+            for (int dir = -1; dir <= 1; dir += 2)
+            {
+                Button arrow = Button(popup.transform, dir < 0 ? "IslandLeft" : "IslandRight", dir < 0 ? "<" : ">", dir < 0 ? new Vector2(0f, 0.5f) : new Vector2(1f, 0.5f),
+                    new Vector2(dir * -80f, 120f), new Vector2(120f, 150f), Gen.Hex("2F7FD6"), 70, false);
+                if (arrow.GetComponent<ButtonFeel>() is ButtonFeel arrowFeel) Object.DestroyImmediate(arrowFeel);
+                Gen.Set(arrow.gameObject.AddComponent<IslandArrow>(), "direction", dir);
+            }
+
             Button tabBuildings = Button(p, "TabBuildings", LocKeys.VillageTabBuildings, Top, new Vector2(-325f, -335f), new Vector2(315f, 80f), Primary, 34);
             Button tabIslands = Button(p, "TabIslands", LocKeys.VillageTabIslands, Top, new Vector2(0f, -335f), new Vector2(315f, 80f), Accent, 34);
             Button tabBoat = Button(p, "TabBoat", LocKeys.VillageTabBoat, Top, new Vector2(325f, -335f), new Vector2(315f, 80f), Accent, 34);

@@ -55,6 +55,29 @@ namespace MoonPull.Rescue
         private Material bubbleMaterial;
         private bool exploring;
         private Vector2 pan;
+        private Vector2 panTarget;
+        private bool panGliding;
+        private int focusIndex;
+
+        /// <summary>Glides the camera to the next island to the right (+1) or left (-1).</summary>
+        public void FocusStep(int dir)
+        {
+            var stops = new List<Vector2> { Vector2.zero };
+            foreach (Transform child in transform)
+            {
+                if (child.name.StartsWith("Expansion_"))
+                {
+                    stops.Add(new Vector2(child.localPosition.x, child.localPosition.z));
+                }
+            }
+
+            stops.Sort((a, b) => a.x.CompareTo(b.x));
+            focusIndex = Mathf.Clamp(focusIndex + dir, 0, stops.Count - 1);
+            panTarget = stops[focusIndex];
+            panGliding = true;
+        }
+
+        public int FocusIndex => focusIndex;
         private float zoom = 1f;
         private Vector2 lastDrag;
         private bool dragging;
@@ -68,6 +91,8 @@ namespace MoonPull.Rescue
             {
                 pan = Vector2.zero;
                 zoom = 1f;
+                focusIndex = 0;
+                panGliding = false;
             }
         }
 
@@ -291,7 +316,8 @@ namespace MoonPull.Rescue
             lastDrag = pos;
             float unitsPerPixel = 0.025f * zoom * 1080f / Mathf.Max(1f, Screen.width);
             pan -= delta * unitsPerPixel;
-            pan = new Vector2(Mathf.Clamp(pan.x, -10f, 10f), Mathf.Clamp(pan.y, -8f, 12f));
+            panGliding = false;
+            pan = new Vector2(Mathf.Clamp(pan.x, -10f, 46f), Mathf.Clamp(pan.y, -8f, 12f));
         }
 
         private void Walk()
@@ -538,6 +564,11 @@ namespace MoonPull.Rescue
             topDown = (MenuView || Active) && !NightRescue.NightActive ? Mathf.MoveTowards(topDown, 1f, Time.unscaledDeltaTime * 2f) : 0f; // snap off when a night starts: no map shallows at sea
             Shader.SetGlobalFloat(TopDownId, topDown);
             UploadIslandShapes();
+            if (panGliding)
+            {
+                pan = Vector2.Lerp(pan, panTarget, 1f - Mathf.Exp(-5f * Time.unscaledDeltaTime));
+                if ((pan - panTarget).sqrMagnitude < 0.01f) panGliding = false;
+            }
 
             if ((!Active && !MenuView) || cameraTransform == null)
             {
