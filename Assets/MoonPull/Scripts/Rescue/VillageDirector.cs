@@ -60,6 +60,7 @@ namespace MoonPull.Rescue
         private int focusIndex = -1; // -1 = the harbor island
         private bool sideView;
         private Vector3 sideForward = Vector3.forward;
+        private Vector3 sideRight = Vector3.right;
         private float sideBlend;
 
         /// <summary>Glides the camera to the next island to the right (+1) or left (-1).</summary>
@@ -90,6 +91,7 @@ namespace MoonPull.Rescue
                 // Look across the line harbor→island so the harbor sits on the side you came from.
                 Vector2 r = panTarget.x >= 0f ? panTarget.normalized : -panTarget.normalized;
                 sideForward = new Vector3(-r.y, 0f, r.x);
+                sideRight = new Vector3(r.x, 0f, r.y) * (panTarget.x >= 0f ? 1f : -1f); // points from the harbor to the island
             }
         }
 
@@ -613,15 +615,18 @@ namespace MoonPull.Rescue
             Vector3 target = transform.position + panWorld + viewOffset * zoom * (exploring ? 1.1f : 1f) * aspectFit;
             // Visiting another island: drop to a low, side-on view across the water so the neighbours sit left and right.
             sideBlend = Mathf.MoveTowards(sideBlend, exploring && sideView ? 1f : 0f, Time.unscaledDeltaTime * 1.5f);
-            Vector3 sideTarget = transform.position + panWorld + (Vector3.up * 5.5f - sideForward * 15f) * zoom * aspectFit;
+            // Frame between the island and the harbor (pulled back), so the big island fills the side you came from.
+            Vector3 sideCentre = panWorld - sideRight * 5f;
+            Vector3 sideTarget = transform.position + sideCentre + (Vector3.up * 7f - sideForward * 21f) * zoom * aspectFit;
             target = Vector3.Lerp(target, sideTarget, Mathf.SmoothStep(0f, 1f, sideBlend));
             float t = 1f - Mathf.Exp(-4f * Time.unscaledDeltaTime);
             cameraTransform.position = Vector3.Lerp(cameraTransform.position, target, t);
             // Aim below the island so it sits in the top half of the screen, above the Village sheet.
             // With the sheet up, aim below the island so it sits in the top half; exploring, frame it in the middle.
             Vector3 aim = exploring ? new Vector3(0f, 1.5f, 1f) : new Vector3(0f, -10f, 3f); // exploring: island centred on screen
-            aim = Vector3.Lerp(aim, new Vector3(0f, 0.8f, 0f), Mathf.SmoothStep(0f, 1f, sideBlend));
-            Quaternion look = Quaternion.LookRotation(transform.position + panWorld + aim - target);
+            float sb = Mathf.SmoothStep(0f, 1f, sideBlend);
+            Vector3 lookAt = Vector3.Lerp(transform.position + panWorld + aim, transform.position + panWorld - sideRight * 5f + new Vector3(0f, -1.5f, 0f), sb);
+            Quaternion look = Quaternion.LookRotation(lookAt - target);
             cameraTransform.rotation = Quaternion.Slerp(cameraTransform.rotation, look, t);
         }
     }
