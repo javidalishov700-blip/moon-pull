@@ -23,11 +23,12 @@ namespace MoonPull.Rescue
 
         private static readonly int[,] Costs =
         {
-            { 150, 450, 1000, 2200, 4500 },  // Shelter
-            { 120, 380, 850, 1900, 4000 },   // Restaurant
-            { 200, 520, 1150, 2500, 5000 },  // Workshop
-            { 250, 620, 1350, 2900, 5800 },  // Shipyard
-            { 300, 700, 1500, 3200, 6500 }   // Market
+            // Tuned so a player affords one or two upgrades a night early on, then saves up for the big ones.
+            { 200, 650, 1500, 3400, 7000 },  // Shelter
+            { 160, 550, 1300, 3000, 6200 },  // Restaurant
+            { 260, 760, 1700, 3800, 7800 },  // Workshop
+            { 320, 900, 2000, 4400, 9000 },  // Shipyard
+            { 400, 1050, 2300, 4900, 10000 } // Market
         };
 
         private static string Key(VillageBuilding b) => "mp_village_" + b.ToString().ToLowerInvariant();
@@ -103,9 +104,9 @@ namespace MoonPull.Rescue
         }
 
         // Effects used by NightRescue.
-        public static int ExtraSeats => Level(VillageBuilding.Shelter) + VillageState.PerkSeats;
-        public static float CoinMultiplier => (1f + 0.3f * Level(VillageBuilding.Restaurant)) * VillageState.PerkCoinMultiplier;
-        public static float NightMultiplier => 1f + 0.12f * Level(VillageBuilding.Workshop);
+        public static int ExtraSeats => Level(VillageBuilding.Shelter) + VillageState.PerkSeats + (TycoonState.Owns(2) ? 1 : 0); // Fisher's Bay: a deckhand
+        public static float CoinMultiplier => (1f + 0.3f * Level(VillageBuilding.Restaurant)) * VillageState.PerkCoinMultiplier * (TycoonState.Owns(1) ? 1.3f : 1f); // Coral Reef: pearls
+        public static float NightMultiplier => (1f + 0.12f * Level(VillageBuilding.Workshop)) * (TycoonState.Owns(3) ? 1.2f : 1f); // Sky Peak: a lighthouse
         public static float SpeedBonus => 1.2f * Level(VillageBuilding.Shipyard);
         public static int DawnCoins(int population) =>
             Mathf.RoundToInt(Level(VillageBuilding.Market) * (10 + population / 2) * VillageState.Happiness / 100f);

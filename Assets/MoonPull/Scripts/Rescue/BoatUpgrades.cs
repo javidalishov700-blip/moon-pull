@@ -16,7 +16,7 @@ namespace MoonPull.Rescue
         public const int MaxLevel = 5;
         public const int PartCount = 3;
 
-        private static readonly int[] BaseCost = { 120, 160, 140 };
+        private static readonly int[] BaseCost = { 180, 240, 210 };
         private static readonly float[] LevelScale = { 1f, 2.5f, 5f, 9f, 15f };
 
         private static string Key(BoatPart p) => "mp_boat_" + p.ToString().ToLowerInvariant();

@@ -42,7 +42,7 @@ namespace MoonPull.Rescue
         /// <summary>The village takes in people up to a quarter over its homes; the rest sail on to other harbors.</summary>
         public static int Capacity => Mathf.CeilToInt(Housing * 1.25f);
 
-        public static float FoodPerHour => 4f + 12f * VillageService.Level(VillageBuilding.Restaurant) + 6f * TycoonState.IslandsOwned;
+        public static float FoodPerHour => 4f + 12f * VillageService.Level(VillageBuilding.Restaurant) + 3f * TycoonState.IslandsOwned + (TycoonState.Owns(0) ? 15f : 0f); // Palm Cove: fruit groves
 
         public static float EatingPerHour => Population * 0.12f;
 

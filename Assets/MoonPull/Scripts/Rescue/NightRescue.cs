@@ -254,7 +254,11 @@ namespace MoonPull.Rescue
             StartFever();
         }
 
-        public float Moonlight => moonlight;
+        /// <summary>The longest this night can last (dawn always comes).</summary>
+        private float NightCap => Mathf.Lerp(60f, 105f, Mathf.Clamp01(levelIndex / 12f)) * Mathf.Min(1.3f, VillageService.NightMultiplier);
+
+        /// <summary>Night bar: whichever runs out first, the moonlight or the time until dawn, so the bar never lies.</summary>
+        public float Moonlight => Mathf.Min(moonlight, running ? Mathf.Clamp01(1f - runTime / NightCap) : moonlight);
 
         /// <summary>Supplies the last night brought home (shown on the win screen).</summary>
         public static int LastSupplies { get; private set; }
@@ -501,7 +505,7 @@ namespace MoonPull.Rescue
 
             // Lighthouses refill the moonlight, but no night lasts forever: dawn always comes.
             // First nights stay short and snappy (about a minute); later nights may run up to about two minutes.
-            if (moonlight <= 0f || runTime > Mathf.Lerp(60f, 105f, Mathf.Clamp01(levelIndex / 12f)) * Mathf.Min(1.2f, VillageService.NightMultiplier))
+            if (moonlight <= 0f || runTime > NightCap)
             {
                 EndNight();
             }
@@ -1037,7 +1041,7 @@ namespace MoonPull.Rescue
 
             int target = 3 + Mathf.Min(levelIndex, 30) / 2;
             int stars = rescued >= target * 2 ? 3 : rescued >= target ? 2 : 1;
-            int coins = Mathf.RoundToInt((rescued * 10 + lanternsCaught * 2) * VillageService.CoinMultiplier) + VillageService.DawnCoins(total) + levelReward
+            int coins = Mathf.RoundToInt((rescued * 7 + lanternsCaught * 2) * VillageService.CoinMultiplier) + VillageService.DawnCoins(total) + levelReward
                         + sailedOn * 6;
             Stats.Rescued = rescued;
             Stats.Lanterns = lanternsCaught;

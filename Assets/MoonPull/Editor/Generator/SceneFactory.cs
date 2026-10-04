@@ -387,6 +387,38 @@ namespace MoonPull.EditorTools
                 }
 
                 Palm(built.transform, new Vector3(0.9f, 0.05f, 0.1f), 0.7f);
+                // Each island shows its perk: fruit trees, coral, a fishing dock, a lighthouse on a peak.
+                switch (i)
+                {
+                    case 0:
+                        for (int f = 0; f < 3; f++)
+                        {
+                            Gen.Prim(PrimitiveType.Sphere, built.transform, new Vector3(-1.2f + f * 1.2f, 0.45f, -0.9f), new Vector3(0.5f, 0.45f, 0.5f), Gen.Hex("3E8E3A"));
+                            Gen.Prim(PrimitiveType.Sphere, built.transform, new Vector3(-1.1f + f * 1.2f, 0.55f, -1.1f), new Vector3(0.14f, 0.14f, 0.14f), Gen.Hex("FF8C2E"));
+                        }
+
+                        break;
+                    case 1:
+                        for (int f = 0; f < 4; f++)
+                        {
+                            Gen.Prim(PrimitiveType.Capsule, built.transform, new Vector3(-1.6f + f * 1.05f, 0.05f, -1.35f), new Vector3(0.18f, 0.35f, 0.18f),
+                                f % 2 == 0 ? Gen.Hex("FF6F91") : Gen.Hex("FFB86B"), new Vector3(0f, 0f, f * 17f - 25f));
+                        }
+
+                        Gen.Prim(PrimitiveType.Sphere, built.transform, new Vector3(1.4f, 0.12f, -1.1f), new Vector3(0.22f, 0.22f, 0.22f), Gen.Hex("F4F0FF"), default, 0.8f); // pearl
+                        break;
+                    case 2:
+                        Gen.Prim(PrimitiveType.Cube, built.transform, new Vector3(0f, 0.05f, -1.9f), new Vector3(0.5f, 0.08f, 1.4f), Gen.Hex("8B5E3C")); // dock
+                        Gen.Prim(PrimitiveType.Cube, built.transform, new Vector3(0.55f, 0.02f, -2.3f), new Vector3(0.8f, 0.2f, 0.35f), Gen.Hex("C8382E")); // fishing boat
+                        Gen.Prim(PrimitiveType.Cylinder, built.transform, new Vector3(0.55f, 0.4f, -2.3f), new Vector3(0.04f, 0.35f, 0.04f), Gen.Hex("6B4A34"));
+                        break;
+                    default:
+                        Gen.Prim(PrimitiveType.Sphere, built.transform, new Vector3(0f, 0.2f, 0.4f), new Vector3(2.2f, 1.6f, 1.6f), Gen.Hex("7FAF6A")); // peak
+                        Gen.Prim(PrimitiveType.Cylinder, built.transform, new Vector3(0f, 1.3f, 0.4f), new Vector3(0.35f, 0.6f, 0.35f), Gen.Hex("F2EEE6"));
+                        Gen.Prim(PrimitiveType.Cylinder, built.transform, new Vector3(0f, 1.5f, 0.4f), new Vector3(0.38f, 0.08f, 0.38f), Gen.Hex("C8382E"));
+                        Gen.Prim(PrimitiveType.Sphere, built.transform, new Vector3(0f, 2.05f, 0.4f), new Vector3(0.32f, 0.32f, 0.32f), Gen.Hex("FFD37A"), default, 2.5f);
+                        break;
+                }
                 Palm(built.transform, new Vector3(-0.9f, 0.05f, 0f), 0.6f);
                 GameObject sale = Gen.Go("ForSale", root);
                 Transform sign = Gen.Go("Sign", sale.transform).transform;

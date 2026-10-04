@@ -100,7 +100,7 @@ namespace MoonPull.Rescue
 
         public static int ExtraHousing => 20 * IslandsOwned;
 
-        public static float IncomeMultiplier => 1f + 0.25f * IslandsOwned;
+        public static float IncomeMultiplier => 1f + 0.1f * IslandsOwned; // each island also has its own perk
 
         /// <summary>Coins per minute at the current happiness.</summary>
         public static float IncomePerMinute

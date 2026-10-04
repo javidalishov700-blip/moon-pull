@@ -745,7 +745,7 @@ namespace MoonPull.EditorTools
             // Everything sits under one scaled node: the boat reads clearly on a phone without touching the hitbox.
             Transform t = Gen.Go("Body", root.transform).transform;
             t.localScale = Vector3.one * 1.35f;
-            Color trim = Color.Lerp(hull, Color.white, 0.55f);
+            Color trim = id == "dinghy" ? Gen.Hex("A8743F") : Color.Lerp(hull, Color.white, 0.55f); // the starter longship stays all wood
             Color wood = Gen.Hex("6B4A34");
             Color dark = hull * 0.6f;
             dark.a = 1f;
@@ -792,6 +792,24 @@ namespace MoonPull.EditorTools
                     }
 
                     Gen.Prim(PrimitiveType.Cylinder, t, new Vector3(0.05f, 0.54f, 0.04f), new Vector3(0.035f, 0.56f, 0.035f), wood, new Vector3(0f, 0f, 90f)); // lower boom
+                    // Longship details: a curled prow and stern post, a gold rail, oars and a stern lantern.
+                    Color gold = Gen.Hex("E8B84A");
+                    Gen.Prim(PrimitiveType.Cylinder, t, new Vector3(0.92f, 0.45f, 0f), new Vector3(0.09f, 0.28f, 0.09f), hull, new Vector3(0f, 0f, -25f));
+                    Gen.Prim(PrimitiveType.Sphere, t, new Vector3(1.02f, 0.72f, 0f), new Vector3(0.2f, 0.2f, 0.12f), hull);
+                    Gen.Prim(PrimitiveType.Sphere, t, new Vector3(1.07f, 0.74f, 0f), new Vector3(0.07f, 0.07f, 0.13f), gold, default, 0.4f); // eye of the prow
+                    Gen.Prim(PrimitiveType.Cylinder, t, new Vector3(-0.88f, 0.4f, 0f), new Vector3(0.08f, 0.22f, 0.08f), hull, new Vector3(0f, 0f, 22f));
+                    Gen.Prim(PrimitiveType.Cylinder, t, new Vector3(-0.98f, 0.62f, 0f), new Vector3(0.03f, 0.05f, 0.03f), Gen.Hex("3A2A1E"));
+                    Gen.Prim(PrimitiveType.Sphere, t, new Vector3(-0.98f, 0.55f, 0f), new Vector3(0.12f, 0.14f, 0.12f), Gen.Hex("FFD37A"), default, 2.2f); // stern lantern
+                    for (int side = -1; side <= 1; side += 2)
+                    {
+                        Gen.Prim(PrimitiveType.Cube, t, new Vector3(-0.05f, 0.235f, side * 0.39f), new Vector3(1.5f, 0.035f, 0.03f), gold, default, 0.2f);
+                        for (int o = 0; o < 2; o++)
+                        {
+                            Gen.Prim(PrimitiveType.Cylinder, t, new Vector3(-0.35f + o * 0.5f, 0.05f, side * 0.55f), new Vector3(0.025f, 0.28f, 0.025f), wood,
+                                new Vector3(side * 60f, 0f, 0f));
+                        }
+                    }
+
                     // Plank lines and round shields along the gunwale.
                     for (int side = -1; side <= 1; side += 2)
                     {

@@ -7,13 +7,13 @@ island.buy,Buy,Satın al,Comprar,Comprar,Kaufen,Acheter,Купить,購入
 island.owned,Yours!,Senin!,¡Tuya!,Sua!,Deine!,À toi !,Твой!,所有中
 island.buy_previous,Buy the island before,Önce önceki adayı al,Compra la isla anterior,Compre a ilha anterior,Kaufe erst die vorige Insel,Achète l'île précédente,Сначала купи предыдущий,前の島を先に購入
 island.palm_cove.name,Palm Cove,Palmiye Koyu,Cala Palmera,Enseada das Palmas,Palmenbucht,Crique aux Palmiers,Пальмовая бухта,ヤシの入り江
-island.palm_cove.desc,+20 homes · +25% income,+20 ev · +%25 gelir,+20 casas · +25% ingresos,+20 casas · +25% renda,+20 Häuser · +25% Einkommen,+20 logis · +25% revenus,+20 домов · +25% дохода,家+20・収入+25%
+island.palm_cove.desc,+20 homes · fruit groves: +15 food/h,+20 ev · meyve bahçesi: +15 yemek/sa,+20 casas · +15 comida/h,+20 casas · +15 comida/h,+20 Häuser · +15 Essen/h,+20 logis · +15 nourriture/h,+20 домов · +15 еды/ч,家+20・食料+15/時
 island.coral_reef.name,Coral Reef,Mercan Resifi,Arrecife de Coral,Recife de Coral,Korallenriff,Récif de Corail,Коралловый риф,サンゴ礁
-island.coral_reef.desc,+20 homes · +25% income,+20 ev · +%25 gelir,+20 casas · +25% ingresos,+20 casas · +25% renda,+20 Häuser · +25% Einkommen,+20 logis · +25% revenus,+20 домов · +25% дохода,家+20・収入+25%
+island.coral_reef.desc,+20 homes · pearls: +30% coins per rescue,+20 ev · inci: kurtarma başına +%30 altın,+20 casas · perlas: +30% monedas,+20 casas · pérolas: +30% moedas,+20 Häuser · Perlen: +30% Münzen,+20 logis · perles : +30% pièces,+20 домов · жемчуг: +30% монет,家+20・真珠: コイン+30%
 island.fisher_bay.name,Fisher's Bay,Balıkçı Körfezi,Bahía Pesquera,Baía dos Pescadores,Fischerbucht,Baie des Pêcheurs,Рыбацкий залив,漁師の湾
-island.fisher_bay.desc,+20 homes · +25% income,+20 ev · +%25 gelir,+20 casas · +25% ingresos,+20 casas · +25% renda,+20 Häuser · +25% Einkommen,+20 logis · +25% revenus,+20 домов · +25% дохода,家+20・収入+25%
+island.fisher_bay.desc,+20 homes · a deckhand: +1 boat seat,+20 ev · tayfa: +1 gemi koltuğu,+20 casas · +1 asiento,+20 casas · +1 assento,+20 Häuser · +1 Sitz,+20 logis · +1 place,+20 домов · +1 место,家+20・座席+1
 island.sky_peak.name,Sky Peak,Gök Tepe,Pico del Cielo,Pico do Céu,Himmelsgipfel,Pic du Ciel,Небесный пик,空の峰
-island.sky_peak.desc,+20 homes · +25% income,+20 ev · +%25 gelir,+20 casas · +25% ingresos,+20 casas · +25% renda,+20 Häuser · +25% Einkommen,+20 logis · +25% revenus,+20 домов · +25% дохода,家+20・収入+25%
+island.sky_peak.desc,+20 homes · lighthouse: +20% longer nights,+20 ev · deniz feneri: +%20 uzun gece,+20 casas · faro: +20% noche,+20 casas · farol: +20% noite,+20 Häuser · Leuchtturm: +20% Nacht,+20 logis · phare : +20% nuit,+20 домов · маяк: +20% ночи,家+20・灯台: 夜+20%
 village.no_supplies,Out of supplies! Sail tonight,Erzak bitti! Denize açıl,¡Sin provisiones! Zarpa,Sem suprimentos! Navegue,Keine Vorräte! Stich in See,Plus de vivres ! Prends la mer,Нет припасов! В море,物資切れ！出航しよう
 village.supplies,"Supplies {0}/{1} · Workers {2}/{3}","Erzak {0}/{1} · İşçi {2}/{3}","Provisiones {0}/{1} · Obreros {2}/{3}","Suprimentos {0}/{1} · Trabalhadores {2}/{3}","Vorräte {0}/{1} · Arbeiter {2}/{3}","Vivres {0}/{1} · Ouvriers {2}/{3}","Припасы {0}/{1} · Рабочие {2}/{3}","物資 {0}/{1}・働き手 {2}/{3}"
 village.needs_people,"Rescue more: {0} people","Daha çok kurtar: {0} kişi","Rescata más: {0} personas","Resgate mais: {0} pessoas","Rette mehr: {0} Leute","Sauve-en plus : {0} pers.","Спаси больше: {0} чел.","もっと救助: {0}人"
