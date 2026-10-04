@@ -17,7 +17,7 @@ namespace MoonPull.Rescue
 
         private void LateUpdate()
         {
-            bool show = !VillageDirector.Active && !VillageDirector.MenuView;
+            bool show = NightRescue.NightActive || (!VillageDirector.Active && !VillageDirector.MenuView);
             if (show != shown)
             {
                 shown = show;

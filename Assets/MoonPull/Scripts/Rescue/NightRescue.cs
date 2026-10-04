@@ -268,6 +268,9 @@ namespace MoonPull.Rescue
 
         public bool Running => running;
 
+        /// <summary>A night is being sailed right now (map visuals stay off).</summary>
+        public static bool NightActive { get; private set; }
+
         private void Awake()
         {
             k = new Vector3(2f * Mathf.PI / wavelengths.x, 2f * Mathf.PI / wavelengths.y, 2f * Mathf.PI / wavelengths.z);
@@ -415,6 +418,7 @@ namespace MoonPull.Rescue
             }
 
             running = true;
+            NightActive = true;
         }
 
         public void SimulationTick(float deltaTime, float levelTime)
@@ -1019,6 +1023,7 @@ namespace MoonPull.Rescue
         private void EndNight()
         {
             running = false;
+            NightActive = false;
             CoachKey = null;
             // Everyone still aboard makes it home at dawn too.
             rescued += aboard;
@@ -1060,6 +1065,7 @@ namespace MoonPull.Rescue
             if (to == GameState.Menu || to == GameState.Shop)
             {
                 running = false;
+                NightActive = false;
                 ClearThings();
                 SetAboard(0);
                 foreach (GameObject go in hideWhileSailing)
