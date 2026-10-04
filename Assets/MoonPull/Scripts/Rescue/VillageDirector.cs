@@ -625,7 +625,7 @@ namespace MoonPull.Rescue
             // With the sheet up, aim below the island so it sits in the top half; exploring, frame it in the middle.
             Vector3 aim = exploring ? new Vector3(0f, 1.5f, 1f) : new Vector3(0f, -10f, 3f); // exploring: island centred on screen
             float sb = Mathf.SmoothStep(0f, 1f, sideBlend);
-            Vector3 lookAt = Vector3.Lerp(transform.position + panWorld + aim, transform.position + panWorld - sideRight * 5f + new Vector3(0f, -1.5f, 0f), sb);
+            Vector3 lookAt = Vector3.Lerp(transform.position + panWorld + aim, transform.position + panWorld - sideRight * 5f + new Vector3(0f, 2.5f, 0f), sb); // islands sit mid-screen
             Quaternion look = Quaternion.LookRotation(lookAt - target);
             cameraTransform.rotation = Quaternion.Slerp(cameraTransform.rotation, look, t);
         }
