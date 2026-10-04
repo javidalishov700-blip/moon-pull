@@ -421,11 +421,7 @@ namespace MoonPull.EditorTools
                 }
                 Palm(built.transform, new Vector3(-0.9f, 0.05f, 0f), 0.6f);
                 GameObject sale = Gen.Go("ForSale", root);
-                Transform sign = Gen.Go("Sign", sale.transform).transform;
-                sign.localPosition = new Vector3(0f, 0.1f, 0f);
-                Gen.Prim(PrimitiveType.Cylinder, sign, new Vector3(0f, 0.4f, 0f), new Vector3(0.08f, 0.4f, 0.08f), Gen.Hex("7A5230"));
-                Gen.Prim(PrimitiveType.Sphere, sign, new Vector3(0f, 0.95f, 0f), new Vector3(0.9f, 0.9f, 0.12f), Gen.Hex("FFD95C"), default, 0.5f); // coin sign
-                Gen.Prim(PrimitiveType.Sphere, sign, new Vector3(0f, 0.95f, -0.06f), new Vector3(0.55f, 0.55f, 0.04f), Gen.Hex("F5B642"), default, 0.4f);
+                // The price now lives on the floating pin; the island itself stays clean sand.
                 owned.Add(built);
                 forSale.Add(sale);
             }

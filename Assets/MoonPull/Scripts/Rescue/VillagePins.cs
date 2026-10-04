@@ -27,6 +27,7 @@ namespace MoonPull.Rescue
         [SerializeField] private Sprite coinSprite;
         [SerializeField] private Sprite islandSprite;
         [SerializeField] private Font font;
+        private readonly System.Collections.Generic.List<TextMesh> shadowLabels = new System.Collections.Generic.List<TextMesh>();
         [SerializeField] private Transform[] buildingSites = new Transform[0];
         [SerializeField] private Transform[] islandSpots = new Transform[0];
 
@@ -80,7 +81,16 @@ namespace MoonPull.Rescue
                 label.characterSize = 0.045f;
                 label.anchor = TextAnchor.MiddleCenter;
                 label.alignment = TextAlignment.Center;
-                label.color = new Color(0.1f, 0.07f, 0.28f);
+                label.color = Color.white;
+                label.fontStyle = FontStyle.Bold;
+                // Dark drop shadow so the white price reads over sand, water and sky alike.
+                var shadow = Instantiate(labelGo.gameObject, root).transform;
+                shadow.name = "PriceShadow";
+                shadow.localPosition = labelGo.localPosition + new Vector3(0.025f, -0.025f, 0.005f);
+                var shadowText = shadow.GetComponent<TextMesh>();
+                shadowText.color = new Color(0.05f, 0.04f, 0.15f, 0.9f);
+                shadow.GetComponent<MeshRenderer>().sortingOrder = 11;
+                shadowLabels.Add(shadowText);
             }
 
             root.gameObject.SetActive(false);
@@ -102,7 +112,11 @@ namespace MoonPull.Rescue
                         show = active && VillageDirector.ShowIslandPins && !TycoonState.Owns(pin.Index);
                         bool ready = TycoonState.CanBuyNext(pin.Index);
                         pin.Body.color = ready ? new Color(0.36f, 0.83f, 0.36f) : new Color(0.55f, 0.58f, 0.75f);
-                        pin.Label.text = TycoonState.IslandCost(pin.Index).ToString();
+                        pin.Label.text = TycoonState.IslandCost(pin.Index).ToString("N0");
+                        foreach (TextMesh sh in shadowLabels)
+                        {
+                            if (sh.transform.parent == pin.Root) sh.text = pin.Label.text;
+                        }
                     }
                     else
                     {

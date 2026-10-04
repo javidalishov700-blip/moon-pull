@@ -776,6 +776,17 @@ namespace MoonPull.EditorTools
             return popup;
         }
 
+        /// <summary>One clear green button that shows the price itself: coin + amount, no separate label.</summary>
+        private static Button PriceButton(Transform row, string name, Vector2 position, Vector2 size, out Text amount)
+        {
+            Button button = Button(row, name, "", new Vector2(1f, 0.5f), position, size, Go, 34, false);
+            RectTransform price = Stretch("Price", button.transform); // hidden together with the button when not for sale
+            CoinIcon(price, new Vector2(0.5f, 0.5f), new Vector2(-size.x * 0.28f, 4f), 52f);
+            amount = Text(price, "Amount", "0", 40, Center, new Vector2(size.x * 0.12f, 4f), new Vector2(size.x * 0.6f, 60f), Color.white, TextAnchor.MiddleCenter, true);
+            amount.raycastTarget = false;
+            return button;
+        }
+
         private static VillagePopup BuildVillage(Transform parent)
         {
             // A bottom sheet: the live village stays visible (and tappable) above it.
@@ -846,10 +857,8 @@ namespace MoonPull.EditorTools
                 Loc(row.transform, "Name", "boat_up." + parts[i] + ".name", 36, new Vector2(0f, 0.5f), new Vector2(330f, 24f), new Vector2(420f, 50f), TextLight, TextAnchor.MiddleLeft, true);
                 Loc(row.transform, "Desc", "boat_up." + parts[i] + ".desc", 26, new Vector2(0f, 0.5f), new Vector2(330f, -24f), new Vector2(420f, 50f), Muted, TextAnchor.MiddleLeft);
                 boatLevels.Add(Text(row.transform, "Level", "0/5", 32, new Vector2(1f, 0.5f), new Vector2(-330f, 0f), new Vector2(100f, 60f), Gold, TextAnchor.MiddleCenter, true));
-                Button up = Button(row.transform, "Upgrade", LocKeys.VillageUpgrade, new Vector2(1f, 0.5f), new Vector2(-140f, 18f), new Vector2(230f, 66f), Go, 32);
-                Image costBg = Image(row.transform, "Cost", new Vector2(1f, 0.5f), new Vector2(-140f, -36f), new Vector2(230f, 44f), new Color(0f, 0f, 0f, 0.3f));
-                CoinIcon(costBg.transform, new Vector2(0f, 0.5f), new Vector2(28f, 0f), 36f);
-                boatCosts.Add(Text(costBg.transform, "Amount", "0", 28, Center, new Vector2(20f, 0f), new Vector2(160f, 44f), Gold, TextAnchor.MiddleCenter, true));
+                Button up = PriceButton(row.transform, "Upgrade", new Vector2(-140f, 0f), new Vector2(230f, 92f), out Text upCost);
+                boatCosts.Add(upCost);
                 boatButtons.Add(up);
                 boatMaxes.Add(Loc(row.transform, "Max", LocKeys.VillageMax, 32, new Vector2(1f, 0.5f), new Vector2(-140f, 0f), new Vector2(230f, 60f), Accent, TextAnchor.MiddleCenter, true).gameObject);
             }
@@ -869,10 +878,8 @@ namespace MoonPull.EditorTools
                 Loc(row.transform, "Name", "village." + ids[i] + ".name", 36, new Vector2(0f, 0.5f), new Vector2(320f, 24f), new Vector2(400f, 50f), TextLight, TextAnchor.MiddleLeft, true);
                 Loc(row.transform, "Desc", "village." + ids[i] + ".desc", 26, new Vector2(0f, 0.5f), new Vector2(320f, -24f), new Vector2(400f, 50f), Muted, TextAnchor.MiddleLeft);
                 levels.Add(Text(row.transform, "Level", "0/3", 32, new Vector2(1f, 0.5f), new Vector2(-330f, 0f), new Vector2(100f, 60f), Gold, TextAnchor.MiddleCenter, true));
-                Button build = Button(row.transform, "Build", LocKeys.VillageUpgrade, new Vector2(1f, 0.5f), new Vector2(-140f, 18f), new Vector2(230f, 66f), Primary, 32);
-                Image costBg = Image(row.transform, "Cost", new Vector2(1f, 0.5f), new Vector2(-140f, -36f), new Vector2(230f, 44f), new Color(0f, 0f, 0f, 0.3f));
-                CoinIcon(costBg.transform, new Vector2(0f, 0.5f), new Vector2(28f, 0f), 36f);
-                costs.Add(Text(costBg.transform, "Amount", "0", 28, Center, new Vector2(20f, 0f), new Vector2(160f, 44f), Gold, TextAnchor.MiddleCenter, true));
+                Button build = PriceButton(row.transform, "Build", new Vector2(-140f, 0f), new Vector2(230f, 92f), out Text buildCost);
+                costs.Add(buildCost);
                 buttons.Add(build);
                 maxes.Add(Loc(row.transform, "Max", LocKeys.VillageMax, 32, new Vector2(1f, 0.5f), new Vector2(-140f, 0f), new Vector2(230f, 60f), Accent, TextAnchor.MiddleCenter, true).gameObject);
                 capped.Add(Loc(row.transform, "Capped", LocKeys.VillageNeedsLevel, 26, new Vector2(1f, 0.5f), new Vector2(-140f, 0f), new Vector2(240f, 80f), Muted, TextAnchor.MiddleCenter, true));
@@ -891,13 +898,11 @@ namespace MoonPull.EditorTools
                 Image(row.transform, "Icon", new Vector2(0f, 0.5f), new Vector2(70f, 0f), new Vector2(110f, 110f), Color.white, Art.BuildingIcon("island", islandTints[i]));
                 Loc(row.transform, "Name", "island." + id + ".name", 36, new Vector2(0f, 0.5f), new Vector2(330f, 24f), new Vector2(420f, 50f), TextLight, TextAnchor.MiddleLeft, true);
                 Loc(row.transform, "Desc", "island." + id + ".desc", 26, new Vector2(0f, 0.5f), new Vector2(330f, -24f), new Vector2(420f, 50f), Muted, TextAnchor.MiddleLeft);
-                Button buy = Button(row.transform, "Buy", LocKeys.IslandBuy, new Vector2(1f, 0.5f), new Vector2(-150f, 20f), new Vector2(250f, 70f), Go, 34);
-                Image costBg = Image(row.transform, "Cost", new Vector2(1f, 0.5f), new Vector2(-150f, -38f), new Vector2(250f, 44f), new Color(0f, 0f, 0f, 0.3f));
-                CoinIcon(costBg.transform, new Vector2(0f, 0.5f), new Vector2(28f, 0f), 36f);
-                islandCosts.Add(Text(costBg.transform, "Amount", "0", 28, Center, new Vector2(20f, 0f), new Vector2(180f, 44f), Gold, TextAnchor.MiddleCenter, true));
+                Button buy = PriceButton(row.transform, "Buy", new Vector2(-150f, 0f), new Vector2(250f, 92f), out Text buyCost);
+                islandCosts.Add(buyCost);
                 islandButtons.Add(buy);
                 islandOwned.Add(Loc(row.transform, "Owned", LocKeys.IslandOwned, 36, new Vector2(1f, 0.5f), new Vector2(-150f, 0f), new Vector2(250f, 60f), Accent, TextAnchor.MiddleCenter, true).gameObject);
-                islandLocked.Add(Loc(row.transform, "Locked", LocKeys.VillageNeedsLevel, 24, new Vector2(1f, 0.5f), new Vector2(-150f, 22f), new Vector2(260f, 60f), Muted, TextAnchor.MiddleCenter, true));
+                islandLocked.Add(Loc(row.transform, "Locked", LocKeys.VillageNeedsLevel, 26, new Vector2(1f, 0.5f), new Vector2(-150f, 0f), new Vector2(270f, 80f), Muted, TextAnchor.MiddleCenter, true));
             }
 
             Gen.Wire(popup, "sheet", p, "exploreButton", explore, "boatTab", tabBoat, "boatPage", boatPage.gameObject);

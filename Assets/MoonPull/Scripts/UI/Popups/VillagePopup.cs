@@ -152,6 +152,11 @@ namespace MoonPull.UI
         {
             exploring = value;
             VillageDirector.ShowIslandPins = value;
+            foreach (string arrow in new[] { "IslandLeft", "IslandRight" })
+            {
+                Transform a = transform.Find(arrow);
+                if (a != null) a.gameObject.SetActive(value); // island stepping only in the full village view
+            }
             if (exploreButton != null)
             {
                 exploreButton.GetComponentInChildren<LocalizedText>().SetKey(value ? LocKeys.VillageManage : LocKeys.VillageExplore);

@@ -153,8 +153,8 @@ namespace MoonPull.EditorTools
         }
 
         /// <summary>
-        /// A villager with human proportions (about 7 heads tall): legs, a coat, arms with hands, a neck, a small head
-        /// with hair, eyes and a nose, and a lantern in one hand. Faces -Z (towards the camera).
+        /// A chunky cartoon villager: short legs, a round body in their colour, stubby arms, a big head with a hair
+        /// cap and a smile, and a lantern in one hand. Faces -Z (towards the camera).
         /// Parts named "Coat", "Hair" and "Skin" are recoloured per villager at runtime.
         /// </summary>
         private static void Person(Transform parent, Vector3 at, float scale, Color coat)
@@ -168,41 +168,39 @@ namespace MoonPull.EditorTools
             Color shoes = Gen.Hex("2A2522");
             Color ink = Gen.Hex("1E1A22");
 
-            // Legs and shoes.
+            // Chunky, friendly base-builder villager (about three heads tall): readable from far above.
             for (int side = -1; side <= 1; side += 2)
             {
-                Gen.Prim(PrimitiveType.Capsule, p, new Vector3(0.055f * side, 0.24f, 0f), new Vector3(0.085f, 0.21f, 0.09f), trousers);
-                Gen.Prim(PrimitiveType.Sphere, p, new Vector3(0.055f * side, 0.035f, -0.03f), new Vector3(0.09f, 0.06f, 0.15f), shoes);
+                Gen.Prim(PrimitiveType.Capsule, p, new Vector3(0.075f * side, 0.15f, 0f), new Vector3(0.12f, 0.13f, 0.12f), trousers);
+                Gen.Prim(PrimitiveType.Sphere, p, new Vector3(0.075f * side, 0.04f, -0.035f), new Vector3(0.13f, 0.08f, 0.18f), shoes);
             }
 
-            // Torso (coat), shoulders and a belt line.
-            Gen.Prim(PrimitiveType.Capsule, p, new Vector3(0f, 0.6f, 0f), new Vector3(0.22f, 0.2f, 0.15f), coat).name = "Coat";
-            Gen.Prim(PrimitiveType.Cylinder, p, new Vector3(0f, 0.47f, 0f), new Vector3(0.2f, 0.015f, 0.14f), Gen.Hex("4A3526"));
+            // Round body in the villager's colour, with a belt.
+            Gen.Prim(PrimitiveType.Sphere, p, new Vector3(0f, 0.42f, 0f), new Vector3(0.34f, 0.36f, 0.28f), coat).name = "Coat";
+            Gen.Prim(PrimitiveType.Cylinder, p, new Vector3(0f, 0.33f, 0f), new Vector3(0.3f, 0.02f, 0.25f), Gen.Hex("4A3526"));
 
-            // Arms hanging at the sides; the right hand carries a small lantern.
+            // Stubby arms; the right hand carries a lantern.
             for (int side = -1; side <= 1; side += 2)
             {
-                Gen.Prim(PrimitiveType.Capsule, p, new Vector3(0.14f * side, 0.6f, 0f), new Vector3(0.06f, 0.16f, 0.06f), coat, new Vector3(0f, 0f, 8f * side)).name = "Coat";
-                Gen.Prim(PrimitiveType.Sphere, p, new Vector3(0.16f * side, 0.43f, 0f), new Vector3(0.055f, 0.06f, 0.055f), skin).name = "Skin";
+                Gen.Prim(PrimitiveType.Capsule, p, new Vector3(0.2f * side, 0.42f, 0f), new Vector3(0.1f, 0.13f, 0.1f), coat, new Vector3(0f, 0f, 18f * side)).name = "Coat";
+                Gen.Prim(PrimitiveType.Sphere, p, new Vector3(0.24f * side, 0.3f, 0f), new Vector3(0.09f, 0.09f, 0.09f), skin).name = "Skin";
             }
 
-            Gen.Prim(PrimitiveType.Cylinder, p, new Vector3(0.16f, 0.36f, -0.01f), new Vector3(0.006f, 0.04f, 0.006f), ink);
-            Gen.Prim(PrimitiveType.Cube, p, new Vector3(0.16f, 0.3f, -0.01f), new Vector3(0.06f, 0.08f, 0.06f), Gen.Hex("E8A64A"), default, 0.9f);
+            Gen.Prim(PrimitiveType.Cylinder, p, new Vector3(0.24f, 0.24f, -0.02f), new Vector3(0.008f, 0.04f, 0.008f), ink);
+            Gen.Prim(PrimitiveType.Cube, p, new Vector3(0.24f, 0.18f, -0.02f), new Vector3(0.08f, 0.1f, 0.08f), Gen.Hex("E8A64A"), default, 0.9f);
 
-            // Neck and head.
-            Gen.Prim(PrimitiveType.Cylinder, p, new Vector3(0f, 0.8f, 0f), new Vector3(0.06f, 0.03f, 0.06f), skin).name = "Skin";
+            // Big round head with a hair cap, dot eyes, rosy cheeks and a smile.
             Transform head = Gen.Go("Head", p).transform;
-            head.localPosition = new Vector3(0f, 0.9f, 0f);
-            Gen.Prim(PrimitiveType.Sphere, head, Vector3.zero, new Vector3(0.15f, 0.17f, 0.15f), skin).name = "Skin";
+            head.localPosition = new Vector3(0f, 0.78f, 0f);
+            Gen.Prim(PrimitiveType.Sphere, head, Vector3.zero, new Vector3(0.32f, 0.31f, 0.3f), skin).name = "Skin";
+            Gen.Prim(PrimitiveType.Sphere, head, new Vector3(0f, 0.06f, 0.02f), new Vector3(0.335f, 0.24f, 0.31f), hair).name = "Hair";
             for (int side = -1; side <= 1; side += 2)
             {
-                Gen.Prim(PrimitiveType.Sphere, head, new Vector3(0.033f * side, 0.012f, -0.068f), new Vector3(0.018f, 0.022f, 0.01f), ink); // eye
-                Gen.Prim(PrimitiveType.Sphere, head, new Vector3(0.075f * side, 0f, 0f), new Vector3(0.025f, 0.04f, 0.03f), skin).name = "Skin"; // ear
+                Gen.Prim(PrimitiveType.Sphere, head, new Vector3(0.06f * side, -0.01f, -0.14f), new Vector3(0.04f, 0.05f, 0.02f), ink); // eye
+                Gen.Prim(PrimitiveType.Sphere, head, new Vector3(0.1f * side, -0.06f, -0.12f), new Vector3(0.05f, 0.03f, 0.02f), Gen.Hex("F08A7A")); // cheek
             }
 
-            Gen.Prim(PrimitiveType.Sphere, head, new Vector3(0f, -0.018f, -0.075f), new Vector3(0.022f, 0.03f, 0.025f), skin).name = "Skin"; // nose
-            Gen.Prim(PrimitiveType.Cube, head, new Vector3(0f, -0.048f, -0.068f), new Vector3(0.035f, 0.006f, 0.005f), Gen.Hex("8A4A42")); // mouth
-            Gen.Prim(PrimitiveType.Sphere, head, new Vector3(0f, 0.035f, 0.012f), new Vector3(0.16f, 0.13f, 0.155f), hair).name = "Hair";
+            Gen.Prim(PrimitiveType.Cube, head, new Vector3(0f, -0.075f, -0.145f), new Vector3(0.06f, 0.012f, 0.01f), Gen.Hex("8A4A42")); // smile
         }
 
         /// <summary>Night Rescue props: castaway rafts, sky lanterns, lighthouse islands and village houses.</summary>
