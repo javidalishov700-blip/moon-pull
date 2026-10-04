@@ -57,7 +57,7 @@ namespace MoonPull.Rescue
         private Vector2 pan;
         private Vector2 panTarget;
         private bool panGliding;
-        private int focusIndex;
+        private int focusIndex = -1; // -1 = the harbor island
 
         /// <summary>Glides the camera to the next island to the right (+1) or left (-1).</summary>
         public void FocusStep(int dir)
@@ -71,7 +71,13 @@ namespace MoonPull.Rescue
                 }
             }
 
+            // Left/right as seen from the camera: islands ordered by x, starting from the harbor.
             stops.Sort((a, b) => a.x.CompareTo(b.x));
+            if (focusIndex < 0)
+            {
+                focusIndex = stops.IndexOf(Vector2.zero);
+            }
+
             focusIndex = Mathf.Clamp(focusIndex + dir, 0, stops.Count - 1);
             panTarget = stops[focusIndex];
             panGliding = true;
@@ -91,7 +97,7 @@ namespace MoonPull.Rescue
             {
                 pan = Vector2.zero;
                 zoom = 1f;
-                focusIndex = 0;
+                focusIndex = -1;
                 panGliding = false;
             }
         }
@@ -317,7 +323,7 @@ namespace MoonPull.Rescue
             float unitsPerPixel = 0.025f * zoom * 1080f / Mathf.Max(1f, Screen.width);
             pan -= delta * unitsPerPixel;
             panGliding = false;
-            pan = new Vector2(Mathf.Clamp(pan.x, -10f, 46f), Mathf.Clamp(pan.y, -8f, 12f));
+            pan = new Vector2(Mathf.Clamp(pan.x, -10f, 10f), Mathf.Clamp(pan.y, -8f, 14f));
         }
 
         private void Walk()
