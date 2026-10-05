@@ -48,6 +48,7 @@ namespace MoonPull.EditorTools
             StampInfoPlist(builtPath);
             WriteAppIcon(builtPath);
             WritePrivacyManifest(builtPath);
+            StripGameCenterEntitlement(builtPath);
             WriteLocalizations(builtPath);
         }
 
@@ -171,6 +172,31 @@ namespace MoonPull.EditorTools
             }
 
             project.WriteToFile(pbxPath);
+        }
+
+        // Unity adds the Game Center entitlement because the game uses Social (leaderboards). Until the App Store
+        // provisioning profile includes Game Center, strip it so archives sign; the leaderboard then simply stays offline.
+        // Remove this once "Moon Pull App Store" is regenerated with Game Center enabled.
+        private static void StripGameCenterEntitlement(string builtPath)
+        {
+            foreach (string file in Directory.GetFiles(builtPath, "*.entitlements", SearchOption.AllDirectories))
+            {
+                var doc = new PlistDocument();
+                doc.ReadFromFile(file);
+                if (doc.root.values.Remove("com.apple.developer.game-center"))
+                {
+                    doc.WriteToFile(file);
+                }
+            }
+
+            string pbxPath = PBXProject.GetPBXProjectPath(builtPath);
+            string text = File.ReadAllText(pbxPath);
+            string cleaned = System.Text.RegularExpressions.Regex.Replace(text,
+                @"com\.apple\.GameCenter\s*=\s*\{\s*enabled\s*=\s*1;\s*\};", "com.apple.GameCenter = { enabled = 0; };");
+            if (cleaned != text)
+            {
+                File.WriteAllText(pbxPath, cleaned);
+            }
         }
     }
 }
