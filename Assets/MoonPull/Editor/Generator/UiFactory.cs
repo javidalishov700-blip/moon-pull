@@ -109,8 +109,11 @@ namespace MoonPull.EditorTools
         {
             RectTransform root = Stretch(name, parent);
             Group(root.gameObject);
-            Backdrop(root, new Color(0.02f, 0.03f, 0.1f, 0.72f));
+            Backdrop(root, new Color(0.02f, 0.03f, 0.1f, 0.84f)); // the screen behind a popup steps clearly back
             panel = Image(root, "Content", Center, Vector2.zero, size, Panel).rectTransform;
+            var frame = panel.gameObject.AddComponent<Outline>();
+            frame.effectColor = new Color(0.96f, 0.72f, 0.18f, 0.9f); // thin gold frame on every panel
+            frame.effectDistance = new Vector2(5f, -5f);
             // Title ribbon riding on the top edge of the panel.
             Image ribbon = Image(panel, "Header", Top, new Vector2(0f, -40f), new Vector2(Mathf.Min(size.x - 160f, 720f), 120f), Primary, Art.ChunkyButton);
             ribbon.raycastTarget = false;
@@ -215,12 +218,13 @@ namespace MoonPull.EditorTools
             RectTransform c = ContentOf(screen);
 
             Text(c, "Title", "MOON PULL", 132, Top, new Vector2(0f, -280f), new Vector2(1000f, 170f), Gold, TextAnchor.MiddleCenter, true);
-            Text(c, "Subtitle", "Night Rescue", 50, Top, new Vector2(0f, -370f), new Vector2(800f, 70f), TextLight, TextAnchor.MiddleCenter, true);
-            LocalizedText region = Loc(c, "Region", "region.tropical_lagoon", 42, Top, new Vector2(0f, -430f), new Vector2(900f, 70f), Accent);
-            LocalizedText level = Loc(c, "Level", LocKeys.MenuLevel, 66, Top, new Vector2(0f, -490f), new Vector2(900f, 90f), TextLight, TextAnchor.MiddleCenter, true);
+            LocalizedText region = Loc(c, "Region", "region.tropical_lagoon", 40, Top, new Vector2(0f, -375f), new Vector2(900f, 60f), Accent);
+            LocalizedText level = Loc(c, "Level", LocKeys.MenuLevel, 48, Top, new Vector2(0f, -432f), new Vector2(900f, 64f), TextLight, TextAnchor.MiddleCenter, true);
             Image starIcon = Image(c, "StarIcon", Top, new Vector2(-50f, -580f), new Vector2(64f, 64f), Color.white, Art.Star(true));
             starIcon.raycastTarget = false;
             Text stars = Text(c, "Stars", "0", 48, Top, new Vector2(72f, -580f), new Vector2(160f, 70f), Gold, TextAnchor.MiddleLeft, true);
+            starIcon.gameObject.SetActive(false); // the title block stays two lines: region and level
+            stars.gameObject.SetActive(false);
             LocalizedText locked = Loc(c, "Locked", LocKeys.LighthouseRegionLocked, 38, Top, new Vector2(0f, -660f), new Vector2(900f, 60f), Primary);
 
             Button play = Button(c, "Play", LocKeys.MenuPlay, Bottom, new Vector2(0f, 560f), new Vector2(680f, 220f), Go, 96);
@@ -237,7 +241,10 @@ namespace MoonPull.EditorTools
             gear.raycastTarget = false;
             Button chestButton = Button(c, "BossChest", LocKeys.ChestTitle, TopLeft, new Vector2(210f, -210f), new Vector2(340f, 96f), Gen.Hex("B8742E"), 34);
             Badge chestBadge = Badge(chestButton.transform, new Vector2(-10f, -10f));
-            Text goal = Text(c, "Goal", "", 34, Top, new Vector2(0f, -725f), new Vector2(960f, 60f), Gold, TextAnchor.MiddleCenter, true);
+            // The next goal sits on its own plate just above the record pill, never over the islands.
+            Image goalPlate = Image(c, "GoalPlate", Bottom, new Vector2(0f, 805f), new Vector2(900f, 70f), new Color(0.05f, 0.07f, 0.18f, 0.85f), Art.Rounded);
+            goalPlate.raycastTarget = false;
+            Text goal = Text(goalPlate.transform, "Goal", "", 32, Center, Vector2.zero, new Vector2(880f, 64f), Gold, TextAnchor.MiddleCenter, true);
 
             float y = 320f;
             Button shop = IconTile(c, "Shop", LocKeys.MenuShop, new Vector2(-390f, y), PanelLight, "bag");
@@ -611,13 +618,15 @@ namespace MoonPull.EditorTools
 
                 float angle = i * 45f * Mathf.Deg2Rad;
                 Text label = Text(wheel, "Label" + i, "", 34, Center, new Vector2(Mathf.Sin(angle) * 240f, Mathf.Cos(angle) * 240f),
-                    new Vector2(220f, 70f), Ink, TextAnchor.MiddleCenter, true);
-                label.rectTransform.localEulerAngles = new Vector3(0f, 0f, -i * 45f);
+                    new Vector2(220f, 70f), Color.white, TextAnchor.MiddleCenter, true);
+                // Bottom-half labels are flipped so none read upside down.
+                label.rectTransform.localEulerAngles = new Vector3(0f, 0f, -i * 45f + (i >= 3 && i <= 5 ? 180f : 0f));
                 labels.Add(label);
             }
 
-            Image(wheel, "Hub", Center, Vector2.zero, new Vector2(120f, 120f), Ink, Art.Circle);
-            Image pointer = Image(p, "Pointer", Center, new Vector2(0f, 545f), new Vector2(70f, 70f), Danger, Art.Square);
+            Image(wheel, "Hub", Center, Vector2.zero, new Vector2(140f, 140f), Gold, Art.Circle);
+            Image(wheel, "HubStar", Center, Vector2.zero, new Vector2(96f, 96f), Color.white, Art.Star(true));
+            Image pointer = Image(p, "Pointer", Center, new Vector2(0f, 545f), new Vector2(80f, 80f), Gold, Art.Square);
             pointer.rectTransform.localEulerAngles = new Vector3(0f, 0f, 45f);
 
             LocalizedText status = Loc(p, "Status", LocKeys.SpinTitle, 44, Center, new Vector2(0f, -290f), new Vector2(900f, 70f), Gold, TextAnchor.MiddleCenter, true);

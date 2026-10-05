@@ -49,7 +49,7 @@ namespace MoonPull.UI
             progressFill.fillAmount = Mathf.Clamp01(progress.Progress / (float)definition.Target);
             progressLabel.SetText("{0}/{1}", progress.Progress, definition.Target);
             rewardLabel.SetText("{0}", definition.RewardCoins);
-            claimButton.gameObject.SetActive(!progress.Claimed);
+            claimButton.gameObject.SetActive(!progress.Claimed && service.CanClaim(progress)); // only a finished mission shows Claim
             claimButton.interactable = service.CanClaim(progress);
             claimedMark.SetActive(progress.Claimed);
         }

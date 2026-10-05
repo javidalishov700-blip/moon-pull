@@ -421,7 +421,9 @@ namespace MoonPull.EditorTools
                 }
                 Palm(built.transform, new Vector3(-0.9f, 0.05f, 0f), 0.6f);
                 GameObject sale = Gen.Go("ForSale", root);
-                // The price now lives on the floating pin; the island itself stays clean sand.
+                // The price now lives on the floating pin; a lone palm hints at what the island could become.
+                Palm(sale.transform, new Vector3(-0.8f, 0.05f, 0.3f), 0.75f);
+                Gen.Prim(PrimitiveType.Sphere, sale.transform, new Vector3(0.6f, -0.1f, -0.3f), new Vector3(0.8f, 0.45f, 0.6f), Gen.Hex("7E8790")); // rock
                 owned.Add(built);
                 forSale.Add(sale);
             }
