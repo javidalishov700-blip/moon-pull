@@ -527,11 +527,12 @@ namespace MoonPull.Rescue
 
         private void Reward(int xp, string key, params object[] args)
         {
+            int before = VillageState.Level;
             int levels = VillageState.AddXp(xp);
             Say(key, args);
             if (levels > 0 && meta != null)
             {
-                int reward = VillageState.LevelReward(VillageState.Level);
+                int reward = VillageState.RewardSince(before);
                 meta.Wallet.AddCoins(reward, "village_level");
                 Say("village.levelup", VillageState.Level, reward);
             }

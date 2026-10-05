@@ -91,6 +91,8 @@ namespace MoonPull.EditorTools
             Boss = Gen.So<BossConfig>("Config", "BossConfig");
             Rewind = Gen.So<RewindConfig>("Config", "RewindConfig");
             Economy = Gen.So<EconomyConfig>("Config", "EconomyConfig");
+            // Night Rescue pays everything itself (rescues, dawn coins, level-ups); the generic level formula adds nothing on top.
+            Gen.Wire(Economy, "baseLevelCoins", 0, "coinsPerLevelIndex", 0f, "coinsPerStar", 0, "coinsPerPassenger", 0);
             Ads = Gen.So<AdConfig>("Config", "AdConfig");
             Iap = Gen.So<IapConfig>("Config", "IapConfig");
             Feedback = Gen.So<FeedbackConfig>("Config", "FeedbackConfig");

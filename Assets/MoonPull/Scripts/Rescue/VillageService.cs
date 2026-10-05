@@ -46,6 +46,9 @@ namespace MoonPull.Rescue
         public static bool IsCapped(VillageBuilding b) => Level(b) < MaxLevel && Level(b) >= VillageState.BuildingLevelCap;
 
         /// <summary>Building one more level needs enough people to staff every level (rescue more at sea).</summary>
+        /// <summary>Homes never wait for workers: a full village must always be able to build room for more people.</summary>
+        public static bool BlockedByWorkers(VillageBuilding b) => b != VillageBuilding.Shelter && NeedsWorkers;
+
         public static bool NeedsWorkers => VillageState.Population < TycoonState.JobsTotal + TycoonState.WorkersPerLevel;
 
         public static int WorkersNeeded => TycoonState.JobsTotal + TycoonState.WorkersPerLevel;
@@ -53,7 +56,7 @@ namespace MoonPull.Rescue
         public static bool TryUpgrade(VillageBuilding b, Wallet wallet)
         {
             int cost = NextCost(b);
-            if (cost < 0 || IsCapped(b) || NeedsWorkers || wallet == null || !wallet.TrySpendCoins(cost, "village_" + b.ToString().ToLowerInvariant()))
+            if (cost < 0 || IsCapped(b) || BlockedByWorkers(b) || wallet == null || !wallet.TrySpendCoins(cost, "village_" + b.ToString().ToLowerInvariant()))
             {
                 return false;
             }
@@ -77,7 +80,7 @@ namespace MoonPull.Rescue
             {
                 var building = (VillageBuilding)b;
                 int cost = NextCost(building);
-                if (cost >= 0 && !IsCapped(building) && !NeedsWorkers && wallet.CanAfford(cost))
+                if (cost >= 0 && !IsCapped(building) && !BlockedByWorkers(building) && wallet.CanAfford(cost))
                 {
                     return true;
                 }

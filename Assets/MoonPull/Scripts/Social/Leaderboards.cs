@@ -43,6 +43,11 @@ namespace MoonPull.Online
         public static bool ReportNight(int rescued)
         {
             bool record = rescued > PersonalBest;
+            if (RivalName != null && rescued >= RivalScore)
+            {
+                RivalName = null; // beaten: never show a "rival" below you while the board reloads
+                RivalScore = 0;
+            }
             if (record)
             {
                 PlayerPrefs.SetInt(BestKey, rescued);

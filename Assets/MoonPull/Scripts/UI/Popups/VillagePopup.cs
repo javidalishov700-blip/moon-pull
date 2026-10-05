@@ -251,7 +251,7 @@ namespace MoonPull.UI
                 Sfx(MoonPull.Audio.SfxId.Reward);
                 if (VillageState.Level > before)
                 {
-                    meta.Wallet.AddCoins(VillageState.LevelReward(VillageState.Level), "village_level");
+                    meta.Wallet.AddCoins(VillageState.RewardSince(before), "village_level");
                 }
             }
 
@@ -267,7 +267,7 @@ namespace MoonPull.UI
                 Sfx(MoonPull.Audio.SfxId.Purchase);
                 if (VillageState.Level > before)
                 {
-                    meta.Wallet.AddCoins(VillageState.LevelReward(VillageState.Level), "village_level");
+                    meta.Wallet.AddCoins(VillageState.RewardSince(before), "village_level");
                 }
             }
 
@@ -282,7 +282,12 @@ namespace MoonPull.UI
             }
 
             int perk = VillageState.NextPerk;
-            if (perk < 0)
+            if (VillageState.Population >= VillageState.Capacity)
+            {
+                // The most common stall: no room for new people. Say exactly what to do.
+                populationLabel.SetKey("village.pop_full", VillageState.Population);
+            }
+            else if (perk < 0)
             {
                 populationLabel.SetKey(LocKeys.VillagePopulation, VillageState.Population);
             }
@@ -365,7 +370,7 @@ namespace MoonPull.UI
                 int level = VillageService.Level(building);
                 int cost = VillageService.NextCost(building);
                 bool needsLevel = VillageService.IsCapped(building);
-                bool capped = needsLevel || (cost >= 0 && VillageService.NeedsWorkers);
+                bool capped = needsLevel || (cost >= 0 && VillageService.BlockedByWorkers(building));
                 levelLabels[i].SetText("{0}/{1}", level, VillageService.MaxLevel);
                 upgradeButtons[i].gameObject.SetActive(cost >= 0 && !capped);
                 upgradeButtons[i].interactable = cost >= 0 && meta.Wallet.CanAfford(cost);

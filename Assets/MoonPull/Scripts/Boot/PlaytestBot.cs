@@ -189,7 +189,7 @@ namespace MoonPull.Boot
                 {
                     var building = (VillageBuilding)b;
                     int cost = VillageService.NextCost(building);
-                    if (cost >= 0 && cost < bestCost && !VillageService.IsCapped(building) && !VillageService.NeedsWorkers && wallet.CanAfford(cost))
+                    if (cost >= 0 && cost < bestCost && !VillageService.IsCapped(building) && !VillageService.BlockedByWorkers(building) && wallet.CanAfford(cost))
                     {
                         bestCost = cost;
                         best = () => VillageService.TryUpgrade(building, wallet);
@@ -221,9 +221,15 @@ namespace MoonPull.Boot
                     }
                 }
 
+                int levelBefore = VillageState.Level;
                 if (best == null || !best())
                 {
                     break;
+                }
+
+                if (VillageState.Level > levelBefore)
+                {
+                    wallet.AddCoins(VillageState.RewardSince(levelBefore), "village_level"); // same as the Village screen
                 }
 
                 log.Add($"n{night}:{bestName}({bestCost})");

@@ -144,6 +144,7 @@ namespace MoonPull.Rescue
         private float progressCheckAt, progressCheckX;
         private float pressStartedAt, hopCooldown;
         private float hopQueued;
+        private readonly System.Collections.Generic.HashSet<int> uiFingers = new System.Collections.Generic.HashSet<int>();
 
         /// <summary>JUMP button. If pressed a moment early (mid-air), the hop fires on touchdown.</summary>
         public void RequestHop()
@@ -227,6 +228,15 @@ namespace MoonPull.Rescue
         /// <summary>Capture player / automation: overrides the touch input while set.</summary>
         public bool? ForcedHold { get; set; }
 
+        private void OnApplicationPause(bool paused)
+        {
+            if (paused)
+            {
+                ButtonHold = false; // a held DIVE can never stay stuck across backgrounding
+                uiFingers.Clear();
+            }
+        }
+
         /// <summary>DIVE button held (same as a finger on the sea).</summary>
         public bool ButtonHold { get; set; }
 
@@ -234,6 +244,8 @@ namespace MoonPull.Rescue
         public bool NewRecord { get; private set; }
 
         private bool recordAnnounced;
+        private float boostHint;
+        private bool boostTaught;
         private float recordFlash;
 
         /// <summary>0..1, filled by perfect landings and lanterns; BOOST spends it.</summary>
@@ -391,6 +403,10 @@ namespace MoonPull.Rescue
             runTime = 0f;
             BoostCharge = 0f;
             ButtonHold = false;
+            hopQueued = 0f;
+            hopCooldown = 0f;
+            holding = false;
+            uiFingers.Clear();
             recordAnnounced = false;
             recordFlash = 0f;
             NewRecord = false;
@@ -497,6 +513,12 @@ namespace MoonPull.Rescue
                 GameEvents.RaiseRescueLanded(1, 1f);
             }
 
+            if (boostHint > 0f)
+            {
+                boostHint -= deltaTime;
+                if (BoostCharge < 1f) CoachKey = "hud.coach_boost_charging";
+            }
+
             if (recordFlash > 0f)
             {
                 recordFlash -= deltaTime;
@@ -561,21 +583,31 @@ namespace MoonPull.Rescue
         {
             if (Input.touchCount > 0)
             {
-                // Any finger on the sea (not on a button) dives, so the thumb on JUMP doesn't block the other hand.
+                // A finger dives only if it STARTED on the sea: a thumb that slides off JUMP/BOOST or the pause button
+                // never turns into a dive.
+                bool any = false;
                 for (int i = 0; i < Input.touchCount; i++)
                 {
                     Touch touch = Input.GetTouch(i);
+                    if (touch.phase == TouchPhase.Began)
+                    {
+                        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject(touch.fingerId)) uiFingers.Add(touch.fingerId);
+                        else uiFingers.Remove(touch.fingerId);
+                    }
+
                     if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
                     {
+                        uiFingers.Remove(touch.fingerId);
                         continue;
                     }
 
-                    if (EventSystem.current == null || !EventSystem.current.IsPointerOverGameObject(touch.fingerId))
+                    if (!uiFingers.Contains(touch.fingerId))
                     {
-                        return true;
+                        any = true;
                     }
                 }
 
+                return any;
                 return false;
             }
 
@@ -676,6 +708,12 @@ namespace MoonPull.Rescue
             else if (diff < 0.32f && airTime > 0.35f && slopeAngle < 0.05f)
             {
                 perfectStreak++;
+                if (!boostTaught)
+                {
+                    boostTaught = true;
+                    boostHint = 2.5f; // first perfect landing: explain what it charged
+                }
+
                 BoostCharge = Mathf.Min(1f, BoostCharge + 0.34f);
                 Stats.Perfects++;
                 speed = Mathf.Max(along, speed) * 1.1f;
@@ -1066,6 +1104,10 @@ namespace MoonPull.Rescue
             {
                 running = false;
                 NightActive = false;
+                ButtonHold = false;
+                hopQueued = 0f;
+                recordFlash = 0f;
+                CoachKey = null;
                 ClearThings();
                 SetAboard(0);
                 foreach (GameObject go in hideWhileSailing)

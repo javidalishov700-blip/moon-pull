@@ -14,12 +14,13 @@ namespace MoonPull.UI
         [SerializeField] private Image fill;
         [SerializeField] private CanvasGroup group;
 
-        private bool down;
+        private int pointers;
+        private bool down => pointers > 0;
         private float pulse;
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            down = true;
+            pointers++;
             if (rescue == null) return;
             if (boost) rescue.UseBoost();
             else rescue.ButtonHold = true;
@@ -27,13 +28,18 @@ namespace MoonPull.UI
 
         public void OnPointerUp(PointerEventData eventData)
         {
-            down = false;
-            if (rescue != null && !boost) rescue.ButtonHold = false;
+            pointers = Mathf.Max(0, pointers - 1);
+            if (rescue != null && !boost && pointers == 0) rescue.ButtonHold = false;
+        }
+
+        private void OnApplicationPause(bool paused)
+        {
+            if (paused) OnDisable();
         }
 
         private void OnDisable()
         {
-            down = false;
+            pointers = 0;
             if (rescue != null && !boost) rescue.ButtonHold = false;
         }
 

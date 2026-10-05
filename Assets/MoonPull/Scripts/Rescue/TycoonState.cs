@@ -27,7 +27,7 @@ namespace MoonPull.Rescue
         // Per-level coins per minute for Shelter, Restaurant, Workshop, Shipyard, Market.
         private static readonly float[] BuildingIncome = { 1f, 3f, 2f, 2f, 5f };
 
-        private static readonly int[] IslandCosts = { 1500, 4000, 9000, 20000 };
+        private static readonly int[] IslandCosts = { 800, 2500, 6000, 14000 }; // first new island within the first week of play
         private static readonly int[] IslandVillageLevel = { 2, 4, 6, 8 };
         public static readonly string[] IslandIds = { "palm_cove", "coral_reef", "fisher_bay", "sky_peak" };
 

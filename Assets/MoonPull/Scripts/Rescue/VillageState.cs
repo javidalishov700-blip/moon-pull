@@ -91,6 +91,14 @@ namespace MoonPull.Rescue
             }
         }
 
+        /// <summary>Sum of the level-up rewards for every level gained after <paramref name="before"/>.</summary>
+        public static int RewardSince(int before)
+        {
+            int total = 0;
+            for (int l = before + 1; l <= Level; l++) total += LevelReward(l);
+            return total;
+        }
+
         public static bool IsHungry => Population > 0 && Food < 1f;
 
         public static int Homeless => Mathf.Max(0, Population - Housing);
@@ -152,7 +160,7 @@ namespace MoonPull.Rescue
 
             int settled = Mathf.Clamp(Capacity - Population, 0, count);
             PlayerPrefs.SetInt(PopulationKey, Population + settled);
-            AddXp(count * 10); // every rescue counts for the village's reputation
+            AddXp(count * 10); // every rescue counts for the village's reputation (even those who sail on)
             return settled;
         }
 
