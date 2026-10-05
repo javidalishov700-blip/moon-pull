@@ -321,6 +321,8 @@ namespace MoonPull.UI
 
             suppliesLabel.SetKey(LocKeys.VillageSupplies, Mathf.FloorToInt(TycoonState.Supplies), TycoonState.SupplyCapacity,
                 Mathf.Min(VillageState.Population, TycoonState.JobsTotal), TycoonState.JobsTotal);
+            // Only surface supplies/workers when they actually hold the village back; otherwise keep the screen calm.
+            suppliesLabel.gameObject.SetActive(TycoonState.Supplies < TycoonState.SupplyCapacity * 0.25f || VillageService.NeedsWorkers);
             treasuryFill.fillAmount = Mathf.Clamp01(treasury / TycoonState.Capacity);
             collectButton.interactable = treasury > 0;
 

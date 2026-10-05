@@ -240,18 +240,63 @@ namespace MoonPull.EditorTools
             }
         });
 
-        public static Sprite BoatIcon(string id, Color hull, Color sail) => Draw("boat_" + id, 192, (x, y) =>
+        public static Sprite BoatIcon(string id, Color hull, Color sail) => Draw("boat3d_" + id, 256, (x, y) =>
         {
-            Vector2 p = new Vector2(x, y);
-            bool hullShape = InTriangle(p, new Vector2(0.1f, 0.35f), new Vector2(0.9f, 0.35f), new Vector2(0.78f, 0.18f))
-                             || InTriangle(p, new Vector2(0.1f, 0.35f), new Vector2(0.78f, 0.18f), new Vector2(0.22f, 0.18f));
-            bool mast = x > 0.48f && x < 0.52f && y > 0.35f && y < 0.88f;
-            bool sailShape = InTriangle(p, new Vector2(0.53f, 0.86f), new Vector2(0.53f, 0.4f), new Vector2(0.84f, 0.4f));
-            bool water = y < 0.16f && y > 0.1f && x > 0.05f && x < 0.95f;
-            if (hullShape) return hull;
-            if (sailShape) return sail;
-            if (mast) return new Color(0.35f, 0.25f, 0.2f);
-            return water ? new Color(0.5f, 0.8f, 0.9f, 0.8f) : Color.clear;
+            // Side view matching the 3D boats: curved hull with plank lines and a curled prow, mast and yard, a billowing
+            // striped square sail, round shields on the rail, outlined like the rest of the UI and shaded from above.
+            Color stripe = Color.Lerp(sail, hull, 0.55f);
+            if (id == "dinghy") { stripe = new Color(0.78f, 0.22f, 0.18f); hull = new Color(0.55f, 0.36f, 0.22f); }
+            Color wood = new Color(0.36f, 0.25f, 0.18f);
+            Color outline = new Color(0.08f, 0.06f, 0.18f);
+            Func<float, float, int> shape = (u, v) =>
+            {
+                // 1 hull, 2 sail, 3 mast/yard, 4 prow
+                float hullTop = 0.36f, keel = 0.17f + 0.07f * Mathf.Pow((u - 0.5f) / 0.42f, 2f);
+                if (u > 0.08f && u < 0.92f && v < hullTop + 0.04f * Mathf.Pow((u - 0.5f) / 0.42f, 2f) && v > keel) return 1;
+                if (Vector2.Distance(new Vector2(u, v), new Vector2(0.88f, 0.47f)) < 0.05f || (u > 0.84f && u < 0.9f && v > 0.34f && v < 0.47f)) return 4;
+                if (u > 0.485f && u < 0.515f && v > 0.34f && v < 0.9f) return 3;
+                if (v > 0.82f && v < 0.85f && u > 0.26f && u < 0.74f) return 3;
+                float bulge = 0.04f * Mathf.Sin(Mathf.Clamp01((v - 0.45f) / 0.37f) * Mathf.PI);
+                if (v > 0.45f && v < 0.82f && u > 0.28f - bulge && u < 0.72f + bulge) return 2;
+                return 0;
+            };
+
+            int s0 = shape(x, y);
+            if (s0 == 0)
+            {
+                const float o = 0.018f;
+                bool edge = shape(x + o, y) != 0 || shape(x - o, y) != 0 || shape(x, y + o) != 0 || shape(x, y - o) != 0;
+                if (edge) return outline;
+                if (y > 0.1f && y < 0.15f && x > 0.06f && x < 0.94f) return new Color(0.45f, 0.78f, 0.9f, 0.85f); // water line
+                return Color.clear;
+            }
+
+            Color c;
+            switch (s0)
+            {
+                case 1:
+                    c = hull * Mathf.Lerp(0.75f, 1.1f, (y - 0.17f) / 0.2f);
+                    if (Mathf.Abs(y - 0.27f) < 0.006f || Mathf.Abs(y - 0.31f) < 0.006f) c *= 0.75f; // planks
+                    for (int k = 0; k < 3; k++)
+                    {
+                        if (Vector2.Distance(new Vector2(x, y), new Vector2(0.3f + k * 0.2f, 0.34f)) < 0.04f) c = k % 2 == 0 ? new Color(0.91f, 0.75f, 0.42f) : stripe;
+                    }
+
+                    break;
+                case 2:
+                    int band = Mathf.FloorToInt((x - 0.28f) / 0.0629f);
+                    c = (band % 2 == 0 ? stripe : sail) * Mathf.Lerp(0.85f, 1.05f, (y - 0.45f) / 0.37f);
+                    break;
+                case 4:
+                    c = hull * 0.95f;
+                    break;
+                default:
+                    c = wood;
+                    break;
+            }
+
+            c.a = 1f;
+            return c;
         });
 
         // ---------------------------------------------------------------- casual UI kit (9-sliced, tinted by Image.color)
