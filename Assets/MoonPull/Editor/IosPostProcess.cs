@@ -47,6 +47,7 @@ namespace MoonPull.EditorTools
 
             StampInfoPlist(builtPath);
             WriteAppIcon(builtPath);
+            WritePrivacyManifest(builtPath);
             WriteLocalizations(builtPath);
         }
 
@@ -112,6 +113,63 @@ namespace MoonPull.EditorTools
             string targetGuid = project.GetUnityMainTargetGuid();
             project.SetBuildProperty(targetGuid, "ASSETCATALOG_COMPILER_APPICON_NAME", AppIconName);
             project.SetBuildProperty(targetGuid, "ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS", "YES");
+            project.WriteToFile(pbxPath);
+        }
+
+        // App Store requires a privacy manifest: required-reason APIs the game uses (PlayerPrefs = UserDefaults) and
+        // what it collects. Ads/analytics SDKs ship their own manifests for their parts.
+        private const string PrivacyManifest = @"<?xml version=""1.0"" encoding=""UTF-8""?>
+<!DOCTYPE plist PUBLIC ""-//Apple//DTD PLIST 1.0//EN"" ""http://www.apple.com/DTDs/PropertyList-1.0.dtd"">
+<plist version=""1.0"">
+<dict>
+  <key>NSPrivacyTracking</key><true/>
+  <key>NSPrivacyTrackingDomains</key><array/>
+  <key>NSPrivacyCollectedDataTypes</key>
+  <array>
+    <dict>
+      <key>NSPrivacyCollectedDataType</key><string>NSPrivacyCollectedDataTypeDeviceID</string>
+      <key>NSPrivacyCollectedDataTypeLinked</key><false/>
+      <key>NSPrivacyCollectedDataTypeTracking</key><true/>
+      <key>NSPrivacyCollectedDataTypePurposes</key><array><string>NSPrivacyCollectedDataTypePurposeThirdPartyAdvertising</string></array>
+    </dict>
+    <dict>
+      <key>NSPrivacyCollectedDataType</key><string>NSPrivacyCollectedDataTypeProductInteraction</string>
+      <key>NSPrivacyCollectedDataTypeLinked</key><false/>
+      <key>NSPrivacyCollectedDataTypeTracking</key><false/>
+      <key>NSPrivacyCollectedDataTypePurposes</key><array><string>NSPrivacyCollectedDataTypePurposeAnalytics</string></array>
+    </dict>
+    <dict>
+      <key>NSPrivacyCollectedDataType</key><string>NSPrivacyCollectedDataTypeCrashData</string>
+      <key>NSPrivacyCollectedDataTypeLinked</key><false/>
+      <key>NSPrivacyCollectedDataTypeTracking</key><false/>
+      <key>NSPrivacyCollectedDataTypePurposes</key><array><string>NSPrivacyCollectedDataTypePurposeAppFunctionality</string></array>
+    </dict>
+  </array>
+  <key>NSPrivacyAccessedAPITypes</key>
+  <array>
+    <dict>
+      <key>NSPrivacyAccessedAPIType</key><string>NSPrivacyAccessedAPICategoryUserDefaults</string>
+      <key>NSPrivacyAccessedAPITypeReasons</key><array><string>CA92.1</string></array>
+    </dict>
+  </array>
+</dict>
+</plist>
+";
+
+        private static void WritePrivacyManifest(string builtPath)
+        {
+            const string relative = "Unity-iPhone/PrivacyInfo.xcprivacy";
+            File.WriteAllText(Path.Combine(builtPath, relative), PrivacyManifest, new UTF8Encoding(false));
+            string pbxPath = PBXProject.GetPBXProjectPath(builtPath);
+            var project = new PBXProject();
+            project.ReadFromFile(pbxPath);
+            string target = project.GetUnityMainTargetGuid();
+            if (!project.ContainsFileByProjectPath(relative))
+            {
+                string guid = project.AddFile(relative, relative);
+                project.AddFileToBuild(target, guid);
+            }
+
             project.WriteToFile(pbxPath);
         }
     }
