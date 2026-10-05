@@ -533,8 +533,7 @@ namespace MoonPull.EditorTools
             LocalizedText rarity = Loc(card.transform, "Rarity", LocKeys.RarityCommon, 30, new Vector2(0f, 0.5f), new Vector2(430f, 10f), new Vector2(420f, 44f), Accent, TextAnchor.MiddleLeft);
             Text perk = Text(card.transform, "Perk", "", 32, new Vector2(0f, 0.5f), new Vector2(430f, -50f), new Vector2(420f, 70f), TextLight, TextAnchor.UpperLeft);
 
-            Button buy = Button(card.transform, "Buy", "", new Vector2(1f, 0.5f), new Vector2(-150f, 45f), new Vector2(240f, 90f), Primary, 38, false);
-            Text price = buy.GetComponentInChildren<Text>();
+            Button buy = PriceButton(card.transform, "Buy", new Vector2(-150f, 45f), new Vector2(240f, 90f), out Text price); // same green coin button as the village
             Button select = Button(card.transform, "Select", LocKeys.BoatsSelect, new Vector2(1f, 0.5f), new Vector2(-150f, 45f), new Vector2(240f, 90f), Accent, 36);
             LocalizedText selected = Loc(card.transform, "Selected", LocKeys.BoatsSelected, 36, new Vector2(1f, 0.5f), new Vector2(-150f, 45f), new Vector2(240f, 90f), Accent, TextAnchor.MiddleCenter, true);
             LocalizedText iapOnly = Loc(card.transform, "IapOnly", LocKeys.BoatsIapOnly, 26, new Vector2(1f, 0.5f), new Vector2(-150f, 45f), new Vector2(260f, 90f), Primary);
