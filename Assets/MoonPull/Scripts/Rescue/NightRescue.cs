@@ -1084,7 +1084,7 @@ namespace MoonPull.Rescue
 
             int target = 3 + Mathf.Min(levelIndex, 30) / 2;
             int stars = rescued >= target * 2 ? 3 : rescued >= target ? 2 : 1;
-            int coins = Mathf.RoundToInt((rescued * 7 + lanternsCaught * 2) * VillageService.CoinMultiplier) + VillageService.DawnCoins(total) + levelReward
+            int coins = Mathf.RoundToInt((rescued * 9 + lanternsCaught * 3) * VillageService.CoinMultiplier) + VillageService.DawnCoins(total) + levelReward
                         + sailedOn * 6;
             Stats.Rescued = rescued;
             Stats.Lanterns = lanternsCaught;

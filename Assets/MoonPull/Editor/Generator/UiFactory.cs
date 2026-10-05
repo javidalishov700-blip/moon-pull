@@ -649,11 +649,11 @@ namespace MoonPull.EditorTools
             {
                 Image row = Image(p, "Mission" + i, Center, new Vector2(0f, 240f - i * 270f), new Vector2(880f, 240f), PanelLight);
                 LocalizedText desc = Loc(row.transform, "Desc", "mission.near_misses", 38, new Vector2(0f, 0.5f), new Vector2(300f, 55f), new Vector2(560f, 80f), TextLight, TextAnchor.MiddleLeft, true);
-                Image bar = Image(row.transform, "Bar", new Vector2(0f, 0.5f), new Vector2(300f, -30f), new Vector2(560f, 30f), new Color(0f, 0f, 0f, 0.35f));
-                Image fill = Fill(Image(bar.transform, "Fill", Center, Vector2.zero, new Vector2(552f, 22f), Accent), UnityEngine.UI.Image.FillMethod.Horizontal, 0f);
+                Image bar = Image(row.transform, "Bar", new Vector2(0f, 0.5f), new Vector2(300f, -30f), new Vector2(560f, 30f), Gen.Hex("0E1430"));
+                Image fill = Fill(Image(bar.transform, "Fill", Center, Vector2.zero, new Vector2(552f, 22f), Gen.Hex("F5B82E")), UnityEngine.UI.Image.FillMethod.Horizontal, 0f);
                 Text progress = Text(row.transform, "Progress", "0/5", 30, new Vector2(0f, 0.5f), new Vector2(300f, -80f), new Vector2(560f, 44f), Muted, TextAnchor.MiddleLeft);
                 CoinIcon(row.transform, new Vector2(1f, 0.5f), new Vector2(-230f, 60f), 50f);
-                Text reward = Text(row.transform, "Reward", "100", 36, new Vector2(1f, 0.5f), new Vector2(-140f, 60f), new Vector2(140f, 50f), Gold, TextAnchor.MiddleLeft, true);
+                Text reward = Text(row.transform, "Reward", "100", 36, new Vector2(1f, 0.5f), new Vector2(-115f, 60f), new Vector2(140f, 50f), Gold, TextAnchor.MiddleLeft, true);
                 Button claim = Button(row.transform, "Claim", LocKeys.CommonClaim, new Vector2(1f, 0.5f), new Vector2(-150f, -35f), new Vector2(240f, 100f), Primary, 38);
                 LocalizedText claimed = Loc(row.transform, "Claimed", LocKeys.CommonClaimed, 34, new Vector2(1f, 0.5f), new Vector2(-150f, -35f), new Vector2(240f, 100f), Accent, TextAnchor.MiddleCenter, true);
                 var missionRow = row.gameObject.AddComponent<MissionRow>();
