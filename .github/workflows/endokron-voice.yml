@@ -8,7 +8,7 @@ on:
     paths:
       - 'endokron-reels/voice/lines.json'
       - 'endokron-reels/voice/bake.py'
-      - 'endokron-reels/images/fetch.py'
+      - 'endokron-reels/voice/variants.json'
       - '.github/workflows/endokron-voice.yml'
   workflow_dispatch:
 
@@ -29,10 +29,8 @@ jobs:
           pip install -U edge-tts
           python -c "import asyncio,edge_tts;print([v['ShortName'] for v in asyncio.run(edge_tts.list_voices()) if v['Locale']=='tr-TR'])" \
             || pip install -q --force-reinstall "git+https://github.com/rany2/edge-tts.git"
-      - name: Bake
-        run: python endokron-reels/voice/bake.py || true
-      - name: Fetch scanner photos
-        run: python endokron-reels/images/fetch.py || true
+      - name: Bake variants
+        run: cd endokron-reels/voice && python bake_variants.py || true
       - name: Commit audio
         run: |
           git config user.name "endokron-voice-bot"
