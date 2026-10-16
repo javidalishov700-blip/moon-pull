@@ -1,0 +1,150 @@
+ok tr-TR-AhmetNeural l00 21024
+retry tr-TR-AhmetNeural l01 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+retry tr-TR-AhmetNeural l01 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+ok tr-TR-AhmetNeural l01 36432
+retry tr-TR-AhmetNeural l02 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+retry tr-TR-AhmetNeural l02 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+retry tr-TR-AhmetNeural l02 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+retry tr-TR-AhmetNeural l02 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+FAILED tr-TR-AhmetNeural l02
+retry tr-TR-AhmetNeural l03 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+ok tr-TR-AhmetNeural l03 31392
+retry tr-TR-AhmetNeural l04 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+retry tr-TR-AhmetNeural l04 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+retry tr-TR-AhmetNeural l04 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+retry tr-TR-AhmetNeural l04 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+FAILED tr-TR-AhmetNeural l04
+retry tr-TR-AhmetNeural l05 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+retry tr-TR-AhmetNeural l05 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+retry tr-TR-AhmetNeural l05 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+retry tr-TR-AhmetNeural l05 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+FAILED tr-TR-AhmetNeural l05
+retry tr-TR-AhmetNeural l06 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+retry tr-TR-AhmetNeural l06 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+retry tr-TR-AhmetNeural l06 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+retry tr-TR-AhmetNeural l06 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+FAILED tr-TR-AhmetNeural l06
+retry tr-TR-AhmetNeural l07 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+retry tr-TR-AhmetNeural l07 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+retry tr-TR-AhmetNeural l07 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+retry tr-TR-AhmetNeural l07 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+FAILED tr-TR-AhmetNeural l07
+retry tr-TR-AhmetNeural l08 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+retry tr-TR-AhmetNeural l08 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+ok tr-TR-AhmetNeural l08 16560
+retry tr-TR-AhmetNeural l09 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+retry tr-TR-AhmetNeural l09 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+retry tr-TR-AhmetNeural l09 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+retry tr-TR-AhmetNeural l09 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+FAILED tr-TR-AhmetNeural l09
+retry tr-TR-AhmetNeural l10 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+retry tr-TR-AhmetNeural l10 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+ok tr-TR-AhmetNeural l10 24912
+retry tr-TR-AhmetNeural l11 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+retry tr-TR-AhmetNeural l11 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+retry tr-TR-AhmetNeural l11 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+ok tr-TR-AhmetNeural l11 26784
+retry tr-TR-AhmetNeural l12 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+ok tr-TR-AhmetNeural l12 28368
+retry tr-TR-AhmetNeural l13 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+retry tr-TR-AhmetNeural l13 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+retry tr-TR-AhmetNeural l13 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+ok tr-TR-AhmetNeural l13 32688
+retry tr-TR-AhmetNeural l14 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+retry tr-TR-AhmetNeural l14 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+ok tr-TR-AhmetNeural l14 25632
+ok tr-TR-AhmetNeural l15 39312
+ok tr-TR-AhmetNeural l16 36576
+retry tr-TR-AhmetNeural l17 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+retry tr-TR-AhmetNeural l17 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+ok tr-TR-AhmetNeural l17 28656
+ok en-US-AndrewMultilingualNeural l00 18432
+ok en-US-AndrewMultilingualNeural l01 28080
+ok en-US-AndrewMultilingualNeural l02 27216
+ok en-US-AndrewMultilingualNeural l03 28944
+ok en-US-AndrewMultilingualNeural l04 29664
+ok en-US-AndrewMultilingualNeural l05 27216
+ok en-US-AndrewMultilingualNeural l06 45360
+ok en-US-AndrewMultilingualNeural l07 39744
+ok en-US-AndrewMultilingualNeural l08 11808
+ok en-US-AndrewMultilingualNeural l09 25200
+ok en-US-AndrewMultilingualNeural l10 22320
+ok en-US-AndrewMultilingualNeural l11 24048
+ok en-US-AndrewMultilingualNeural l12 26064
+ok en-US-AndrewMultilingualNeural l13 30240
+ok en-US-AndrewMultilingualNeural l14 23040
+ok en-US-AndrewMultilingualNeural l15 37872
+ok en-US-AndrewMultilingualNeural l16 28368
+ok en-US-AndrewMultilingualNeural l17 23328
+ok en-US-BrianMultilingualNeural l00 17136
+ok en-US-BrianMultilingualNeural l01 30960
+ok en-US-BrianMultilingualNeural l02 25920
+ok en-US-BrianMultilingualNeural l03 29808
+ok en-US-BrianMultilingualNeural l04 28224
+ok en-US-BrianMultilingualNeural l05 29952
+ok en-US-BrianMultilingualNeural l06 42912
+ok en-US-BrianMultilingualNeural l07 40176
+ok en-US-BrianMultilingualNeural l08 12960
+ok en-US-BrianMultilingualNeural l09 21600
+ok en-US-BrianMultilingualNeural l10 21600
+ok en-US-BrianMultilingualNeural l11 24624
+ok en-US-BrianMultilingualNeural l12 25200
+ok en-US-BrianMultilingualNeural l13 31968
+ok en-US-BrianMultilingualNeural l14 23040
+ok en-US-BrianMultilingualNeural l15 37008
+ok en-US-BrianMultilingualNeural l16 30240
+ok en-US-BrianMultilingualNeural l17 25488
+ok de-DE-FlorianMultilingualNeural l00 16704
+ok de-DE-FlorianMultilingualNeural l01 28944
+ok de-DE-FlorianMultilingualNeural l02 23616
+ok de-DE-FlorianMultilingualNeural l03 26496
+ok de-DE-FlorianMultilingualNeural l04 25920
+ok de-DE-FlorianMultilingualNeural l05 27792
+ok de-DE-FlorianMultilingualNeural l06 38592
+ok de-DE-FlorianMultilingualNeural l07 37440
+ok de-DE-FlorianMultilingualNeural l08 11808
+ok de-DE-FlorianMultilingualNeural l09 20304
+ok de-DE-FlorianMultilingualNeural l10 20304
+ok de-DE-FlorianMultilingualNeural l11 22896
+ok de-DE-FlorianMultilingualNeural l12 23616
+ok de-DE-FlorianMultilingualNeural l13 29520
+ok de-DE-FlorianMultilingualNeural l14 21024
+ok de-DE-FlorianMultilingualNeural l15 33408
+ok de-DE-FlorianMultilingualNeural l16 28080
+ok de-DE-FlorianMultilingualNeural l17 23328
+ok fr-FR-RemyMultilingualNeural l00 17424
+ok fr-FR-RemyMultilingualNeural l01 28944
+ok fr-FR-RemyMultilingualNeural l02 24912
+ok fr-FR-RemyMultilingualNeural l03 28080
+ok fr-FR-RemyMultilingualNeural l04 28224
+ok fr-FR-RemyMultilingualNeural l05 28368
+ok fr-FR-RemyMultilingualNeural l06 40320
+ok fr-FR-RemyMultilingualNeural l07 38448
+ok fr-FR-RemyMultilingualNeural l08 12384
+ok fr-FR-RemyMultilingualNeural l09 21456
+ok fr-FR-RemyMultilingualNeural l10 20304
+ok fr-FR-RemyMultilingualNeural l11 25488
+ok fr-FR-RemyMultilingualNeural l12 24624
+ok fr-FR-RemyMultilingualNeural l13 30240
+ok fr-FR-RemyMultilingualNeural l14 22032
+ok fr-FR-RemyMultilingualNeural l15 35568
+ok fr-FR-RemyMultilingualNeural l16 29376
+ok fr-FR-RemyMultilingualNeural l17 26208
+ok it-IT-GiuseppeMultilingualNeural l00 15696
+ok it-IT-GiuseppeMultilingualNeural l01 27792
+ok it-IT-GiuseppeMultilingualNeural l02 23472
+ok it-IT-GiuseppeMultilingualNeural l03 25632
+ok it-IT-GiuseppeMultilingualNeural l04 25056
+ok it-IT-GiuseppeMultilingualNeural l05 26784
+ok it-IT-GiuseppeMultilingualNeural l06 39168
+ok it-IT-GiuseppeMultilingualNeural l07 36000
+ok it-IT-GiuseppeMultilingualNeural l08 11520
+ok it-IT-GiuseppeMultilingualNeural l09 22176
+ok it-IT-GiuseppeMultilingualNeural l10 19008
+ok it-IT-GiuseppeMultilingualNeural l11 22896
+ok it-IT-GiuseppeMultilingualNeural l12 22320
+ok it-IT-GiuseppeMultilingualNeural l13 28800
+ok it-IT-GiuseppeMultilingualNeural l14 20736
+ok it-IT-GiuseppeMultilingualNeural l15 33264
+ok it-IT-GiuseppeMultilingualNeural l16 28656
+ok it-IT-GiuseppeMultilingualNeural l17 23184
