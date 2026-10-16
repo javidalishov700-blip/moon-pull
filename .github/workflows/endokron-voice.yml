@@ -1,0 +1,44 @@
+name: Endokron voice
+
+# Seslendirme Microsoft Edge neural sesleriyle üretilir. Bulut ortamı ses
+# servisine bağlanamadığı için runner üretir ve sonucu bu dala geri commit eder.
+on:
+  push:
+    branches: [claude/vibrant-meitner-4a2g6b]
+    paths:
+      - 'endokron-reels/voice/lines.json'
+      - 'endokron-reels/voice/bake.py'
+      - '.github/workflows/endokron-voice.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  bake:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install edge-tts
+        run: |
+          pip install -U edge-tts
+          python -c "import asyncio,edge_tts;print([v['ShortName'] for v in asyncio.run(edge_tts.list_voices()) if v['Locale']=='tr-TR'])" \
+            || pip install -q --force-reinstall "git+https://github.com/rany2/edge-tts.git"
+      - name: Bake
+        run: python endokron-reels/voice/bake.py || true
+      - name: Commit audio
+        run: |
+          git config user.name "endokron-voice-bot"
+          git config user.email "endokron-voice-bot@users.noreply.github.com"
+          git add -A endokron-reels/voice/out
+          if git diff --cached --quiet; then echo "No audio changes."; exit 0; fi
+          git commit -m "Bake endokron narration audio"
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin ${GITHUB_REF_NAME} && git push origin HEAD:${GITHUB_REF_NAME} && exit 0
+            sleep $((i * 5))
+          done
+          exit 1

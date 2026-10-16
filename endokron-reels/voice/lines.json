@@ -1,0 +1,82 @@
+{
+ "voices": [
+  "tr-TR-EmelNeural",
+  "tr-TR-AhmetNeural"
+ ],
+ "rate": "+6%",
+ "pitch": "+0Hz",
+ "lines": [
+  {
+   "id": "l00",
+   "say": "Kanal tedavili bir dişe, her zaman post mu gerekir?"
+  },
+  {
+   "id": "l01",
+   "say": "Hayır! Cevap: endokron."
+  },
+  {
+   "id": "l02",
+   "say": "Endokron, pulpa odasına uzanan, tek parça bir restorasyondur."
+  },
+  {
+   "id": "l03",
+   "say": "Tutuculuğunu, pulpa odası duvarlarından ve adeziv simantasyondan alır."
+  },
+  {
+   "id": "l04",
+   "say": "Post boşluğu açılmadığı için, kök kırığı ve perforasyon riski azalır."
+  },
+  {
+   "id": "l05",
+   "say": "Peki, ağız içi tarayıcı, bu derin kaviteyi ne kadar doğru kopyalar?"
+  },
+  {
+   "id": "l06",
+   "say": "Molar ve premolar dişlerde, iki ve beş milimetre pulpa odası derinliği hazırladık."
+  },
+  {
+   "id": "l07",
+   "say": "Üç farklı ağız içi tarayıcıyla, yüz otuz iki tarama yapıp, referans taramayla karşılaştırdık."
+  },
+  {
+   "id": "l08",
+   "say": "Sonuç şaşırtıcı."
+  },
+  {
+   "id": "l09",
+   "say": "Derinlik arttıkça, aksiyel duvarlarda sapma azaldı."
+  },
+  {
+   "id": "l10",
+   "say": "Ama kavite tabanında, sapma belirgin şekilde arttı."
+  },
+  {
+   "id": "l11",
+   "say": "Klinik olarak kabul edilen uyumsuzluk sınırı, yaklaşık yüz mikron."
+  },
+  {
+   "id": "l12",
+   "say": "Derin premolarların tabanında, ortalama sapma bu sınırı aştı: yüz üç ile yüz dokuz mikron."
+  },
+  {
+   "id": "l13",
+   "say": "Çünkü dar ve derin kavitede, ışık tabana yeterince ulaşamaz."
+  },
+  {
+   "id": "l14",
+   "say": "Molarlarda ise geniş kavite, taramayı kolaylaştırır."
+  },
+  {
+   "id": "l15",
+   "say": "Klinik ipucu: Derin premolar endokronda, kavite tabanını mutlaka kontrol edin."
+  },
+  {
+   "id": "l16",
+   "say": "Gerekirse tekrar tarayın. Doğru ölçü, doğru uyum demektir."
+  },
+  {
+   "id": "l17",
+   "say": "Daha fazlası için, takipte kalın!"
+  }
+ ]
+}
