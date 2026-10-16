@@ -1,5 +1,6 @@
 import numpy as np, wave, json
-sr=44100; T=76.5; n=int(sr*T); t=np.arange(n)/sr
+import sys
+sr=44100; T=float(sys.argv[1]); n=int(sr*T); t=np.arange(n)/sr
 rng=np.random.default_rng(3)
 def note(f): return 440*2**((f-69)/12)
 mix=np.zeros(n)
@@ -27,7 +28,7 @@ for i in range(int(T/beat)):
   hs=s+int(beat/2*sr); he=min(n,hs+int(0.05*sr))
   if i>=8 and hs<n: mix[hs:he]+=0.015*rng.standard_normal(he-hs)*np.exp(-np.arange(he-hs)/sr*80)
 # whoosh at scene changes
-tl=json.load(open('vo.json')); starts=[]; prev=None
+tl=json.load(open(sys.argv[2])); starts=[]; prev=None
 for c in tl:
   if c['scene']!=prev: starts.append(c['start']-0.35); prev=c['scene']
 for st in starts[1:]:
@@ -44,5 +45,5 @@ for st in [tl[1]['start']+0.6, tl[7]['start']+2.0]:
   mix[s:s+L]+=0.12*np.exp(-tt*25)*np.sin(2*np.pi*(900-500*tt/0.18)*tt)
 fade=np.ones(n); fo=int(2.5*sr); fade[-fo:]=np.linspace(1,0,fo); fi=int(0.8*sr); fade[:fi]=np.linspace(0,1,fi)
 mix*=fade; mix/=np.max(np.abs(mix)); mix*=0.9
-with wave.open('music.wav','wb') as w:
+with wave.open(sys.argv[3],'wb') as w:
   w.setnchannels(1);w.setsampwidth(2);w.setframerate(sr);w.writeframes((mix*32767).astype(np.int16).tobytes())

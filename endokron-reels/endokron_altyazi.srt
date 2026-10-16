@@ -1,71 +1,75 @@
 1
-00:00:00,600 --> 00:00:03,996
+00:00:00,600 --> 00:00:03,679
 Kanal tedavili dişe her zaman post mu gerekir?
 
 2
-00:00:04,046 --> 00:00:05,980
+00:00:03,699 --> 00:00:06,541
 Hayır! Cevap: ENDOKRON.
 
 3
-00:00:06,380 --> 00:00:10,455
+00:00:06,941 --> 00:00:10,619
 Endokron, pulpa odasına uzanan tek parça bir restorasyondur.
 
 4
-00:00:10,505 --> 00:00:15,242
+00:00:10,639 --> 00:00:14,621
 Tutuculuğunu pulpa odası duvarlarından ve adeziv simantasyondan alır.
 
 5
-00:00:15,292 --> 00:00:19,752
+00:00:14,641 --> 00:00:18,631
 Post boşluğu açılmadığı için kök kırığı ve perforasyon riski azalır.
 
 6
-00:00:20,152 --> 00:00:24,221
-Peki dijital ölçü, bu derin kaviteyi ne kadar doğru kopyalar?
+00:00:19,031 --> 00:00:23,206
+Peki ağız içi tarayıcılar bu derin kaviteyi ne kadar doğru kopyalıyor?
 
 7
-00:00:24,621 --> 00:00:29,802
-Molar ve premolar dişlerde 2 ve 5 mm pulpa odası derinliği hazırladık.
+00:00:23,606 --> 00:00:28,887
+Dt. Muraz Alishov ve Dr. Öğr. Üyesi Ezgi Erden Kayalıdere bu soruyu araştırdı.
 
 8
-00:00:29,852 --> 00:00:35,628
-3 ağız içi tarayıcıyla 132 tarama yapıp referansla karşılaştırdık.
+00:00:29,287 --> 00:00:34,842
+Araştırmacılar molar ve premolar dişlerde 2 ve 5 mm pulpa odası derinliği hazırladı.
 
 9
-00:00:36,028 --> 00:00:37,445
-Sonuç şaşırtıcı:
+00:00:34,862 --> 00:00:40,704
+3 ağız içi tarayıcıyla 132 tarama yapıp laboratuvar referansıyla karşılaştırdılar.
 
 10
-00:00:37,495 --> 00:00:41,046
-Derinlik arttıkça aksiyel duvarlarda sapma azaldı…
+00:00:41,104 --> 00:00:42,472
+Sonuç şaşırtıcı:
 
 11
-00:00:41,446 --> 00:00:44,843
-…ama kavite tabanında sapma belirgin şekilde arttı.
+00:00:42,492 --> 00:00:45,750
+Derinlik arttıkça aksiyel duvarlarda sapma azaldı…
 
 12
-00:00:45,243 --> 00:00:49,283
-Klinik olarak kabul edilen uyumsuzluk sınırı ~100 µm.
+00:00:46,151 --> 00:00:49,252
+…ama kavite tabanında sapma belirgin şekilde arttı.
 
 13
-00:00:49,333 --> 00:00:55,036
-Derin premolarların tabanında ortalama sapma bu sınırı aştı: 103–109 µm.
+00:00:49,652 --> 00:00:53,368
+Klinik olarak kabul edilen uyumsuzluk sınırı ~100 µm.
 
 14
-00:00:55,436 --> 00:00:59,396
-Çünkü dar ve derin kavitede ışık tabana yeterince ulaşamaz.
+00:00:53,388 --> 00:00:58,853
+Derin premolarların tabanında ortalama sapma bu sınırı aştı: 103–109 µm.
 
 15
-00:00:59,446 --> 00:01:02,930
-Molarlarda ise geniş kavite, taramayı kolaylaştırır.
+00:00:59,253 --> 00:01:03,371
+Olası neden: dar ve derin kavitede ışık tabana yeterince ulaşamıyor.
 
 16
-00:01:03,330 --> 00:01:08,472
-Klinik ipucu: Derin premolar endokronda kavite tabanını mutlaka kontrol edin.
+00:01:03,391 --> 00:01:06,556
+Molarlarda ise geniş kavite, taramayı kolaylaştırıyor.
 
 17
-00:01:08,522 --> 00:01:12,248
-Gerekirse tekrar tarayın. Doğru ölçü = doğru uyum.
+00:01:06,956 --> 00:01:11,490
+Pratik ipucu: Derin premolar endokronda kavite tabanını mutlaka kontrol edin.
 
 18
-00:01:12,648 --> 00:01:14,948
+00:01:11,510 --> 00:01:16,225
+Gerekirse tekrar tarayın. Doğru ölçü = doğru uyum.
+
+19
+00:01:16,625 --> 00:01:18,770
 Daha fazlası için takipte kalın!

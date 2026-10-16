@@ -78,9 +78,29 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#050d18;font-fam
 
 <!-- SCENE question -->
 <div class="scene" id="s_question">
-  <div class="abs center kicker" style="top:250px">Dijital ölçü</div>
-  <div class="photo" id="q_ph" style="left:90px;top:330px;width:900px;height:880px"><img src="s9_2.jpg" style="object-position:22% 50%;width:200%;"><div id="scanline" class="abs" style="left:0;right:0;height:16px;background:linear-gradient(90deg,transparent,#7ff3e6,transparent);box-shadow:0 0 60px 20px rgba(62,224,208,.55)"></div><div id="scangrid" class="abs" style="inset:0;background-image:linear-gradient(rgba(127,243,230,.18) 2px,transparent 2px),linear-gradient(90deg,rgba(127,243,230,.18) 2px,transparent 2px);background-size:60px 60px"></div></div>
-  <div class="abs center h1" id="q_mark" style="top:520px;font-size:380px;color:#ffc857;text-shadow:0 0 80px rgba(255,200,87,.7)">?</div>
+  <div class="abs center kicker" style="top:250px">Dijital ölçü · ağız içi tarayıcı</div>
+  <div class="photo" id="q_dev" style="left:90px;top:320px;width:900px;height:520px;background:#e9eef1"><img id="scanner_img" src="scanner.jpg" style="object-fit:cover;object-position:50% 62%"><div class="abs" style="right:18px;bottom:14px;font-size:18px;font-weight:500;color:rgba(0,0,0,.6);background:rgba(255,255,255,.6);padding:4px 10px;border-radius:8px">Temsili · Foto: Викидим, Wikimedia Commons, CC BY 4.0</div><div class="abs pill" style="left:22px;bottom:22px;background:rgba(4,20,32,.85);color:#7ff3e6;font-size:30px">Ağız içi tarayıcı (IOS)</div></div>
+  <div class="photo" id="q_scan" style="left:90px;top:870px;width:900px;height:400px">
+    <img src="s3_3.jpg" style="object-position:50% 62%">
+    <div id="q_mesh" class="abs" style="inset:0;overflow:hidden"><img src="s17_0.png" style="position:absolute;width:100%;height:100%;object-fit:cover;object-position:5% 45%;transform:scale(1.25)"></div>
+    <div id="scanline" class="abs" style="top:0;bottom:0;width:14px;background:linear-gradient(180deg,transparent,#7ff3e6,transparent);box-shadow:0 0 60px 22px rgba(62,224,208,.6)"></div>
+    <div class="abs pill" id="q_l1" style="left:20px;top:20px;background:rgba(4,20,32,.8);font-size:28px">Preparasyon</div>
+    <div class="abs pill" id="q_l2" style="right:20px;top:20px;background:#3ee0d0;color:#04202a;font-size:28px">3B dijital model</div>
+  </div>
+  <div class="abs center" id="q_mark" style="top:1035px"><span class="pill" style="font-size:56px;background:#ffc857;color:#2a1b00;box-shadow:0 0 60px rgba(255,200,87,.6);padding:18px 44px">Ne kadar doğru?</span></div>
+</div>
+
+<!-- SCENE authors -->
+<div class="scene" id="s_authors">
+  <div class="abs center kicker" style="top:250px">Araştırma</div>
+  <div class="card abs" id="au_card" style="left:70px;right:70px;top:330px;padding:50px 50px 46px">
+    <div style="font-size:30px;font-weight:700;color:#7ff3e6;letter-spacing:1px;margin-bottom:16px">KARŞILAŞTIRMALI İN VİTRO ÇALIŞMA</div>
+    <div style="font-size:50px;font-weight:900;line-height:1.15">Diş tipi ve pulpa odası derinliğinin <span style="color:#ffc857">endokron taramalarının doğruluğuna</span> etkisi</div>
+  </div>
+  <div class="abs" style="left:70px;right:70px;top:760px;display:flex;flex-direction:column;gap:26px">
+    <div class="card au" style="display:flex;align-items:center;gap:30px;padding:30px 36px"><div class="chk" style="width:110px;height:110px;font-size:44px;background:linear-gradient(135deg,#3ee0d0,#1d8fa8)">MA</div><div><div style="font-size:44px;font-weight:800">Dt. Muraz Alishov</div><div style="font-size:30px;opacity:.7;font-weight:600;margin-top:6px">Doktora öğrencisi · araştırmacı</div></div></div>
+    <div class="card au" style="display:flex;align-items:center;gap:30px;padding:30px 36px"><div class="chk" style="width:110px;height:110px;font-size:44px;background:linear-gradient(135deg,#ffc857,#ff9a5a);color:#2a1b00">EK</div><div><div style="font-size:42px;font-weight:800">Dr. Öğr. Üyesi Ezgi Erden Kayalıdere</div><div style="font-size:30px;opacity:.7;font-weight:600;margin-top:6px">Danışman</div></div></div>
+  </div>
 </div>
 
 <!-- SCENE design -->
@@ -97,7 +117,12 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#050d18;font-fam
     <div class="eqx h1" style="font-size:70px;opacity:.5;padding-bottom:40px">×</div>
     <div class="eqi" style="text-align:center"><div class="h1 n" style="font-size:110px;color:#7ff3e6">11</div><div style="font-size:28px;font-weight:600;opacity:.8">tekrar</div></div>
   </div>
-  <div class="abs center" id="d_total" style="top:1010px"><span class="h1" id="d_num" style="font-size:190px;color:#ffc857;text-shadow:0 0 50px rgba(255,200,87,.5)">132</span><span style="font-size:52px;font-weight:800"> tarama</span></div>
+  <div class="abs center" id="d_total" style="top:990px"><span class="h1" id="d_num" style="font-size:190px;color:#ffc857;text-shadow:0 0 50px rgba(255,200,87,.5)">132</span><span style="font-size:52px;font-weight:800"> tarama</span></div>
+  <div class="abs" id="d_chips" style="left:50px;right:50px;top:1235px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+    <span class="pill dch" style="font-size:28px;background:rgba(127,243,230,.14);border:2px solid rgba(127,243,230,.5)">TRIOS 5</span>
+    <span class="pill dch" style="font-size:28px;background:rgba(127,243,230,.14);border:2px solid rgba(127,243,230,.5)">DEXIS IS 3800</span>
+    <span class="pill dch" style="font-size:28px;background:rgba(127,243,230,.14);border:2px solid rgba(127,243,230,.5)">iTero Element 5D</span>
+  </div>
 </div>
 
 <!-- SCENE result (axial) -->
@@ -175,8 +200,8 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#050d18;font-fam
   <div class="abs center h1" id="o_title" style="top:470px;font-size:120px;background:linear-gradient(90deg,#7ff3e6,#ffc857);-webkit-background-clip:text;color:transparent">ENDOKRON</div>
   <div class="abs center" id="o_sub" style="top:630px;font-size:44px;font-weight:700;opacity:.9">Dijital ölçüde derinlik önemli.</div>
   <div class="abs center" id="o_btn" style="top:760px"><span class="pill" style="font-size:52px;padding:26px 60px;background:linear-gradient(90deg,#3ee0d0,#ffc857);color:#04202a;box-shadow:0 0 60px rgba(62,224,208,.6)">+ Takip et</span></div>
-  <div class="abs center" id="o_name" style="top:950px;font-size:40px;font-weight:800">Dt. Muraz Alishov</div>
-  <div class="abs center" id="o_ref" style="top:1010px;font-size:26px;font-weight:500;opacity:.6;padding:0 120px;line-height:1.35">Kaynak: Endokron taramalarında diş tipi ve pulpa odası derinliğinin etkisi · in vitro, tipodont modeli</div>
+  <div class="abs center" id="o_name" style="top:940px;font-size:26px;font-weight:700;letter-spacing:4px;color:#7ff3e6">KAYNAK ÇALIŞMA</div>
+  <div class="abs center" id="o_ref" style="top:990px;font-size:34px;font-weight:700;padding:0 90px;line-height:1.4">Dt. Muraz Alishov<br>Dr. Öğr. Üyesi Ezgi Erden Kayalıdere<br><span style="font-size:26px;font-weight:500;opacity:.7">In vitro çalışma · tipodont modeli</span></div>
 </div>
 
 <div class="tag" id="tag"><span>RESTORATİF DİŞ HEKİMLİĞİ</span></div>
@@ -210,7 +235,7 @@ for(let i=0;i<46;i++){const d=document.createElement('div');d.className='pt';con
 function mkChart(id,data,max,colA,colB,threshold){
   const c=$(id);const W=c.clientWidth,H=c.clientHeight;const g=W/data.length;const bw=g*0.32;const out=[];
   if(threshold){const ln=document.createElement('div');ln.className='abs';ln.style.cssText=`left:0;right:0;height:6px;background:repeating-linear-gradient(90deg,#ff5d6c 0 26px,transparent 26px 40px);top:${H-H*threshold/max}px`;c.appendChild(ln);
-    const lt=document.createElement('div');lt.className='abs';lt.style.cssText=`left:0;top:-30px;font-size:30px;font-weight:900;color:#ff6b78`;lt.textContent='- - '+threshold+' µm klinik sınır';c.appendChild(lt);out.thr=[ln,lt];}
+    const lt=document.createElement('div');lt.className='abs';lt.style.cssText=`left:0;top:-80px;font-size:30px;font-weight:900;color:#ff6b78`;lt.textContent='- - '+threshold+' µm klinik sınır';c.appendChild(lt);out.thr=[ln,lt];}
   data.forEach((d,i)=>{
     const mk=(v,col,off)=>{const b=document.createElement('div');b.className='bar';b.style.cssText=`left:${g*i+g/2+off-bw/2}px;width:${bw}px;height:0;background:linear-gradient(180deg,${col},${col}88);box-shadow:0 0 30px ${col}55`;c.appendChild(b);
       const l=document.createElement('div');l.className='lbl';l.style.cssText=`left:${g*i+g/2+off-80}px;width:160px;font-size:40px;color:${col}`;c.appendChild(l);return {b,l,v,H,max}};
@@ -249,7 +274,7 @@ function setSub(t){
   const pin=eo(P(t,L.start-0.05,0.25));subbox.style.opacity=pin;subbox.style.transform=`translateY(${(1-pin)*30}px) scale(${0.96+0.04*pin})`;
   let active=-1;wordEls.forEach((w,i)=>{if(t>=w.st)active=i});
   wordEls.forEach((w,i)=>{const k=eo(P(t,w.st,0.18));
-    if(i===active){w.s.style.color='#ffc857';w.s.style.transform=`scale(${1+0.08*(1-P(t,w.st,0.25))})`;}
+    if(i===active){w.s.style.color='#ffc857';w.s.style.transform=`scale(${1+0.03*(1-P(t,w.st,0.25))})`;}
     else{w.s.style.color=i<active?'#ffffff':'rgba(255,255,255,.45)';w.s.style.transform='none'}});
 }
 
@@ -290,16 +315,23 @@ function render(t){
    $('tooth_svg').style.transform=`scale(${0.92+0.08*eo(P(l,0,1.2))}) translateY(${Math.sin(l*1.2)*6}px)`;
   }
   // QUESTION
-  {const l=S('question');const img=$('q_ph').firstElementChild;img.style.transform=`scale(${1.05+0.12*P(l,-0.4,4.5)})`;
-   const sl=(l*0.55)%1;$('scanline').style.top=(eio(Math.abs(((l*0.45)%2)-1))*860)+'px';
-   $('scangrid').style.opacity=0.3+0.3*Math.sin(l*3);
-   const q=el(P(l,1.6,1.0));$('q_mark').style.opacity=P(l,1.6,0.2);$('q_mark').style.transform=`scale(${q}) rotate(${Math.sin(l*3)*6}deg)`;
+  {const l=S('question');const dv=eb(P(l,-0.2,0.8));$('q_dev').style.opacity=P(l,-0.2,0.3);$('q_dev').style.transform=`translateY(${(1-dv)*-100}px)`;
+   $('scanner_img').style.transform=`scale(${1.04+0.08*P(l,0,5)})`;
+   const sc=eo(P(l,0.4,0.6));$('q_scan').style.opacity=P(l,0.4,0.3);$('q_scan').style.transform=`translateY(${(1-sc)*100}px)`;
+   const w=eio(P(l,0.9,2.4));$('scanline').style.left=(w*900-7)+'px';$('scanline').style.opacity=(w>0&&w<1)?1:0;
+   $('q_mesh').style.clipPath=`inset(0 ${100-w*100}% 0 0)`;$('q_l2').style.opacity=P(l,2.6,0.4);$('q_l1').style.opacity=1-P(l,2.4,0.4);
+   const q=el(P(l,3.0,1.0));$('q_mark').style.opacity=P(l,3.0,0.2);$('q_mark').style.transform=`scale(${q})`;
+  }
+  // AUTHORS
+  {const l=S('authors');const c=eb(P(l,-0.2,0.7));$('au_card').style.opacity=P(l,-0.2,0.3);$('au_card').style.transform=`scale(${0.85+0.15*c})`;
+   document.querySelectorAll('.au').forEach((e,i)=>{const p=eb(P(l,0.6+i*0.9,0.6));e.style.opacity=P(l,0.6+i*0.9,0.2);e.style.transform=`translateX(${(1-p)*(i?200:-200)}px)`});
   }
   // DESIGN
   {const l=S('design');const L=SC.design.lines;const t2=L[1].start-SC.design.start;
    [['d_ph1',0],['d_ph2',0.5]].forEach(([id,tt])=>{const p=eb(P(l,tt,0.7));const e=$(id);e.style.opacity=P(l,tt,0.2);e.style.transform=`translateY(${(1-p)*120}px) rotate(${(1-p)*(id==='d_ph1'?-6:6)}deg)`});
    const items=$('d_eq').children;for(let i=0;i<items.length;i++){const tt=t2-0.2+i*0.22;const p=eb(P(l,tt,0.45));items[i].style.opacity=P(l,tt,0.15);items[i].style.transform=`scale(${0.4+0.6*p})`}
    const tn=t2+2.0;const n=eo(P(l,tn,1.3));$('d_total').style.opacity=P(l,tn,0.2);$('d_num').textContent=Math.round(132*n);$('d_total').style.transform=`scale(${0.7+0.3*eb(P(l,tn,0.6))})`;
+   document.querySelectorAll('.dch').forEach((e,i)=>{const p=eb(P(l,tn+0.8+i*0.2,0.5));e.style.opacity=P(l,tn+0.8+i*0.2,0.2);e.style.display='inline-block';e.style.transform=`scale(${0.5+0.5*p})`});
   }
   // RESULT axial
   {const l=S('result');AX.forEach((pair,i)=>{setBar(pair[0],eo(P(l,0.1+i*0.15,0.8)));
@@ -331,7 +363,7 @@ function render(t){
   }
   // OUTRO
   {const l=S('outro');const a=el(P(l,-0.2,1.1));$('o_title').style.transform=`scale(${0.5+0.5*a})`;$('o_title').style.opacity=P(l,-0.2,0.2);
-   [['o_sub',0.4],['o_btn',0.8],['o_name',1.3],['o_ref',1.6]].forEach(([id,tt])=>{const p=eo(P(l,tt,0.5));$(id).style.opacity=p*(id==='o_ref'?0.6:1);$(id).style.transform=`translateY(${(1-p)*40}px)`});
+   [['o_sub',0.4],['o_btn',0.8],['o_name',1.3],['o_ref',1.6]].forEach(([id,tt])=>{const p=eo(P(l,tt,0.5));$(id).style.opacity=p;$(id).style.transform=`translateY(${(1-p)*40}px)`});
    const pulse=1+0.05*Math.max(0,Math.sin((l-0.8)*5));$('o_btn').firstElementChild.style.display='inline-block';$('o_btn').firstElementChild.style.transform=`scale(${pulse})`;
   }
   setSub(t);
