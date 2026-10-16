@@ -1,10 +1,10 @@
 {"voice":"en-US-BrianMultilingualNeural","lang":"tr-TR","rate":"+4%","pitch":"+0Hz",
  "lines":[
-  {"id":"l09a","say":"Derinlik arttıkça, aksiyel duvarlarda sapma azaldı."},
-  {"id":"l09b","say":"Kavite derinleştikçe, aksiyel duvarlardaki sapma azaldı."},
-  {"id":"l09c","say":"Derinlik arttıkça aksiyel duvarlardaki sapma azalıyor."},
-  {"id":"l09d","say":"Kavite derinliği arttıkça, aksiyel duvarlarda sapma azaldı."},
-  {"id":"l09e","say":"Derin kavitelerde, aksiyel duvarlardaki sapma azaldı."},
-  {"id":"l00a","say":"Kanal tedavili her dişe, post şart mı?"},
-  {"id":"l00b","say":"Kanal tedavisi görmüş her dişe post şart mı?"}
+  {"id":"l09f","say":"Sonuçlar dikkat çekici: derinlik arttıkça, aksiyel duvarlarda sapma azaldı."},
+  {"id":"l09g","say":"Görüldü ki, kavite derinliği arttıkça, yan duvarlardaki sapma azaldı."},
+  {"id":"l09h","say":"Kavitenin derinliği arttıkça, yan duvarlarda, yani aksiyel bölgede, sapma azaldı."},
+  {"id":"l09i","say":"Sonuçlar dikkat çekici. Derinlik arttıkça, aksiyel duvarlarda sapma azaldı."},
+  {"id":"l09j","say":"Derinlik arttıkça, aksiyel duvarlarda sapma azaldı.","wrap":true},
+  {"id":"l09k","say":"Sonuçlar dikkat çekici: derinlik arttıkça, aksiyel duvarlarda sapma azaldı.","wrap":true},
+  {"id":"l09l","say":"Görüldü ki, kavite derinliği arttıkça, yan duvarlardaki sapma azaldı.","wrap":true}
  ]}
