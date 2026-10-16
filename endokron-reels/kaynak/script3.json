@@ -1,0 +1,20 @@
+[
+ {"scene":"hook","say":"Kanal tedavili her dişe post şart mı?"},
+ {"scene":"hook","say":"Hayır. Uygun vakalarda güçlü bir alternatif var: endokron."},
+ {"scene":"what","say":"Endokron, pulpa odasına uzanan tek parça bir restorasyon."},
+ {"scene":"what","say":"Tutuculuğunu pulpa odası duvarlarından ve adeziv simantasyondan alıyor."},
+ {"scene":"what","say":"Post boşluğu açılmadığı için kök kırığı ve perforasyon riski de azalıyor."},
+ {"scene":"question","say":"Peki ağız içi tarayıcılar bu derin kaviteyi ne kadar doğru kopyalıyor?"},
+ {"scene":"design","say":"Yapılan bir in vitro çalışmada, molar ve premolar dişlerde 2 ve 5 milimetre derinlikte kaviteler hazırlandı."},
+ {"scene":"design","say":"Üç farklı ağız içi tarayıcıyla toplam 132 tarama alındı ve referans modelle karşılaştırıldı."},
+ {"scene":"result","say":"Sonuçlar dikkat çekici."},
+ {"scene":"result","say":"Derinlik arttıkça aksiyel duvarlarda sapma azaldı."},
+ {"scene":"result2","say":"Ama kavite tabanında sapma belirgin şekilde arttı."},
+ {"scene":"limit","say":"Klinikte kabul edilen uyumsuzluk sınırı yaklaşık 100 mikron."},
+ {"scene":"limit","say":"Derin premolarların tabanında ortalama sapma bu sınırı aştı."},
+ {"scene":"why","say":"Olası neden şu: dar ve derin kavitede ışık tabana yeterince ulaşamıyor."},
+ {"scene":"why","say":"Molarlarda ise geniş kavite taramayı kolaylaştırıyor."},
+ {"scene":"tips","say":"Yani derin bir premolar endokronda, taramadan sonra kavite tabanını mutlaka kontrol edin."},
+ {"scene":"tips","say":"Eksik varsa tekrar tarayın. Doğru ölçü, doğru uyum demek."},
+ {"scene":"outro","say":"Faydalı bulduysanız kaydedin ve meslektaşlarınızla paylaşın."}
+]

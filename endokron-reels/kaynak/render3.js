@@ -3,7 +3,7 @@ const fs=require('fs');const path=require('path');
 (async()=>{
   const dir=__dirname;const tl=JSON.parse(fs.readFileSync(process.argv[5]||dir+'/vo.json'));
   const total=parseFloat(process.argv[2]);const fps=30;const only=process.argv[3];
-  let html=fs.readFileSync(dir+'/video.html','utf8').replace('__TIMELINE__',JSON.stringify(tl)).replace('__TOTAL__',total);
+  let html=fs.readFileSync(dir+'/'+(process.env.HTML||'video.html'),'utf8').replace('__TIMELINE__',JSON.stringify(tl)).replace('__TOTAL__',total);
   fs.writeFileSync(dir+'/_v_'+path.basename(process.argv[4]||'frames')+'.html',html);
   const b=await chromium.launch({executablePath:'/opt/pw-browsers/chromium'});
   const pg=await b.newPage({viewport:{width:1080,height:1920}});

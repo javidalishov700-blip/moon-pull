@@ -1,75 +1,195 @@
 1
-00:00:00,600 --> 00:00:03,679
-Kanal tedavili dişe her zaman post mu gerekir?
+00:00:00,500 --> 00:00:01,868
+Kanal tedavili her dişe
 
 2
-00:00:03,699 --> 00:00:06,541
-Hayır! Cevap: ENDOKRON.
+00:00:01,868 --> 00:00:03,087
+post şart mı?
 
 3
-00:00:06,941 --> 00:00:10,619
-Endokron, pulpa odasına uzanan tek parça bir restorasyondur.
+00:00:03,087 --> 00:00:03,874
+Hayır.
 
 4
-00:00:10,639 --> 00:00:14,621
-Tutuculuğunu pulpa odası duvarlarından ve adeziv simantasyondan alır.
+00:00:03,922 --> 00:00:05,569
+Uygun vakalarda güçlü bir
 
 5
-00:00:14,641 --> 00:00:18,631
-Post boşluğu açılmadığı için kök kırığı ve perforasyon riski azalır.
+00:00:05,569 --> 00:00:06,866
+alternatif var:
 
 6
-00:00:19,031 --> 00:00:23,206
-Peki ağız içi tarayıcılar bu derin kaviteyi ne kadar doğru kopyalıyor?
+00:00:06,975 --> 00:00:07,984
+endokron.
 
 7
-00:00:23,606 --> 00:00:28,887
-Dt. Muraz Alishov ve Dr. Öğr. Üyesi Ezgi Erden Kayalıdere bu soruyu araştırdı.
+00:00:08,336 --> 00:00:09,232
+Endokron,
 
 8
-00:00:29,287 --> 00:00:34,842
-Araştırmacılar molar ve premolar dişlerde 2 ve 5 mm pulpa odası derinliği hazırladı.
+00:00:09,232 --> 00:00:10,699
+pulpa odasına uzanan tek
 
 9
-00:00:34,862 --> 00:00:40,704
-3 ağız içi tarayıcıyla 132 tarama yapıp laboratuvar referansıyla karşılaştırdılar.
+00:00:10,699 --> 00:00:12,417
+parça bir restorasyon.
 
 10
-00:00:41,104 --> 00:00:42,472
-Sonuç şaşırtıcı:
+00:00:12,426 --> 00:00:14,527
+Tutuculuğunu pulpa odası duvarlarından
 
 11
-00:00:42,492 --> 00:00:45,750
-Derinlik arttıkça aksiyel duvarlarda sapma azaldı…
+00:00:14,527 --> 00:00:17,074
+ve adeziv simantasyondan alıyor.
 
 12
-00:00:46,151 --> 00:00:49,252
-…ama kavite tabanında sapma belirgin şekilde arttı.
+00:00:17,074 --> 00:00:18,585
+Post boşluğu açılmadığı için
 
 13
-00:00:49,652 --> 00:00:53,368
-Klinik olarak kabul edilen uyumsuzluk sınırı ~100 µm.
+00:00:18,585 --> 00:00:20,135
+kök kırığı ve perforasyon
 
 14
-00:00:53,388 --> 00:00:58,853
-Derin premolarların tabanında ortalama sapma bu sınırı aştı: 103–109 µm.
+00:00:20,135 --> 00:00:21,529
+riski de azalıyor.
 
 15
-00:00:59,253 --> 00:01:03,371
-Olası neden: dar ve derin kavitede ışık tabana yeterince ulaşamıyor.
+00:00:21,828 --> 00:00:23,292
+Peki ağız içi tarayıcılar
 
 16
-00:01:03,391 --> 00:01:06,556
-Molarlarda ise geniş kavite, taramayı kolaylaştırıyor.
+00:00:23,292 --> 00:00:24,807
+bu derin kaviteyi ne
 
 17
-00:01:06,956 --> 00:01:11,490
-Pratik ipucu: Derin premolar endokronda kavite tabanını mutlaka kontrol edin.
+00:00:24,807 --> 00:00:26,561
+kadar doğru kopyalıyor?
 
 18
-00:01:11,510 --> 00:01:16,225
-Gerekirse tekrar tarayın. Doğru ölçü = doğru uyum.
+00:00:26,840 --> 00:00:27,938
+Yapılan bir in vitro
 
 19
-00:01:16,625 --> 00:01:18,770
-Daha fazlası için takipte kalın!
+00:00:27,938 --> 00:00:28,924
+çalışmada,
+
+20
+00:00:28,924 --> 00:00:30,606
+molar ve premolar dişlerde
+
+21
+00:00:30,606 --> 00:00:31,724
+2 ve 5 milimetre
+
+22
+00:00:31,724 --> 00:00:33,767
+derinlikte kaviteler hazırlandı.
+
+23
+00:00:33,799 --> 00:00:34,871
+Üç farklı ağız içi
+
+24
+00:00:34,871 --> 00:00:36,987
+tarayıcıyla toplam 132 tarama
+
+25
+00:00:36,987 --> 00:00:38,934
+alındı ve referans modelle
+
+26
+00:00:38,934 --> 00:00:40,268
+karşılaştırıldı.
+
+27
+00:00:40,633 --> 00:00:42,509
+Sonuçlar dikkat çekici.
+
+28
+00:00:42,509 --> 00:00:44,524
+Derinlik arttıkça aksiyel duvarlarda
+
+29
+00:00:44,524 --> 00:00:45,918
+sapma azaldı.
+
+30
+00:00:46,333 --> 00:00:47,887
+Ama kavite tabanında sapma
+
+31
+00:00:47,887 --> 00:00:49,690
+belirgin şekilde arttı.
+
+32
+00:00:50,009 --> 00:00:51,821
+Klinikte kabul edilen uyumsuzluk
+
+33
+00:00:51,821 --> 00:00:53,815
+sınırı yaklaşık 100 mikron.
+
+34
+00:00:53,815 --> 00:00:56,018
+Derin premolarların tabanında ortalama
+
+35
+00:00:56,018 --> 00:00:57,797
+sapma bu sınırı aştı.
+
+36
+00:00:58,115 --> 00:00:59,393
+Olası neden şu:
+
+37
+00:00:59,622 --> 00:01:00,968
+dar ve derin kavitede
+
+38
+00:01:00,968 --> 00:01:03,197
+ışık tabana yeterince ulaşamıyor.
+
+39
+00:01:03,197 --> 00:01:04,939
+Molarlarda ise geniş kavite
+
+40
+00:01:04,939 --> 00:01:06,813
+taramayı kolaylaştırıyor.
+
+41
+00:01:07,076 --> 00:01:08,415
+Yani derin bir premolar
+
+42
+00:01:08,415 --> 00:01:09,472
+endokronda,
+
+43
+00:01:09,521 --> 00:01:11,287
+taramadan sonra kavite tabanını
+
+44
+00:01:11,287 --> 00:01:13,006
+mutlaka kontrol edin.
+
+45
+00:01:13,029 --> 00:01:15,105
+Eksik varsa tekrar tarayın.
+
+46
+00:01:15,154 --> 00:01:16,415
+Doğru ölçü,
+
+47
+00:01:16,428 --> 00:01:17,846
+doğru uyum demek.
+
+48
+00:01:18,230 --> 00:01:20,078
+Faydalı bulduysanız kaydedin ve
+
+49
+00:01:20,078 --> 00:01:22,217
+meslektaşlarınızla paylaşın.

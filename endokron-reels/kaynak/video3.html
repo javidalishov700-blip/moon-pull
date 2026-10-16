@@ -1,0 +1,339 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="fonts/fraunces/400-italic.css"><link rel="stylesheet" href="fonts/fraunces/600.css"><link rel="stylesheet" href="fonts/fraunces/600-italic.css"><link rel="stylesheet" href="fonts/fraunces/800.css">
+<link rel="stylesheet" href="fonts/dm-sans/500.css"><link rel="stylesheet" href="fonts/dm-sans/700.css"><link rel="stylesheet" href="fonts/dm-sans/800.css">
+<link rel="stylesheet" href="fonts/caveat/700.css">
+<style>
+:root{--paper:#F2EEE6;--ink:#1C1B19;--mute:#8A8478;--red:#D2462B;--blue:#2E5C86;--line:#CFC7B8}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif}
+#cam{position:absolute;left:-20px;top:-20px;width:1120px;height:1960px}
+#stage{position:absolute;left:20px;top:20px;width:1080px;height:1920px;overflow:hidden}
+.scene{position:absolute;inset:0;background:var(--paper);overflow:hidden;display:none}
+.abs{position:absolute}
+.serif{font-family:'Fraunces',serif}
+.hand{font-family:'Caveat',cursive;font-weight:700}
+.chap{position:absolute;left:80px;top:150px;display:flex;align-items:center;gap:18px;font-size:28px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--ink)}
+.chap b{font-family:'Fraunces',serif;font-style:italic;font-weight:600;font-size:34px;letter-spacing:0;color:var(--red)}
+.chap i{display:block;height:2px;width:120px;background:var(--ink)}
+.h{font-family:'Fraunces',serif;font-weight:800;line-height:1.02;letter-spacing:-1.5px}
+.mask{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:6px}
+.mask>span{display:inline-block}
+.photo{position:absolute;overflow:hidden;background:#ddd}
+.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.polaroid{position:absolute;background:#fff;padding:18px 18px 70px;box-shadow:0 6px 18px rgba(40,30,10,.18),0 1px 2px rgba(40,30,10,.2)}
+.polaroid .im{position:relative;overflow:hidden;width:100%;height:100%}
+.polaroid img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tape{position:absolute;width:150px;height:44px;background:rgba(236,226,200,.78);top:-20px;left:50%;margin-left:-75px;transform:rotate(-3deg);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.cap{font-size:22px;color:var(--mute);font-style:italic;font-family:'Fraunces',serif}
+/* subtitles */
+#subs{position:absolute;left:60px;right:60px;top:1395px;text-align:center;z-index:50}
+#subs .ln{display:inline-block;background:#fff;color:var(--ink);font-weight:800;font-size:54px;line-height:1.2;padding:8px 22px 12px;border-radius:12px;box-shadow:0 3px 0 rgba(0,0,0,.12)}
+#subs .w{display:inline-block;margin:0 6px}
+#grain{position:absolute;inset:0;z-index:60;pointer-events:none;mix-blend-mode:multiply;opacity:.16}
+#topline{position:absolute;left:0;top:0;height:6px;background:var(--ink);z-index:61}
+svg text{font-family:'Caveat',cursive;font-weight:700}
+</style></head>
+<body>
+<div id="cam"><div id="stage">
+
+<!-- 1 HOOK -->
+<div class="scene" id="s_hook" style="background:#3c4651">
+  <div class="photo" style="inset:0"><img id="hook_img" src="s3_3.jpg" style="object-position:50% 50%"></div>
+  <div class="abs" style="inset:0;background:linear-gradient(180deg,rgba(15,20,26,.55) 0%,rgba(15,20,26,.15) 38%,rgba(15,20,26,0) 55%,rgba(15,20,26,.35) 100%)"></div>
+  <div class="abs h" id="hook_t1" style="left:80px;top:250px;right:80px;color:#fff;font-size:104px">
+    <span class="mask"><span>Kanal</span></span> <span class="mask"><span>tedavili</span></span><br><span class="mask"><span>her</span></span> <span class="mask"><span>dişe</span></span><br><span class="mask"><span id="hook_post" style="position:relative">post</span></span> <span class="mask"><span>şart</span></span> <span class="mask"><span>mı?</span></span>
+  </div>
+  <svg class="abs" id="hook_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="abs" id="hook_ans" style="left:80px;top:640px;color:#fff">
+    <div class="serif" style="font-style:italic;font-weight:400;font-size:52px;opacity:.9">Uygun vakalarda alternatif:</div>
+    <div class="h" style="font-size:150px;font-style:italic;font-weight:600;margin-top:4px">Endokron.</div>
+  </div>
+</div>
+
+<!-- 2 WHAT -->
+<div class="scene" id="s_what">
+  <div class="chap"><b>01</b><i></i>Endokron nedir?</div>
+  <div class="abs h" style="left:80px;top:220px;font-size:92px">Tek parça,<br><span style="font-style:italic;font-weight:600;color:var(--blue)">postsuz</span> çözüm.</div>
+  <svg class="abs" id="what_svg" style="left:0;top:470px" width="1080" height="880" viewBox="0 0 1080 880">
+    <defs>
+      <pattern id="hatch" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="14" stroke="#B9AE9A" stroke-width="3"/></pattern>
+    </defs>
+    <g transform="translate(290,40)">
+      <path id="w_tooth" d="M150 250 L150 360 Q150 420 175 470 L220 700 Q235 740 260 700 L300 520 Q350 490 400 520 L440 700 Q465 740 480 700 L525 470 Q550 420 550 360 L550 250 L470 250 L470 380 Q470 405 445 405 L255 405 Q230 405 230 380 L230 250 Z" fill="#E9E1D1" stroke="#1C1B19" stroke-width="5" stroke-linejoin="round"/>
+      <path id="w_c1" d="M250 410 L262 690" stroke="#B9A88C" stroke-width="8" stroke-linecap="round" fill="none"/>
+      <path id="w_c2" d="M450 410 L438 690" stroke="#B9A88C" stroke-width="8" stroke-linecap="round" fill="none"/>
+      <path id="w_gum" d="M40 430 Q350 395 660 430" stroke="#C98B7F" stroke-width="4" fill="none" stroke-dasharray="12 10"/>
+      <g id="w_crown"><path d="M140 250 Q140 120 230 95 Q290 70 350 110 Q410 70 470 95 Q560 120 560 250 L470 250 L470 375 Q470 398 448 398 L252 398 Q230 398 230 375 L230 250 Z" fill="#D8E4EE" stroke="#1C1B19" stroke-width="5" stroke-linejoin="round"/>
+        <path d="M200 150 Q260 120 300 140" stroke="#fff" stroke-width="8" fill="none" stroke-linecap="round" opacity=".8"/></g>
+      <path id="w_adh" d="M230 250 L230 375 Q230 398 252 398 L448 398 Q470 398 470 375 L470 250" fill="none" stroke="#D2462B" stroke-width="7" stroke-linecap="round"/>
+      <g id="w_post"><rect x="336" y="420" width="28" height="270" rx="14" fill="none" stroke="#1C1B19" stroke-width="4" stroke-dasharray="10 9"/></g>
+    </g>
+    <g id="w_ann"></g>
+  </svg>
+</div>
+
+<!-- 3 QUESTION -->
+<div class="scene" id="s_question">
+  <div class="chap"><b>02</b><i></i>Dijital ölçü</div>
+  <div class="photo" id="q_photo" style="left:0;top:220px;width:1080px;height:600px"><img id="q_img" src="scanner.jpg" style="object-position:50% 60%"></div>
+  <div class="abs cap" style="left:80px;top:832px">Ağız içi tarayıcı (temsili) · Foto: Викидим, Wikimedia Commons, CC BY 4.0</div>
+  <div class="abs h" id="q_t" style="left:80px;right:60px;top:925px;font-size:84px">
+    <span class="mask"><span>Bu derin kaviteyi</span></span><br><span class="mask"><span>ne kadar <span id="q_word" style="font-style:italic;font-weight:600;color:var(--red)">doğru</span></span></span><br><span class="mask"><span>kopyalıyor?</span></span>
+  </div>
+  <svg class="abs" id="q_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+</div>
+
+<!-- 4 DESIGN -->
+<div class="scene" id="s_design">
+  <div class="chap"><b>03</b><i></i>Çalışma</div>
+  <div class="abs h" style="left:80px;top:220px;font-size:80px">Bir <span style="font-style:italic;font-weight:600">in vitro</span> çalışma</div>
+  <div class="polaroid" id="d_p1" style="left:70px;top:380px;width:450px;height:430px"><div class="tape"></div><div class="im"><img src="s9_2.jpg" style="width:200%;object-position:0 50%"></div><div class="abs hand" style="left:0;right:0;bottom:8px;text-align:center;font-size:50px">2 mm</div></div>
+  <div class="polaroid" id="d_p2" style="left:560px;top:400px;width:450px;height:430px"><div class="tape"></div><div class="im"><img src="s10_3.jpg" style="width:200%;object-position:0 50%"></div><div class="abs hand" style="left:0;right:0;bottom:8px;text-align:center;font-size:50px;color:var(--red)">5 mm</div></div>
+  <div class="abs" id="d_eq" style="left:70px;right:70px;top:900px;display:flex;justify-content:space-between;align-items:flex-end">
+    <div class="eqi"><div class="h" style="font-size:96px">2</div><div style="font-size:26px;font-weight:700;color:var(--mute)">diş tipi</div></div>
+    <div class="eqi serif" style="font-size:56px;color:var(--mute);padding-bottom:36px">×</div>
+    <div class="eqi"><div class="h" style="font-size:96px">2</div><div style="font-size:26px;font-weight:700;color:var(--mute)">derinlik</div></div>
+    <div class="eqi serif" style="font-size:56px;color:var(--mute);padding-bottom:36px">×</div>
+    <div class="eqi"><div class="h" style="font-size:96px">3</div><div style="font-size:26px;font-weight:700;color:var(--mute)">tarayıcı</div></div>
+    <div class="eqi serif" style="font-size:56px;color:var(--mute);padding-bottom:36px">×</div>
+    <div class="eqi"><div class="h" style="font-size:96px">11</div><div style="font-size:26px;font-weight:700;color:var(--mute)">tekrar</div></div>
+  </div>
+  <div class="abs" id="d_tot" style="left:80px;top:1080px;display:flex;align-items:baseline;gap:22px"><span class="h" id="d_num" style="font-size:170px;color:var(--red)">132</span><span class="serif" style="font-size:56px;font-style:italic;font-weight:600">tarama</span></div>
+  <div class="abs" id="d_sc" style="left:80px;top:1295px;font-size:28px;font-weight:700;letter-spacing:1px;color:var(--mute)">TRIOS 5 &nbsp;·&nbsp; DEXIS IS 3800 &nbsp;·&nbsp; iTero Element 5D</div>
+  <svg class="abs" id="d_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+</div>
+
+<!-- 5 RESULT axial -->
+<div class="scene" id="s_result">
+  <div class="chap"><b>04</b><i></i>Bulgular</div>
+  <div class="abs h" style="left:80px;top:220px;font-size:96px">Aksiyel duvar</div>
+  <div class="abs" style="left:80px;top:340px;font-size:30px;font-weight:700;color:var(--mute)">Molar · medyan sapma (µm) · düşük = daha doğru</div>
+  <div class="abs" id="ax" style="left:80px;right:80px;top:430px;height:820px"></div>
+  <svg class="abs" id="ax_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+</div>
+
+<!-- 6 RESULT base -->
+<div class="scene" id="s_result2">
+  <div class="chap"><b>04</b><i></i>Bulgular</div>
+  <div class="abs h" style="left:80px;top:220px;font-size:96px">Kavite tabanı</div>
+  <div class="abs" style="left:80px;top:340px;font-size:30px;font-weight:700;color:var(--mute)">Premolar · medyan sapma (µm)</div>
+  <div class="abs" id="bs" style="left:80px;right:80px;top:430px;height:820px"></div>
+  <svg class="abs" id="bs_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+</div>
+
+<!-- 7 LIMIT -->
+<div class="scene" id="s_limit">
+  <div class="chap"><b>05</b><i></i>Klinik eşik</div>
+  <div class="photo" id="lm_photo" style="left:0;top:220px;width:1080px;height:470px"><img id="lm_img" src="s17_0.png" style="object-position:50% 40%"></div>
+  <div class="abs cap" style="left:80px;top:702px">Çakıştırma sonrası renk kodlu sapma haritası (çalışmadan, temsili örnek)</div>
+  <div class="abs" style="left:80px;top:748px;font-size:30px;font-weight:700;color:var(--mute)">Derin (5 mm) premolar · kavite tabanı · ortalama (µm)</div>
+  <div class="abs" id="lm" style="left:80px;right:80px;top:840px;height:440px"></div>
+  <svg class="abs" id="lm_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+</div>
+
+<!-- 8 WHY -->
+<div class="scene" id="s_why">
+  <div class="chap"><b>06</b><i></i>Neden?</div>
+  <div class="abs h" style="left:80px;top:220px;font-size:88px">Işık tabana<br><span style="font-style:italic;font-weight:600;color:var(--red)">ulaşamıyor.</span></div>
+  <svg class="abs" id="why_svg" style="left:0;top:450px" width="1080" height="900" viewBox="0 0 1080 900">
+    <defs><pattern id="hatch2" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="16" stroke="#1C1B19" stroke-width="2.5"/></pattern></defs>
+    <!-- narrow -->
+    <path d="M110 200 L110 820 L450 820 L450 200 L360 200 L360 720 L200 720 L200 200 Z" fill="url(#hatch2)" stroke="#1C1B19" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M110 200 L110 820 L450 820 L450 200 L360 200 L360 720 L200 720 L200 200 Z" fill="none" stroke="#1C1B19" stroke-width="5"/>
+    <rect x="200" y="200" width="160" height="520" fill="#F2EEE6"/>
+    <line id="pm_floor" x1="200" y1="718" x2="360" y2="718" stroke="#D2462B" stroke-width="8"/>
+    <!-- wide -->
+    <path d="M580 200 L580 820 L1000 820 L1000 200 L940 200 L940 600 L640 600 L640 200 Z" fill="url(#hatch2)" stroke="#1C1B19" stroke-width="5" stroke-linejoin="round"/>
+    <rect x="640" y="200" width="300" height="400" fill="#F2EEE6"/>
+    <path d="M580 200 L580 820 L1000 820 L1000 200 L940 200 L940 600 L640 600 L640 200 Z" fill="none" stroke="#1C1B19" stroke-width="5"/>
+    <line id="m_floor" x1="640" y1="598" x2="940" y2="598" stroke="#2E5C86" stroke-width="8"/>
+    <!-- scanner tips -->
+    <g id="tip1"><rect x="215" y="70" width="130" height="70" rx="10" fill="#fff" stroke="#1C1B19" stroke-width="5"/><rect x="245" y="138" width="70" height="14" fill="#1C1B19"/></g>
+    <g id="tip2"><rect x="725" y="70" width="130" height="70" rx="10" fill="#fff" stroke="#1C1B19" stroke-width="5"/><rect x="755" y="138" width="70" height="14" fill="#1C1B19"/></g>
+    <g id="pm_rays"></g><g id="m_rays"></g>
+    <text x="280" y="880" text-anchor="middle" font-size="52" fill="#1C1B19">Premolar</text>
+    <text x="790" y="880" text-anchor="middle" font-size="52" fill="#1C1B19">Molar</text>
+    <g id="why_ann"></g>
+  </svg>
+</div>
+
+<!-- 9 TIPS -->
+<div class="scene" id="s_tips">
+  <div class="chap"><b>07</b><i></i>Pratik ipucu</div>
+  <div class="abs h" style="left:80px;top:220px;font-size:88px">Derin premolar<br>endokronda:</div>
+  <div class="abs" id="tips" style="left:80px;right:80px;top:500px">
+    <div class="tip" style="display:flex;gap:36px;align-items:flex-start;padding:34px 0;border-top:3px solid var(--ink)"><div class="h" style="font-size:80px;color:var(--red);width:70px">1</div><div style="font-size:52px;font-weight:700;line-height:1.15;padding-top:10px">Taramadan sonra <span class="serif" style="font-style:italic;font-weight:600">kavite tabanını</span> kontrol et</div></div>
+    <div class="tip" style="display:flex;gap:36px;align-items:flex-start;padding:34px 0;border-top:3px solid var(--ink)"><div class="h" style="font-size:80px;color:var(--red);width:70px">2</div><div style="font-size:52px;font-weight:700;line-height:1.15;padding-top:10px">Eksik varsa <span class="serif" style="font-style:italic;font-weight:600">tekrar tara</span></div></div>
+    <div class="tip" style="display:flex;gap:36px;align-items:flex-start;padding:34px 0;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink)"><div class="h" style="font-size:80px;color:var(--red);width:70px">3</div><div style="font-size:52px;font-weight:700;line-height:1.15;padding-top:10px">Doğru ölçü = <span class="serif" style="font-style:italic;font-weight:600">doğru uyum</span></div></div>
+  </div>
+  <svg class="abs" id="tips_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+</div>
+
+<!-- 10 OUTRO -->
+<div class="scene" id="s_outro">
+  <div class="abs h" id="o_t" style="left:80px;top:420px;font-size:150px"><span class="mask"><span>Kaydet,</span></span><br><span class="mask"><span style="font-style:italic;font-weight:600;color:var(--red)">paylaş.</span></span></div>
+  <svg class="abs" id="o_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="abs" id="o_src" style="left:80px;right:80px;top:1130px;font-size:26px;line-height:1.45;color:var(--mute)"><span style="font-weight:700;color:var(--ink)">Kaynak:</span> Diş tipi ve pulpa odası derinliğinin farklı ağız içi tarayıcılarla alınan endokron taramalarının doğruluğuna etkisi üzerine in vitro çalışma.</div>
+</div>
+
+<div id="subs"></div>
+</div></div>
+<svg id="grain" width="1080" height="1920"><filter id="gf"><feTurbulence id="turb" type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="1"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#gf)"/></svg>
+<div id="topline"></div>
+
+<script>
+const TL=__TIMELINE__, TOTAL=__TOTAL__;
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)), P=(t,a,d)=>clamp((t-a)/d);
+const eo=t=>1-Math.pow(1-t,3), eio=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2, eb=t=>{const c1=1.4,c3=c1+1;return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2)};
+const $=id=>document.getElementById(id), lerp=(a,b,t)=>a+(b-a)*t, NS='http://www.w3.org/2000/svg';
+
+// ---------- scene windows
+const order=[],SC={};
+TL.forEach(c=>{if(!SC[c.scene]){SC[c.scene]={start:c.start,lines:[]};order.push(c.scene)}SC[c.scene].end=c.end;SC[c.scene].lines.push(c)});
+order.forEach((k,i)=>{const s=SC[k];s.a=i===0?0:s.start-0.3;s.b=i<order.length-1?SC[order[i+1]].start-0.3:TOTAL;s.z=i});
+const LS=(k,i)=>SC[k].lines[i].start-SC[k].start; // line start relative to scene start
+const W=(k,li,wi)=>{const ws=SC[k].lines[li].words;return (ws[Math.min(wi,ws.length-1)].s)-SC[k].start};
+
+// ---------- hand-drawn helpers (seeded jitter)
+let sd=11;const rnd=()=>{sd=(sd*16807)%2147483647;return sd/2147483647};
+function roughPath(pts,amp=3){let d='';const out=[];for(let i=0;i<pts.length-1;i++){const [x1,y1]=pts[i],[x2,y2]=pts[i+1];const n=Math.max(2,Math.round(Math.hypot(x2-x1,y2-y1)/40));for(let k=0;k<n;k++){const t=k/n;out.push([lerp(x1,x2,t)+(rnd()-.5)*amp,lerp(y1,y2,t)+(rnd()-.5)*amp])}}out.push(pts[pts.length-1]);
+  d='M'+out[0].join(' ');for(let i=1;i<out.length-1;i++){const mx=(out[i][0]+out[i+1][0])/2,my=(out[i][1]+out[i+1][1])/2;d+=` Q${out[i][0]} ${out[i][1]} ${mx} ${my}`}d+=` L${out[out.length-1].join(' ')}`;return d}
+function roughEllipse(cx,cy,rx,ry,amp=6){const pts=[];const n=26;const st=rnd()*6.28;for(let i=0;i<=n+3;i++){const a=st+i/n*Math.PI*2*1.0;const k=1+(rnd()-.5)*0.06;pts.push([cx+Math.cos(a)*rx*k,cy+Math.sin(a)*ry*k])}return roughPath(pts,amp)}
+function stroke(svg,d,col='#D2462B',w=6){const p=document.createElementNS(NS,'path');p.setAttribute('d',d);p.setAttribute('fill','none');p.setAttribute('stroke',col);p.setAttribute('stroke-width',w);p.setAttribute('stroke-linecap','round');p.setAttribute('stroke-linejoin','round');svg.appendChild(p);const L=p.getTotalLength();p.style.strokeDasharray=L;p.style.strokeDashoffset=L;return {p,L}}
+function draw(s,pr){s.p.style.strokeDashoffset=s.L*(1-pr)}
+function arrow(svg,x1,y1,x2,y2,col,w=5,bend=40){const mx=(x1+x2)/2+bend,my=(y1+y2)/2-bend;const body=stroke(svg,roughPath([[x1,y1],[mx,my],[x2,y2]],2),col,w);const a=Math.atan2(y2-my,x2-mx);const h=26;
+  const head=stroke(svg,`M${x2-h*Math.cos(a-0.45)} ${y2-h*Math.sin(a-0.45)} L${x2} ${y2} L${x2-h*Math.cos(a+0.45)} ${y2-h*Math.sin(a+0.45)}`,col,w);return [body,head]}
+function drawArrow(ar,pr){draw(ar[0],clamp(pr/0.8));draw(ar[1],clamp((pr-0.8)/0.2))}
+function htext(svg,x,y,txt,size,col,anchor='start',rot=0){const t=document.createElementNS(NS,'text');t.setAttribute('x',x);t.setAttribute('y',y);t.setAttribute('font-size',size);t.setAttribute('fill',col);t.setAttribute('text-anchor',anchor);t.setAttribute('transform',`rotate(${rot} ${x} ${y})`);t.textContent=txt;svg.appendChild(t);return t}
+function reveal(el,pr){el.style.opacity=clamp(pr*3);el.style.clipPath=`inset(-20px ${100-pr*100}% -20px -20px)`}
+
+// ---------- build static annotation elements
+// hook
+const hs=$('hook_svg');
+const hookStrike=stroke(hs,roughPath([[70,540],[190,515],[310,530]],5),'#D2462B',12);
+const hookUnder=stroke(hs,roughPath([[85,850],[330,838],[640,848]],4),'#D2462B',9);
+// what
+const wa=$('w_ann');
+const a1t=htext(wa,40,150,'tek parça',62,'#2E5C86',  'start',-4), a1=arrow(wa,150,170,410,170,'#2E5C86',5,-30);
+const a2t=htext(wa,40,480,'pulpa odası',58,'#1C1B19','start',-3), a2=arrow(wa,140,500,520,410,'#1C1B19',5,40);
+const a3t=htext(wa,960,200,'adeziv',58,'#D2462B','middle',4), a3=arrow(wa,950,225,770,340,'#D2462B',5,-30);
+const a4t=htext(wa,890,640,'post yok',60,'#D2462B','middle',-3), a4=arrow(wa,860,665,690,640,'#D2462B',5,30);
+const px1=stroke(wa,roughPath([[600,560],[700,720]],3),'#D2462B',9), px2=stroke(wa,roughPath([[700,560],[600,720]],3),'#D2462B',9);
+// question
+const qs=$('q_svg');const qCirc=stroke(qs,roughEllipse(490,1075,170,62,5),'#D2462B',6);
+// design
+const ds=$('d_svg');const dUnder=stroke(ds,roughPath([[80,1262],[260,1254],[420,1260]],4),'#D2462B',9);
+// charts
+function hbar(id,rows,max,colA,colB,threshold,Wd,Hh){const c=$(id);const x0=240,x1=Wd-110;const sc=(x1-x0)/max;const out=[];
+  const axis=document.createElement('div');axis.className='abs';axis.style.cssText=`left:${x0}px;top:0;bottom:0;width:3px;background:#1C1B19`;c.appendChild(axis);
+  if(threshold!==undefined){const tl=document.createElement('div');tl.className='abs';tl.style.cssText=`left:${x0+threshold*sc}px;top:-30px;bottom:-10px;width:0;border-left:5px dashed #D2462B`;c.appendChild(tl);out.thr=tl;out.thrX=x0+threshold*sc}
+  const rh=Hh/rows.length;
+  rows.forEach((r,i)=>{const y=i*rh+rh*0.18;const lab=document.createElement('div');lab.className='abs';lab.style.cssText=`left:0;top:${y+(r.v.length>1?28:6)}px;width:${x0-24}px;font-size:36px;font-weight:800`;lab.textContent=r.n;c.appendChild(lab);
+    const bars=r.v.map((v,j)=>{const bh=r.v.length>1?62:84;const by=y+j*(bh+16);const b=document.createElement('div');b.className='abs';const col=j===0&&r.v.length>1?colA:colB;
+      b.style.cssText=`left:${x0+3}px;top:${by}px;height:${bh}px;width:0;background:${col}`;c.appendChild(b);
+      let over=null;if(threshold!==undefined){over=document.createElement('div');over.className='abs';over.style.cssText=`left:${x0+threshold*sc}px;top:${by}px;height:${bh}px;width:0;background:#D2462B`;c.appendChild(over)}
+      const t=document.createElement('div');t.className='abs serif';t.style.cssText=`top:${by+bh/2-30}px;font-size:46px;font-weight:800;color:${col==='#C9C1B2'?'#8A8478':col}`;c.appendChild(t);
+      const tag=document.createElement('div');tag.className='abs';tag.style.cssText=`top:${by+bh/2-16}px;left:${x0+14}px;font-size:24px;font-weight:800;color:#fff`;tag.textContent=r.v.length>1?(j?'5 mm':'2 mm'):'';c.appendChild(tag);
+      return {b,t,v,over,x0,sc,tag,threshold}});out.push(bars)});return out}
+function setH(o,v,pr){const w=v*o.sc*pr;o.b.style.width=w+'px';o.t.style.left=(o.x0+w+16)+'px';o.t.textContent=(v*pr).toFixed(1).replace('.',',');o.t.style.opacity=pr>0.02?1:0;o.tag.style.opacity=w>110?1:0;
+  if(o.over){const thx=o.threshold*o.sc;const ow=Math.max(0,w-thx);o.over.style.width=ow+'px'}}
+const AX=hbar('ax',[{n:'Dexis',v:[96.8,69.4]},{n:'iTero',v:[89.0,28.2]},{n:'TRIOS 5',v:[118.3,35.2]}],125,'#C9C1B2','#2E5C86',undefined,920,820);
+const BS=hbar('bs',[{n:'Dexis',v:[62.0,99.5]},{n:'iTero',v:[58.7,105.3]},{n:'TRIOS 5',v:[76.7,107.2]}],125,'#C9C1B2','#D2462B',undefined,920,820);
+const LM=hbar('lm',[{n:'Dexis',v:[103.2]},{n:'iTero',v:[104.1]},{n:'TRIOS 5',v:[109.1]}],112,null,'#1C1B19',100,920,440);
+const axs=$('ax_svg'), bss=$('bs_svg'), lms=$('lm_svg');
+const axNote=htext(axs,560,1330,'derinlik ↑  sapma ↓',66,'#2E5C86','middle',-3);
+const bsNote=htext(bss,560,1330,'ters etki: sapma ↑',66,'#D2462B','middle',-3);
+const lmNote=htext(lms,815,824,'~100 µm klinik sınır',48,'#D2462B','end',0);
+const lmCirc=stroke(lms,roughEllipse(858,1055,62,205,6),'#D2462B',6);
+// why rays
+function rays(g,x0,x1,top,floorY,wl,wr,cap){const arr=[];for(let i=0;i<6;i++){const x=lerp(x0,x1,i/5);const ang=(i-2.5)*0.11;let ex=x+Math.tan(ang)*(floorY-top),ey=floorY;
+  if(ex<wl){ey=top+(wl-x)/Math.tan(ang);ex=wl}else if(ex>wr){ey=top+(wr-x)/Math.tan(ang);ex=wr}if(cap&&ey>cap){ex=x+Math.tan(ang)*(cap-top);ey=cap}
+  const s=stroke(g,`M${x} ${top} L${ex} ${ey}`,'#2E5C86',4);s.p.setAttribute('stroke-dasharray','');s.p.style.strokeDasharray=s.L;arr.push(s)}return arr}
+const PR=rays($('pm_rays'),245,315,152,720,200,360,470), MR=rays($('m_rays'),755,825,152,600,640,940);
+const wa2=$('why_ann');const whyQ=htext(wa2,280,640,'?',120,'#D2462B','middle',0);const whyOk=stroke(wa2,roughPath([[745,520],[780,560],[850,470]],3),'#2E5C86',10);
+const whyNote=htext(wa2,280,560,'',0,'#000');
+// tips
+const ts=$('tips_svg');const tChecks=[...document.querySelectorAll('.tip')].map(tp=>{tp.style.position='relative';tp.style.paddingRight='110px';const sv=document.createElementNS(NS,'svg');sv.setAttribute('width',110);sv.setAttribute('height',110);sv.style.cssText='position:absolute;right:-10px;top:24px';tp.appendChild(sv);return stroke(sv,roughPath([[15,55],[45,90],[100,15]],3),'#D2462B',10)});
+// outro
+const os=$('o_svg');const oUnder=stroke(os,roughPath([[90,775],[380,760],[640,770]],4),'#D2462B',10);
+const oBook=stroke(os,'M820 420 L820 640 L880 590 L940 640 L940 420 Z','#1C1B19',8);
+const oNote=htext(os,560,980,'meslektaşına gönder →',64,'#2E5C86','middle',-3);
+
+// ---------- subtitles from word timings
+const CH=[];TL.forEach(L=>{let cur=[];L.words.forEach((w,i)=>{cur.push(w);const end=/[.,:?!;]$/.test(w.w);if(cur.length>=4||end||i===L.words.length-1){CH.push({ws:cur.slice(),s:cur[0].s,e:cur[cur.length-1].e});cur=[]}})});
+CH.forEach((c,i)=>{const nx=CH[i+1];c.hide=nx?Math.min(nx.s,c.e+0.6):c.e+0.6});
+const subs=$('subs');let curC=-1,wEls=[];
+function setSub(t){let k=-1;for(let i=0;i<CH.length;i++){if(t>=CH[i].s-0.06&&t<CH[i].hide){k=i;break}}
+  if(k<0){subs.style.opacity=0;return}subs.style.opacity=1;
+  if(k!==curC){curC=k;subs.innerHTML='';const ln=document.createElement('span');ln.className='ln';subs.appendChild(ln);wEls=CH[k].ws.map(w=>{const s=document.createElement('span');s.className='w';s.textContent=w.w;ln.appendChild(s);return {s,w}})}
+  const pin=eb(P(t,CH[k].s-0.06,0.22));subs.firstChild.style.transform=`scale(${0.85+0.15*pin}) rotate(${(1-pin)*-2}deg)`;
+  wEls.forEach(o=>{o.s.style.color=t>=o.w.s-0.02?(t<o.w.e+0.05?'#D2462B':'#1C1B19'):'#B5AEA2'})}
+
+// ---------- reveal helpers
+function maskWords(root,times,t){const ms=root.querySelectorAll('.mask>span');ms.forEach((m,i)=>{const p=eo(P(t,times[Math.min(i,times.length-1)],0.45));m.style.transform=`translateY(${(1-p)*110}%)`})}
+
+function render(t){
+  $('turb').setAttribute('seed',1+Math.floor(t*12)%9);
+  $('cam').style.transform=`translate(${Math.sin(t*0.9)*3+Math.sin(t*2.3)*1.2}px,${Math.cos(t*0.7)*3+Math.sin(t*1.9)*1}px) rotate(${Math.sin(t*0.5)*0.12}deg)`;
+  $('topline').style.width=(1080*t/TOTAL)+'px';
+  // scene transitions: push from right
+  order.forEach(k=>{const s=SC[k],e=$('s_'+k);const vis=t>=s.a-0.01&&t<s.b+0.45;e.style.display=vis?'block':'none';if(!vis)return;
+    e.style.zIndex=s.z;const pin=s.z===0?1:eio(P(t,s.a,0.5));const pout=eio(P(t,s.b,0.45));
+    e.style.transform=`translateX(${(1-pin)*100 - pout*28}%)`;e.style.filter=pout>0?`brightness(${1-pout*0.25})`:'none'});
+  const S=k=>t-SC[k].start;
+
+  // HOOK
+  {const l=S('hook');const L1=SC.hook.lines[0].words.map(w=>w.s-SC.hook.start-0.12);
+   $('hook_img').style.transform=`scale(${1.12-0.08*P(t,0,8)}) translateY(${-30*P(t,0,8)}px)`;
+   maskWords($('hook_t1'),L1,l);
+   const l2=LS('hook',1);draw(hookStrike,eio(P(l,l2-0.2,0.35)));
+   $('hook_t1').style.opacity=1-0.45*P(l,l2+0.4,0.4);
+   const tE=W('hook',1,8)-0.15;const a=eo(P(l,l2+0.5,0.6));const ans=$('hook_ans');ans.style.opacity=a;ans.style.transform=`translateY(${(1-a)*40}px)`;
+   const big=ans.lastElementChild;const bp=eb(P(l,tE,0.55));big.style.opacity=P(l,tE,0.15);big.style.transform=`translateY(${(1-bp)*60}px)`;
+   draw(hookUnder,eio(P(l,tE+0.5,0.5)));}
+  // WHAT
+  {const l=S('what');const tp=$('w_tooth');tp.style.strokeDasharray=2300;tp.style.strokeDashoffset=2300*(1-eio(P(l,0,1.2)));tp.style.fillOpacity=P(l,0.7,0.6);
+   ['w_c1','w_c2','w_gum'].forEach((id,i)=>{$(id).style.opacity=P(l,0.9+i*0.15,0.4)});
+   const c=eb(P(l,1.3,0.7));$('w_crown').style.transform=`translateY(${(1-c)*-260}px)`;$('w_crown').style.opacity=P(l,1.3,0.15);
+   reveal(a1t,P(l,2.0,0.5));drawArrow(a1,P(l,2.2,0.6));
+   const t2=LS('what',1);reveal(a2t,P(l,t2+0.6,0.5));drawArrow(a2,P(l,t2+0.8,0.6));
+   const adh=$('w_adh');adh.style.strokeDasharray=600;adh.style.strokeDashoffset=600*(1-eio(P(l,t2+2.0,0.8)));
+   reveal(a3t,P(l,t2+2.4,0.5));drawArrow(a3,P(l,t2+2.6,0.5));
+   const t3=LS('what',2);$('w_post').style.opacity=P(l,t3,0.3);draw(px1,eo(P(l,t3+0.9,0.3)));draw(px2,eo(P(l,t3+1.15,0.3)));
+   reveal(a4t,P(l,t3+1.5,0.5));drawArrow(a4,P(l,t3+1.6,0.5));}
+  // QUESTION
+  {const l=S('question');$('q_img').style.transform=`scale(${1.18-0.12*eo(P(l,-0.3,5))}) translateX(${-20+30*P(l,0,5)}px)`;
+   maskWords($('q_t'),[0.5,1.2,1.9],l);draw(qCirc,eio(P(l,W('question',0,8)+0.0,0.6)));}
+  // DESIGN
+  {const l=S('design');[['d_p1',-3.5,0.1],['d_p2',2.5,0.5]].forEach(([id,r,tt])=>{const p=eb(P(l,tt,0.6));const e=$(id);e.style.opacity=P(l,tt,0.15);e.style.transform=`translateY(${(1-p)*-80}px) rotate(${r+(1-p)*-8}deg) scale(${1.1-0.1*p})`});
+   const t2=LS('design',1);const its=$('d_eq').children;for(let i=0;i<its.length;i++){const tt=t2+i*0.18;const p=eo(P(l,tt,0.4));its[i].style.opacity=p;its[i].style.transform=`translateY(${(1-p)*30}px)`}
+   const tn=W('design',1,5)-0.2;const n=eo(P(l,tn,1.0));$('d_tot').style.opacity=P(l,tn,0.15);$('d_num').textContent=Math.round(132*n);draw(dUnder,eio(P(l,tn+0.8,0.5)));
+   const sc=$('d_sc');reveal(sc,P(l,tn+0.5,0.8));}
+  // RESULT
+  {const l=S('result');AX.forEach((b,i)=>{setH(b[0],b[0].v,eo(P(l,0.15+i*0.15,0.7)));
+     const tt=LS('result',1)+0.3+i*0.35;const pr=P(l,tt,1.0);const v=lerp(b[0].v,b[1].v,eio(pr));setH(b[1],v,eo(P(l,tt-0.5,0.4)))});
+   reveal(axNote,P(l,LS('result',1)+1.8,0.7));}
+  // RESULT2
+  {const l=S('result2');BS.forEach((b,i)=>{setH(b[0],b[0].v,eo(P(l,-0.1+i*0.12,0.6)));
+     const tt=0.9+i*0.3;const v=lerp(b[0].v,b[1].v,eio(P(l,tt,1.0)));setH(b[1],v,eo(P(l,tt-0.4,0.35)))});
+   reveal(bsNote,P(l,2.3,0.7));}
+  // LIMIT
+  {const l=S('limit');$('lm_img').style.transform=`scale(${1.08+0.08*P(l,0,9)}) translateX(${-20*P(l,0,9)}px)`;
+   LM.thr.style.opacity=P(l,0.6,0.3);reveal(lmNote,P(l,1.0,0.7));
+   const t2=LS('limit',1);LM.forEach((b,i)=>setH(b[0],b[0].v,eo(P(l,t2+0.2+i*0.3,1.0))));
+   draw(lmCirc,eio(P(l,t2+1.9,0.7)));}
+  // WHY
+  {const l=S('why');PR.forEach((r,i)=>draw(r,eo(P(l,0.4+i*0.07,0.8))));$('pm_floor').style.opacity=0.35+0.65*Math.abs(Math.sin(l*3))*P(l,1.4,0.2);
+   whyQ.style.opacity=P(l,1.6,0.2);whyQ.style.transform=`translateY(${(1-eb(P(l,1.6,0.5)))*30}px)`;
+   const t2=LS('why',1);MR.forEach((r,i)=>draw(r,eo(P(l,t2-0.3+i*0.07,0.8))));$('m_floor').style.opacity=P(l,t2+0.5,0.3);draw(whyOk,eio(P(l,t2+0.8,0.5)));
+   $('tip1').style.transform=`translateY(${Math.sin(l*2)*4}px)`;$('tip2').style.transform=`translateY(${Math.cos(l*2)*4}px)`;}
+  // TIPS
+  {const l=S('tips');const t2=LS('tips',1);const tips=document.querySelectorAll('.tip');[0.2,t2,W('tips',1,4)].forEach((tt,i)=>{const p=eo(P(l,tt,0.5));tips[i].style.opacity=p;tips[i].style.transform=`translateX(${(1-p)*-60}px)`;draw(tChecks[i],eio(P(l,tt+0.5,0.4)))});}
+  // OUTRO
+  {const l=S('outro');maskWords($('o_t'),[0.1,0.5],l);draw(oUnder,eio(P(l,1.0,0.5)));draw(oBook,eio(P(l,0.6,0.9)));reveal(oNote,P(l,1.4,0.8));$('o_src').style.opacity=P(l,1.8,0.5);}
+  setSub(t);
+}
+window.render=render;render(0);
+</script>
+</body></html>
