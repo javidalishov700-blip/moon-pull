@@ -1,0 +1,71 @@
+1
+00:00:00,600 --> 00:00:03,996
+Kanal tedavili dişe her zaman post mu gerekir?
+
+2
+00:00:04,046 --> 00:00:05,980
+Hayır! Cevap: ENDOKRON.
+
+3
+00:00:06,380 --> 00:00:10,455
+Endokron, pulpa odasına uzanan tek parça bir restorasyondur.
+
+4
+00:00:10,505 --> 00:00:15,242
+Tutuculuğunu pulpa odası duvarlarından ve adeziv simantasyondan alır.
+
+5
+00:00:15,292 --> 00:00:19,752
+Post boşluğu açılmadığı için kök kırığı ve perforasyon riski azalır.
+
+6
+00:00:20,152 --> 00:00:24,221
+Peki dijital ölçü, bu derin kaviteyi ne kadar doğru kopyalar?
+
+7
+00:00:24,621 --> 00:00:29,802
+Molar ve premolar dişlerde 2 ve 5 mm pulpa odası derinliği hazırladık.
+
+8
+00:00:29,852 --> 00:00:35,628
+3 ağız içi tarayıcıyla 132 tarama yapıp referansla karşılaştırdık.
+
+9
+00:00:36,028 --> 00:00:37,445
+Sonuç şaşırtıcı:
+
+10
+00:00:37,495 --> 00:00:41,046
+Derinlik arttıkça aksiyel duvarlarda sapma azaldı…
+
+11
+00:00:41,446 --> 00:00:44,843
+…ama kavite tabanında sapma belirgin şekilde arttı.
+
+12
+00:00:45,243 --> 00:00:49,283
+Klinik olarak kabul edilen uyumsuzluk sınırı ~100 µm.
+
+13
+00:00:49,333 --> 00:00:55,036
+Derin premolarların tabanında ortalama sapma bu sınırı aştı: 103–109 µm.
+
+14
+00:00:55,436 --> 00:00:59,396
+Çünkü dar ve derin kavitede ışık tabana yeterince ulaşamaz.
+
+15
+00:00:59,446 --> 00:01:02,930
+Molarlarda ise geniş kavite, taramayı kolaylaştırır.
+
+16
+00:01:03,330 --> 00:01:08,472
+Klinik ipucu: Derin premolar endokronda kavite tabanını mutlaka kontrol edin.
+
+17
+00:01:08,522 --> 00:01:12,248
+Gerekirse tekrar tarayın. Doğru ölçü = doğru uyum.
+
+18
+00:01:12,648 --> 00:01:14,948
+Daha fazlası için takipte kalın!
