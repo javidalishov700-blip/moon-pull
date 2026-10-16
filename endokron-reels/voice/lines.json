@@ -1,86 +1,103 @@
 {
  "voices": [
-  "tr-TR-EmelNeural",
-  "tr-TR-AhmetNeural"
+  {
+   "voice": "tr-TR-AhmetNeural"
+  },
+  {
+   "voice": "en-US-AndrewMultilingualNeural",
+   "lang": "tr-TR"
+  },
+  {
+   "voice": "en-US-BrianMultilingualNeural",
+   "lang": "tr-TR"
+  },
+  {
+   "voice": "de-DE-FlorianMultilingualNeural",
+   "lang": "tr-TR"
+  },
+  {
+   "voice": "fr-FR-RemyMultilingualNeural",
+   "lang": "tr-TR"
+  },
+  {
+   "voice": "it-IT-GiuseppeMultilingualNeural",
+   "lang": "tr-TR"
+  }
  ],
- "rate": "+6%",
+ "rate": "+4%",
  "pitch": "+0Hz",
  "lines": [
   {
    "id": "l00",
-   "say": "Kanal tedavili bir dişe, her zaman post mu gerekir?"
+   "say": "Kanal tedavili her dişe post şart mı?"
   },
   {
    "id": "l01",
-   "say": "Hayır! Cevap: endokron."
+   "say": "Hayır. Uygun vakalarda güçlü bir alternatif var: endokron."
   },
   {
    "id": "l02",
-   "say": "Endokron, pulpa odasına uzanan, tek parça bir restorasyondur."
+   "say": "Endokron, pulpa odasına uzanan tek parça bir restorasyon."
   },
   {
    "id": "l03",
-   "say": "Tutuculuğunu, pulpa odası duvarlarından ve adeziv simantasyondan alır."
+   "say": "Tutuculuğunu pulpa odası duvarlarından ve adeziv simantasyondan alıyor."
   },
   {
    "id": "l04",
-   "say": "Post boşluğu açılmadığı için, kök kırığı ve perforasyon riski azalır."
+   "say": "Post boşluğu açılmadığı için kök kırığı ve perforasyon riski de azalıyor."
   },
   {
    "id": "l05",
-   "say": "Peki, ağız içi tarayıcılar, bu derin kaviteyi ne kadar doğru kopyalıyor?"
+   "say": "Peki ağız içi tarayıcılar bu derin kaviteyi ne kadar doğru kopyalıyor?"
   },
   {
    "id": "l06",
-   "say": "Diş hekimi Muraz Alişov ve Doktor Öğretim Üyesi Ezgi Erden Kayalıdere, bu soruyu araştırdı."
+   "say": "Yapılan bir in vitro çalışmada, molar ve premolar dişlerde 2 ve 5 milimetre derinlikte kaviteler hazırlandı."
   },
   {
    "id": "l07",
-   "say": "Araştırmacılar, molar ve premolar dişlerde, iki ve beş milimetre pulpa odası derinliği hazırladı."
+   "say": "Üç farklı ağız içi tarayıcıyla toplam 132 tarama alındı ve referans modelle karşılaştırıldı."
   },
   {
    "id": "l08",
-   "say": "Üç farklı ağız içi tarayıcıyla, yüz otuz iki tarama yapıp, laboratuvar referansıyla karşılaştırdılar."
+   "say": "Sonuçlar dikkat çekici."
   },
   {
    "id": "l09",
-   "say": "Sonuç şaşırtıcı."
+   "say": "Derinlik arttıkça aksiyel duvarlarda sapma azaldı."
   },
   {
    "id": "l10",
-   "say": "Derinlik arttıkça, aksiyel duvarlarda sapma azaldı."
+   "say": "Ama kavite tabanında sapma belirgin şekilde arttı."
   },
   {
    "id": "l11",
-   "say": "Ama kavite tabanında, sapma belirgin şekilde arttı."
+   "say": "Klinikte kabul edilen uyumsuzluk sınırı yaklaşık 100 mikron."
   },
   {
    "id": "l12",
-   "say": "Klinik olarak kabul edilen uyumsuzluk sınırı, yaklaşık yüz mikron."
+   "say": "Derin premolarların tabanında ortalama sapma bu sınırı aştı."
   },
   {
    "id": "l13",
-   "say": "Derin premolarların tabanında, ortalama sapma bu sınırı aştı: yüz üç ile yüz dokuz mikron."
+   "say": "Olası neden şu: dar ve derin kavitede ışık tabana yeterince ulaşamıyor."
   },
   {
    "id": "l14",
-   "say": "Olası neden: dar ve derin kavitede, ışık tabana yeterince ulaşamıyor."
+   "say": "Molarlarda ise geniş kavite taramayı kolaylaştırıyor."
   },
   {
    "id": "l15",
-   "say": "Molarlarda ise geniş kavite, taramayı kolaylaştırıyor."
+   "say": "Yani derin bir premolar endokronda, taramadan sonra kavite tabanını mutlaka kontrol edin."
   },
   {
    "id": "l16",
-   "say": "Pratik ipucu: Derin premolar endokronda, kavite tabanını mutlaka kontrol edin."
+   "say": "Eksik varsa tekrar tarayın. Doğru ölçü, doğru uyum demek."
   },
   {
    "id": "l17",
-   "say": "Gerekirse tekrar tarayın. Doğru ölçü, doğru uyum demektir."
-  },
-  {
-   "id": "l18",
-   "say": "Daha fazlası için, takipte kalın!"
+   "say": "Faydalı bulduysanız kaydedin ve meslektaşlarınızla paylaşın."
   }
  ]
 }

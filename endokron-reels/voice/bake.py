@@ -9,6 +9,17 @@ lines.json -> out/<ses>/<id>.mp3 + <id>.words.json (kelime zamanları, saniye)
 import asyncio, json, sys
 from pathlib import Path
 import edge_tts
+import edge_tts.communicate as _C
+
+# Çok dilli seslere metnin dilini bildirmek için (meditation/ne-olardi-voice ile aynı yöntem).
+LANG = {"v": None}
+_orig_mkssml = _C.mkssml
+def _mkssml(tc, text):
+    s = _orig_mkssml(tc, text)
+    if LANG["v"]:
+        s = s.replace("xml:lang='en-US'", f"xml:lang='{LANG['v']}'")
+    return s
+_C.mkssml = _mkssml
 
 ROOT = Path(__file__).resolve().parent
 LOG = []
@@ -33,7 +44,8 @@ async def synth(text, voice, rate, pitch, dest):
 
 async def main():
     d = json.loads((ROOT / "lines.json").read_text("utf-8"))
-    for voice in d["voices"]:
+    for v in d["voices"]:
+        voice = v["voice"]; LANG["v"] = v.get("lang")
         out = ROOT / "out" / voice; out.mkdir(parents=True, exist_ok=True)
         for ln in d["lines"]:
             dest = out / f"{ln['id']}.mp3"
