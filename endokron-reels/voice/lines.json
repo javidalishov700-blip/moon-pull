@@ -28,54 +28,58 @@
   },
   {
    "id": "l05",
-   "say": "Peki, ağız içi tarayıcı, bu derin kaviteyi ne kadar doğru kopyalar?"
+   "say": "Peki, ağız içi tarayıcılar, bu derin kaviteyi ne kadar doğru kopyalıyor?"
   },
   {
    "id": "l06",
-   "say": "Molar ve premolar dişlerde, iki ve beş milimetre pulpa odası derinliği hazırladık."
+   "say": "Diş hekimi Muraz Alişov ve Doktor Öğretim Üyesi Ezgi Erden Kayalıdere, bu soruyu araştırdı."
   },
   {
    "id": "l07",
-   "say": "Üç farklı ağız içi tarayıcıyla, yüz otuz iki tarama yapıp, referans taramayla karşılaştırdık."
+   "say": "Araştırmacılar, molar ve premolar dişlerde, iki ve beş milimetre pulpa odası derinliği hazırladı."
   },
   {
    "id": "l08",
-   "say": "Sonuç şaşırtıcı."
+   "say": "Üç farklı ağız içi tarayıcıyla, yüz otuz iki tarama yapıp, laboratuvar referansıyla karşılaştırdılar."
   },
   {
    "id": "l09",
-   "say": "Derinlik arttıkça, aksiyel duvarlarda sapma azaldı."
+   "say": "Sonuç şaşırtıcı."
   },
   {
    "id": "l10",
-   "say": "Ama kavite tabanında, sapma belirgin şekilde arttı."
+   "say": "Derinlik arttıkça, aksiyel duvarlarda sapma azaldı."
   },
   {
    "id": "l11",
-   "say": "Klinik olarak kabul edilen uyumsuzluk sınırı, yaklaşık yüz mikron."
+   "say": "Ama kavite tabanında, sapma belirgin şekilde arttı."
   },
   {
    "id": "l12",
-   "say": "Derin premolarların tabanında, ortalama sapma bu sınırı aştı: yüz üç ile yüz dokuz mikron."
+   "say": "Klinik olarak kabul edilen uyumsuzluk sınırı, yaklaşık yüz mikron."
   },
   {
    "id": "l13",
-   "say": "Çünkü dar ve derin kavitede, ışık tabana yeterince ulaşamaz."
+   "say": "Derin premolarların tabanında, ortalama sapma bu sınırı aştı: yüz üç ile yüz dokuz mikron."
   },
   {
    "id": "l14",
-   "say": "Molarlarda ise geniş kavite, taramayı kolaylaştırır."
+   "say": "Olası neden: dar ve derin kavitede, ışık tabana yeterince ulaşamıyor."
   },
   {
    "id": "l15",
-   "say": "Klinik ipucu: Derin premolar endokronda, kavite tabanını mutlaka kontrol edin."
+   "say": "Molarlarda ise geniş kavite, taramayı kolaylaştırıyor."
   },
   {
    "id": "l16",
-   "say": "Gerekirse tekrar tarayın. Doğru ölçü, doğru uyum demektir."
+   "say": "Pratik ipucu: Derin premolar endokronda, kavite tabanını mutlaka kontrol edin."
   },
   {
    "id": "l17",
+   "say": "Gerekirse tekrar tarayın. Doğru ölçü, doğru uyum demektir."
+  },
+  {
+   "id": "l18",
    "say": "Daha fazlası için, takipte kalın!"
   }
  ]
