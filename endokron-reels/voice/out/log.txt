@@ -3,48 +3,62 @@ ok tr-TR-EmelNeural l01 21744
 ok tr-TR-EmelNeural l02 26928
 ok tr-TR-EmelNeural l03 29088
 ok tr-TR-EmelNeural l04 28944
-ok tr-TR-EmelNeural l05 28800
-ok tr-TR-EmelNeural l06 42624
-ok tr-TR-EmelNeural l07 46224
-ok tr-TR-EmelNeural l08 12816
-ok tr-TR-EmelNeural l09 24624
-ok tr-TR-EmelNeural l10 23616
-ok tr-TR-EmelNeural l11 27648
-ok tr-TR-EmelNeural l12 38160
-ok tr-TR-EmelNeural l13 27504
-ok tr-TR-EmelNeural l14 23184
-ok tr-TR-EmelNeural l15 32256
-ok tr-TR-EmelNeural l16 33408
-ok tr-TR-EmelNeural l17 17712
+ok tr-TR-EmelNeural l05 30096
+ok tr-TR-EmelNeural l06 37152
+ok tr-TR-EmelNeural l07 39024
+ok tr-TR-EmelNeural l08 40608
+ok tr-TR-EmelNeural l09 12816
+ok tr-TR-EmelNeural l10 24624
+ok tr-TR-EmelNeural l11 23616
+ok tr-TR-EmelNeural l12 27648
+ok tr-TR-EmelNeural l13 38160
+ok tr-TR-EmelNeural l14 29808
+ok tr-TR-EmelNeural l15 23760
+ok tr-TR-EmelNeural l16 32256
+ok tr-TR-EmelNeural l17 33408
+ok tr-TR-EmelNeural l18 17712
 retry tr-TR-AhmetNeural l00 NoAudioReceived No audio was received. Please verify that your parameters are correct.
 retry tr-TR-AhmetNeural l00 NoAudioReceived No audio was received. Please verify that your parameters are correct.
-ok tr-TR-AhmetNeural l00 25488
+retry tr-TR-AhmetNeural l00 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+retry tr-TR-AhmetNeural l00 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+FAILED tr-TR-AhmetNeural l00
 retry tr-TR-AhmetNeural l01 NoAudioReceived No audio was received. Please verify that your parameters are correct.
 retry tr-TR-AhmetNeural l01 NoAudioReceived No audio was received. Please verify that your parameters are correct.
 retry tr-TR-AhmetNeural l01 NoAudioReceived No audio was received. Please verify that your parameters are correct.
-ok tr-TR-AhmetNeural l01 23328
+retry tr-TR-AhmetNeural l01 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+FAILED tr-TR-AhmetNeural l01
 retry tr-TR-AhmetNeural l02 NoAudioReceived No audio was received. Please verify that your parameters are correct.
 retry tr-TR-AhmetNeural l02 NoAudioReceived No audio was received. Please verify that your parameters are correct.
 retry tr-TR-AhmetNeural l02 NoAudioReceived No audio was received. Please verify that your parameters are correct.
-ok tr-TR-AhmetNeural l02 30960
+retry tr-TR-AhmetNeural l02 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+FAILED tr-TR-AhmetNeural l02
 retry tr-TR-AhmetNeural l03 NoAudioReceived No audio was received. Please verify that your parameters are correct.
-ok tr-TR-AhmetNeural l03 31392
+retry tr-TR-AhmetNeural l03 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+retry tr-TR-AhmetNeural l03 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+retry tr-TR-AhmetNeural l03 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+FAILED tr-TR-AhmetNeural l03
 retry tr-TR-AhmetNeural l04 NoAudioReceived No audio was received. Please verify that your parameters are correct.
 retry tr-TR-AhmetNeural l04 NoAudioReceived No audio was received. Please verify that your parameters are correct.
 retry tr-TR-AhmetNeural l04 NoAudioReceived No audio was received. Please verify that your parameters are correct.
 retry tr-TR-AhmetNeural l04 NoAudioReceived No audio was received. Please verify that your parameters are correct.
 FAILED tr-TR-AhmetNeural l04
 retry tr-TR-AhmetNeural l05 NoAudioReceived No audio was received. Please verify that your parameters are correct.
-ok tr-TR-AhmetNeural l05 29808
+retry tr-TR-AhmetNeural l05 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+retry tr-TR-AhmetNeural l05 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+retry tr-TR-AhmetNeural l05 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+FAILED tr-TR-AhmetNeural l05
 retry tr-TR-AhmetNeural l06 NoAudioReceived No audio was received. Please verify that your parameters are correct.
 retry tr-TR-AhmetNeural l06 NoAudioReceived No audio was received. Please verify that your parameters are correct.
-ok tr-TR-AhmetNeural l06 35280
+retry tr-TR-AhmetNeural l06 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+ok tr-TR-AhmetNeural l06 38880
 retry tr-TR-AhmetNeural l07 NoAudioReceived No audio was received. Please verify that your parameters are correct.
 retry tr-TR-AhmetNeural l07 NoAudioReceived No audio was received. Please verify that your parameters are correct.
-retry tr-TR-AhmetNeural l07 NoAudioReceived No audio was received. Please verify that your parameters are correct.
-retry tr-TR-AhmetNeural l07 NoAudioReceived No audio was received. Please verify that your parameters are correct.
-FAILED tr-TR-AhmetNeural l07
-ok tr-TR-AhmetNeural l08 13536
+ok tr-TR-AhmetNeural l07 41040
+retry tr-TR-AhmetNeural l08 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+retry tr-TR-AhmetNeural l08 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+retry tr-TR-AhmetNeural l08 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+retry tr-TR-AhmetNeural l08 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+FAILED tr-TR-AhmetNeural l08
 retry tr-TR-AhmetNeural l09 NoAudioReceived No audio was received. Please verify that your parameters are correct.
 retry tr-TR-AhmetNeural l09 NoAudioReceived No audio was received. Please verify that your parameters are correct.
 retry tr-TR-AhmetNeural l09 NoAudioReceived No audio was received. Please verify that your parameters are correct.
@@ -56,36 +70,23 @@ retry tr-TR-AhmetNeural l10 NoAudioReceived No audio was received. Please verify
 retry tr-TR-AhmetNeural l10 NoAudioReceived No audio was received. Please verify that your parameters are correct.
 FAILED tr-TR-AhmetNeural l10
 retry tr-TR-AhmetNeural l11 NoAudioReceived No audio was received. Please verify that your parameters are correct.
-retry tr-TR-AhmetNeural l11 NoAudioReceived No audio was received. Please verify that your parameters are correct.
-retry tr-TR-AhmetNeural l11 NoAudioReceived No audio was received. Please verify that your parameters are correct.
-retry tr-TR-AhmetNeural l11 NoAudioReceived No audio was received. Please verify that your parameters are correct.
-FAILED tr-TR-AhmetNeural l11
+ok tr-TR-AhmetNeural l11 26208
 retry tr-TR-AhmetNeural l12 NoAudioReceived No audio was received. Please verify that your parameters are correct.
 retry tr-TR-AhmetNeural l12 NoAudioReceived No audio was received. Please verify that your parameters are correct.
 retry tr-TR-AhmetNeural l12 NoAudioReceived No audio was received. Please verify that your parameters are correct.
-retry tr-TR-AhmetNeural l12 NoAudioReceived No audio was received. Please verify that your parameters are correct.
-FAILED tr-TR-AhmetNeural l12
+ok tr-TR-AhmetNeural l12 29376
 retry tr-TR-AhmetNeural l13 NoAudioReceived No audio was received. Please verify that your parameters are correct.
-retry tr-TR-AhmetNeural l13 NoAudioReceived No audio was received. Please verify that your parameters are correct.
-retry tr-TR-AhmetNeural l13 NoAudioReceived No audio was received. Please verify that your parameters are correct.
-retry tr-TR-AhmetNeural l13 NoAudioReceived No audio was received. Please verify that your parameters are correct.
-FAILED tr-TR-AhmetNeural l13
+ok tr-TR-AhmetNeural l13 39168
 retry tr-TR-AhmetNeural l14 NoAudioReceived No audio was received. Please verify that your parameters are correct.
 retry tr-TR-AhmetNeural l14 NoAudioReceived No audio was received. Please verify that your parameters are correct.
-retry tr-TR-AhmetNeural l14 NoAudioReceived No audio was received. Please verify that your parameters are correct.
-retry tr-TR-AhmetNeural l14 NoAudioReceived No audio was received. Please verify that your parameters are correct.
-FAILED tr-TR-AhmetNeural l14
+ok tr-TR-AhmetNeural l14 32112
 retry tr-TR-AhmetNeural l15 NoAudioReceived No audio was received. Please verify that your parameters are correct.
-retry tr-TR-AhmetNeural l15 NoAudioReceived No audio was received. Please verify that your parameters are correct.
-retry tr-TR-AhmetNeural l15 NoAudioReceived No audio was received. Please verify that your parameters are correct.
-retry tr-TR-AhmetNeural l15 NoAudioReceived No audio was received. Please verify that your parameters are correct.
-FAILED tr-TR-AhmetNeural l15
-retry tr-TR-AhmetNeural l16 NoAudioReceived No audio was received. Please verify that your parameters are correct.
-retry tr-TR-AhmetNeural l16 NoAudioReceived No audio was received. Please verify that your parameters are correct.
-retry tr-TR-AhmetNeural l16 NoAudioReceived No audio was received. Please verify that your parameters are correct.
-ok tr-TR-AhmetNeural l16 36000
+ok tr-TR-AhmetNeural l15 26784
+ok tr-TR-AhmetNeural l16 35568
 retry tr-TR-AhmetNeural l17 NoAudioReceived No audio was received. Please verify that your parameters are correct.
 retry tr-TR-AhmetNeural l17 NoAudioReceived No audio was received. Please verify that your parameters are correct.
 retry tr-TR-AhmetNeural l17 NoAudioReceived No audio was received. Please verify that your parameters are correct.
 retry tr-TR-AhmetNeural l17 NoAudioReceived No audio was received. Please verify that your parameters are correct.
 FAILED tr-TR-AhmetNeural l17
+retry tr-TR-AhmetNeural l18 NoAudioReceived No audio was received. Please verify that your parameters are correct.
+ok tr-TR-AhmetNeural l18 20304
