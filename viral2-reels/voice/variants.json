@@ -1,0 +1,20 @@
+{
+ "voice": "en-US-BrianMultilingualNeural",
+ "lang": "tr-TR",
+ "rate": "+10%",
+ "pitch": "+0Hz",
+ "lines": [
+  {
+   "id": "l00b",
+   "say": "Kompozitte en iyi polimerizasyon tekniği hangisi?"
+  },
+  {
+   "id": "l00c",
+   "say": "Kompozit ışınlarken en iyi teknik hangisi? Cevap araştırmalarda."
+  },
+  {
+   "id": "l03b",
+   "say": "Laboratuvarda pulse-delay de stresi azaltıyor; ama uzun sürüyor ve klinik avantajı kanıtlanmadı."
+  }
+ ]
+}

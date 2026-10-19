@@ -1,0 +1,52 @@
+{
+ "voices": [
+  {
+   "voice": "en-US-BrianMultilingualNeural",
+   "lang": "tr-TR"
+  }
+ ],
+ "rate": "+10%",
+ "pitch": "+0Hz",
+ "lines": [
+  {
+   "id": "l00",
+   "say": "Kompozit ışınlarken en iyi teknik hangisi?"
+  },
+  {
+   "id": "l01",
+   "say": "Klinikte hassasiyet açısından standart ile soft-start arasında fark bulunmadı; ikisi de yeterli dozla güvenilir."
+  },
+  {
+   "id": "l02",
+   "say": "Giderek artan, yani rampa modunda ışık yavaşça yükselir; laboratuvarda stresi ve ısıyı azaltırken sertliği koruyor."
+  },
+  {
+   "id": "l03",
+   "say": "Bekletmeli pulse-delay de stresi azaltıyor; ama uzun sürüyor ve klinik avantajı kanıtlanmadı."
+  },
+  {
+   "id": "l04",
+   "say": "En riskli olan üç saniyelik mod; sadece bu moda özel kompozitlerde yeterli polimerizasyon sağlıyor."
+  },
+  {
+   "id": "l05",
+   "say": "Başarıyı artıran dört kural var. Bir: ucu dişe yakın ve dik tut; on milimetrede ışığın üçte biri kayboluyor."
+  },
+  {
+   "id": "l06",
+   "say": "İki: cihazı iki elle sabitle ve restorasyona bak; eğitimle ulaşan ışık yüzde altmış artıyor."
+  },
+  {
+   "id": "l07",
+   "say": "Üç: sınıf iki restorasyonlarda matrisi çıkarınca, bukkal ve lingualden ek ışınlama yap."
+  },
+  {
+   "id": "l08",
+   "say": "Dört: ucu temiz tut ve cihazı düzenli ölç; kirli uçta ışık yarıdan fazla düşebiliyor."
+  },
+  {
+   "id": "l09",
+   "say": "Yani başarıyı modun adı değil, uygulama belirliyor. Kaydet ve bir meslektaşınla paylaş."
+  }
+ ]
+}
