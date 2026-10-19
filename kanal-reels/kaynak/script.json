@@ -1,0 +1,43 @@
+[
+ {
+  "scene": "hook",
+  "say": "Kanal tedavili dişin dolgusu nasıl yapılmalı? Güncel kanıtlara göre beş adım."
+ },
+ {
+  "scene": "why",
+  "say": "Başarıyı kanal dolgusu kadar üstündeki dolgu da belirler; ikisi de iyiyse iyileşme şansı yaklaşık üç kat artıyor."
+ },
+ {
+  "scene": "time",
+  "say": "Bir: geciktirme. Daimi dolgu altmış günden sonra yapılırsa, çekim riski yüzde yetmiş üç artıyor."
+ },
+ {
+  "scene": "dam",
+  "say": "İki: rubber dam kullan; tükürük hem kanalı hem de adeziv bağlantıyı kirletir."
+ },
+ {
+  "scene": "clean",
+  "say": "Üç: güta perka ve patı artıklarını ultrasonik uçla temizle; artıklar bağlantıyı zayıflatır."
+ },
+ {
+  "scene": "seal",
+  "say": "Dört: kanal ağızlarını cam iyonomer ya da kompozitle mühürle; laboratuvarda bu bariyer sızıntıyı azaltıp kırılma direncini artırıyor."
+ },
+ {
+  "scene": "comp",
+  "say": "Beş: dolguyu adeziv teknikle yap; pulpa odasında bulk-fill kompozit daha az boşluk bırakıyor."
+ },
+ {
+  "scene": "ridge",
+  "say": "Marjinal sırtlar sağlamsa, kompozit dolgu kurona yakın sağkalım gösteriyor."
+ },
+ {
+  "scene": "ridge",
+  "say": "Ama iki marjinal sırt da kayıpsa diş, sertliğinin yüzde altmış üçünü yitirir; o zaman tüberkülleri de ört."
+ },
+ {
+  "scene": "outro",
+  "say": "Kanal tedavisi kökü kurtarır; dişi ise doğru dolgu korur. Kaydet ve bir meslektaşınla paylaş.",
+  "file": "../variants/l09b"
+ }
+]

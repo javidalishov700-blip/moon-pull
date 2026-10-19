@@ -1,0 +1,429 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="fonts/fraunces/400-italic.css"><link rel="stylesheet" href="fonts/fraunces/600.css"><link rel="stylesheet" href="fonts/fraunces/600-italic.css"><link rel="stylesheet" href="fonts/fraunces/800.css">
+<link rel="stylesheet" href="fonts/dm-sans/500.css"><link rel="stylesheet" href="fonts/dm-sans/700.css"><link rel="stylesheet" href="fonts/dm-sans/800.css">
+<link rel="stylesheet" href="fonts/caveat/700.css">
+<style>
+:root{--paper:#F2EEE6;--ink:#1C1B19;--mute:#8A8478;--red:#D2462B;--blue:#2E5C86}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif}
+#cam{position:absolute;left:-20px;top:-20px;width:1120px;height:1960px}
+#stage{position:absolute;left:20px;top:20px;width:1080px;height:1920px;overflow:hidden}
+.scene{position:absolute;inset:0;background:var(--paper);overflow:hidden;display:none}
+.abs{position:absolute}
+.serif{font-family:'Fraunces',serif}
+.chap{position:absolute;left:80px;top:232px;display:flex;align-items:center;gap:18px;font-size:28px;font-weight:700;letter-spacing:3px;text-transform:uppercase}
+.chap b{font-family:'Fraunces',serif;font-style:italic;font-weight:600;font-size:38px;letter-spacing:0;color:var(--red)}
+.chap b small{font-size:24px;color:var(--mute);font-weight:600}
+.chap i{display:block;height:2px;width:110px;background:var(--ink)}
+.h{font-family:'Fraunces',serif;font-weight:800;line-height:1.02;letter-spacing:-1.5px}
+.it{font-style:italic;font-weight:600}
+.mask{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:8px}
+.mask>span{display:inline-block}
+#subs{position:absolute;left:60px;right:60px;top:1395px;text-align:center;z-index:50}
+#subs .ln{display:inline-block;background:#fff;color:var(--ink);font-weight:800;font-size:54px;line-height:1.2;padding:8px 22px 12px;border-radius:12px;box-shadow:0 3px 0 rgba(0,0,0,.12)}
+#subs .w{display:inline-block;margin:0 6px}
+#grain{position:absolute;left:0;top:0;z-index:60;pointer-events:none;mix-blend-mode:multiply;opacity:.16}
+#topline{position:absolute;left:0;top:0;height:6px;background:var(--ink);z-index:61}
+#handle{position:absolute;left:0;right:0;top:150px;display:flex;justify-content:center;align-items:center;gap:12px;font-weight:700;font-size:30px;color:var(--ink);opacity:.85;z-index:58}
+#refs{position:absolute;left:80px;right:150px;top:1506px;font-weight:500;font-size:23px;line-height:1.38;color:#6E685D;z-index:55;padding-top:10px}
+#refs:before{content:'';position:absolute;left:0;top:0;width:60px;height:3px;background:var(--red)}
+#refs b{font-weight:800;color:var(--ink)}
+svg text{font-family:'Caveat',cursive;font-weight:700}
+.bar{position:absolute;bottom:0;width:100%;transform-origin:bottom}
+.rc{display:flex;align-items:baseline;gap:22px;padding:9px 0;border-top:2px solid rgba(28,27,25,.8);font-size:36px;font-weight:800}
+.rc .n{font-family:'Fraunces',serif;font-weight:800;font-size:44px;color:var(--red);width:32px}
+.rc span.s{font-weight:500;color:#5E594F;font-size:30px}
+.btn{display:flex;align-items:center;gap:14px;padding:14px 26px;border:3px solid var(--ink);border-radius:14px;font-weight:800;font-size:36px;background:#F7F4EE}
+</style></head>
+<body>
+<div id="cam"><div id="stage">
+
+<!-- HOOK -->
+<div class="scene" id="s_hook">
+  <div class="abs h" id="hk_t" style="left:80px;top:250px;font-size:112px">
+    <span class="mask"><span>Kanal tedavili</span></span><br><span class="mask"><span>dişin dolgusu</span></span><br><span class="mask"><span class="it" style="color:var(--red)">nasıl yapılmalı?</span></span>
+  </div>
+  <svg class="abs" id="hk_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+</div>
+
+<!-- WHY -->
+<div class="scene" id="s_why">
+  <div class="chap"><i></i>Neden önemli?</div>
+  <div class="abs h" id="why_t" style="left:80px;top:300px;font-size:104px"><span class="mask"><span>Başarı =</span></span><br><span class="mask"><span>kanal <span class="it" style="color:var(--red)">+ dolgu</span></span></span></div>
+  <svg class="abs" id="wy_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="abs" id="wy_r2" style="left:470px;top:668px;display:flex;align-items:center;gap:14px;font-size:42px;font-weight:800">Üst dolgu<svg id="wy_c2" width="64" height="56"></svg></div>
+  <div class="abs" id="wy_r1" style="left:470px;top:872px;display:flex;align-items:center;gap:14px;font-size:42px;font-weight:800">Kanal dolgusu<svg id="wy_c1" width="64" height="56"></svg></div>
+  <div class="abs" id="wy_big" style="left:450px;top:950px;width:600px">
+    <div class="h" style="font-size:230px;color:var(--red);letter-spacing:-6px">≈3×</div>
+  </div>
+</div>
+
+<!-- TIME -->
+<div class="scene" id="s_time">
+  <div class="chap"><b>1<small>/5</small></b><i></i>Zamanlama</div>
+  <div class="abs h" id="tm_t" style="left:80px;top:300px;font-size:124px"><span class="mask"><span>Geciktirme.</span></span></div>
+  <div class="abs" id="tm_sub" style="left:80px;top:458px;font-size:34px;font-weight:800;color:var(--mute)">8 yılda dişin ağızda kalma oranı</div>
+  <div class="abs" id="tm_ax" style="left:110px;width:860px;top:1290px;text-align:center;font-size:28px;font-weight:700;color:var(--mute)">kanal tedavisinden daimi restorasyona kadar geçen süre</div>
+  <div class="abs" id="tm_chart" style="left:110px;top:560px;width:860px;height:640px">
+    <div class="abs" style="left:0;right:0;bottom:0;height:4px;background:var(--ink)"></div>
+  </div>
+  <div class="abs" id="tm_days" style="left:110px;top:1218px;width:860px;height:60px;font-size:36px;font-weight:800"></div>
+  <svg class="abs" id="tm_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+</div>
+
+<!-- DAM -->
+<div class="scene" id="s_dam">
+  <div class="chap"><b>2<small>/5</small></b><i></i>İzolasyon</div>
+  <div class="abs h" id="dm_t" style="left:80px;top:300px;font-size:124px"><span class="mask"><span>Rubber dam.</span></span></div>
+  <svg class="abs" id="dm_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+</div>
+
+<!-- CLEAN -->
+<div class="scene" id="s_clean">
+  <div class="chap"><b>3<small>/5</small></b><i></i>Temizlik</div>
+  <div class="abs h" id="cl_t" style="left:80px;top:300px;font-size:116px"><span class="mask"><span>Artıkları</span></span> <span class="mask"><span class="it" style="color:var(--red)">temizle.</span></span></div>
+  <svg class="abs" id="cl_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+</div>
+
+<!-- SEAL -->
+<div class="scene" id="s_seal">
+  <div class="chap"><b>4<small>/5</small></b><i></i>Kanal ağızları</div>
+  <div class="abs h" id="sl_t" style="left:80px;top:300px;font-size:116px"><span class="mask"><span>Ağızları</span></span> <span class="mask"><span class="it" style="color:var(--red)">mühürle.</span></span></div>
+  <svg class="abs" id="sl_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+</div>
+
+<!-- COMP -->
+<div class="scene" id="s_comp">
+  <div class="chap"><b>5<small>/5</small></b><i></i>Dolgu</div>
+  <div class="abs h" id="cp_t" style="left:80px;top:300px;font-size:116px"><span class="mask"><span>Adeziv</span></span> <span class="mask"><span class="it" style="color:var(--red)">dolgu.</span></span></div>
+  <svg class="abs" id="cp_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+</div>
+
+<!-- RIDGE -->
+<div class="scene" id="s_ridge">
+  <div class="chap"><b>5<small>/5</small></b><i></i>Dolgu</div>
+  <div class="abs h" id="rg_t" style="left:80px;top:300px;font-size:98px"><span class="mask"><span>Marjinal sırtlar</span></span><br><span class="mask"><span class="it" style="color:var(--red)">kararı verir.</span></span></div>
+  <svg class="abs" id="rg_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="abs" id="rg_L" style="left:80px;top:1076px;width:440px">
+    <div style="font-size:30px;font-weight:800;color:var(--mute);letter-spacing:2px">5 YIL · PREMOLAR</div>
+    <div style="display:flex;align-items:center;gap:14px;margin-top:16px"><div style="width:130px;font-size:30px;font-weight:800">Kompozit</div><div id="rgb1" style="height:30px;background:var(--blue);width:0"></div><div id="rgv1" class="serif" style="font-size:40px;font-weight:800;color:var(--blue)">%88,5</div></div>
+    <div style="display:flex;align-items:center;gap:14px;margin-top:12px"><div style="width:130px;font-size:30px;font-weight:800">Kuron</div><div id="rgb2" style="height:30px;background:#B9B1A3;width:0"></div><div id="rgv2" class="serif" style="font-size:40px;font-weight:800;color:#8A8478">%95,1</div></div>
+  </div>
+  <div class="abs" id="rg_R" style="left:585px;top:1076px;width:430px">
+    <div style="font-size:30px;font-weight:800;color:var(--mute);letter-spacing:2px">DİŞİN SERTLİĞİ</div>
+    <div class="h" id="rg_big" style="font-size:150px;color:var(--red);letter-spacing:-4px;margin-top:-4px">−%63</div>
+  </div>
+</div>
+
+<!-- OUTRO -->
+<div class="scene" id="s_outro">
+  <div class="abs h" id="o_t" style="left:80px;top:250px;font-size:84px"><span class="mask"><span>Kanal kökü kurtarır,</span></span><br><span class="mask"><span class="it" style="color:var(--red)">dolgu dişi korur.</span></span></div>
+  <div class="abs" id="o_list" style="left:80px;right:80px;top:470px">
+    <div class="rc"><span class="n">1</span>Geciktirme <span class="s">· en geç 2 ay</span></div>
+    <div class="rc"><span class="n">2</span>Rubber dam</div>
+    <div class="rc"><span class="n">3</span>Artıkları temizle <span class="s">· ultrasonik uç</span></div>
+    <div class="rc"><span class="n">4</span>Kanal ağızlarını mühürle</div>
+    <div class="rc" style="border-bottom:2px solid rgba(28,27,25,.8)"><span class="n">5</span>Adeziv dolgu <span class="s">· sırt yoksa tüberkülü ört</span></div>
+  </div>
+  <div class="abs" id="o_share" style="left:80px;top:850px;display:flex;gap:22px">
+    <div class="btn"><svg width="34" height="42" viewBox="0 0 40 48"><path d="M6 4 H34 V44 L20 34 L6 44 Z" fill="none" stroke="#1C1B19" stroke-width="5" stroke-linejoin="round"/></svg>Kaydet</div>
+    <div class="btn"><svg width="44" height="40" viewBox="0 0 50 46"><path d="M4 22 L46 4 L34 42 L24 28 Z M24 28 L46 4" fill="none" stroke="#1C1B19" stroke-width="5" stroke-linejoin="round"/></svg>Paylaş</div>
+  </div>
+  <div class="abs" id="o_ig" style="left:80px;top:965px;display:flex;align-items:center;gap:18px;font-weight:800;font-size:56px;letter-spacing:-1px"><svg width="62" height="62" viewBox="0 0 64 64"><rect x="5" y="5" width="54" height="54" rx="16" fill="none" stroke="#1C1B19" stroke-width="5"/><circle cx="32" cy="32" r="12" fill="none" stroke="#1C1B19" stroke-width="5"/><circle cx="47" cy="17" r="3.5" fill="#1C1B19"/></svg>@muraz_alishov</div>
+  <svg class="abs" id="o_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="abs" id="o_refs" style="left:80px;right:80px;top:1068px;font-size:22.5px;line-height:1.36;color:#4A463F">
+    <div style="font-size:23px;font-weight:800;letter-spacing:3px;color:var(--ink);margin-bottom:6px">KAYNAKLAR</div>
+    1. Gillen BM ve ark. J Endod 2011;37(7):895–902 · 2. Sadaf D. Ther Clin Risk Manag 2020;16:125–131 · 3. Patel SR, Youngson C, Jarad F. Br Dent J 2025;238(7):508–516 · 4. Miao C ve ark. Cochrane Database Syst Rev 2021;5:CD009858 · 5. Mannocci F ve ark. Int Endod J 2022;55(Suppl 4):1059–1084 · 6. de Araújo LP ve ark. Biomed Res Int 2022:2789073 · 7. Karahan S ve ark. J Endod 2026;52(5):696–712 · 8. Suksaphar W ve ark. J Endod 2018;44(2):233–238 · 9. Reeh ES, Messer HH, Douglas WH. J Endod 1989;15(11):512–516
+  </div>
+</div>
+
+<div id="handle"><svg width="32" height="32" viewBox="0 0 64 64"><rect x="5" y="5" width="54" height="54" rx="16" fill="none" stroke="#1C1B19" stroke-width="6"/><circle cx="32" cy="32" r="12" fill="none" stroke="#1C1B19" stroke-width="6"/><circle cx="47" cy="17" r="4" fill="#1C1B19"/></svg>@muraz_alishov</div>
+<div id="subs"></div>
+<div id="refs"></div>
+</div></div>
+<svg id="grain" width="1080" height="1920"><filter id="gf"><feTurbulence id="turb" type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="1"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#gf)"/></svg>
+<div id="topline"></div>
+
+<script>
+const TL=__TIMELINE__, TOTAL=__TOTAL__;
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)), P=(t,a,d)=>clamp((t-a)/d);
+const eo=t=>1-Math.pow(1-t,3), eio=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2, eb=t=>{const c1=1.4,c3=c1+1;return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2)};
+const $=id=>document.getElementById(id), lerp=(a,b,t)=>a+(b-a)*t, NS='http://www.w3.org/2000/svg';
+const order=[],SC={};
+TL.forEach(c=>{if(!SC[c.scene]){SC[c.scene]={start:c.start,lines:[]};order.push(c.scene)}SC[c.scene].end=c.end;SC[c.scene].lines.push(c)});
+order.forEach((k,i)=>{const s=SC[k];s.a=i===0?0:s.start-0.3;s.b=i<order.length-1?SC[order[i+1]].start-0.3:TOTAL;s.z=i});
+const LS=(k,i)=>SC[k].lines[i].start-SC[k].start;
+const nrm=s=>s.toLocaleLowerCase('tr').replace(/[^a-zçğıöşü0-9%]/g,'');
+const WF=(k,li,pre)=>{const ws=SC[k].lines[li].words;const w=ws.find(x=>nrm(x.w).startsWith(pre))||ws[0];return w.s-SC[k].start};
+
+let sd=7;const rnd=()=>{sd=(sd*16807)%2147483647;return sd/2147483647};
+function roughPath(pts,amp=3){const out=[];for(let i=0;i<pts.length-1;i++){const [x1,y1]=pts[i],[x2,y2]=pts[i+1];const n=Math.max(2,Math.round(Math.hypot(x2-x1,y2-y1)/40));for(let k=0;k<n;k++){const t=k/n;out.push([lerp(x1,x2,t)+(rnd()-.5)*amp,lerp(y1,y2,t)+(rnd()-.5)*amp])}}out.push(pts[pts.length-1]);
+  let d='M'+out[0].join(' ');for(let i=1;i<out.length-1;i++){const mx=(out[i][0]+out[i+1][0])/2,my=(out[i][1]+out[i+1][1])/2;d+=` Q${out[i][0]} ${out[i][1]} ${mx} ${my}`}return d+` L${out[out.length-1].join(' ')}`}
+function roughEllipse(cx,cy,rx,ry,amp=5){const pts=[];const st=rnd()*6.28;for(let i=0;i<=29;i++){const a=st+i/26*Math.PI*2;const k=1+(rnd()-.5)*0.06;pts.push([cx+Math.cos(a)*rx*k,cy+Math.sin(a)*ry*k])}return roughPath(pts,amp)}
+function stroke(svg,d,col='#D2462B',w=6){const p=document.createElementNS(NS,'path');p.setAttribute('d',d);p.setAttribute('fill','none');p.setAttribute('stroke',col);p.setAttribute('stroke-width',w);p.setAttribute('stroke-linecap','round');p.setAttribute('stroke-linejoin','round');svg.appendChild(p);const L=p.getTotalLength();p.style.strokeDasharray=L;p.style.strokeDashoffset=L;return {p,L}}
+const draw=(s,pr)=>{s.p.style.strokeDashoffset=s.L*(1-pr)};
+function arrow(svg,x1,y1,x2,y2,col,w=5,bend=40){const mx=(x1+x2)/2+bend,my=(y1+y2)/2-bend;const body=stroke(svg,roughPath([[x1,y1],[mx,my],[x2,y2]],2),col,w);const a=Math.atan2(y2-my,x2-mx);const h=24;
+  const head=stroke(svg,`M${x2-h*Math.cos(a-0.45)} ${y2-h*Math.sin(a-0.45)} L${x2} ${y2} L${x2-h*Math.cos(a+0.45)} ${y2-h*Math.sin(a+0.45)}`,col,w);return [body,head]}
+const drawArrow=(ar,pr)=>{draw(ar[0],clamp(pr/0.8));draw(ar[1],clamp((pr-0.8)/0.2))};
+const fadeArrow=(ar,o)=>ar.forEach(s=>s.p.style.opacity=o);
+function htext(svg,x,y,txt,size,col,anchor='start',rot=0){const t=document.createElementNS(NS,'text');t.setAttribute('x',x);t.setAttribute('y',y);t.setAttribute('font-size',size);t.setAttribute('fill',col);t.setAttribute('text-anchor',anchor);t.setAttribute('transform',`rotate(${rot} ${x} ${y})`);t.textContent=txt;svg.appendChild(t);return t}
+function reveal(el,pr){el.style.opacity=clamp(pr*3);el.style.clipPath=`inset(-30px ${100-pr*100}% -30px -30px)`}
+function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e}
+function maskWords(root,times,t){root.querySelectorAll('.mask>span').forEach((m,i)=>{const p=eo(P(t,times[Math.min(i,times.length-1)],0.45));m.style.transform=`translateY(${(1-p)*110}%)`})}
+const xmark=(svg,x,y,r,col='#D2462B',w=7)=>[stroke(svg,roughPath([[x-r,y-r],[x+r,y+r]],2),col,w),stroke(svg,roughPath([[x+r,y-r],[x-r,y+r]],2),col,w)];
+const check=(svg,x,y,s,col,w=9)=>stroke(svg,roughPath([[x,y],[x+s*0.32,y+s*0.36],[x+s,y-s*0.42]],3),col,w);
+
+// ---------- shared defs (hatch patterns)
+const DEFS=`<defs>
+ <pattern id="hD" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="14" stroke="#1C1B19" stroke-width="1.6" stroke-opacity=".16"/></pattern>
+ <pattern id="hR" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="12" stroke="#D2462B" stroke-width="3"/></pattern>
+ <pattern id="hI" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="16" stroke="#1C1B19" stroke-width="2.4"/></pattern>
+</defs>`;
+['hk_svg','wy_svg','tm_svg','dm_svg','cl_svg','sl_svg','cp_svg','rg_svg','o_svg'].forEach(id=>$(id).insertAdjacentHTML('afterbegin',DEFS));
+
+// ---------- molar (mesio-distal section), local units: 520 x 860
+const TOOTH='M75 330 C55 290 28 240 30 190 C32 120 70 50 120 40 C170 32 210 100 260 118 C310 100 350 32 400 40 C450 50 488 120 490 190 C492 240 465 290 445 330 C440 500 410 700 388 815 Q365 850 345 815 C330 690 310 560 280 478 Q260 452 240 478 C212 560 192 690 175 815 Q155 850 132 815 C110 700 82 500 75 330 Z';
+const ENAMEL='M75 330 C55 290 28 240 30 190 C32 120 70 50 120 40 C170 32 210 100 260 118 C310 100 350 32 400 40 C450 50 488 120 490 190 C492 240 465 290 445 330 L440 300 C458 250 465 200 458 165 C442 110 420 82 395 80 C355 78 315 130 260 148 C205 130 165 78 125 80 C100 82 78 110 62 165 C55 200 62 250 80 300 Z';
+const CAN=['M184 372 C172 520 154 680 141 806 L151 807 C166 680 186 520 202 372 Z','M318 372 C336 520 356 680 369 807 L379 806 C366 680 348 520 336 372 Z'];
+const CAV='M182 10 L338 10 L338 63 L348 300 L340 372 L180 372 L172 300 L182 63 Z';
+const COMP='M182 63 C205 90 235 112 260 118 C285 112 315 90 338 63 L348 300 L340 372 L180 372 L172 300 Z';
+const OCC='M182 63 C205 90 235 112 260 118 C285 112 315 90 338 63';
+let mid=0;
+function molar(svg,x,y,s,o={}){
+  const g=el('g',{transform:`translate(${x} ${y}) scale(${s})`},svg);const W=w=>w/s;const id='m'+(mid++);
+  const cp=el('clipPath',{id:id+'t'},g);el('path',{d:TOOTH},cp);
+  const cc=el('clipPath',{id:id+'c'},g);CAN.forEach(d=>el('path',{d},cc));
+  const ck=el('clipPath',{id:id+'k'},g);el('path',{d:COMP},ck);
+  const body=el('g',{},g);
+  el('path',{d:TOOTH,fill:'#EDE6D8'},body);
+  el('rect',{x:0,y:0,width:520,height:870,fill:'url(#hD)','clip-path':`url(#${id}t)`},body);
+  el('path',{d:ENAMEL,fill:'#F8F5EE'},body);
+  el('path',{d:'M80 300 C62 250 55 200 62 165 C78 110 100 82 125 80 C165 78 205 130 260 148 C315 130 355 78 395 80 C420 82 442 110 458 165 C465 200 458 250 440 300',fill:'none',stroke:'#1C1B19','stroke-width':W(1.6),'stroke-opacity':.45},body);
+  CAN.forEach(d=>el('path',{d,fill:'#F4C9BE'},body));
+  const gpG=el('g',{'clip-path':`url(#${id}c)`},g);const gp=el('rect',{x:0,y:372,width:520,height:460,fill:'#C8703F'},gpG);
+  const barG=el('g',{'clip-path':`url(#${id}c)`},g);const bar=el('rect',{x:0,y:372,width:520,height:0,fill:'#8FAECB'},barG);
+  CAN.forEach(d=>el('path',{d,fill:'none',stroke:'#1C1B19','stroke-width':W(2.2)},g));
+  const out=stroke(g,TOOTH,'#1C1B19',W(o.ow||5));draw(out,1);
+  // access cavity (empty)
+  const cav=el('g',{},g);el('path',{d:CAV,fill:'#F2EEE6'},cav);
+  const walls=[stroke(cav,roughPath([[182,63],[172,300],[180,372],[184,372]],1.5),'#1C1B19',W(4.5)),stroke(cav,roughPath([[338,63],[348,300],[340,372],[336,372]],1.5),'#1C1B19',W(4.5)),stroke(cav,'M202 372 L318 372','#1C1B19',W(4.5))];walls.forEach(w=>draw(w,1));
+  // debris (for cleaning)
+  const deb=el('g',{opacity:0},g);
+  const smear=[[[174,250],[178,330],[184,360]],[[346,240],[343,320],[338,362]],[[214,370],[262,368],[300,370]]].map(pts=>{const p=stroke(deb,roughPath(pts,3),'#9C7A4E',W(9));draw(p,1);p.p.style.opacity=.75;return p});
+  const blobs=[el('ellipse',{cx:193,cy:362,rx:22,ry:11,fill:'#C8703F',stroke:'#1C1B19','stroke-width':W(2)},deb),el('ellipse',{cx:327,cy:363,rx:20,ry:10,fill:'#C8703F',stroke:'#1C1B19','stroke-width':W(2)},deb)];
+  // adhesive + composite
+  const compG=el('g',{'clip-path':`url(#${id}k)`},g);
+  const bulk=el('rect',{x:150,y:372,width:220,height:0,fill:'#DCCDB2'},compG);
+  const enam=el('rect',{x:150,y:150,width:220,height:0,fill:'#E9DFCB'},compG);
+  const compOut=el('path',{d:'M182 63 L172 300 L180 372 L340 372 L348 300 L338 63',fill:'none',stroke:'#1C1B19','stroke-width':W(4),'stroke-linejoin':'round',opacity:0},g);
+  const adh=stroke(g,'M182 63 L172 300 L180 372 L340 372 L348 300 L338 63','#2E5C86',W(6));
+  const occ=stroke(g,OCC,'#1C1B19',W(5));
+  const compLine=stroke(g,'M176 150 L344 150','#1C1B19',W(2));compLine.p.style.strokeDasharray='';compLine.p.style.opacity=0;
+  return {g,s,x,y,gp,bar,cav,deb,smear,blobs,adh,bulk,enam,occ,compLine,compOut,out,
+    setGP(top){gp.setAttribute('y',top);gp.setAttribute('height',Math.max(0,832-top))},
+    setBar(top,bot){bar.setAttribute('y',top);bar.setAttribute('height',Math.max(0,bot-top))},
+    setBulk(p,top=150){const y0=372-(372-top)*p;bulk.setAttribute('y',y0);bulk.setAttribute('height',372-y0)},
+    setEnam(p){const y0=150-(150-40)*p;enam.setAttribute('y',y0);enam.setAttribute('height',150-y0)},
+    P:(lx,ly)=>[x+lx*s,y+ly*s]};
+}
+
+// ---------- HOOK
+const hk=$('hk_svg');const HM=molar(hk,540-260*0.80,690,0.80);
+const hkQ=htext(hk,540,925,'?',150,'#D2462B','middle',8);
+const hkQc=stroke(hk,roughEllipse(540,872,96,104,5),'#D2462B',7);
+const hkK=htext(hk,170,1250,'kanal ✓',62,'#2E5C86','middle',-6);const hkKa=arrow(hk,215,1205,448,1170,'#2E5C86',5,30);
+const hk5=htext(hk,880,760,'5 adım',72,'#1C1B19','middle',-6);const hk5c=stroke(hk,roughEllipse(880,738,118,64,4),'#D2462B',7);
+const hkD=htext(hk,880,1010,'dolgu?',62,'#D2462B','middle',4);const hkDa=arrow(hk,840,965,640,890,'#D2462B',5,-30);
+// ---------- WHY
+const wy=$('wy_svg');const WM=molar(wy,95,620,0.62);WM.cav.style.opacity=0;WM.setBulk(1);WM.setEnam(1);draw(WM.occ,1);WM.compOut.setAttribute('opacity',1);WM.setBar(372,440);WM.setGP(440);
+const wyC1=check($('wy_c1'),8,30,46,'#2E5C86',8),wyC2=check($('wy_c2'),8,30,46,'#2E5C86',8);
+const wyA1=arrow(wy,455,905,WM.P(352,640)[0]+8,WM.P(352,640)[1],'#1C1B19',4,-20),wyA2=arrow(wy,455,700,WM.P(300,200)[0],WM.P(300,200)[1],'#1C1B19',4,20);
+const wyLbl=htext(wy,750,1262,'iyileşme şansı',62,'#D2462B','middle',-3);
+const wyNote=htext(wy,750,1322,'(OR ≈ 2,7)',44,'#8A8478','middle',-3);
+const wyU=stroke(wy,roughPath([[470,1205],[760,1193],[1010,1203]],4),'#D2462B',9);
+// ---------- TIME
+const ch=$('tm_chart');const BARS=[{v:72,c:'#2E5C86',d:'0–14 gün'},{v:51,c:'url(#x)',d:'15–59 gün'},{v:39,c:'#D2462B',d:'60+ gün'}];
+const bEls=BARS.map((b,i)=>{const w=document.createElement('div');w.className='abs';w.style.cssText=`left:${i*300+30}px;width:220px;bottom:4px;height:600px`;
+  const bar=document.createElement('div');bar.className='bar';bar.style.height=(b.v/100*600)+'px';bar.style.background=i===1?'repeating-linear-gradient(45deg,#8A8478 0 6px,#E3DCCD 6px 14px)':b.c;bar.style.border='3px solid #1C1B19';w.appendChild(bar);
+  const v=document.createElement('div');v.className='abs serif';v.style.cssText=`left:0;right:0;text-align:center;bottom:${b.v/100*600+14}px;font-size:76px;font-weight:800;color:${i===2?'#D2462B':i===0?'#2E5C86':'#5E594F'}`;v.textContent='%'+b.v;w.appendChild(v);ch.appendChild(w);
+  const d=document.createElement('div');d.className='abs';d.style.cssText=`left:${i*300+30}px;width:220px;text-align:center`;d.textContent=b.d;$('tm_days').appendChild(d);return {bar,v,d}});
+const tms=$('tm_svg');const tmA=arrow(tms,900,700,850,880,'#D2462B',5,-30);const tmT=htext(tms,800,660,'çekim riski +%73',62,'#D2462B','middle',-4);
+const tmC=stroke(tms,roughEllipse(850,1240,132,44,4),'#D2462B',6);
+// ---------- DAM
+const dm=$('dm_svg');const DM=molar(dm,540-260*0.95,560,0.95);
+const [cx1,cy1]=DM.P(75,330),[cx2,cy2]=DM.P(445,330);
+const sheetL=el('path',{d:`M40 ${cy1+40} Q${(40+cx1)/2} ${cy1+52} ${cx1-4} ${cy1-6} L${cx1-4} ${cy1+22} Q${(40+cx1)/2} ${cy1+80} 40 ${cy1+68} Z`,fill:'#B8CCDD',stroke:'#1C1B19','stroke-width':4,'stroke-linejoin':'round'},dm);
+const sheetR=el('path',{d:`M1040 ${cy2+40} Q${(1040+cx2)/2} ${cy2+52} ${cx2+4} ${cy2-6} L${cx2+4} ${cy2+22} Q${(1040+cx2)/2} ${cy2+80} 1040 ${cy2+68} Z`,fill:'#B8CCDD',stroke:'#1C1B19','stroke-width':4,'stroke-linejoin':'round'},dm);
+const fog=el('rect',{x:0,y:cy1+75,width:1080,height:1385-(cy1+75),fill:'#F2EEE6',opacity:.0},dm);
+const jaws=[el('path',{d:`M${cx1-2} ${cy1+4} l-26 10 l4 22 l24 -8 Z`,fill:'#1C1B19'},dm),el('path',{d:`M${cx2+2} ${cy2+4} l26 10 l-4 22 l-24 -8 Z`,fill:'#1C1B19'},dm)];
+const dmL=htext(dm,165,cy1-60,'rubber dam',58,'#2E5C86','middle',-5);const dmLa=arrow(dm,165,cy1-40,200,cy1+34,'#2E5C86',5,-20);
+const dmOk=htext(dm,905,cy2-70,'kuru alan ✓',56,'#2E5C86','middle',-4);
+const drops=[0,1,2,3].map(i=>el('path',{d:'M0 -26 C10 -10 16 0 16 8 A16 16 0 0 1 -16 8 C-16 0 -10 -10 0 -26 Z',fill:'#2E5C86',opacity:0},dm));
+const DX=[150,262,818,930];
+const dmS=htext(dm,930,1250,'tükürük',58,'#2E5C86','middle',-4);
+const dmX=[xmark(dm,206,cy1+122,20),xmark(dm,874,cy2+122,20)];
+const dmK=htext(dm,540,548,'kanal + bağlantı korunur',52,'#D2462B','middle',-2);
+// ---------- CLEAN / SEAL / COMP: zoomed molars
+const ZS=1.3,ZX=70,ZY=560;
+function zoomMolar(svg){const clip=el('clipPath',{id:svg.id+'w'},svg);el('rect',{x:0,y:596,width:1080,height:776},clip);const wrap=el('g',{'clip-path':`url(#${svg.id}w)`},svg);return molar(wrap,ZX,ZY,ZS,{ow:5})}
+const cl=$('cl_svg');const CM=zoomMolar(cl);CM.deb.setAttribute('opacity',1);
+const tip=el('g',{},cl);el('path',{d:'M0 0 L60 -70',stroke:'#1C1B19','stroke-width':7,'stroke-linecap':'round',fill:'none'},tip);el('path',{d:'M60 -70 L300 -300',stroke:'#1C1B19','stroke-width':34,'stroke-linecap':'round',fill:'none'},tip);el('path',{d:'M60 -70 L300 -300',stroke:'#F2EEE6','stroke-width':22,'stroke-linecap':'round',fill:'none'},tip);
+const spray=[0,1,2,3,4].map(i=>el('circle',{r:5,fill:'#2E5C86',opacity:0},tip));
+const clL=htext(cl,870,930,'patı artığı',60,'#8C6A40','middle',-5);const clLa=arrow(cl,790,948,ZX+346*ZS,ZY+300*ZS,'#8C6A40',5,30);
+const clB=htext(cl,870,1150,'bağlantı ↓',60,'#D2462B','middle',-4);
+const clE=[htext(cl,870,1250,'öjenollü pat varsa:',44,'#2E5C86','middle',-3),htext(cl,870,1298,'izopropil alkol',44,'#2E5C86','middle',-3)];
+// ---------- SEAL
+const sl=$('sl_svg');const SM=zoomMolar(sl);
+const [,by0]=SM.P(392,372),[,by1]=SM.P(392,490);const bx=690;
+const slBr=stroke(sl,`M${bx-18} ${by0} L${bx} ${by0} L${bx} ${by1} L${bx-18} ${by1}`,'#D2462B',5);
+const slBt=htext(sl,bx+20,(by0+by1)/2+18,'≈3 mm',56,'#D2462B','start',0);
+const slLd=stroke(sl,`M${SM.P(345,372)[0]} ${by0} L${bx-26} ${by0}`,'#D2462B',2);
+const slM=[htext(sl,880,1262,'cam iyonomer',50,'#2E5C86','middle',-3),htext(sl,880,1312,'ya da kompozit',50,'#2E5C86','middle',-3)];const slMa=arrow(sl,800,1240,ZX+336*ZS,ZY+440*ZS,'#2E5C86',5,40);
+const leaks=[[ZX+200*ZS,640],[ZX+325*ZS,640]].map(([x0,y0],i)=>{const tx=ZX+(i?327:193)*ZS,ty=ZY+360*ZS;const p=stroke(sl,`M${x0} ${y0} Q${x0+(i?40:-40)} ${(y0+ty)/2} ${tx} ${ty-8}`,'#2E5C86',5);p.p.style.strokeDasharray='12 12';return {p:p.p,tx,ty}});
+const slX=leaks.map(l=>xmark(sl,l.tx,l.ty-40,18));
+const slN1=htext(sl,880,760,'sızıntı ↓',60,'#D2462B','middle',-4),slN2=[htext(sl,880,840,'kırılma',56,'#D2462B','middle',-4),htext(sl,880,892,'direnci ↑',56,'#D2462B','middle',-4)],slN3=htext(sl,880,948,'(in vitro)',40,'#8A8478','middle',-4);
+// ---------- COMP
+const cps=$('cp_svg');const PM=zoomMolar(cps);PM.setGP(490);PM.setBar(372,490);
+const cpA=htext(cps,880,880,'adeziv',60,'#2E5C86','middle',-5);const cpAa=arrow(cps,800,895,ZX+352*ZS,ZY+250*ZS,'#2E5C86',5,30);
+const cpB=htext(cps,880,1040,'bulk-fill',60,'#1C1B19','middle',-4);const cpBa=arrow(cps,790,1050,ZX+300*ZS,ZY+300*ZS,'#1C1B19',5,-30);
+const cpV=htext(cps,880,1130,'boşluk ↓',58,'#D2462B','middle',-4),cpV2=htext(cps,880,1182,'(in vitro)',40,'#8A8478','middle',-4);
+const cpE=htext(cps,880,720,'son kat',56,'#1C1B19','middle',-4);const cpEa=arrow(cps,800,735,ZX+300*ZS,ZY+95*ZS,'#1C1B19',4,-20);
+// ---------- RIDGE: occlusal views
+const rg=$('rg_svg');
+const OCCL='M40 60 Q60 10 130 15 Q180 0 230 15 Q300 10 330 60 Q360 150 330 240 Q300 290 230 285 Q180 300 130 285 Q60 290 30 240 Q0 150 40 60 Z';
+function occView(x,y,s){const g=el('g',{transform:`translate(${x} ${y}) scale(${s})`},rg);el('path',{d:OCCL,fill:'#F8F5EE',stroke:'#1C1B19','stroke-width':5/s},g);
+  el('path',{d:'M90 150 Q130 120 180 150 Q230 180 270 150',fill:'none',stroke:'#1C1B19','stroke-width':2/s,'stroke-opacity':.4},g);el('path',{d:'M180 40 L180 260',fill:'none',stroke:'#1C1B19','stroke-width':2/s,'stroke-opacity':.3},g);
+  return g}
+const gL=occView(95,640,1.15),gR=occView(590,640,1.15);
+const PL=(lx,ly)=>[95+lx*1.15,640+ly*1.15],PR=(lx,ly)=>[590+lx*1.15,640+ly*1.15];
+el('rect',{x:125,y:95,width:110,height:110,rx:26,fill:'#E9DFCB',stroke:'#1C1B19','stroke-width':4/1.15},gL);
+const ridgesL=[stroke(gL,roughPath([[52,70],[44,150],[52,230]],2),'#2E5C86',12/1.15),stroke(gL,roughPath([[318,70],[326,150],[318,230]],2),'#2E5C86',12/1.15)];
+const ocR=el('clipPath',{id:'ocR'},gR);el('path',{d:OCCL},ocR);
+const modR=el('path',{d:'M-10 100 L370 100 L370 200 L-10 200 Z',fill:'url(#hR)',stroke:'#D2462B','stroke-width':4/1.15,opacity:0,'clip-path':'url(#ocR)'},gR);
+const ridgesR=[stroke(gR,roughPath([[52,70],[44,150],[52,230]],2),'#2E5C86',12/1.15),stroke(gR,roughPath([[318,70],[326,150],[318,230]],2),'#2E5C86',12/1.15)];
+const rgXs=[xmark(rg,...PR(48,150),24),xmark(rg,...PR(322,150),24)];
+const cover=el('path',{d:'M48 66 Q64 24 130 28 Q180 14 230 28 Q296 24 318 66 Q346 150 318 234 Q296 276 230 272 Q180 286 130 272 Q64 276 42 234 Q14 150 48 66 Z',fill:'#E4D9C4',stroke:'#1C1B19','stroke-width':4/1.15,opacity:0},gR);
+const coverH=el('path',{d:'M48 66 Q64 24 130 28 Q180 14 230 28 Q296 24 318 66 Q346 150 318 234 Q296 276 230 272 Q180 286 130 272 Q64 276 42 234 Q14 150 48 66 Z',fill:'url(#hI)',opacity:0},gR);
+const rgLl=htext(rg,300,1036,'sırtlar sağlam',54,'#2E5C86','middle',-3),rgRl=htext(rg,795,1036,'iki sırt kayıp',54,'#D2462B','middle',-3);
+const rgCov=htext(rg,795,600,'tüberkülleri ört',60,'#D2462B','middle',-4);const rgCovA=arrow(rg,870,612,880,700,'#D2462B',5,-30);
+const rgDiv=stroke(rg,roughPath([[540,640],[540,1330]],3),'#1C1B19',3);
+// ---------- OUTRO
+const os=$('o_svg');const oUnder=stroke(os,roughPath([[90,450],[420,438],[640,446]],4),'#D2462B',9);
+const oChecks=[...document.querySelectorAll('#o_list .rc')].map(it=>{it.style.position='relative';const sv=document.createElementNS(NS,'svg');sv.setAttribute('width',70);sv.setAttribute('height',60);sv.style.cssText='position:absolute;right:0;top:4px';it.appendChild(sv);return stroke(sv,roughPath([[10,32],[28,50],[62,10]],3),'#D2462B',7)});
+
+// ---------- refs per scene/line
+const REFS={why:[['Gillen ve ark., J Endod 2011 (meta-analiz)']],
+  time:[['Sadaf, Ther Clin Risk Manag 2020 (4012 diş, 8 yıl)','Patel ve ark., Br Dent J 2025']],
+  dam:[['Miao ve ark., Cochrane Database Syst Rev 2021','Mannocci ve ark., Int Endod J 2022']],
+  clean:[['Mannocci ve ark., Int Endod J 2022']],
+  seal:[['Patel ve ark., Br Dent J 2025','de Araújo ve ark., Biomed Res Int 2022','Karahan ve ark., J Endod 2026 (in vitro)']],
+  comp:[['Mannocci ve ark., Int Endod J 2022','Patel ve ark., Br Dent J 2025']],
+  ridge:[['Suksaphar ve ark., J Endod 2018 (premolar, 5 yıl)'],['Reeh ve ark., J Endod 1989','Patel ve ark., Br Dent J 2025']]};
+const refsEl=$('refs');let lastRef='';
+function setRefs(t){let k=null,li=0;order.forEach(s=>{if(t>=SC[s].a&&t<SC[s].b)k=s});if(!k||!REFS[k]){refsEl.style.opacity=0;return}
+  const ls=SC[k].lines;for(let i=0;i<ls.length;i++){if(t>=ls[i].start-0.3)li=i}const arr=REFS[k][Math.min(li,REFS[k].length-1)];const html='<b>Kaynak:</b> '+arr.join(' · ');
+  if(html!==lastRef){refsEl.innerHTML=html;lastRef=html}const st=Math.max(SC[k].a+0.2,ls[li].start-0.3);refsEl.style.opacity=eo(P(t,st,0.4))*(1-P(t,SC[k].b-0.25,0.25))}
+
+// ---------- subtitles
+const CH=[];TL.forEach(L=>{let cur=[];L.words.forEach((w,i)=>{cur.push(w);if(cur.length>=3||/[.,:;?!]$/.test(w.w)||i===L.words.length-1){CH.push({ws:cur.slice(),s:cur[0].s,e:cur[cur.length-1].e});cur=[]}})});
+CH.forEach((c,i)=>{const nx=CH[i+1];c.hide=nx?Math.min(nx.s,c.e+0.6):c.e+0.6});
+const subs=$('subs');let curC=-1,wEls=[];
+function setSub(t){let k=-1;for(let i=0;i<CH.length;i++){if(t>=CH[i].s-0.06&&t<CH[i].hide){k=i;break}}
+  if(k<0){subs.style.opacity=0;return}subs.style.opacity=1;
+  if(k!==curC){curC=k;subs.innerHTML='';const ln=document.createElement('span');ln.className='ln';subs.appendChild(ln);wEls=CH[k].ws.map(w=>{const s=document.createElement('span');s.className='w';s.textContent=w.w;ln.appendChild(s);return {s,w}})}
+  const pin=eb(P(t,CH[k].s-0.06,0.22));subs.firstChild.style.transform=`scale(${0.85+0.15*pin}) rotate(${(1-pin)*-2}deg)`;
+  wEls.forEach(o=>{o.s.style.color=t>=o.w.s-0.02?(t<o.w.e+0.05?'#D2462B':'#1C1B19'):'#B5AEA2'})}
+
+const pop=(e,p,ox,oy)=>{e.style.opacity=clamp(p*4);e.style.transformOrigin=`${ox}px ${oy}px`;e.style.transform=`scale(${0.6+0.4*eb(p)})`};
+const fadeUp=(e,p,d=30)=>{e.style.opacity=p;e.style.transform=`translateY(${(1-eo(p))*d}px)`};
+function render(t){
+  $('turb').setAttribute('seed',1+Math.floor(t*12)%9);
+  $('cam').style.transform=`translate(${Math.sin(t*0.9)*3+Math.sin(t*2.3)*1.2}px,${Math.cos(t*0.7)*3+Math.sin(t*1.9)}px) rotate(${Math.sin(t*0.5)*0.12}deg)`;
+  $('topline').style.width=(1080*t/TOTAL)+'px';
+  order.forEach(k=>{const s=SC[k],e=$('s_'+k);const vis=t>=s.a-0.01&&t<s.b+0.45;e.style.display=vis?'block':'none';if(!vis)return;
+    e.style.zIndex=s.z;const pin=s.z===0?1:eio(P(t,s.a,0.5));const pout=eio(P(t,s.b,0.45));
+    e.style.transform=`translateX(${(1-pin)*100-pout*28}%)`;e.style.filter=pout>0?`brightness(${1-pout*0.25})`:'none'});
+  const S=k=>t-SC[k].start;
+  // HOOK
+  {const l=S('hook');const T=p=>WF('hook',0,p);
+   maskWords($('hk_t'),[-1,-1,-1],l);
+   HM.setGP(lerp(832,372,eio(P(l,0.15,1.3))));
+   reveal(hkK,P(l,0.9,0.6));drawArrow(hkKa,P(l,1.1,0.5));
+   draw(hkQc,eio(P(l,T('yapıl'),0.6)));pop(hkQ,P(l,T('yapıl')+0.2,0.5),540,760);
+   reveal(hkD,P(l,T('yapıl')+0.5,0.5));drawArrow(hkDa,P(l,T('yapıl')+0.6,0.5));
+   reveal(hk5,P(l,T('güncel'),0.5));draw(hk5c,eio(P(l,T('beş')-0.2,0.45)));}
+  // WHY
+  {const l=S('why');const T=p=>WF('why',0,p);
+   maskWords($('why_t'),[0,T('üstünde')-0.15],l);
+   WM.g.style.opacity=P(l,0.1,0.4);
+   fadeUp($('wy_r1'),P(l,T('kanal')-0.1,0.4),20);draw(wyC1,eio(P(l,T('kanal')+0.3,0.4)));
+   fadeUp($('wy_r2'),P(l,T('üstünde')-0.1,0.4),20);draw(wyC2,eio(P(l,T('üstünde')+0.3,0.4)));
+   drawArrow(wyA1,P(l,T('kanal'),0.5));drawArrow(wyA2,P(l,T('üstünde'),0.5));
+   const bt=T('üç')-0.25;const b=$('wy_big');b.style.opacity=P(l,bt,0.15);b.style.transformOrigin='120px 160px';b.style.transform=`scale(${0.6+0.4*eb(P(l,bt,0.55))}) rotate(${(1-eb(P(l,bt,0.55)))*-5}deg)`;
+   reveal(wyLbl,P(l,T('üç')+0.25,0.6));draw(wyU,eio(P(l,T('üç')+0.1,0.5)));reveal(wyNote,P(l,T('artı')+0.3,0.5));}
+  // TIME
+  {const l=S('time');const T=p=>WF('time',0,p);
+   maskWords($('tm_t'),[T('geciktir')-0.25],l);fadeUp($('tm_sub'),P(l,T('daimi')-0.3,0.5),16);fadeUp($('tm_ax'),P(l,T('daimi'),0.5),10);
+   bEls.forEach((b,i)=>{const p=eo(P(l,T('daimi')+i*0.32,0.7));b.bar.style.transform=`scaleY(${p})`;b.v.style.opacity=P(l,T('daimi')+i*0.32+0.4,0.3);b.d.style.opacity=P(l,T('daimi')+i*0.32,0.3)});
+   const tr=T('yüzde');reveal(tmT,P(l,tr-0.2,0.6));drawArrow(tmA,P(l,tr,0.5));draw(tmC,eio(P(l,T('altmış'),0.6)));}
+  // DAM
+  {const l=S('dam');const T=p=>WF('dam',0,p);
+   maskWords($('dm_t'),[0],l);
+   const sp=eio(P(l,T('rubber')-0.2,0.7));[sheetL,sheetR].forEach((s,i)=>{s.style.transformOrigin=i?'1040px 0px':'40px 0px';s.style.transform=`scaleX(${sp})`});
+   jaws.forEach(j=>j.style.opacity=P(l,T('rubber')+0.4,0.3));fog.setAttribute('opacity',0.45*eio(P(l,T('rubber'),0.6)));
+   reveal(dmL,P(l,T('kullan'),0.5));drawArrow(dmLa,P(l,T('kullan')+0.2,0.5));reveal(dmOk,P(l,T('kullan')+0.5,0.5));
+   const t0=T('tükürük')-0.25;drops.forEach((d,i)=>{const ph=(Math.max(0,l-t0)*0.75+i*0.29)%1;const on=P(l,t0,0.2);const y=lerp(1320,cy1+96,eo(clamp(ph/0.7)));const sq=P(ph,0.7,0.12);d.setAttribute('transform',`translate(${DX[i]} ${y}) scale(${1.5+0.5*sq} ${1.5-0.7*sq})`);d.setAttribute('opacity',on*0.8*(1-P(ph,0.82,0.18)))});
+   reveal(dmS,P(l,t0+0.2,0.5));
+   dmX.forEach((x,i)=>x.forEach((s,j)=>draw(s,eio(P(l,T('kirlet')-0.1+i*0.15+j*0.1,0.25)))));
+   reveal(dmK,P(l,T('kanal')+0.1,0.6));}
+  // CLEAN
+  {const l=S('clean');const T=p=>WF('clean',0,p);
+   maskWords($('cl_t'),[0,0.15],l);
+   const ts=T('ultrason')-0.4;const tp=P(l,ts,2.4);const [ax,ay]=CM.P(176,250),[bx2,by2]=CM.P(260,368),[cx3,cy3]=CM.P(344,250);
+   let px,py;if(tp<0.5){const q=eio(tp/0.5);px=lerp(ax,bx2,q);py=lerp(ay,by2,q)}else{const q=eio((tp-0.5)/0.5);px=lerp(bx2,cx3,q);py=lerp(by2,cy3,q)}
+   const enter=eo(P(l,ts-0.5,0.5)),leave=eo(P(l,ts+2.5,0.5));tip.setAttribute('transform',`translate(${px+(1-enter)*300+leave*300} ${py-(1-enter)*300-leave*300}) translate(${Math.sin(l*60)*2} 0)`);tip.style.opacity=enter*(1-leave);
+   spray.forEach((c,i)=>{const ph=(l*3+i/5)%1;c.setAttribute('cx',20+ph*40*Math.cos(i));c.setAttribute('cy',-10-ph*40);c.setAttribute('opacity',(1-ph)*enter*(1-leave)*0.8)});
+   const fadeAt=[0.25,0.95,0.6];CM.smear.forEach((s,i)=>s.p.style.opacity=0.75*(1-P(tp,fadeAt[i],0.25)));CM.blobs.forEach((b,i)=>b.setAttribute('opacity',1-P(tp,[0.4,0.75][i],0.2)));
+   reveal(clL,P(l,T('patı')-0.1,0.5));drawArrow(clLa,P(l,T('patı')+0.1,0.5));const lf=1-P(l,ts+1.0,0.4);clL.style.opacity=Math.min(clL.style.opacity,lf);fadeArrow(clLa,lf);
+   reveal(clB,P(l,T('zayıf')-0.1,0.5));clE.forEach((e,i)=>reveal(e,P(l,T('zayıf')+0.6+i*0.3,0.6)));}
+  // SEAL
+  {const l=S('seal');const T=p=>WF('seal',0,p);
+   maskWords($('sl_t'),[0,0.15],l);
+   SM.setGP(lerp(372,490,eio(P(l,0.1,1.0))));
+   const bp=eio(P(l,T('cam')-0.1,1.2));SM.setBar(lerp(490,372,bp),490);
+   draw(slBr,eio(P(l,T('mühür'),0.5)));draw(slLd,eio(P(l,T('mühür')+0.2,0.4)));reveal(slBt,P(l,T('mühür')+0.3,0.5));
+   slM.forEach((e,i)=>reveal(e,P(l,T('cam')+i*0.25,0.6)));drawArrow(slMa,P(l,T('cam')+0.3,0.5));
+   const tl=T('laboratuvar');leaks.forEach((k,i)=>{k.p.style.strokeDashoffset=-l*30;k.p.style.opacity=P(l,tl-0.2+i*0.1,0.3)});
+   slX.forEach((x,i)=>x.forEach((s,j)=>draw(s,eio(P(l,T('sızıntı')+i*0.15+j*0.1,0.25)))));
+   reveal(slN1,P(l,T('sızıntı'),0.5));slN2.forEach((e,i)=>reveal(e,P(l,T('kırılma')+i*0.2,0.5)));reveal(slN3,P(l,T('kırılma')+0.5,0.5));}
+  // COMP
+  {const l=S('comp');const T=p=>WF('comp',0,p);
+   maskWords($('cp_t'),[0,0.15],l);
+   draw(PM.adh,eio(P(l,T('adeziv')-0.1,0.9)));reveal(cpA,P(l,T('adeziv'),0.5));drawArrow(cpAa,P(l,T('adeziv')+0.2,0.5));
+   PM.setBulk(eio(P(l,T('bulk')-0.1,1.0)));reveal(cpB,P(l,T('bulk'),0.5));drawArrow(cpBa,P(l,T('bulk')+0.2,0.5));
+   reveal(cpV,P(l,T('boşluk')-0.1,0.5));reveal(cpV2,P(l,T('boşluk')+0.2,0.5));
+   const te=T('bırak');PM.setEnam(eio(P(l,te,0.8)));draw(PM.occ,eio(P(l,te+0.5,0.6)));PM.compOut.setAttribute('opacity',P(l,T('bulk'),0.6));PM.compLine.p.style.opacity=0.5*P(l,te,0.3);
+   reveal(cpE,P(l,te+0.2,0.5));drawArrow(cpEa,P(l,te+0.4,0.5));}
+  // RIDGE
+  {const l=S('ridge');const T=p=>WF('ridge',0,p),U=p=>WF('ridge',1,p);const L2=LS('ridge',1);
+   maskWords($('rg_t'),[0,0.2],l);
+   gL.style.opacity=P(l,0.1,0.4);rgDiv.p.style.opacity=.35;draw(rgDiv,eio(P(l,0.2,0.8)));
+   ridgesL.forEach((r,i)=>draw(r,eio(P(l,T('marjinal')+i*0.2,0.5))));reveal(rgLl,P(l,T('sağlam')-0.1,0.5));
+   fadeUp($('rg_L'),P(l,T('kompozit')-0.2,0.4),16);const b1=eo(P(l,T('kompozit'),0.7)),b2=eo(P(l,T('kurona'),0.7));$('rgb1').style.width=(170*0.885*b1)+'px';$('rgb2').style.width=(170*0.951*b2)+'px';$('rgv1').style.opacity=b1;$('rgv2').style.opacity=b2;
+   gR.style.opacity=P(l,L2-0.3,0.4);ridgesR.forEach((r,i)=>{draw(r,eio(P(l,L2-0.2,0.4)));r.p.style.opacity=1-0.65*P(l,U('kayıp'),0.3)});
+   modR.setAttribute('opacity',eio(P(l,U('marjinal'),0.5)));reveal(rgRl,P(l,U('kayıp')-0.1,0.5));
+   rgXs.forEach((x,i)=>x.forEach((s,j)=>draw(s,eio(P(l,U('kayıp')+i*0.15+j*0.1,0.25)))));
+   fadeUp($('rg_R'),P(l,U('sertliğ')-0.2,0.4),16);const bg=$('rg_big');bg.style.transformOrigin='0 50%';bg.style.transform=`scale(${0.7+0.3*eb(P(l,U('yüzde'),0.5))})`;bg.style.opacity=P(l,U('yüzde'),0.15);
+   const tc=U('zaman')-0.15;const cv=eio(P(l,tc,0.8));cover.setAttribute('opacity',cv);coverH.setAttribute('opacity',0.18*cv);modR.setAttribute('opacity',Math.min(+modR.getAttribute('opacity'),1-cv*0.85));
+   reveal(rgCov,P(l,tc,0.5));drawArrow(rgCovA,P(l,tc+0.2,0.5));}
+  // OUTRO
+  {const l=S('outro');const T=p=>WF('outro',0,p);
+   maskWords($('o_t'),[0,T('dişi')-0.15],l);draw(oUnder,eio(P(l,T('korur'),0.5)));
+   document.querySelectorAll('#o_list .rc').forEach((it,i)=>{const p=eo(P(l,0.5+i*0.22,0.45));it.style.opacity=p;it.style.transform=`translateX(${(1-p)*-50}px)`;draw(oChecks[i],eio(P(l,0.85+i*0.22,0.35)))});
+   fadeUp($('o_share'),P(l,T('kaydet')-0.2,0.5),24);fadeUp($('o_ig'),P(l,T('paylaş')-0.2,0.5),24);fadeUp($('o_refs'),P(l,T('paylaş')+0.1,0.6),20);}
+  setRefs(t);setSub(t);
+}
+window.render=render;render(0);
+</script>
+</body></html>
