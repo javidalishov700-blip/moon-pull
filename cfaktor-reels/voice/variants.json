@@ -1,1 +1,28 @@
-{"voice": "en-US-BrianMultilingualNeural", "lang": "tr-TR", "rate": "+4%", "pitch": "+0Hz", "lines": []}
+{
+ "voice": "en-US-BrianMultilingualNeural",
+ "lang": "tr-TR",
+ "rate": "+4%",
+ "pitch": "+0Hz",
+ "lines": [
+  {
+   "id": "l10a",
+   "say": "Peki klinikte ne yapabiliriz? Kompoziti, iki milimetreyi geçmeyen, oblik tabakalar halinde yerleştirin."
+  },
+  {
+   "id": "l10b",
+   "say": "Klinikte yapılabilecek ilk şey, kompoziti iki milimetreyi geçmeyen oblik tabakalar halinde yerleştirmek."
+  },
+  {
+   "id": "l10c",
+   "say": "Peki klinikte ne yapabiliriz? Öncelikle kompoziti, iki milimetreyi geçmeyen oblik tabakalarla yerleştirin."
+  },
+  {
+   "id": "l10d",
+   "say": "Peki klinikte ne yapılmalı? Kompozit, iki milimetreyi geçmeyen eğik tabakalar halinde yerleştirilmeli."
+  },
+  {
+   "id": "l10e",
+   "say": "Peki klinikte ne yapabiliriz? Kompoziti tek seferde değil, iki milimetreyi geçmeyen oblik tabakalarla yerleştirin."
+  }
+ ]
+}
