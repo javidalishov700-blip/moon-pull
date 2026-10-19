@@ -1,0 +1,48 @@
+{
+ "voices": [
+  {
+   "voice": "en-US-BrianMultilingualNeural",
+   "lang": "tr-TR"
+  }
+ ],
+ "rate": "+10%",
+ "pitch": "+0Hz",
+ "lines": [
+  {
+   "id": "l00",
+   "say": "Kompozitte soft-start mı, standart mod mu, yoksa üç saniyelik hızlı mod mu? Hangisi gerçekten daha başarılı?"
+  },
+  {
+   "id": "l01",
+   "say": "Klinik çalışmalarda soft-start ile standart mod arasında hassasiyet açısından anlamlı fark yok; ikisi de yeterli dozla güvenilir."
+  },
+  {
+   "id": "l02",
+   "say": "Laboratuvarda pulse-delay de büzülme stresini azaltıyor; ancak klinik avantajı kanıtlanmadı."
+  },
+  {
+   "id": "l03",
+   "say": "En riskli olan üç saniyelik mod; sadece bu moda özel kompozitlerde yeterli polimerizasyon sağlıyor."
+  },
+  {
+   "id": "l04",
+   "say": "Başarıyı artıran dört kural var. Bir: ucu dişe yakın ve dik tut; on milimetrede ışığın üçte biri kayboluyor."
+  },
+  {
+   "id": "l05",
+   "say": "İki: cihazı iki elle sabitle ve restorasyona bak; eğitimle ulaşan ışık yüzde altmış artıyor."
+  },
+  {
+   "id": "l06",
+   "say": "Üç: sınıf iki restorasyonlarda matrisi çıkarınca, bukkal ve lingualden ek ışınlama yap."
+  },
+  {
+   "id": "l07",
+   "say": "Dört: ucu temiz tut ve cihazı düzenli ölç; kirli uçta ışık yarıdan fazla düşebiliyor."
+  },
+  {
+   "id": "l08",
+   "say": "Yani başarıyı modun adı değil, uygulaman belirliyor. Kaydet ve yorumlara hangi modu kullandığını yaz."
+  }
+ ]
+}
