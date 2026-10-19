@@ -1,0 +1,55 @@
+[
+ {
+  "scene": "hook",
+  "say": "Aynı kompozit, aynı bonding ajanı; ama bir kavitede sorun yok, diğerinde hassasiyet ve kenar sızıntısı var. Neden?"
+ },
+ {
+  "scene": "hook",
+  "say": "Cevabı küçük bir oranda saklı: Ce faktör."
+ },
+ {
+  "scene": "what",
+  "say": "Ce faktör, yani konfigürasyon faktörü, restorasyonda bağlanan yüzeylerin, bağlanmayan serbest yüzeylere oranıdır."
+ },
+ {
+  "scene": "why",
+  "say": "Kompozit rezin polimerize olurken büzülür ve bu büzülme bir stres oluşturur."
+ },
+ {
+  "scene": "why",
+  "say": "Serbest yüzey fazlaysa materyal akabilir ve stresin bir kısmı rahatlar."
+ },
+ {
+  "scene": "why",
+  "say": "Ama duvarların çoğu bağlıysa, bu stres doğrudan bağlanma ara yüzüne yüklenir."
+ },
+ {
+  "scene": "ex",
+  "say": "Örneğin Sınıf 1 kavitede beş yüzey bağlı, yalnızca bir yüzey serbest: Ce faktör beş."
+ },
+ {
+  "scene": "ex",
+  "say": "Sınıf 4 restorasyonda ise serbest yüzey fazla olduğu için Ce faktör düşüktür."
+ },
+ {
+  "scene": "risk",
+  "say": "Yüksek Ce faktör; kenar aralığı, mikrosızıntı, postoperatif hassasiyet ve tüberkül defleksiyonu riskini artırabilir."
+ },
+ {
+  "scene": "data",
+  "say": "Bir çalışmada, Ce faktörü üç olan Sınıf 1 kavitelerin tabanında, bağlanma dayanımı yüzde 21 ile 35 arasında düştü."
+ },
+ {
+  "scene": "tips",
+  "say": "Peki klinikte ne yapabiliriz? Kompoziti tek seferde değil, iki milimetreyi geçmeyen oblik tabakalarla yerleştirin.",
+  "file": "../variants/l10e"
+ },
+ {
+  "scene": "tips",
+  "say": "Düşük büzülme stresli bulk-fill kompozitler ve kontrollü polimerizasyon da stresi azaltmaya yardımcı olabilir."
+ },
+ {
+  "scene": "outro",
+  "say": "Küçük bir oran, büyük bir fark. Faydalı bulduysanız kaydedin ve meslektaşlarınızla paylaşın."
+ }
+]

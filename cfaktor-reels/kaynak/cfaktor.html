@@ -1,0 +1,328 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="fonts/fraunces/400-italic.css"><link rel="stylesheet" href="fonts/fraunces/600.css"><link rel="stylesheet" href="fonts/fraunces/600-italic.css"><link rel="stylesheet" href="fonts/fraunces/800.css">
+<link rel="stylesheet" href="fonts/dm-sans/500.css"><link rel="stylesheet" href="fonts/dm-sans/700.css"><link rel="stylesheet" href="fonts/dm-sans/800.css">
+<link rel="stylesheet" href="fonts/caveat/700.css">
+<style>
+:root{--paper:#F2EEE6;--ink:#1C1B19;--mute:#8A8478;--red:#D2462B;--blue:#2E5C86}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif}
+#cam{position:absolute;left:-20px;top:-20px;width:1120px;height:1960px}
+#stage{position:absolute;left:20px;top:20px;width:1080px;height:1920px;overflow:hidden}
+.scene{position:absolute;inset:0;background:var(--paper);overflow:hidden;display:none}
+.abs{position:absolute}
+.serif{font-family:'Fraunces',serif}
+.chap{position:absolute;left:80px;top:150px;display:flex;align-items:center;gap:18px;font-size:28px;font-weight:700;letter-spacing:3px;text-transform:uppercase}
+.chap b{font-family:'Fraunces',serif;font-style:italic;font-weight:600;font-size:34px;letter-spacing:0;color:var(--red)}
+.chap i{display:block;height:2px;width:120px;background:var(--ink)}
+.h{font-family:'Fraunces',serif;font-weight:800;line-height:1.02;letter-spacing:-1.5px}
+.it{font-style:italic;font-weight:600}
+.mask{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:8px}
+.mask>span{display:inline-block}
+#subs{position:absolute;left:60px;right:60px;top:1395px;text-align:center;z-index:50}
+#subs .ln{display:inline-block;background:#fff;color:var(--ink);font-weight:800;font-size:54px;line-height:1.2;padding:8px 22px 12px;border-radius:12px;box-shadow:0 3px 0 rgba(0,0,0,.12)}
+#subs .w{display:inline-block;margin:0 6px}
+#grain{position:absolute;left:0;top:0;z-index:60;pointer-events:none;mix-blend-mode:multiply;opacity:.16}
+#topline{position:absolute;left:0;top:0;height:6px;background:var(--ink);z-index:61}
+svg text{font-family:'Caveat',cursive;font-weight:700}
+.item{display:flex;gap:30px;align-items:center;padding:22px 0;border-top:3px solid var(--ink);font-size:46px;font-weight:700}
+.item .n{font-family:'Fraunces',serif;font-weight:800;font-size:64px;color:var(--red);width:50px}
+</style></head>
+<body>
+<div id="cam"><div id="stage">
+
+<!-- HOOK -->
+<div class="scene" id="s_hook">
+  <div class="abs h" id="hk_t" style="left:80px;top:200px;font-size:100px">
+    <span class="mask"><span>Aynı kompozit.</span></span><br><span class="mask"><span>Aynı bonding.</span></span>
+  </div>
+  <svg class="abs" id="hk_svg" style="left:0;top:0" width="1080" height="1920">
+    <defs><pattern id="ht" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="16" stroke="#1C1B19" stroke-width="2.4"/></pattern></defs>
+    <g id="hkA">
+      <path d="M90 520 L90 980 L470 980 L470 520 L390 520 L390 860 L170 860 L170 520 Z" fill="url(#ht)" stroke="#1C1B19" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M170 520 L170 860 L390 860 L390 520 Q280 545 170 520 Z" fill="#E4D9C4" stroke="#1C1B19" stroke-width="4"/>
+      <text x="280" y="1050" text-anchor="middle" font-size="56" fill="#1C1B19">A</text>
+    </g>
+    <g id="hkB">
+      <path d="M610 520 L610 980 L990 980 L990 520 L910 520 L910 860 L690 860 L690 520 Z" fill="url(#ht)" stroke="#1C1B19" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M700 530 L700 850 L900 850 L900 530 Q800 555 700 530 Z" fill="#E4D9C4" stroke="#1C1B19" stroke-width="4"/>
+      <text x="800" y="1050" text-anchor="middle" font-size="56" fill="#1C1B19">B</text>
+    </g>
+    <g id="hk_ann"></g>
+  </svg>
+  <div class="abs h it" id="hk_why" style="left:0;right:0;top:1165px;text-align:center;font-size:120px;color:var(--red)">Neden?</div>
+  <div class="abs" id="hk_ans" style="left:80px;top:560px">
+    <div class="serif it" style="font-weight:400;font-size:54px">Cevap küçük bir oranda saklı:</div>
+    <div class="h it" style="font-size:190px;margin-top:10px">C-faktör.</div>
+  </div>
+</div>
+
+<!-- WHAT -->
+<div class="scene" id="s_what">
+  <div class="chap"><b>01</b><i></i>Tanım</div>
+  <div class="abs" id="fm" style="left:80px;top:250px;display:flex;align-items:center;gap:34px">
+    <div class="h" style="font-size:150px">C =</div>
+    <div style="text-align:center">
+      <div class="h it" id="fm_num" style="font-size:66px;color:var(--blue)">bağlı yüzeyler</div>
+      <div id="fm_bar" style="height:7px;background:var(--ink);margin:14px 0;transform-origin:left"></div>
+      <div class="h it" id="fm_den" style="font-size:66px;color:var(--red)">serbest yüzeyler</div>
+    </div>
+  </div>
+  <div class="abs" style="left:80px;top:540px;font-size:30px;font-weight:700;color:var(--mute)">Konfigürasyon faktörü · Feilzer ve ark., 1987</div>
+  <svg class="abs" id="wh_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+</div>
+
+<!-- WHY -->
+<div class="scene" id="s_why">
+  <div class="chap"><b>02</b><i></i>Neden önemli?</div>
+  <div class="abs h" id="why_t" style="left:80px;top:220px;font-size:88px">Büzülme <span class="it" style="color:var(--red)">→ stres</span></div>
+  <svg class="abs" id="wy_svg" style="left:0;top:0" width="1080" height="1920">
+    <defs><pattern id="ht2" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="16" stroke="#1C1B19" stroke-width="2.4"/></pattern></defs>
+    <path d="M140 420 L140 1240 L940 1240 L940 420 L790 420 L790 1060 L290 1060 L290 420 Z" fill="url(#ht2)" stroke="#1C1B19" stroke-width="6" stroke-linejoin="round"/>
+    <path id="wy_comp" d="" fill="#E4D9C4" stroke="#1C1B19" stroke-width="4"/>
+    <g id="wy_ann"></g>
+  </svg>
+</div>
+
+<!-- EX -->
+<div class="scene" id="s_ex">
+  <div class="chap"><b>03</b><i></i>Örnek</div>
+  <svg class="abs" id="ex_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="abs h" id="ex_c1" style="left:80px;top:860px;font-size:92px">C = <span style="color:var(--blue)">5</span>/<span style="color:var(--red)">1</span> = <span style="color:var(--red)">5</span></div>
+  <div class="abs" id="ex_scale" style="left:80px;right:80px;top:1040px;height:200px"></div>
+</div>
+
+<!-- RISK -->
+<div class="scene" id="s_risk">
+  <div class="chap"><b>04</b><i></i>Riskler</div>
+  <div class="abs h" style="left:80px;top:220px;font-size:88px">Yüksek C <span class="it" style="color:var(--red)">=</span></div>
+  <svg class="abs" id="rk_svg" style="left:0;top:0" width="1080" height="1920">
+    <defs><pattern id="ht3" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="16" stroke="#C9BEA9" stroke-width="3"/></pattern></defs>
+    <g transform="translate(240,380)">
+      <path id="rk_tooth" d="M60 120 Q60 30 140 20 Q190 60 240 30 Q300 60 360 30 Q440 30 440 120 L440 420 Q440 470 420 520 L380 820 Q365 860 340 820 L300 600 Q250 570 200 600 L160 820 Q135 860 120 820 L80 520 Q60 470 60 420 Z" fill="#EDE6D8" stroke="#1C1B19" stroke-width="6" stroke-linejoin="round"/>
+      <path d="M180 360 Q250 330 320 360 L320 470 Q250 500 180 470 Z" fill="#F4C9BE" stroke="#1C1B19" stroke-width="4"/>
+      <path id="rk_rest" d="M150 60 L150 290 L350 290 L350 60 Q300 80 250 60 Q200 80 150 60 Z" fill="#E4D9C4" stroke="#1C1B19" stroke-width="5"/>
+    </g>
+    <g id="rk_ann"></g>
+  </svg>
+</div>
+
+<!-- DATA -->
+<div class="scene" id="s_data">
+  <div class="chap"><b>05</b><i></i>Kanıt</div>
+  <div class="abs" style="left:80px;top:230px;font-size:34px;font-weight:700">Sınıf I kavite tabanında bağlanma dayanımı</div>
+  <div class="abs h" id="dt_big" style="left:70px;top:290px;font-size:220px;color:var(--red)">−%21–35</div>
+  <div class="abs" id="dt_bars" style="left:80px;right:80px;top:640px;height:420px">
+    <div class="abs" style="left:0;top:0;font-size:34px;font-weight:800">Düz yüzey · C = 1</div>
+    <div class="abs" id="dt_b1" style="left:0;top:56px;height:90px;width:0;background:#C9C1B2"></div>
+    <div class="abs serif" id="dt_v1" style="top:66px;font-size:52px;font-weight:800;color:#8A8478">100</div>
+    <div class="abs" style="left:0;top:210px;font-size:34px;font-weight:800">Sınıf I tabanı · C = 3</div>
+    <div class="abs" id="dt_b2" style="left:0;top:266px;height:90px;width:0;background:var(--red)"></div>
+    <div class="abs" id="dt_rng" style="top:266px;height:90px;width:0;background:repeating-linear-gradient(45deg,#D2462B 0 6px,transparent 6px 14px)"></div>
+    <div class="abs serif" id="dt_v2" style="top:276px;font-size:52px;font-weight:800;color:var(--red)">65–79</div>
+  </div>
+  <div class="abs" id="dt_note" style="left:80px;right:80px;top:1110px;font-size:27px;line-height:1.45;color:var(--mute)">Göreli değerler (C = 1 → 100). In vitro mikro-gerilme testi; düşüş üç adezivin hepsinde görüldü, ancak yalnızca birinde istatistiksel olarak anlamlıydı. <b style="color:var(--ink)">Yoshikawa ve ark., 1999</b></div>
+</div>
+
+<!-- TIPS -->
+<div class="scene" id="s_tips">
+  <div class="chap"><b>06</b><i></i>Klinikte</div>
+  <svg class="abs" id="tp_svg" style="left:0;top:0" width="1080" height="1920">
+    <defs><pattern id="ht4" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="16" stroke="#1C1B19" stroke-width="2.4"/></pattern></defs>
+    <path d="M200 240 L200 800 L880 800 L880 240 L760 240 L760 680 L320 680 L320 240 Z" fill="url(#ht4)" stroke="#1C1B19" stroke-width="6" stroke-linejoin="round"/>
+    <g id="tp_inc"></g><g id="tp_ann"></g>
+  </svg>
+  <div class="abs" id="tp_list" style="left:80px;right:80px;top:860px">
+    <div class="item"><span class="n">1</span><span>≤ 2 mm <span class="serif it">oblik tabakalar</span></span></div>
+    <div class="item"><span class="n">2</span><span>Düşük stresli <span class="serif it">bulk-fill</span></span></div>
+    <div class="item" style="border-bottom:3px solid var(--ink)"><span class="n">3</span><span><span class="serif it">Kontrollü</span> polimerizasyon</span></div>
+  </div>
+</div>
+
+<!-- OUTRO -->
+<div class="scene" id="s_outro">
+  <div class="abs h" id="o_t" style="left:80px;top:230px;font-size:120px"><span class="mask"><span>Küçük oran,</span></span><br><span class="mask"><span class="it" style="color:var(--red)">büyük fark.</span></span></div>
+  <svg class="abs" id="o_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="abs" id="o_ig" style="left:225px;top:578px;font-size:66px;font-weight:800;letter-spacing:-1px">@muraz_alishov</div>
+  <div class="abs" id="o_refs" style="left:80px;right:80px;top:770px;font-size:25px;line-height:1.45;color:#4A463F">
+    <div style="font-size:26px;font-weight:800;letter-spacing:3px;color:var(--ink);margin-bottom:12px">KAYNAKLAR</div>
+    <div style="margin-bottom:10px">1. Feilzer AJ, De Gee AJ, Davidson CL. Setting stress in composite resin in relation to configuration of the restoration. <i>J Dent Res.</i> 1987;66(11):1636–1639.</div>
+    <div style="margin-bottom:10px">2. Yoshikawa T, Sano H, Burrow MF, Tagami J, Pashley DH. Effects of dentin depth and cavity configuration on bond strength. <i>J Dent Res.</i> 1999;78(4):898–905.</div>
+    <div>3. Braga RR, Ballester RY, Ferracane JL. Factors involved in the development of polymerization shrinkage stress in resin-composites: a systematic review. <i>Dent Mater.</i> 2005;21(10):962–970.</div>
+  </div>
+</div>
+
+<div id="subs"></div>
+</div></div>
+<svg id="grain" width="1080" height="1920"><filter id="gf"><feTurbulence id="turb" type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="1"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#gf)"/></svg>
+<div id="topline"></div>
+
+<script>
+const TL=__TIMELINE__, TOTAL=__TOTAL__;
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)), P=(t,a,d)=>clamp((t-a)/d);
+const eo=t=>1-Math.pow(1-t,3), eio=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2, eb=t=>{const c1=1.4,c3=c1+1;return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2)};
+const $=id=>document.getElementById(id), lerp=(a,b,t)=>a+(b-a)*t, NS='http://www.w3.org/2000/svg';
+const order=[],SC={};
+TL.forEach(c=>{if(!SC[c.scene]){SC[c.scene]={start:c.start,lines:[]};order.push(c.scene)}SC[c.scene].end=c.end;SC[c.scene].lines.push(c)});
+order.forEach((k,i)=>{const s=SC[k];s.a=i===0?0:s.start-0.3;s.b=i<order.length-1?SC[order[i+1]].start-0.3:TOTAL;s.z=i});
+const LS=(k,i)=>SC[k].lines[i].start-SC[k].start;
+const W=(k,li,wi)=>{const ws=SC[k].lines[li].words;return ws[Math.min(wi,ws.length-1)].s-SC[k].start};
+
+let sd=7;const rnd=()=>{sd=(sd*16807)%2147483647;return sd/2147483647};
+function roughPath(pts,amp=3){const out=[];for(let i=0;i<pts.length-1;i++){const [x1,y1]=pts[i],[x2,y2]=pts[i+1];const n=Math.max(2,Math.round(Math.hypot(x2-x1,y2-y1)/40));for(let k=0;k<n;k++){const t=k/n;out.push([lerp(x1,x2,t)+(rnd()-.5)*amp,lerp(y1,y2,t)+(rnd()-.5)*amp])}}out.push(pts[pts.length-1]);
+  let d='M'+out[0].join(' ');for(let i=1;i<out.length-1;i++){const mx=(out[i][0]+out[i+1][0])/2,my=(out[i][1]+out[i+1][1])/2;d+=` Q${out[i][0]} ${out[i][1]} ${mx} ${my}`}return d+` L${out[out.length-1].join(' ')}`}
+function roughEllipse(cx,cy,rx,ry,amp=5){const pts=[];const st=rnd()*6.28;for(let i=0;i<=29;i++){const a=st+i/26*Math.PI*2;const k=1+(rnd()-.5)*0.06;pts.push([cx+Math.cos(a)*rx*k,cy+Math.sin(a)*ry*k])}return roughPath(pts,amp)}
+function stroke(svg,d,col='#D2462B',w=6,dash){const p=document.createElementNS(NS,'path');p.setAttribute('d',d);p.setAttribute('fill','none');p.setAttribute('stroke',col);p.setAttribute('stroke-width',w);p.setAttribute('stroke-linecap','round');p.setAttribute('stroke-linejoin','round');svg.appendChild(p);const L=p.getTotalLength();p.style.strokeDasharray=L;p.style.strokeDashoffset=L;return {p,L}}
+const draw=(s,pr)=>{s.p.style.strokeDashoffset=s.L*(1-pr)};
+function arrow(svg,x1,y1,x2,y2,col,w=5,bend=40){const mx=(x1+x2)/2+bend,my=(y1+y2)/2-bend;const body=stroke(svg,roughPath([[x1,y1],[mx,my],[x2,y2]],2),col,w);const a=Math.atan2(y2-my,x2-mx);const h=24;
+  const head=stroke(svg,`M${x2-h*Math.cos(a-0.45)} ${y2-h*Math.sin(a-0.45)} L${x2} ${y2} L${x2-h*Math.cos(a+0.45)} ${y2-h*Math.sin(a+0.45)}`,col,w);return [body,head]}
+const drawArrow=(ar,pr)=>{draw(ar[0],clamp(pr/0.8));draw(ar[1],clamp((pr-0.8)/0.2))};
+function htext(svg,x,y,txt,size,col,anchor='start',rot=0){const t=document.createElementNS(NS,'text');t.setAttribute('x',x);t.setAttribute('y',y);t.setAttribute('font-size',size);t.setAttribute('fill',col);t.setAttribute('text-anchor',anchor);t.setAttribute('transform',`rotate(${rot} ${x} ${y})`);t.textContent=txt;svg.appendChild(t);return t}
+function reveal(el,pr){el.style.opacity=clamp(pr*3);el.style.clipPath=`inset(-30px ${100-pr*100}% -30px -30px)`}
+function poly(svg,pts,fill,strokeCol='#1C1B19',w=5){const p=document.createElementNS(NS,'path');p.setAttribute('d','M'+pts.map(q=>q.join(' ')).join(' L')+' Z');p.setAttribute('fill',fill);p.setAttribute('stroke',strokeCol);p.setAttribute('stroke-width',w);p.setAttribute('stroke-linejoin','round');svg.appendChild(p);return p}
+function maskWords(root,times,t){root.querySelectorAll('.mask>span').forEach((m,i)=>{const p=eo(P(t,times[Math.min(i,times.length-1)],0.45));m.style.transform=`translateY(${(1-p)*110}%)`})}
+// isometric projection
+const iso=(ox,oy,s)=>(x,y,z)=>[ox+(x-z)*0.866*s,oy+(x+z)*0.5*s-y*s];
+function openBox(svg,ox,oy,s,w,h,d,{bond='#D8E4EE',numbers=false}={}){const P3=iso(ox,oy,s);const g=document.createElementNS(NS,'g');svg.appendChild(g);
+  const F={bottom:[[0,0,0],[w,0,0],[w,0,d],[0,0,d]],back1:[[0,0,0],[w,0,0],[w,h,0],[0,h,0]],back2:[[0,0,0],[0,0,d],[0,h,d],[0,h,0]],front1:[[w,0,0],[w,0,d],[w,h,d],[w,h,0]],front2:[[0,0,d],[w,0,d],[w,h,d],[0,h,d]]};
+  const faces={};['back1','back2','bottom','front1','front2'].forEach(k=>{const pts=F[k].map(q=>P3(...q));const fr=k.startsWith('front');faces[k]=poly(g,pts,fr?'rgba(216,228,238,.35)':bond,'#1C1B19',fr?3:5);if(fr)faces[k].setAttribute('stroke-dasharray','')});
+  const top=[[0,h,0],[w,h,0],[w,h,d],[0,h,d],[0,h,0]].map(q=>P3(...q));const rim=stroke(g,roughPath(top,2),'#D2462B',7);
+  const cen=k=>{const pts=F[k].map(q=>P3(...q));return [pts.reduce((a,b)=>a+b[0],0)/4,pts.reduce((a,b)=>a+b[1],0)/4]};
+  return {g,faces,rim,cen,P3}}
+
+// ---------- HOOK
+const ha=$('hk_ann');
+const hkOk=stroke(ha,roughPath([[215,690],[260,740],[340,620]],3),'#2E5C86',12);
+const gaps=[stroke(ha,roughPath([[693,540],[690,700]],2),'#D2462B',8),stroke(ha,roughPath([[907,540],[910,700]],2),'#D2462B',8)];
+const zap=stroke(ha,'M820 600 L780 670 L828 670 L785 750','#D2462B',8);
+const hkTxt=htext(ha,800,1120,'hassasiyet',58,'#D2462B','middle',-3);
+const hkUnder=stroke(ha,roughPath([[90,940],[400,926],[700,936]],4),'#D2462B',11);
+// ---------- WHAT
+const ws=$('wh_svg');const BX=openBox(ws,520,1060,1.0,330,190,260);
+const lbBond=htext(ws,110,1250,'bağlı (5)',64,'#2E5C86','start',-3), arBond=arrow(ws,260,1230,430,1150,'#2E5C86',5,40);
+const lbFree=htext(ws,820,700,'serbest (1)',64,'#D2462B','middle',3), arFree=arrow(ws,800,720,700,830,'#D2462B',5,-30);
+// ---------- WHY
+const wy=$('wy_svg'),wya=$('wy_ann');
+function compPath(sag,shrink){const L=290+shrink,R=790-shrink,B=1060-shrink*0.6;const top=420+sag*0;const mid=420+sag;return `M${L} ${top} L${L} ${B} L${R} ${B} L${R} ${top} Q540 ${mid*2-top} ${L} ${top} Z`}
+const inA=[[[330,600],[380,600]],[[750,600],[700,600]],[[540,1020],[540,970]],[[330,850],[380,850]],[[750,850],[700,850]]].map(([a,b])=>arrow(wya,a[0],a[1],b[0],b[1],'#D2462B',5,0));
+const flowA=[arrow(wya,430,400,470,480,'#2E5C86',6,0),arrow(wya,650,400,610,480,'#2E5C86',6,0)];
+const flowT=htext(wya,540,385,'serbest yüzey akar',58,'#2E5C86','middle',-2);
+const zig=[[290,450,290,1060],[790,450,790,1060],[290,1060,790,1060]].map(([x1,y1,x2,y2])=>{const pts=[];const n=18;for(let i=0;i<=n;i++){const t=i/n;const o=(i%2?1:-1)*12;pts.push([lerp(x1,x2,t)+(x1===x2?o:0),lerp(y1,y2,t)+(y1===y2?o:0)])}return stroke(wya,'M'+pts.map(p=>p.join(' ')).join(' L'),'#D2462B',5)});
+const crack=stroke(wya,roughPath([[292,440],[300,560],[296,640]],2),'#1C1B19',7);
+const zigT=htext(wya,540,1330,'stres → ara yüz',62,'#D2462B','middle',-2);
+// ---------- EX
+const ex=$('ex_svg');const C1=openBox(ex,330,650,0.85,300,170,240);
+const nums=['bottom','back1','back2','front1','front2'].map((k,i)=>{const [x,y]=C1.cen(k);return htext(ex,x,y+20,String(i+1),66,'#2E5C86','middle',0)});
+const c1lab=htext(ex,330,330,'Sınıf I',62,'#1C1B19','middle',0);
+// class IV: incisor outline with missing corner
+const inc=document.createElementNS(NS,'g');ex.appendChild(inc);
+poly(inc,[[700,330],[930,330],[950,420],[960,640],[900,800],[740,800],[690,640],[680,420]],'#EDE6D8','#1C1B19',5);
+const c4rest=poly(inc,[[820,330],[930,330],[950,420],[955,500],[870,500],[820,440]],'#E4D9C4','#1C1B19',5);
+const c4bond=stroke(ex,roughPath([[820,335],[820,440],[870,500],[952,500]],2),'#2E5C86',10);
+const c4lab=htext(ex,820,300,'Sınıf IV',62,'#1C1B19','middle',0);
+const c4note=htext(ex,820,880,'çok serbest yüzey',52,'#D2462B','middle',-2);
+// scale
+const scl=$('ex_scale');scl.innerHTML=`<div class="abs" style="left:0;right:0;top:80px;height:10px;background:linear-gradient(90deg,#2E5C86,#C9C1B2,#D2462B)"></div>
+ <div class="abs" style="left:0;top:110px;font-size:30px;font-weight:800;color:#2E5C86">düşük stres</div><div class="abs" style="right:0;top:110px;font-size:30px;font-weight:800;color:#D2462B">yüksek stres</div>`;
+const mk=(lab,col)=>{const m=document.createElement('div');m.className='abs';m.style.cssText=`top:30px;width:0;height:0`;m.innerHTML=`<div style="position:absolute;left:-14px;top:36px;width:28px;height:28px;border-radius:50%;background:${col};border:4px solid #F2EEE6"></div><div style="position:absolute;left:-120px;width:240px;top:-6px;text-align:center;font-size:32px;font-weight:800;color:${col}">${lab}</div>`;scl.appendChild(m);return m};
+const mk4=mk('Sınıf IV','#2E5C86'), mk1=mk('Sınıf I','#D2462B');
+// ---------- RISK
+const rk=$('rk_ann'), rs=$('rk_svg');
+const gapL=stroke(rk,roughPath([[392,442],[392,560]],2),'#D2462B',9), gapR=stroke(rk,roughPath([[588,442],[588,560]],2),'#D2462B',9);
+const rk1=htext(rk,80,420,'kenar aralığı',54,'#D2462B','start',-3), rka1=arrow(rk,200,440,380,470,'#D2462B',5,-20);
+const leak=stroke(rk,'M600 300 Q640 360 600 400 Q560 440 595 470','#2E5C86',6);leak.p.style.strokeDasharray='';const leakL=leak.L;
+const rk2=htext(rk,700,330,'mikrosızıntı',54,'#2E5C86','start',-3);
+const rzap=stroke(rk,'M500 690 L470 740 L510 740 L478 800','#D2462B',8);
+const rk3=htext(rk,600,780,'hassasiyet',54,'#D2462B','start',-3);
+const cuspA=[arrow(rk,250,330,330,360,'#1C1B19',6,0),arrow(rk,730,330,650,360,'#1C1B19',6,0)];
+const rk4=htext(rk,540,1300,'tüberkül defleksiyonu',58,'#1C1B19','middle',-2);
+// ---------- TIPS
+const ti=$('tp_inc'),ta=$('tp_ann');
+const wedges=[[[320,680],[760,680],[320,560]],[[760,680],[760,540],[320,560]],[[320,560],[760,540],[320,420]],[[760,540],[760,400],[320,420]],[[320,420],[760,400],[320,280]],[[760,400],[760,260],[320,280]]].map((pts,i)=>{const p=poly(ti,pts,i%2?'#E4D9C4':'#D9CCB4','#1C1B19',3);p.style.opacity=0;return p});
+const brk=stroke(ta,'M800 680 L830 680 L830 560 L800 560','#D2462B',6);const brkT=htext(ta,850,640,'≤ 2 mm',56,'#D2462B','start',0);
+const tChecks=[...document.querySelectorAll('.item')].map(it=>{it.style.position='relative';const sv=document.createElementNS(NS,'svg');sv.setAttribute('width',90);sv.setAttribute('height',90);sv.style.cssText='position:absolute;right:0;top:12px';it.appendChild(sv);return stroke(sv,roughPath([[12,45],[38,74],[82,12]],3),'#D2462B',9)});
+// ---------- OUTRO
+const os=$('o_svg');const oUnder=stroke(os,roughPath([[90,500],[380,488],[620,496]],4),'#D2462B',10);
+const igBox=stroke(os,'M120 570 h56 a22 22 0 0 1 22 22 v56 a22 22 0 0 1 -22 22 h-56 a22 22 0 0 1 -22 -22 v-56 a22 22 0 0 1 22 -22 Z','#1C1B19',7);const igC=stroke(os,roughEllipse(148,620,22,22,0.5),'#1C1B19',7);
+const oNote=htext(os,1000,470,'kaydet & paylaş',52,'#2E5C86','end',-3);
+
+// ---------- subtitles
+const CH=[];TL.forEach(L=>{let cur=[];L.words.forEach((w,i)=>{cur.push(w);if(cur.length>=4||/[.,:;?!]$/.test(w.w)||i===L.words.length-1){CH.push({ws:cur.slice(),s:cur[0].s,e:cur[cur.length-1].e});cur=[]}})});
+CH.forEach((c,i)=>{const nx=CH[i+1];c.hide=nx?Math.min(nx.s,c.e+0.6):c.e+0.6});
+const subs=$('subs');let curC=-1,wEls=[];
+function setSub(t){let k=-1;for(let i=0;i<CH.length;i++){if(t>=CH[i].s-0.06&&t<CH[i].hide){k=i;break}}
+  if(k<0){subs.style.opacity=0;return}subs.style.opacity=1;
+  if(k!==curC){curC=k;subs.innerHTML='';const ln=document.createElement('span');ln.className='ln';subs.appendChild(ln);wEls=CH[k].ws.map(w=>{const s=document.createElement('span');s.className='w';s.textContent=w.w;ln.appendChild(s);return {s,w}})}
+  const pin=eb(P(t,CH[k].s-0.06,0.22));subs.firstChild.style.transform=`scale(${0.85+0.15*pin}) rotate(${(1-pin)*-2}deg)`;
+  wEls.forEach(o=>{o.s.style.color=t>=o.w.s-0.02?(t<o.w.e+0.05?'#D2462B':'#1C1B19'):'#B5AEA2'})}
+
+function render(t){
+  $('turb').setAttribute('seed',1+Math.floor(t*12)%9);
+  $('cam').style.transform=`translate(${Math.sin(t*0.9)*3+Math.sin(t*2.3)*1.2}px,${Math.cos(t*0.7)*3+Math.sin(t*1.9)}px) rotate(${Math.sin(t*0.5)*0.12}deg)`;
+  $('topline').style.width=(1080*t/TOTAL)+'px';
+  order.forEach(k=>{const s=SC[k],e=$('s_'+k);const vis=t>=s.a-0.01&&t<s.b+0.45;e.style.display=vis?'block':'none';if(!vis)return;
+    e.style.zIndex=s.z;const pin=s.z===0?1:eio(P(t,s.a,0.5));const pout=eio(P(t,s.b,0.45));
+    e.style.transform=`translateX(${(1-pin)*100-pout*28}%)`;e.style.filter=pout>0?`brightness(${1-pout*0.25})`:'none'});
+  const S=k=>t-SC[k].start;
+  // HOOK
+  {const l=S('hook');const w0=SC.hook.lines[0].words;maskWords($('hk_t'),[w0[0].s-SC.hook.start-0.1,w0[3].s-SC.hook.start-0.1],l);
+   const tA=W('hook',0,7),tB=W('hook',0,10);const l2=LS('hook',1);
+   ['hkA','hkB'].forEach((id,i)=>{const p=eb(P(l,i?tB-0.3:tA-0.3,0.6));const e=$(id);e.style.opacity=P(l,i?tB-0.3:tA-0.3,0.2)*(1-P(l,l2-0.2,0.3));e.style.transform=`translateY(${(1-p)*80}px)`});
+   draw(hkOk,eio(P(l,tA+0.4,0.5)));gaps.forEach((g,i)=>draw(g,eio(P(l,W('hook',0,13)-0.2+i*0.2,0.5))));draw(zap,eio(P(l,W('hook',0,11),0.4)));reveal(hkTxt,P(l,W('hook',0,11)+0.2,0.6));
+   [hkTxt].forEach(e=>e.style.opacity=Math.min(e.style.opacity,1-P(l,l2-0.2,0.3)));hkOk.p.style.opacity=gaps[0].p.style.opacity=gaps[1].p.style.opacity=zap.p.style.opacity=1-P(l,l2-0.2,0.3);
+   const wy=$('hk_why');const wp=eb(P(l,W('hook',0,16)-0.1,0.5));wy.style.opacity=P(l,W('hook',0,16)-0.1,0.15)*(1-P(l,l2-0.2,0.3));wy.style.transform=`scale(${0.6+0.4*wp}) rotate(${(1-wp)*-6}deg)`;
+   $('hk_t').style.opacity=1-P(l,l2-0.2,0.3);
+   const an=$('hk_ans');an.style.opacity=P(l,l2+0.1,0.3);const big=an.lastElementChild;const bt=W('hook',1,5)-0.1;const bp=eb(P(l,bt,0.55));big.style.opacity=P(l,bt,0.15);big.style.transform=`translateY(${(1-bp)*70}px)`;
+   draw(hkUnder,eio(P(l,bt+0.5,0.5)));}
+  // WHAT
+  {const l=S('what');const f=eo(P(l,0,0.6));$('fm').style.opacity=f;$('fm').style.transform=`translateY(${(1-f)*40}px)`;
+   reveal($('fm_num'),eo(P(l,W('what',0,6)-0.2,0.6)));$('fm_bar').style.transform=`scaleX(${eio(P(l,W('what',0,8),0.4))})`;reveal($('fm_den'),eo(P(l,W('what',0,9)-0.2,0.6)));
+   Object.entries(BX.faces).forEach(([k,f],i)=>{f.style.opacity=P(l,0.4+i*0.15,0.3)});
+   draw(BX.rim,eio(P(l,W('what',0,9),0.7)));
+   reveal(lbBond,P(l,W('what',0,6)+0.4,0.5));drawArrow(arBond,P(l,W('what',0,6)+0.6,0.5));
+   reveal(lbFree,P(l,W('what',0,9)+0.4,0.5));drawArrow(arFree,P(l,W('what',0,9)+0.6,0.5));}
+  // WHY
+  {const l=S('why');const t1=LS('why',1),t2=LS('why',2);
+   const shrink=8*eio(P(l,W('why',0,4),0.9));const sag=60*eio(P(l,t1+0.5,1.2))*(1-eio(P(l,t2,0.6)));
+   $('wy_comp').setAttribute('d',compPath(sag+shrink*2,shrink*(1-eio(P(l,t2,0.6)))));
+   inA.forEach((a,i)=>{drawArrow(a,P(l,W('why',0,4)+i*0.1,0.5));a.forEach(s=>s.p.style.opacity=1-P(l,t1-0.2,0.3))});
+   flowA.forEach((a,i)=>{drawArrow(a,P(l,t1+0.3+i*0.15,0.5));a.forEach(s=>s.p.style.opacity=1-P(l,t2-0.2,0.3))});reveal(flowT,P(l,t1+0.2,0.6));flowT.style.opacity=Math.min(flowT.style.opacity,1-P(l,t2-0.2,0.3));
+   zig.forEach((z,i)=>{draw(z,eio(P(l,t2+0.4+i*0.25,0.6)));z.p.style.opacity=0.55+0.45*Math.abs(Math.sin(l*7+i))});draw(crack,eio(P(l,W('why',2,8),0.4)));reveal(zigT,P(l,W('why',2,7),0.6));}
+  // EX
+  {const l=S('ex');const t2=LS('ex',1);
+   C1.g.style.opacity=P(l,0,0.3);C1.g.style.transform=`translateY(${(1-eo(P(l,0,0.6)))*60}px)`;reveal(c1lab,P(l,0.1,0.5));
+   nums.forEach((n,i)=>{const tt=W('ex',0,4)+i*0.18;n.style.opacity=P(l,tt,0.1);n.style.transformOrigin=`${n.getAttribute('x')}px ${n.getAttribute('y')}px`;n.style.transform=`scale(${eb(P(l,tt,0.4))})`});
+   draw(C1.rim,eio(P(l,W('ex',0,10),0.6)));
+   const c=eb(P(l,W('ex',0,11),0.6));$('ex_c1').style.opacity=P(l,W('ex',0,11),0.15);$('ex_c1').style.transform=`translateY(${(1-c)*40}px)`;
+   inc.style.opacity=P(l,t2-0.3,0.3);inc.style.transform=`translateY(${(1-eo(P(l,t2-0.3,0.6)))*60}px)`;reveal(c4lab,P(l,t2-0.2,0.5));draw(c4bond,eio(P(l,t2+0.8,0.6)));reveal(c4note,P(l,W('ex',1,5),0.6));
+   const sc=$('ex_scale');sc.style.opacity=P(l,t2+1.5,0.4);const W0=920;
+   mk4.style.left=(lerp(W0/2,W0*0.1,eio(P(l,t2+1.8,0.8))))+'px';mk4.style.opacity=P(l,t2+1.8,0.2);mk1.style.left=(lerp(W0/2,W0*0.95,eio(P(l,t2+1.6,0.8))))+'px';mk1.style.opacity=P(l,t2+1.6,0.2);}
+  // RISK
+  {const l=S('risk');const T=i=>W('risk',0,i);
+   $('rk_tooth').style.opacity=P(l,0,0.3);
+   draw(gapL,eio(P(l,T(3),0.4)));draw(gapR,eio(P(l,T(3)+0.15,0.4)));reveal(rk1,P(l,T(3),0.5));drawArrow(rka1,P(l,T(3)+0.2,0.5));
+   leak.p.style.strokeDasharray='10 10';leak.p.style.strokeDashoffset=-l*40;leak.p.style.opacity=P(l,T(5),0.3);reveal(rk2,P(l,T(5),0.5));
+   draw(rzap,eio(P(l,T(6),0.4)));reveal(rk3,P(l,T(6)+0.1,0.5));
+   cuspA.forEach((a,i)=>drawArrow(a,P(l,T(9)+i*0.15,0.5)));reveal(rk4,P(l,T(9)+0.2,0.6));
+   const sh=P(l,T(9),1.0)>0&&P(l,T(9),1.0)<1?Math.sin(l*40)*3:0;$('rk_tooth').style.transform=`translateX(${sh}px)`;}
+  // DATA
+  {const l=S('data');const T=i=>W('data',0,i);
+   const bg=eb(P(l,T(12)-0.3,0.6));$('dt_big').style.opacity=P(l,T(12)-0.3,0.15);$('dt_big').style.transform=`scale(${0.7+0.3*bg})`;$('dt_big').style.transformOrigin='left center';
+   const Wm=860;const p1=eo(P(l,0.3,0.9));$('dt_b1').style.width=(Wm*0.9*p1)+'px';$('dt_v1').style.left=(Wm*0.9*p1+16)+'px';$('dt_v1').style.opacity=p1;
+   const p2=eo(P(l,T(6),1.0));$('dt_b2').style.width=(Wm*0.9*0.65*p2)+'px';$('dt_rng').style.left=(Wm*0.9*0.65)+'px';const pr=eo(P(l,T(6)+1.0,0.6));$('dt_rng').style.width=(Wm*0.9*0.14*pr)+'px';$('dt_v2').style.left=(Wm*0.9*(0.65+0.14*pr)+16)+'px';$('dt_v2').style.opacity=pr;
+   $('dt_note').style.opacity=P(l,T(14),0.6);}
+  // TIPS
+  {const l=S('tips');const T=i=>W('tips',0,i);
+   wedges.forEach((w,i)=>{const tt=T(4)+i*0.45;w.style.opacity=P(l,tt,0.15);w.style.transformOrigin='540px 700px';w.style.transform=`translateY(${(1-eb(P(l,tt,0.4)))*-40}px)`});
+   draw(brk,eio(P(l,T(8),0.5)));reveal(brkT,P(l,T(8)+0.2,0.5));
+   const items=document.querySelectorAll('.item');const tt=[T(11),W('tips',1,3),W('tips',1,6)];
+   items.forEach((it,i)=>{const p=eo(P(l,tt[i],0.5));it.style.opacity=p;it.style.transform=`translateX(${(1-p)*-60}px)`;draw(tChecks[i],eio(P(l,tt[i]+0.5,0.4)))});}
+  // OUTRO
+  {const l=S('outro');maskWords($('o_t'),[0,0.9],l);draw(oUnder,eio(P(l,1.4,0.5)));reveal(oNote,P(l,2.0,0.6));
+   draw(igBox,eio(P(l,2.4,0.6)));draw(igC,eio(P(l,2.7,0.4)));reveal($('o_ig'),eo(P(l,2.6,0.8)));
+   const r=eo(P(l,3.2,0.8));$('o_refs').style.opacity=r;$('o_refs').style.transform=`translateY(${(1-r)*30}px)`;}
+  setSub(t);
+}
+window.render=render;render(0);
+</script>
+</body></html>

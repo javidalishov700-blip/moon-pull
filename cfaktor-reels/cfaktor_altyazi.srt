@@ -1,0 +1,207 @@
+1
+00:00:00,500 --> 00:00:01,622
+Aynı kompozit,
+
+2
+00:00:01,622 --> 00:00:03,016
+aynı bonding ajanı;
+
+3
+00:00:03,160 --> 00:00:04,422
+ama bir kavitede sorun
+
+4
+00:00:04,422 --> 00:00:05,023
+yok,
+
+5
+00:00:05,035 --> 00:00:06,694
+diğerinde hassasiyet ve kenar
+
+6
+00:00:06,694 --> 00:00:07,835
+sızıntısı var.
+
+7
+00:00:07,883 --> 00:00:08,821
+Neden?
+
+8
+00:00:08,821 --> 00:00:10,132
+Cevabı küçük bir oranda
+
+9
+00:00:10,132 --> 00:00:10,949
+saklı:
+
+10
+00:00:11,118 --> 00:00:12,259
+C faktör.
+
+11
+00:00:12,599 --> 00:00:13,568
+C faktör,
+
+12
+00:00:13,568 --> 00:00:15,563
+yani konfigürasyon faktörü,
+
+13
+00:00:15,563 --> 00:00:17,763
+restorasyonda bağlanan yüzeylerin,
+
+14
+00:00:17,763 --> 00:00:20,310
+bağlanmayan serbest yüzeylere oranıdır.
+
+15
+00:00:20,662 --> 00:00:22,560
+Kompozit rezin polimerize olurken
+
+16
+00:00:22,560 --> 00:00:24,255
+büzülür ve bu büzülme
+
+17
+00:00:24,255 --> 00:00:25,803
+bir stres oluşturur.
+
+18
+00:00:25,803 --> 00:00:27,709
+Serbest yüzey fazlaysa materyal
+
+19
+00:00:27,709 --> 00:00:29,500
+akabilir ve stresin bir
+
+20
+00:00:29,500 --> 00:00:30,733
+kısmı rahatlar.
+
+21
+00:00:30,733 --> 00:00:32,661
+Ama duvarların çoğu bağlıysa,
+
+22
+00:00:32,673 --> 00:00:34,344
+bu stres doğrudan bağlanma
+
+23
+00:00:34,344 --> 00:00:35,822
+ara yüzüne yüklenir.
+
+24
+00:00:36,167 --> 00:00:37,549
+Örneğin Sınıf 1 kavitede
+
+25
+00:00:37,549 --> 00:00:38,822
+beş yüzey bağlı,
+
+26
+00:00:38,967 --> 00:00:41,022
+yalnızca bir yüzey serbest:
+
+27
+00:00:41,143 --> 00:00:42,536
+C faktör beş.
+
+28
+00:00:42,572 --> 00:00:44,245
+Sınıf 4 restorasyonda ise
+
+29
+00:00:44,245 --> 00:00:45,736
+serbest yüzey fazla olduğu
+
+30
+00:00:45,736 --> 00:00:47,694
+için C faktör düşüktür.
+
+31
+00:00:47,968 --> 00:00:49,287
+Yüksek C faktör;
+
+32
+00:00:49,335 --> 00:00:50,357
+kenar aralığı,
+
+33
+00:00:50,357 --> 00:00:51,570
+mikrosızıntı,
+
+34
+00:00:51,583 --> 00:00:53,662
+postoperatif hassasiyet ve tüberkül
+
+35
+00:00:53,662 --> 00:00:55,801
+defleksiyonu riskini artırabilir.
+
+36
+00:00:56,155 --> 00:00:57,260
+Bir çalışmada,
+
+37
+00:00:57,260 --> 00:00:58,438
+C faktörü üç olan
+
+38
+00:00:58,438 --> 00:01:00,457
+Sınıf 1 kavitelerin tabanında,
+
+39
+00:01:00,542 --> 00:01:02,296
+bağlanma dayanımı yüzde 21
+
+40
+00:01:02,296 --> 00:01:04,111
+ile 35 arasında düştü.
+
+41
+00:01:04,499 --> 00:01:06,556
+Peki klinikte ne yapabiliriz?
+
+42
+00:01:06,604 --> 00:01:08,695
+Kompoziti tek seferde değil,
+
+43
+00:01:08,780 --> 00:01:10,559
+iki milimetreyi geçmeyen oblik
+
+44
+00:01:10,559 --> 00:01:12,265
+tabakalarla yerleştirin.
+
+45
+00:01:12,285 --> 00:01:13,978
+Düşük büzülme stresli bulk-fill
+
+46
+00:01:13,978 --> 00:01:16,743
+kompozitler ve kontrollü polimerizasyon
+
+47
+00:01:16,743 --> 00:01:18,474
+da stresi azaltmaya yardımcı
+
+48
+00:01:18,474 --> 00:01:19,399
+olabilir.
+
+49
+00:01:19,707 --> 00:01:20,828
+Küçük bir oran,
+
+50
+00:01:20,828 --> 00:01:22,162
+büyük bir fark.
+
+51
+00:01:22,211 --> 00:01:24,206
+Faydalı bulduysanız kaydedin ve
+
+52
+00:01:24,206 --> 00:01:26,345
+meslektaşlarınızla paylaşın.
