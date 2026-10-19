@@ -34,6 +34,7 @@ svg text{font-family:'Caveat',cursive;font-weight:700}
 .rc{display:flex;align-items:baseline;gap:22px;padding:9px 0;border-top:2px solid rgba(28,27,25,.8);font-size:36px;font-weight:800}
 .rc .n{font-family:'Fraunces',serif;font-weight:800;font-size:44px;color:var(--red);width:32px}
 .rc span.s{font-weight:500;color:#5E594F;font-size:30px}
+#sm_list .rc{font-size:42px;padding:16px 0}#sm_list .rc .n{font-size:50px}#sm_list .rc span.s{font-size:32px}
 .btn{display:flex;align-items:center;gap:14px;padding:14px 26px;border:3px solid var(--ink);border-radius:14px;font-weight:800;font-size:36px;background:#F7F4EE}
 </style></head>
 <body>
@@ -117,22 +118,38 @@ svg text{font-family:'Caveat',cursive;font-weight:700}
 </div>
 
 <!-- OUTRO -->
-<div class="scene" id="s_outro">
-  <div class="abs h" id="o_t" style="left:80px;top:250px;font-size:84px"><span class="mask"><span>Kanal kökü kurtarır,</span></span><br><span class="mask"><span class="it" style="color:var(--red)">dolgu dişi korur.</span></span></div>
-  <div class="abs" id="o_list" style="left:80px;right:80px;top:470px">
+<div class="scene" id="s_sum">
+  <div class="abs h" id="sm_t" style="left:80px;top:270px;font-size:86px"><span class="mask"><span>Kanal kökü kurtarır,</span></span><br><span class="mask"><span class="it" style="color:var(--red)">dolgu dişi korur.</span></span></div>
+  <div class="abs" id="sm_list" style="left:80px;right:80px;top:540px">
     <div class="rc"><span class="n">1</span>Geciktirme <span class="s">· en geç 2 ay</span></div>
     <div class="rc"><span class="n">2</span>Rubber dam</div>
     <div class="rc"><span class="n">3</span>Artıkları temizle <span class="s">· ultrasonik uç</span></div>
     <div class="rc"><span class="n">4</span>Kanal ağızlarını mühürle</div>
     <div class="rc" style="border-bottom:2px solid rgba(28,27,25,.8)"><span class="n">5</span>Adeziv dolgu <span class="s">· sırt yoksa tüberkülü ört</span></div>
   </div>
-  <div class="abs" id="o_share" style="left:80px;top:850px;display:flex;gap:22px">
+  <svg class="abs" id="sm_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+</div>
+
+<!-- NEXT (teaser) -->
+<div class="scene" id="s_next">
+  <div class="chap"><b>→</b><i></i>Sıradaki video</div>
+  <div class="abs h" id="nx_t" style="left:80px;top:300px;font-size:100px"><span class="mask"><span>Eskiden <span class="it" style="color:var(--blue)">sandviç,</span></span></span><br><span class="mask"><span>bugün <span class="it" style="color:var(--red)">direkt.</span></span></span></div>
+  <svg class="abs" id="nx_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="abs h it" id="nx_q" style="left:0;right:0;top:1080px;text-align:center;font-size:150px;color:var(--red)">Neden?</div>
+</div>
+
+<!-- OUTRO (end card) -->
+<div class="scene" id="s_outro">
+  <div class="chap"><b>→</b><i></i>Sıradaki video</div>
+  <div class="abs h" id="o_t" style="left:80px;top:300px;font-size:88px"><span class="mask"><span>Cam iyonomer mi,</span></span><br><span class="mask"><span class="it" style="color:var(--red)">direkt kompozit mi?</span></span></div>
+  <div class="abs" id="o_share" style="left:80px;top:548px;display:flex;gap:18px">
+    <div class="btn" id="o_follow" style="background:#1C1B19;color:#F2EEE6;border-color:#1C1B19"><svg width="44" height="40" viewBox="0 0 44 40"><circle cx="17" cy="12" r="8" fill="none" stroke="#F2EEE6" stroke-width="4.5"/><path d="M3 37 Q3 24 17 24 Q31 24 31 37" fill="none" stroke="#F2EEE6" stroke-width="4.5" stroke-linecap="round"/><path d="M37 8 V22 M30 15 H44" stroke="#F2EEE6" stroke-width="4.5" stroke-linecap="round"/></svg>Takip et</div>
     <div class="btn"><svg width="34" height="42" viewBox="0 0 40 48"><path d="M6 4 H34 V44 L20 34 L6 44 Z" fill="none" stroke="#1C1B19" stroke-width="5" stroke-linejoin="round"/></svg>Kaydet</div>
     <div class="btn"><svg width="44" height="40" viewBox="0 0 50 46"><path d="M4 22 L46 4 L34 42 L24 28 Z M24 28 L46 4" fill="none" stroke="#1C1B19" stroke-width="5" stroke-linejoin="round"/></svg>Paylaş</div>
   </div>
-  <div class="abs" id="o_ig" style="left:80px;top:965px;display:flex;align-items:center;gap:18px;font-weight:800;font-size:56px;letter-spacing:-1px"><svg width="62" height="62" viewBox="0 0 64 64"><rect x="5" y="5" width="54" height="54" rx="16" fill="none" stroke="#1C1B19" stroke-width="5"/><circle cx="32" cy="32" r="12" fill="none" stroke="#1C1B19" stroke-width="5"/><circle cx="47" cy="17" r="3.5" fill="#1C1B19"/></svg>@muraz_alishov</div>
+  <div class="abs" id="o_ig" style="left:80px;top:668px;display:flex;align-items:center;gap:18px;font-weight:800;font-size:56px;letter-spacing:-1px"><svg width="62" height="62" viewBox="0 0 64 64"><rect x="5" y="5" width="54" height="54" rx="16" fill="none" stroke="#1C1B19" stroke-width="5"/><circle cx="32" cy="32" r="12" fill="none" stroke="#1C1B19" stroke-width="5"/><circle cx="47" cy="17" r="3.5" fill="#1C1B19"/></svg>@muraz_alishov</div>
   <svg class="abs" id="o_svg" style="left:0;top:0" width="1080" height="1920"></svg>
-  <div class="abs" id="o_refs" style="left:80px;right:80px;top:1068px;font-size:22.5px;line-height:1.36;color:#4A463F">
+  <div class="abs" id="o_refs" style="left:80px;right:80px;top:790px;font-size:22.5px;line-height:1.36;color:#4A463F">
     <div style="font-size:23px;font-weight:800;letter-spacing:3px;color:var(--ink);margin-bottom:6px">KAYNAKLAR</div>
     1. Gillen BM ve ark. J Endod 2011;37(7):895–902 · 2. Sadaf D. Ther Clin Risk Manag 2020;16:125–131 · 3. Patel SR, Youngson C, Jarad F. Br Dent J 2025;238(7):508–516 · 4. Miao C ve ark. Cochrane Database Syst Rev 2021;5:CD009858 · 5. Mannocci F ve ark. Int Endod J 2022;55(Suppl 4):1059–1084 · 6. de Araújo LP ve ark. Biomed Res Int 2022:2789073 · 7. Karahan S ve ark. J Endod 2026;52(5):696–712 · 8. Suksaphar W ve ark. J Endod 2018;44(2):233–238 · 9. Reeh ES, Messer HH, Douglas WH. J Endod 1989;15(11):512–516
   </div>
@@ -179,8 +196,10 @@ const DEFS=`<defs>
  <pattern id="hD" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="14" stroke="#1C1B19" stroke-width="1.6" stroke-opacity=".16"/></pattern>
  <pattern id="hR" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="12" stroke="#D2462B" stroke-width="3"/></pattern>
  <pattern id="hI" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="16" stroke="#1C1B19" stroke-width="2.4"/></pattern>
+ <pattern id="gD" width="14" height="14" patternUnits="userSpaceOnUse"><rect width="14" height="14" fill="#AFC2D6"/><circle cx="4" cy="4" r="2" fill="#6F8DAE"/><circle cx="11" cy="11" r="2" fill="#6F8DAE"/></pattern>
 </defs>`;
-['hk_svg','wy_svg','tm_svg','dm_svg','cl_svg','sl_svg','cp_svg','rg_svg','o_svg'].forEach(id=>$(id).insertAdjacentHTML('afterbegin',DEFS));
+const _G=document.createElementNS(NS,'svg');_G.setAttribute('width',0);_G.setAttribute('height',0);_G.style.position='absolute';document.body.insertBefore(_G,document.body.firstChild);_G.insertAdjacentHTML('afterbegin',DEFS);
+['hk_svg','wy_svg','tm_svg','dm_svg','cl_svg','sl_svg','cp_svg','rg_svg','sm_svg','nx_svg','o_svg'].forEach(id=>$(id).insertAdjacentHTML('afterbegin',DEFS));
 
 // ---------- molar (mesio-distal section), local units: 520 x 860
 const TOOTH='M75 330 C55 290 28 240 30 190 C32 120 70 50 120 40 C170 32 210 100 260 118 C310 100 350 32 400 40 C450 50 488 120 490 190 C492 240 465 290 445 330 C440 500 410 700 388 815 Q365 850 345 815 C330 690 310 560 280 478 Q260 452 240 478 C212 560 192 690 175 815 Q155 850 132 815 C110 700 82 500 75 330 Z';
@@ -309,9 +328,26 @@ const rgLl=htext(rg,300,1036,'sırtlar sağlam',54,'#2E5C86','middle',-3),rgRl=h
 const rgCov=htext(rg,795,600,'tüberkülleri ört',60,'#D2462B','middle',-4);const rgCovA=arrow(rg,870,612,880,700,'#D2462B',5,-30);
 const rgDiv=stroke(rg,roughPath([[540,640],[540,1330]],3),'#1C1B19',3);
 // ---------- OUTRO
-const os=$('o_svg');const oUnder=stroke(os,roughPath([[90,450],[420,438],[640,446]],4),'#D2462B',9);
-const oChecks=[...document.querySelectorAll('#o_list .rc')].map(it=>{it.style.position='relative';const sv=document.createElementNS(NS,'svg');sv.setAttribute('width',70);sv.setAttribute('height',60);sv.style.cssText='position:absolute;right:0;top:4px';it.appendChild(sv);return stroke(sv,roughPath([[10,32],[28,50],[62,10]],3),'#D2462B',7)});
+const sms=$('sm_svg');const smUnder=stroke(sms,roughPath([[90,470],[420,458],[660,466]],4),'#D2462B',9);
+const oChecks=[...document.querySelectorAll('#sm_list .rc')].map(it=>{it.style.position='relative';const sv=document.createElementNS(NS,'svg');sv.setAttribute('width',70);sv.setAttribute('height',60);sv.style.cssText='position:absolute;right:0;top:4px';it.appendChild(sv);return stroke(sv,roughPath([[10,32],[28,50],[62,10]],3),'#D2462B',7)});
 
+
+// ---------- NEXT (teaser): two cavity boxes, old sandwich vs direct
+const nx=$('nx_svg');
+function cbox(x,mode){const g=el('g',{},nx);const y0=560,yb=860,yo=960;
+  el('path',{d:`M${x} ${y0} L${x} ${yo} L${x+380} ${yo} L${x+380} ${y0} L${x+300} ${y0} L${x+300} ${yb} L${x+80} ${yb} L${x+80} ${y0} Z`,fill:'url(#hI)',stroke:'#1C1B19','stroke-width':5,'stroke-linejoin':'round'},g);
+  const gic=el('rect',{x:x+80,y:yb,width:220,height:0,fill:'url(#gD)'},g);
+  const comp=el('path',{d:'',fill:'#E4D9C4'},g);
+  const top=el('path',{d:`M${x+80} ${y0+6} Q${x+190} ${y0+30} ${x+300} ${y0+6}`,fill:'none',stroke:'#1C1B19','stroke-width':4,opacity:0},g);
+  return {g,gic,comp,top,x,y0,yb}}
+const NA=cbox(90,'sand'),NB=cbox(610,'direct');
+const setComp=(B,from,to)=>B.comp.setAttribute('d',to>=from?'':`M${B.x+80} ${from} L${B.x+80} ${to} Q${B.x+190} ${to+24} ${B.x+300} ${to} L${B.x+300} ${from} Z`);
+const nbAdh=stroke(nx,`M${NB.x+84} ${NB.y0+4} L${NB.x+84} ${NB.yb-4} L${NB.x+296} ${NB.yb-4} L${NB.x+296} ${NB.y0+4}`,'#2E5C86',8);
+const tag=(x,y,s,col)=>{const t=document.createElementNS(NS,'text');t.setAttribute('x',x);t.setAttribute('y',y);t.setAttribute('text-anchor','middle');t.setAttribute('font-size',22);t.setAttribute('fill',col);t.setAttribute('style',"font-family:'DM Sans';font-weight:800;letter-spacing:2px");t.textContent=s;nx.appendChild(t);return t};
+const nTagG=tag(280,825,'CAM İYONOMER','#1C1B19'),nTagA=tag(280,700,'KOMPOZİT','#1C1B19'),nTagB=tag(800,725,'KOMPOZİT','#1C1B19');
+const nxL1=htext(nx,280,1036,'eskiden',60,'#1C1B19','middle',-3),nxL2=htext(nx,800,1036,'bugün',60,'#1C1B19','middle',-3);
+const nxChk=stroke(nx,roughPath([[905,520],[935,552],[995,478]],3),'#2E5C86',11);
+const nxNote=htext(nx,540,1318,'bir sonraki videoda →',60,'#2E5C86','middle',-2);
 // ---------- refs per scene/line
 const REFS={why:[['Gillen ve ark., J Endod 2011 (meta-analiz)']],
   time:[['Sadaf, Ther Clin Risk Manag 2020 (4012 diş, 8 yıl)','Patel ve ark., Br Dent J 2025']],
@@ -417,11 +453,27 @@ function render(t){
    fadeUp($('rg_R'),P(l,U('sertliğ')-0.2,0.4),16);const bg=$('rg_big');bg.style.transformOrigin='0 50%';bg.style.transform=`scale(${0.7+0.3*eb(P(l,U('yüzde'),0.5))})`;bg.style.opacity=P(l,U('yüzde'),0.15);
    const tc=U('zaman')-0.15;const cv=eio(P(l,tc,0.8));cover.setAttribute('opacity',cv);coverH.setAttribute('opacity',0.18*cv);modR.setAttribute('opacity',Math.min(+modR.getAttribute('opacity'),1-cv*0.85));
    reveal(rgCov,P(l,tc,0.5));drawArrow(rgCovA,P(l,tc+0.2,0.5));}
+  // SUM
+  {const l=S('sum');const T=p=>WF('sum',0,p);
+   maskWords($('sm_t'),[0,T('dişi')-0.15],l);draw(smUnder,eio(P(l,T('korur'),0.5)));
+   document.querySelectorAll('#sm_list .rc').forEach((it,i)=>{const p=eo(P(l,0.35+i*0.2,0.45));it.style.opacity=p;it.style.transform=`translateX(${(1-p)*-50}px)`;draw(oChecks[i],eio(P(l,0.7+i*0.2,0.35)))});}
+  // NEXT
+  {const l=S('next');const T=p=>WF('next',0,p);
+   maskWords($('nx_t'),[0,T('şimdi')-0.15],l);
+   const a=eo(P(l,T('cam')-0.35,0.5));NA.g.style.opacity=a;NA.g.style.transform=`translateY(${(1-a)*40}px)`;
+   const gh=90*eio(P(l,T('cam'),0.6));NA.gic.setAttribute('y',NA.yb-gh);NA.gic.setAttribute('height',gh);nTagG.style.opacity=P(l,T('cam')+0.3,0.3);
+   const ca=eio(P(l,T('üzerine'),0.7));setComp(NA,NA.yb-90,lerp(NA.yb-90,NA.y0+6,ca));NA.top.setAttribute('opacity',P(l,T('üzerine')+0.5,0.3));nTagA.style.opacity=P(l,T('üzerine')+0.4,0.3);
+   reveal(nxL1,P(l,T('cam')-0.1,0.5));
+   const b=eo(P(l,T('şimdi')-0.25,0.5));NB.g.style.opacity=b;NB.g.style.transform=`translateY(${(1-b)*40}px)`;nbAdh.p.style.opacity=b;
+   draw(nbAdh,eio(P(l,T('direkt')-0.1,0.6)));const cb=eio(P(l,T('direkt')+0.3,0.7));setComp(NB,NB.yb,lerp(NB.yb,NB.y0+6,cb));NB.top.setAttribute('opacity',P(l,T('direkt')+0.9,0.3));nTagB.style.opacity=P(l,T('direkt')+0.8,0.3);
+   reveal(nxL2,P(l,T('şimdi'),0.5));draw(nxChk,eio(P(l,T('avantaj'),0.5)));
+   const q=eb(P(l,T('sebebi')-0.1,0.6));$('nx_q').style.opacity=P(l,T('sebebi')-0.1,0.15);$('nx_q').style.transform=`scale(${0.6+0.4*q}) rotate(${(1-q)*-6}deg)`;
+   reveal(nxNote,P(l,T('sonraki'),0.7));}
   // OUTRO
   {const l=S('outro');const T=p=>WF('outro',0,p);
-   maskWords($('o_t'),[0,T('dişi')-0.15],l);draw(oUnder,eio(P(l,T('korur'),0.5)));
-   document.querySelectorAll('#o_list .rc').forEach((it,i)=>{const p=eo(P(l,0.5+i*0.22,0.45));it.style.opacity=p;it.style.transform=`translateX(${(1-p)*-50}px)`;draw(oChecks[i],eio(P(l,0.85+i*0.22,0.35)))});
-   fadeUp($('o_share'),P(l,T('kaydet')-0.2,0.5),24);fadeUp($('o_ig'),P(l,T('paylaş')-0.2,0.5),24);fadeUp($('o_refs'),P(l,T('paylaş')+0.1,0.6),20);}
+   maskWords($('o_t'),[0,0.15],l);
+   fadeUp($('o_share'),P(l,T('takip')-0.25,0.5),24);const pf=Math.sin(clamp((l-T('takip'))/0.7)*Math.PI);$('o_follow').style.transform=`scale(${1+0.06*pf})`;
+   fadeUp($('o_ig'),P(l,T('kaydet')-0.1,0.5),24);fadeUp($('o_refs'),P(l,T('paylaş'),0.6),20);}
   setRefs(t);setSub(t);
 }
 window.render=render;render(0);

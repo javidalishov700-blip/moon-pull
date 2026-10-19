@@ -155,5 +155,33 @@ Kanal tedavisi kökü kurtarır;
 dişi ise doğru dolgu korur.
 
 40
-00:00:54,658 --> 00:00:57,240
-Kaydet ve bir meslektaşınla paylaş.
+00:00:54,755 --> 00:00:56,097
+Eskiden cam iyonomer üzerine
+
+41
+00:00:56,117 --> 00:00:57,232
+dolgu yapılıyordu;
+
+42
+00:00:57,485 --> 00:00:58,541
+ama şimdi direkt dolgu
+
+43
+00:00:58,561 --> 00:01:00,148
+yapılması daha avantajlı.
+
+44
+00:01:00,190 --> 00:01:01,326
+Bunun sebebi ise bir
+
+45
+00:01:01,346 --> 00:01:03,034
+sonraki videomuzun konusu.
+
+46
+00:01:03,154 --> 00:01:04,677
+Kaçırmamak için takip et;
+
+47
+00:01:04,779 --> 00:01:07,229
+kaydet ve bir meslektaşınla paylaş.

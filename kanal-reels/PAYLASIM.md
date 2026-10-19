@@ -13,6 +13,8 @@ Kanal ne kadar iyi olursa olsun, üstündeki dolgu iyi değilse başarı düşü
    • Marjinal sırtlar sağlamsa kompozit, kurona yakın sağkalım gösteriyor
    • İki sırt da kayıpsa dişin sertliği %63 düşüyor → tüberkülleri de ört
 
+Eskiden cam iyonomer üzerine dolgu yapılıyordu; şimdi direkt dolgu daha avantajlı. Neden? Bir sonraki videonun konusu. Kaçırmamak için takip et! 🔔
+
 📌 Kaydet, bir meslektaşınla paylaş. Sen kanal ağızlarını neyle kapatıyorsun? 👇
 
 Kaynaklar: Gillen ve ark. 2011 · Sadaf 2020 · Patel ve ark. 2025 · Miao ve ark. 2021 (Cochrane) · Mannocci ve ark. 2022 · de Araújo ve ark. 2022 · Karahan ve ark. 2026 · Suksaphar ve ark. 2018 · Reeh ve ark. 1989
@@ -21,5 +23,6 @@ Kaynaklar: Gillen ve ark. 2011 · Sadaf 2020 · Patel ve ark. 2025 · Miao ve ar
 
 ## İpuçları
 - Kapak: `kanal_dolgu_kapak.jpg`.
+- Video, sıradaki "Cam iyonomer mi, direkt kompozit mi?" videosunun duyurusuyla bitiyor; o videoyu bundan sonra paylaşın.
 - İlk yorumu siz yazıp sabitleyin: "Kanal ağızlarını neyle kapatıyorsunuz: cam iyonomer, akışkan kompozit, biyoseramik?"
 - Altyazılar videoya gömülü; platformun otomatik altyazısını kapatabilirsiniz.

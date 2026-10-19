@@ -1,0 +1,347 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="fonts/space-grotesk/500.css"><link rel="stylesheet" href="fonts/space-grotesk/700.css">
+<link rel="stylesheet" href="fonts/inter/500.css"><link rel="stylesheet" href="fonts/inter/600.css"><link rel="stylesheet" href="fonts/inter/700.css"><link rel="stylesheet" href="fonts/inter/800.css">
+<style>
+:root{--bg:#EDF1F5;--ink:#14213D;--sub:#5A6B80;--line:#D3DCE6;--gic:#8DA9C4;--gicd:#5F7FA6;--comp:#EFD3A0;--den:#F6EEE1;--amber:#F4A259;--red:#D1495B;--green:#2A9D8F;--adh:#2A6F97}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif}
+#stage{position:absolute;inset:0;overflow:hidden}
+.scene{position:absolute;inset:0;background:var(--bg);overflow:hidden;display:none}
+.abs{position:absolute}
+.lbl{position:absolute;left:80px;top:248px;display:flex;align-items:center;gap:14px;font-weight:700;font-size:26px;letter-spacing:4px;text-transform:uppercase}
+.lbl:before{content:'';width:18px;height:18px;background:var(--amber);border-radius:4px}
+.ttl{position:absolute;left:80px;top:298px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:92px;line-height:1.0;letter-spacing:-2.5px}
+.ttl .ln{display:block;overflow:hidden;padding-bottom:6px}
+.ttl .ln>span{display:inline-block}
+.card{position:absolute;background:#fff;border-radius:28px;border:2px solid var(--line)}
+.chip{display:inline-flex;align-items:center;justify-content:center;padding:8px 20px;border-radius:999px;font-weight:800;font-size:24px;letter-spacing:3px}
+.row{position:absolute;left:80px;right:80px;height:200px;background:#fff;border-radius:28px;border:2px solid var(--line);display:flex;align-items:center;gap:34px;padding:0 40px}
+.row svg{flex:none}
+.row .t1{font-weight:800;font-size:44px;letter-spacing:-0.5px}
+.row .t2{font-weight:500;font-size:30px;color:var(--sub);margin-top:6px}
+.num{font-family:'Space Grotesk',sans-serif;font-weight:700}
+#handle{position:absolute;left:0;right:0;top:150px;display:flex;justify-content:center;align-items:center;gap:12px;font-weight:700;font-size:30px;color:var(--ink);opacity:.85;z-index:58}
+#seg{position:absolute;left:80px;right:80px;top:205px;height:6px;display:flex;gap:8px;z-index:58}
+#seg i{flex:1;background:#C9D3DD;border-radius:3px;overflow:hidden;position:relative}
+#seg i b{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--ink)}
+#subs{position:absolute;left:60px;right:60px;top:1392px;text-align:center;z-index:50}
+#subs .ln{display:inline-block;background:var(--ink);color:#fff;font-weight:800;font-size:52px;line-height:1.2;padding:10px 26px 14px;border-radius:18px}
+#subs .w{display:inline-block;margin:0 6px}
+#refs{position:absolute;left:80px;right:150px;top:1510px;font-weight:500;font-size:22px;line-height:1.4;color:var(--sub);z-index:55;padding-left:26px}
+#refs:before{content:'';position:absolute;left:0;top:9px;width:12px;height:12px;background:var(--amber);border-radius:3px}
+#refs b{font-weight:800;color:var(--ink)}
+svg text{font-family:'Inter',sans-serif}
+.btn{display:flex;align-items:center;gap:14px;padding:16px 28px;border-radius:18px;background:#fff;border:2px solid var(--line);font-weight:800;font-size:36px}
+</style></head>
+<body>
+<div id="stage">
+
+<!-- HOOK -->
+<div class="scene" id="s_hook">
+  <div class="ttl" id="hk_t" style="top:262px;font-size:88px"><span class="ln"><span>Cam iyonomer mi,</span></span><span class="ln"><span>direkt <span style="color:var(--adh)">kompozit</span> mi?</span></span></div>
+  <div class="card" id="hk_cL" style="left:80px;top:500px;width:440px;height:660px"><div class="chip" style="position:absolute;left:30px;top:28px;background:var(--gic);color:#fff">ESKİDEN</div><div class="abs" style="left:30px;right:30px;bottom:34px;font-weight:800;font-size:32px;line-height:1.2">Cam iyonomer<br><span style="color:var(--sub);font-weight:600">+ kompozit</span></div></div>
+  <div class="card" id="hk_cR" style="left:560px;top:500px;width:440px;height:660px"><div class="chip" style="position:absolute;left:30px;top:28px;background:var(--amber);color:var(--ink)">BUGÜN</div><div class="abs" style="left:30px;right:30px;bottom:34px;font-weight:800;font-size:32px;line-height:1.2">Direkt kompozit<br><span style="color:var(--sub);font-weight:600">adeziv ile</span></div></div>
+  <svg class="abs" id="hk_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="abs" id="hk_q" style="left:0;right:0;top:1206px;text-align:center;font-family:'Space Grotesk';font-weight:700;font-size:104px;letter-spacing:-3px">Neden değişti<span style="color:var(--amber)">?</span></div>
+</div>
+
+<!-- THEN -->
+<div class="scene" id="s_then">
+  <div class="lbl">Eskiden neden?</div>
+  <div class="ttl" id="th_t"><span class="ln"><span>3 sebep vardı.</span></span></div>
+  <div class="row" id="th_r1" style="top:470px"><svg id="th_i1" width="130" height="130"></svg><div><div class="t1">Zayıf adezivler</div><div class="t2">İlk adezivler dentine güvenilir bağlanamıyordu</div></div></div>
+  <div class="row" id="th_r2" style="top:700px"><svg id="th_i2" width="130" height="130"></svg><div><div class="t1">Kimyasal bağlanma + flor</div><div class="t2">Cam iyonomer dentine iyon değişimiyle bağlanır</div></div></div>
+  <div class="row" id="th_r3" style="top:930px"><svg id="th_i3" width="130" height="130"></svg><div><div class="t1">Pulpa koruma</div><div class="t2">Vital dişte astar olarak kullanılıyordu</div></div></div>
+  <div class="abs" id="th_note" style="left:80px;right:80px;top:1170px;font-weight:600;font-size:30px;color:var(--sub)">Bu yüzden: <b style="color:var(--ink)">CİS taban + üstüne kompozit</b> = sandviç tekniği</div>
+</div>
+
+<!-- NOW -->
+<div class="scene" id="s_now">
+  <div class="lbl">Bugün</div>
+  <div class="ttl" id="nw_t"><span class="ln"><span>Zayıf halka:</span></span><span class="ln"><span style="color:var(--gicd)">cam iyonomer.</span></span></div>
+  <svg class="abs" id="nw_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="abs" id="nw_stat" style="left:80px;right:80px;top:1196px;display:flex;gap:18px">
+    <div class="card" style="position:relative;flex:1;padding:22px 28px"><div style="font-weight:700;font-size:24px;letter-spacing:2px;color:var(--sub)">CİS → DENTİN</div><div class="num" style="font-size:58px;margin-top:2px">1–4 <span style="font-size:34px">MPa</span></div></div>
+    <div class="card" style="position:relative;flex:1.25;padding:22px 28px"><div style="font-weight:700;font-size:24px;letter-spacing:2px;color:var(--sub)">KOPMA</div><div style="font-weight:800;font-size:38px;margin-top:10px">çoğu zaman <span style="color:var(--red)">CİS'in içinde</span></div></div>
+  </div>
+</div>
+
+<!-- NINE -->
+<div class="scene" id="s_nine">
+  <div class="lbl">Klinik · 9 yıl</div>
+  <div class="ttl" id="n9_t"><span class="ln"><span>Sağlam kalan</span></span><span class="ln"><span>restorasyon</span></span></div>
+  <svg class="abs" id="n9_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="abs num" id="n9_v1" style="left:110px;width:380px;top:790px;text-align:center;font-size:84px;letter-spacing:-2px">%0</div>
+  <div class="abs num" id="n9_v2" style="left:590px;width:380px;top:790px;text-align:center;font-size:84px;letter-spacing:-2px">%0</div>
+  <div class="abs" id="n9_l1" style="left:110px;width:380px;top:1110px;text-align:center;font-weight:800;font-size:36px">Astarsız kompozit</div>
+  <div class="abs" id="n9_l2" style="left:590px;width:380px;top:1110px;text-align:center;font-weight:800;font-size:36px">CİS astarlı</div>
+  <div class="abs" id="n9_n" style="left:80px;right:80px;top:1196px;text-align:center;font-weight:600;font-size:28px;color:var(--sub)">Genel muayenehane · 458 Sınıf II restorasyon · retrospektif</div>
+</div>
+
+<!-- FIFTEEN -->
+<div class="scene" id="s_fifteen">
+  <div class="lbl">Klinik · 15 yıl</div>
+  <div class="ttl" id="f_t"><span class="ln"><span>Yıllık</span></span><span class="ln"><span>başarısızlık</span></span></div>
+  <div class="abs" id="f_rows" style="left:80px;right:80px;top:540px;height:420px">
+    <div class="abs" style="left:0;top:0;font-weight:800;font-size:36px">Direkt kompozit <span style="color:var(--sub);font-weight:600;font-size:28px">· total-etch</span></div>
+    <div class="abs" id="f_b1" style="left:0;top:58px;height:84px;width:0;background:var(--adh);border-radius:0 14px 14px 0"></div>
+    <div class="abs num" id="f_v1" style="top:62px;font-size:66px;color:var(--adh)">%2,9</div>
+    <div class="abs" style="left:0;top:200px;font-weight:800;font-size:36px">Açık sandviç <span style="color:var(--sub);font-weight:600;font-size:28px">· CİS + kompozit</span></div>
+    <div class="abs" id="f_b2" style="left:0;top:258px;height:84px;width:0;background:var(--red);border-radius:0 14px 14px 0"></div>
+    <div class="abs num" id="f_v2" style="top:262px;font-size:66px;color:var(--red)">%9,7</div>
+  </div>
+  <div class="abs num" id="f_x3" style="left:780px;top:440px;width:200px;height:200px;border-radius:50%;background:var(--amber);display:flex;align-items:center;justify-content:center;font-size:96px;letter-spacing:-3px">×3</div>
+  <div class="card" id="f_car" style="left:80px;right:80px;top:1010px;height:300px;display:flex;align-items:center;gap:40px;padding:0 44px">
+    <div class="num" style="font-size:150px;color:var(--ink);line-height:1">=</div>
+    <div><div style="font-weight:800;font-size:44px">Sekonder çürük</div><div style="font-weight:600;font-size:32px;color:var(--sub);margin-top:8px">iki grupta eşit dağıldı<br><span style="color:var(--red)">flor avantajı görülmedi</span></div></div>
+  </div>
+</div>
+
+<!-- ETT -->
+<div class="scene" id="s_ett">
+  <div class="lbl">Kanal tedavili diş</div>
+  <div class="ttl" id="e_t" style="font-size:86px"><span class="ln"><span>CİS tabanı</span></span><span class="ln"><span style="color:var(--red)">dişi zayıflattı.</span></span></div>
+  <svg class="abs" id="e_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="abs" id="e_pulp" style="left:80px;right:80px;top:1268px;display:flex;justify-content:center"><div style="display:flex;align-items:center;gap:16px;background:var(--ink);color:#fff;border-radius:999px;padding:14px 30px;font-weight:800;font-size:34px">Pulpa yok <span style="color:var(--amber)">→</span> koruma gerekçesi yok</div></div>
+</div>
+
+<!-- STILL -->
+<div class="scene" id="s_still">
+  <div class="lbl">Cam iyonomer bitmedi</div>
+  <div class="ttl" id="st_t"><span class="ln"><span>Kanal ağzında</span></span><span class="ln"><span style="color:var(--gicd)">ince bariyer.</span></span></div>
+  <svg class="abs" id="st_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="card" id="st_eq" style="left:560px;top:740px;width:440px;height:370px;padding:32px 36px">
+    <div style="font-weight:700;font-size:24px;letter-spacing:2px;color:var(--sub)">MİKROSIZINTI</div>
+    <div class="num" style="font-size:66px;line-height:1.02;margin-top:12px;letter-spacing:-2px"><span style="color:var(--gicd)">CİS</span><br>≈ <span style="color:#B8862E">kompozit</span></div>
+    <div style="font-weight:600;font-size:28px;color:var(--sub);margin-top:16px">bariyer olarak benzer mühür<br>(in vitro)</div>
+  </div>
+</div>
+
+<!-- RULES -->
+<div class="scene" id="s_rules">
+  <div class="lbl">Direkt kompozitin şartları</div>
+  <div class="ttl" id="r_t"><span class="ln"><span>3 şart.</span></span></div>
+  <div class="row" id="r_r1" style="top:470px"><svg id="r_i1" width="130" height="130"></svg><div><div class="t1">Rubber dam</div><div class="t2">Nem kontrolü olmadan adeziv bağlantı olmaz</div></div></div>
+  <div class="row" id="r_r2" style="top:700px"><svg id="r_i2" width="130" height="130"></svg><div><div class="t1">İnce ilk tabaka</div><div class="t2">Derin tabanda ışık zayıflar; bulk-fill tercih et</div></div></div>
+  <div class="row" id="r_r3" style="top:930px"><svg id="r_i3" width="130" height="130"></svg><div><div class="t1">Hipoklorit → antioksidan</div><div class="t2">Sodyum askorbat bağlanmayı artırıyor (in vitro)</div></div></div>
+</div>
+
+<!-- OUTRO -->
+<div class="scene" id="s_outro">
+  <div class="lbl">Kısacası</div>
+  <div class="card" id="o_v" style="left:80px;right:80px;top:300px;height:300px;padding:30px 40px">
+    <div id="o_v1" style="display:flex;align-items:center;gap:22px;font-weight:800;font-size:46px;height:110px;border-bottom:2px solid var(--line)"><svg width="62" height="62" viewBox="0 0 62 62"><circle cx="31" cy="31" r="29" fill="var(--red)"/><path d="M20 20 L42 42 M42 20 L20 42" stroke="#fff" stroke-width="7" stroke-linecap="round"/></svg><span style="position:relative">Kalın CİS tabanı<i id="o_strike" style="position:absolute;left:-4px;top:52%;height:5px;width:0;background:var(--red)"></i></span></div>
+    <div id="o_v2" style="display:flex;align-items:center;gap:22px;font-weight:800;font-size:46px;height:120px"><svg width="62" height="62" viewBox="0 0 62 62"><circle cx="31" cy="31" r="29" fill="var(--green)"/><path d="M18 32 L27 41 L45 22" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Adeziv + kompozit</div>
+  </div>
+  <div class="abs" id="o_share" style="left:80px;top:650px;display:flex;gap:22px">
+    <div class="btn"><svg width="34" height="42" viewBox="0 0 40 48"><path d="M6 4 H34 V44 L20 34 L6 44 Z" fill="none" stroke="#14213D" stroke-width="5" stroke-linejoin="round"/></svg>Kaydet</div>
+    <div class="btn"><svg width="44" height="40" viewBox="0 0 50 46"><path d="M4 22 L46 4 L34 42 L24 28 Z M24 28 L46 4" fill="none" stroke="#14213D" stroke-width="5" stroke-linejoin="round"/></svg>Paylaş</div>
+  </div>
+  <div class="abs" id="o_ig" style="left:80px;top:772px;display:flex;align-items:center;gap:18px;font-weight:800;font-size:56px;letter-spacing:-1px"><svg width="62" height="62" viewBox="0 0 64 64"><rect x="5" y="5" width="54" height="54" rx="16" fill="none" stroke="#14213D" stroke-width="5"/><circle cx="32" cy="32" r="12" fill="none" stroke="#14213D" stroke-width="5"/><circle cx="47" cy="17" r="3.5" fill="#14213D"/></svg>@muraz_alishov</div>
+  <div class="abs" id="o_refs" style="left:80px;right:80px;top:880px;font-weight:500;font-size:22px;line-height:1.38;color:#4A5568">
+    <div style="font-weight:800;font-size:23px;letter-spacing:3px;color:var(--ink);margin-bottom:6px">KAYNAKLAR</div>
+    1. Van Meerbeek B ve ark. J Adhes Dent 2020;22(1):7–34 · 2. Sidhu SK, Nicholson JW. J Funct Biomater 2016;7(3):16 · 3. Schenkel AB, Veitz-Keenan A. Cochrane Database Syst Rev 2019;3:CD010526 · 4. Opdam NJ ve ark. J Adhes Dent 2007;9(5):469–475 · 5. Opdam NJM ve ark. Dent Mater 2023;39(9):800–806 · 6. Thongbai-On N ve ark. J Investig Clin Dent 2019;10(4):e12435 · 7. de Araújo LP ve ark. Biomed Res Int 2022:2789073 · 8. Patel SR, Youngson C, Jarad F. Br Dent J 2025;238(7):508–516 · 9. Miao C ve ark. Cochrane Database Syst Rev 2021;5:CD009858 · 10. Mannocci F ve ark. Int Endod J 2022;55(Suppl 4):1059–1084 · 11. Grazioli G ve ark. Antioxidants 2024;13(9):1116
+  </div>
+</div>
+
+<div id="handle"><svg width="32" height="32" viewBox="0 0 64 64"><rect x="5" y="5" width="54" height="54" rx="16" fill="none" stroke="#14213D" stroke-width="6"/><circle cx="32" cy="32" r="12" fill="none" stroke="#14213D" stroke-width="6"/><circle cx="47" cy="17" r="4" fill="#14213D"/></svg>@muraz_alishov</div>
+<div id="seg"></div>
+<div id="subs"></div>
+<div id="refs"></div>
+</div>
+
+<script>
+const TL=__TIMELINE__, TOTAL=__TOTAL__;
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)), P=(t,a,d)=>clamp((t-a)/d);
+const eo=t=>1-Math.pow(1-t,3), eio=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2, eb=t=>{const c1=1.5,c3=c1+1;return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2)};
+const $=id=>document.getElementById(id), lerp=(a,b,t)=>a+(b-a)*t, NS='http://www.w3.org/2000/svg';
+const C={ink:'#14213D',sub:'#5A6B80',line:'#D3DCE6',gic:'#8DA9C4',gicd:'#5F7FA6',comp:'#EFD3A0',den:'#F6EEE1',amber:'#F4A259',red:'#D1495B',green:'#2A9D8F',adh:'#2A6F97',gp:'#D9824B',pulp:'#F1B5A6'};
+const order=[],SC={};
+TL.forEach(c=>{if(!SC[c.scene]){SC[c.scene]={start:c.start,lines:[]};order.push(c.scene)}SC[c.scene].end=c.end;SC[c.scene].lines.push(c)});
+order.forEach((k,i)=>{const s=SC[k];s.a=i===0?0:s.start-0.3;s.b=i<order.length-1?SC[order[i+1]].start-0.3:TOTAL;s.z=i});
+const nrm=s=>s.toLocaleLowerCase('tr').replace(/[^a-zçğıöşü0-9%]/g,'');
+const WF=(k,li,pre)=>{const ws=SC[k].lines[Math.min(li,SC[k].lines.length-1)].words;const w=ws.find(x=>nrm(x.w).startsWith(pre))||ws[0];return w.s-SC[k].start};
+function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e}
+function txt(svg,x,y,s,size,col,anchor='middle',weight=700){const t=el('text',{x,y,'font-size':size,fill:col,'text-anchor':anchor,'font-weight':weight},svg);t.textContent=s;return t}
+const rise=(e,p,d=36)=>{e.style.opacity=clamp(p*1.4);e.style.transform=`translateY(${(1-eo(p))*d}px)`};
+const popS=(e,p)=>{e.style.transformBox='fill-box';e.style.transformOrigin='center';e.style.opacity=clamp(p*3);e.style.transform=`scale(${0.5+0.5*eb(p)})`};
+const lines=(root,times,t)=>root.querySelectorAll('.ln>span').forEach((m,i)=>{const p=eo(P(t,times[Math.min(i,times.length-1)],0.5));m.style.transform=`translateY(${(1-p)*105}%)`});
+function dash(p,len,pr){p.style.strokeDasharray=len;p.style.strokeDashoffset=len*(1-pr)}
+
+// defs: GIC dotted texture, void dots
+const DEFS=`<defs><pattern id="dots" width="16" height="16" patternUnits="userSpaceOnUse"><rect width="16" height="16" fill="#8DA9C4"/><circle cx="4" cy="4" r="2.1" fill="#5F7FA6"/><circle cx="12" cy="12" r="2.1" fill="#5F7FA6"/></pattern>
+<pattern id="dotsS" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#8DA9C4"/><circle cx="2.5" cy="2.5" r="1.4" fill="#5F7FA6"/><circle cx="7.5" cy="7.5" r="1.4" fill="#5F7FA6"/></pattern></defs>`;
+const _G=document.createElementNS(NS,'svg');_G.setAttribute('width',0);_G.setAttribute('height',0);_G.style.position='absolute';document.body.insertBefore(_G,document.body.firstChild);_G.insertAdjacentHTML('afterbegin',DEFS);
+['hk_svg','nw_svg','n9_svg','e_svg','st_svg'].forEach(id=>$(id).insertAdjacentHTML('afterbegin',DEFS));
+
+// ---------- flat cavity block (local 360 x 430)
+const BLK='M22 430 L8 150 Q4 70 50 38 Q95 8 140 40 L220 40 Q265 8 310 38 Q356 70 352 150 L338 430';
+const ENM='M8 150 Q4 70 50 38 Q95 8 140 40 L220 40 Q265 8 310 38 Q356 70 352 150 L326 156 Q330 88 296 66 Q262 44 228 68 L132 68 Q98 44 64 66 Q30 88 34 156 Z';
+const CAVB='M120 40 L240 40 L250 236 Q250 266 220 266 L140 266 Q110 266 110 236 Z';
+let uid=0;
+function block(svg,x,y,s,mode){const g=el('g',{transform:`translate(${x} ${y}) scale(${s})`},svg);const id='b'+(uid++);
+  const cp=el('clipPath',{id:id+'c'},g);el('path',{d:CAVB},cp);
+  el('path',{d:BLK+' Z',fill:C.den},g);el('path',{d:ENM,fill:'#FFFFFF'},g);
+  el('path',{d:'M140 340 Q180 312 220 340 L232 430 L128 430 Z',fill:C.pulp},g);
+  const fill=el('g',{'clip-path':`url(#${id}c)`},g);
+  const comp=el('rect',{x:100,y:30,width:160,height:mode==='sand'?156:240,fill:C.comp},fill);
+  const gic=el('rect',{x:100,y:186,width:160,height:mode==='sand'?90:0,fill:'url(#dots)'},fill);
+  el('path',{d:'M120 40 Q180 54 240 40',fill:'none',stroke:C.ink,'stroke-width':5/s},g);
+  const adh=el('path',{d:'M121 44 L111 236 Q111 264 140 264 L220 264 Q249 264 249 236 L239 44',fill:'none',stroke:C.adh,'stroke-width':8/s,'stroke-linejoin':'round',opacity:mode==='sand'?0:1},g);
+  el('path',{d:CAVB,fill:'none',stroke:C.ink,'stroke-width':4/s},g);
+  el('path',{d:BLK,fill:'none',stroke:C.ink,'stroke-width':5/s,'stroke-linejoin':'round'},g);
+  el('path',{d:'M22 430 L338 430',fill:'none',stroke:C.ink,'stroke-width':3/s,'stroke-dasharray':`${10/s} ${8/s}`},g);
+  return {g,comp,gic,adh}}
+
+// ---------- flat molar (from the root-filled tooth video geometry), local 520 x 860
+const TOOTH='M75 330 C55 290 28 240 30 190 C32 120 70 50 120 40 C170 32 210 100 260 118 C310 100 350 32 400 40 C450 50 488 120 490 190 C492 240 465 290 445 330 C440 500 410 700 388 815 Q365 850 345 815 C330 690 310 560 280 478 Q260 452 240 478 C212 560 192 690 175 815 Q155 850 132 815 C110 700 82 500 75 330 Z';
+const ENAMEL='M75 330 C55 290 28 240 30 190 C32 120 70 50 120 40 C170 32 210 100 260 118 C310 100 350 32 400 40 C450 50 488 120 490 190 C492 240 465 290 445 330 L440 300 C458 250 465 200 458 165 C442 110 420 82 395 80 C355 78 315 130 260 148 C205 130 165 78 125 80 C100 82 78 110 62 165 C55 200 62 250 80 300 Z';
+const CAN=['M184 372 C172 520 154 680 141 806 L151 807 C166 680 186 520 202 372 Z','M318 372 C336 520 356 680 369 807 L379 806 C366 680 348 520 336 372 Z'];
+const COMP='M182 63 C205 90 235 112 260 118 C285 112 315 90 338 63 L348 300 L340 372 L180 372 L172 300 Z';
+function molar(svg,x,y,s,{base=0,bar=0}={}){const g=el('g',{transform:`translate(${x} ${y}) scale(${s})`},svg);const id='m'+(uid++);
+  const cc=el('clipPath',{id:id+'n'},g);CAN.forEach(d=>el('path',{d},cc));const ck=el('clipPath',{id:id+'k'},g);el('path',{d:COMP},ck);
+  el('path',{d:TOOTH,fill:C.den},g);el('path',{d:ENAMEL,fill:'#FFFFFF'},g);
+  const cg=el('g',{'clip-path':`url(#${id}n)`},g);el('rect',{x:0,y:372+bar,width:520,height:470,fill:C.gp},cg);const barR=el('rect',{x:0,y:372,width:520,height:bar,fill:'url(#dotsS)'},cg);
+  CAN.forEach(d=>el('path',{d,fill:'none',stroke:C.ink,'stroke-width':2.4/s},g));
+  const fg=el('g',{'clip-path':`url(#${id}k)`},g);el('rect',{x:150,y:40,width:220,height:340,fill:C.comp},fg);const baseR=el('rect',{x:150,y:372-base,width:220,height:base,fill:'url(#dots)'},fg);
+  el('path',{d:'M182 63 L172 300 L180 372 L340 372 L348 300 L338 63',fill:'none',stroke:C.ink,'stroke-width':3.6/s,'stroke-linejoin':'round'},g);
+  el('path',{d:'M182 63 C205 90 235 112 260 118 C285 112 315 90 338 63',fill:'none',stroke:C.ink,'stroke-width':4/s},g);
+  el('path',{d:TOOTH,fill:'none',stroke:C.ink,'stroke-width':4.5/s,'stroke-linejoin':'round'},g);
+  return {g,baseR,barR,P:(lx,ly)=>[x+lx*s,y+ly*s]}}
+
+// ---------- icons (flat line, 130x130 viewport)
+function icon(svg,kind){svg.setAttribute('viewBox','0 0 130 130');el('circle',{cx:65,cy:65,r:62,fill:'#EEF2F6'},svg);const st={fill:'none',stroke:C.ink,'stroke-width':7,'stroke-linecap':'round','stroke-linejoin':'round'};
+  if(kind==='link'){el('rect',{x:22,y:50,width:46,height:28,rx:14,...st,transform:'rotate(-35 45 64)'},svg);el('rect',{x:64,y:50,width:46,height:28,rx:14,...st,transform:'rotate(-35 87 64)'},svg);['M60 40 L56 30','M70 42 L76 33','M58 92 L52 100'].forEach(d=>el('path',{d,...st,stroke:C.red,'stroke-width':6},svg))}
+  if(kind==='ion'){el('circle',{cx:65,cy:65,r:34,...st},svg);const t=txt(svg,62,78,'F',38,C.ink);t.setAttribute('font-family','Space Grotesk');const m=txt(svg,84,58,'−',26,C.amber);}
+  if(kind==='shield'){el('path',{d:'M65 22 L100 36 L100 66 Q100 94 65 110 Q30 94 30 66 L30 36 Z',...st},svg);el('path',{d:'M50 66 L61 77 L82 55',...st,stroke:C.green},svg)}
+  if(kind==='dam'){el('rect',{x:24,y:24,width:82,height:82,rx:12,...st},svg);el('path',{d:'M50 76 Q50 50 65 50 Q80 50 80 76',...st,stroke:C.adh},svg);el('path',{d:'M44 80 L86 80',...st},svg)}
+  if(kind==='layer'){el('path',{d:'M30 92 L100 92',...st,stroke:C.amber,'stroke-width':12},svg);el('path',{d:'M30 74 L100 74 M30 58 L100 58',...st,'stroke-opacity':.35},svg);['M50 22 L56 40','M65 18 L65 38','M80 22 L74 40'].forEach(d=>el('path',{d,...st,stroke:C.amber,'stroke-width':6},svg))}
+  if(kind==='flask'){el('path',{d:'M54 24 L76 24 M58 24 L58 54 L34 98 Q32 106 40 106 L90 106 Q98 106 96 98 L72 54 L72 24',...st},svg);el('path',{d:'M44 86 L86 86',...st,stroke:C.green,'stroke-width':6},svg)}}
+[['th_i1','link'],['th_i2','ion'],['th_i3','shield'],['r_i1','dam'],['r_i2','layer'],['r_i3','flask']].forEach(([id,k])=>icon($(id),k));
+
+// ---------- HOOK
+const hk=$('hk_svg');const BL=block(hk,138,640,0.9,'sand'),BR=block(hk,618,640,0.9,'direct');
+const vs=el('g',{},hk);el('circle',{cx:540,cy:830,r:52,fill:C.ink},vs);const vt=txt(vs,540,846,'VS',40,'#fff');vt.setAttribute('font-family','Space Grotesk');
+const hkLbl=[['CİS',300,853,'#fff',28],['Kompozit',300,750,C.ink,21]].map(([s,x,y,c,f])=>txt(hk,x,y,s,f,c,'middle',800));
+const hkAdh=txt(hk,780,925,'adeziv',26,C.adh,'middle',800);
+// ---------- NOW: layer stacks
+const nw=$('nw_svg');
+function stack(x,y,parts){const g=el('g',{},nw);let yy=y;const out=[];parts.forEach(([h,fill,label,lc])=>{const r=el('rect',{x,y:yy,width:360,height:h,fill,stroke:C.ink,'stroke-width':4},g);const t=txt(g,x+180,yy+h/2+12,label,32,lc||C.ink,'middle',800);out.push({r,t,y:yy,h});yy+=h});return {g,parts:out}}
+const SL=stack(100,610,[[230,C.comp,'Kompozit'],[65,'url(#dots)','Cam iyonomer'],[65,'url(#dots)',''],[150,C.den,'Dentin']]);
+const SR=stack(620,610,[[300,C.comp,'Kompozit'],[30,C.adh,''],[180,C.den,'Dentin']]);
+const adhT=txt(nw,800,933,'adeziv',22,'#fff','middle',800);
+const nwHL=txt(nw,280,590,'ESKİDEN',26,C.gicd,'middle',800),nwHR=txt(nw,800,590,'BUGÜN',26,'#B8862E','middle',800);
+const crack=el('path',{d:'M100 905 L140 897 L180 912 L222 896 L262 914 L302 897 L340 911 L380 898 L420 909 L460 903',fill:'none',stroke:C.red,'stroke-width':7,'stroke-linejoin':'round'},nw);const crackL=crack.getTotalLength();
+const okR=el('g',{},nw);el('circle',{cx:1018,cy:925,r:30,fill:C.green},okR);el('path',{d:'M1004 926 L1014 936 L1033 915',fill:'none',stroke:'#fff','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},okR);
+// ---------- NINE: rings
+const n9=$('n9_svg');function ring(cx,cy,col){el('circle',{cx,cy,r:165,fill:'none',stroke:'#DDE4EC','stroke-width':40},n9);const r=el('circle',{cx,cy,r:165,fill:'none',stroke:col,'stroke-width':40,'stroke-linecap':'round',transform:`rotate(-90 ${cx} ${cy})`},n9);const L=2*Math.PI*165;r.style.strokeDasharray=L;r.style.strokeDashoffset=L;return {r,L}}
+const R1=ring(300,840,C.green),R2=ring(780,840,C.gic);
+// ---------- ETT
+const es=$('e_svg');const EL=molar(es,95,540,0.72,{base:72}),ER=molar(es,595,540,0.72,{base:0});
+const eTagL=txt(es,282,520,'CİS tabanlı',30,C.gicd,'middle',800),eTagR=txt(es,782,520,'Tabansız',30,'#B8862E','middle',800);
+const voids=[[210,345],[245,330],[300,352],[330,336],[268,356]].map(([lx,ly])=>{const [cx,cy]=EL.P(lx,ly);return el('circle',{cx,cy,r:6.5,fill:'#fff',stroke:C.ink,'stroke-width':2.5,opacity:0},es)});
+const eDown=el('g',{opacity:0},es);el('rect',{x:105,y:1165,width:340,height:72,rx:36,fill:C.red},eDown);txt(eDown,275,1212,'kırılma direnci ↓',32,'#fff','middle',800);
+const eVoid=el('g',{opacity:0},es);el('rect',{x:182,y:672,width:200,height:56,rx:28,fill:'#fff',stroke:C.ink,'stroke-width':3},eVoid);txt(eVoid,282,710,'boşluk ↑',28,C.red,'middle',800);
+const eOk=el('g',{opacity:0},es);el('rect',{x:625,y:1165,width:320,height:72,rx:36,fill:C.green},eOk);txt(eOk,785,1212,'≈ sağlam diş',32,'#fff','middle',800);
+const eVitro=txt(es,535,1210,'(in vitro)',24,C.sub,'middle',600);
+// ---------- STILL
+const ss=$('st_svg');const stc=el('clipPath',{id:'stw'},ss);el('rect',{x:0,y:520,width:1080,height:700},stc);const stW=el('g',{'clip-path':'url(#stw)'},ss);const SM=molar(stW,40,560,0.9,{bar:0});
+const [sax,say]=SM.P(345,430);const stArrow=el('g',{opacity:0},ss);el('path',{d:`M${sax+6} ${say} L556 ${say-40}`,fill:'none',stroke:C.gicd,'stroke-width':6,'stroke-linecap':'round'},stArrow);el('circle',{cx:sax,cy:say,r:9,fill:C.gicd},stArrow);
+const stTag=el('g',{opacity:0},ss);el('rect',{x:80,y:1244,width:440,height:70,rx:35,fill:C.gicd},stTag);txt(stTag,300,1290,'kanal ağzında ince CİS',30,'#fff','middle',800);
+
+// ---------- progress segments
+const segEl=$('seg');const segs=order.map(()=>{const i=document.createElement('i');const b=document.createElement('b');i.appendChild(b);segEl.appendChild(i);return b});
+
+// ---------- refs per scene/line
+const REFS={then:[['Van Meerbeek ve ark., J Adhes Dent 2020','Sidhu & Nicholson, J Funct Biomater 2016','Schenkel & Veitz-Keenan, Cochrane 2019']],
+  now:[['Sidhu & Nicholson, J Funct Biomater 2016','Van Meerbeek ve ark., J Adhes Dent 2020']],
+  nine:[['Opdam ve ark., J Adhes Dent 2007 (retrospektif)']],
+  fifteen:[['Opdam ve ark., Dent Mater 2023 (retrospektif, 675 restorasyon)']],
+  ett:[['Thongbai-On ve ark., J Investig Clin Dent 2019 (in vitro)']],
+  still:[['de Araújo ve ark., Biomed Res Int 2022 (in vitro)','Patel ve ark., Br Dent J 2025']],
+  rules:[['Miao ve ark., Cochrane 2021','Mannocci ve ark., Int Endod J 2022','Grazioli ve ark., Antioxidants 2024 (in vitro)']]};
+const refsEl=$('refs');let lastRef='';
+function setRefs(t){let k=null,li=0;order.forEach(s=>{if(t>=SC[s].a&&t<SC[s].b)k=s});if(!k||!REFS[k]){refsEl.style.opacity=0;return}
+  const ls=SC[k].lines;for(let i=0;i<ls.length;i++){if(t>=ls[i].start-0.3)li=i}const arr=REFS[k][Math.min(li,REFS[k].length-1)];const html='<b>Kaynak:</b> '+arr.join(' · ');
+  if(html!==lastRef){refsEl.innerHTML=html;lastRef=html}refsEl.style.opacity=eo(P(t,SC[k].a+0.3,0.4))*(1-P(t,SC[k].b-0.25,0.25))}
+
+// ---------- subtitles (navy lower third)
+const CH=[];TL.forEach(L=>{let cur=[];L.words.forEach((w,i)=>{cur.push(w);if(cur.length>=3||/[.,:;?!]$/.test(w.w)||i===L.words.length-1){CH.push({ws:cur.slice(),s:cur[0].s,e:cur[cur.length-1].e});cur=[]}})});
+CH.forEach((c,i)=>{const nx=CH[i+1];c.hide=nx?Math.min(nx.s,c.e+0.6):c.e+0.6});
+const subs=$('subs');let curC=-1,wEls=[];
+function setSub(t){let k=-1;for(let i=0;i<CH.length;i++){if(t>=CH[i].s-0.06&&t<CH[i].hide){k=i;break}}
+  if(k<0){subs.style.opacity=0;return}subs.style.opacity=1;
+  if(k!==curC){curC=k;subs.innerHTML='';const ln=document.createElement('span');ln.className='ln';subs.appendChild(ln);wEls=CH[k].ws.map(w=>{const s=document.createElement('span');s.className='w';s.textContent=w.w;ln.appendChild(s);return {s,w}})}
+  const pin=eo(P(t,CH[k].s-0.06,0.18));subs.firstChild.style.transform=`translateY(${(1-pin)*14}px)`;subs.firstChild.style.opacity=pin;
+  wEls.forEach(o=>{o.s.style.color=t>=o.w.s-0.02?(t<o.w.e+0.05?'#F4A259':'#FFFFFF'):'#8A97AB'})}
+
+function render(t){
+  order.forEach(k=>{const s=SC[k],e=$('s_'+k);const vis=t>=s.a-0.01&&t<s.b+0.5;e.style.display=vis?'block':'none';if(!vis)return;
+    e.style.zIndex=s.z;const pin=s.z===0?1:eio(P(t,s.a,0.55));const pout=eio(P(t,s.b,0.5));
+    e.style.transform=`translateY(${(1-pin)*100-pout*14}%) scale(${1-pout*0.04})`;e.style.opacity=1-pout*0.7});
+  order.forEach((k,i)=>{const s=SC[k];segs[i].style.width=(100*clamp((t-s.a)/(s.b-s.a)))+'%'});
+  const S=k=>t-SC[k].start;
+  // HOOK — fully visible on frame 0 (cover)
+  {const l=S('hook');const T=p=>WF('hook',0,p);
+   lines($('hk_t'),[-1,-1],l);
+   const bt=T('bugün');const g=eo(P(l,bt-0.2,0.5));$('hk_cR').style.boxShadow=g>0?`0 0 0 ${6*g}px #F4A259`:'none';
+   BR.adh.setAttribute('stroke-width',8+4*Math.sin(clamp((l-bt)/0.6)*Math.PI));
+   const q=P(l,T('neden')-0.1,0.5);$('hk_q').style.opacity=q;$('hk_q').style.transform=`scale(${0.8+0.2*eb(q)})`;
+   popS(vs,P(l,-1,0.1));}
+  // THEN
+  {const l=S('then');const T=p=>WF('then',0,p);
+   lines($('th_t'),[0],l);
+   rise($('th_r1'),P(l,T('ilk')-0.2,0.45));rise($('th_r2'),P(l,T('kimyasal')-0.2,0.45));rise($('th_r3'),P(l,T('pulpa')-0.2,0.45));
+   rise($('th_note'),P(l,T('kullanıl')+0.2,0.5),16);}
+  // NOW
+  {const l=S('now');const T=p=>WF('now',0,p);
+   lines($('nw_t'),[0,T('zayıf')-0.15],l);
+   const pr=eo(P(l,0.15,0.6));SR.g.style.opacity=pr;SR.g.style.transform=`translateY(${(1-pr)*30}px)`;adhT.style.opacity=pr;nwHR.style.opacity=pr;
+   const pl=eo(P(l,0.35,0.6));SL.g.style.opacity=pl;SL.g.style.transform=`translateY(${(1-pl)*30}px)`;nwHL.style.opacity=pl;
+   popS(okR,P(l,T('güvenil'),0.4));
+   const ck=eio(P(l,T('kopma')-0.1,0.6));dash(crack,crackL,ck);const sep=14*eio(P(l,T('kopma')+0.4,0.5));[0,1].forEach(i=>{SL.parts[i].r.setAttribute('transform',`translate(0 ${-sep})`);SL.parts[i].t.setAttribute('transform',`translate(0 ${-sep})`)});
+   rise($('nw_stat'),P(l,T('kopma')+0.2,0.5),24);}
+  // NINE
+  {const l=S('nine');const T=p=>WF('nine',0,p);
+   lines($('n9_t'),[0,0.15],l);
+   const a=eio(P(l,T('astarsız')-0.1,1.3)),b=eio(P(l,T('cam')-0.1,1.3));
+   R1.r.style.strokeDashoffset=R1.L*(1-0.881*a);R2.r.style.strokeDashoffset=R2.L*(1-0.705*b);
+   $('n9_v1').textContent='%'+(88.1*a).toFixed(1).replace('.',',');$('n9_v2').textContent='%'+(70.5*b).toFixed(1).replace('.',',');
+   $('n9_v1').style.opacity=P(l,T('astarsız')-0.1,0.2);$('n9_v2').style.opacity=P(l,T('cam')-0.1,0.2);
+   rise($('n9_l1'),P(l,T('astarsız')-0.1,0.4),16);rise($('n9_l2'),P(l,T('cam')-0.1,0.4),16);rise($('n9_n'),P(l,T('yetmiş'),0.5),10);}
+  // FIFTEEN
+  {const l=S('fifteen');const T=p=>WF('fifteen',0,p);
+   lines($('f_t'),[0,0.15],l);const W=760/10;
+   const a=eo(P(l,0.3,0.8)),b=eo(P(l,T('açık')-0.1,0.9));$('f_b1').style.width=(W*2.9*a)+'px';$('f_v1').style.left=(W*2.9*a+18)+'px';$('f_v1').style.opacity=a;
+   $('f_b2').style.width=(W*9.7*b*0.82)+'px';$('f_v2').style.left=(W*9.7*b*0.82+18)+'px';$('f_v2').style.opacity=b;
+   popS($('f_x3'),P(l,T('üç')-0.1,0.5));
+   rise($('f_car'),P(l,T('flor')-0.2,0.5),30);}
+  // ETT
+  {const l=S('ett');const T=p=>WF('ett',0,p);
+   lines($('e_t'),[0,T('kırılma')-0.2],l);
+   const g1=eo(P(l,0.1,0.5)),g2=eo(P(l,0.3,0.5));EL.g.style.opacity=g1;ER.g.style.opacity=g2;eTagL.style.opacity=g1;eTagR.style.opacity=g2;
+   const bp=eio(P(l,T('cam')-0.1,0.8));EL.baseR.setAttribute('y',372-72*bp);EL.baseR.setAttribute('height',72*bp);
+   eDown.setAttribute('opacity',eo(P(l,T('kırılma')-0.1,0.4)));eOk.setAttribute('opacity',eo(P(l,T('kırılma')+0.3,0.4)));
+   voids.forEach((v,i)=>v.setAttribute('opacity',P(l,T('boşluk')-0.1+i*0.08,0.25)));eVoid.setAttribute('opacity',eo(P(l,T('boşluk'),0.4)));eVitro.style.opacity=P(l,T('boşluk')+0.3,0.4);
+   const pp=P(l,T('pulpa')-0.2,0.5);$('e_pulp').style.opacity=pp;$('e_pulp').style.transform=`scale(${0.85+0.15*eb(pp)})`;}
+  // STILL
+  {const l=S('still');const T=p=>WF('still',0,p);
+   lines($('st_t'),[0,T('bariyer')-0.2],l);
+   SM.g.style.opacity=eo(P(l,0.1,0.5));const bp=eio(P(l,T('kanal')-0.1,0.9));SM.barR.setAttribute('height',110*bp);
+   stArrow.setAttribute('opacity',P(l,T('bariyer'),0.4));stTag.setAttribute('opacity',eo(P(l,T('bariyer'),0.4)));
+   rise($('st_eq'),P(l,T('kompozit')-0.2,0.5),30);}
+  // RULES
+  {const l=S('rules');const T=p=>WF('rules',0,p);
+   lines($('r_t'),[0],l);
+   rise($('r_r1'),P(l,T('rubber')-0.2,0.45));rise($('r_r2'),P(l,T('derin')-0.2,0.45));rise($('r_r3'),P(l,T('hipoklorit')-0.2,0.45));}
+  // OUTRO
+  {const l=S('outro');const T=p=>WF('outro',0,p);
+   rise($('o_v'),P(l,0,0.5),30);$('o_strike').style.width=(eio(P(l,T('kalın')+0.3,0.5))*104)+'%';
+   $('o_v1').style.opacity=1-0.45*P(l,T('yerine'),0.4);rise($('o_v2'),P(l,T('adeziv')-0.2,0.45),16);
+   rise($('o_share'),P(l,T('kaydet')-0.2,0.5),24);rise($('o_ig'),P(l,T('paylaş')-0.2,0.5),24);rise($('o_refs'),P(l,T('paylaş')+0.1,0.6),20);}
+  setRefs(t);setSub(t);
+}
+window.render=render;render(0);
+</script>
+</body></html>

@@ -36,8 +36,18 @@
   "say": "Ama iki marjinal sırt da kayıpsa diş, sertliğinin yüzde altmış üçünü yitirir; o zaman tüberkülleri de ört."
  },
  {
+  "scene": "sum",
+  "say": "Kanal tedavisi kökü kurtarır; dişi ise doğru dolgu korur.",
+  "file": "../variants/l09c"
+ },
+ {
+  "scene": "next",
+  "say": "Eskiden cam iyonomer üzerine dolgu yapılıyordu; ama şimdi direkt dolgu yapılması daha avantajlı. Bunun sebebi ise bir sonraki videomuzun konusu.",
+  "file": "../variants/l10"
+ },
+ {
   "scene": "outro",
-  "say": "Kanal tedavisi kökü kurtarır; dişi ise doğru dolgu korur. Kaydet ve bir meslektaşınla paylaş.",
-  "file": "../variants/l09b"
+  "say": "Kaçırmamak için takip et; kaydet ve bir meslektaşınla paylaş.",
+  "file": "../variants/l11"
  }
 ]
