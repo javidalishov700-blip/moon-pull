@@ -1,0 +1,64 @@
+{
+ "voices": [
+  {
+   "voice": "en-US-BrianMultilingualNeural",
+   "lang": "tr-TR"
+  }
+ ],
+ "rate": "+6%",
+ "pitch": "+0Hz",
+ "lines": [
+  {
+   "id": "l00",
+   "say": "Kompozitin başarısı sadece materyale değil, onu ne kadar doğru ışınladığınıza da bağlıdır."
+  },
+  {
+   "id": "l01",
+   "say": "Peki halojen, LED, plazma ark ve lazer arasında fark ne, ve hangi polimerizasyon tekniği ne zaman tercih edilir?"
+  },
+  {
+   "id": "l02",
+   "say": "Halojen cihazlar geniş bir spektrum yayar ama ısınır; plazma ark ve argon lazer ise çok yüksek yoğunlukla, kısa sürede polimerizasyon sağlar."
+  },
+  {
+   "id": "l03",
+   "say": "Bugün en yaygın kullanılan cihazlar ise LED'lerdir; daha serin, dayanıklı ve verimlidirler."
+  },
+  {
+   "id": "l04",
+   "say": "En yaygın fotobaşlatıcı olan kamforokinon, yaklaşık 455 ile 480 nanometre arasındaki mavi ışığı emer."
+  },
+  {
+   "id": "l05",
+   "say": "Bazı yeni fotobaşlatıcılar ise daha kısa, mor dalga boylarına ihtiyaç duyar; dar spektrumlu bir cihaz bunları yeterince aktive edemeyebilir."
+  },
+  {
+   "id": "l06",
+   "say": "Asıl önemli olan, materyale ulaşan toplam enerjidir; yani ışık yoğunluğu çarpı süre."
+  },
+  {
+   "id": "l07",
+   "say": "Örneğin santimetrekare başına 1000 miliwatt yoğunlukla 20 saniye ışınlamak, 20 joule enerji demektir."
+  },
+  {
+   "id": "l08",
+   "say": "Uç dişten uzaklaştıkça ve açı bozuldukça materyale ulaşan ışık azalır; bu yüzden ucu yakın ve dik tutun."
+  },
+  {
+   "id": "l09",
+   "say": "Standart teknikte ışık baştan sona sabit yoğunluktadır. Soft-start tekniğinde önce düşük, sonra yüksek yoğunluk kullanılır; pulse-delay tekniğinde ise kısa bir ışınlamadan sonra birkaç dakika beklenip son polimerizasyon yapılır."
+  },
+  {
+   "id": "l10",
+   "say": "Laboratuvar çalışmaları, bu tekniklerin büzülme stresini ve kenar aralığını azaltabileceğini gösteriyor; ancak klinik kanıtlar sınırlı ve tutarsız."
+  },
+  {
+   "id": "l11",
+   "say": "Ve unutmayın: yüksek yoğunluk pulpada ısı artışına yol açabilir, mavi ışık da gözler için risklidir; turuncu filtre ya da koruyucu gözlük kullanın."
+  },
+  {
+   "id": "l12",
+   "say": "Doğru ışık, doğru doz, doğru teknik. Faydalı bulduysanız kaydedin ve meslektaşlarınızla paylaşın."
+  }
+ ]
+}
