@@ -1,16 +1,77 @@
 {
  "queries": [
   {
-   "name": "cochrane2021",
-   "q": "DOI:\"10.1002/14651858.CD009858.pub3\"",
+   "name": "opdam2007",
+   "q": "TITLE:\"Longevity and reasons for failure of sandwich and total-etch posterior composite resin restorations\"",
    "full": false,
-   "abslen": 9000
+   "abslen": 4000
   },
   {
-   "name": "gillen2011",
-   "q": "DOI:\"10.1016/j.joen.2011.04.002\"",
+   "name": "s_open15",
+   "q": "(TITLE:\"open sandwich\" OR TITLE:\"open-sandwich\") AND (TITLE:\"year\" OR TITLE:\"clinical\" OR TITLE:\"longevity\" OR TITLE:\"durability\")",
+   "n": 10,
    "full": false,
-   "abslen": 6000
+   "abslen": 1600
+  },
+  {
+   "name": "cochrane_liners",
+   "q": "DOI:\"10.1002/14651858.CD010526.pub3\"",
+   "full": true,
+   "abslen": 6000,
+   "keys": [
+    "authors' conclusions",
+    "hypersensitivity",
+    "failure",
+    "longevity",
+    "low-certainty",
+    "low-quality",
+    "no evidence"
+   ],
+   "maxp": 8
+  },
+  {
+   "name": "thongbai2019",
+   "q": "(TITLE:\"root-filled\" OR TITLE:\"root filled\") AND TITLE:\"bulk-fill\" AND (TITLE:\"glass-ionomer\" OR TITLE:\"glass ionomer\")",
+   "n": 3,
+   "full": false,
+   "abslen": 3000
+  },
+  {
+   "name": "grazioli2024",
+   "q": "TITLE:\"Bond Strength of Dentin Treated with Sodium Hypochlorite\" AND TITLE:\"Antioxidant\"",
+   "n": 2,
+   "full": true,
+   "abslen": 3500,
+   "keys": [
+    "10%",
+    "concentration",
+    "minutes",
+    "min ",
+    "sodium ascorbate",
+    "conclusion"
+   ],
+   "maxp": 8
+  },
+  {
+   "name": "sidhu2016",
+   "q": "TITLE:\"A Review of Glass-Ionomer Cements for Clinical Dentistry\"",
+   "full": true,
+   "abslen": 1500,
+   "keys": [
+    "mpa",
+    "bond strength",
+    "sandwich",
+    "brittle",
+    "fracture toughness",
+    "flexural"
+   ],
+   "maxp": 10
+  },
+  {
+   "name": "vanmeerbeek2020",
+   "q": "TITLE:\"From Buonocore's pioneering acid-etch technique to self-adhering restoratives\"",
+   "full": false,
+   "abslen": 2500
   }
  ]
 }
