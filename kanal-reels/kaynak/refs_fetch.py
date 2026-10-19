@@ -51,18 +51,19 @@ def main():
                   f"{ji.get('yearOfPublication') or r.get('pubYear')};{ji.get('volume')}({ji.get('issue')}):{r.get('pageInfo')} "
                   f"| doi {r.get('doi')} | pmid {r.get('pmid')} | pmcid {r.get('pmcid')} | OA {r.get('isOpenAccess')}")
             ab = re.sub(r"<[^>]+>", "", r.get("abstractText", "") or "")
-            print("   ABSTRACT: " + re.sub(r"\s+", " ", html.unescape(ab)).strip()[:3000])
+            print("   ABSTRACT: " + re.sub(r"\s+", " ", html.unescape(ab)).strip()[:2200])
             if q.get("full", True) and r.get("pmcid"):
                 xml = get(BASE + r["pmcid"] + "/fullTextXML")
                 ps = paras(xml)
+                keys = q.get("keys", KEYS)
                 print(f"   FULLTEXT paragraphs: {len(ps)}")
+                shown = 0
                 for kind, t in ps:
                     low = t.lower()
-                    hits = sum(k in low for k in KEYS)
-                    if kind == "title":
-                        print(f"   ## {t[:160]}")
-                    elif hits >= 1:
-                        print(f"   [{hits}] {t[:1400]}")
+                    hits = [k for k in keys if k in low]
+                    if kind == "p" and hits and shown < q.get("maxp", 999):
+                        shown += 1
+                        print(f"   [{','.join(hits)}] {t[:1100]}")
         time.sleep(1)
 
 if __name__ == "__main__":
