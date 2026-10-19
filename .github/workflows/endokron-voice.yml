@@ -21,6 +21,8 @@ on:
       - 'viral-reels/voice/variants.json'
       - 'viral2-reels/voice/lines.json'
       - 'viral2-reels/voice/variants.json'
+      - 'kanal-reels/voice/lines.json'
+      - 'kanal-reels/voice/variants.json'
       - '.github/workflows/endokron-voice.yml'
   workflow_dispatch:
 
@@ -45,7 +47,7 @@ jobs:
             || pip install -q --force-reinstall "git+https://github.com/rany2/edge-tts.git"
       - name: Bake narration
         run: |
-          for d in cfaktor-reels laser-reels polim-reels led-reels viral-reels viral2-reels; do
+          for d in cfaktor-reels laser-reels polim-reels led-reels viral-reels viral2-reels kanal-reels; do
             if [ ! -d "$d/voice/out" ] || git diff --name-only HEAD~1 HEAD | grep -q "$d/voice/lines.json"; then python "$d/voice/bake.py" || true; fi
             if git diff --name-only HEAD~1 HEAD | grep -q "$d/voice/variants.json"; then (cd "$d/voice" && python bake_variants.py || true); fi
           done
@@ -53,7 +55,7 @@ jobs:
         run: |
           git config user.name "endokron-voice-bot"
           git config user.email "endokron-voice-bot@users.noreply.github.com"
-          git add -A -- endokron-reels/voice cfaktor-reels/voice laser-reels/voice polim-reels/voice led-reels/voice viral-reels/voice viral2-reels/voice
+          git add -A -- endokron-reels/voice cfaktor-reels/voice laser-reels/voice polim-reels/voice led-reels/voice viral-reels/voice viral2-reels/voice kanal-reels/voice
           if git diff --cached --quiet; then echo "No audio changes."; exit 0; fi
           git commit -m "Bake endokron narration audio"
           for i in 1 2 3 4 5; do

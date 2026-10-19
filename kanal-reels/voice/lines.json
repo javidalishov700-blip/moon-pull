@@ -1,0 +1,52 @@
+{
+ "voices": [
+  {
+   "voice": "en-US-BrianMultilingualNeural",
+   "lang": "tr-TR"
+  }
+ ],
+ "rate": "+10%",
+ "pitch": "+0Hz",
+ "lines": [
+  {
+   "id": "l00",
+   "say": "Kanal tedavisinden sonra dişi nasıl restore etmeli?"
+  },
+  {
+   "id": "l01",
+   "say": "Başarıyı kanal dolgusu kadar üstündeki restorasyon da belirler; ikisi de iyiyse iyileşme olasılığı yaklaşık üç kat artıyor."
+  },
+  {
+   "id": "l02",
+   "say": "Ön dişte madde kaybı azsa, adeziv kompozit dolgu yeterli olabilir."
+  },
+  {
+   "id": "l03",
+   "say": "Arka dişte tüberkülleri örten restorasyon önemli; on yılda kuronlu dişlerin yüzde doksan biri, direkt dolguluların yüzde yetmiş altısı ağızda kaldı."
+  },
+  {
+   "id": "l04",
+   "say": "Büyük madde kaybı olan molarlarda ise endokron, konvansiyonel kurona benzer sağkalım gösteriyor."
+  },
+  {
+   "id": "l05",
+   "say": "Post sadece kor için tutuculuk gerektiğinde kullanılır; fiber ve metal post arasında sağkalımda anlamlı fark bulunmadı."
+  },
+  {
+   "id": "l06",
+   "say": "Başarı için üç kural var. Bir: bir buçuk, iki milimetre ferrule bırak; sağkalımı artırıyor."
+  },
+  {
+   "id": "l07",
+   "say": "İki: geciktirme; daimi restorasyon altmış günden sonra yapılırsa, çekim riski yüzde yetmiş üç artıyor."
+  },
+  {
+   "id": "l08",
+   "say": "Üç: rubber dam kullan ve kanal ağızlarını kapatarak koronal sızdırmazlığı sağla."
+  },
+  {
+   "id": "l09",
+   "say": "Kanalın ömrünü, üstündeki restorasyon belirler. Kaydet ve bir meslektaşınla paylaş."
+  }
+ ]
+}
