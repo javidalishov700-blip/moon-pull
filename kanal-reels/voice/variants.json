@@ -6,11 +6,19 @@
  "lines": [
   {
    "id": "l00b",
-   "say": "Kanal tedavisi bitti; peki dişin üstünü nasıl restore etmeli?"
+   "say": "Kanal tedavili bir dişin dolgusu nasıl yapılmalı? Güncel kanıtlara göre, beş adımda."
   },
   {
-   "id": "l08b",
-   "say": "Üç: rubber dam kullan ve kanal ağızlarını kapatarak dişi koronal sızıntıdan koru."
+   "id": "l06b",
+   "say": "Beş: dolguyu adeziv teknikle yap; pulpa odasında bulk-fill kompozit, klasik kompozite göre daha az boşluk bırakıyor."
+  },
+  {
+   "id": "l07b",
+   "say": "Marjinal sırtlar sağlamsa kompozit dolgu, beş yılda kurona yakın sağkalım gösteriyor."
+  },
+  {
+   "id": "l09b",
+   "say": "Kanal tedavisi kökü kurtarır; dişi ise doğru dolgu korur. Kaydet ve bir meslektaşınla paylaş."
   }
  ]
 }
