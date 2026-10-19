@@ -51,7 +51,7 @@ def main():
                   f"{ji.get('yearOfPublication') or r.get('pubYear')};{ji.get('volume')}({ji.get('issue')}):{r.get('pageInfo')} "
                   f"| doi {r.get('doi')} | pmid {r.get('pmid')} | pmcid {r.get('pmcid')} | OA {r.get('isOpenAccess')}")
             ab = re.sub(r"<[^>]+>", "", r.get("abstractText", "") or "")
-            if not q.get("noabs"): print("   ABSTRACT: " + re.sub(r"\s+", " ", html.unescape(ab)).strip()[:2200])
+            if not q.get("noabs"): print("   ABSTRACT: " + re.sub(r"\s+", " ", html.unescape(ab)).strip()[:q.get("abslen", 2200)])
             if q.get("full", True) and r.get("pmcid"):
                 xml = get(BASE + r["pmcid"] + "/fullTextXML")
                 ps = paras(xml)
