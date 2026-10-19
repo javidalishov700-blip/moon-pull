@@ -1,0 +1,273 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="fonts/baloo-2/700.css"><link rel="stylesheet" href="fonts/baloo-2/800.css">
+<link rel="stylesheet" href="fonts/nunito/700.css"><link rel="stylesheet" href="fonts/nunito/800.css"><link rel="stylesheet" href="fonts/nunito/900.css">
+<style>
+:root{--bg:#FFFBF4;--ink:#1F5560;--sub:#5E8A90;--coral:#FF6B57;--green:#1E9E67;--amber:#E8962A;--mint:#BDEBD9;--peach:#FFD2C2;--sky:#CFE4FF;--butter:#FFEDA8;--lilac:#E3D9FF}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);color:var(--ink);font-family:'Nunito',sans-serif}
+#stage{position:absolute;inset:0;overflow:hidden;background:var(--bg)}
+#blobs{position:absolute;inset:0}
+.scene{position:absolute;inset:0;display:none}
+.inner{position:absolute;inset:0;transform-origin:540px 800px}
+.abs{position:absolute}
+.bl{font-family:'Baloo 2',sans-serif;font-weight:800;line-height:.95;letter-spacing:-1px}
+.stk{position:absolute;display:inline-block;white-space:nowrap;font-family:'Nunito';font-weight:900;font-size:30px;letter-spacing:2px;padding:12px 24px;border-radius:40px;background:#fff;color:var(--ink);box-shadow:0 6px 0 rgba(31,85,96,.12)}
+.row{position:absolute;left:60px;right:60px;height:172px;border-radius:38px;display:flex;align-items:center;gap:26px;padding:0 28px;box-shadow:0 8px 0 rgba(31,85,96,.10)}
+.ic{width:118px;height:118px;background:#fff;border-radius:28px;flex:none}
+.nm{font-family:'Baloo 2';font-weight:800;font-size:58px;line-height:1;color:var(--ink)}
+.sb{font-family:'Nunito';font-size:28px;color:var(--sub);font-weight:800;margin-top:4px}
+.bd{margin-left:auto;display:flex;align-items:center;gap:8px;font-family:'Nunito';font-weight:900;font-size:31px;padding:12px 22px;border-radius:40px;background:#fff;border:4px solid;white-space:nowrap}
+.ok{color:var(--green);border-color:var(--green)}.q{color:#C27712;border-color:var(--amber)}.bad{color:var(--coral);border-color:var(--coral)}
+.src{position:absolute;font-family:'Nunito';font-weight:800;font-size:24px;color:var(--sub);background:rgba(255,255,255,.85);padding:8px 18px;border-radius:30px}
+.num{position:absolute;width:150px;height:150px;border-radius:50%;background:var(--coral);color:#fff;font-family:'Baloo 2';font-weight:800;font-size:110px;display:flex;align-items:center;justify-content:center;line-height:1;padding-top:12px}
+.tt{position:absolute;font-family:'Baloo 2';font-weight:800;font-size:96px;line-height:.95;color:var(--ink)}
+.dots{position:absolute;left:0;right:0;top:120px;display:flex;justify-content:center;gap:14px}
+.dots i{display:block;width:64px;height:14px;border-radius:10px;background:rgba(31,85,96,.15)}
+#subs{position:absolute;left:50px;right:50px;top:1290px;text-align:center;z-index:50}
+#subs .w{display:inline-block;margin:0 5px;padding:0 10px;border-radius:16px;font-family:'Nunito';font-weight:900;font-size:66px;line-height:1.25;color:var(--ink);text-shadow:0 0 6px #fff,0 0 10px #fff,0 3px 0 #fff}
+#wipe{position:absolute;left:-10%;width:120%;height:130%;top:0;z-index:70;transform:translateY(130%)}
+#bar{position:absolute;left:0;top:0;height:10px;background:var(--coral);z-index:80;border-radius:0 6px 6px 0}
+</style></head>
+<body>
+<div id="stage">
+<svg id="blobs" width="1080" height="1920"></svg>
+
+<!-- HOOK -->
+<div class="scene" id="s_hook"><div class="inner">
+  <div class="stk" id="hk_tag" style="left:50%;top:150px;transform:translateX(-50%) rotate(-2deg);background:var(--mint)">KOMPOZİT · POLİMERİZASYON</div>
+  <div class="row" id="hk_c1" style="top:290px;left:110px;right:110px;background:var(--mint);transform:rotate(-2deg)"><svg class="ic" id="hk_i1"></svg><div class="nm">Standart</div></div>
+  <div class="row" id="hk_c2" style="top:490px;left:150px;right:70px;background:var(--sky);transform:rotate(1.5deg)"><svg class="ic" id="hk_i2"></svg><div class="nm">Soft-start</div></div>
+  <div class="row" id="hk_c3" style="top:690px;left:90px;right:130px;background:var(--peach);transform:rotate(-1deg)"><svg class="ic" id="hk_i3"></svg><div class="nm">3 saniye</div></div>
+  <div class="abs bl" id="hk_h" style="left:70px;top:930px;font-size:150px">Hangisi<br><span style="color:var(--coral)">kazanır?</span></div>
+  <svg class="abs" id="hk_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+</div></div>
+
+<!-- RANK -->
+<div class="scene" id="s_rank"><div class="inner">
+  <div class="stk" style="left:60px;top:150px;transform:rotate(-2deg);background:var(--butter)">ARAŞTIRMALARA GÖRE</div>
+  <div class="row rk" id="r1" style="top:270px;background:#E3F6EE"><svg class="ic" id="ri1"></svg><div><div class="nm">Standart</div><div class="sb">Sabit yoğunluk</div></div><div class="bd ok" id="b1"></div></div>
+  <div class="row rk" id="r2" style="top:470px;background:#E3EEFF"><svg class="ic" id="ri2"></svg><div><div class="nm">Soft-start</div><div class="sb">Düşük → yüksek</div></div><div class="bd ok" id="b2"></div></div>
+  <div class="row rk" id="r3" style="top:670px;background:#FFF4CF"><svg class="ic" id="ri3"></svg><div><div class="nm">Pulse-delay</div><div class="sb">Işınla · bekle · ışınla</div></div><div class="bd q" id="b3"></div></div>
+  <div class="row rk" id="r4" style="top:870px;background:#FFE3DA"><svg class="ic" id="ri4"></svg><div><div class="nm">3 saniye</div><div class="sb">Sadece bu moda özel kompozit</div></div><div class="bd bad" id="b4"></div></div>
+  <div class="abs bl" id="r_eq" style="left:640px;top:418px;width:118px;height:118px;border-radius:50%;background:var(--coral);color:#fff;font-size:100px;display:flex;align-items:center;justify-content:center;padding-top:10px;transform:rotate(-8deg)">=</div>
+  <div class="src" id="r_src" style="left:60px;top:1080px">Betamar 2018 · Chan 2008 · Meereis 2018 · Marovic 2021/2025 · Ilie 2025</div>
+</div></div>
+
+<!-- TIP 1 -->
+<div class="scene" id="s_tip1"><div class="inner">
+  <div class="dots" id="d1"><i></i><i></i><i></i><i></i></div>
+  <div class="stk" id="t1_k" style="left:50%;top:170px;transform:translateX(-50%) rotate(-1.5deg);background:var(--lilac)">BAŞARIYI ARTIRAN 4 KURAL</div>
+  <div class="num" id="t1_n" style="left:70px;top:270px">1</div>
+  <div class="tt" id="t1_t" style="left:250px;top:300px">Yakın &amp; dik</div>
+  <svg class="abs" id="t1_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="src" id="t1_s" style="left:60px;top:1200px">Altaie ve ark., Oper Dent 2021</div>
+</div></div>
+
+<!-- TIP 2 -->
+<div class="scene" id="s_tip2"><div class="inner">
+  <div class="dots" id="d2"><i></i><i></i><i></i><i></i></div>
+  <div class="num" style="left:70px;top:200px">2</div>
+  <div class="tt" style="left:250px;top:230px">İki el + göz</div>
+  <svg class="abs" id="t2_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="abs" id="t2_stat" style="left:60px;top:1010px;display:flex;align-items:center;gap:24px"><span class="bl" style="font-size:180px;color:var(--coral)">+%60</span><span style="font-weight:900;font-size:36px;line-height:1.15">eğitim sonrası<br>ulaşan ışık</span></div>
+  <div class="src" style="left:60px;top:1210px">Suliman ve ark., J Dent Educ 2020</div>
+</div></div>
+
+<!-- TIP 3 -->
+<div class="scene" id="s_tip3"><div class="inner">
+  <div class="dots" id="d3"><i></i><i></i><i></i><i></i></div>
+  <div class="num" style="left:70px;top:200px">3</div>
+  <div class="tt" style="left:250px;top:200px;font-size:84px">Sınıf II:<br><span style="color:var(--coral)">ek ışınlama</span></div>
+  <svg class="abs" id="t3_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="src" style="left:60px;top:1210px">Reinhard ve ark., J Funct Biomater 2026 (in vitro)</div>
+</div></div>
+
+<!-- TIP 4 -->
+<div class="scene" id="s_tip4"><div class="inner">
+  <div class="dots" id="d4"><i></i><i></i><i></i><i></i></div>
+  <div class="num" style="left:70px;top:200px">4</div>
+  <div class="tt" style="left:250px;top:230px">Temiz uç + ölçüm</div>
+  <svg class="abs" id="t4_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="abs" id="t4_bars" style="left:70px;width:640px;top:930px"></div>
+  <div class="src" style="left:60px;top:1210px">Altaie ve ark., Oper Dent 2021</div>
+</div></div>
+
+<!-- OUTRO -->
+<div class="scene" id="s_outro"><div class="inner">
+  <div class="abs bl" id="o_h" style="left:70px;top:150px;font-size:96px">Başarıyı belirleyen:<br><span id="o_big" style="display:inline-block;color:var(--coral);font-size:150px">UYGULAMA</span></div>
+  <div class="abs" id="o_card" style="left:60px;right:60px;top:520px;background:var(--mint);border-radius:34px;padding:26px 32px;font-weight:800;font-size:34px;line-height:1.3;box-shadow:0 8px 0 rgba(31,85,96,.10)">Güncel derleme: kompozitin ömrünü materyalden çok <span style="color:var(--coral)">hekim ve hasta faktörleri</span> belirliyor.<div style="font-size:24px;color:var(--sub);margin-top:8px">Demarco ve ark., Dent Mater 2023</div></div>
+  <div class="stk" id="o_save" style="left:60px;top:780px;background:var(--butter);font-size:38px;transform:rotate(-3deg)">KAYDET</div>
+  <div class="stk" id="o_cm" style="left:330px;top:780px;background:var(--sky);font-size:38px;transform:rotate(2deg)">YORUMA MODUNU YAZ</div>
+  <div class="abs" id="o_ig" style="left:60px;top:900px;display:flex;align-items:center;gap:18px;font-weight:900;font-size:56px"><svg width="70" height="70" viewBox="0 0 70 70"><rect x="5" y="5" width="60" height="60" rx="18" fill="none" stroke="#FF6B57" stroke-width="7"/><circle cx="35" cy="35" r="14" fill="none" stroke="#FF6B57" stroke-width="7"/><circle cx="51" cy="19" r="4" fill="#FF6B57"/></svg>@muraz_alishov</div>
+  <div class="abs" id="o_refs" style="left:60px;right:60px;top:1000px;font-weight:700;font-size:21px;line-height:1.38;color:var(--sub)">
+    <b style="color:var(--ink);letter-spacing:2px">KAYNAKLAR</b><br>
+    Betamar & Shah, Libyan J Dent 2018 · Chan ve ark., Oper Dent 2008 · Meereis ve ark., J Mech Behav Biomed Mater 2018 · Marovic ve ark., Materials 2021 & 2025 · Ilie, Materials 2025 · Altaie ve ark., Oper Dent 2021 · Suliman ve ark., J Dent Educ 2020 · Reinhard ve ark., J Funct Biomater 2026 · Demarco ve ark., Dent Mater 2023
+  </div>
+</div></div>
+
+<div id="subs"></div>
+<div id="wipe"></div>
+<div id="bar"></div>
+</div>
+
+<script>
+const TL=__TIMELINE__, TOTAL=__TOTAL__;
+const INK='#1F5560',SUB='#5E8A90',CORAL='#FF6B57',GREEN='#1E9E67',AMB='#E8962A',MINT='#BDEBD9',PEACH='#FFD2C2',SKY='#CFE4FF',BUTTER='#FFEDA8',LILAC='#E3D9FF',BG='#FFFBF4',BEAM='#8DBEF5',GUM='#FFC3B3';
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)),P=(t,a,d)=>clamp((t-a)/d);
+const eo=t=>1-Math.pow(1-t,3),eio=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2,eb=t=>{const c1=1.7,c3=c1+1;return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2)};
+const els=t=>t===0?0:t===1?1:Math.pow(2,-10*t)*Math.sin((t*10-.75)*(2*Math.PI/3))+1;
+const $=id=>document.getElementById(id),lerp=(a,b,t)=>a+(b-a)*t,NS='http://www.w3.org/2000/svg';
+const order=[],SC={};
+TL.forEach(c=>{if(!SC[c.scene]){SC[c.scene]={start:c.start,lines:[]};order.push(c.scene)}SC[c.scene].end=c.end;SC[c.scene].lines.push(c)});
+order.forEach((k,i)=>{const s=SC[k];s.a=i===0?0:s.start-0.25;s.b=i<order.length-1?SC[order[i+1]].start-0.25:TOTAL+1;s.i=i});
+const LS=(k,i)=>SC[k].lines[i].start-SC[k].start;
+const WF=(k,li,pre)=>{const ws=SC[k].lines[li].words;const w=ws.find(x=>x.w.toLocaleLowerCase('tr').replace(/[^a-zçğıöşü0-9%]/g,'').startsWith(pre))||ws[0];return w.s-SC[k].start};
+function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e}
+function pop(e,pr,ox,oy){e.style.opacity=clamp(pr*5);if(ox!==undefined)e.style.transformOrigin=`${ox}px ${oy}px`;e.style.transform=`scale(${Math.max(0,eb(pr))})`}
+function popCss(e,pr,base=''){e.style.opacity=clamp(pr*5);e.style.transform=`${base} scale(${Math.max(0,eb(pr))})`}
+function slideIn(e,pr,dx=-120,base=''){const p=eo(pr);e.style.opacity=clamp(pr*4);e.style.transform=`${base} translateX(${(1-p)*dx}px)`}
+function drawPath(p,pr){if(!p._L){p._L=p.getTotalLength();p.style.strokeDasharray=p._L}p.style.strokeDashoffset=p._L*(1-pr)}
+// sparkline icon inside .ic svg
+function spark(svg,pts,col){svg.setAttribute('viewBox','0 0 118 118');el('path',{d:'M18 98 L100 98',stroke:'#D6E3E5','stroke-width':5,'stroke-linecap':'round'},svg);
+  const d='M'+pts.map(([a,b])=>`${18+a*82} ${92-b*66}`).join(' L');return el('path',{d,fill:'none',stroke:col,'stroke-width':9,'stroke-linecap':'round','stroke-linejoin':'round'},svg)}
+const SP={std:[[0,.8],[1,.8]],soft:[[0,.25],[.4,.25],[.5,.8],[1,.8]],pulse:[[0,.35],[.18,.35],[.18,0],[.62,0],[.62,.8],[1,.8]],fast:[[0,0],[.08,1],[.3,1],[.38,0],[1,0]]};
+// icons
+const CHECK='<svg width="34" height="34" viewBox="0 0 34 34"><path d="M6 18 L14 26 L28 8" stroke="currentColor" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const WARN='<svg width="38" height="34" viewBox="0 0 38 34"><path d="M19 3 L35 31 L3 31 Z" fill="currentColor"/><path d="M19 12 L19 21" stroke="#fff" stroke-width="5" stroke-linecap="round"/><circle cx="19" cy="26" r="2.8" fill="#fff"/></svg>';
+// tooth + wand drawing helpers
+function tooth(svg,cx,top,s=1,fillComp=true){const g=el('g',{transform:`translate(${cx},${top}) scale(${s})`},svg);
+  el('path',{d:'M-240 220 Q0 160 240 220 L240 300 L-240 300 Z',fill:GUM},g);
+  el('path',{d:'M-160 280 L-160 75 Q-160 15 -110 0 Q-70 -14 -40 6 Q0 22 40 6 Q70 -14 110 0 Q160 15 160 75 L160 280 Z',fill:'#fff',stroke:INK,'stroke-width':8,'stroke-linejoin':'round'},g);
+  if(fillComp)el('path',{d:'M-70 22 Q0 44 70 22 L60 105 L-60 105 Z',fill:BUTTER,stroke:INK,'stroke-width':5},g);return g}
+function wand(svg){const g=el('g',{},svg);const cone=el('path',{fill:BEAM,opacity:.55},g);const guide=el('path',{stroke:INK,'stroke-width':64,'stroke-linecap':'round',fill:'none'},g);const guide2=el('path',{stroke:'#fff','stroke-width':48,'stroke-linecap':'round',fill:'none'},g);
+  const tip=el('path',{stroke:BEAM,'stroke-width':48,'stroke-linecap':'round',fill:'none'},g);
+  return {g,set(x,y,ang,len=330,spread=70,target=null,on=1){const dx=Math.sin(ang),dy=-Math.cos(ang);const x2=x+dx*len,y2=y+dy*len;guide.setAttribute('d',`M${x2} ${y2} L${x+dx*18} ${y+dy*18}`);guide2.setAttribute('d',`M${x2} ${y2} L${x+dx*18} ${y+dy*18}`);tip.setAttribute('d',`M${x+dx*30} ${y+dy*30} L${x+dx*10} ${y+dy*10}`);
+    const px=-dy,py=dx;const ty=target||[x-dx*120,y-dy*120];const w0=26;cone.setAttribute('d',`M${x+px*w0} ${y+py*w0} L${x-px*w0} ${y-py*w0} L${ty[0]-px*spread} ${ty[1]-py*spread} L${ty[0]+px*spread} ${ty[1]+py*spread} Z`);cone.setAttribute('opacity',.5*on)}}}
+function hand(svg,x,y,rot,flip=1){const outer=el('g',{},svg);const g=el('g',{transform:`translate(${x},${y}) rotate(${rot}) scale(${flip},1)`},outer);
+  el('path',{d:'M-70 -40 Q-90 20 -50 60 L40 60 Q80 40 70 0 L60 -50 Q50 -70 30 -60 L20 -20 L10 -70 Q0 -90 -20 -80 L-25 -30 L-40 -70 Q-55 -85 -68 -65 Z',fill:'#FFC9B5',stroke:INK,'stroke-width':6,'stroke-linejoin':'round'},g);return outer}
+
+// ===== BLOBS
+const blobsSvg=$('blobs');const BL=[[MINT,140,260,260],[PEACH,980,620,230],[SKY,120,1560,300],[BUTTER,960,1500,260],[LILAC,560,980,170]].map(([c,x,y,r],i)=>{
+  const pts=[];for(let k=0;k<8;k++){const a=k/8*Math.PI*2;pts.push([Math.cos(a),Math.sin(a),0.85+0.3*((k*37+i*13)%10)/10])}
+  const p=el('path',{fill:c,opacity:.55},blobsSvg);return {p,x,y,r,pts,ph:i*1.3}});
+function blobPath(b,t){const P2=b.pts.map(([cx,cy,k],j)=>{const rr=b.r*k*(1+0.06*Math.sin(t*0.8+j+b.ph));return [b.x+cx*rr+Math.sin(t*0.3+b.ph)*30,b.y+cy*rr+Math.cos(t*0.25+b.ph)*30]});
+  let d='';for(let j=0;j<P2.length;j++){const a=P2[j],c=P2[(j+1)%P2.length];const m=[(a[0]+c[0])/2,(a[1]+c[1])/2];d+=(j?' Q':'M'+((P2[P2.length-1][0]+a[0])/2)+' '+((P2[P2.length-1][1]+a[1])/2)+' Q')+a[0]+' '+a[1]+' '+m[0]+' '+m[1]}return d+' Z'}
+
+// ===== HOOK build
+spark($('hk_i1'),SP.std,GREEN);spark($('hk_i2'),SP.soft,'#3C7DD9');spark($('hk_i3'),SP.fast,CORAL);
+const hs=$('hk_svg');const trophy=el('g',{},hs);
+el('path',{d:'M840 960 L1000 960 L990 1060 Q980 1130 920 1140 Q860 1130 850 1060 Z',fill:BUTTER,stroke:AMB,'stroke-width':8,'stroke-linejoin':'round'},trophy);
+el('path',{d:'M845 985 Q790 990 800 1040 Q810 1080 858 1085 M995 985 Q1050 990 1040 1040 Q1030 1080 982 1085',fill:'none',stroke:AMB,'stroke-width':8},trophy);
+el('rect',{x:900,y:1140,width:40,height:40,fill:AMB},trophy);el('rect',{x:870,y:1180,width:100,height:24,rx:8,fill:AMB},trophy);
+el('text',{x:920,y:1090,'text-anchor':'middle','font-size':70,fill:AMB,style:"font-family:'Baloo 2';font-weight:800"},trophy).textContent='?';
+// ===== RANK build
+spark($('ri1'),SP.std,GREEN);spark($('ri2'),SP.soft,'#3C7DD9');spark($('ri3'),SP.pulse,AMB);spark($('ri4'),SP.fast,CORAL);
+$('b1').innerHTML=CHECK+'Güvenilir';$('b2').innerHTML=CHECK+'Güvenilir';$('b3').innerHTML='Lab '+CHECK+' Klinik ?';$('b4').innerHTML=WARN+'Riskli';
+// ===== TIP1 build
+const t1=$('t1_svg');const T1tooth=tooth(t1,540,880,1);const W1=wand(t1);
+const br=el('path',{fill:'none',stroke:CORAL,'stroke-width':6,'stroke-linecap':'round'},t1);const brT=el('text',{'font-size':46,fill:CORAL,style:"font-family:'Baloo 2';font-weight:800"},t1);brT.textContent='10 mm';
+const meter=el('g',{},t1);el('rect',{x:880,y:500,width:90,height:500,rx:26,fill:'#fff',stroke:INK,'stroke-width':6},meter);const mFill=el('rect',{x:892,y:512,width:66,height:476,rx:18,fill:GREEN},meter);
+el('text',{x:925,y:1050,'text-anchor':'middle','font-size':34,fill:INK,style:"font-family:'Nunito';font-weight:900"},meter).textContent='ışık';
+const mDrop=el('text',{x:925,y:470,'text-anchor':'middle','font-size':54,fill:CORAL,style:"font-family:'Baloo 2';font-weight:800"},meter);mDrop.textContent='−%34';
+const ang=el('g',{},t1);el('path',{d:'M590 790 L590 840 L640 840',fill:'none',stroke:GREEN,'stroke-width':6},ang);el('text',{x:650,y:820,'font-size':44,fill:GREEN,style:"font-family:'Baloo 2';font-weight:800"},ang).textContent='90°';
+const ok1=el('g',{},t1);el('circle',{cx:240,cy:640,r:62,fill:GREEN},ok1);el('path',{d:'M212 642 L234 664 L270 618',fill:'none',stroke:'#fff','stroke-width':12,'stroke-linecap':'round','stroke-linejoin':'round'},ok1);
+// ===== TIP2 build
+const t2=$('t2_svg');const T2tooth=tooth(t2,500,760,0.9);const W2=wand(t2);const h1=hand(t2,415,520,90,1),h2=hand(t2,585,640,-90,1);
+const eye=el('g',{},t2);el('path',{d:'M780 470 Q880 395 980 470 Q880 545 780 470 Z',fill:'#fff',stroke:INK,'stroke-width':7},eye);el('circle',{cx:880,cy:470,r:30,fill:'#3C7DD9'},eye);el('circle',{cx:880,cy:470,r:13,fill:INK},eye);
+const look=el('path',{d:'M840 520 Q720 640 560 770',fill:'none',stroke:'#3C7DD9','stroke-width':6,'stroke-dasharray':'14 12','stroke-linecap':'round'},t2);
+// ===== TIP3 build (occlusal view)
+const t3=el('g',{transform:'translate(0,190)'},$('t3_svg'));const occ=el('g',{},t3);
+el('path',{d:'M330 520 Q330 440 420 430 L660 430 Q750 440 750 520 L750 820 Q750 900 660 910 L420 910 Q330 900 330 820 Z',fill:'#fff',stroke:INK,'stroke-width':8},occ);
+el('path',{d:'M330 590 L450 590 Q470 590 470 610 L470 750 Q470 770 450 770 L330 770 Z',fill:BUTTER,stroke:INK,'stroke-width':6},occ);
+el('path',{d:'M520 520 Q560 600 520 680 M600 500 Q640 590 610 700',fill:'none',stroke:'#D6E3E5','stroke-width':7,'stroke-linecap':'round'},occ);
+const band=el('path',{d:'M310 500 Q310 410 420 405 L660 405 Q770 410 770 500 L770 840 Q770 935 660 935 L420 935 Q310 935 310 840 Z',fill:'none',stroke:'#9FB7C9','stroke-width':22},t3);
+el('text',{x:540,y:1000,'text-anchor':'middle','font-size':40,fill:SUB,style:"font-family:'Nunito';font-weight:900"},t3).textContent='bukkal';
+el('text',{x:540,y:380,'text-anchor':'middle','font-size':40,fill:SUB,style:"font-family:'Nunito';font-weight:900"},t3).textContent='lingual';
+const W3b=wand(t3),W3l=wand(t3);
+const hard=el('g',{},t3);el('rect',{x:640,y:960,width:330,height:84,rx:42,fill:GREEN},hard);el('text',{x:805,y:1016,'text-anchor':'middle','font-size':42,fill:'#fff',style:"font-family:'Nunito';font-weight:900"},hard).textContent='sertlik ↑';
+// ===== TIP4 build
+const t4=$('t4_svg');
+function face(cx,cy,dirty){const g=el('g',{},t4);el('circle',{cx,cy,r:170,fill:'#EAF3FF',stroke:INK,'stroke-width':8},g);
+  for(let i=0;i<34;i++){const a=(i*137.5)%360*Math.PI/180,r=((i*53)%150);el('circle',{cx:cx+Math.cos(a)*r,cy:cy+Math.sin(a)*r,r:5,fill:'#C2DAF5'},g)}
+  const bits=[];if(dirty){for(let i=0;i<12;i++){const a=(i*97)%360*Math.PI/180,r=30+((i*41)%110);bits.push(el('ellipse',{cx:cx+Math.cos(a)*r,cy:cy+Math.sin(a)*r,rx:16+(i%4)*7,ry:11+(i%3)*6,fill:'#D9C38E',stroke:'#B39352','stroke-width':3,opacity:0},g))}
+    bits.push(el('path',{d:`M${cx+70} ${cy-150} L${cx+25} ${cy-50} L${cx+95} ${cy+20}`,fill:'none',stroke:INK,'stroke-width':6,opacity:0},g))}
+  const lb=el('text',{x:cx,y:cy+235,'text-anchor':'middle','font-size':50,fill:dirty?CORAL:GREEN,style:"font-family:'Baloo 2';font-weight:800"},g);lb.textContent=dirty?'Kirli uç':'Temiz uç';return {g,bits}}
+const F1=face(300,600,false),F2=face(780,600,true);
+const radio=el('g',{},t4);el('rect',{x:760,y:930,width:250,height:200,rx:34,fill:'#fff',stroke:INK,'stroke-width':7},radio);
+el('path',{d:'M800 1060 A85 85 0 0 1 970 1060',fill:'none',stroke:'#D6E3E5','stroke-width':16},radio);el('path',{d:'M800 1060 A85 85 0 0 1 870 977',fill:'none',stroke:GREEN,'stroke-width':16},radio);
+const needle=el('path',{d:'M885 1060 L885 990',stroke:CORAL,'stroke-width':8,'stroke-linecap':'round'},radio);el('circle',{cx:885,cy:1060,r:12,fill:INK},radio);
+$('t4_bars').innerHTML=`<div style="display:flex;align-items:center;gap:16px;margin-bottom:20px"><div style="width:150px;font-weight:900;font-size:34px">Temiz</div><div id="cb1" style="height:64px;border-radius:32px;width:0;background:${GREEN}"></div></div>
+ <div style="display:flex;align-items:center;gap:16px"><div style="width:150px;font-weight:900;font-size:34px">Kirli</div><div id="cb2" style="height:64px;border-radius:32px;width:0;background:${CORAL}"></div><div id="cb2t" class="bl" style="font-size:64px;color:${CORAL}">−%62</div></div>`;
+
+// ===== subtitles
+const CH=[];TL.forEach(L=>{let cur=[];L.words.forEach((w,i)=>{cur.push(w);if(cur.length>=3||/[.,:;?!]$/.test(w.w)||i===L.words.length-1){CH.push({ws:cur.slice(),s:cur[0].s,e:cur[cur.length-1].e});cur=[]}})});
+CH.forEach((c,i)=>{const nx=CH[i+1];c.hide=nx?Math.min(nx.s,c.e+0.5):c.e+0.5});
+const subs=$('subs');let curC=-1,wEls=[];
+function setSub(t){let k=-1;for(let i=0;i<CH.length;i++){if(t>=CH[i].s-0.05&&t<CH[i].hide){k=i;break}}
+  if(k<0){subs.style.opacity=0;return}subs.style.opacity=1;
+  if(k!==curC){curC=k;subs.innerHTML='';wEls=CH[k].ws.map(w=>{const s=document.createElement('span');s.className='w';s.textContent=w.w;subs.appendChild(s);return {s,w}})}
+  const pin=eb(P(t,CH[k].s-0.05,0.2));subs.style.transform=`scale(${0.8+0.2*pin})`;
+  wEls.forEach(o=>{const on=t>=o.w.s-0.02&&t<o.w.e+0.06;const done=t>=o.w.e+0.06;o.s.style.background=on?'#FFE173':'transparent';o.s.style.color=(on||done)?INK:'rgba(31,85,96,.38)';o.s.style.transform=on?'scale(1.06) rotate(-1deg)':'none'})}
+
+const SCOL={hook:MINT,rank:BUTTER,tip1:LILAC,tip2:PEACH,tip3:SKY,tip4:MINT,outro:PEACH};
+function render(t){
+  BL.forEach(b=>b.p.setAttribute('d',blobPath(b,t)));
+  $('bar').style.width=(1080*clamp(t/TOTAL))+'px';
+  // wipe
+  let wy=130;order.forEach((k,i)=>{if(i===0)return;const b=SC[k].a;const q=P(t,b-0.3,0.6);if(q>0&&q<1){wy=lerp(130,-130,eio(q));$('wipe').style.background=SCOL[k]}});$('wipe').style.transform=`translateY(${wy}%) skewY(-6deg)`;
+  order.forEach(k=>{const s=SC[k],e=$('s_'+k);const vis=t>=s.a&&t<s.b;e.style.display=vis?'block':'none';if(vis){const z=1+0.03*P(t,s.a,Math.max(1,s.b-s.a));e.firstElementChild.style.transform=`scale(${z})`}});
+  const S=k=>t-SC[k].start;
+  // HOOK
+  {const l=S('hook');const T=p=>WF('hook',0,p);
+   const fl=(id,ph,base)=>{const e=$(id);const k=1+0.05*Math.max(0,Math.sin(Math.PI*P(l,ph,0.5)));e.style.transform=`${base} translateY(${Math.sin(t*2+ph)*6}px) scale(${k})`};
+   fl('hk_c2',T('soft'),'rotate(1.5deg)');fl('hk_c1',T('standart'),'rotate(-2deg)');fl('hk_c3',T('üç'),'rotate(-1deg)');
+   const h=$('hk_h');const wg=Math.sin(Math.PI*P(l,T('başar'),0.6));h.style.transform=`rotate(${wg*-3}deg) scale(${1+wg*0.05})`;
+   trophy.style.transformOrigin='920px 1080px';trophy.style.transform=`translateY(${-Math.abs(Math.sin(t*3.2))*24}px) rotate(${Math.sin(t*3.2)*6}deg)`;}
+  // RANK
+  {const l=S('rank');const t1=0,t2=LS('rank',1),t3=LS('rank',2);
+   slideIn($('r1'),P(l,0.1,0.5),-160);slideIn($('r2'),P(l,WF('rank',0,'standart')-0.2,0.5),160);
+   popCss($('b1'),P(l,WF('rank',0,'güvenil'),0.45));popCss($('b2'),P(l,WF('rank',0,'güvenil')+0.15,0.45));
+   const eq=$('r_eq');eq.style.opacity=clamp(P(l,WF('rank',0,'fark'),0.35)*5);eq.style.transform=`rotate(-8deg) scale(${Math.max(0,eb(P(l,WF('rank',0,'fark'),0.45)))})`;
+   slideIn($('r3'),P(l,t2,0.5),-160);popCss($('b3'),P(l,WF('rank',1,'kanıt'),0.45));
+   const r4p=P(l,t3,0.5);slideIn($('r4'),r4p,160);const sh=(P(l,WF('rank',2,'riskl'),0.6)>0&&P(l,WF('rank',2,'riskl'),0.6)<1)?Math.sin(l*60)*8:0;$('r4').style.marginLeft=sh+'px';popCss($('b4'),P(l,WF('rank',2,'riskl'),0.45));
+   const foc=[[0,t2],[0,t2],[t2,t3],[t3,99]];['r1','r2','r3','r4'].forEach((id,i)=>{const e=$(id);const on=l>=foc[i][0]&&l<foc[i][1];if(l>t2-0.1)e.style.filter=on?'none':'saturate(.6) opacity(.55)';else e.style.filter='none'});
+   $('r_src').style.opacity=P(l,1,0.5);}
+  // TIPS common dots
+  ['d1','d2','d3','d4'].forEach((id,i)=>{$(id).querySelectorAll('i').forEach((d,j)=>{d.style.background=j<=i?CORAL:'rgba(31,85,96,.15)'})});
+  // TIP1
+  {const l=S('tip1');const T=p=>WF('tip1',0,p);
+   popCss($('t1_k'),P(l,0,0.4),'translateX(-50%) rotate(-1.5deg)');pop($('t1_n'),P(l,T('bir')-0.1,0.45),145,345);slideIn($('t1_t'),P(l,T('bir'),0.5),120);
+   const far=eio(P(l,T('on'),0.7))*(1-eio(P(l,T('kaybol')+0.8,0.6)));const yTip=lerp(860,640,far);
+   W1.set(540,yTip,0,240,lerp(90,180,far),[540,900],P(l,T('yakın')-0.3,0.3));
+   br.setAttribute('d',`M640 ${yTip+10} L670 ${yTip+10} L670 880 L640 880`);br.style.opacity=far;brT.setAttribute('x',690);brT.setAttribute('y',(yTip+880)/2+16);brT.style.opacity=far;
+   const lev=1-0.34*eio(P(l,T('kaybol')-0.2,0.6))*(1-eio(P(l,T('kaybol')+0.8,0.6)));mFill.setAttribute('y',512+476*(1-lev));mFill.setAttribute('height',476*lev);mFill.setAttribute('fill',lev<0.9?CORAL:GREEN);mDrop.style.opacity=lev<0.8?1:0;meter.style.opacity=P(l,T('on')-0.3,0.4);
+   ang.style.opacity=P(l,T('dik'),0.3)*(1-far);pop(ok1,P(l,T('kaybol')+1.0,0.5),240,640);$('t1_s').style.opacity=P(l,T('kaybol'),0.4);}
+  // TIP2
+  {const l=S('tip2');const T=p=>WF('tip2',0,p);
+   W2.set(500,740,0,320,90,[500,790],P(l,0.2,0.3));
+   [h1,h2].forEach((h,i)=>{const p=eb(P(l,T('iki')+i*0.15,0.5));h.style.opacity=clamp(P(l,T('iki')+i*0.15,0.3)*4);h.style.transform=`translateX(${(1-p)*(i?200:-200)}px)`});
+   eye.style.opacity=P(l,T('bak')-0.3,0.3);drawPath(look,eio(P(l,T('bak'),0.6)));
+   const st=$('t2_stat');const sp=P(l,T('yüzde')-0.2,0.5);st.style.opacity=clamp(sp*5);st.style.transform=`scale(${Math.max(0,eb(sp))})`;st.style.transformOrigin='left center';}
+  // TIP3
+  {const l=S('tip3');const T=p=>WF('tip3',0,p);
+   occ.style.opacity=P(l,0,0.3);const bo=eio(P(l,T('matris'),0.6));band.style.opacity=1-bo;band.style.transform=`translateX(${-bo*160}px)`;
+   const bk=P(l,T('bukkal')-0.1,0.4),lg=P(l,T('lingual')-0.1,0.4);
+   W3b.g.style.opacity=bk;W3b.set(300+20*(1-eo(bk)),930+40*(1-eo(bk)),Math.PI+0.6,120,60,[400,680],1);
+   W3l.g.style.opacity=lg;W3l.set(300+20*(1-eo(lg)),440-40*(1-eo(lg)),-0.6,150,60,[400,680],1);
+   W3b.g.setAttribute('transform','');pop(hard,P(l,T('ışınl'),0.5),805,1000);}
+  // TIP4
+  {const l=S('tip4');const T=p=>WF('tip4',0,p);
+   pop(F1.g,P(l,0,0.45),300,600);pop(F2.g,P(l,0.25,0.45),780,600);F2.bits.forEach((b,i)=>b.setAttribute('opacity',P(l,T('kirli')+i*0.05,0.2)));
+   const b1=eo(P(l,T('kirli')-0.3,0.5));$('cb1').style.width=(420*b1)+'px';const b2=eo(P(l,T('kirli'),0.5));const dr=eio(P(l,T('yarı'),0.7));$('cb2').style.width=(420*b2*(1-0.62*dr))+'px';$('cb2t').style.opacity=dr;
+   const rp=P(l,T('ölç')-0.2,0.45);pop(radio,rp,885,1030);needle.setAttribute('transform',`rotate(${-70+Math.sin(l*3)*25+70*eio(P(l,T('ölç'),1))} 885 1060)`);}
+  // OUTRO
+  {const l=S('outro');const T=p=>WF('outro',0,p);
+   const big=$('o_big');const bp=P(l,T('uygula')-0.15,0.5);big.style.transform=`scale(${Math.max(0,eb(bp))}) rotate(${(1-eo(bp))*-6}deg)`;big.style.opacity=clamp(bp*5);
+   slideIn($('o_card'),P(l,0.2,0.5),-140);popCss($('o_save'),P(l,T('kaydet'),0.45),'rotate(-3deg)');popCss($('o_cm'),P(l,T('yorum'),0.45),'rotate(2deg)');
+   slideIn($('o_ig'),P(l,T('kaydet')+0.3,0.5),-100);$('o_refs').style.opacity=P(l,T('yorum'),0.6);}
+  setSub(t);
+}
+window.render=render;render(0);
+</script>
+</body></html>
