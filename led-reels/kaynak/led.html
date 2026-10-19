@@ -1,0 +1,238 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="fonts/fraunces/400-italic.css"><link rel="stylesheet" href="fonts/fraunces/600.css"><link rel="stylesheet" href="fonts/fraunces/600-italic.css"><link rel="stylesheet" href="fonts/fraunces/800.css">
+<link rel="stylesheet" href="fonts/dm-sans/500.css"><link rel="stylesheet" href="fonts/dm-sans/700.css"><link rel="stylesheet" href="fonts/dm-sans/800.css">
+<link rel="stylesheet" href="fonts/caveat/700.css">
+<style>
+:root{--paper:#EAF0E6;--ink:#13261C;--mute:#6C7C70;--g1:#1E6B47;--g2:#3F9E68;--lime:#7CC242;--amber:#D98E2B;--fill:#DCE6D5}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif}
+#cam{position:absolute;left:-20px;top:-20px;width:1120px;height:1960px}
+#stage{position:absolute;left:20px;top:20px;width:1080px;height:1920px;overflow:hidden}
+.scene{position:absolute;inset:0;background:var(--paper);overflow:hidden;display:none}
+.abs{position:absolute}
+.serif{font-family:'Fraunces',serif}
+.chap{position:absolute;left:80px;top:150px;display:flex;align-items:center;gap:18px;font-size:28px;font-weight:700;letter-spacing:3px;text-transform:uppercase}
+.chap b{font-family:'Fraunces',serif;font-style:italic;font-weight:600;font-size:34px;letter-spacing:0;color:var(--g1)}
+.chap i{display:block;height:2px;width:120px;background:var(--ink)}
+.h{font-family:'Fraunces',serif;font-weight:800;line-height:1.02;letter-spacing:-1.5px}
+.it{font-style:italic;font-weight:600}
+.mask{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:8px}
+.mask>span{display:inline-block}
+#subs{position:absolute;left:60px;right:60px;top:1395px;text-align:center;z-index:50}
+#subs .ln{display:inline-block;background:#fff;color:var(--ink);font-weight:800;font-size:54px;line-height:1.2;padding:8px 22px 12px;border-radius:12px;box-shadow:0 3px 0 rgba(10,40,20,.14)}
+#subs .w{display:inline-block;margin:0 6px}
+#grain{position:absolute;left:0;top:0;z-index:60;pointer-events:none;mix-blend-mode:multiply;opacity:.15}
+#topline{position:absolute;left:0;top:0;height:6px;background:var(--g1);z-index:61}
+svg text{font-family:'Caveat',cursive;font-weight:700}
+.row{display:flex;align-items:center;gap:18px;padding:24px 0;border-top:3px solid var(--ink);font-size:34px;font-weight:700;white-space:nowrap}
+.cap{font-family:'Fraunces',serif;font-style:italic;font-weight:600;font-size:40px;text-align:center}
+</style></head>
+<body>
+<div id="cam"><div id="stage">
+
+<div class="scene" id="s_hook">
+  <div class="abs h" id="hk_t" style="left:80px;top:190px;font-size:96px"><span class="mask"><span>Aynı LED.</span></span><br><span class="mask"><span>Aynı kompozit.</span></span></div>
+  <svg class="abs" id="hk_svg" style="left:0;top:150px" width="1080" height="1920"></svg>
+  <div class="abs h it" id="hk_q" style="left:80px;top:1180px;font-size:96px;color:var(--g1)">Fark: uygulama.</div>
+</div>
+
+<div class="scene" id="s_tech">
+  <div class="chap"><b>01</b><i></i>Teknikler</div>
+  <svg class="abs" id="tc_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+</div>
+
+<div class="scene" id="s_evidence">
+  <div class="chap"><b>02</b><i></i>Kanıt</div>
+  <div class="abs" id="ev_l" style="left:80px;width:440px;top:250px"><div class="h" style="font-size:56px;margin-bottom:10px">Laboratuvar</div>
+    <div class="row evr"><span class="h" style="color:var(--g1);font-size:52px">↓</span>Büzülme stresi</div><div class="row evr" style="border-bottom:3px solid var(--ink)"><span class="h" style="color:var(--g1);font-size:52px">↓</span>Kenar aralığı</div></div>
+  <div class="abs" id="ev_r" style="left:580px;width:420px;top:250px"><div class="h" style="font-size:56px;margin-bottom:10px">Klinik</div>
+    <div class="row evr"><span class="h" style="color:var(--amber);font-size:52px">?</span>Sınırlı</div><div class="row evr" style="border-bottom:3px solid var(--ink)"><span class="h" style="color:var(--amber);font-size:52px">?</span>Tutarsız</div></div>
+  <div class="abs" id="ev_rct" style="left:80px;right:80px;top:700px">
+    <div style="font-size:28px;font-weight:800;letter-spacing:3px;color:var(--mute)">RANDOMİZE KLİNİK ÇALIŞMA · 2 YIL</div>
+    <div class="h" style="font-size:68px;margin-top:14px">Soft-start <span class="it" style="color:var(--mute)">vs</span> yüksek yoğunluk</div>
+    <div class="h it" id="ev_res" style="font-size:76px;color:var(--g1);margin-top:24px">= hassasiyette fark yok</div>
+    <div style="font-size:26px;color:var(--mute);margin-top:18px;font-weight:600">Chan ve ark., Oper Dent 2008</div>
+  </div>
+</div>
+
+<div class="scene" id="s_tips">
+  <div class="chap"><b>03</b><i></i>Klinikte</div>
+  <svg class="abs" id="tp_svg" style="left:0;top:110px" width="1080" height="1920"></svg>
+  <div class="abs" id="tp_list" style="left:80px;right:80px;top:830px">
+    <div class="row tpr" style="font-size:44px"><span class="h" style="color:var(--g1);font-size:56px;width:50px">1</span>Uç yakın ve dik</div>
+    <div class="row tpr" style="font-size:44px"><span class="h" style="color:var(--g1);font-size:56px;width:50px">2</span>İki elle sabitle</div>
+    <div class="row tpr" style="font-size:44px;border-bottom:3px solid var(--ink)"><span class="h" style="color:var(--g1);font-size:56px;width:50px">3</span>Işınlarken restorasyona bak</div>
+  </div>
+  <div class="abs" id="tp_stat" style="left:80px;top:1165px;display:flex;align-items:baseline;gap:24px"><span class="h" style="font-size:150px;color:var(--g1)">+%60</span><span style="font-size:32px;font-weight:700;line-height:1.25">eğitim sonrası ulaşan ışık<br><span style="color:var(--mute);font-size:24px;font-weight:600">Suliman ve ark., J Dent Educ 2020</span></span></div>
+</div>
+
+<div class="scene" id="s_care">
+  <div class="chap"><b>04</b><i></i>Uç bakımı</div>
+  <svg class="abs" id="cr_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="abs cap" id="cr_c1" style="left:60px;width:480px;top:790px">Temiz uç</div>
+  <div class="abs cap" id="cr_c2" style="left:540px;width:480px;top:790px">Rezin bulaşmış uç</div>
+  <div class="abs" id="cr_bars" style="left:80px;right:80px;top:900px"></div>
+</div>
+
+<div class="scene" id="s_success">
+  <div class="chap"><b>05</b><i></i>Başarı</div>
+  <div class="abs" style="left:80px;top:260px;font-size:36px;font-weight:700">Posterior kompozitler · yıllık başarısızlık</div>
+  <div class="abs h" id="sc_big" style="left:70px;top:320px;font-size:260px;color:var(--g1)">≈%2</div>
+  <svg class="abs" id="sc_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="abs" id="sc_note" style="left:80px;right:80px;top:1060px;font-size:28px;color:var(--mute);font-weight:600;line-height:1.4">Meta-analiz: 5 yılda yıllık %1,8 · Opdam ve ark., J Dent Res 2014</div>
+</div>
+
+<div class="scene" id="s_outro">
+  <div class="abs h" id="o_t" style="left:80px;top:200px;font-size:110px"><span class="mask"><span>Doğru teknik,</span></span><br><span class="mask"><span class="it" style="color:var(--g1)">uzun ömür.</span></span></div>
+  <svg class="abs" id="o_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="abs" id="o_ig" style="left:225px;top:528px;font-size:66px;font-weight:800;letter-spacing:-1px">@muraz_alishov</div>
+  <div class="abs" id="o_refs" style="left:80px;right:80px;top:700px;font-size:23px;line-height:1.4;color:#3E4E43">
+    <div style="font-size:26px;font-weight:800;letter-spacing:3px;color:var(--ink);margin-bottom:12px">KAYNAKLAR</div>
+    <div style="margin-bottom:8px">1. Chan DCN, Browning WD, Frazier KB, Brackett MG. Clinical evaluation of the soft-start (pulse-delay) polymerization technique in Class I and II composite restorations. <i>Oper Dent.</i> 2008;33(3):265–271.</div>
+    <div style="margin-bottom:8px">2. Suliman AA, Abdo AA, Elmasmari HA. Training and experience effect on light-curing efficiency by dental practitioners. <i>J Dent Educ.</i> 2020;84(6):652–659.</div>
+    <div style="margin-bottom:8px">3. Altaie A, et al. An evaluation of the efficacy of LED light curing units in primary and secondary dental settings in the UK. <i>Oper Dent.</i> 2021;46(3):271–282.</div>
+    <div style="margin-bottom:8px">4. Opdam NJM, et al. Longevity of posterior composite restorations: a systematic review and meta-analysis. <i>J Dent Res.</i> 2014;93(10):943–949.</div>
+    <div>5. Polymerization shrinkage stress of resin-based dental materials: a systematic review and meta-analyses of technique protocol and photo-activation strategies. <i>J Mech Behav Biomed Mater.</i> 2018.</div>
+  </div>
+</div>
+
+<div id="subs"></div>
+</div></div>
+<svg id="grain" width="1080" height="1920"><filter id="gf"><feTurbulence id="turb" type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="1"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#gf)"/></svg>
+<div id="topline"></div>
+<script>
+const TL=__TIMELINE__, TOTAL=__TOTAL__;
+const G1='#1E6B47',G2='#3F9E68',LIME='#7CC242',INK='#13261C',AMB='#D98E2B',FILL='#DCE6D5',MUTE='#6C7C70';
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)), P=(t,a,d)=>clamp((t-a)/d);
+const eo=t=>1-Math.pow(1-t,3), eio=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2, eb=t=>{const c1=1.4,c3=c1+1;return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2)};
+const $=id=>document.getElementById(id), lerp=(a,b,t)=>a+(b-a)*t, NS='http://www.w3.org/2000/svg';
+const order=[],SC={};
+TL.forEach(c=>{if(!SC[c.scene]){SC[c.scene]={start:c.start,lines:[]};order.push(c.scene)}SC[c.scene].end=c.end;SC[c.scene].lines.push(c)});
+order.forEach((k,i)=>{const s=SC[k];s.a=i===0?0:s.start-0.3;s.b=i<order.length-1?SC[order[i+1]].start-0.3:TOTAL;s.z=i});
+const LS=(k,i)=>SC[k].lines[i].start-SC[k].start;
+const W=(k,li,wi)=>{const ws=SC[k].lines[li].words;return ws[Math.min(wi,ws.length-1)].s-SC[k].start};
+let sd=13;const rnd=()=>{sd=(sd*16807)%2147483647;return sd/2147483647};
+function roughPath(pts,amp=3){const out=[];for(let i=0;i<pts.length-1;i++){const [x1,y1]=pts[i],[x2,y2]=pts[i+1];const n=Math.max(2,Math.round(Math.hypot(x2-x1,y2-y1)/40));for(let k=0;k<n;k++){const t=k/n;out.push([lerp(x1,x2,t)+(rnd()-.5)*amp,lerp(y1,y2,t)+(rnd()-.5)*amp])}}out.push(pts[pts.length-1]);
+  let d='M'+out[0].join(' ');for(let i=1;i<out.length-1;i++){const mx=(out[i][0]+out[i+1][0])/2,my=(out[i][1]+out[i+1][1])/2;d+=` Q${out[i][0]} ${out[i][1]} ${mx} ${my}`}return d+` L${out[out.length-1].join(' ')}`}
+function roughEllipse(cx,cy,rx,ry,amp=5){const pts=[];const st=rnd()*6.28;for(let i=0;i<=29;i++){const a=st+i/26*Math.PI*2;const k=1+(rnd()-.5)*0.06;pts.push([cx+Math.cos(a)*rx*k,cy+Math.sin(a)*ry*k])}return roughPath(pts,amp)}
+function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e}
+function stroke(svg,d,col=G1,w=6){const p=el('path',{d,fill:'none',stroke:col,'stroke-width':w,'stroke-linecap':'round','stroke-linejoin':'round'},svg);const L=p.getTotalLength();p.style.strokeDasharray=L;p.style.strokeDashoffset=L;return {p,L}}
+const draw=(s,pr)=>{s.p.style.strokeDashoffset=s.L*(1-pr)};
+function arrow(svg,x1,y1,x2,y2,col,w=5,bend=40){const mx=(x1+x2)/2+bend,my=(y1+y2)/2-bend;const body=stroke(svg,roughPath([[x1,y1],[mx,my],[x2,y2]],2),col,w);const a=Math.atan2(y2-my,x2-mx);const h=24;
+  const head=stroke(svg,`M${x2-h*Math.cos(a-0.45)} ${y2-h*Math.sin(a-0.45)} L${x2} ${y2} L${x2-h*Math.cos(a+0.45)} ${y2-h*Math.sin(a+0.45)}`,col,w);return [body,head]}
+const drawArrow=(ar,pr)=>{draw(ar[0],clamp(pr/0.8));draw(ar[1],clamp((pr-0.8)/0.2))};
+function htext(svg,x,y,txt,size,col,anchor='start',rot=0){const t=el('text',{x,y,'font-size':size,fill:col,'text-anchor':anchor,transform:`rotate(${rot} ${x} ${y})`},svg);t.textContent=txt;return t}
+function reveal(e,pr){e.style.opacity=clamp(pr*3);e.style.clipPath=`inset(-30px ${100-pr*100}% -30px -30px)`}
+function poly(svg,pts,fill,sc=INK,w=5){return el('path',{d:'M'+pts.map(q=>q.join(' ')).join(' L')+' Z',fill,stroke:sc,'stroke-width':w,'stroke-linejoin':'round'},svg)}
+function maskWords(root,times,t){root.querySelectorAll('.mask>span').forEach((m,i)=>{const p=eo(P(t,times[Math.min(i,times.length-1)],0.45));m.style.transform=`translateY(${(1-p)*110}%)`})}
+function pop(e,pr,ox,oy){e.style.opacity=clamp(pr*4);e.style.transformOrigin=`${ox}px ${oy}px`;e.style.transform=`scale(${eb(pr)})`}
+// beam: wavy laser line
+function beam(svg,x1,y1,x2,y2,amp=10,wl=40,w=6){const g=el('g',{},svg);const glow=el('path',{fill:'none',stroke:LIME,'stroke-width':w*3,'stroke-opacity':.22,'stroke-linecap':'round'},g);const core=el('path',{fill:'none',stroke:LIME,'stroke-width':w,'stroke-linecap':'round'},g);
+  return {g,set(pr,ph){const L=Math.hypot(x2-x1,y2-y1)*pr;const ang=Math.atan2(y2-y1,x2-x1);let d='';for(let s=0;s<=L;s+=4){const o=Math.sin((s/wl)*Math.PI*2-ph)*amp;const x=x1+Math.cos(ang)*s-Math.sin(ang)*o,y=y1+Math.sin(ang)*s+Math.cos(ang)*o;d+=(s?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)}core.setAttribute('d',d);glow.setAttribute('d',d)}}}
+function sparks(svg,cx,cy,n,col){const arr=[];for(let i=0;i<n;i++){const c=el('circle',{r:3+rnd()*4,fill:col},svg);arr.push({c,a:-Math.PI/2+(rnd()-.5)*2.2,v:60+rnd()*120,ph:rnd()})}return {set(t,on){arr.forEach(s=>{const k=((t*1.6+s.ph)%1);s.c.setAttribute('cx',cx+Math.cos(s.a)*s.v*k);s.c.setAttribute('cy',cy+Math.sin(s.a)*s.v*k+40*k*k);s.c.setAttribute('opacity',on*(1-k))})}}}
+
+
+const BLUE='#4F86D6';
+const WF=(k,li,pre)=>{const ws=SC[k].lines[li].words;const w=ws.find(x=>x.w.toLowerCase().replace(/[^a-zçğıöşü0-9]/g,'').startsWith(pre))||ws[0];return w.s-SC[k].start};
+function toothAt(svg,x,y,s=1){const g=el('g',{transform:`translate(${x},${y}) scale(${s})`},svg);poly(g,[[0,330],[0,80],[30,20],[90,0],[140,25],[190,0],[250,25],[280,80],[280,330]],FILL,INK,6);return g}
+function gunAt(svg,x,y,rot=0){const g=el('g',{transform:`translate(${x},${y}) rotate(${rot})`},svg);el('path',{d:'M0 0 L0 -260',stroke:INK,'stroke-width':40,'stroke-linecap':'round'},g);el('path',{d:'M0 0 L0 -260',stroke:'#fff','stroke-width':28,'stroke-linecap':'round'},g);return g}
+// HOOK
+const hs=$('hk_svg');const tA=toothAt(hs,140,700),tB=toothAt(hs,660,700);
+const cA=el('path',{d:'M220 760 Q280 780 340 760 L330 850 L230 850 Z',fill:'#F2EFE3',stroke:INK,'stroke-width':4},hs);
+const cB=el('path',{d:'M740 760 Q800 780 860 760 L850 850 L750 850 Z',fill:'#F2EFE3',stroke:INK,'stroke-width':4},hs);
+const gA=gunAt(hs,280,650),gB=gunAt(hs,900,560,28);
+const coneA=el('path',{d:'M262 655 L298 655 L345 760 L215 760 Z',fill:BLUE,opacity:0},hs);const coneB=el('path',{d:'M885 575 L905 595 L880 760 L770 705 Z',fill:BLUE,opacity:0},hs);
+const okA=stroke(hs,roughPath([[455,860],[490,900],[555,815]],3),G1,11);
+const gapB=[stroke(hs,roughPath([[748,770],[752,845]],2),AMB,7),stroke(hs,roughPath([[856,770],[850,845]],2),AMB,7)];
+const qB=htext(hs,1000,900,'?',110,AMB,'middle',0);
+// TECH
+const tc=$('tc_svg');const charts=[['Standart',[[0,0.85],[1,0.85]]],['Soft-start',[[0,0.25],[0.35,0.25],[0.4,0.85],[1,0.85]]],['Pulse-delay',[[0,0.35],[0.15,0.35],[0.15,0],[0.62,0],[0.62,0.85],[1,0.85]]]];
+const CH2=charts.map(([n,pts],i)=>{const y0=260+i*340,x0=420,w=580,h=230;const gg=el('g',{},tc);
+  const lab=el('text',{x:80,y:y0+120,'font-size':48,fill:INK,style:"font-family:'Fraunces';font-weight:800"},gg);lab.textContent=n;
+  el('line',{x1:x0,y1:y0+h,x2:x0+w,y2:y0+h,stroke:INK,'stroke-width':4},gg);el('line',{x1:x0,y1:y0,x2:x0,y2:y0+h,stroke:INK,'stroke-width':4},gg);
+  const ax=el('text',{x:x0+w,y:y0+h+40,'text-anchor':'end','font-size':26,fill:MUTE,style:"font-family:'DM Sans';font-weight:700"},gg);ax.textContent='zaman →';
+  const ay=el('text',{x:x0-12,y:y0+20,'text-anchor':'end','font-size':26,fill:MUTE,style:"font-family:'DM Sans';font-weight:700"},gg);ay.textContent='yoğunluk';
+  const s=stroke(gg,'M'+pts.map(([a,b])=>`${x0+a*w} ${y0+h-b*h}`).join(' L'),G1,8);
+  let note=null;if(i===2)note=htext(gg,x0+0.39*w,y0+h-0.45*h,'bekle · birkaç dk',40,AMB,'middle',0);if(i===1)note=htext(gg,x0+0.18*w,y0+h-0.25*h-20,'düşük',38,G2,'middle',0);
+  return {gg,s,note}});
+// TIPS illustration
+const tp=$('tp_svg');const tT=toothAt(tp,380,360,0.9);const tGun=gunAt(tp,506,310);const tCone=el('path',{d:'M486 315 L526 315 L546 368 L466 368 Z',fill:BLUE,opacity:0},tp);
+const tBr=stroke(tp,'M580 312 L610 312 L610 366 L580 366',G1,5);const tBrT=htext(tp,625,352,'yakın',44,G1,'start',0);const tAng=htext(tp,560,230,'90°',52,G1,'start',0);
+const hands=[stroke(tp,roughPath([[420,190],[470,175],[488,140]],2),INK,10),stroke(tp,roughPath([[590,120],[540,100],[522,70]],2),INK,10)];
+const eyeG=el('g',{},tp);el('path',{d:'M760 220 Q840 160 920 220 Q840 280 760 220 Z',fill:'#fff',stroke:INK,'stroke-width':5},eyeG);el('circle',{cx:840,cy:220,r:26,fill:G1},eyeG);
+const look=stroke(tp,'M770 250 Q690 320 600 380',G1,4);
+const tChecks=[...document.querySelectorAll('.tpr')].map(it=>{it.style.position='relative';const sv=document.createElementNS(NS,'svg');sv.setAttribute('width',90);sv.setAttribute('height',90);sv.style.cssText='position:absolute;right:0;top:8px';it.appendChild(sv);return stroke(sv,roughPath([[12,45],[38,74],[82,12]],3),G1,9)});
+// CARE
+const cr=$('cr_svg');
+function tipFace(cx,cy,dirty){const g=el('g',{},cr);el('circle',{cx,cy,r:190,fill:'#E9F2FC',stroke:INK,'stroke-width':8},g);
+  for(let i=0;i<40;i++){const a=rnd()*6.28,r=rnd()*170;el('circle',{cx:cx+Math.cos(a)*r,cy:cy+Math.sin(a)*r,r:4,fill:'#C9DBF0'},g)}
+  const dots=[];if(dirty){for(let i=0;i<14;i++){const a=rnd()*6.28,r=rnd()*150;dots.push(el('ellipse',{cx:cx+Math.cos(a)*r,cy:cy+Math.sin(a)*r,rx:14+rnd()*26,ry:10+rnd()*18,fill:'#B9A97E',stroke:'#7C6E4A','stroke-width':3,opacity:0},g))}
+    dots.push(el('path',{d:`M${cx+60} ${cy-170} L${cx+20} ${cy-60} L${cx+90} ${cy+10}`,fill:'none',stroke:INK,'stroke-width':5,opacity:0},g))}
+  return {g,dots}}
+const tc1=tipFace(300,540,false),tc2=tipFace(780,540,true);
+const barsW=$('cr_bars');barsW.innerHTML=`<div style="font-size:28px;font-weight:800;letter-spacing:3px;margin-bottom:18px">IŞIK ÇIKIŞI</div>
+ <div style="display:flex;align-items:center;gap:20px;margin-bottom:22px"><div style="width:200px;font-size:34px;font-weight:800">Temiz</div><div id="cb1" style="height:60px;width:0;background:${G1}"></div></div>
+ <div style="display:flex;align-items:center;gap:20px"><div style="width:200px;font-size:34px;font-weight:800">Bulaşmış</div><div id="cb2" style="height:60px;width:0;background:${AMB}"></div><div id="cb2t" class="h" style="font-size:56px;color:${AMB}">−%62</div></div>
+ <div style="font-size:26px;color:${MUTE};margin-top:22px;font-weight:600">Altaie ve ark., Oper Dent 2021</div>`;
+// SUCCESS
+const ss=$('sc_svg');const scU=stroke(ss,roughPath([[80,640],[300,628],[470,636]],4),G1,10);
+const yrs=[];for(let i=0;i<5;i++){const x=80+i*190;const g=el('g',{},ss);el('rect',{x,y:760,width:160,height:220,rx:14,fill:'#fff',stroke:INK,'stroke-width':5},g);const t=el('text',{x:x+80,y:900,'text-anchor':'middle','font-size':64,fill:G1,style:"font-family:'Fraunces';font-weight:800"},g);t.textContent=(i+1)+'.';const lb=el('text',{x:x+80,y:950,'text-anchor':'middle','font-size':34,fill:MUTE},g);lb.textContent='yıl';yrs.push(g)}
+// OUTRO
+const os=$('o_svg');const oUnder=stroke(os,roughPath([[90,445],[380,433],[560,440]],4),G1,10);
+const igBox=stroke(os,'M120 520 h56 a22 22 0 0 1 22 22 v56 a22 22 0 0 1 -22 22 h-56 a22 22 0 0 1 -22 -22 v-56 a22 22 0 0 1 22 -22 Z',INK,7);const igC=stroke(os,roughEllipse(148,570,22,22,0.5),INK,7);
+// ================= subtitles
+const CH=[];TL.forEach(L=>{let cur=[];L.words.forEach((w,i)=>{cur.push(w);if(cur.length>=4||/[.,:;?!]$/.test(w.w)||i===L.words.length-1){CH.push({ws:cur.slice(),s:cur[0].s,e:cur[cur.length-1].e});cur=[]}})});
+CH.forEach((c,i)=>{const nx=CH[i+1];c.hide=nx?Math.min(nx.s,c.e+0.6):c.e+0.6});
+const subs=$('subs');let curC=-1,wEls=[];
+function setSub(t){let k=-1;for(let i=0;i<CH.length;i++){if(t>=CH[i].s-0.06&&t<CH[i].hide){k=i;break}}
+  if(k<0){subs.style.opacity=0;return}subs.style.opacity=1;
+  if(k!==curC){curC=k;subs.innerHTML='';const ln=document.createElement('span');ln.className='ln';subs.appendChild(ln);wEls=CH[k].ws.map(w=>{const s=document.createElement('span');s.className='w';s.textContent=w.w;ln.appendChild(s);return {s,w}})}
+  const pin=eb(P(t,CH[k].s-0.06,0.22));subs.firstChild.style.transform=`scale(${0.85+0.15*pin}) rotate(${(1-pin)*-2}deg)`;
+  wEls.forEach(o=>{o.s.style.color=t>=o.w.s-0.02?(t<o.w.e+0.05?G1:INK):'#A9B5AA'})}
+
+function render(t){
+  $('turb').setAttribute('seed',1+Math.floor(t*12)%9);
+  $('cam').style.transform=`translate(${Math.sin(t*0.9)*3+Math.sin(t*2.3)*1.2}px,${Math.cos(t*0.7)*3+Math.sin(t*1.9)}px) rotate(${Math.sin(t*0.5)*0.12}deg)`;
+  $('topline').style.width=(1080*t/TOTAL)+'px';
+  order.forEach(k=>{const s=SC[k],e=$('s_'+k);const vis=t>=s.a-0.01&&t<s.b+0.45;e.style.display=vis?'block':'none';if(!vis)return;
+    e.style.zIndex=s.z;const pin=s.z===0?1:eio(P(t,s.a,0.5));const pout=eio(P(t,s.b,0.45));
+    e.style.transform=`translateX(${(1-pin)*100-pout*28}%)`;e.style.filter=pout>0?`brightness(${1-pout*0.25})`:'none'});
+  const S=k=>t-SC[k].start, ph=t*9;
+  // HOOK
+  {const l=S('hook');maskWords($('hk_t'),[0,0.6],l);
+   [tA,tB,cA,cB,gA,gB].forEach(e=>e.style.opacity=P(l,0.3,0.4));
+   const on=P(l,WF('hook',0,'sonu')-0.5,0.3);coneA.setAttribute('opacity',on*0.35);coneB.setAttribute('opacity',on*0.3);
+   draw(okA,eio(P(l,WF('hook',0,'ışığ'),0.5)));gapB.forEach((g,i)=>draw(g,eio(P(l,WF('hook',0,'ışığ')+0.2+i*0.15,0.4))));qB.style.opacity=P(l,WF('hook',0,'nası'),0.3);
+   const q=$('hk_q');const qp=eb(P(l,WF('hook',0,'uygul')-0.1,0.5));q.style.opacity=P(l,WF('hook',0,'uygul')-0.1,0.15);q.style.transform=`translateY(${(1-qp)*50}px)`;}
+  // TECH
+  {const l=S('tech');const st=[0,WF('tech',0,'soft'),WF('tech',0,'pulse')];
+   CH2.forEach((c,i)=>{c.gg.style.opacity=P(l,st[i]-0.2,0.3);draw(c.s,eio(P(l,st[i],i===2?3.5:1.6)));if(c.note)reveal(c.note,P(l,i===2?WF('tech',0,'bekl'):WF('tech',0,'düşük'),0.6))});}
+  // EVIDENCE
+  {const l=S('evidence');$('ev_l').style.opacity=P(l,0,0.4);$('ev_r').style.opacity=P(l,WF('evidence',0,'klinik')-0.2,0.4);
+   document.querySelectorAll('.evr').forEach((r,i)=>{const tt=[WF('evidence',0,'büzül'),WF('evidence',0,'kenar'),WF('evidence',0,'sınırl'),WF('evidence',0,'tutars')][i];const p=eo(P(l,tt,0.5));r.style.opacity=p;r.style.transform=`translateX(${(1-p)*-40}px)`});
+   const t2=LS('evidence',1);const rc=$('ev_rct');rc.style.opacity=P(l,t2-0.2,0.4);rc.style.transform=`translateY(${(1-eo(P(l,t2-0.2,0.6)))*40}px)`;reveal($('ev_res'),P(l,WF('evidence',1,'anlam'),0.7));}
+  // TIPS
+  {const l=S('tips');const T=p=>WF('tips',0,p);
+   tT.style.opacity=P(l,0,0.4);tGun.style.opacity=P(l,0,0.4);tCone.setAttribute('opacity',0.35*P(l,T('yakın'),0.3));
+   draw(tBr,eio(P(l,T('yakın'),0.5)));reveal(tBrT,P(l,T('yakın')+0.1,0.5));reveal(tAng,P(l,T('dik'),0.5));
+   hands.forEach((h,i)=>draw(h,eio(P(l,T('iki')+i*0.15,0.5))));eyeG.style.opacity=P(l,T('bakın')-0.6,0.3);draw(look,eio(P(l,T('bakın')-0.4,0.6)));
+   document.querySelectorAll('.tpr').forEach((r,i)=>{const tt=[T('yakın'),T('iki'),T('ışınl')][i];const p=eo(P(l,tt,0.5));r.style.opacity=p;r.style.transform=`translateX(${(1-p)*-50}px)`;draw(tChecks[i],eio(P(l,tt+0.5,0.4)))});
+   const st=$('tp_stat');const ts2=WF('tips',0,'bakın')+0.4;const sp=eb(P(l,ts2,0.6));st.style.opacity=P(l,ts2,0.15);st.style.transform=`scale(${0.7+0.3*sp})`;st.style.transformOrigin='left center';}
+  // CARE
+  {const l=S('care');const T=p=>WF('care',0,p);tc1.g.style.opacity=P(l,0,0.4);tc2.g.style.opacity=P(l,0.3,0.4);reveal($('cr_c1'),P(l,0.1,0.5));reveal($('cr_c2'),P(l,T('rezin'),0.6));
+   tc2.dots.forEach((d,i)=>d.setAttribute('opacity',P(l,T('rezin')+i*0.06,0.2)));
+   const b1=eo(P(l,T('ışık')-0.3,0.6));$('cb1').style.width=(560*b1)+'px';const b2=eo(P(l,T('ışık'),0.6));const drop=eio(P(l,T('yarı'),0.8));$('cb2').style.width=(560*b2*(1-0.62*drop))+'px';$('cb2t').style.opacity=drop;}
+  // SUCCESS
+  {const l=S('success');const b=eb(P(l,WF('success',0,'yüzde')-0.2,0.6));$('sc_big').style.opacity=P(l,WF('success',0,'yüzde')-0.2,0.15);$('sc_big').style.transform=`scale(${0.7+0.3*b})`;$('sc_big').style.transformOrigin='left center';
+   draw(scU,eio(P(l,WF('success',0,'iki'),0.5)));yrs.forEach((g,i)=>{const tt=WF('success',0,'uzun')-0.6+i*0.15;const p=eb(P(l,tt,0.4));g.style.opacity=P(l,tt,0.15);g.style.transform=`translateY(${(1-p)*40}px)`});
+   $('sc_note').style.opacity=P(l,WF('success',0,'yani'),0.5);}
+  // OUTRO
+  {const l=S('outro');maskWords($('o_t'),[0,0.8],l);draw(oUnder,eio(P(l,1.3,0.5)));
+   draw(igBox,eio(P(l,1.7,0.6)));draw(igC,eio(P(l,2.0,0.4)));reveal($('o_ig'),eo(P(l,1.9,0.8)));
+   const r=eo(P(l,2.5,0.8));$('o_refs').style.opacity=r;$('o_refs').style.transform=`translateY(${(1-r)*30}px)`;}
+  setSub(t);
+}
+window.render=render;render(0);
+</script>
+</body></html>

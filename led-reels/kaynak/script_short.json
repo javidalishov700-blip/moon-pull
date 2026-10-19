@@ -1,0 +1,42 @@
+[
+ {
+  "scene": "hook",
+  "say": "Aynı LED cihaz, aynı kompozit; ama sonuç, ışığı nasıl uyguladığınıza göre değişir.",
+  "file": "l00"
+ },
+ {
+  "scene": "tech",
+  "say": "Standart teknikte ışık baştan sona sabit yoğunluktadır. Soft-start tekniğinde önce düşük, sonra yüksek yoğunluk kullanılır; pulse-delay tekniğinde ise kısa bir ışınlamadan sonra birkaç dakika beklenip son polimerizasyon yapılır.",
+  "file": "l01"
+ },
+ {
+  "scene": "evidence",
+  "say": "Laboratuvar çalışmaları, bu tekniklerin büzülme stresini ve kenar aralığını azaltabileceğini gösteriyor; ancak klinik kanıtlar sınırlı ve tutarsız.",
+  "file": "l02"
+ },
+ {
+  "scene": "evidence",
+  "say": "İki yıllık randomize bir klinik çalışmada, soft-start ile yüksek yoğunluklu ışınlama arasında postoperatif hassasiyet açısından anlamlı fark bulunmadı.",
+  "file": "l03"
+ },
+ {
+  "scene": "tips",
+  "say": "Klinikte asıl fark uygulamada: ucu restorasyona yakın ve dik tutun, cihazı iki elle sabitleyin ve ışınlama boyunca restorasyona bakın.",
+  "file": "l04"
+ },
+ {
+  "scene": "care",
+  "say": "Ucu temiz ve hasarsız tutun; rezin artığı bulaşmış uçlarda ışık çıkışının yarıdan fazla düşebildiği gösterildi.",
+  "file": "l06"
+ },
+ {
+  "scene": "success",
+  "say": "Meta-analize göre posterior kompozitlerin yıllık başarısızlık oranı yaklaşık yüzde iki; yani doğru uygulandığında kompozit uzun ömürlüdür.",
+  "file": "l07"
+ },
+ {
+  "scene": "outro",
+  "say": "Doğru teknik, uzun ömürlü restorasyon. Faydalı bulduysanız kaydedin ve meslektaşlarınızla paylaşın.",
+  "file": "l08"
+ }
+]

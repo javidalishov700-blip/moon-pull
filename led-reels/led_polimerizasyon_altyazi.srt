@@ -1,0 +1,175 @@
+1
+00:00:00,435 --> 00:00:01,435
+Aynı LED cihaz,
+
+2
+00:00:01,435 --> 00:00:02,560
+aynı kompozit;
+
+3
+00:00:02,703 --> 00:00:03,518
+ama sonuç,
+
+4
+00:00:03,518 --> 00:00:04,927
+ışığı nasıl uyguladığınıza göre
+
+5
+00:00:04,927 --> 00:00:05,700
+değişir.
+
+6
+00:00:05,970 --> 00:00:07,511
+Standart teknikte ışık baştan
+
+7
+00:00:07,511 --> 00:00:09,131
+sona sabit yoğunluktadır.
+
+8
+00:00:09,131 --> 00:00:10,993
+Soft-start tekniğinde önce düşük,
+
+9
+00:00:10,993 --> 00:00:12,712
+sonra yüksek yoğunluk kullanılır;
+
+10
+00:00:12,896 --> 00:00:14,315
+pulse-delay tekniğinde ise kısa
+
+11
+00:00:14,315 --> 00:00:15,623
+bir ışınlamadan sonra birkaç
+
+12
+00:00:15,623 --> 00:00:17,223
+dakika beklenip son polimerizasyon
+
+13
+00:00:17,223 --> 00:00:17,926
+yapılır.
+
+14
+00:00:18,193 --> 00:00:19,482
+Laboratuvar çalışmaları,
+
+15
+00:00:19,482 --> 00:00:20,971
+bu tekniklerin büzülme stresini
+
+16
+00:00:20,971 --> 00:00:22,522
+ve kenar aralığını azaltabileceğini
+
+17
+00:00:22,522 --> 00:00:23,375
+gösteriyor;
+
+18
+00:00:23,508 --> 00:00:24,947
+ancak klinik kanıtlar sınırlı
+
+19
+00:00:24,947 --> 00:00:25,933
+ve tutarsız.
+
+20
+00:00:25,933 --> 00:00:26,897
+İki yıllık randomize bir
+
+21
+00:00:26,897 --> 00:00:27,983
+klinik çalışmada,
+
+22
+00:00:27,983 --> 00:00:29,503
+soft-start ile yüksek yoğunluklu
+
+23
+00:00:29,503 --> 00:00:31,466
+ışınlama arasında postoperatif hassasiyet
+
+24
+00:00:31,466 --> 00:00:33,447
+açısından anlamlı fark bulunmadı.
+
+25
+00:00:33,744 --> 00:00:35,483
+Klinikte asıl fark uygulamada:
+
+26
+00:00:35,575 --> 00:00:36,793
+ucu restorasyona yakın ve
+
+27
+00:00:36,793 --> 00:00:37,548
+dik tutun,
+
+28
+00:00:37,548 --> 00:00:38,926
+cihazı iki elle sabitleyin
+
+29
+00:00:38,926 --> 00:00:40,366
+ve ışınlama boyunca restorasyona
+
+30
+00:00:40,366 --> 00:00:41,018
+bakın.
+
+31
+00:00:41,303 --> 00:00:42,377
+Ucu temiz ve hasarsız
+
+32
+00:00:42,377 --> 00:00:43,030
+tutun;
+
+33
+00:00:43,071 --> 00:00:44,530
+rezin artığı bulaşmış uçlarda
+
+34
+00:00:44,530 --> 00:00:45,940
+ışık çıkışının yarıdan fazla
+
+35
+00:00:45,940 --> 00:00:47,337
+düşebildiği gösterildi.
+
+36
+00:00:47,625 --> 00:00:49,510
+Meta-analize göre posterior kompozitlerin
+
+37
+00:00:49,510 --> 00:00:51,030
+yıllık başarısızlık oranı yaklaşık
+
+38
+00:00:51,030 --> 00:00:51,954
+yüzde iki;
+
+39
+00:00:52,087 --> 00:00:53,768
+yani doğru uygulandığında kompozit
+
+40
+00:00:53,768 --> 00:00:54,812
+uzun ömürlüdür.
+
+41
+00:00:55,090 --> 00:00:56,059
+Doğru teknik,
+
+42
+00:00:56,059 --> 00:00:57,710
+uzun ömürlü restorasyon.
+
+43
+00:00:57,710 --> 00:00:59,380
+Faydalı bulduysanız kaydedin ve
+
+44
+00:00:59,380 --> 00:01:01,220
+meslektaşlarınızla paylaşın.
