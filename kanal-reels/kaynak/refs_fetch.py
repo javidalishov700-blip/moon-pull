@@ -51,7 +51,7 @@ def main():
                   f"{ji.get('yearOfPublication') or r.get('pubYear')};{ji.get('volume')}({ji.get('issue')}):{r.get('pageInfo')} "
                   f"| doi {r.get('doi')} | pmid {r.get('pmid')} | pmcid {r.get('pmcid')} | OA {r.get('isOpenAccess')}")
             ab = re.sub(r"<[^>]+>", "", r.get("abstractText", "") or "")
-            print("   ABSTRACT: " + re.sub(r"\s+", " ", html.unescape(ab)).strip()[:2200])
+            if not q.get("noabs"): print("   ABSTRACT: " + re.sub(r"\s+", " ", html.unescape(ab)).strip()[:2200])
             if q.get("full", True) and r.get("pmcid"):
                 xml = get(BASE + r["pmcid"] + "/fullTextXML")
                 ps = paras(xml)
@@ -64,6 +64,11 @@ def main():
                     if kind == "p" and hits and shown < q.get("maxp", 999):
                         shown += 1
                         print(f"   [{','.join(hits)}] {t[:1100]}")
+                refl = re.findall(r"<ref[ >].*?</ref>", xml, re.S)
+                for i in q.get("refs", []):
+                    if 0 < i <= len(refl):
+                        r_ = html.unescape(re.sub(r"<[^>]+>", " ", refl[i - 1]))
+                        print(f"   REF {i}: " + re.sub(r"\s+", " ", r_).strip()[:400])
         time.sleep(1)
 
 if __name__ == "__main__":

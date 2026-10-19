@@ -1,147 +1,72 @@
 {
  "queries": [
   {
-   "name": "ese2021",
-   "q": "DOI:\"10.1111/iej.13607\"",
+   "name": "sadaf2020",
+   "q": "TITLE:\"Survival Rates of Endodontically Treated Teeth After Placement of Definitive Coronal Restoration\"",
    "keys": [
-    "rubber dam",
-    "orifice",
-    "as soon as",
-    "delay",
-    "sealer",
-    "marginal ridge",
-    "cuspal coverage",
-    "cusp coverage",
-    "immediate",
-    "temporary",
-    "interim",
-    "coronal leakage",
-    "coronal seal"
+    "60",
+    "days",
+    "hazard",
+    "HR",
+    "73",
+    "%",
+    "delay"
    ],
-   "maxp": 18
-  },
-  {
-   "name": "bhuva2021",
-   "q": "DOI:\"10.1111/iej.13438\"",
-   "keys": [
-    "rubber dam",
-    "orifice",
-    "as soon as",
-    "delay",
-    "sealer",
-    "marginal ridge",
-    "cuspal coverage",
-    "cusp coverage",
-    "immediate",
-    "temporary",
-    "interim",
-    "coronal leakage",
-    "coronal seal"
-   ],
-   "maxp": 18
-  },
-  {
-   "name": "mannocci2022",
-   "q": "DOI:\"10.1111/iej.13796\"",
-   "keys": [
-    "rubber dam",
-    "orifice",
-    "as soon as",
-    "delay",
-    "sealer",
-    "marginal ridge",
-    "cuspal coverage",
-    "cusp coverage",
-    "immediate",
-    "temporary",
-    "interim",
-    "coronal leakage",
-    "coronal seal"
-   ],
-   "maxp": 14
+   "maxp": 25,
+   "noabs": true
   },
   {
    "name": "patel2025",
    "q": "DOI:\"10.1038/s41415-025-8401-4\"",
    "keys": [
-    "rubber dam",
+    "cusp",
+    "direct",
+    "composite",
+    "rubber",
+    "isolat",
     "orifice",
-    "as soon as",
-    "delay",
-    "sealer",
-    "marginal ridge",
-    "cuspal coverage",
-    "cusp coverage",
-    "immediate",
-    "temporary",
-    "interim",
-    "coronal leakage",
-    "coronal seal"
+    "bulk",
+    "increment"
    ],
-   "maxp": 14
+   "maxp": 30,
+   "refs": [
+    20,
+    30,
+    31,
+    38,
+    51
+   ],
+   "noabs": true
   },
   {
-   "name": "araujo2022",
-   "q": "DOI:\"10.1155/2022/2789073\"",
+   "name": "mannocci2022",
+   "q": "DOI:\"10.1111/iej.13796\"",
+   "keys": [
+    "bulk",
+    "increment",
+    "layer",
+    "orifice",
+    "isolation",
+    "rubber dam isolation",
+    "immediate dentine sealing",
+    "short fibre"
+   ],
+   "maxp": 12,
+   "noabs": true
+  },
+  {
+   "name": "suksaphar2018",
+   "q": "TITLE:\"Survival rates from fracture of endodontically treated premolars\"",
    "full": false
   },
   {
-   "name": "chen2023",
-   "q": "EXT_ID:36661351 AND SRC:MED",
+   "name": "pratt2016",
+   "q": "TITLE:\"Critical Time Lapse between Root Canal Completion and Crown Placement\"",
    "full": false
   },
   {
-   "name": "cochrane2021",
-   "q": "DOI:\"10.1002/14651858.CD009858.pub3\"",
-   "full": false
-  },
-  {
-   "name": "sadaf2020",
-   "q": "TITLE:\"Survival Rates of Endodontically Treated Teeth After Placement of Definitive Coronal Restoration\"",
-   "full": false
-  },
-  {
-   "name": "gillen2011",
-   "q": "DOI:\"10.1016/j.joen.2011.04.002\"",
-   "full": false
-  },
-  {
-   "name": "reeh1989",
-   "q": "TITLE:\"Reduction in tooth stiffness as a result of endodontic and restorative procedures\"",
-   "full": false
-  },
-  {
-   "name": "shu2018",
-   "q": "TITLE:\"Direct and Indirect Restorations for Endodontically Treated Teeth\"",
-   "full": false
-  },
-  {
-   "name": "suksaphar2017",
-   "q": "TITLE:\"Survival rates against fracture of endodontically treated posterior teeth\"",
-   "full": false
-  },
-  {
-   "name": "s_rubberdam",
-   "q": "TITLE:\"rubber dam\" AND (TITLE:\"endodontic\" OR TITLE:\"root canal\" OR TITLE:\"root filled\" OR TITLE:\"restor\")",
-   "n": 6,
-   "full": false
-  },
-  {
-   "name": "s_timing",
-   "q": "(TITLE:\"restoration\" AND (TITLE:\"timing\" OR TITLE:\"delay\" OR TITLE:\"time lapse\" OR TITLE:\"time interval\")) AND (TITLE:\"endodontic\" OR TITLE:\"root canal\" OR TITLE:\"root filled\")",
-   "n": 6,
-   "full": false
-  },
-  {
-   "name": "s_direct",
-   "q": "(TITLE:\"endodontically treated\" OR TITLE:\"root filled\" OR TITLE:\"root-filled\") AND TITLE:\"composite\" AND (TITLE:\"survival\" OR TITLE:\"clinical\" OR TITLE:\"randomized\" OR TITLE:\"retrospective\") AND PUB_YEAR:[2017 TO 2026]",
-   "n": 8,
-   "full": false
-  },
-  {
-   "name": "s_cusp",
-   "q": "(TITLE:\"cuspal coverage\" OR TITLE:\"cusp coverage\") AND PUB_YEAR:[2017 TO 2026]",
-   "n": 8,
+   "name": "karahan2026",
+   "q": "DOI:\"10.1016/j.joen.2025.12.010\"",
    "full": false
   }
  ]
