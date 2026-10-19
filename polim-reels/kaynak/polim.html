@@ -1,0 +1,273 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="fonts/fraunces/400-italic.css"><link rel="stylesheet" href="fonts/fraunces/600.css"><link rel="stylesheet" href="fonts/fraunces/600-italic.css"><link rel="stylesheet" href="fonts/fraunces/800.css">
+<link rel="stylesheet" href="fonts/dm-sans/500.css"><link rel="stylesheet" href="fonts/dm-sans/700.css"><link rel="stylesheet" href="fonts/dm-sans/800.css">
+<link rel="stylesheet" href="fonts/caveat/700.css">
+<style>
+:root{--paper:#EAF0E6;--ink:#13261C;--mute:#6C7C70;--g1:#1E6B47;--g2:#3F9E68;--lime:#7CC242;--amber:#D98E2B;--fill:#DCE6D5}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif}
+#cam{position:absolute;left:-20px;top:-20px;width:1120px;height:1960px}
+#stage{position:absolute;left:20px;top:20px;width:1080px;height:1920px;overflow:hidden}
+.scene{position:absolute;inset:0;background:var(--paper);overflow:hidden;display:none}
+.abs{position:absolute}
+.serif{font-family:'Fraunces',serif}
+.chap{position:absolute;left:80px;top:150px;display:flex;align-items:center;gap:18px;font-size:28px;font-weight:700;letter-spacing:3px;text-transform:uppercase}
+.chap b{font-family:'Fraunces',serif;font-style:italic;font-weight:600;font-size:34px;letter-spacing:0;color:var(--g1)}
+.chap i{display:block;height:2px;width:120px;background:var(--ink)}
+.h{font-family:'Fraunces',serif;font-weight:800;line-height:1.02;letter-spacing:-1.5px}
+.it{font-style:italic;font-weight:600}
+.mask{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:8px}
+.mask>span{display:inline-block}
+#subs{position:absolute;left:60px;right:60px;top:1395px;text-align:center;z-index:50}
+#subs .ln{display:inline-block;background:#fff;color:var(--ink);font-weight:800;font-size:54px;line-height:1.2;padding:8px 22px 12px;border-radius:12px;box-shadow:0 3px 0 rgba(10,40,20,.14)}
+#subs .w{display:inline-block;margin:0 6px}
+#grain{position:absolute;left:0;top:0;z-index:60;pointer-events:none;mix-blend-mode:multiply;opacity:.15}
+#topline{position:absolute;left:0;top:0;height:6px;background:var(--g1);z-index:61}
+svg text{font-family:'Caveat',cursive;font-weight:700}
+.row{display:flex;align-items:center;gap:18px;padding:24px 0;border-top:3px solid var(--ink);font-size:34px;font-weight:700;white-space:nowrap}
+.cap{font-family:'Fraunces',serif;font-style:italic;font-weight:600;font-size:40px;text-align:center}
+</style></head>
+<body>
+<div id="cam"><div id="stage">
+
+<div class="scene" id="s_hook">
+  <div class="abs h" id="hk_t" style="left:80px;top:190px;font-size:88px"><span class="mask"><span>İyi kompozit</span></span><br><span class="mask"><span class="it" style="color:var(--g1)">+ doğru ışık.</span></span></div>
+  <svg class="abs" id="hk_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="abs" id="hk_list" style="left:80px;top:470px">
+    <div class="h hk_n" style="font-size:110px">Halojen</div><div class="h hk_n" style="font-size:110px">LED</div><div class="h hk_n" style="font-size:110px">Plazma ark</div><div class="h hk_n" style="font-size:110px">Lazer</div>
+  </div>
+  <div class="abs h it" id="hk_q" style="left:80px;top:1130px;font-size:100px;color:var(--g1)">Hangi teknik?</div>
+</div>
+
+<div class="scene" id="s_devices">
+  <div class="chap"><b>01</b><i></i>Cihazlar</div>
+  <svg class="abs" id="dv_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="abs cap dv_c" style="left:80px;width:440px;top:700px">Halojen</div>
+  <div class="abs cap dv_c" style="left:560px;width:440px;top:700px">Plazma ark</div>
+  <div class="abs cap dv_c" style="left:80px;width:440px;top:1240px">Argon lazer</div>
+  <div class="abs cap dv_c" style="left:560px;width:440px;top:1240px">LED</div>
+</div>
+
+<div class="scene" id="s_spectrum">
+  <div class="chap"><b>02</b><i></i>Spektrum</div>
+  <div class="abs h" style="left:80px;top:220px;font-size:80px">Doğru renk,<br><span class="it" style="color:var(--g1)">doğru başlatıcı.</span></div>
+  <svg class="abs" id="sp_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+</div>
+
+<div class="scene" id="s_dose">
+  <div class="chap"><b>03</b><i></i>Doz</div>
+  <div class="abs h" id="ds_f" style="left:80px;top:220px;font-size:64px">Yoğunluk × Süre = <span class="it" style="color:var(--g1)">Enerji</span></div>
+  <div class="abs" id="ds_ex" style="left:80px;top:330px;font-size:44px;font-weight:800">1000 mW/cm² × 20 s</div>
+  <div class="abs h" id="ds_res" style="left:80px;top:390px;font-size:150px;color:var(--g1)">= <span id="ds_n">20</span> J/cm²</div>
+  <svg class="abs" id="ds_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+</div>
+
+<div class="scene" id="s_tech">
+  <div class="chap"><b>04</b><i></i>Teknikler</div>
+  <svg class="abs" id="tc_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+</div>
+
+<div class="scene" id="s_evidence">
+  <div class="chap"><b>05</b><i></i>Kanıt</div>
+  <div class="abs h" style="left:80px;top:220px;font-size:80px">Modüle teknikler<br><span class="it" style="color:var(--g1)">işe yarıyor mu?</span></div>
+  <div class="abs" id="ev_l" style="left:80px;width:440px;top:500px"><div class="h" style="font-size:56px;margin-bottom:10px">Laboratuvar</div>
+    <div class="row evr"><span class="h" style="color:var(--g1);font-size:52px">↓</span>Büzülme stresi</div><div class="row evr" style="border-bottom:3px solid var(--ink)"><span class="h" style="color:var(--g1);font-size:52px">↓</span>Kenar aralığı</div></div>
+  <div class="abs" id="ev_r" style="left:580px;width:420px;top:500px"><div class="h" style="font-size:56px;margin-bottom:10px">Klinik</div>
+    <div class="row evr"><span class="h" style="color:var(--amber);font-size:52px">?</span>Sınırlı</div><div class="row evr" style="border-bottom:3px solid var(--ink)"><span class="h" style="color:var(--amber);font-size:52px">?</span>Tutarsız</div></div>
+  <svg class="abs" id="ev_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+</div>
+
+<div class="scene" id="s_safety">
+  <div class="chap"><b>06</b><i></i>Güvenlik</div>
+  <svg class="abs" id="sf_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="abs cap" id="sf_c1" style="left:60px;width:480px;top:1080px">Isı <span style="font-family:'DM Sans';font-style:normal;font-weight:700;font-size:32px">→ pulpa</span></div>
+  <div class="abs cap" id="sf_c2" style="left:540px;width:480px;top:1080px">Turuncu <span style="font-family:'DM Sans';font-style:normal;font-weight:700;font-size:32px">filtre / gözlük</span></div>
+</div>
+
+<div class="scene" id="s_outro">
+  <div class="abs h" id="o_t" style="left:80px;top:200px;font-size:110px"><span class="mask"><span>Doğru ışık,</span></span><br><span class="mask"><span>doğru doz,</span></span><br><span class="mask"><span class="it" style="color:var(--g1)">doğru teknik.</span></span></div>
+  <svg class="abs" id="o_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="abs" id="o_ig" style="left:225px;top:648px;font-size:66px;font-weight:800;letter-spacing:-1px">@muraz_alishov</div>
+  <div class="abs" id="o_refs" style="left:80px;right:80px;top:830px;font-size:25px;line-height:1.45;color:#3E4E43">
+    <div style="font-size:26px;font-weight:800;letter-spacing:3px;color:var(--ink);margin-bottom:12px">KAYNAKLAR</div>
+    <div style="margin-bottom:10px">1. Rueggeberg FA. State-of-the-art: dental photocuring—a review. <i>Dent Mater.</i> 2011;27(1):39–52.</div>
+    <div style="margin-bottom:10px">2. Price RB, Ferracane JL, Shortall AC. Light-curing units: a review of what we need to know. <i>J Dent Res.</i> 2015;94(9):1179–1186.</div>
+    <div>3. FDI World Dental Federation. Intraoral light curing of resin-based materials. Policy statement, 2021.</div>
+  </div>
+</div>
+
+<div id="subs"></div>
+</div></div>
+<svg id="grain" width="1080" height="1920"><filter id="gf"><feTurbulence id="turb" type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="1"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#gf)"/></svg>
+<div id="topline"></div>
+<script>
+const TL=__TIMELINE__, TOTAL=__TOTAL__;
+const G1='#1E6B47',G2='#3F9E68',LIME='#7CC242',INK='#13261C',AMB='#D98E2B',FILL='#DCE6D5',MUTE='#6C7C70';
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)), P=(t,a,d)=>clamp((t-a)/d);
+const eo=t=>1-Math.pow(1-t,3), eio=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2, eb=t=>{const c1=1.4,c3=c1+1;return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2)};
+const $=id=>document.getElementById(id), lerp=(a,b,t)=>a+(b-a)*t, NS='http://www.w3.org/2000/svg';
+const order=[],SC={};
+TL.forEach(c=>{if(!SC[c.scene]){SC[c.scene]={start:c.start,lines:[]};order.push(c.scene)}SC[c.scene].end=c.end;SC[c.scene].lines.push(c)});
+order.forEach((k,i)=>{const s=SC[k];s.a=i===0?0:s.start-0.3;s.b=i<order.length-1?SC[order[i+1]].start-0.3:TOTAL;s.z=i});
+const LS=(k,i)=>SC[k].lines[i].start-SC[k].start;
+const W=(k,li,wi)=>{const ws=SC[k].lines[li].words;return ws[Math.min(wi,ws.length-1)].s-SC[k].start};
+let sd=13;const rnd=()=>{sd=(sd*16807)%2147483647;return sd/2147483647};
+function roughPath(pts,amp=3){const out=[];for(let i=0;i<pts.length-1;i++){const [x1,y1]=pts[i],[x2,y2]=pts[i+1];const n=Math.max(2,Math.round(Math.hypot(x2-x1,y2-y1)/40));for(let k=0;k<n;k++){const t=k/n;out.push([lerp(x1,x2,t)+(rnd()-.5)*amp,lerp(y1,y2,t)+(rnd()-.5)*amp])}}out.push(pts[pts.length-1]);
+  let d='M'+out[0].join(' ');for(let i=1;i<out.length-1;i++){const mx=(out[i][0]+out[i+1][0])/2,my=(out[i][1]+out[i+1][1])/2;d+=` Q${out[i][0]} ${out[i][1]} ${mx} ${my}`}return d+` L${out[out.length-1].join(' ')}`}
+function roughEllipse(cx,cy,rx,ry,amp=5){const pts=[];const st=rnd()*6.28;for(let i=0;i<=29;i++){const a=st+i/26*Math.PI*2;const k=1+(rnd()-.5)*0.06;pts.push([cx+Math.cos(a)*rx*k,cy+Math.sin(a)*ry*k])}return roughPath(pts,amp)}
+function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e}
+function stroke(svg,d,col=G1,w=6){const p=el('path',{d,fill:'none',stroke:col,'stroke-width':w,'stroke-linecap':'round','stroke-linejoin':'round'},svg);const L=p.getTotalLength();p.style.strokeDasharray=L;p.style.strokeDashoffset=L;return {p,L}}
+const draw=(s,pr)=>{s.p.style.strokeDashoffset=s.L*(1-pr)};
+function arrow(svg,x1,y1,x2,y2,col,w=5,bend=40){const mx=(x1+x2)/2+bend,my=(y1+y2)/2-bend;const body=stroke(svg,roughPath([[x1,y1],[mx,my],[x2,y2]],2),col,w);const a=Math.atan2(y2-my,x2-mx);const h=24;
+  const head=stroke(svg,`M${x2-h*Math.cos(a-0.45)} ${y2-h*Math.sin(a-0.45)} L${x2} ${y2} L${x2-h*Math.cos(a+0.45)} ${y2-h*Math.sin(a+0.45)}`,col,w);return [body,head]}
+const drawArrow=(ar,pr)=>{draw(ar[0],clamp(pr/0.8));draw(ar[1],clamp((pr-0.8)/0.2))};
+function htext(svg,x,y,txt,size,col,anchor='start',rot=0){const t=el('text',{x,y,'font-size':size,fill:col,'text-anchor':anchor,transform:`rotate(${rot} ${x} ${y})`},svg);t.textContent=txt;return t}
+function reveal(e,pr){e.style.opacity=clamp(pr*3);e.style.clipPath=`inset(-30px ${100-pr*100}% -30px -30px)`}
+function poly(svg,pts,fill,sc=INK,w=5){return el('path',{d:'M'+pts.map(q=>q.join(' ')).join(' L')+' Z',fill,stroke:sc,'stroke-width':w,'stroke-linejoin':'round'},svg)}
+function maskWords(root,times,t){root.querySelectorAll('.mask>span').forEach((m,i)=>{const p=eo(P(t,times[Math.min(i,times.length-1)],0.45));m.style.transform=`translateY(${(1-p)*110}%)`})}
+function pop(e,pr,ox,oy){e.style.opacity=clamp(pr*4);e.style.transformOrigin=`${ox}px ${oy}px`;e.style.transform=`scale(${eb(pr)})`}
+// beam: wavy laser line
+function beam(svg,x1,y1,x2,y2,amp=10,wl=40,w=6){const g=el('g',{},svg);const glow=el('path',{fill:'none',stroke:LIME,'stroke-width':w*3,'stroke-opacity':.22,'stroke-linecap':'round'},g);const core=el('path',{fill:'none',stroke:LIME,'stroke-width':w,'stroke-linecap':'round'},g);
+  return {g,set(pr,ph){const L=Math.hypot(x2-x1,y2-y1)*pr;const ang=Math.atan2(y2-y1,x2-x1);let d='';for(let s=0;s<=L;s+=4){const o=Math.sin((s/wl)*Math.PI*2-ph)*amp;const x=x1+Math.cos(ang)*s-Math.sin(ang)*o,y=y1+Math.sin(ang)*s+Math.cos(ang)*o;d+=(s?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)}core.setAttribute('d',d);glow.setAttribute('d',d)}}}
+function sparks(svg,cx,cy,n,col){const arr=[];for(let i=0;i<n;i++){const c=el('circle',{r:3+rnd()*4,fill:col},svg);arr.push({c,a:-Math.PI/2+(rnd()-.5)*2.2,v:60+rnd()*120,ph:rnd()})}return {set(t,on){arr.forEach(s=>{const k=((t*1.6+s.ph)%1);s.c.setAttribute('cx',cx+Math.cos(s.a)*s.v*k);s.c.setAttribute('cy',cy+Math.sin(s.a)*s.v*k+40*k*k);s.c.setAttribute('opacity',on*(1-k))})}}}
+
+
+const BLUE='#4F86D6',VIO='#7A5BA6';
+const WF=(k,li,pre)=>{const ws=SC[k].lines[li].words;const w=ws.find(x=>x.w.toLowerCase().replace(/[^a-zçğıöşü0-9]/g,'').startsWith(pre))||ws[0];return w.s-SC[k].start};
+// HOOK
+const hs=$('hk_svg');const gun=el('g',{},hs);
+el('path',{d:'M640 520 L900 470 Q960 460 965 520 L975 640 Q978 690 925 690 L820 690 L800 860 L740 860 L730 690 L660 690 Q620 690 618 640 Z',fill:'#fff',stroke:INK,'stroke-width':6},gun);
+el('path',{d:'M660 560 L560 760',stroke:INK,'stroke-width':34,'stroke-linecap':'round'},gun);el('path',{d:'M660 560 L560 760',stroke:'#CFE0F5','stroke-width':22,'stroke-linecap':'round'},gun);
+const cone=el('path',{d:'M545 770 L590 790 L520 1000 L380 950 Z',fill:BLUE,opacity:0},hs);
+const tooth=el('g',{},hs);poly(tooth,[[260,1260],[260,1010],[290,950],[350,930],[400,955],[450,930],[510,955],[540,1010],[540,1260]],FILL,INK,6);
+const comp=el('path',{d:'M340 975 Q400 995 460 975 L450 1060 L350 1060 Z',fill:'#B9B29A',stroke:INK,'stroke-width':4},hs);
+const hkCheck=stroke(hs,roughPath([[580,1060],[620,1100],[700,1010]],3),G1,10);
+// DEVICES
+const dv=$('dv_svg');const cells=[[80,260],[560,260],[80,800],[560,800]];
+const D=cells.map(([x,y])=>{const g=el('g',{transform:`translate(${x},${y})`},dv);el('rect',{x:0,y:0,width:440,height:420,fill:'none',stroke:'#B9C8B6','stroke-width':3},g);return g});
+const props=[['geniş spektrum · ısınır'],['çok yüksek yoğunluk'],['dar dalga boyu · kısa süre'],['serin · verimli · yaygın']];
+props.forEach((p,i)=>{const t=el('text',{x:220,y:395,'text-anchor':'middle','font-size':40,fill:i===0?AMB:G1},D[i]);t.textContent=p[0]});
+// halogen bulb + reflector
+el('path',{d:'M110 80 Q220 330 330 80',fill:'none',stroke:INK,'stroke-width':6},D[0]);el('circle',{cx:220,cy:170,r:46,fill:'#FFF6D8',stroke:INK,'stroke-width':5},D[0]);el('rect',{x:200,y:216,width:40,height:40,fill:'#B9C8B6',stroke:INK,'stroke-width':4},D[0]);
+const heat=[0,1,2].map(i=>stroke(D[0],roughPath([[300+i*30,150],[312+i*30,120],[300+i*30,90],[312+i*30,60]],2),AMB,5));
+// plasma arc
+el('rect',{x:110,y:140,width:60,height:100,rx:8,fill:'#fff',stroke:INK,'stroke-width':5},D[1]);el('rect',{x:270,y:140,width:60,height:100,rx:8,fill:'#fff',stroke:INK,'stroke-width':5},D[1]);
+const arc=stroke(D[1],'M170 190 L200 160 L215 215 L240 160 L270 190',BLUE,8);
+// argon laser
+el('rect',{x:60,y:160,width:200,height:70,rx:12,fill:'#fff',stroke:INK,'stroke-width':5},D[2]);el('rect',{x:260,y:180,width:24,height:30,fill:INK},D[2]);
+const lzb=el('path',{d:'M284 195 L284 195',stroke:BLUE,'stroke-width':6,'stroke-linecap':'round'},D[2]);
+// LED
+el('rect',{x:180,y:110,width:80,height:60,rx:8,fill:'#fff',stroke:INK,'stroke-width':5},D[3]);[195,245].forEach(x=>el('line',{x1:x,y1:80,x2:x,y2:110,stroke:INK,'stroke-width':5},D[3]));
+const ledCone=el('path',{d:'M180 170 L260 170 L330 330 L110 330 Z',fill:BLUE,opacity:0},D[3]);
+// SPECTRUM
+const sp=$('sp_svg');const X=nm=>100+(nm-360)/(520-360)*880,Y0=1150;
+const g=(c,s,h)=>{let d=`M${X(360)} ${Y0}`;for(let nm=360;nm<=520;nm+=1){d+=` L${X(nm).toFixed(1)} ${(Y0-h*Math.exp(-((nm-c)**2)/(2*s*s))).toFixed(1)}`}return d+` L${X(520)} ${Y0} Z`};
+const ledM=el('path',{d:g(460,9,330),fill:BLUE,opacity:0},sp);const ledV=el('path',{d:g(405,7,260),fill:VIO,opacity:0},sp);
+const cq=stroke(sp,g(468,17,420).replace(/ Z$/,''),G1,7);const tpo=stroke(sp,g(398,13,360).replace(/ Z$/,''),VIO,6);tpo.p.style.strokeDasharray=tpo.L;
+el('line',{x1:X(360),y1:Y0,x2:X(520),y2:Y0,stroke:INK,'stroke-width':5},sp);
+[400,450,500].forEach(nm=>{el('line',{x1:X(nm),y1:Y0,x2:X(nm),y2:Y0+16,stroke:INK,'stroke-width':4},sp);const t=el('text',{x:X(nm),y:Y0+56,'text-anchor':'middle','font-size':30,fill:MUTE,style:"font-family:'DM Sans';font-weight:700"},sp);t.textContent=nm+' nm'});
+const cqT=htext(sp,X(492),700,'kamforokinon',54,G1,'start',0),tpoT=htext(sp,X(362),760,'yeni başlatıcılar',48,VIO,'start',0);
+const ledMT=htext(sp,X(446),1220,'',0,'#000');
+const legM=htext(sp,X(470),1260,'tek dalga LED',40,BLUE,'start',0),legV=htext(sp,X(362),1260,'çok dalga (polywave)',40,VIO,'start',0);
+// DOSE distance demo
+const ds=$('ds_svg');const dTooth=el('g',{},ds);poly(dTooth,[[300,1290],[300,1100],[330,1040],[390,1020],[440,1045],[490,1020],[550,1045],[580,1100],[580,1290]],FILL,INK,6);
+const dComp=el('path',{d:'M380 1060 Q440 1080 500 1060 L490 1130 L390 1130 Z',fill:'#E8E2CC',stroke:INK,'stroke-width':4},ds);
+const tipG=el('g',{},ds);const dCone=el('path',{d:'',fill:BLUE,opacity:.35},tipG);el('rect',{x:-50,y:-160,width:100,height:160,rx:14,fill:'#fff',stroke:INK,'stroke-width':6},tipG);
+const meter=el('g',{},ds);el('rect',{x:850,y:700,width:60,height:500,rx:10,fill:'#fff',stroke:INK,'stroke-width':5},meter);const mFill=el('rect',{x:858,y:708,width:44,height:484,fill:G1},meter);
+const mT=el('text',{x:880,y:1250,'text-anchor':'middle','font-size':34,fill:INK},meter);mT.textContent='ışık';
+const dOk=htext(ds,640,820,'yakın + dik ✓',58,G1,'start',-3);
+// TECH charts
+const tc=$('tc_svg');const charts=[['Standart',[[0,0.85],[1,0.85]]],['Soft-start',[[0,0.25],[0.35,0.25],[0.4,0.85],[1,0.85]]],['Pulse-delay',[[0,0.35],[0.15,0.35],[0.15,0],[0.62,0],[0.62,0.85],[1,0.85]]]];
+const CH2=charts.map(([n,pts],i)=>{const y0=260+i*340,x0=420,w=580,h=230;const gg=el('g',{},tc);
+  const lab=el('text',{x:80,y:y0+120,'font-size':54,fill:INK,style:"font-family:'Fraunces';font-weight:800"},gg);lab.textContent=n;lab.setAttribute('font-size',48);
+  el('line',{x1:x0,y1:y0+h,x2:x0+w,y2:y0+h,stroke:INK,'stroke-width':4},gg);el('line',{x1:x0,y1:y0,x2:x0,y2:y0+h,stroke:INK,'stroke-width':4},gg);
+  const ax=el('text',{x:x0+w,y:y0+h+40,'text-anchor':'end','font-size':26,fill:MUTE,style:"font-family:'DM Sans';font-weight:700"},gg);ax.textContent='zaman →';
+  const ay=el('text',{x:x0-12,y:y0+20,'text-anchor':'end','font-size':26,fill:MUTE,style:"font-family:'DM Sans';font-weight:700"},gg);ay.textContent='yoğunluk';
+  const d='M'+pts.map(([a,b])=>`${x0+a*w} ${y0+h-b*h}`).join(' L');const s=stroke(gg,d,G1,8);
+  let note=null;if(i===2){note=htext(gg,x0+0.39*w,y0+h-0.45*h,'bekle · birkaç dk',40,AMB,'middle',0)}
+  if(i===1){note=htext(gg,x0+0.18*w,y0+h-0.25*h-20,'düşük',38,G2,'middle',0)}
+  return {gg,s,note}});
+// EVIDENCE
+const evs=$('ev_svg');const evQ=stroke(evs,roughEllipse(790,640,240,150,5),AMB,5);
+// SAFETY
+const sf=$('sf_svg');const sT=el('g',{},sf);poly(sT,[[120,1000],[120,620],[150,560],[210,540],[260,565],[310,540],[370,565],[400,620],[400,1000]],FILL,INK,6);
+const pulp=el('path',{d:'M200 760 Q260 730 320 760 L320 900 Q260 930 200 900 Z',fill:'#F2C9B8',stroke:INK,'stroke-width':4},sf);
+const sGun=el('path',{d:'M260 300 L260 500',stroke:BLUE,'stroke-width':40,'stroke-linecap':'round',opacity:.35},sf);
+const th=el('g',{},sf);el('rect',{x:440,y:620,width:40,height:240,rx:20,fill:'#fff',stroke:INK,'stroke-width':5},th);el('circle',{cx:460,cy:880,r:34,fill:AMB,stroke:INK,'stroke-width':5},th);const thF=el('rect',{x:450,y:830,width:20,height:30,fill:AMB},th);
+const eye=el('g',{},sf);el('path',{d:'M620 760 Q780 620 940 760 Q780 900 620 760 Z',fill:'#fff',stroke:INK,'stroke-width':6},eye);el('circle',{cx:780,cy:760,r:52,fill:G1},eye);el('circle',{cx:780,cy:760,r:22,fill:INK},eye);
+const shield=el('rect',{x:600,y:600,width:360,height:320,rx:30,fill:'#E8892B',opacity:0,stroke:INK,'stroke-width':5},sf);
+const bl=[0,1,2].map(i=>stroke(sf,`M${700+i*60} 420 L${720+i*60} 600`,BLUE,6));
+// OUTRO
+const os=$('o_svg');const oUnder=stroke(os,roughPath([[90,560],[380,548],[640,556]],4),G1,10);
+const igBox=stroke(os,'M120 640 h56 a22 22 0 0 1 22 22 v56 a22 22 0 0 1 -22 22 h-56 a22 22 0 0 1 -22 -22 v-56 a22 22 0 0 1 22 -22 Z',INK,7);const igC=stroke(os,roughEllipse(148,690,22,22,0.5),INK,7);
+// ================= subtitles
+const CH=[];TL.forEach(L=>{let cur=[];L.words.forEach((w,i)=>{cur.push(w);if(cur.length>=4||/[.,:;?!]$/.test(w.w)||i===L.words.length-1){CH.push({ws:cur.slice(),s:cur[0].s,e:cur[cur.length-1].e});cur=[]}})});
+CH.forEach((c,i)=>{const nx=CH[i+1];c.hide=nx?Math.min(nx.s,c.e+0.6):c.e+0.6});
+const subs=$('subs');let curC=-1,wEls=[];
+function setSub(t){let k=-1;for(let i=0;i<CH.length;i++){if(t>=CH[i].s-0.06&&t<CH[i].hide){k=i;break}}
+  if(k<0){subs.style.opacity=0;return}subs.style.opacity=1;
+  if(k!==curC){curC=k;subs.innerHTML='';const ln=document.createElement('span');ln.className='ln';subs.appendChild(ln);wEls=CH[k].ws.map(w=>{const s=document.createElement('span');s.className='w';s.textContent=w.w;ln.appendChild(s);return {s,w}})}
+  const pin=eb(P(t,CH[k].s-0.06,0.22));subs.firstChild.style.transform=`scale(${0.85+0.15*pin}) rotate(${(1-pin)*-2}deg)`;
+  wEls.forEach(o=>{o.s.style.color=t>=o.w.s-0.02?(t<o.w.e+0.05?G1:INK):'#A9B5AA'})}
+
+function render(t){
+  $('turb').setAttribute('seed',1+Math.floor(t*12)%9);
+  $('cam').style.transform=`translate(${Math.sin(t*0.9)*3+Math.sin(t*2.3)*1.2}px,${Math.cos(t*0.7)*3+Math.sin(t*1.9)}px) rotate(${Math.sin(t*0.5)*0.12}deg)`;
+  $('topline').style.width=(1080*t/TOTAL)+'px';
+  order.forEach(k=>{const s=SC[k],e=$('s_'+k);const vis=t>=s.a-0.01&&t<s.b+0.45;e.style.display=vis?'block':'none';if(!vis)return;
+    e.style.zIndex=s.z;const pin=s.z===0?1:eio(P(t,s.a,0.5));const pout=eio(P(t,s.b,0.45));
+    e.style.transform=`translateX(${(1-pin)*100-pout*28}%)`;e.style.filter=pout>0?`brightness(${1-pout*0.25})`:'none'});
+  const S=k=>t-SC[k].start, ph=t*9;
+  // HOOK
+  {const l=S('hook');const l2=LS('hook',1);const fade=1-P(l,l2-0.2,0.3);
+   maskWords($('hk_t'),[0,WF('hook',0,'ışınl')-0.6],l);
+   [gun,tooth].forEach(e=>e.style.opacity=P(l,0.2,0.4)*fade);gun.style.transform=`translate(${(1-eo(P(l,0.2,0.8)))*120}px,${(1-eo(P(l,0.2,0.8)))*-80}px)`;
+   const on=P(l,WF('hook',0,'ışınl'),0.3);cone.setAttribute('opacity',on*fade*(0.35+0.1*Math.sin(l*20)));
+   const cur=P(l,WF('hook',0,'ışınl')+0.2,1.6);comp.setAttribute('fill',`rgb(${Math.round(lerp(185,245,cur))},${Math.round(lerp(178,240,cur))},${Math.round(lerp(154,222,cur))})`);comp.style.opacity=fade;
+   draw(hkCheck,eio(P(l,WF('hook',0,'bağl'),0.5)));hkCheck.p.style.opacity=fade;
+   const ns=document.querySelectorAll('.hk_n');['halojen','led','plazma','lazer'].forEach((p,i)=>{const tt=WF('hook',1,p);const pr=eb(P(l,tt-0.1,0.45));ns[i].style.opacity=P(l,tt-0.1,0.15);ns[i].style.transform=`translateX(${(1-pr)*-80}px)`});
+   const q=$('hk_q');const qp=eb(P(l,WF('hook',1,'polimer')-0.2,0.5));q.style.opacity=P(l,WF('hook',1,'polimer')-0.2,0.15);q.style.transform=`translateY(${(1-qp)*50}px)`;}
+  // DEVICES
+  {const l=S('devices');const st=[WF('devices',0,'halojen'),WF('devices',0,'plazma'),WF('devices',0,'argon'),WF('devices',1,'led')];
+   D.forEach((g,i)=>g.style.opacity=eo(P(l,st[i]-0.3,0.5)));document.querySelectorAll('.dv_c').forEach((c,i)=>reveal(c,P(l,st[i],0.6)));
+   heat.forEach((h,i)=>{draw(h,eio(P(l,WF('devices',0,'ısın')+i*0.15,0.5)));h.p.style.transform=`translateY(${-Math.abs(Math.sin(l*2+i))*8}px)`});
+   draw(arc,eio(P(l,st[1]+0.2,0.4)));arc.p.style.opacity=0.6+0.4*Math.abs(Math.sin(l*25));
+   const lp=eio(P(l,st[2]+0.2,0.5));lzb.setAttribute('d',`M284 195 L${284+lp*130} 195`);
+   ledCone.setAttribute('opacity',0.3*P(l,st[3]+0.3,0.5));}
+  // SPECTRUM
+  {const l=S('spectrum');draw(cq,eio(P(l,WF('spectrum',0,'kamfor'),1.2)));reveal(cqT,P(l,WF('spectrum',0,'kamfor')+0.4,0.6));
+   ledM.setAttribute('opacity',0.35*P(l,WF('spectrum',0,'mavi'),0.4));reveal(legM,P(l,WF('spectrum',0,'mavi'),0.6));
+   draw(tpo,eio(P(l,WF('spectrum',1,'mor'),1.0)));reveal(tpoT,P(l,WF('spectrum',1,'mor')+0.3,0.6));
+   ledV.setAttribute('opacity',0.35*P(l,WF('spectrum',1,'dar')+0.8,0.5));reveal(legV,P(l,WF('spectrum',1,'aktive'),0.7));}
+  // DOSE
+  {const l=S('dose');const f=eo(P(l,0,0.6));$('ds_f').style.opacity=f;
+   const te=WF('dose',1,'örne');$('ds_ex').style.opacity=P(l,te,0.4);const rp=P(l,WF('dose',1,'20')-0.2,1.0);$('ds_res').style.opacity=P(l,WF('dose',1,'20')-0.2,0.2);$('ds_n').textContent=Math.round(20*eo(rp));
+   const t3=LS('dose',2);dTooth.style.opacity=P(l,t3-0.4,0.4);dComp.style.opacity=P(l,t3-0.4,0.4);meter.style.opacity=P(l,t3-0.4,0.4);
+   const up=eio(P(l,WF('dose',2,'uzakl'),0.8))*(1-eio(P(l,WF('dose',2,'yakın')-0.3,0.6)));const tilt=eio(P(l,WF('dose',2,'açı'),0.6))*(1-eio(P(l,WF('dose',2,'yakın')-0.3,0.6)));
+   const ty=1010-up*300;tipG.setAttribute('transform',`translate(440 ${ty}) rotate(${tilt*28})`);tipG.style.opacity=P(l,t3-0.4,0.4);
+   const spread=60+up*140;dCone.setAttribute('d',`M-50 0 L50 0 L${spread} ${1040-ty} L${-spread} ${1040-ty} Z`);
+   const lev=1-0.65*up-0.3*tilt;mFill.setAttribute('y',708+484*(1-lev));mFill.setAttribute('height',484*lev);mFill.setAttribute('fill',lev<0.6?AMB:G1);
+   reveal(dOk,P(l,WF('dose',2,'dik'),0.6));}
+  // TECH
+  {const l=S('tech');const st=[0,WF('tech',0,'soft'),WF('tech',0,'pulse')];
+   CH2.forEach((c,i)=>{c.gg.style.opacity=P(l,st[i]-0.2,0.3);draw(c.s,eio(P(l,st[i],i===2?3.5:1.6)));if(c.note)reveal(c.note,P(l,i===2?WF('tech',0,'bekl'):WF('tech',0,'düşük'),0.6))});}
+  // EVIDENCE
+  {const l=S('evidence');$('ev_l').style.opacity=P(l,0,0.4);$('ev_r').style.opacity=P(l,WF('evidence',0,'klinik')-0.2,0.4);
+   document.querySelectorAll('.evr').forEach((r,i)=>{const tt=[WF('evidence',0,'büzül'),WF('evidence',0,'kenar'),WF('evidence',0,'sınırl'),WF('evidence',0,'tutars')][i];const p=eo(P(l,tt,0.5));r.style.opacity=p;r.style.transform=`translateX(${(1-p)*-40}px)`});
+   draw(evQ,eio(P(l,WF('evidence',0,'tutars')+0.3,0.7)));}
+  // SAFETY
+  {const l=S('safety');[sT,pulp].forEach(e=>e.style.opacity=P(l,0,0.4));sGun.style.opacity=0.35*P(l,WF('safety',0,'yüksek'),0.3);
+   th.style.opacity=P(l,WF('safety',0,'pulpa')-0.2,0.3);const hf=eio(P(l,WF('safety',0,'ısı'),1.0));thF.setAttribute('y',830-hf*190);thF.setAttribute('height',30+hf*190);
+   pulp.setAttribute('fill',hf>0.6?'#F0A98C':'#F2C9B8');reveal($('sf_c1'),P(l,WF('safety',0,'ısı'),0.6));
+   eye.style.opacity=P(l,WF('safety',0,'mavi')-0.2,0.3);bl.forEach((b,i)=>draw(b,eio(P(l,WF('safety',0,'mavi')+i*0.1,0.4))));
+   shield.setAttribute('opacity',0.55*P(l,WF('safety',0,'turunc'),0.4));reveal($('sf_c2'),P(l,WF('safety',0,'turunc'),0.6));}
+  // OUTRO
+  {const l=S('outro');maskWords($('o_t'),[0,0.9,1.7],l);draw(oUnder,eio(P(l,2.2,0.5)));
+   draw(igBox,eio(P(l,2.6,0.6)));draw(igC,eio(P(l,2.9,0.4)));reveal($('o_ig'),eo(P(l,2.8,0.8)));
+   const r=eo(P(l,3.4,0.8));$('o_refs').style.opacity=r;$('o_refs').style.transform=`translateY(${(1-r)*30}px)`;}
+  setSub(t);
+}
+window.render=render;render(0);
+</script>
+</body></html>
