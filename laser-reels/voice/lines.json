@@ -1,0 +1,68 @@
+{
+ "voices": [
+  {
+   "voice": "en-US-BrianMultilingualNeural",
+   "lang": "tr-TR"
+  }
+ ],
+ "rate": "+4%",
+ "pitch": "+0Hz",
+ "lines": [
+  {
+   "id": "l00",
+   "say": "Bir lazer diş minesini kesebiliyor, bir diğeri mineye dokunmadan yalnızca dişetinde çalışıyor. Peki aradaki fark ne?"
+  },
+  {
+   "id": "l01",
+   "say": "Cevap, lazerin dalga boyunda saklı."
+  },
+  {
+   "id": "l02",
+   "say": "Her lazer belirli bir dalga boyunda ışık üretir ve bu ışık, dokudaki belirli hedefler tarafından emilir."
+  },
+  {
+   "id": "l03",
+   "say": "Bu hedeflere kromofor denir: su, hidroksiapatit, hemoglobin ve melanin."
+  },
+  {
+   "id": "l04",
+   "say": "Erbiyum lazerler su ve hidroksiapatit tarafından güçlü şekilde emilir; bu yüzden mine ve dentinde, yani sert dokuda kullanılabilir."
+  },
+  {
+   "id": "l05",
+   "say": "Diyot lazerler ise hemoglobin ve melanin tarafından emilir ve yumuşak doku işlemlerinde öne çıkar."
+  },
+  {
+   "id": "l06",
+   "say": "Restoratif pratikte lazer; çürük temizliği ve kavite hazırlığı, ölçü öncesi dişeti açma, gingivektomi ve dentin hassasiyetinin tedavisinde kullanılır."
+  },
+  {
+   "id": "l07",
+   "say": "Erbiyum lazer, su spreyi eşliğinde temassız ya da yakın mesafeden çalışır; su, ısıyı kontrol altında tutar."
+  },
+  {
+   "id": "l08",
+   "say": "Diyot lazer ise genellikle temas modunda, ucu aktive edilerek kullanılır ve kesim sırasında kanamayı azaltır."
+  },
+  {
+   "id": "l09",
+   "say": "Güç, atım süresi ve uç hareketi doğru ayarlanmazsa, oluşan ısı pulpaya ve çevre dokuya zarar verebilir."
+  },
+  {
+   "id": "l10",
+   "say": "Sistematik bir derlemeye göre, çürük temizliğinde lazer, anestezi ihtiyacı ve ağrı açısından avantaj gösterebilir; ancak kanıtlar düşük kalitededir."
+  },
+  {
+   "id": "l11",
+   "say": "Yani lazer frezin rakibi değil; doğru endikasyonda güçlü bir yardımcıdır."
+  },
+  {
+   "id": "l12",
+   "say": "Ve unutmayın: dental lazerlerin çoğu sınıf dört cihazdır. Hasta, hekim ve asistan, dalga boyuna uygun koruyucu gözlük takmalıdır."
+  },
+  {
+   "id": "l13",
+   "say": "Doğru dalga boyu, doğru doku, doğru teknik. Faydalı bulduysanız kaydedin ve meslektaşlarınızla paylaşın."
+  }
+ ]
+}

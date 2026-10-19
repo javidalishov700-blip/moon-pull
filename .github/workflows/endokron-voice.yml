@@ -11,6 +11,8 @@ on:
       - 'endokron-reels/voice/variants.json'
       - 'cfaktor-reels/voice/lines.json'
       - 'cfaktor-reels/voice/variants.json'
+      - 'laser-reels/voice/lines.json'
+      - 'laser-reels/voice/variants.json'
       - '.github/workflows/endokron-voice.yml'
   workflow_dispatch:
 
@@ -33,15 +35,17 @@ jobs:
           pip install -U edge-tts
           python -c "import asyncio,edge_tts;print([v['ShortName'] for v in asyncio.run(edge_tts.list_voices()) if v['Locale']=='tr-TR'])" \
             || pip install -q --force-reinstall "git+https://github.com/rany2/edge-tts.git"
-      - name: Bake C-factor narration
+      - name: Bake narration
         run: |
-          if git diff --name-only HEAD~1 HEAD | grep -q 'cfaktor-reels/voice/lines.json'; then python cfaktor-reels/voice/bake.py || true; fi
-          cd cfaktor-reels/voice && python bake_variants.py || true
+          for d in cfaktor-reels laser-reels; do
+            if git diff --name-only HEAD~1 HEAD | grep -q "/voice/lines.json"; then python /voice/bake.py || true; fi
+            if git diff --name-only HEAD~1 HEAD | grep -q "/voice/variants.json"; then (cd /voice && python bake_variants.py || true); fi
+          done
       - name: Commit audio
         run: |
           git config user.name "endokron-voice-bot"
           git config user.email "endokron-voice-bot@users.noreply.github.com"
-          git add -A endokron-reels/voice/out cfaktor-reels/voice/out
+          git add -A endokron-reels/voice/out cfaktor-reels/voice/out laser-reels/voice/out
           if git diff --cached --quiet; then echo "No audio changes."; exit 0; fi
           git commit -m "Bake endokron narration audio"
           for i in 1 2 3 4 5; do
