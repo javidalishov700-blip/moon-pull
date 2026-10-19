@@ -1,0 +1,259 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="fonts/manrope/500.css"><link rel="stylesheet" href="fonts/manrope/600.css"><link rel="stylesheet" href="fonts/manrope/700.css"><link rel="stylesheet" href="fonts/manrope/800.css">
+<style>
+:root{--bg:#F4F7F6;--ink:#12424A;--sub:#5B7D82;--line:#DCE7E6;--teal:#1C8C84;--blue:#3A78C2;--green:#2A9A6A;--amber:#C9862A;--coral:#D5604C;--soft:#EAF4F3}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);color:var(--ink);font-family:'Manrope',sans-serif}
+#stage{position:absolute;inset:0;overflow:hidden;background-color:var(--bg);background-image:radial-gradient(rgba(18,66,74,.075) 1.6px,transparent 1.7px);background-size:36px 36px}
+#glow{position:absolute;left:-200px;top:-300px;width:1480px;height:1100px;background:radial-gradient(closest-side,rgba(255,255,255,.95),rgba(255,255,255,0));pointer-events:none}
+.scene{position:absolute;inset:0;display:none}
+.abs{position:absolute}
+.eyebrow{position:absolute;left:70px;font-weight:800;font-size:26px;letter-spacing:5px;color:var(--teal);text-transform:uppercase}
+.title{position:absolute;left:70px;right:70px;font-weight:800;line-height:1.02;letter-spacing:-2.5px;color:var(--ink)}
+.card{position:absolute;background:#fff;border:2px solid var(--line);border-radius:28px;box-shadow:0 14px 34px rgba(18,66,74,.06)}
+.row{position:absolute;left:96px;right:60px;height:148px;display:flex;align-items:center;gap:24px;padding:0 26px 0 20px}
+.mini{width:118px;height:92px;flex:none;background:var(--soft);border-radius:18px}
+.nm{font-weight:800;font-size:44px;line-height:1.05;letter-spacing:-1px}
+.ds{font-weight:600;font-size:25px;color:var(--sub);margin-top:4px}
+.bd{margin-left:auto;display:flex;align-items:center;gap:8px;font-weight:800;font-size:26px;padding:10px 18px;border-radius:30px;border:2.5px solid;white-space:nowrap;background:#fff}
+.g{color:var(--green);border-color:var(--green)}.tl{color:#fff;background:var(--teal);border-color:var(--teal)}.am{color:var(--amber);border-color:var(--amber)}.co{color:var(--coral);border-color:var(--coral)}
+.chip{display:inline-block;font-weight:700;font-size:28px;padding:10px 22px;border-radius:30px;border:2px solid var(--line);background:#fff;color:var(--ink);margin:0 6px 12px 0}
+.step{position:absolute;left:70px;font-weight:800;font-size:40px;color:var(--teal);letter-spacing:1px}
+.lab{font-weight:800;font-size:24px;letter-spacing:3px;fill:#5B7D82;text-transform:uppercase}
+#handle{position:absolute;left:0;right:0;top:150px;display:flex;justify-content:center;align-items:center;gap:12px;font-weight:700;font-size:30px;color:var(--ink);opacity:.88;z-index:60}
+#bar{position:absolute;left:0;top:0;height:6px;background:var(--teal);z-index:70}
+#subs{position:absolute;left:50px;right:50px;top:1272px;text-align:center;z-index:50}
+#subs .w{display:inline-block;margin:0 6px;font-weight:800;font-size:58px;line-height:1.25;letter-spacing:-.5px;color:var(--ink);text-shadow:0 0 8px #F4F7F6,0 0 14px #F4F7F6}
+#refs{position:absolute;left:70px;right:70px;top:1440px;text-align:center;font-weight:600;font-size:23px;line-height:1.4;color:var(--sub);z-index:55}
+#refs b{font-weight:800;color:var(--ink)}
+</style></head>
+<body>
+<div id="stage">
+<div id="glow"></div>
+
+<!-- HOOK -->
+<div class="scene" id="s_hook">
+  <div class="eyebrow" style="top:262px">Kompozit polimerizasyonu</div>
+  <div class="title" style="top:312px;font-size:108px">En iyi<br>polimerizasyon<br>tekniği <span style="color:var(--teal)">hangisi?</span></div>
+  <svg class="abs" id="hk_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="abs" id="hk_chips" style="left:70px;right:40px;top:1158px"><span class="chip">Standart</span><span class="chip">Soft-start</span><span class="chip">Rampa</span><span class="chip">Pulse-delay</span><span class="chip">3 saniye</span></div>
+</div>
+
+<!-- RANK -->
+<div class="scene" id="s_rank">
+  <div class="eyebrow" style="top:262px">Araştırmalara göre</div>
+  <div class="title" style="top:300px;font-size:64px">5 teknik, <span style="color:var(--teal)">net sonuç</span></div>
+  <div class="card row" id="r1" style="top:400px"><svg class="mini" id="m1" viewBox="0 0 118 92"></svg><div><div class="nm">Standart</div><div class="ds">Sabit yoğunluk</div></div><div class="bd g" id="b1"></div></div>
+  <div class="card row" id="r2" style="top:566px"><svg class="mini" id="m2" viewBox="0 0 118 92"></svg><div><div class="nm">Soft-start</div><div class="ds">Düşük → yüksek, basamaklı</div></div><div class="bd g" id="b2"></div></div>
+  <div class="card row" id="r3" style="top:732px"><svg class="mini" id="m3" viewBox="0 0 118 92"></svg><div><div class="nm">Rampa</div><div class="ds">Giderek artan yoğunluk</div></div><div class="bd tl" id="b3"></div></div>
+  <div class="card row" id="r4" style="top:898px"><svg class="mini" id="m4" viewBox="0 0 118 92"></svg><div><div class="nm">Pulse-delay</div><div class="ds">Işınla · bekle · ışınla</div></div><div class="bd am" id="b4"></div></div>
+  <div class="card row" id="r5" style="top:1064px"><svg class="mini" id="m5" viewBox="0 0 118 92"></svg><div><div class="nm">3 saniye</div><div class="ds">Sadece bu moda özel kompozitler</div></div><div class="bd co" id="b5"></div></div>
+  <svg class="abs" id="rk_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+</div>
+
+<!-- TIP 1 -->
+<div class="scene" id="s_tip1">
+  <div class="eyebrow" style="top:262px">Başarıyı artıran 4 kural</div>
+  <div class="step" style="top:306px">01 / 04</div>
+  <div class="title" style="top:356px;font-size:84px">Uç yakın <span style="color:var(--teal)">ve dik</span></div>
+  <svg class="abs" id="t1_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+</div>
+
+<!-- TIP 2 -->
+<div class="scene" id="s_tip2">
+  <div class="eyebrow" style="top:262px">Başarıyı artıran 4 kural</div>
+  <div class="step" style="top:306px">02 / 04</div>
+  <div class="title" style="top:356px;font-size:84px">İki el, <span style="color:var(--teal)">gözler dişte</span></div>
+  <svg class="abs" id="t2_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="abs" id="t2_stat" style="left:70px;top:1020px;display:flex;align-items:baseline;gap:22px"><span style="font-weight:800;font-size:150px;letter-spacing:-5px;color:var(--teal)">+%60</span><span style="font-weight:700;font-size:32px;line-height:1.2;color:var(--ink)">eğitim sonrası<br>dişe ulaşan ışık</span></div>
+</div>
+
+<!-- TIP 3 -->
+<div class="scene" id="s_tip3">
+  <div class="eyebrow" style="top:262px">Başarıyı artıran 4 kural</div>
+  <div class="step" style="top:306px">03 / 04</div>
+  <div class="title" style="top:356px;font-size:76px">Sınıf II: <span style="color:var(--teal)">yandan ek ışınlama</span></div>
+  <svg class="abs" id="t3_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+</div>
+
+<!-- TIP 4 -->
+<div class="scene" id="s_tip4">
+  <div class="eyebrow" style="top:262px">Başarıyı artıran 4 kural</div>
+  <div class="step" style="top:306px">04 / 04</div>
+  <div class="title" style="top:356px;font-size:84px">Temiz uç, <span style="color:var(--teal)">düzenli ölçüm</span></div>
+  <svg class="abs" id="t4_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="abs" id="t4_bars" style="left:70px;width:600px;top:1010px"></div>
+</div>
+
+<!-- OUTRO -->
+<div class="scene" id="s_outro">
+  <div class="eyebrow" style="top:262px">Özet</div>
+  <div class="title" style="top:312px;font-size:86px">Başarıyı modun adı değil, <span style="color:var(--teal)">uygulama belirler.</span></div>
+  <div class="abs" id="o_share" style="left:70px;top:640px;display:flex;gap:26px">
+    <div class="card" style="position:relative;display:flex;align-items:center;gap:16px;padding:20px 30px;font-weight:800;font-size:38px"><svg width="40" height="48" viewBox="0 0 40 48"><path d="M6 4 H34 V44 L20 34 L6 44 Z" fill="none" stroke="#1C8C84" stroke-width="5" stroke-linejoin="round"/></svg>Kaydet</div>
+    <div class="card" style="position:relative;display:flex;align-items:center;gap:16px;padding:20px 30px;font-weight:800;font-size:38px"><svg width="50" height="46" viewBox="0 0 50 46"><path d="M4 22 L46 4 L34 42 L24 28 Z M24 28 L46 4" fill="none" stroke="#1C8C84" stroke-width="5" stroke-linejoin="round"/></svg>Paylaş</div>
+  </div>
+  <div class="abs" id="o_ig" style="left:70px;top:790px;display:flex;align-items:center;gap:18px;font-weight:800;font-size:54px;letter-spacing:-1px"><svg width="64" height="64" viewBox="0 0 64 64"><rect x="5" y="5" width="54" height="54" rx="16" fill="none" stroke="#12424A" stroke-width="5"/><circle cx="32" cy="32" r="12" fill="none" stroke="#12424A" stroke-width="5"/><circle cx="47" cy="17" r="3.5" fill="#12424A"/></svg>@muraz_alishov</div>
+  <div class="abs" id="o_refs" style="left:70px;right:70px;top:900px;font-weight:600;font-size:22px;line-height:1.42;color:var(--sub)">
+    <div style="font-weight:800;font-size:24px;letter-spacing:4px;color:var(--ink);margin-bottom:8px">KAYNAKLAR</div>
+    1. Betamar & Shah, Libyan J Dent 2018 &nbsp;2. Chan ve ark., Oper Dent 2008 &nbsp;3. Sousa ve ark., Polymers 2021 &nbsp;4. Meereis ve ark., J Mech Behav Biomed Mater 2018 &nbsp;5. Marovic ve ark., Materials 2021 & 2025 &nbsp;6. Ilie, Materials 2025 &nbsp;7. Altaie ve ark., Oper Dent 2021 &nbsp;8. Suliman ve ark., J Dent Educ 2020 &nbsp;9. Reinhard ve ark., J Funct Biomater 2026
+  </div>
+</div>
+
+<div id="handle"><svg width="34" height="34" viewBox="0 0 64 64"><rect x="5" y="5" width="54" height="54" rx="16" fill="none" stroke="#12424A" stroke-width="6"/><circle cx="32" cy="32" r="12" fill="none" stroke="#12424A" stroke-width="6"/><circle cx="47" cy="17" r="4" fill="#12424A"/></svg>@muraz_alishov</div>
+<div id="subs"></div>
+<div id="refs"></div>
+<div id="bar"></div>
+</div>
+
+<script>
+const TL=__TIMELINE__, TOTAL=__TOTAL__;
+const INK='#12424A',SUB='#5B7D82',LINE='#DCE7E6',TEAL='#1C8C84',BLUE='#3A78C2',GREEN='#2A9A6A',AMB='#C9862A',CORAL='#D5604C',SOFT='#EAF4F3',BEAM='#9CC4EE',GUM='#F3D2CB',COMP='#F3E4B8';
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)),P=(t,a,d)=>clamp((t-a)/d);
+const eo=t=>1-Math.pow(1-t,4),eio=t=>t<.5?8*t*t*t*t:1-Math.pow(-2*t+2,4)/2;
+const $=id=>document.getElementById(id),lerp=(a,b,t)=>a+(b-a)*t,NS='http://www.w3.org/2000/svg';
+const order=[],SC={};
+TL.forEach(c=>{if(!SC[c.scene]){SC[c.scene]={start:c.start,lines:[]};order.push(c.scene)}SC[c.scene].end=c.end;SC[c.scene].lines.push(c)});
+order.forEach((k,i)=>{const s=SC[k];s.a=i===0?0:s.start-0.3;s.b=i<order.length-1?SC[order[i+1]].start-0.3:TOTAL+1;s.i=i});
+const LS=(k,i)=>SC[k].lines[i].start-SC[k].start;
+const WF=(k,li,pre)=>{const ws=SC[k].lines[li].words;const w=ws.find(x=>x.w.toLocaleLowerCase('tr').replace(/[^a-zçğıöşü0-9%]/g,'').startsWith(pre))||ws[0];return w.s-SC[k].start};
+function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e}
+function fadeUp(e,pr,dy=36,base=''){const p=eo(pr);e.style.opacity=p;e.style.transform=`${base} translateY(${(1-p)*dy}px)`}
+function fadeX(e,pr,dx=-50){const p=eo(pr);e.style.opacity=p;e.style.transform=`translateX(${(1-p)*dx}px)`}
+function drawPath(p,pr){if(!p._L){p._L=p.getTotalLength();p.style.strokeDasharray=p._L}p.style.strokeDashoffset=p._L*(1-pr)}
+function txt(svg,x,y,s,size,col,anchor='start',weight=800){const t=el('text',{x,y,'font-size':size,fill:col,'text-anchor':anchor,style:`font-family:Manrope;font-weight:${weight}`},svg);t.textContent=s;return t}
+// mini charts
+function mini(svg,kind,col){el('line',{x1:14,y1:76,x2:106,y2:76,stroke:'#C9DADA','stroke-width':3,'stroke-linecap':'round'},svg);
+  let d='';if(kind==='std')d='M14 26 L106 26';else if(kind==='soft')d='M14 58 L46 58 L54 26 L106 26';else if(kind==='ramp'){d='M14 70';for(let i=0;i<=40;i++){const x=14+i*(92/40);const y=70-44*(1-Math.exp(-i/9));d+=` L${x.toFixed(1)} ${y.toFixed(1)}`}}
+  else if(kind==='pulse')d='M14 52 L30 52 L30 76 L66 76 L66 26 L106 26';else d='M14 76 L20 14 L32 14 L38 76 L106 76';
+  return el('path',{d,fill:'none',stroke:col,'stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},svg)}
+const CHECK='<svg width="26" height="26" viewBox="0 0 26 26"><path d="M4 14 L10 20 L22 6" stroke="currentColor" stroke-width="4.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const WARN='<svg width="28" height="26" viewBox="0 0 28 26"><path d="M14 3 L26 23 L2 23 Z" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/><path d="M14 10 L14 16" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/><circle cx="14" cy="19.6" r="1.9" fill="currentColor"/></svg>';
+// line-art tooth (side view)
+function tooth(svg,cx,top,s=1){const g=el('g',{transform:`translate(${cx},${top}) scale(${s})`},svg);
+  el('path',{d:'M-250 230 Q0 175 250 230 L250 320 L-250 320 Z',fill:GUM,opacity:.75},g);
+  el('path',{d:'M-160 300 L-160 80 Q-160 18 -108 4 Q-68 -10 -38 8 Q0 24 38 8 Q68 -10 108 4 Q160 18 160 80 L160 300',fill:'#fff',stroke:INK,'stroke-width':6,'stroke-linejoin':'round','stroke-linecap':'round'},g);
+  el('path',{d:'M-72 24 Q0 44 72 24 L62 104 L-62 104 Z',fill:COMP,stroke:INK,'stroke-width':4,'stroke-linejoin':'round'},g);return g}
+// light guide (line-art)
+function guide(svg){const g=el('g',{},svg);const cone=el('path',{fill:BEAM,opacity:.45},g);const body=el('path',{fill:'#fff',stroke:INK,'stroke-width':6,'stroke-linejoin':'round'},g);const lens=el('path',{fill:BEAM,stroke:INK,'stroke-width':5},g);
+  return {g,set(x,y,ang,len,spread,target,on=1){const dx=Math.sin(ang),dy=-Math.cos(ang),px=-dy,py=dx,w=34;
+    const x2=x+dx*len,y2=y+dy*len;body.setAttribute('d',`M${x+px*w} ${y+py*w} L${x2+px*w} ${y2+py*w} L${x2-px*w} ${y2-py*w} L${x-px*w} ${y-py*w} Z`);
+    lens.setAttribute('d',`M${x+px*w} ${y+py*w} L${x+dx*14+px*w} ${y+dy*14+py*w} L${x+dx*14-px*w} ${y+dy*14-py*w} L${x-px*w} ${y-py*w} Z`);
+    const ty=target;cone.setAttribute('d',`M${x+px*(w-4)} ${y+py*(w-4)} L${x-px*(w-4)} ${y-py*(w-4)} L${ty[0]-px*spread} ${ty[1]-py*spread} L${ty[0]+px*spread} ${ty[1]+py*spread} Z`);cone.setAttribute('opacity',.45*on)}}}
+
+// ===== HOOK
+const hs=$('hk_svg');const hT=tooth(hs,540,880,0.75);const hG=guide(hs);hG.set(540,862,0,150,90,[540,895],1);
+// ===== RANK
+mini($('m1'),'std',GREEN);mini($('m2'),'soft',BLUE);const ramp=mini($('m3'),'ramp',TEAL);mini($('m4'),'pulse',AMB);mini($('m5'),'fast',CORAL);
+$('b1').innerHTML=CHECK+'Güvenilir';$('b2').innerHTML=CHECK+'Güvenilir';$('b3').innerHTML="Lab'da en dengeli";$('b4').innerHTML='Lab '+CHECK+' Klinik ?';$('b5').innerHTML=WARN+'Riskli';
+const rk=$('rk_svg');const conn=el('path',{d:'M74 474 L60 474 L60 640 L74 640',fill:'none',stroke:TEAL,'stroke-width':4,'stroke-linecap':'round','stroke-linejoin':'round'},rk);
+const eqc=el('g',{},rk);el('circle',{cx:60,cy:557,r:24,fill:TEAL},eqc);txt(eqc,60,568,'=',34,'#fff','middle');
+// ===== TIP1
+const t1=$('t1_svg');const T1=tooth(t1,470,900,1);const G1=guide(t1);
+const br=el('path',{fill:'none',stroke:CORAL,'stroke-width':4,'stroke-linecap':'round'},t1);const brT=txt(t1,0,0,'10 mm',40,CORAL);
+const ang=el('g',{},t1);el('path',{d:'M410 846 L410 886 L370 886',fill:'none',stroke:TEAL,'stroke-width':4},ang);txt(ang,358,874,'90°',36,TEAL,'end');
+const meter=el('g',{},t1);txt(meter,820,560,'DİŞE ULAŞAN',22,SUB,'middle');txt(meter,820,588,'IŞIK',22,SUB,'middle');
+el('rect',{x:780,y:610,width:80,height:420,rx:20,fill:'#fff',stroke:LINE,'stroke-width':3},meter);const mF=el('rect',{x:792,y:622,width:56,height:396,rx:12,fill:TEAL},meter);
+const mPct=txt(meter,820,1080,'%100',40,INK,'middle');
+const ok1=el('g',{},t1);el('circle',{cx:200,cy:650,r:46,fill:'none',stroke:TEAL,'stroke-width':5},ok1);el('path',{d:'M180 652 L195 667 L222 636',fill:'none',stroke:TEAL,'stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},ok1);
+// ===== TIP2
+const t2=$('t2_svg');const T2=tooth(t2,470,820,0.85);const G2=guide(t2);
+function grip(svg,x,y,label){const g=el('g',{},svg);el('circle',{cx:x,cy:y,r:30,fill:'#fff',stroke:TEAL,'stroke-width':5},g);txt(g,x,y+12,label,32,TEAL,'middle');return g}
+const gp1=grip(t2,470,520,'1'),gp2=grip(t2,470,660,'2');
+const gpl=el('g',{},t2);el('path',{d:'M500 520 L600 520 M500 660 L600 660',stroke:TEAL,'stroke-width':3,'stroke-dasharray':'6 8'},gpl);txt(gpl,612,530,'1. el',34,INK);txt(gpl,612,670,'2. el',34,INK);
+const eye=el('g',{},t2);el('path',{d:'M790 520 Q870 465 950 520 Q870 575 790 520 Z',fill:'#fff',stroke:INK,'stroke-width':5},eye);el('circle',{cx:870,cy:520,r:22,fill:'none',stroke:INK,'stroke-width':5},eye);el('circle',{cx:870,cy:520,r:8,fill:INK},eye);
+const look=el('path',{d:'M840 570 Q720 690 560 830',fill:'none',stroke:BLUE,'stroke-width':4,'stroke-dasharray':'10 10','stroke-linecap':'round'},t2);
+// ===== TIP3 (occlusal view)
+const t3=el('g',{transform:'translate(0,40)'},$('t3_svg'));
+el('path',{d:'M330 560 Q330 480 420 470 L660 470 Q750 480 750 560 L750 860 Q750 940 660 950 L420 950 Q330 940 330 860 Z',fill:'#fff',stroke:INK,'stroke-width':6},t3);
+el('path',{d:'M330 630 L450 630 Q468 630 468 648 L468 792 Q468 810 450 810 L330 810 Z',fill:COMP,stroke:INK,'stroke-width':4},t3);
+el('path',{d:'M540 560 Q575 640 540 720 M612 545 Q650 640 622 750',fill:'none',stroke:'#D3E1E1','stroke-width':5,'stroke-linecap':'round'},t3);
+const band=el('path',{d:'M310 540 Q310 450 420 445 L660 445 Q770 450 770 540 L770 880 Q770 975 660 975 L420 975 Q310 975 310 880 Z',fill:'none',stroke:'#A9BCC9','stroke-width':12,'stroke-dasharray':'2 0'},t3);
+const lbB=txt(t3,540,1040,'BUKKAL',26,SUB,'middle'),lbL=txt(t3,540,425,'LİNGUAL',26,SUB,'middle');
+const G3b=guide(t3),G3l=guide(t3);
+const hard=el('g',{},t3);el('rect',{x:640,y:1000,width:300,height:70,rx:35,fill:'#fff',stroke:GREEN,'stroke-width':4},hard);txt(hard,790,1046,'proksimal sertlik ↑',30,GREEN,'middle');
+// ===== TIP4
+const t4=$('t4_svg');
+function face(cx,cy,dirty){const g=el('g',{},t4);el('circle',{cx,cy,r:160,fill:'#F2F8FF',stroke:INK,'stroke-width':6},g);
+  for(let i=0;i<30;i++){const a=(i*137.5)%360*Math.PI/180,r=(i*53)%140;el('circle',{cx:cx+Math.cos(a)*r,cy:cy+Math.sin(a)*r,r:4,fill:'#C9DDF2'},g)}
+  const bits=[];if(dirty){for(let i=0;i<11;i++){const a=(i*97)%360*Math.PI/180,r=28+((i*41)%100);bits.push(el('ellipse',{cx:cx+Math.cos(a)*r,cy:cy+Math.sin(a)*r,rx:14+(i%4)*6,ry:10+(i%3)*5,fill:'#D8C59A',stroke:'#B79C61','stroke-width':2.5,opacity:0},g))}
+    bits.push(el('path',{d:`M${cx+66} ${cy-140} L${cx+24} ${cy-46} L${cx+88} ${cy+18}`,fill:'none',stroke:INK,'stroke-width':4,opacity:0},g))}
+  txt(g,cx,cy+215,dirty?'Kirli / hasarlı uç':'Temiz uç',34,dirty?CORAL:TEAL,'middle');return {g,bits}}
+const F1=face(300,670,false),F2=face(780,670,true);
+const radio=el('g',{},t4);el('rect',{x:740,y:1000,width:270,height:190,rx:28,fill:'#fff',stroke:INK,'stroke-width':5},radio);
+el('path',{d:'M785 1140 A90 90 0 0 1 965 1140',fill:'none',stroke:LINE,'stroke-width':12},radio);el('path',{d:'M785 1140 A90 90 0 0 1 875 1050',fill:'none',stroke:TEAL,'stroke-width':12},radio);
+const needle=el('path',{d:'M875 1140 L875 1068',stroke:CORAL,'stroke-width':6,'stroke-linecap':'round'},radio);el('circle',{cx:875,cy:1140,r:10,fill:INK},radio);txt(radio,875,1180,'RADYOMETRE',20,SUB,'middle');
+$('t4_bars').innerHTML=`<div style="font-weight:800;font-size:22px;letter-spacing:3px;color:${SUB};margin-bottom:14px">IŞIK ÇIKIŞI</div>
+ <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px"><div style="width:110px;font-weight:800;font-size:30px">Temiz</div><div id="cb1" style="height:44px;border-radius:22px;width:0;background:${TEAL}"></div></div>
+ <div style="display:flex;align-items:center;gap:16px"><div style="width:110px;font-weight:800;font-size:30px">Kirli</div><div id="cb2" style="height:44px;border-radius:22px;width:0;background:${CORAL}"></div><div id="cb2t" style="font-weight:800;font-size:44px;color:${CORAL}">−%62</div></div>`;
+
+// ===== refs per scene/line
+const REFS={rank:[['Betamar & Shah, Libyan J Dent 2018','Chan ve ark., Oper Dent 2008'],['Sousa ve ark., Polymers 2021'],['Sousa ve ark., Polymers 2021','Meereis ve ark., J Mech Behav Biomed Mater 2018'],['Marovic ve ark., Materials 2021 & 2025','Ilie, Materials 2025']],
+  tip1:[['Altaie ve ark., Oper Dent 2021']],tip2:[['Suliman ve ark., J Dent Educ 2020']],tip3:[['Reinhard ve ark., J Funct Biomater 2026 (in vitro)']],tip4:[['Altaie ve ark., Oper Dent 2021']]};
+const refsEl=$('refs');let lastRef='';
+function setRefs(t){let k=null,li=0;order.forEach(s=>{if(t>=SC[s].a&&t<SC[s].b)k=s});if(!k||!REFS[k]){refsEl.style.opacity=0;return}
+  const ls=SC[k].lines;for(let i=0;i<ls.length;i++){if(t>=ls[i].start-0.3)li=i}const arr=REFS[k][Math.min(li,REFS[k].length-1)];const html='<b>Kaynak:</b> '+arr.join(' · ');
+  if(html!==lastRef){refsEl.innerHTML=html;lastRef=html}const st=Math.max(SC[k].a,ls[li].start-0.3);refsEl.style.opacity=eo(P(t,st,0.4))*(1-P(t,SC[k].b-0.25,0.25))}
+
+// ===== subtitles
+const CH=[];TL.forEach(L=>{let cur=[];L.words.forEach((w,i)=>{cur.push(w);if(cur.length>=3||/[.,:;?!]$/.test(w.w)||i===L.words.length-1){CH.push({ws:cur.slice(),s:cur[0].s,e:cur[cur.length-1].e});cur=[]}})});
+CH.forEach((c,i)=>{const nx=CH[i+1];c.hide=nx?Math.min(nx.s,c.e+0.5):c.e+0.5});
+const subs=$('subs');let curC=-1,wEls=[];
+function setSub(t){let k=-1;for(let i=0;i<CH.length;i++){if(t>=CH[i].s-0.05&&t<CH[i].hide){k=i;break}}
+  if(k<0){subs.style.opacity=0;return}subs.style.opacity=1;
+  if(k!==curC){curC=k;subs.innerHTML='';wEls=CH[k].ws.map(w=>{const s=document.createElement('span');s.className='w';s.textContent=w.w;subs.appendChild(s);return {s,w}})}
+  const pin=eo(P(t,CH[k].s-0.05,0.18));subs.style.opacity=pin;subs.style.transform=`translateY(${(1-pin)*14}px)`;
+  wEls.forEach(o=>{const on=t>=o.w.s-0.02&&t<o.w.e+0.06;const done=t>=o.w.e+0.06;o.s.style.color=on?TEAL:(done?INK:'rgba(18,66,74,.32)');o.s.style.backgroundImage=on?'linear-gradient(transparent 74%,rgba(28,140,132,.20) 74%)':'none'})}
+
+function render(t){
+  $('bar').style.width=(1080*clamp(t/TOTAL))+'px';
+  order.forEach(k=>{const s=SC[k],e=$('s_'+k);const vis=t>=s.a&&t<s.b+0.3;e.style.display=vis?'block':'none';if(!vis)return;
+    const pin=s.i===0?1:eo(P(t,s.a,0.4)),pout=eio(P(t,s.b-0.05,0.35));e.style.opacity=pin*(1-pout);e.style.transform=`translateY(${(1-pin)*40-pout*30}px)`});
+  const S=k=>t-SC[k].start;
+  // HOOK (fully visible at t=0 for cover)
+  {const l=S('hook');const chips=$('hk_chips').children;const sw=(t*1.4)%2.2;for(let i=0;i<chips.length;i++){const on=Math.abs(sw-i*0.36)<0.25;chips[i].style.borderColor=on?TEAL:LINE;chips[i].style.color=on?TEAL:INK}
+   hG.set(540,862,0,150,90+6*Math.sin(t*3),[540,895],0.8+0.2*Math.sin(t*3))}
+  // RANK
+  {const l=S('rank');const L1=0,L2=LS('rank',1),L3=LS('rank',2),L4=LS('rank',3);
+   fadeX($('r1'),P(l,0.05,0.45));fadeX($('r2'),P(l,WF('rank',0,'standart'),0.45));
+   ['b1','b2'].forEach((id,i)=>{const p=eo(P(l,WF('rank',0,'güvenil')+i*0.12,0.35));$(id).style.opacity=p;$(id).style.transform=`translateX(${(1-p)*20}px)`});
+   drawPath(conn,eo(P(l,WF('rank',0,'fark'),0.5)));eqc.style.opacity=P(l,WF('rank',0,'fark')+0.2,0.3);
+   fadeX($('r3'),P(l,L2-0.1,0.45));drawPath(ramp,eio(P(l,WF('rank',1,'yavaş'),1.2)));const b3=eo(P(l,WF('rank',1,'koru'),0.4));$('b3').style.opacity=b3;$('b3').style.transform=`translateX(${(1-b3)*20}px)`;
+   fadeX($('r4'),P(l,L3-0.1,0.45));const b4=eo(P(l,WF('rank',2,'kanıt'),0.4));$('b4').style.opacity=b4;$('b4').style.transform=`translateX(${(1-b4)*20}px)`;
+   fadeX($('r5'),P(l,L4-0.1,0.45));const b5=eo(P(l,WF('rank',3,'riskl'),0.4));$('b5').style.opacity=b5;$('b5').style.transform=`translateX(${(1-b5)*20}px)`;
+   const foc=[[L1,L2],[L1,L2],[L2,L3],[L3,L4],[L4,999]];['r1','r2','r3','r4','r5'].forEach((id,i)=>{const e=$(id);const active=l>=foc[i][0]-0.15&&l<foc[i][1]-0.15;if(l>L2-0.15){e.style.opacity=Math.min(parseFloat(e.style.opacity||1),active?1:0.45);e.style.borderColor=active?TEAL:LINE}else{e.style.borderColor=LINE}});
+   conn.style.opacity=l>L2-0.15?0.45:1;eqc.style.opacity=Math.min(eqc.style.opacity,l>L2-0.15?0.45:1);}
+  // TIP1
+  {const l=S('tip1');const T=p=>WF('tip1',0,p);
+   const far=eio(P(l,T('on'),0.8))*(1-eio(P(l,T('kaybol')+0.9,0.6)));const yTip=lerp(880,640,far);
+   G1.set(470,yTip,0,260,lerp(110,190,far),[470,920],P(l,T('yakın')-0.3,0.4));
+   br.setAttribute('d',`M560 ${yTip+8} L590 ${yTip+8} L590 900 L560 900`);br.style.opacity=far;brT.setAttribute('x',604);brT.setAttribute('y',(yTip+900)/2+14);brT.style.opacity=far;
+   const lev=1-0.34*eio(P(l,T('kaybol')-0.3,0.7))*(1-eio(P(l,T('kaybol')+0.9,0.6)));mF.setAttribute('y',622+396*(1-lev));mF.setAttribute('height',396*lev);mF.setAttribute('fill',lev<0.92?CORAL:TEAL);mPct.textContent='%'+Math.round(lev*100);mPct.setAttribute('fill',lev<0.92?CORAL:INK);
+   meter.style.opacity=P(l,T('on')-0.4,0.4);ang.style.opacity=P(l,T('dik'),0.3)*(1-far);ok1.style.opacity=P(l,T('kaybol')+1.1,0.4);}
+  // TIP2
+  {const l=S('tip2');const T=p=>WF('tip2',0,p);
+   G2.set(470,790,0,330,100,[470,840],P(l,0.1,0.3));
+   [gp1,gp2].forEach((g,i)=>{g.style.opacity=P(l,T('iki')+i*0.15,0.3)});gpl.style.opacity=P(l,T('elle'),0.4);
+   eye.style.opacity=P(l,T('bak')-0.3,0.3);drawPath(look,eio(P(l,T('bak'),0.6)));
+   fadeUp($('t2_stat'),P(l,T('yüzde')-0.25,0.5),30);}
+  // TIP3
+  {const l=S('tip3');const T=p=>WF('tip3',0,p);
+   const bo=eio(P(l,T('matris'),0.7));band.style.opacity=1-bo;
+   const bk=P(l,T('bukkal')-0.1,0.4),lg=P(l,T('lingual')-0.1,0.4);
+   G3b.g.style.opacity=bk;G3b.set(300+20*(1-eo(bk)),980+30*(1-eo(bk)),Math.PI+0.55,150,70,[400,720],1);
+   G3l.g.style.opacity=lg;G3l.set(300+20*(1-eo(lg)),460-30*(1-eo(lg)),-0.55,150,70,[400,720],1);
+   hard.style.opacity=eo(P(l,T('ışınl'),0.4));}
+  // TIP4
+  {const l=S('tip4');const T=p=>WF('tip4',0,p);
+   F1.g.style.opacity=eo(P(l,0,0.4));F2.g.style.opacity=eo(P(l,0.2,0.4));F2.bits.forEach((b,i)=>b.setAttribute('opacity',P(l,T('kirli')+i*0.05,0.2)));
+   const b1=eo(P(l,T('kirli')-0.3,0.5));$('cb1').style.width=(380*b1)+'px';const b2=eo(P(l,T('kirli'),0.5));const dr=eio(P(l,T('yarı'),0.7));$('cb2').style.width=(380*b2*(1-0.62*dr))+'px';$('cb2t').style.opacity=dr;
+   radio.style.opacity=eo(P(l,T('ölç')-0.2,0.4));needle.setAttribute('transform',`rotate(${-75+75*eio(P(l,T('ölç'),1.0))+Math.sin(l*2.5)*6} 875 1140)`);}
+  // OUTRO
+  {const l=S('outro');const T=p=>WF('outro',0,p);
+   fadeUp($('o_share'),P(l,T('kaydet')-0.2,0.5),30);fadeUp($('o_ig'),P(l,T('paylaş')-0.2,0.5),30);fadeUp($('o_refs'),P(l,T('paylaş'),0.6),20);}
+  setRefs(t);setSub(t);
+}
+window.render=render;render(0);
+</script>
+</body></html>
