@@ -1,0 +1,313 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="fonts/fraunces/400-italic.css"><link rel="stylesheet" href="fonts/fraunces/600.css"><link rel="stylesheet" href="fonts/fraunces/600-italic.css"><link rel="stylesheet" href="fonts/fraunces/800.css">
+<link rel="stylesheet" href="fonts/dm-sans/500.css"><link rel="stylesheet" href="fonts/dm-sans/700.css"><link rel="stylesheet" href="fonts/dm-sans/800.css">
+<link rel="stylesheet" href="fonts/caveat/700.css">
+<style>
+:root{--paper:#EAF0E6;--ink:#13261C;--mute:#6C7C70;--g1:#1E6B47;--g2:#3F9E68;--lime:#7CC242;--amber:#D98E2B;--fill:#DCE6D5}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif}
+#cam{position:absolute;left:-20px;top:-20px;width:1120px;height:1960px}
+#stage{position:absolute;left:20px;top:20px;width:1080px;height:1920px;overflow:hidden}
+.scene{position:absolute;inset:0;background:var(--paper);overflow:hidden;display:none}
+.abs{position:absolute}
+.serif{font-family:'Fraunces',serif}
+.chap{position:absolute;left:80px;top:150px;display:flex;align-items:center;gap:18px;font-size:28px;font-weight:700;letter-spacing:3px;text-transform:uppercase}
+.chap b{font-family:'Fraunces',serif;font-style:italic;font-weight:600;font-size:34px;letter-spacing:0;color:var(--g1)}
+.chap i{display:block;height:2px;width:120px;background:var(--ink)}
+.h{font-family:'Fraunces',serif;font-weight:800;line-height:1.02;letter-spacing:-1.5px}
+.it{font-style:italic;font-weight:600}
+.mask{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:8px}
+.mask>span{display:inline-block}
+#subs{position:absolute;left:60px;right:60px;top:1395px;text-align:center;z-index:50}
+#subs .ln{display:inline-block;background:#fff;color:var(--ink);font-weight:800;font-size:54px;line-height:1.2;padding:8px 22px 12px;border-radius:12px;box-shadow:0 3px 0 rgba(10,40,20,.14)}
+#subs .w{display:inline-block;margin:0 6px}
+#grain{position:absolute;left:0;top:0;z-index:60;pointer-events:none;mix-blend-mode:multiply;opacity:.15}
+#topline{position:absolute;left:0;top:0;height:6px;background:var(--g1);z-index:61}
+svg text{font-family:'Caveat',cursive;font-weight:700}
+.row{display:flex;align-items:center;gap:18px;padding:24px 0;border-top:3px solid var(--ink);font-size:34px;font-weight:700;white-space:nowrap}
+.cap{font-family:'Fraunces',serif;font-style:italic;font-weight:600;font-size:40px;text-align:center}
+</style></head>
+<body>
+<div id="cam"><div id="stage">
+
+<!-- HOOK -->
+<div class="scene" id="s_hook">
+  <div class="abs h" id="hk_t" style="left:80px;top:190px;font-size:92px">
+    <span class="mask"><span>Biri mineyi keser.</span></span><br><span class="mask"><span class="it" style="color:var(--g1)">Diğeri dişetini.</span></span>
+  </div>
+  <svg class="abs" id="hk_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="abs h it" id="hk_q" style="left:0;right:0;top:1180px;text-align:center;font-size:110px;color:var(--g1)">Fark ne?</div>
+  <div class="abs" id="hk_ans" style="left:80px;top:560px">
+    <div class="serif it" style="font-weight:400;font-size:54px">Cevap:</div>
+    <div class="h it" style="font-size:180px;margin-top:6px">Dalga boyu.</div>
+  </div>
+</div>
+
+<!-- PRINCIPLE -->
+<div class="scene" id="s_principle">
+  <div class="chap"><b>01</b><i></i>Prensip</div>
+  <div class="abs h" style="left:80px;top:220px;font-size:86px">Işık, hedefe göre <span class="it" style="color:var(--g1)">emilir.</span></div>
+  <svg class="abs" id="pr_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="abs" id="pr_lab" style="left:80px;top:780px;font-size:30px;font-weight:800;letter-spacing:3px">KROMOFORLAR</div>
+</div>
+
+<!-- TYPES -->
+<div class="scene" id="s_types">
+  <div class="chap"><b>02</b><i></i>Lazer türleri</div>
+  <svg class="abs" id="ty_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="abs" id="ty_rows" style="left:80px;right:80px;top:700px">
+    <div class="row" id="ty_r1"><span class="h" style="font-size:50px;width:230px">Erbiyum</span><span style="color:var(--mute)">su + hidroksiapatit</span><span class="serif it" style="margin-left:auto;color:var(--g1);font-size:40px">sert doku</span></div>
+    <div class="row" id="ty_r2"><span class="h" style="font-size:50px;width:230px">Diyot</span><span style="color:var(--mute)">hemoglobin + melanin</span><span class="serif it" style="margin-left:auto;color:var(--g1);font-size:40px">yumuşak doku</span></div>
+    <div class="row" id="ty_r3" style="border-bottom:3px solid var(--ink)"><span class="h" style="font-size:50px;width:230px">CO₂</span><span style="color:var(--mute)">su</span><span class="serif it" style="margin-left:auto;color:var(--g1);font-size:40px">yumuşak doku</span></div>
+  </div>
+</div>
+
+<!-- USES -->
+<div class="scene" id="s_uses">
+  <div class="chap"><b>03</b><i></i>Restoratif pratikte</div>
+  <svg class="abs" id="us_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="abs cap us_c" style="left:80px;width:440px;top:700px">Çürük &amp; kavite</div>
+  <div class="abs cap us_c" style="left:560px;width:440px;top:700px">Ölçü öncesi dişeti açma</div>
+  <div class="abs cap us_c" style="left:80px;width:440px;top:1240px">Gingivektomi</div>
+  <div class="abs cap us_c" style="left:560px;width:440px;top:1240px">Dentin hassasiyeti</div>
+</div>
+
+<!-- TECH -->
+<div class="scene" id="s_tech">
+  <div class="chap"><b>04</b><i></i>Teknik</div>
+  <svg class="abs" id="te_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="abs cap" id="te_c1" style="left:60px;width:480px;top:820px">Erbiyum · <span style="font-family:'DM Sans';font-style:normal;font-weight:700;font-size:32px">temassız + su</span></div>
+  <div class="abs cap" id="te_c2" style="left:540px;width:480px;top:820px">Diyot · <span style="font-family:'DM Sans';font-style:normal;font-weight:700;font-size:32px">temas modu</span></div>
+  <div class="abs" id="te_sl" style="left:80px;right:300px;top:930px"></div>
+</div>
+
+<!-- EVIDENCE -->
+<div class="scene" id="s_evidence">
+  <div class="chap"><b>05</b><i></i>Kanıt</div>
+  <div class="abs h" style="left:80px;top:220px;font-size:76px">Çürük temizliğinde<br><span class="it" style="color:var(--g1)">lazer vs. frez</span></div>
+  <div class="abs" style="left:80px;top:410px;font-size:28px;font-weight:700;color:var(--mute)">Cochrane sistematik derlemesi · Montedori ve ark., 2016</div>
+  <div class="abs" id="ev_rows" style="left:80px;right:80px;top:480px">
+    <div class="row ev_r"><span class="h" style="font-size:56px;color:var(--g1);width:60px">↓</span>Anestezi ihtiyacı</div>
+    <div class="row ev_r" style="border-bottom:3px solid var(--ink)"><span class="h" style="font-size:56px;color:var(--g1);width:60px">↓</span>Ağrı ve rahatsızlık</div>
+  </div>
+  <div class="abs" id="ev_g" style="left:80px;right:80px;top:770px;height:150px"></div>
+  <svg class="abs" id="ev_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="abs h" id="ev_t2" style="left:80px;top:1240px;font-size:64px">Rakip değil, <span class="it" style="color:var(--g1)">yardımcı.</span></div>
+</div>
+
+<!-- SAFETY -->
+<div class="scene" id="s_safety">
+  <div class="chap"><b>06</b><i></i>Güvenlik</div>
+  <div class="abs" style="left:80px;top:230px;font-size:34px;font-weight:700">Dental lazerlerin çoğu</div>
+  <div class="abs h" id="sf_big" style="left:70px;top:270px;font-size:230px;color:var(--amber)">Sınıf 4</div>
+  <svg class="abs" id="sf_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="abs" id="sf_note" style="left:80px;right:80px;top:1180px;font-size:40px;font-weight:700;text-align:center">Dalga boyuna <span class="serif it" style="color:var(--g1)">özel filtreli</span> gözlük</div>
+</div>
+
+<!-- OUTRO -->
+<div class="scene" id="s_outro">
+  <div class="abs h" id="o_t" style="left:80px;top:200px;font-size:104px"><span class="mask"><span>Doğru dalga boyu,</span></span><br><span class="mask"><span>doğru doku,</span></span><br><span class="mask"><span class="it" style="color:var(--g1)">doğru teknik.</span></span></div>
+  <svg class="abs" id="o_svg" style="left:0;top:0" width="1080" height="1920"></svg>
+  <div class="abs" id="o_ig" style="left:225px;top:648px;font-size:66px;font-weight:800;letter-spacing:-1px">@muraz_alishov</div>
+  <div class="abs" id="o_refs" style="left:80px;right:80px;top:830px;font-size:25px;line-height:1.45;color:#3E4E43">
+    <div style="font-size:26px;font-weight:800;letter-spacing:3px;color:var(--ink);margin-bottom:12px">KAYNAKLAR</div>
+    <div style="margin-bottom:10px">1. Verma SK, Maheshwari S, Singh RK, Chaudhari PK. Laser in dentistry: an innovative tool in modern dental practice. <i>Natl J Maxillofac Surg.</i> 2012;3(2):124–132.</div>
+    <div style="margin-bottom:10px">2. Montedori A, et al. Lasers for caries removal in deciduous and permanent teeth. <i>Cochrane Database Syst Rev.</i> 2016;9:CD010229.</div>
+    <div>3. Sachelarie L, Cristea R, Burlui E, Hurjui LL. Laser technology in dentistry: from clinical applications to future innovations. <i>Dent J (Basel).</i> 2024;12(12):420.</div>
+  </div>
+</div>
+
+<div id="subs"></div>
+</div></div>
+<svg id="grain" width="1080" height="1920"><filter id="gf"><feTurbulence id="turb" type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="1"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#gf)"/></svg>
+<div id="topline"></div>
+
+<script>
+const TL=__TIMELINE__, TOTAL=__TOTAL__;
+const G1='#1E6B47',G2='#3F9E68',LIME='#7CC242',INK='#13261C',AMB='#D98E2B',FILL='#DCE6D5',MUTE='#6C7C70';
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)), P=(t,a,d)=>clamp((t-a)/d);
+const eo=t=>1-Math.pow(1-t,3), eio=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2, eb=t=>{const c1=1.4,c3=c1+1;return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2)};
+const $=id=>document.getElementById(id), lerp=(a,b,t)=>a+(b-a)*t, NS='http://www.w3.org/2000/svg';
+const order=[],SC={};
+TL.forEach(c=>{if(!SC[c.scene]){SC[c.scene]={start:c.start,lines:[]};order.push(c.scene)}SC[c.scene].end=c.end;SC[c.scene].lines.push(c)});
+order.forEach((k,i)=>{const s=SC[k];s.a=i===0?0:s.start-0.3;s.b=i<order.length-1?SC[order[i+1]].start-0.3:TOTAL;s.z=i});
+const LS=(k,i)=>SC[k].lines[i].start-SC[k].start;
+const W=(k,li,wi)=>{const ws=SC[k].lines[li].words;return ws[Math.min(wi,ws.length-1)].s-SC[k].start};
+let sd=13;const rnd=()=>{sd=(sd*16807)%2147483647;return sd/2147483647};
+function roughPath(pts,amp=3){const out=[];for(let i=0;i<pts.length-1;i++){const [x1,y1]=pts[i],[x2,y2]=pts[i+1];const n=Math.max(2,Math.round(Math.hypot(x2-x1,y2-y1)/40));for(let k=0;k<n;k++){const t=k/n;out.push([lerp(x1,x2,t)+(rnd()-.5)*amp,lerp(y1,y2,t)+(rnd()-.5)*amp])}}out.push(pts[pts.length-1]);
+  let d='M'+out[0].join(' ');for(let i=1;i<out.length-1;i++){const mx=(out[i][0]+out[i+1][0])/2,my=(out[i][1]+out[i+1][1])/2;d+=` Q${out[i][0]} ${out[i][1]} ${mx} ${my}`}return d+` L${out[out.length-1].join(' ')}`}
+function roughEllipse(cx,cy,rx,ry,amp=5){const pts=[];const st=rnd()*6.28;for(let i=0;i<=29;i++){const a=st+i/26*Math.PI*2;const k=1+(rnd()-.5)*0.06;pts.push([cx+Math.cos(a)*rx*k,cy+Math.sin(a)*ry*k])}return roughPath(pts,amp)}
+function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e}
+function stroke(svg,d,col=G1,w=6){const p=el('path',{d,fill:'none',stroke:col,'stroke-width':w,'stroke-linecap':'round','stroke-linejoin':'round'},svg);const L=p.getTotalLength();p.style.strokeDasharray=L;p.style.strokeDashoffset=L;return {p,L}}
+const draw=(s,pr)=>{s.p.style.strokeDashoffset=s.L*(1-pr)};
+function arrow(svg,x1,y1,x2,y2,col,w=5,bend=40){const mx=(x1+x2)/2+bend,my=(y1+y2)/2-bend;const body=stroke(svg,roughPath([[x1,y1],[mx,my],[x2,y2]],2),col,w);const a=Math.atan2(y2-my,x2-mx);const h=24;
+  const head=stroke(svg,`M${x2-h*Math.cos(a-0.45)} ${y2-h*Math.sin(a-0.45)} L${x2} ${y2} L${x2-h*Math.cos(a+0.45)} ${y2-h*Math.sin(a+0.45)}`,col,w);return [body,head]}
+const drawArrow=(ar,pr)=>{draw(ar[0],clamp(pr/0.8));draw(ar[1],clamp((pr-0.8)/0.2))};
+function htext(svg,x,y,txt,size,col,anchor='start',rot=0){const t=el('text',{x,y,'font-size':size,fill:col,'text-anchor':anchor,transform:`rotate(${rot} ${x} ${y})`},svg);t.textContent=txt;return t}
+function reveal(e,pr){e.style.opacity=clamp(pr*3);e.style.clipPath=`inset(-30px ${100-pr*100}% -30px -30px)`}
+function poly(svg,pts,fill,sc=INK,w=5){return el('path',{d:'M'+pts.map(q=>q.join(' ')).join(' L')+' Z',fill,stroke:sc,'stroke-width':w,'stroke-linejoin':'round'},svg)}
+function maskWords(root,times,t){root.querySelectorAll('.mask>span').forEach((m,i)=>{const p=eo(P(t,times[Math.min(i,times.length-1)],0.45));m.style.transform=`translateY(${(1-p)*110}%)`})}
+function pop(e,pr,ox,oy){e.style.opacity=clamp(pr*4);e.style.transformOrigin=`${ox}px ${oy}px`;e.style.transform=`scale(${eb(pr)})`}
+// beam: wavy laser line
+function beam(svg,x1,y1,x2,y2,amp=10,wl=40,w=6){const g=el('g',{},svg);const glow=el('path',{fill:'none',stroke:LIME,'stroke-width':w*3,'stroke-opacity':.22,'stroke-linecap':'round'},g);const core=el('path',{fill:'none',stroke:LIME,'stroke-width':w,'stroke-linecap':'round'},g);
+  return {g,set(pr,ph){const L=Math.hypot(x2-x1,y2-y1)*pr;const ang=Math.atan2(y2-y1,x2-x1);let d='';for(let s=0;s<=L;s+=4){const o=Math.sin((s/wl)*Math.PI*2-ph)*amp;const x=x1+Math.cos(ang)*s-Math.sin(ang)*o,y=y1+Math.sin(ang)*s+Math.cos(ang)*o;d+=(s?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)}core.setAttribute('d',d);glow.setAttribute('d',d)}}}
+function sparks(svg,cx,cy,n,col){const arr=[];for(let i=0;i<n;i++){const c=el('circle',{r:3+rnd()*4,fill:col},svg);arr.push({c,a:-Math.PI/2+(rnd()-.5)*2.2,v:60+rnd()*120,ph:rnd()})}return {set(t,on){arr.forEach(s=>{const k=((t*1.6+s.ph)%1);s.c.setAttribute('cx',cx+Math.cos(s.a)*s.v*k);s.c.setAttribute('cy',cy+Math.sin(s.a)*s.v*k+40*k*k);s.c.setAttribute('opacity',on*(1-k))})}}}
+
+// ================= HOOK
+const hs=$('hk_svg');
+// tooth crown (left)
+const hkL=el('g',{},hs);poly(hkL,[[120,1080],[120,760],[150,690],[210,660],[260,690],[310,660],[370,690],[400,760],[400,1080]],FILL,INK,6);
+el('path',{d:'M150 760 Q260 730 370 760 L370 1080 L150 1080 Z',fill:'#F5F7F1',stroke:INK,'stroke-width':4},hkL);
+htext(hkL,260,1150,'mine',58,INK,'middle');
+const bL=beam(hs,260,470,260,700,8,36,6);const spL=sparks(hs,260,705,14,G2);
+// gingiva block (right)
+const hkR=el('g',{},hs);el('path',{d:'M640 760 Q700 720 760 760 Q820 800 880 760 Q930 730 960 760 L960 1080 L640 1080 Z',fill:'#C9DABE',stroke:INK,'stroke-width':6},hkR);
+for(let i=0;i<7;i++)el('path',{d:`M${660+i*45} 1060 Q${670+i*45} 960 ${660+i*45} 880`,fill:'none',stroke:G2,'stroke-width':3,opacity:.5},hkR);
+htext(hkR,800,1150,'dişeti',58,INK,'middle');
+const bR=beam(hs,800,470,800,768,8,36,6);
+const hkWave=stroke(hs,(()=>{let d='';for(let x=80;x<=1000;x+=6){const y=1000+Math.sin(x/38)*30;d+=(x===80?'M':'L')+x+' '+y}return d})(),G1,8);
+// ================= PRINCIPLE
+const ps=$('pr_svg');
+el('rect',{x:80,y:470,width:170,height:90,rx:16,fill:'#fff',stroke:INK,'stroke-width':6},ps);el('rect',{x:250,y:500,width:40,height:30,fill:INK},ps);
+const tissue=el('g',{},ps);el('rect',{x:640,y:400,width:360,height:230,fill:FILL,stroke:INK,'stroke-width':6},tissue);
+const prBeam=beam(ps,290,515,660,515,18,60,7);
+const absorb=el('circle',{cx:700,cy:515,r:10,fill:LIME,opacity:0},ps);
+const chrom=[['su','H₂O'],['hidroksiapatit','HA'],['hemoglobin','Hb'],['melanin','Mel']].map((c,i)=>{const x=80+(i%2)*470,y=840+Math.floor(i/2)*260;const g=el('g',{},ps);
+  el('circle',{cx:x+80,cy:y+80,r:70,fill:'#fff',stroke:G1,'stroke-width':6},g);const t=el('text',{x:x+80,y:y+98,'text-anchor':'middle','font-size':52,fill:G1,style:"font-family:'Fraunces';font-weight:800"},g);t.textContent=c[1];
+  const l=el('text',{x:x+175,y:y+98,'font-size':58,fill:INK},g);l.textContent=c[0];return {g,ox:x+80,oy:y+80}});
+// ================= TYPES spectrum
+const ts=$('ty_svg');const X=nm=>80+(Math.log10(nm)-Math.log10(400))/(Math.log10(12000)-Math.log10(400))*920;
+el('text',{x:80,y:255,'font-size':30,fill:MUTE,style:"font-family:'DM Sans';font-weight:700;letter-spacing:2px"},ts).textContent='DALGA BOYU (nm, log ölçek)';
+const axis=stroke(ts,`M80 420 L1000 420`,INK,5);
+const ticks=[[500,'500'],[1000,'1000'],[3000,'3000'],[10000,'10 000']].map(([nm,l])=>{const g=el('g',{},ts);el('line',{x1:X(nm),y1:410,x2:X(nm),y2:432,stroke:INK,'stroke-width':4},g);const t=el('text',{x:X(nm),y:470,'text-anchor':'middle','font-size':26,fill:MUTE,style:"font-family:'DM Sans';font-weight:700"},g);t.textContent=l;return g});
+const lasers=[{n:'Diyot',a:810,b:980,y:360},{n:'Nd:YAG',a:1064,b:1064,y:540},{n:'Er,Cr:YSGG',a:2780,b:2780,y:540},{n:'Er:YAG',a:2940,b:2940,y:360},{n:'CO₂',a:10600,b:10600,y:360}].map((L,i)=>{const g=el('g',{},ts);
+  const x1=X(L.a),x2=X(L.b);el('rect',{x:x1-6,y:398,width:Math.max(12,x2-x1+12),height:44,rx:6,fill:i===1||i===2?G2:G1},g);
+  const t=el('text',{x:(x1+x2)/2,y:L.y,'text-anchor':'middle','font-size':40,fill:INK},g);t.textContent=L.n;
+  const nm=el('text',{x:(x1+x2)/2,y:L.y<400?L.y-40:L.y+38,'text-anchor':'middle','font-size':26,fill:MUTE,style:"font-family:'DM Sans';font-weight:700"},g);nm.textContent=L.a===L.b?L.a+' nm':L.a+'–'+L.b+' nm';return g});
+// ================= USES (2x2 line art)
+const us=$('us_svg');const cells=[[80,260],[560,260],[80,800],[560,800]];
+const U=cells.map(([x,y],i)=>{const g=el('g',{transform:`translate(${x},${y})`},us);el('rect',{x:0,y:0,width:440,height:420,fill:'none',stroke:'#B9C8B6','stroke-width':3},g);return g});
+// 1 caries
+poly(U[0],[[120,380],[120,170],[150,110],[200,90],[240,120],[290,90],[330,120],[320,170],[320,380]],FILL,INK,5);
+const car=el('ellipse',{cx:225,cy:150,rx:34,ry:24,fill:'#4B3B2A'},U[0]);const ub1=beam(U[0],225,10,225,130,6,26,5);
+// 2 troughing
+el('path',{d:'M40 300 Q220 250 400 300 L400 410 L40 410 Z',fill:'#C9DABE',stroke:INK,'stroke-width':5},U[1]);
+poly(U[1],[[150,300],[160,150],[280,150],[290,300]],FILL,INK,5);
+const ub2=beam(U[1],330,40,292,268,6,26,5);const trough=stroke(U[1],'M150 296 Q220 280 290 296','#fff',7);
+// 3 gingivectomy
+poly(U[2],[[140,400],[140,110],[300,110],[300,400]],FILL,INK,5);
+el('path',{d:'M30 200 Q220 140 410 200 L410 410 L30 410 Z',fill:'#C9DABE',stroke:INK,'stroke-width':5,opacity:.35},U[2]);
+const gnew=el('path',{d:'M30 270 Q220 210 410 270 L410 410 L30 410 Z',fill:'#C9DABE',stroke:INK,'stroke-width':5},U[2]);
+const gdash=stroke(U[2],'M30 200 Q220 140 410 200',G1,4);gdash.p.setAttribute('stroke-dasharray','12 10');
+// 4 tubules
+for(let i=0;i<8;i++)el('line',{x1:60+i*45,y1:120,x2:60+i*45,y2:380,stroke:'#9DB09B','stroke-width':10,'stroke-linecap':'round'},U[3]);
+const caps=[];for(let i=0;i<8;i++){const c=el('rect',{x:48+i*45,y:102,width:24,height:22,rx:6,fill:G1,opacity:0},U[3]);caps.push(c)}
+const ub4=beam(U[3],220,10,220,96,6,26,5);
+// ================= TECH
+const tes=$('te_svg');
+// Er panel
+const erTooth=poly(tes,[[150,780],[150,560],[180,500],[240,480],[290,505],[340,480],[400,500],[430,560],[430,780]],FILL,INK,5);
+el('rect',{x:220,y:260,width:120,height:70,rx:12,fill:'#fff',stroke:INK,'stroke-width':5},tes);
+const teB1=beam(tes,280,330,280,500,6,30,6);const sp1=sparks(tes,280,500,10,G2);
+const water=[];for(let i=0;i<14;i++){const c=el('circle',{r:5,fill:'#6FB6A6'},tes);water.push({c,x:250+rnd()*60,ph:rnd()})}
+const gapB=stroke(tes,'M360 335 L380 335 L380 495 L360 495',AMB,4);const gapT=htext(tes,395,430,'mesafe',40,AMB,'start',0);
+// diode panel
+el('path',{d:'M580 640 Q690 600 800 640 Q900 680 990 640 L990 780 L580 780 Z',fill:'#C9DABE',stroke:INK,'stroke-width':5},tes);
+const fiber=el('g',{},tes);el('path',{d:'M940 260 L800 600',stroke:INK,'stroke-width':14,'stroke-linecap':'round'},fiber);el('path',{d:'M940 260 L800 600',stroke:'#fff','stroke-width':6,'stroke-linecap':'round'},fiber);
+const tipGlow=el('circle',{cx:800,cy:604,r:16,fill:LIME,opacity:0},tes);
+const cut=stroke(tes,roughPath([[640,628],[700,616],[770,616],[810,628]],2),'#7B2E2E',5);
+const ctT=htext(tes,640,560,'kanama ↓',44,G1,'start',-3);
+// sliders
+const slWrap=$('te_sl');const sl=['Güç','Atım süresi','Uç hareketi'].map((n,i)=>{const d=document.createElement('div');d.style.cssText='position:relative;height:96px';d.innerHTML=`<div style="font-size:34px;font-weight:800;position:absolute;left:0;top:18px">${n}</div><div style="position:absolute;left:260px;right:0;top:40px;height:6px;background:#B9C8B6"></div><div class="kn" style="position:absolute;top:24px;width:38px;height:38px;border-radius:50%;background:${G1};border:5px solid #EAF0E6;box-shadow:0 0 0 3px ${G1}"></div>`;slWrap.appendChild(d);return d});
+const th=el('g',{},tes);el('rect',{x:880,y:930,width:46,height:250,rx:23,fill:'#fff',stroke:INK,'stroke-width':5},th);el('circle',{cx:903,cy:1200,r:40,fill:AMB,stroke:INK,'stroke-width':5},th);const thFill=el('rect',{x:891,y:1150,width:24,height:40,fill:AMB},th);
+const thT=htext(tes,903,1290,'ısı → pulpa',44,AMB,'middle',0);
+// ================= EVIDENCE gauge
+const gw=$('ev_g');const levels=['çok düşük','düşük','orta','yüksek'];gw.innerHTML=`<div style="font-size:28px;font-weight:800;letter-spacing:3px;margin-bottom:16px">KANIT KALİTESİ</div>`+levels.map((l,i)=>`<div class="lv" style="display:inline-block;width:24%;margin-right:1%;text-align:center;padding:16px 0;font-size:30px;font-weight:800;border:3px solid ${INK};color:${INK}">${l}</div>`).join('');
+const evs=$('ev_svg');const evCirc=stroke(evs,roughEllipse(80+920*0.375,862,135,58,4),AMB,6);
+// bur + laser icons
+const bur=el('g',{},evs);el('rect',{x:120,y:1010,width:240,height:40,rx:20,fill:'#fff',stroke:INK,'stroke-width':5},bur);el('path',{d:'M360 1030 L440 1030',stroke:INK,'stroke-width':10},bur);el('circle',{cx:455,cy:1030,r:20,fill:'#B9C8B6',stroke:INK,'stroke-width':5},bur);
+const plus=htext(evs,540,1060,'+',96,G1,'middle',0);
+const lz=el('g',{},evs);el('rect',{x:620,y:1000,width:200,height:60,rx:14,fill:'#fff',stroke:INK,'stroke-width':5},lz);el('rect',{x:820,y:1018,width:30,height:24,fill:INK},lz);const lzb=beam(evs,850,1030,990,1030,6,24,5);
+// ================= SAFETY goggles
+const ss=$('sf_svg');const gg=['hasta','hekim','asistan'].map((n,i)=>{const x=80+i*320;const g=el('g',{},ss);
+  const d=`M${x+20} 720 Q${x+20} 660 ${x+80} 660 L${x+200} 660 Q${x+260} 660 ${x+260} 720 Q${x+260} 800 ${x+190} 800 Q${x+160} 800 ${x+140} 760 Q${x+120} 800 ${x+90} 800 Q${x+20} 800 ${x+20} 720 Z`;
+  el('path',{d,fill:'rgba(124,194,66,.35)',stroke:INK,'stroke-width':6},g);el('path',{d:`M${x+20} 700 L${x} 690 M${x+260} 700 L${x+280} 690`,stroke:INK,'stroke-width':6},g);
+  const t=el('text',{x:x+140,y:900,'text-anchor':'middle','font-size':60,fill:INK},g);t.textContent=n;return g});
+const sfUnder=stroke(ss,roughPath([[80,560],[400,548],[700,556]],4),AMB,10);
+// ================= OUTRO
+const os=$('o_svg');const oUnder=stroke(os,roughPath([[90,560],[380,548],[640,556]],4),G1,10);
+const igBox=stroke(os,'M120 640 h56 a22 22 0 0 1 22 22 v56 a22 22 0 0 1 -22 22 h-56 a22 22 0 0 1 -22 -22 v-56 a22 22 0 0 1 22 -22 Z',INK,7);const igC=stroke(os,roughEllipse(148,690,22,22,0.5),INK,7);
+
+// ================= subtitles
+const CH=[];TL.forEach(L=>{let cur=[];L.words.forEach((w,i)=>{cur.push(w);if(cur.length>=4||/[.,:;?!]$/.test(w.w)||i===L.words.length-1){CH.push({ws:cur.slice(),s:cur[0].s,e:cur[cur.length-1].e});cur=[]}})});
+CH.forEach((c,i)=>{const nx=CH[i+1];c.hide=nx?Math.min(nx.s,c.e+0.6):c.e+0.6});
+const subs=$('subs');let curC=-1,wEls=[];
+function setSub(t){let k=-1;for(let i=0;i<CH.length;i++){if(t>=CH[i].s-0.06&&t<CH[i].hide){k=i;break}}
+  if(k<0){subs.style.opacity=0;return}subs.style.opacity=1;
+  if(k!==curC){curC=k;subs.innerHTML='';const ln=document.createElement('span');ln.className='ln';subs.appendChild(ln);wEls=CH[k].ws.map(w=>{const s=document.createElement('span');s.className='w';s.textContent=w.w;ln.appendChild(s);return {s,w}})}
+  const pin=eb(P(t,CH[k].s-0.06,0.22));subs.firstChild.style.transform=`scale(${0.85+0.15*pin}) rotate(${(1-pin)*-2}deg)`;
+  wEls.forEach(o=>{o.s.style.color=t>=o.w.s-0.02?(t<o.w.e+0.05?G1:INK):'#A9B5AA'})}
+
+function render(t){
+  $('turb').setAttribute('seed',1+Math.floor(t*12)%9);
+  $('cam').style.transform=`translate(${Math.sin(t*0.9)*3+Math.sin(t*2.3)*1.2}px,${Math.cos(t*0.7)*3+Math.sin(t*1.9)}px) rotate(${Math.sin(t*0.5)*0.12}deg)`;
+  $('topline').style.width=(1080*t/TOTAL)+'px';
+  order.forEach(k=>{const s=SC[k],e=$('s_'+k);const vis=t>=s.a-0.01&&t<s.b+0.45;e.style.display=vis?'block':'none';if(!vis)return;
+    e.style.zIndex=s.z;const pin=s.z===0?1:eio(P(t,s.a,0.5));const pout=eio(P(t,s.b,0.45));
+    e.style.transform=`translateX(${(1-pin)*100-pout*28}%)`;e.style.filter=pout>0?`brightness(${1-pout*0.25})`:'none'});
+  const S=k=>t-SC[k].start, ph=t*9;
+  // HOOK
+  {const l=S('hook');const T=i=>W('hook',0,i);const l2=LS('hook',1);const fade=1-P(l,l2-0.2,0.3);
+   maskWords($('hk_t'),[T(0)-0.1,T(5)-0.1],l);$('hk_t').style.opacity=fade;
+   hkL.style.opacity=P(l,T(1),0.3)*fade;bL.set(eio(P(l,T(3),0.5)),ph);bL.g.style.opacity=fade;spL.set(l,P(l,T(4),0.2)*fade);
+   hkR.style.opacity=P(l,T(6)-0.2,0.3)*fade;bR.set(eio(P(l,T(9),0.5)),ph);bR.g.style.opacity=fade;
+   const q=$('hk_q');pop(q,P(l,T(13),0.5),540,1240);q.style.opacity=Math.min(q.style.opacity,fade);
+   const an=$('hk_ans');an.style.opacity=P(l,l2,0.3);const big=an.lastElementChild;const bt=W('hook',1,3)-0.1;const bp=eb(P(l,bt,0.55));big.style.opacity=P(l,bt,0.15);big.style.transform=`translateY(${(1-bp)*70}px)`;
+   draw(hkWave,eio(P(l,bt+0.3,0.9)));hkWave.p.setAttribute('transform',`translate(${-((l*60)%240)} 0)`);}
+  // PRINCIPLE
+  {const l=S('principle');const T=i=>W('principle',0,i),T1=i=>W('principle',1,i);
+   prBeam.set(eio(P(l,T(4),0.9)),ph);absorb.setAttribute('opacity',P(l,T(13),0.3)*(0.6+0.4*Math.sin(l*8)));absorb.setAttribute('r',10+14*P(l,T(13),0.6));
+   tissue.style.opacity=P(l,T(8),0.4);$('pr_lab').style.opacity=P(l,T1(2),0.4);
+   chrom.forEach((c,i)=>pop(c.g,P(l,T1(4+i)-0.1,0.45),c.ox,c.oy));}
+  // TYPES
+  {const l=S('types');draw(axis,eio(P(l,0,0.6)));ticks.forEach((g,i)=>g.style.opacity=P(l,0.3+i*0.1,0.3));
+   lasers.forEach((g,i)=>{const p=eb(P(l,0.6+i*0.25,0.5));g.style.opacity=P(l,0.6+i*0.25,0.2);g.style.transform=`translateY(${(1-p)*20}px)`});
+   const r=[[$('ty_r1'),W('types',0,0)],[$('ty_r2'),W('types',1,0)],[$('ty_r3'),W('types',1,9)]];r.forEach(([e,tt])=>{const p=eo(P(l,tt,0.5));e.style.opacity=p;e.style.transform=`translateX(${(1-p)*-60}px)`});
+   lasers.forEach((g,i)=>{const hl=(i===3||i===2)?P(l,W('types',0,0),0.3)*(1-P(l,W('types',1,0),0.3)):(i===0?P(l,W('types',1,0),0.3):0);g.firstChild.setAttribute('stroke',hl>0.5?LIME:'none');g.firstChild.setAttribute('stroke-width',8)});}
+  // USES
+  {const l=S('uses');const T=i=>W('uses',0,i);const st=[T(3),T(8),T(12),T(14)];
+   U.forEach((g,i)=>{const p=eo(P(l,st[i]-0.3,0.5));g.style.opacity=p;});document.querySelectorAll('.us_c').forEach((c,i)=>reveal(c,P(l,st[i],0.6)));
+   ub1.set(eio(P(l,st[0]+0.2,0.4)),ph);car.setAttribute('opacity',1-P(l,st[0]+0.6,1.2));
+   ub2.set(eio(P(l,st[1]+0.2,0.4)),ph);draw(trough,eio(P(l,st[1]+0.5,0.8)));
+   draw(gdash,eio(P(l,st[2],0.4)));gnew.style.opacity=P(l,st[2]+0.3,0.4);
+   ub4.set(eio(P(l,st[3]+0.1,0.3)),ph);caps.forEach((c,i)=>c.setAttribute('opacity',P(l,st[3]+0.3+i*0.08,0.15)));}
+  // TECH
+  {const l=S('tech');const T=i=>W('tech',0,i),T1=i=>W('tech',1,i),T2=i=>W('tech',2,i);
+   teB1.set(eio(P(l,T(1),0.5)),ph);sp1.set(l,P(l,T(2),0.3));
+   water.forEach(w=>{const k=((l*1.3+w.ph)%1);w.c.setAttribute('cx',w.x+(k-0.5)*30);w.c.setAttribute('cy',340+k*150);w.c.setAttribute('opacity',P(l,T(2),0.3)*(1-k))});
+   draw(gapB,eio(P(l,T(5),0.5)));reveal(gapT,P(l,T(5)+0.2,0.5));reveal($('te_c1'),P(l,T(1),0.6));
+   fiber.style.opacity=P(l,T1(0),0.3);fiber.style.transform=`translate(${(1-eo(P(l,T1(0),0.6)))*80}px,${(1-eo(P(l,T1(0),0.6)))*-80}px)`;
+   tipGlow.setAttribute('opacity',P(l,T1(7),0.3)*(0.7+0.3*Math.sin(l*10)));reveal($('te_c2'),P(l,T1(0),0.6));
+   draw(cut,eio(P(l,T1(10),0.8)));reveal(ctT,P(l,T1(13),0.5));
+   sl.forEach((d,i)=>{const tt=T2(i*2);d.style.opacity=P(l,tt,0.3);const kn=d.querySelector('.kn');const v=0.2+0.6*eio(P(l,tt+0.2,0.8))+0.12*Math.sin(l*2+i);kn.style.left=(260+v*(slWrap.clientWidth-300))+'px'});
+   th.style.opacity=P(l,T2(8),0.3);const hf=eio(P(l,T2(9),1.2));thFill.setAttribute('y',1150-hf*200);thFill.setAttribute('height',40+hf*200);reveal(thT,P(l,T2(12),0.6));}
+  // EVIDENCE
+  {const l=S('evidence');const T=i=>W('evidence',0,i),T1=i=>W('evidence',1,i);
+   document.querySelectorAll('.ev_r').forEach((r,i)=>{const p=eo(P(l,T(7+i*3),0.5));r.style.opacity=p;r.style.transform=`translateX(${(1-p)*-60}px)`});
+   const gp=P(l,T(14),0.4);gw.style.opacity=gp;gw.querySelectorAll('.lv').forEach((e,i)=>{const on=i===1&&l>T(16);e.style.background=on?AMB:'transparent';e.style.color=on?'#fff':INK});draw(evCirc,eio(P(l,T(16)+0.2,0.6)));
+   bur.style.opacity=P(l,T1(2),0.3);plus.style.opacity=P(l,T1(5),0.3);lz.style.opacity=P(l,T1(1),0.3);lzb.set(eio(P(l,T1(1)+0.2,0.5)),ph);
+   reveal($('ev_t2'),P(l,T1(3),0.8));}
+  // SAFETY
+  {const l=S('safety');const T=i=>W('safety',0,i);const b=eb(P(l,T(5)-0.1,0.6));$('sf_big').style.opacity=P(l,T(5)-0.1,0.15);$('sf_big').style.transform=`scale(${0.7+0.3*b})`;$('sf_big').style.transformOrigin='left center';
+   draw(sfUnder,eio(P(l,T(7),0.5)));gg.forEach((g,i)=>{const p=eb(P(l,T(8+i*1.5|0),0.5));g.style.opacity=P(l,T(8+i*1.5|0),0.2);g.style.transformOrigin=`${220+i*320}px 730px`;g.style.transform=`translateY(${(1-p)*40}px)`});
+   reveal($('sf_note'),P(l,T(12),0.8));}
+  // OUTRO
+  {const l=S('outro');maskWords($('o_t'),[0,0.9,1.7],l);draw(oUnder,eio(P(l,2.2,0.5)));
+   draw(igBox,eio(P(l,2.6,0.6)));draw(igC,eio(P(l,2.9,0.4)));reveal($('o_ig'),eo(P(l,2.8,0.8)));
+   const r=eo(P(l,3.4,0.8));$('o_refs').style.opacity=r;$('o_refs').style.transform=`translateY(${(1-r)*30}px)`;}
+  setSub(t);
+}
+window.render=render;render(0);
+</script>
+</body></html>

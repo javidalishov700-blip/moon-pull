@@ -1,0 +1,16 @@
+[
+ {"scene":"hook","say":"Bir lazer diş minesini kesebiliyor, bir diğeri mineye dokunmadan yalnızca dişetinde çalışıyor. Peki aradaki fark ne?"},
+ {"scene":"hook","say":"Cevap, lazerin dalga boyunda saklı."},
+ {"scene":"principle","say":"Her lazer belirli bir dalga boyunda ışık üretir ve bu ışık, dokudaki belirli hedefler tarafından emilir."},
+ {"scene":"principle","say":"Bu hedeflere kromofor denir: su, hidroksiapatit, hemoglobin ve melanin."},
+ {"scene":"types","say":"Erbiyum lazerler su ve hidroksiapatit tarafından güçlü şekilde emilir; bu yüzden mine ve dentinde, yani sert dokuda kullanılabilir."},
+ {"scene":"types","say":"Diyot lazerler ise hemoglobin ve melanin tarafından emilir ve yumuşak doku işlemlerinde öne çıkar."},
+ {"scene":"uses","say":"Restoratif pratikte lazer; çürük temizliği ve kavite hazırlığı, ölçü öncesi dişeti açma, gingivektomi ve dentin hassasiyetinin tedavisinde kullanılır."},
+ {"scene":"tech","say":"Erbiyum lazer, su spreyi eşliğinde temassız ya da yakın mesafeden çalışır; su, ısıyı kontrol altında tutar."},
+ {"scene":"tech","say":"Diyot lazer ise genellikle temas modunda, ucu aktive edilerek kullanılır ve kesim sırasında kanamayı azaltır."},
+ {"scene":"tech","say":"Güç, atım süresi ve uç hareketi doğru ayarlanmazsa, oluşan ısı pulpaya ve çevre dokuya zarar verebilir."},
+ {"scene":"evidence","say":"Sistematik bir derlemeye göre, çürük temizliğinde lazer, anestezi ihtiyacı ve ağrı açısından avantaj gösterebilir; ancak kanıtlar düşük kalitededir."},
+ {"scene":"evidence","say":"Yani lazer frezin rakibi değil; doğru endikasyonda güçlü bir yardımcıdır."},
+ {"scene":"safety","say":"Ve unutmayın: dental lazerlerin çoğu sınıf dört cihazdır. Hasta, hekim ve asistan, dalga boyuna uygun koruyucu gözlük takmalıdır."},
+ {"scene":"outro","say":"Doğru dalga boyu, doğru doku, doğru teknik. Faydalı bulduysanız kaydedin ve meslektaşlarınızla paylaşın."}
+]
