@@ -1,0 +1,48 @@
+{
+ "voices": [
+  {
+   "voice": "en-US-BrianMultilingualNeural",
+   "lang": "tr-TR"
+  }
+ ],
+ "rate": "+10%",
+ "pitch": "+0Hz",
+ "lines": [
+  {
+   "id": "l00",
+   "say": "Eskiden kompozitin altına cam iyonomer koyardık. Peki bugün neden direkt kompozit?"
+  },
+  {
+   "id": "l01",
+   "say": "Çünkü ilk adezivler dentine zayıf bağlanıyordu; cam iyonomer ise kimyasal bağlanıyor, flor salıyor ve pulpayı korumak için kullanılıyordu."
+  },
+  {
+   "id": "l02",
+   "say": "Bugün adezivler dentine güvenilir bağlanıyor. Artık zayıf halka cam iyonomerin kendisi: kopma çoğu zaman materyalin içinde oluyor."
+  },
+  {
+   "id": "l03",
+   "say": "Dokuz yıllık takipte astarsız kompozitlerin yüzde seksen sekizi sağlam kaldı; cam iyonomer astarlılarda bu oran yüzde yetmişti."
+  },
+  {
+   "id": "l04",
+   "say": "On beş yılda açık sandviçte yıllık başarısızlık üç kat fazlaydı; flor salımına rağmen sekonder çürük azalmadı."
+  },
+  {
+   "id": "l05",
+   "say": "Kanal tedavili dişte cam iyonomer tabanı, kırılma direncini düşürüp boşlukları artırdı. Üstelik pulpa olmadığı için koruma gerekçesi de yok."
+  },
+  {
+   "id": "l06",
+   "say": "Ama cam iyonomer bitmedi: kanal ağızlarında ince bir bariyer olarak, kompozit kadar iyi mühürlüyor."
+  },
+  {
+   "id": "l07",
+   "say": "Direkt kompozitin de şartları var: rubber dam, derin tabanda ince ilk tabaka ve hipokloritli dentinde dikkatli bağlama."
+  },
+  {
+   "id": "l08",
+   "say": "Kısacası: kalın cam iyonomer tabanı yerine adeziv ve kompozit. Kaydet ve bir meslektaşınla paylaş."
+  }
+ ]
+}

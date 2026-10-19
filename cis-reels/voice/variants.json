@@ -1,0 +1,20 @@
+{
+ "voice": "en-US-BrianMultilingualNeural",
+ "lang": "tr-TR",
+ "rate": "+10%",
+ "pitch": "+0Hz",
+ "lines": [
+  {
+   "id": "l00b",
+   "say": "Eskiden kompozitin altına cam iyonomer koyuyorduk. Bugün neden direkt kompozit yapıyoruz?"
+  },
+  {
+   "id": "l06b",
+   "say": "Yine de cam iyonomer bitmedi: kanal ağızlarında ince bir bariyer olarak kompozit kadar iyi mühürlüyor."
+  },
+  {
+   "id": "l08b",
+   "say": "Kısacası, kalın cam iyonomer tabanı yerine adeziv ve kompozit. Kaydet ve bir meslektaşınla paylaş."
+  }
+ ]
+}

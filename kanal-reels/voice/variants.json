@@ -5,20 +5,24 @@
  "pitch": "+0Hz",
  "lines": [
   {
-   "id": "l00b",
-   "say": "Kanal tedavili bir dişin dolgusu nasıl yapılmalı? Güncel kanıtlara göre, beş adımda."
+   "id": "l09c",
+   "say": "Kanal tedavisi kökü kurtarır; dişi ise doğru dolgu korur."
   },
   {
-   "id": "l06b",
-   "say": "Beş: dolguyu adeziv teknikle yap; pulpa odasında bulk-fill kompozit, klasik kompozite göre daha az boşluk bırakıyor."
+   "id": "l10",
+   "say": "Eskiden cam iyonomer üzerine dolgu yapılıyordu; ama şimdi direkt dolgu yapılması daha avantajlı. Bunun sebebi ise bir sonraki videomuzun konusu."
   },
   {
-   "id": "l07b",
-   "say": "Marjinal sırtlar sağlamsa kompozit dolgu, beş yılda kurona yakın sağkalım gösteriyor."
+   "id": "l10b",
+   "say": "Eskiden dolgu, cam iyonomerin üzerine yapılıyordu; şimdi ise direkt dolgu daha avantajlı. Nedenini bir sonraki videomuzda anlatıyoruz."
   },
   {
-   "id": "l09b",
-   "say": "Kanal tedavisi kökü kurtarır; dişi ise doğru dolgu korur. Kaydet ve bir meslektaşınla paylaş."
+   "id": "l11",
+   "say": "Kaçırmamak için takip et; kaydet ve bir meslektaşınla paylaş."
+  },
+  {
+   "id": "l11b",
+   "say": "Takip et, kaydet ve bir meslektaşınla paylaş."
   }
  ]
 }
