@@ -1,0 +1,23 @@
+name: Kanal refs
+
+# Bulut ortamı yayıncı sitelerine bağlanamadığı için kaynak künyeleri ve açık
+# erişimli metinler runner'da okunur; çıktı yalnızca iş günlüğüne yazılır.
+on:
+  push:
+    branches: [claude/vibrant-meitner-4a2g6b]
+    paths:
+      - 'kanal-reels/kaynak/refs_queries.json'
+      - 'kanal-reels/kaynak/refs_fetch.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch references
+        run: python kanal-reels/kaynak/refs_fetch.py

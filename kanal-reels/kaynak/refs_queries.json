@@ -1,0 +1,20 @@
+{"queries": [
+ {"name": "ese2021", "q": "DOI:\"10.1111/iej.13607\""},
+ {"name": "bhuva2021", "q": "DOI:\"10.1111/iej.13438\""},
+ {"name": "mannocci2022", "q": "DOI:\"10.1111/iej.13796\""},
+ {"name": "patel2025", "q": "DOI:\"10.1038/s41415-025-8401-4\""},
+ {"name": "araujo2022", "q": "DOI:\"10.1155/2022/2789073\""},
+ {"name": "chen2023", "q": "EXT_ID:36661351 AND SRC:MED"},
+ {"name": "cochrane2021", "q": "DOI:\"10.1002/14651858.CD009858.pub3\""},
+ {"name": "sadaf2020", "q": "TITLE:\"Survival Rates of Endodontically Treated Teeth After Placement of Definitive Coronal Restoration\""},
+ {"name": "gillen2011", "q": "DOI:\"10.1016/j.joen.2011.04.002\""},
+ {"name": "reeh1989", "q": "TITLE:\"Reduction in tooth stiffness as a result of endodontic and restorative procedures\""},
+ {"name": "shu2018", "q": "TITLE:\"Direct and Indirect Restorations for Endodontically Treated Teeth\""},
+ {"name": "suksaphar2017", "q": "TITLE:\"Survival rates against fracture of endodontically treated posterior teeth\""},
+ {"name": "s_rubberdam", "q": "TITLE:\"rubber dam\" AND (TITLE:\"endodontic\" OR TITLE:\"root canal\" OR TITLE:\"root filled\" OR TITLE:\"restor\")", "n": 8, "full": false},
+ {"name": "s_timing", "q": "(TITLE:\"restoration\" AND (TITLE:\"timing\" OR TITLE:\"delay\" OR TITLE:\"time lapse\" OR TITLE:\"time interval\")) AND (TITLE:\"endodontic\" OR TITLE:\"root canal\" OR TITLE:\"root filled\")", "n": 8, "full": false},
+ {"name": "s_direct", "q": "(TITLE:\"endodontically treated\" OR TITLE:\"root filled\" OR TITLE:\"root-filled\") AND TITLE:\"composite\" AND (TITLE:\"survival\" OR TITLE:\"clinical\" OR TITLE:\"randomized\" OR TITLE:\"retrospective\") AND PUB_YEAR:[2017 TO 2026]", "n": 10, "full": false},
+ {"name": "s_cusp", "q": "(TITLE:\"cuspal coverage\" OR TITLE:\"cusp coverage\") AND PUB_YEAR:[2017 TO 2026]", "n": 10, "full": false},
+ {"name": "s_iob", "q": "(TITLE:\"orifice barrier\" OR TITLE:\"intraorifice\" OR TITLE:\"intra-orifice\" OR TITLE:\"coronal seal\") AND PUB_YEAR:[2019 TO 2026]", "n": 10, "full": false},
+ {"name": "s_sealer", "q": "TITLE:\"sealer\" AND (TITLE:\"pulp chamber\" OR TITLE:\"coronal dentin\" OR TITLE:\"bond strength\") AND (TITLE:\"cleaning\" OR TITLE:\"remov\" OR TITLE:\"residue\")", "n": 8, "full": false}
+]}
