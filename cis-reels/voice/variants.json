@@ -5,16 +5,12 @@
  "pitch": "+0Hz",
  "lines": [
   {
-   "id": "l04g",
-   "say": "On beş yılda, açık sandviç restorasyonlarda yıllık başarısızlık üç kat fazlaydı. Sekonder çürük ise iki grupta eşitti."
+   "id": "l04j",
+   "say": "On beş yılda, açık sandviç restorasyonlarda yıllık başarısızlık üç kat fazlaydı. Sekonder çürük ise iki grupta aynı oranda görüldü."
   },
   {
-   "id": "l04h",
-   "say": "On beş yıllık takipte açık sandviç restorasyonlarda yıllık başarısızlık üç kat fazlaydı; sekonder çürük ise iki grupta eşitti."
-  },
-  {
-   "id": "l04i",
-   "say": "On beş yılda, açık sandviç restorasyonlarda yıllık başarısızlık üç kat fazlaydı. Sekonder çürük ise azalmadı, iki grupta eşitti."
+   "id": "l04k",
+   "say": "On beş yılda, açık sandviç restorasyonlarda yıllık başarısızlık üç kat fazlaydı; sekonder çürük oranı ise iki grupta aynıydı."
   }
  ]
 }
