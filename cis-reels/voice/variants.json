@@ -5,44 +5,16 @@
  "pitch": "+0Hz",
  "lines": [
   {
-   "id": "l04b",
-   "say": "On beş yılda açık sandviç tekniğinde yıllık başarısızlık üç kat fazlaydı ve flor salımına rağmen sekonder çürük azalmadı."
+   "id": "l04g",
+   "say": "On beş yılda, açık sandviç restorasyonlarda yıllık başarısızlık üç kat fazlaydı. Sekonder çürük ise iki grupta eşitti."
   },
   {
-   "id": "l04c",
-   "say": "On beş yılda, açık sandviç restorasyonlarda yıllık başarısızlık üç kat fazlaydı. Florür salımına rağmen sekonder çürük azalmadı."
+   "id": "l04h",
+   "say": "On beş yıllık takipte açık sandviç restorasyonlarda yıllık başarısızlık üç kat fazlaydı; sekonder çürük ise iki grupta eşitti."
   },
   {
-   "id": "l04d",
-   "say": "On beş yılda, cam iyonomerin kenarda açık kaldığı restorasyonlarda yıllık başarısızlık üç kat fazlaydı. Florür salımı da sekonder çürüğü azaltmadı."
-  },
-  {
-   "id": "l04e",
-   "say": "On beş yılda açık sandviç tekniğinde yıllık başarısızlık üç kat fazlaydı ve flor salımına rağmen sekonder çürük azalmadı.",
-   "wrap": true
-  },
-  {
-   "id": "l04f",
-   "say": "On beş yılda, açık sandviç restorasyonlarda yıllık başarısızlık üç kat fazlaydı. Florür salımına rağmen sekonder çürük azalmadı.",
-   "wrap": true
-  },
-  {
-   "id": "l05b",
-   "say": "Kanal tedavili dişte, cam iyonomer tabanı kırılma direncini düşürdü ve boşlukları artırdı. Üstelik pulpa olmadığı için koruma gerekçesi de yok."
-  },
-  {
-   "id": "l05c",
-   "say": "Kanal tedavili dişlerde cam iyonomer taban, kırılma direncini azalttı ve boşlukları artırdı. Pulpa olmadığı için koruma gerekçesi de yok."
-  },
-  {
-   "id": "l05d",
-   "say": "Kanal tedavili dişte, cam iyonomer tabanı kırılma direncini düşürdü ve boşlukları artırdı. Üstelik pulpa olmadığı için koruma gerekçesi de yok.",
-   "wrap": true
-  },
-  {
-   "id": "l05e",
-   "say": "Kanal tedavili dişlerde cam iyonomer taban, kırılma direncini azalttı ve boşlukları artırdı. Pulpa olmadığı için koruma gerekçesi de yok.",
-   "wrap": true
+   "id": "l04i",
+   "say": "On beş yılda, açık sandviç restorasyonlarda yıllık başarısızlık üç kat fazlaydı. Sekonder çürük ise azalmadı, iki grupta eşitti."
   }
  ]
 }
