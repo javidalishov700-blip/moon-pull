@@ -17,11 +17,13 @@
  },
  {
   "scene": "fifteen",
-  "say": "On beş yılda açık sandviçte yıllık başarısızlık üç kat fazlaydı; flor salımına rağmen sekonder çürük azalmadı."
+  "say": "On beş yılda, açık sandviç restorasyonlarda yıllık başarısızlık üç kat fazlaydı; sekonder çürük oranı ise iki grupta aynıydı.",
+  "file": "../variants/l04k"
  },
  {
   "scene": "ett",
-  "say": "Kanal tedavili dişte cam iyonomer tabanı, kırılma direncini düşürüp boşlukları artırdı. Üstelik pulpa olmadığı için koruma gerekçesi de yok."
+  "say": "Kanal tedavili dişte, cam iyonomer tabanı kırılma direncini düşürdü ve boşlukları artırdı. Üstelik pulpa olmadığı için koruma gerekçesi de yok.",
+  "file": "../variants/l05b"
  },
  {
   "scene": "still",
